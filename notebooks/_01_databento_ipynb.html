@@ -1,0 +1,2559 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Example: Pulling Market Data From Databento &#8212; Full Stack Quantitative Finance</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_01_databento_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Case Study: Hedging Oil Price Exposure As An E&amp;P" href="_01_corporate_hedging_ipynb.html" />
+    <link rel="prev" title="Databento" href="../Week7/databento.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Full Stack Quantitative Finance - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Full Stack Quantitative Finance - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Full Stack Quantitative Finance
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32900, Summer 2026</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: GitHub, GitHub Classroom, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What is Full Stack Quantitative Finance? Why This Course?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/midterm_report_and_style_guides.html">The Midterm Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Virtual Environments, WRDS, and CRSP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Automating the Pipeline with PyDoit, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: ChartBook, GitHub Pages, and Reproducible Reports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Proposal Presentations, LaTeX, and the Midterm Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Python Packages, FINM, and the ChartBook Catalog</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Web Authentication, GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../midterm_report.html">Midterm Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_01_databento_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_01_databento_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Example: Pulling Market Data From Databento</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-warning">Cost warning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-live-data-license">No live-data license</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-sdk-basics">1. Historical SDK Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-raw-http-api">2. The Raw HTTP API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curl-flags-explained">curl flags explained</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-methods">HTTP methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-request-from-python">The same request from Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-raw-record">Reading the raw record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sdk-vs-api-whats-the-difference">SDK vs API — what’s the difference?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbology-four-ways-to-name-an-instrument">3. Symbology: Four Ways to Name an Instrument</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-raw-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-parent-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">parent</span></code> symbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-continuous-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">continuous</span></code> symbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instrument-id"><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schemas-how-granular-is-the-data">4. Schemas: How Granular Is the Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-a-treasury-futures-market-brief">5. Application: A Treasury Futures Market Brief</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-v-0-and-not-c-0">Why <code class="docutils literal notranslate"><span class="pre">.v.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">.c.0</span></code>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetch-once-cache-to-parquet">Fetch once, cache to Parquet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-interest-via-the-statistics-schema-and-a-data-cleaning-lesson">Open interest via the statistics schema — and a data-cleaning lesson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-1-indexed-price-performance">Chart 1: Indexed price performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-2-curve-spreads">Chart 2: Curve spreads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-3-volume-and-open-interest">Chart 3: Volume and open interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-4-rolling-volatility">Chart 4: Rolling volatility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-snapshot-table">Market snapshot table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-from-here">Where to Go From Here</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="example-pulling-market-data-from-databento">
+<h1>Example: Pulling Market Data From Databento<a class="headerlink" href="#example-pulling-market-data-from-databento" title="Link to this heading">#</a></h1>
+<p>This notebook teaches how to pull market data from
+<a class="reference external" href="https://databento.com/">Databento</a> while illustrating the difference between
+using a <strong>Python SDK</strong> and making <strong>raw API calls</strong> (HTTP). It merges the
+standalone exercises in the
+<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento"><code class="docutils literal notranslate"><span class="pre">databento/</span></code></a>
+directory of the in-class examples repo into a single walkthrough:</p>
+<ol class="arabic simple">
+<li><p><strong>Historical SDK basics</strong> — the simplest fetch: check cost, pull trades,
+convert to a DataFrame</p></li>
+<li><p><strong>The raw HTTP API</strong> — the same query with <code class="docutils literal notranslate"><span class="pre">curl</span></code>/<code class="docutils literal notranslate"><span class="pre">requests</span></code>, to see what
+the SDK abstracts away</p></li>
+<li><p><strong>Symbology and schemas</strong> — how Databento identifies instruments and
+organizes data</p></li>
+<li><p><strong>Treasury futures market brief</strong> — a small end-to-end application:
+two queries combined into four charts and a summary table</p></li>
+</ol>
+<section id="cost-warning">
+<h2>Cost warning<a class="headerlink" href="#cost-warning" title="Link to this heading">#</a></h2>
+<p>Databento charges per query. The examples here keep costs negligible with
+small <code class="docutils literal notranslate"><span class="pre">limit=</span></code> values, and the SDK sections call <code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> (free)
+<em>before</em> fetching data, so you never spend money by accident. The market
+brief in the final section downloads a few dollars’ worth of data at most,
+guards against anything larger, and caches the result to Parquet so
+re-running the notebook is free.</p>
+</section>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
+<p>All examples use <strong>GLBX.MDP3</strong> (CME Globex), which covers E-mini S&amp;P 500
+futures (ES), Treasury futures, and other CME products. Students have
+subscriptions to this dataset.</p>
+</section>
+<section id="no-live-data-license">
+<h2>No live-data license<a class="headerlink" href="#no-live-data-license" title="Link to this heading">#</a></h2>
+<p>Databento has two modes of access, and <strong>we only have the historical one</strong>:</p>
+<ul class="simple">
+<li><p><strong>Historical</strong> (<code class="docutils literal notranslate"><span class="pre">db.Historical()</span></code>) — archived data, billed per query. This
+is what everything in this notebook uses.</p></li>
+<li><p><strong>Live</strong> (<code class="docutils literal notranslate"><span class="pre">db.Live()</span></code>) — real-time streaming over a persistent TCP
+connection, billed per subscription. <strong>Our subscription does not include
+this.</strong> An API key with historical access only will authenticate against
+the live gateway and then be rejected with
+<code class="docutils literal notranslate"><span class="pre">BentoError:</span> <span class="pre">A</span> <span class="pre">live</span> <span class="pre">data</span> <span class="pre">license</span> <span class="pre">is</span> <span class="pre">required</span> <span class="pre">to</span> <span class="pre">access</span> <span class="pre">GLBX.MDP3.</span></code> That
+message is about entitlement, not a bad key.</p></li>
+</ul>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>Your Databento API key must be set as <code class="docutils literal notranslate"><span class="pre">DATABENTO_API_KEY</span></code> in the repo-root
+<code class="docutils literal notranslate"><span class="pre">.env</span></code> file (see <code class="docutils literal notranslate"><span class="pre">.env.example</span></code>). We read it with the course-standard
+<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">settings</span> <span class="pre">import</span> <span class="pre">config</span></code> pattern and pass it to the client explicitly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">))</span>
+<span class="n">DATABENTO_API_KEY</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATABENTO_API_KEY&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">databento</span> <span class="k">as</span> <span class="nn">db</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Historical</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">DATABENTO_API_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="historical-sdk-basics">
+<h2>1. Historical SDK Basics<a class="headerlink" href="#historical-sdk-basics" title="Link to this heading">#</a></h2>
+<p>The simplest workflow has four steps:</p>
+<ol class="arabic simple">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">Historical</span></code> client</p></li>
+<li><p>Check the estimated cost (a <strong>free</strong> metadata call)</p></li>
+<li><p>Fetch the data only if the cost is acceptable</p></li>
+<li><p>Convert to a pandas DataFrame</p></li>
+</ol>
+<p>We define the query once as a dict so the cost check and the data pull are
+guaranteed to describe the same request. <code class="docutils literal notranslate"><span class="pre">ES.FUT</span></code> with <code class="docutils literal notranslate"><span class="pre">stype_in=&quot;parent&quot;</span></code>
+means “all E-mini S&amp;P 500 futures contracts” (more on symbology in
+Section 3), and <code class="docutils literal notranslate"><span class="pre">limit=10</span></code> caps the number of records returned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;GLBX.MDP3&quot;</span><span class="p">,</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ES.FUT&quot;</span><span class="p">],</span>
+    <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;trades&quot;</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2024-08-01&quot;</span><span class="p">,</span>
+    <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-08-02&quot;</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cost</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get_cost</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated cost: $</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated cost: $0.0000
+</pre></div>
+</div>
+</div>
+</div>
+<p>The guard below is the habit to build: <em>always</em> check the cost before
+fetching. This tiny query is free, so a non-zero estimate means the query
+is not what we intended.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">cost</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Estimated cost is $</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, expected $0.00 — &quot;</span>
+        <span class="s2">&quot;review the query before fetching.&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Prices are automatically scaled to floats by the SDK</span>
+<span class="n">df_trades_sdk</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_trades_sdk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ts_event</th>
+      <th>rtype</th>
+      <th>publisher_id</th>
+      <th>instrument_id</th>
+      <th>action</th>
+      <th>side</th>
+      <th>depth</th>
+      <th>price</th>
+      <th>size</th>
+      <th>flags</th>
+      <th>ts_in_delta</th>
+      <th>sequence</th>
+      <th>symbol</th>
+    </tr>
+    <tr>
+      <th>ts_recv</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 00:00:00.079196344+00:00</th>
+      <td>2024-08-01 00:00:00.078950957+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>B</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>5</td>
+      <td>0</td>
+      <td>14913</td>
+      <td>45877799</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079236309+00:00</th>
+      <td>2024-08-01 00:00:00.078970329+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>B</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>1</td>
+      <td>0</td>
+      <td>14376</td>
+      <td>45877800</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079349483+00:00</th>
+      <td>2024-08-01 00:00:00.079156215+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>B</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>1</td>
+      <td>0</td>
+      <td>14712</td>
+      <td>45877801</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079868759+00:00</th>
+      <td>2024-08-01 00:00:00.079685131+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>B</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>1</td>
+      <td>0</td>
+      <td>14558</td>
+      <td>45877816</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.094556955+00:00</th>
+      <td>2024-08-01 00:00:00.094305073+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>1</td>
+      <td>0</td>
+      <td>15096</td>
+      <td>45877890</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.123901714+00:00</th>
+      <td>2024-08-01 00:00:00.123669805+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>1</td>
+      <td>0</td>
+      <td>14589</td>
+      <td>45877906</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.211571140+00:00</th>
+      <td>2024-08-01 00:00:00.211326531+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>2</td>
+      <td>0</td>
+      <td>14989</td>
+      <td>45877936</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.211785774+00:00</th>
+      <td>2024-08-01 00:00:00.211514531+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.75</td>
+      <td>7</td>
+      <td>0</td>
+      <td>14566</td>
+      <td>45877938</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.291190144+00:00</th>
+      <td>2024-08-01 00:00:00.290962393+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.50</td>
+      <td>1</td>
+      <td>0</td>
+      <td>14715</td>
+      <td>45877987</td>
+      <td>ESU4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.589283254+00:00</th>
+      <td>2024-08-01 00:00:00.589059835+00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>118</td>
+      <td>T</td>
+      <td>A</td>
+      <td>0</td>
+      <td>5587.50</td>
+      <td>2</td>
+      <td>0</td>
+      <td>14783</td>
+      <td>45878033</td>
+      <td>ESU4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Each row is one trade: the index is the exchange receive timestamp
+(<code class="docutils literal notranslate"><span class="pre">ts_recv</span></code>), <code class="docutils literal notranslate"><span class="pre">price</span></code> is already in dollars, <code class="docutils literal notranslate"><span class="pre">size</span></code> is the number of
+contracts, and <code class="docutils literal notranslate"><span class="pre">side</span></code> is the aggressor side (<code class="docutils literal notranslate"><span class="pre">B</span></code> = buyer initiated,
+<code class="docutils literal notranslate"><span class="pre">A</span></code> = seller initiated). Notice the SDK also mapped the numeric
+<code class="docutils literal notranslate"><span class="pre">instrument_id</span></code> back to the human-readable contract ticker in <code class="docutils literal notranslate"><span class="pre">symbol</span></code>.</p>
+</section>
+<section id="the-raw-http-api">
+<h2>2. The Raw HTTP API<a class="headerlink" href="#the-raw-http-api" title="Link to this heading">#</a></h2>
+<p>The SDK is a thin layer over a REST API. The same query as Section 1 can be
+made with <code class="docutils literal notranslate"><span class="pre">curl</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># HTTP Basic Auth: API key is the username, password is empty.</span>
+<span class="c1"># The -u flag sets the Authorization header: base64(key:)</span>
+curl<span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-u<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATABENTO_API_KEY</span><span class="si">}</span><span class="s2">:&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://hist.databento.com/v0/timeseries.get_range&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;dataset=GLBX.MDP3&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;symbols=ES.FUT&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;stype_in=parent&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;schema=trades&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;start=2024-08-01&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;end=2024-08-02&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;encoding=json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;limit=10&quot;</span>
+</pre></div>
+</div>
+<section id="curl-flags-explained">
+<h3>curl flags explained<a class="headerlink" href="#curl-flags-explained" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-s</span></code></p></td>
+<td><p><strong>Silent mode.</strong> Suppresses the progress bar so you only see the response body.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-u</span> <span class="pre">&quot;${DATABENTO_API_KEY}:&quot;</span></code></p></td>
+<td><p><strong>HTTP Basic Auth.</strong> The API key is the username; the trailing colon means the password is empty. curl base64-encodes <code class="docutils literal notranslate"><span class="pre">key:</span></code> and sends <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Basic</span> <span class="pre">&lt;encoded&gt;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">POST</span></code></p></td>
+<td><p><strong>HTTP method.</strong> Specifies the request method (see below).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&quot;key=value&quot;</span></code></p></td>
+<td><p><strong>Data / form field.</strong> Sends a key-value pair in the request body as <code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code>. Each <code class="docutils literal notranslate"><span class="pre">-d</span></code> flag adds another field. When <code class="docutils literal notranslate"><span class="pre">-d</span></code> is present, curl implies <code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">POST</span></code>, so the explicit flag is technically redundant but makes intent clear.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="http-methods">
+<h3>HTTP methods<a class="headerlink" href="#http-methods" title="Link to this heading">#</a></h3>
+<p>Every HTTP request includes a <strong>method</strong> (or “verb”) that tells the server
+what kind of operation you intend:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Body?</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GET</span></code></p></td>
+<td><p><strong>Read</strong> a resource. What your browser sends when you visit a URL. Parameters go in the query string (<code class="docutils literal notranslate"><span class="pre">?key=value</span></code>).</p></td>
+<td><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v0/metadata.list_datasets</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span></code></p></td>
+<td><p><strong>Send data</strong> to the server to create or query something. Parameters go in the request body.</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v0/timeseries.get_range</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PUT</span></code></p></td>
+<td><p><strong>Replace</strong> a resource entirely with new data.</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/users/42</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PATCH</span></code></p></td>
+<td><p><strong>Partially update</strong> a resource (only the fields you send).</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/users/42</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DELETE</span></code></p></td>
+<td><p><strong>Remove</strong> a resource.</p></td>
+<td><p>Rarely</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/users/42</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Why POST here?</strong> Databento’s query has many parameters (dataset, symbols,
+date range, schema, …). Packing all of that into a URL query string would
+be unwieldy, so the API uses POST with form-encoded body fields. This is a
+common pattern for “read” endpoints that take complex inputs.</p>
+</section>
+<section id="the-same-request-from-python">
+<h3>The same request from Python<a class="headerlink" href="#the-same-request-from-python" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">requests.post</span></code> is the Python equivalent of the curl command. We run the
+same query (with <code class="docutils literal notranslate"><span class="pre">limit=5</span></code>) and look at the raw response before any SDK
+processing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s2">&quot;https://hist.databento.com/v0/timeseries.get_range&quot;</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">DATABENTO_API_KEY</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>  <span class="c1"># HTTP Basic Auth: key as username, empty password</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;GLBX.MDP3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;symbols&quot;</span><span class="p">:</span> <span class="s2">&quot;ES.FUT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stype_in&quot;</span><span class="p">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="s2">&quot;trades&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-01&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-02&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+<span class="c1"># The response is newline-delimited JSON (one record per line)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;ts_recv&quot;: &quot;1722470400079196344&quot;,
+  &quot;hd&quot;: {
+    &quot;ts_event&quot;: &quot;1722470400078950957&quot;,
+    &quot;rtype&quot;: 0,
+    &quot;publisher_id&quot;: 1,
+    &quot;instrument_id&quot;: 118
+  },
+  &quot;action&quot;: &quot;T&quot;,
+  &quot;side&quot;: &quot;B&quot;,
+  &quot;depth&quot;: 0,
+  &quot;price&quot;: &quot;5587750000000&quot;,
+  &quot;size&quot;: 5,
+  &quot;flags&quot;: 0,
+  &quot;ts_in_delta&quot;: 14913,
+  &quot;sequence&quot;: 45877799
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-the-raw-record">
+<h3>Reading the raw record<a class="headerlink" href="#reading-the-raw-record" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ts_recv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1722470400079196344</span></code></p></td>
+<td><p>Exchange receive timestamp (nanoseconds since Unix epoch)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hd.ts_event</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1722470400078950957</span></code></p></td>
+<td><p>Matching-engine event timestamp (ns)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hd.rtype</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Record type: <code class="docutils literal notranslate"><span class="pre">0</span></code> = MBP-0 / trade</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hd.publisher_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Venue ID (<code class="docutils literal notranslate"><span class="pre">1</span></code> = CME)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hd.instrument_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">118</span></code></p></td>
+<td><p>Numeric instrument ID for this contract</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">action</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></p></td>
+<td><p>Message action: <code class="docutils literal notranslate"><span class="pre">T</span></code> = Trade</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">side</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;B&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span></code></p></td>
+<td><p>Aggressor side: <code class="docutils literal notranslate"><span class="pre">B</span></code> = buyer initiated, <code class="docutils literal notranslate"><span class="pre">A</span></code> = seller initiated</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">price</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5587750000000</span></code></p></td>
+<td><p><strong>Fixed-point integer</strong> — multiply by 1e-9 → <strong>$5,587.75</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+<td><p>Number of contracts traded</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ts_in_delta</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">14913</span></code></p></td>
+<td><p>Capture latency: <code class="docutils literal notranslate"><span class="pre">ts_recv</span> <span class="pre">-</span> <span class="pre">ts_event</span></code> in nanoseconds (~15 μs)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sequence</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">45877799</span></code></p></td>
+<td><p>Exchange sequence number (detect gaps / ordering)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Two gotchas in the raw JSON that the SDK hides from you:</p>
+<ol class="arabic simple">
+<li><p><strong>64-bit integers are encoded as strings</strong> (<code class="docutils literal notranslate"><span class="pre">&quot;5587750000000&quot;</span></code>), because
+JSON numbers are doubles and would lose precision. Cast with <code class="docutils literal notranslate"><span class="pre">int()</span></code>
+first.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ts_event</span></code> lives in the record header</strong> (<code class="docutils literal notranslate"><span class="pre">hd</span></code>), not at the top level.
+Only <code class="docutils literal notranslate"><span class="pre">ts_recv</span></code> is top-level.</p></li>
+</ol>
+<p>Databento stores prices as fixed-point integers to avoid floating-point
+rounding: divide by 1e9 to get dollars.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">raw_price</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>  <span class="c1"># arrives as a string!</span>
+    <span class="n">actual_price</span> <span class="o">=</span> <span class="n">raw_price</span> <span class="o">*</span> <span class="mf">1e-9</span>  <span class="c1"># fixed-point -&gt; dollars</span>
+    <span class="n">ts_event</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;hd&quot;</span><span class="p">][</span><span class="s2">&quot;ts_event&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ts=</span><span class="si">{</span><span class="n">ts_event</span><span class="si">}</span><span class="s2">  price=</span><span class="si">{</span><span class="n">raw_price</span><span class="si">}</span><span class="s2"> (raw) -&gt; $</span><span class="si">{</span><span class="n">actual_price</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ts=1722470400078950957  price=5587750000000 (raw) -&gt; $5587.75
+ts=1722470400078970329  price=5587750000000 (raw) -&gt; $5587.75
+ts=1722470400079156215  price=5587750000000 (raw) -&gt; $5587.75
+ts=1722470400079685131  price=5587750000000 (raw) -&gt; $5587.75
+ts=1722470400094305073  price=5587750000000 (raw) -&gt; $5587.75
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sdk-vs-api-whats-the-difference">
+<h3>SDK vs API — what’s the difference?<a class="headerlink" href="#sdk-vs-api-whats-the-difference" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>SDK (<code class="docutils literal notranslate"><span class="pre">databento</span></code> package)</p></th>
+<th class="head"><p>Raw API (curl / <code class="docutils literal notranslate"><span class="pre">requests</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Auth</strong></p></td>
+<td><p>Pass key to constructor or set env var</p></td>
+<td><p>HTTP Basic Auth</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data format</strong></p></td>
+<td><p>Auto-decoded to DataFrames</p></td>
+<td><p>Raw JSON or binary DBN</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Price scaling</strong></p></td>
+<td><p>Automatic (human-readable floats)</p></td>
+<td><p>Raw fixed-point integers (multiply by 1e-9)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Integer encoding</strong></p></td>
+<td><p>Native Python <code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>JSON encodes 64-bit ints as <em>strings</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Error handling</strong></p></td>
+<td><p>Python exceptions</p></td>
+<td><p>HTTP status codes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You’ll normally use the SDK — but when it misbehaves, knowing the protocol
+underneath is what lets you debug it.</p>
+</section>
+</section>
+<section id="symbology-four-ways-to-name-an-instrument">
+<h2>3. Symbology: Four Ways to Name an Instrument<a class="headerlink" href="#symbology-four-ways-to-name-an-instrument" title="Link to this heading">#</a></h2>
+<p>The same underlying product (the E-mini S&amp;P 500 future) can be referenced
+in four different ways, depending on your use case:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Use case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESH4</span></code>, <code class="docutils literal notranslate"><span class="pre">ESU4</span></code></p></td>
+<td><p>Specific contract by exchange ticker</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parent</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ES.FUT</span></code></p></td>
+<td><p>All contracts for a product (e.g., all ES futures)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">continuous</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ES.c.0</span></code></p></td>
+<td><p>Front-month (rolling), no manual roll management</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3403</span></code></p></td>
+<td><p>Numeric ID from the exchange, most compact</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="reading-a-raw-symbol">
+<h3>Reading a <code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code><a class="headerlink" href="#reading-a-raw-symbol" title="Link to this heading">#</a></h3>
+<p>CME futures tickers follow the format <strong>Root + Month Code + Year Digit</strong>.
+For example, <code class="docutils literal notranslate"><span class="pre">ESU4</span></code> = <strong>ES</strong> (E-mini S&amp;P 500) + <strong>U</strong> (September) + <strong>4</strong>
+(2024).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>F</p></th>
+<th class="head"><p>G</p></th>
+<th class="head"><p>H</p></th>
+<th class="head"><p>J</p></th>
+<th class="head"><p>K</p></th>
+<th class="head"><p>M</p></th>
+<th class="head"><p>N</p></th>
+<th class="head"><p>Q</p></th>
+<th class="head"><p>U</p></th>
+<th class="head"><p>V</p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Z</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jan</p></td>
+<td><p>Feb</p></td>
+<td><p>Mar</p></td>
+<td><p>Apr</p></td>
+<td><p>May</p></td>
+<td><p>Jun</p></td>
+<td><p>Jul</p></td>
+<td><p>Aug</p></td>
+<td><p>Sep</p></td>
+<td><p>Oct</p></td>
+<td><p>Nov</p></td>
+<td><p>Dec</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>ES futures trade on a quarterly cycle, so you’ll only see <strong>H</strong> (Mar),
+<strong>M</strong> (Jun), <strong>U</strong> (Sep), <strong>Z</strong> (Dec).</p>
+</section>
+<section id="reading-a-parent-symbol">
+<h3>Reading a <code class="docutils literal notranslate"><span class="pre">parent</span></code> symbol<a class="headerlink" href="#reading-a-parent-symbol" title="Link to this heading">#</a></h3>
+<p>Format: <strong>Root.AssetClass</strong>. <code class="docutils literal notranslate"><span class="pre">ES.FUT</span></code> = all E-mini S&amp;P 500 <strong>futures</strong>
+(outrights and spreads); <code class="docutils literal notranslate"><span class="pre">ES.OPT</span></code> = all E-mini S&amp;P 500 <strong>options</strong>.</p>
+</section>
+<section id="reading-a-continuous-symbol">
+<h3>Reading a <code class="docutils literal notranslate"><span class="pre">continuous</span></code> symbol<a class="headerlink" href="#reading-a-continuous-symbol" title="Link to this heading">#</a></h3>
+<p>Format: <strong>Root.Rule.Rank</strong>, where <strong>Rule</strong> selects the roll method
+(<code class="docutils literal notranslate"><span class="pre">c</span></code> = calendar / nearest expiry, <code class="docutils literal notranslate"><span class="pre">v</span></code> = volume, <code class="docutils literal notranslate"><span class="pre">n</span></code> = open interest) and
+<strong>Rank</strong> selects which contract (<code class="docutils literal notranslate"><span class="pre">0</span></code> = front month, <code class="docutils literal notranslate"><span class="pre">1</span></code> = second nearest,
+…). Examples: <code class="docutils literal notranslate"><span class="pre">ES.c.0</span></code> = front-month ES by expiry date; <code class="docutils literal notranslate"><span class="pre">ES.v.0</span></code> =
+most-traded ES contract by volume.</p>
+</section>
+<section id="instrument-id">
+<h3><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code><a class="headerlink" href="#instrument-id" title="Link to this heading">#</a></h3>
+<p>Numeric IDs assigned by the exchange. Compact but less portable — some
+venues remap IDs daily.</p>
+<p>Let’s see <code class="docutils literal notranslate"><span class="pre">parent</span></code> and <code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code> side by side. First, <code class="docutils literal notranslate"><span class="pre">ES.FUT</span></code> returns
+trades from <strong>all</strong> active ES contracts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_parent</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;GLBX.MDP3&quot;</span><span class="p">,</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ES.FUT&quot;</span><span class="p">],</span>
+    <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;trades&quot;</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2024-08-01&quot;</span><span class="p">,</span>
+    <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-08-02&quot;</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">df_parent</span> <span class="o">=</span> <span class="n">data_parent</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_parent</span><span class="p">[[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>price</th>
+      <th>size</th>
+    </tr>
+    <tr>
+      <th>ts_recv</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 00:00:00.079196344+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079236309+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079349483+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079868759+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.094556955+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">ESU4</span></code> with <code class="docutils literal notranslate"><span class="pre">stype_in=&quot;raw_symbol&quot;</span></code> returns trades from <strong>one</strong>
+specific contract (September 2024):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_raw</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;GLBX.MDP3&quot;</span><span class="p">,</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ESU4&quot;</span><span class="p">],</span>
+    <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;raw_symbol&quot;</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;trades&quot;</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2024-08-01&quot;</span><span class="p">,</span>
+    <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-08-02&quot;</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">data_raw</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_raw</span><span class="p">[[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>price</th>
+      <th>size</th>
+    </tr>
+    <tr>
+      <th>ts_recv</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 00:00:00.079196344+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079236309+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079349483+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.079868759+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 00:00:00.094556955+00:00</th>
+      <td>ESU4</td>
+      <td>5587.75</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Rules of thumb:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parent</span></code> is the most convenient for “all ES futures” without knowing
+specific tickers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">continuous</span></code> is ideal for backtesting — it handles contract rolls
+automatically</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code> is what you’d use on a trading desk (a specific contract)</p></li>
+</ul>
+</section>
+</section>
+<section id="schemas-how-granular-is-the-data">
+<h2>4. Schemas: How Granular Is the Data?<a class="headerlink" href="#schemas-how-granular-is-the-data" title="Link to this heading">#</a></h2>
+<p>A <strong>schema</strong> is the shape of the records you get back. They form a
+hierarchy from full order-book detail down to daily bars:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Most granular                              Least granular
+     |                                          |
+     v                                          v
+    mbo  →  mbp-10  →  mbp-1  →  trades  →  ohlcv-1s  →  ohlcv-1m  →  ohlcv-1d
+ (L3 book)  (L2 depth)  (L1 top)  (last sale)  (1s bars)   (1m bars)   (daily)
+</pre></div>
+</div>
+<p>More granular = more data = higher cost. <strong>Use the coarsest schema that
+meets your needs.</strong> Here we fetch the same 30-minute window at three levels
+of granularity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PARAMS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;GLBX.MDP3&quot;</span><span class="p">,</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ES.FUT&quot;</span><span class="p">],</span>
+    <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2024-08-01T14:30:00&quot;</span><span class="p">,</span>  <span class="c1"># 30 min window during market hours</span>
+    <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-08-01T15:00:00&quot;</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">df_schema_trades</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s2">&quot;trades&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">PARAMS</span><span class="p">)</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_schema_trades</span><span class="p">[[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>price</th>
+      <th>size</th>
+    </tr>
+    <tr>
+      <th>ts_recv</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 14:30:00.002504512+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.009743452+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.009937551+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.010159425+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.010519155+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.010560969+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.010803036+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.010950754+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.011308309+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00.011697499+00:00</th>
+      <td>ESU4</td>
+      <td>5550.5</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">trades</span></code> schema returned 10 individual ticks covering barely a second
+of trading. One-second bars summarize each second as an
+open/high/low/close/volume row:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_schema_1s</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s2">&quot;ohlcv-1s&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">PARAMS</span><span class="p">)</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_schema_1s</span><span class="p">[[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;open&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;close&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>volume</th>
+    </tr>
+    <tr>
+      <th>ts_event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 14:30:00+00:00</th>
+      <td>ESU4</td>
+      <td>5550.50</td>
+      <td>5550.75</td>
+      <td>5549.75</td>
+      <td>5550.00</td>
+      <td>430</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:01+00:00</th>
+      <td>ESU4</td>
+      <td>5550.25</td>
+      <td>5550.25</td>
+      <td>5549.25</td>
+      <td>5549.75</td>
+      <td>262</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:02+00:00</th>
+      <td>ESU4</td>
+      <td>5549.50</td>
+      <td>5549.75</td>
+      <td>5549.00</td>
+      <td>5549.25</td>
+      <td>293</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:03+00:00</th>
+      <td>ESU4</td>
+      <td>5549.50</td>
+      <td>5550.25</td>
+      <td>5549.25</td>
+      <td>5550.25</td>
+      <td>296</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:04+00:00</th>
+      <td>ESU4</td>
+      <td>5550.00</td>
+      <td>5551.00</td>
+      <td>5549.75</td>
+      <td>5551.00</td>
+      <td>285</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:05+00:00</th>
+      <td>ESU4</td>
+      <td>5550.75</td>
+      <td>5551.50</td>
+      <td>5550.75</td>
+      <td>5551.50</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:06+00:00</th>
+      <td>ESU4</td>
+      <td>5551.50</td>
+      <td>5552.00</td>
+      <td>5551.25</td>
+      <td>5551.75</td>
+      <td>170</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:07+00:00</th>
+      <td>ESU4</td>
+      <td>5551.75</td>
+      <td>5552.25</td>
+      <td>5551.50</td>
+      <td>5552.00</td>
+      <td>118</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:08+00:00</th>
+      <td>ESU4</td>
+      <td>5551.75</td>
+      <td>5552.00</td>
+      <td>5551.50</td>
+      <td>5551.50</td>
+      <td>276</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:09+00:00</th>
+      <td>ESU4</td>
+      <td>5551.50</td>
+      <td>5551.50</td>
+      <td>5551.00</td>
+      <td>5551.00</td>
+      <td>39</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And one-minute bars cover the same window in far fewer rows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_schema_1m</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s2">&quot;ohlcv-1m&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">PARAMS</span><span class="p">)</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+<span class="n">df_schema_1m</span><span class="p">[[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;open&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;close&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>volume</th>
+    </tr>
+    <tr>
+      <th>ts_event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-08-01 14:30:00+00:00</th>
+      <td>ESU4</td>
+      <td>5550.50</td>
+      <td>5554.50</td>
+      <td>5549.00</td>
+      <td>5553.75</td>
+      <td>7585</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:30:00+00:00</th>
+      <td>ESU4-ESZ4</td>
+      <td>61.15</td>
+      <td>61.15</td>
+      <td>61.15</td>
+      <td>61.15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:31:00+00:00</th>
+      <td>ESU4-ESZ4</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:31:00+00:00</th>
+      <td>ESU4</td>
+      <td>5553.75</td>
+      <td>5554.50</td>
+      <td>5546.75</td>
+      <td>5548.00</td>
+      <td>7720</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:32:00+00:00</th>
+      <td>ESZ4-ESH5</td>
+      <td>56.60</td>
+      <td>56.60</td>
+      <td>56.60</td>
+      <td>56.60</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:32:00+00:00</th>
+      <td>ESH5</td>
+      <td>5665.75</td>
+      <td>5665.75</td>
+      <td>5665.75</td>
+      <td>5665.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:32:00+00:00</th>
+      <td>ESU4-ESZ4</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>61.05</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:32:00+00:00</th>
+      <td>ESZ4</td>
+      <td>5608.00</td>
+      <td>5608.00</td>
+      <td>5606.00</td>
+      <td>5606.00</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:32:00+00:00</th>
+      <td>ESU4</td>
+      <td>5548.00</td>
+      <td>5549.75</td>
+      <td>5543.50</td>
+      <td>5544.00</td>
+      <td>9799</td>
+    </tr>
+    <tr>
+      <th>2024-08-01 14:33:00+00:00</th>
+      <td>ESU4</td>
+      <td>5544.00</td>
+      <td>5545.75</td>
+      <td>5541.50</td>
+      <td>5545.50</td>
+      <td>8819</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For most research, start with <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> or <code class="docutils literal notranslate"><span class="pre">trades</span></code>; only reach for
+<code class="docutils literal notranslate"><span class="pre">mbo</span></code>/<code class="docutils literal notranslate"><span class="pre">mbp-10</span></code> if you actually need order-book depth.</p>
+</section>
+<section id="application-a-treasury-futures-market-brief">
+<h2>5. Application: A Treasury Futures Market Brief<a class="headerlink" href="#application-a-treasury-futures-market-brief" title="Link to this heading">#</a></h2>
+<p>Now a small end-to-end example: a market brief for Treasury futures across
+the yield curve, combining two Databento queries into four charts and a
+summary table.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Product</p></th>
+<th class="head"><p>Tenor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZT</p></td>
+<td><p>2-Year T-Note</p></td>
+<td><p>2Y</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZF</p></td>
+<td><p>5-Year T-Note</p></td>
+<td><p>5Y</p></td>
+</tr>
+<tr class="row-even"><td><p>ZN</p></td>
+<td><p>10-Year T-Note</p></td>
+<td><p>10Y</p></td>
+</tr>
+<tr class="row-odd"><td><p>TN</p></td>
+<td><p>Ultra 10-Year T-Note</p></td>
+<td><p>Ultra 10Y</p></td>
+</tr>
+<tr class="row-even"><td><p>ZB</p></td>
+<td><p>30-Year T-Bond</p></td>
+<td><p>30Y</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We make two queries:</p>
+<ol class="arabic simple">
+<li><p><strong>Daily OHLCV bars</strong> using <em>continuous</em> contracts — clean price series
+that roll automatically</p></li>
+<li><p><strong>Statistics</strong> (open interest) using <em>parent</em> symbology — aggregate
+activity across all expirations</p></li>
+</ol>
+<section id="why-v-0-and-not-c-0">
+<h3>Why <code class="docutils literal notranslate"><span class="pre">.v.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">.c.0</span></code>?<a class="headerlink" href="#why-v-0-and-not-c-0" title="Link to this heading">#</a></h3>
+<p>We use <code class="docutils literal notranslate"><span class="pre">ZN.v.0</span></code> (roll by <strong>volume</strong>), not <code class="docutils literal notranslate"><span class="pre">ZN.c.0</span></code> (roll by <strong>calendar</strong>).
+The distinction matters a lot for Treasury futures: <code class="docutils literal notranslate"><span class="pre">.c.0</span></code> rolls only when
+the front contract expires, and ZT/ZF stay listed through the end of their
+delivery month — so <code class="docutils literal notranslate"><span class="pre">.c.0</span></code> keeps pointing at a contract that everyone has
+already rolled out of, and daily volume collapses to double digits for
+weeks at a time. <code class="docutils literal notranslate"><span class="pre">.v.0</span></code> rolls when volume migrates to the next expiration,
+which is what a market brief actually wants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">DATASET</span> <span class="o">=</span> <span class="s2">&quot;GLBX.MDP3&quot;</span>
+
+<span class="n">PRODUCTS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ZT&quot;</span><span class="p">,</span> <span class="s2">&quot;ZF&quot;</span><span class="p">,</span> <span class="s2">&quot;ZN&quot;</span><span class="p">,</span> <span class="s2">&quot;TN&quot;</span><span class="p">,</span> <span class="s2">&quot;ZB&quot;</span><span class="p">]</span>
+<span class="n">TENORS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ZT&quot;</span><span class="p">:</span> <span class="s2">&quot;2Y&quot;</span><span class="p">,</span> <span class="s2">&quot;ZF&quot;</span><span class="p">:</span> <span class="s2">&quot;5Y&quot;</span><span class="p">,</span> <span class="s2">&quot;ZN&quot;</span><span class="p">:</span> <span class="s2">&quot;10Y&quot;</span><span class="p">,</span> <span class="s2">&quot;TN&quot;</span><span class="p">:</span> <span class="s2">&quot;Ultra 10Y&quot;</span><span class="p">,</span> <span class="s2">&quot;ZB&quot;</span><span class="p">:</span> <span class="s2">&quot;30Y&quot;</span><span class="p">}</span>
+<span class="n">COLORS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ZT&quot;</span><span class="p">:</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZF&quot;</span><span class="p">:</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZN&quot;</span><span class="p">:</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TN&quot;</span><span class="p">:</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ZB&quot;</span><span class="p">:</span> <span class="s2">&quot;#9467bd&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Continuous front-month symbols for daily OHLCV (roll by volume)</span>
+<span class="n">OHLCV_SYMBOLS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ZT.v.0&quot;</span><span class="p">,</span> <span class="s2">&quot;ZF.v.0&quot;</span><span class="p">,</span> <span class="s2">&quot;ZN.v.0&quot;</span><span class="p">,</span> <span class="s2">&quot;TN.v.0&quot;</span><span class="p">,</span> <span class="s2">&quot;ZB.v.0&quot;</span><span class="p">]</span>
+
+<span class="c1"># Parent symbols for statistics (open interest across all expirations)</span>
+<span class="n">STATS_SYMBOLS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ZT.FUT&quot;</span><span class="p">,</span> <span class="s2">&quot;ZF.FUT&quot;</span><span class="p">,</span> <span class="s2">&quot;ZN.FUT&quot;</span><span class="p">,</span> <span class="s2">&quot;TN.FUT&quot;</span><span class="p">,</span> <span class="s2">&quot;ZB.FUT&quot;</span><span class="p">]</span>
+
+<span class="n">START</span> <span class="o">=</span> <span class="s2">&quot;2024-07-01&quot;</span>
+<span class="n">END</span> <span class="o">=</span> <span class="s2">&quot;2025-01-01&quot;</span>
+
+<span class="c1"># Parent symbology x statistics schema is very large over long windows, so</span>
+<span class="c1"># the statistics query only covers the last few days of the window.</span>
+<span class="n">STATS_START</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">END</span><span class="p">)</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fetch-once-cache-to-parquet">
+<h3>Fetch once, cache to Parquet<a class="headerlink" href="#fetch-once-cache-to-parquet" title="Link to this heading">#</a></h3>
+<p>This is the only section of the notebook that downloads a meaningful amount
+of data (a few dollars at most). To avoid re-paying every time the notebook
+runs, we cache both query results as Parquet files under the repo’s data
+directory and <strong>skip the API entirely when the cache exists</strong>. Delete the
+files to force a fresh download.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DATABENTO_DATA_DIR</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;databento&quot;</span>
+<span class="n">DATABENTO_DATA_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ohlcv_path</span> <span class="o">=</span> <span class="n">DATABENTO_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;ohlcv_daily.parquet&quot;</span>
+<span class="n">oi_path</span> <span class="o">=</span> <span class="n">DATABENTO_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;open_interest.parquet&quot;</span>
+
+<span class="n">use_cache</span> <span class="o">=</span> <span class="n">ohlcv_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">oi_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using cached Parquet files: </span><span class="si">{</span><span class="n">use_cache</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using cached Parquet files: True
+</pre></div>
+</div>
+</div>
+</div>
+<p>On a fresh fetch we first estimate the cost of both queries (free metadata
+calls) and stop if the total looks wrong — the same habit as Section 1,
+with a higher tolerance because this data genuinely costs a little money.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">use_cache</span><span class="p">:</span>
+    <span class="n">ohlcv_cost</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get_cost</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">DATASET</span><span class="p">,</span>
+        <span class="n">symbols</span><span class="o">=</span><span class="n">OHLCV_SYMBOLS</span><span class="p">,</span>
+        <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;ohlcv-1d&quot;</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">START</span><span class="p">,</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">END</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">stats_cost</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get_cost</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">DATASET</span><span class="p">,</span>
+        <span class="n">symbols</span><span class="o">=</span><span class="n">STATS_SYMBOLS</span><span class="p">,</span>
+        <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;statistics&quot;</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">STATS_START</span><span class="p">,</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">END</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="n">ohlcv_cost</span> <span class="o">+</span> <span class="n">stats_cost</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OHLCV daily:  $</span><span class="si">{</span><span class="n">ohlcv_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Statistics:   $</span><span class="si">{</span><span class="n">stats_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total:        $</span><span class="si">{</span><span class="n">total_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total_cost</span> <span class="o">&gt;</span> <span class="mf">5.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Total cost $</span><span class="si">{</span><span class="n">total_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> exceeds $5.00 — review before proceeding.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">ohlcv_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">DATASET</span><span class="p">,</span>
+        <span class="n">symbols</span><span class="o">=</span><span class="n">OHLCV_SYMBOLS</span><span class="p">,</span>
+        <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;ohlcv-1d&quot;</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">START</span><span class="p">,</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">END</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ohlcv_data</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ohlcv_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved </span><span class="si">{</span><span class="n">ohlcv_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="open-interest-via-the-statistics-schema-and-a-data-cleaning-lesson">
+<h3>Open interest via the statistics schema — and a data-cleaning lesson<a class="headerlink" href="#open-interest-via-the-statistics-schema-and-a-data-cleaning-lesson" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">statistics</span></code> schema carries exchange-published figures (settlement
+prices, volume summaries, open interest, …) distinguished by <code class="docutils literal notranslate"><span class="pre">stat_type</span></code>.
+Open interest is <code class="docutils literal notranslate"><span class="pre">stat_type</span> <span class="pre">==</span> <span class="pre">9</span></code>
+(<a class="reference external" href="https://databento.com/docs/schemas-and-data-formats/whats-in-a-schema/statistics">docs</a>).
+Getting from raw statistics records to a clean daily series takes three
+steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Filter to <code class="docutils literal notranslate"><span class="pre">stat_type</span> <span class="pre">==</span> <span class="pre">9</span></code></strong> — the schema mixes many statistic types.</p></li>
+<li><p><strong>Drop calendar spreads</strong> (symbols like <code class="docutils literal notranslate"><span class="pre">ZNH5-ZNM5</span></code>) — we want outright
+contracts only.</p></li>
+<li><p><strong>Deduplicate before aggregating.</strong> CME publishes open interest for a
+given trade date <strong>twice</strong>: a preliminary figure shortly after the close,
+then a final figure the next morning. Both arrive as separate records
+with the <em>same</em> <code class="docutils literal notranslate"><span class="pre">ts_ref</span></code> (the trade date the statistic describes).
+Summing them naively double-counts — the 10-Year would show ~9.1M
+contracts when the true figure is ~4.5M. The fix: group by
+(contract, <code class="docutils literal notranslate"><span class="pre">ts_ref</span></code>) and keep the record that arrived last, which is the
+final revision.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">use_cache</span><span class="p">:</span>
+    <span class="n">stats_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">DATASET</span><span class="p">,</span>
+        <span class="n">symbols</span><span class="o">=</span><span class="n">STATS_SYMBOLS</span><span class="p">,</span>
+        <span class="n">stype_in</span><span class="o">=</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;statistics&quot;</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">STATS_START</span><span class="p">,</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">END</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">df_stats</span> <span class="o">=</span> <span class="n">stats_data</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw statistics records: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_stats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Step 1: open interest only</span>
+    <span class="n">df_oi_raw</span> <span class="o">=</span> <span class="n">df_stats</span><span class="p">[</span><span class="n">df_stats</span><span class="p">[</span><span class="s2">&quot;stat_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Step 2: outright contracts only</span>
+    <span class="n">df_oi_raw</span> <span class="o">=</span> <span class="n">df_oi_raw</span><span class="p">[</span><span class="o">~</span><span class="n">df_oi_raw</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
+
+    <span class="c1"># Step 3: keep the final revision per (contract, trade date)</span>
+    <span class="n">df_oi_raw</span> <span class="o">=</span> <span class="n">df_oi_raw</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>  <span class="c1"># ts_recv ascending</span>
+    <span class="n">df_oi_raw</span> <span class="o">=</span> <span class="n">df_oi_raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;ts_ref&quot;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+
+    <span class="c1"># The statistic describes ts_ref (the trade date), not when we received it</span>
+    <span class="n">df_oi_raw</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_oi_raw</span><span class="p">[</span><span class="s2">&quot;ts_ref&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Extract product root (&quot;ZNH5&quot; -&gt; &quot;ZN&quot;) and aggregate across expirations</span>
+    <span class="n">df_oi_raw</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_oi_raw</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^([A-Z]</span><span class="si">{2}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">df_oi_agg</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df_oi_raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">])[</span><span class="s2">&quot;quantity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">df_oi_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="s2">&quot;open_interest&quot;</span><span class="p">]</span>
+    <span class="n">df_oi_agg</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">oi_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved </span><span class="si">{</span><span class="n">oi_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here on everything reads from the local Parquet files, so the analysis
+below runs identically whether the data was just fetched or loaded from
+cache.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_ohlcv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">ohlcv_path</span><span class="p">)</span>
+<span class="n">df_oi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">oi_path</span><span class="p">)</span>
+
+<span class="c1"># Extract product root from symbol (e.g., &quot;ZN.v.0&quot; -&gt; &quot;ZN&quot;)</span>
+<span class="n">df_ohlcv</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ohlcv</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df_ohlcv</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_ohlcv</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Pivot to wide format (date x product), in curve order</span>
+<span class="n">close</span> <span class="o">=</span> <span class="n">df_ohlcv</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;close&quot;</span><span class="p">)</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">df_ohlcv</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">close</span> <span class="o">=</span> <span class="n">close</span><span class="p">[[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PRODUCTS</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">close</span><span class="o">.</span><span class="n">columns</span><span class="p">]]</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">volume</span><span class="p">[[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PRODUCTS</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">columns</span><span class="p">]]</span>
+
+<span class="n">close</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>product</th>
+      <th>ZT</th>
+      <th>ZF</th>
+      <th>ZN</th>
+      <th>TN</th>
+      <th>ZB</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-26 00:00:00+00:00</th>
+      <td>102.667969</td>
+      <td>106.117188</td>
+      <td>108.640625</td>
+      <td>111.250000</td>
+      <td>113.84375</td>
+    </tr>
+    <tr>
+      <th>2024-12-27 00:00:00+00:00</th>
+      <td>102.667969</td>
+      <td>106.015625</td>
+      <td>108.375000</td>
+      <td>110.859375</td>
+      <td>113.15625</td>
+    </tr>
+    <tr>
+      <th>2024-12-29 00:00:00+00:00</th>
+      <td>102.671875</td>
+      <td>106.015625</td>
+      <td>108.375000</td>
+      <td>110.828125</td>
+      <td>113.09375</td>
+    </tr>
+    <tr>
+      <th>2024-12-30 00:00:00+00:00</th>
+      <td>102.820312</td>
+      <td>106.421875</td>
+      <td>109.015625</td>
+      <td>111.656250</td>
+      <td>114.28125</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 00:00:00+00:00</th>
+      <td>102.816406</td>
+      <td>106.328125</td>
+      <td>108.765625</td>
+      <td>111.296875</td>
+      <td>113.75000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="chart-1-indexed-price-performance">
+<h3>Chart 1: Indexed price performance<a class="headerlink" href="#chart-1-indexed-price-performance" title="Link to this heading">#</a></h3>
+<p>Normalizing every series to 100 at the start of the window makes the
+relative moves across tenors comparable even though the contracts trade at
+very different price levels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">indexed</span> <span class="o">=</span> <span class="n">close</span> <span class="o">/</span> <span class="n">close</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">indexed</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">indexed</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="n">indexed</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prod</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">TENORS</span><span class="p">[</span><span class="n">prod</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Treasury Futures — Indexed Price Performance&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Index (Start = 100)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b38466f83bdfd479721a8e9342ade8d6650e38525c58e25958d664396074c2f.png" src="../_images/2b38466f83bdfd479721a8e9342ade8d6650e38525c58e25958d664396074c2f.png" />
+</div>
+</div>
+</section>
+<section id="chart-2-curve-spreads">
+<h3>Chart 2: Curve spreads<a class="headerlink" href="#chart-2-curve-spreads" title="Link to this heading">#</a></h3>
+<p>Long-tenor minus short-tenor price spreads (10s-2s, 30s-5s) as a rough
+steepening/flattening gauge. These are raw price spreads, not
+DV01-weighted, so read them as direction rather than magnitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">spread_10s2s</span> <span class="o">=</span> <span class="n">close</span><span class="p">[</span><span class="s2">&quot;ZN&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">close</span><span class="p">[</span><span class="s2">&quot;ZT&quot;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">spread_10s2s</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">spread_10s2s</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;10s-2s (ZN − ZT)&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spread_30s5s</span> <span class="o">=</span> <span class="n">close</span><span class="p">[</span><span class="s2">&quot;ZB&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">close</span><span class="p">[</span><span class="s2">&quot;ZF&quot;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">spread_30s5s</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">spread_30s5s</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;30s-5s (ZB − ZF)&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9467bd&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Treasury Futures — Curve Spreads&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Price Spread (points)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="mf">0.01</span><span class="p">,</span>
+    <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s2">&quot;Raw price spread, not DV01-weighted&quot;</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/298223c8988d997a22b66d248339f7b93c477996fb7717f43bda5eecae51713d.png" src="../_images/298223c8988d997a22b66d248339f7b93c477996fb7717f43bda5eecae51713d.png" />
+</div>
+</div>
+</section>
+<section id="chart-3-volume-and-open-interest">
+<h3>Chart 3: Volume and open interest<a class="headerlink" href="#chart-3-volume-and-open-interest" title="Link to this heading">#</a></h3>
+<p>Average daily volume (from the OHLCV query) next to the latest open
+interest (from the statistics query) shows where activity concentrates on
+the curve — the 10-Year dominates both measures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">avg_volume</span> <span class="o">=</span> <span class="n">volume</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">latest_oi</span> <span class="o">=</span> <span class="n">df_oi</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;product&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s2">&quot;open_interest&quot;</span><span class="p">]</span>
+
+<span class="n">bar_products</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PRODUCTS</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">avg_volume</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">bar_labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">TENORS</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bar_products</span><span class="p">]</span>
+<span class="n">vol_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">avg_volume</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bar_products</span><span class="p">]</span>
+<span class="n">oi_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">latest_oi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bar_products</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bar_products</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">vol_vals</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Avg Daily Volume&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">oi_vals</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Latest Open Interest&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Treasury Futures — Volume &amp; Open Interest&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Contracts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">bar_labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c27bc58e745ce56f18492fc4e37c67b2aaa53e380282281c86ca431eb776ff8c.png" src="../_images/c27bc58e745ce56f18492fc4e37c67b2aaa53e380282281c86ca431eb776ff8c.png" />
+</div>
+</div>
+</section>
+<section id="chart-4-rolling-volatility">
+<h3>Chart 4: Rolling volatility<a class="headerlink" href="#chart-4-rolling-volatility" title="Link to this heading">#</a></h3>
+<p>A 20-day rolling standard deviation of daily returns, annualized. Note how
+volatility rises with tenor — the 30-Year moves far more than the 2-Year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="n">fill_method</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">rolling_vol</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">rolling_vol</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">rolling_vol</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="n">rolling_vol</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prod</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">TENORS</span><span class="p">[</span><span class="n">prod</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Treasury Futures — 20-Day Rolling Annualized Volatility&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Volatility (%)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2daaaf2104453e9ce65297bd8661e61d46ecf5751a0124116380e7c84d8e5cea.png" src="../_images/2daaaf2104453e9ce65297bd8661e61d46ecf5751a0124116380e7c84d8e5cea.png" />
+</div>
+</div>
+</section>
+<section id="market-snapshot-table">
+<h3>Market snapshot table<a class="headerlink" href="#market-snapshot-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">PRODUCTS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">prod</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">close</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">close</span><span class="p">[</span><span class="n">prod</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">last_price</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">daily_chg</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">five_day_chg</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">avg_vol_20d</span> <span class="o">=</span> <span class="n">volume</span><span class="p">[</span><span class="n">prod</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">if</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">oi</span> <span class="o">=</span> <span class="n">latest_oi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Product&quot;</span><span class="p">:</span> <span class="n">prod</span><span class="p">,</span>
+            <span class="s2">&quot;Tenor&quot;</span><span class="p">:</span> <span class="n">TENORS</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span>
+            <span class="s2">&quot;Last Price&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">last_price</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Daily Chg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">daily_chg</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;5-Day Chg&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">five_day_chg</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;20D Avg Volume&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">avg_vol_20d</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Open Interest&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">oi</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+<span class="n">df_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="n">df_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Product</th>
+      <th>Tenor</th>
+      <th>Last Price</th>
+      <th>Daily Chg</th>
+      <th>5-Day Chg</th>
+      <th>20D Avg Volume</th>
+      <th>Open Interest</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ZT</td>
+      <td>2Y</td>
+      <td>102.816</td>
+      <td>-0.004</td>
+      <td>+0.168</td>
+      <td>397,808</td>
+      <td>4,275,521</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ZF</td>
+      <td>5Y</td>
+      <td>106.328</td>
+      <td>-0.094</td>
+      <td>+0.281</td>
+      <td>688,089</td>
+      <td>6,127,196</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ZN</td>
+      <td>10Y</td>
+      <td>108.766</td>
+      <td>-0.250</td>
+      <td>+0.281</td>
+      <td>1,010,347</td>
+      <td>4,540,185</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>TN</td>
+      <td>Ultra 10Y</td>
+      <td>111.297</td>
+      <td>-0.359</td>
+      <td>+0.188</td>
+      <td>318,219</td>
+      <td>2,147,557</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ZB</td>
+      <td>30Y</td>
+      <td>113.750</td>
+      <td>-0.531</td>
+      <td>+0.031</td>
+      <td>268,478</td>
+      <td>1,903,499</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="where-to-go-from-here">
+<h2>Where to Go From Here<a class="headerlink" href="#where-to-go-from-here" title="Link to this heading">#</a></h2>
+<p>The standalone versions of these examples (runnable scripts with their own
+READMEs, including the pure-<code class="docutils literal notranslate"><span class="pre">curl</span></code> version of Section 2) live in the
+<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento"><code class="docutils literal notranslate"><span class="pre">databento/</span></code></a>
+directory of the in-class examples repo:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/01_historical_sdk"><code class="docutils literal notranslate"><span class="pre">01_historical_sdk</span></code></a></p></li>
+<li><p><a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/02_historical_api"><code class="docutils literal notranslate"><span class="pre">02_historical_api</span></code></a></p></li>
+<li><p><a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/03_schemas_and_symbology"><code class="docutils literal notranslate"><span class="pre">03_schemas_and_symbology</span></code></a></p></li>
+<li><p><a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/04_treasury_futures_brief"><code class="docutils literal notranslate"><span class="pre">04_treasury_futures_brief</span></code></a></p></li>
+</ul>
+<p>Exercises to try:</p>
+<ul class="simple">
+<li><p>In Section 3, try <code class="docutils literal notranslate"><span class="pre">NQ.FUT</span></code> (Nasdaq futures) as the parent symbol</p></li>
+<li><p>In Section 4, add <code class="docutils literal notranslate"><span class="pre">ohlcv-1h</span></code> as a fourth schema level</p></li>
+<li><p>In Section 5, add <code class="docutils literal notranslate"><span class="pre">UB.v.0</span></code> (Ultra T-Bond) as a sixth product, or switch
+the continuous rule from <code class="docutils literal notranslate"><span class="pre">.v.0</span></code> to <code class="docutils literal notranslate"><span class="pre">.c.0</span></code> and watch what happens to ZT
+and ZF volume</p></li>
+<li><p>Compute DV01-weighted curve spreads instead of raw price spreads</p></li>
+</ul>
+<p>Further reading:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://databento.com/docs/">Databento documentation</a></p></li>
+<li><p><a class="reference external" href="https://databento.com/docs/schemas-and-data-formats">Schemas and data formats</a></p></li>
+<li><p><a class="reference external" href="https://databento.com/docs/standards-and-conventions/symbology">Symbology</a></p></li>
+</ul>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week7/databento.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Databento</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_01_corporate_hedging_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case Study: Hedging Oil Price Exposure As An E&amp;P</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-warning">Cost warning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-live-data-license">No live-data license</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-sdk-basics">1. Historical SDK Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-raw-http-api">2. The Raw HTTP API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curl-flags-explained">curl flags explained</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#http-methods">HTTP methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-request-from-python">The same request from Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-raw-record">Reading the raw record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sdk-vs-api-whats-the-difference">SDK vs API — what’s the difference?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbology-four-ways-to-name-an-instrument">3. Symbology: Four Ways to Name an Instrument</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-raw-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">raw_symbol</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-parent-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">parent</span></code> symbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-continuous-symbol">Reading a <code class="docutils literal notranslate"><span class="pre">continuous</span></code> symbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instrument-id"><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schemas-how-granular-is-the-data">4. Schemas: How Granular Is the Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-a-treasury-futures-market-brief">5. Application: A Treasury Futures Market Brief</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-v-0-and-not-c-0">Why <code class="docutils literal notranslate"><span class="pre">.v.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">.c.0</span></code>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetch-once-cache-to-parquet">Fetch once, cache to Parquet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-interest-via-the-statistics-schema-and-a-data-cleaning-lesson">Open interest via the statistics schema — and a data-cleaning lesson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-1-indexed-price-performance">Chart 1: Indexed price performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-2-curve-spreads">Chart 2: Curve spreads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-3-volume-and-open-interest">Chart 3: Volume and open interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chart-4-rolling-volatility">Chart 4: Rolling volatility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-snapshot-table">Market snapshot table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-from-here">Where to Go From Here</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

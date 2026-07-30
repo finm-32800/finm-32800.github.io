@@ -29,6 +29,13 @@ What are the implications for a research project that requires one-time bulk
 historical pulls versus ongoing daily updates?
 ```
 
+```{seealso}
+Everything on this page is also available as a single executed notebook,
+[Pulling Market Data From Databento](../notebooks/_01_databento_ipynb.ipynb),
+which walks through the SDK, the raw HTTP API, symbology and schemas, and the
+Treasury futures market brief with live output.
+```
+
 ## Key Concepts: Datasets, Schemas, and Symbology
 
 Before writing any code, it helps to understand three organizing concepts in the
@@ -85,7 +92,7 @@ More granular schemas produce more data (and cost more). For most research
 projects, `trades` or `ohlcv-1m` are good starting points.
 
 See the
-[`05_schemas_and_symbology`](https://github.com/finm-32900/inclass_examples/tree/main/databento/05_schemas_and_symbology)
+[`03_schemas_and_symbology`](https://github.com/finm-32900/inclass_examples/tree/main/databento/03_schemas_and_symbology)
 module in the examples repo for runnable comparisons.
 
 ## Getting Started with the Python SDK
@@ -160,7 +167,9 @@ Databento provides two modes of access:
 - **Live**: Stream real-time data as it arrives from the exchange via
   `db.Live()`. Billed per subscription.
 
-Here is a minimal live streaming example:
+Here is a minimal live streaming example. **Read it for contrast only — we do
+not have a live license for this course, so this code will not run** (see the
+warning below):
 
 ```python
 import databento as db
@@ -181,21 +190,32 @@ for record in client:
     print(record)  # each record is a TradeMsg with auto-scaled prices
 ```
 
-```{note}
-Live streaming requires CME Globex to be open (Sunday 5 PM – Friday 4 PM CT).
+```{warning}
+**We do not have a live-data license for this course.** Live access is licensed
+separately from historical access, and our subscription covers historical only.
+Running the code above authenticates successfully and is then rejected:
+
+    BentoError: A live data license is required to access GLBX.MDP3.
+
+That is an entitlement message, not a bad API key — the same key keeps working
+for every historical query on this page. Because we cannot run them, the class
+repo has **no live streaming examples**; everything in it uses
+`db.Historical()`. Treat `db.Live()` as background knowledge for how real-time
+market data feeds work, not as something to try in this course.
+
+Separately, live streaming also requires CME Globex to be open (Sunday 5 PM –
+Friday 4 PM CT, with a daily maintenance break from 4–5 PM CT).
 ```
 
-For a deeper look at what the SDK does under the hood (raw HTTP requests, TCP
-connections, CRAM authentication), see modules
+For a deeper look at what the SDK does under the hood — raw HTTP requests, HTTP
+Basic Auth, and the fixed-point integer encoding — see module
 [`02_historical_api`](https://github.com/finm-32900/inclass_examples/tree/main/databento/02_historical_api)
-and
-[`04_live_raw_tcp`](https://github.com/finm-32900/inclass_examples/tree/main/databento/04_live_raw_tcp)
 in the examples repo.
 
 ## Case Study: Treasury Futures Market Brief
 
 The
-[`06_treasury_futures_brief`](https://github.com/finm-32900/inclass_examples/tree/main/databento/06_treasury_futures_brief)
+[`04_treasury_futures_brief`](https://github.com/finm-32900/inclass_examples/tree/main/databento/04_treasury_futures_brief)
 example in the class repo fetches daily OHLCV data and open interest for five
 Treasury futures products spanning the yield curve:
 
@@ -223,9 +243,12 @@ Indexed closing prices (base = 100) for five Treasury futures products.
 
 ### Volume and Open Interest
 
-Volume and open interest reveal where liquidity concentrates. The 10-Year
-T-Note (ZN) typically dominates both metrics, making it the benchmark for
-Treasury futures trading.
+Volume and open interest reveal where liquidity concentrates, and the two
+metrics do not agree. The 10-Year T-Note (ZN) dominates *volume* — it turns
+over the most contracts per day, which is why it is the benchmark for
+Treasury futures trading. But *open interest* is highest in the 5-Year (ZF),
+because positions there are held rather than traded. Volume measures flow;
+open interest measures the stock of positions outstanding.
 
 ```{figure} assets/databento_chart_volume_oi.png
 :alt: Treasury futures volume and open interest
@@ -237,7 +260,7 @@ Average daily volume and open interest across Treasury futures products.
 ```{tip}
 **Try it yourself.** Clone the
 [examples repo](https://github.com/finm-32900/inclass_examples/tree/main/databento)
-and run the `06_treasury_futures_brief` scripts to reproduce these charts, add
+and run the `04_treasury_futures_brief` scripts to reproduce these charts, add
 new products, or extend the date range.
 ```
 
@@ -261,7 +284,9 @@ new products, or extend the date range.
 - [Databento Python SDK (PyPI)](https://pypi.org/project/databento/) — SDK
   installation and changelog
 - [FINM-32900 In-Class Examples: Databento](https://github.com/finm-32900/inclass_examples/tree/main/databento)
-  — 6 modules covering historical/live access, schemas, symbology, and the
-  Treasury futures case study
+  — 4 modules covering historical access (SDK and raw HTTP), schemas, symbology,
+  and the Treasury futures case study. All historical; we have no live license.
+- [Pulling Market Data From Databento](../notebooks/_01_databento_ipynb.ipynb)
+  — the four modules above merged into one executed notebook
 - [Databento Portal](https://app.databento.com) — Web UI for browsing datasets,
   checking costs, and managing API keys

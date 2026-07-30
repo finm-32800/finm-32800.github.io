@@ -51,7 +51,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Case Study: Hedging Oil Price Exposure As An E&amp;P" href="../notebooks/_01_corporate_hedging_ipynb.html" />
+    <link rel="next" title="Example: Pulling Market Data From Databento" href="../notebooks/_01_databento_ipynb.html" />
     <link rel="prev" title="LSEG Datastream" href="LSEG_datastream.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -219,16 +219,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
@@ -531,6 +532,13 @@ futures, Treasury futures, and other major derivatives.</p>
 What are the implications for a research project that requires one-time bulk
 historical pulls versus ongoing daily updates?</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Everything on this page is also available as a single executed notebook,
+<a class="reference internal" href="../notebooks/_01_databento_ipynb.html"><span class="std std-doc">Pulling Market Data From Databento</span></a>,
+which walks through the SDK, the raw HTTP API, symbology and schemas, and the
+Treasury futures market brief with live output.</p>
+</div>
 </section>
 <section id="key-concepts-datasets-schemas-and-symbology">
 <h2>Key Concepts: Datasets, Schemas, and Symbology<a class="headerlink" href="#key-concepts-datasets-schemas-and-symbology" title="Link to this heading">#</a></h2>
@@ -671,7 +679,7 @@ Schemas form a hierarchy from most to least granular:</p>
 <p>More granular schemas produce more data (and cost more). For most research
 projects, <code class="docutils literal notranslate"><span class="pre">trades</span></code> or <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> are good starting points.</p>
 <p>See the
-<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/05_schemas_and_symbology"><code class="docutils literal notranslate"><span class="pre">05_schemas_and_symbology</span></code></a>
+<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/03_schemas_and_symbology"><code class="docutils literal notranslate"><span class="pre">03_schemas_and_symbology</span></code></a>
 module in the examples repo for runnable comparisons.</p>
 </section>
 </section>
@@ -746,7 +754,9 @@ become expensive. The cost check is free and returns the exact dollar amount.</p
 <li><p><strong>Live</strong>: Stream real-time data as it arrives from the exchange via
 <code class="docutils literal notranslate"><span class="pre">db.Live()</span></code>. Billed per subscription.</p></li>
 </ul>
-<p>Here is a minimal live streaming example:</p>
+<p>Here is a minimal live streaming example. <strong>Read it for contrast only — we do
+not have a live license for this course, so this code will not run</strong> (see the
+warning below):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">databento</span> <span class="k">as</span> <span class="nn">db</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
 
@@ -765,21 +775,31 @@ become expensive. The cost check is free and returns the exact dollar amount.</p
     <span class="nb">print</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>  <span class="c1"># each record is a TradeMsg with auto-scaled prices</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Live streaming requires CME Globex to be open (Sunday 5 PM – Friday 4 PM CT).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>We do not have a live-data license for this course.</strong> Live access is licensed
+separately from historical access, and our subscription covers historical only.
+Running the code above authenticates successfully and is then rejected:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BentoError: A live data license is required to access GLBX.MDP3.
+</pre></div>
 </div>
-<p>For a deeper look at what the SDK does under the hood (raw HTTP requests, TCP
-connections, CRAM authentication), see modules
+<p>That is an entitlement message, not a bad API key — the same key keeps working
+for every historical query on this page. Because we cannot run them, the class
+repo has <strong>no live streaming examples</strong>; everything in it uses
+<code class="docutils literal notranslate"><span class="pre">db.Historical()</span></code>. Treat <code class="docutils literal notranslate"><span class="pre">db.Live()</span></code> as background knowledge for how real-time
+market data feeds work, not as something to try in this course.</p>
+<p>Separately, live streaming also requires CME Globex to be open (Sunday 5 PM –
+Friday 4 PM CT, with a daily maintenance break from 4–5 PM CT).</p>
+</div>
+<p>For a deeper look at what the SDK does under the hood — raw HTTP requests, HTTP
+Basic Auth, and the fixed-point integer encoding — see module
 <a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/02_historical_api"><code class="docutils literal notranslate"><span class="pre">02_historical_api</span></code></a>
-and
-<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/04_live_raw_tcp"><code class="docutils literal notranslate"><span class="pre">04_live_raw_tcp</span></code></a>
 in the examples repo.</p>
 </section>
 <section id="case-study-treasury-futures-market-brief">
 <h2>Case Study: Treasury Futures Market Brief<a class="headerlink" href="#case-study-treasury-futures-market-brief" title="Link to this heading">#</a></h2>
 <p>The
-<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/06_treasury_futures_brief"><code class="docutils literal notranslate"><span class="pre">06_treasury_futures_brief</span></code></a>
+<a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento/04_treasury_futures_brief"><code class="docutils literal notranslate"><span class="pre">04_treasury_futures_brief</span></code></a>
 example in the class repo fetches daily OHLCV data and open interest for five
 Treasury futures products spanning the yield curve:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -834,9 +854,12 @@ relationship between bond prices and yields.</p>
 </section>
 <section id="volume-and-open-interest">
 <h3>Volume and Open Interest<a class="headerlink" href="#volume-and-open-interest" title="Link to this heading">#</a></h3>
-<p>Volume and open interest reveal where liquidity concentrates. The 10-Year
-T-Note (ZN) typically dominates both metrics, making it the benchmark for
-Treasury futures trading.</p>
+<p>Volume and open interest reveal where liquidity concentrates, and the two
+metrics do not agree. The 10-Year T-Note (ZN) dominates <em>volume</em> — it turns
+over the most contracts per day, which is why it is the benchmark for
+Treasury futures trading. But <em>open interest</em> is highest in the 5-Year (ZF),
+because positions there are held rather than traded. Volume measures flow;
+open interest measures the stock of positions outstanding.</p>
 <figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/databento_chart_volume_oi.png"><img alt="Treasury futures volume and open interest" src="../_images/databento_chart_volume_oi.png" style="width: 100%;" /></a>
 <figcaption>
@@ -847,7 +870,7 @@ Treasury futures trading.</p>
 <p class="admonition-title">Tip</p>
 <p><strong>Try it yourself.</strong> Clone the
 <a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento">examples repo</a>
-and run the <code class="docutils literal notranslate"><span class="pre">06_treasury_futures_brief</span></code> scripts to reproduce these charts, add
+and run the <code class="docutils literal notranslate"><span class="pre">04_treasury_futures_brief</span></code> scripts to reproduce these charts, add
 new products, or extend the date range.</p>
 </div>
 </section>
@@ -898,8 +921,10 @@ definitions, dataset catalog</p></li>
 <li><p><a class="reference external" href="https://pypi.org/project/databento/">Databento Python SDK (PyPI)</a> — SDK
 installation and changelog</p></li>
 <li><p><a class="reference external" href="https://github.com/finm-32900/inclass_examples/tree/main/databento">FINM-32900 In-Class Examples: Databento</a>
-— 6 modules covering historical/live access, schemas, symbology, and the
-Treasury futures case study</p></li>
+— 4 modules covering historical access (SDK and raw HTTP), schemas, symbology,
+and the Treasury futures case study. All historical; we have no live license.</p></li>
+<li><p><a class="reference internal" href="../notebooks/_01_databento_ipynb.html"><span class="std std-doc">Pulling Market Data From Databento</span></a>
+— the four modules above merged into one executed notebook</p></li>
 <li><p><a class="reference external" href="https://app.databento.com">Databento Portal</a> — Web UI for browsing datasets,
 checking costs, and managing API keys</p></li>
 </ul>
@@ -930,11 +955,11 @@ checking costs, and managing API keys</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="../notebooks/_01_corporate_hedging_ipynb.html"
+       href="../notebooks/_01_databento_ipynb.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Case Study: Hedging Oil Price Exposure As An E&amp;P</p>
+        <p class="prev-next-title">Example: Pulling Market Data From Databento</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

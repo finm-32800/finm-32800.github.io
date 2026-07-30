@@ -47,6 +47,8 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'HW4';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -219,16 +221,17 @@
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
@@ -473,6 +476,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
 </ul>
             </nav>
         </div>
@@ -486,37 +491,86 @@ document.write(`
                    <section class="tex2jax_ignore mathjax_ignore" id="homework-4">
 <h1>Homework 4<a class="headerlink" href="#homework-4" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Due Date:</strong> TBD (will be announced on Canvas)</p></li>
-<li><p><strong>Link to Assignment:</strong> TBD (the GitHub Classroom link will be posted on Canvas)</p></li>
+<li><p><strong>Due Date:</strong> Friday, August 14, 2026 at 11:59 PM CT</p></li>
+<li><p><strong>Link to Assignment:</strong> The GitHub Classroom link will be posted on Canvas.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The yield-curve estimation content that previously formed Homework 4 has moved to
-<strong><a class="reference internal" href="HW3.html"><span class="std std-doc">Homework 3</span></a></strong>. Homework 4 is now a short options case study; full
-instructions arrive with the GitHub Classroom link.</p>
+<strong><a class="reference internal" href="HW3.html"><span class="std std-doc">Homework 3</span></a></strong>. Homework 4 is now a short options case study.</p>
 </div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Homework 4 is a deliberately minimal introduction to working with options data.
-The spine of the assignment is <a class="reference external" href="https://github.com/finm-32900/case_study_options">finm-32900/case_study_options</a>,
-a pipeline built from the same ChartBook template as your other course repos. The
-pipeline pulls option-chain data from WRDS OptionMetrics (a year-by-year SQL query
-against WRDS, in <code class="docutils literal notranslate"><span class="pre">src/pull_options_data.py</span></code>) and works through two hedging case
-studies as notebook reports:</p>
+<p>Homework 4 is a deliberately minimal introduction to working with options data,
+built from <a class="reference external" href="https://github.com/finm-32900/case_study_options">finm-32900/case_study_options</a>,
+the pipeline we walk through in class. In class we review both of its case-study
+notebooks; the homework repo itself contains only the SPX side:</p>
 <ul class="simple">
-<li><p><strong>Corporate hedging</strong>: designing a hedging program for a firm exposed to oil
-prices, using Brent crude futures and options (the futures strips and
-option-chain snapshots ship with the repo in <code class="docutils literal notranslate"><span class="pre">data_manual/</span></code>).</p></li>
-<li><p><strong>SPX hedging</strong>: hedging an equity portfolio with S&amp;P 500 index options.</p></li>
+<li><p><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html"><span class="std std-doc">Corporate Hedging</span></a> (class only): designing a
+hedging program for a firm exposed to oil prices, using Brent crude futures and
+options. The futures strips and option-chain snapshots ship with the case-study
+repo, so this notebook runs fully offline.</p></li>
+<li><p><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html"><span class="std std-doc">SPX Hedging</span></a> (the homework): hedging an equity
+portfolio with S&amp;P 500 index options — costless collars built from the
+market-implied delta map, IV surface, and a Monte Carlo simulation.</p></li>
 </ul>
-<p>As in HW 3, the pipeline is orchestrated with <code class="docutils literal notranslate"><span class="pre">doit</span></code> and ends by building a
-ChartBook site from the registered dataframes and executed notebooks.</p>
-<p>We launch the assignment together in Week 7 and review the two case-study
-notebooks in class:</p>
+<p>As in HW 3, the pipeline is orchestrated with <code class="docutils literal notranslate"><span class="pre">doit</span></code>, and this week’s themes
+(unit tests, documentation) run straight through it: your grade is determined by
+a pytest suite, part of which runs as a GitHub Actions autograder on every push.</p>
+</section>
+<section id="what-you-do">
+<h2>What You Do<a class="headerlink" href="#what-you-do" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Complete the WRDS OptionMetrics pull.</strong> The SQL query in
+<code class="docutils literal notranslate"><span class="pre">src/pull_options_data.py</span></code> is blanked out; the TODO block spells out the
+required columns, tables, join keys, and filters (PM-settled SPX options,
+<code class="docutils literal notranslate"><span class="pre">am_settlement</span> <span class="pre">=</span> <span class="pre">0</span></code>). Then run <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">pull_WRDS_options_data</span></code> (~200 MB;
+never commit the parquet).</p></li>
+<li><p><strong>Extend the sample with Databento.</strong> The OptionMetrics feed lags badly —
+the pulled data ends August 2023. You will close the gap by pulling recent
+PM-settled S&amp;P 500 (SPXW) options from the OPRA feed via
+<a class="reference external" href="https://databento.com">Databento</a>, using your own free-trial API key.
+Three pieces are blanked out for you to complete:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html"><span class="std std-doc">Corporate Hedging</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html"><span class="std std-doc">SPX Hedging</span></a></p></li>
+<li><p>the query fields in <code class="docutils literal notranslate"><span class="pre">src/pull_databento_options.py</span></code> (which dataset,
+schema, symbol root, and symbology — think about AM vs. PM settlement),</p></li>
+<li><p>the OSI option-symbol parser,</p></li>
+<li><p>the implied-volatility solver in <code class="docutils literal notranslate"><span class="pre">src/black_scholes.py</span></code> (OPRA carries
+prices only, so IV and greeks are computed, not vendor-supplied).</p></li>
 </ul>
+<p>The pull script is <strong>cost-guarded</strong>: it prices every query with a free
+<code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> call and refuses to download if the estimate exceeds
+<code class="docutils literal notranslate"><span class="pre">DATABENTO_MAX_COST</span></code> (default <span class="math notranslate nohighlight">\(3.00; the default two-week window costs
+about \)</span>2.50 of your $125 trial credits). Check with <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> first, and
+do not modify the guard.</p>
+</li>
+<li><p><strong>Make the tests pass.</strong> <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">./src</span></code> runs the whole suite. Tests marked
+<code class="docutils literal notranslate"><span class="pre">requires_data</span></code> skip until the parquets exist; the autograder runs the
+no-data tests (including the SQL-completeness and Black-Scholes tests) on
+every push.</p></li>
+</ol>
+</section>
+<section id="grading">
+<h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Points</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SQL query completeness (autograded)</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Databento pipeline and Black-Scholes tests (autograded)</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>Full fast test suite (autograded)</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -569,6 +623,8 @@ notebooks in class:</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
 </ul>
   </nav></div>
 
