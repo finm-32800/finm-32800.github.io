@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 8: Medium-Sized Data and Remote Machines &#8212; Full Stack Quantitative Finance</title>
+    <title>Week 8: GitHub Actions, and Publishing &#8212; Full Stack Quantitative Finance</title>
   
   
   
@@ -53,8 +53,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Strategies for Medium-Sized Data" href="Week8/medium_sized_data_strategies.html" />
-    <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
+    <link rel="next" title="Creating a Live Dashboard Example with GitHub Actions" href="Week9/github_actions_interactive_dashboard.html" />
+    <link rel="prev" title="Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars" href="notebooks/_02_spx_hedging_ipynb.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -177,6 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -231,20 +232,21 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: GitHub Actions, and Publishing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: Medium-Sized Data and Remote Machines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Web Authentication, GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -465,7 +467,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 8: Medium-Sized Data and Remote Machines</h1>
+    <h1>Week 8: GitHub Actions, and Publishing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -487,38 +489,36 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-medium-sized-data-and-remote-machines">
-<h1>Week 8: Medium-Sized Data and Remote Machines<a class="headerlink" href="#week-8-medium-sized-data-and-remote-machines" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-github-actions-and-publishing">
+<h1>Week 8: GitHub Actions, and Publishing<a class="headerlink" href="#week-8-github-actions-and-publishing" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </div>
 <section id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Medium-sized data strategies and Polars</p></li>
-<li><p>Remote machines and HPC</p></li>
-<li><p>Go over Homework 5: running the Clean TRACE pipeline on RCC</p></li>
+<li><p>A minimal replication of the CME FedWatch tool built on Databento data (<a class="reference external" href="https://github.com/finm-32900/case_study_fedwatch">finm-32900/case_study_fedwatch</a>):</p>
+<ul>
+<li><p><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html"><span class="std std-doc">30-Day Fed Funds Futures Data from Databento</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/_02_fedwatch_replication.html"><span class="std std-doc">Replicating the CME FedWatch Tool</span></a></p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="learning-outcomes">
 <h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Understand strategies for working with medium-sized datasets (1GB-100GB)</p></li>
-<li><p>Compare Pandas and Polars for data processing at scale</p></li>
-<li><p>Understand lazy evaluation, predicate pushdown, streaming, and Hive partitioning</p></li>
-<li><p>Introduction to TRACE corporate bond data</p></li>
-<li><p>Connect to remote machines via SSH and transfer files with rsync</p></li>
-<li><p>Understand HPC cluster architecture (login nodes, compute nodes, storage)</p></li>
-<li><p>Submit and manage jobs with SLURM (sinteractive, sbatch)</p></li>
-<li><p>Understand why data pipelines must decouple internet-dependent pulls from processing</p></li>
-<li><p>Set up SSH port forwarding to access Jupyter notebooks on remote compute nodes</p></li>
+<li><p>Overview of GitHub Actions</p></li>
+<li><p>Understand cron for scheduling recurring tasks</p></li>
+<li><p>Overview of GitHub Pages</p></li>
+<li><p>Static HTML widgets with plotly</p></li>
+<li><p>Demonstrate ChartBook: <a class="github reference external" href="https://github.com/jmbejara/chartbook">jmbejara/chartbook</a></p></li>
+<li><p>Review LaTeX, and how it should be used in the final project</p></li>
 </ul>
 </section>
 </section>
@@ -538,20 +538,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="subject_to_change_after_this_week.html"
+       href="notebooks/_02_spx_hedging_ipynb.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
+        <p class="prev-next-title">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week8/medium_sized_data_strategies.html"
+       href="Week9/github_actions_interactive_dashboard.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Strategies for Medium-Sized Data</p>
+        <p class="prev-next-title">Creating a Live Dashboard Example with GitHub Actions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

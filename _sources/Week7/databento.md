@@ -19,7 +19,16 @@ Key differentiators:
 
 UChicago has a Databento subscription for FINM students, providing access to
 **CME Globex (GLBX.MDP3)** — the electronic trading venue for E-mini S&P 500
-futures, Treasury futures, and other major derivatives.
+futures, Treasury futures, and other major derivatives (including the options
+on those futures).
+
+One licensing detail matters in practice: the course subscription is a
+**flat-rate license for GLBX.MDP3 only**. Queries against that dataset cost
+$0.00, while every other Databento dataset — for example **OPRA**, the
+consolidated feed for listed equity options like SPX/SPXW — bills
+pay-as-you-go per query. This is exactly why the HW 4 case study extends its
+S&P 500 option panel with CME **E-mini options on futures** (free under the
+subscription) rather than SPX index options from OPRA (metered).
 
 ```{admonition} Discussion
 :class: tip
@@ -58,8 +67,16 @@ is essential when working with futures, which have expiring contracts:
 |----------------|---------|-------------|
 | `raw_symbol` | `ESU4` | One specific contract (ES = E-mini S&P, U = Sep, 4 = 2024) |
 | `parent` | `ES.FUT` | All active expirations of a product |
+| `parent` (options) | `EW.OPT` | All listed series of an options-on-futures product (here: E-mini S&P 500 end-of-month options — used in HW 4) |
 | `continuous` | `ES.c.0` | Rolling front-month contract |
 | `instrument_id` | `3403` | Numeric exchange-assigned ID |
+
+Two options-on-futures quirks worth knowing before HW 4: an option's raw
+symbol (e.g. `EW1N3 C4580`) names the series, right, and strike but **not the
+expiration date** — that comes from the exchange's listing rule or its
+`definition` records — and parent-symbol queries also return **user-defined
+spreads** (raw symbols starting `UD:`), multi-leg strategies that must be
+filtered out of an outright-options panel.
 
 For quick reference, here are the **futures month codes**:
 

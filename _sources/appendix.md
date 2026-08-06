@@ -19,3 +19,14 @@ We are **not covering the Bloomberg Terminal live this quarter** — as an onlin
 :maxdepth: 1
 Week7/bloomberg_terminal.md
 ```
+
+## Web Authentication
+
+```{note}
+This material is **not covered in any class session this quarter**. It is kept here as a reference.
+```
+
+```{toctree}
+:maxdepth: 1
+Week8/web_authentication.md
+```

@@ -175,6 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -229,20 +230,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Web Authentication, GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -524,7 +526,15 @@ executing it, for free.</p></li>
 </ul>
 <p>UChicago has a Databento subscription for FINM students, providing access to
 <strong>CME Globex (GLBX.MDP3)</strong> — the electronic trading venue for E-mini S&amp;P 500
-futures, Treasury futures, and other major derivatives.</p>
+futures, Treasury futures, and other major derivatives (including the options
+on those futures).</p>
+<p>One licensing detail matters in practice: the course subscription is a
+<strong>flat-rate license for GLBX.MDP3 only</strong>. Queries against that dataset cost
+$0.00, while every other Databento dataset — for example <strong>OPRA</strong>, the
+consolidated feed for listed equity options like SPX/SPXW — bills
+pay-as-you-go per query. This is exactly why the HW 4 case study extends its
+S&amp;P 500 option panel with CME <strong>E-mini options on futures</strong> (free under the
+subscription) rather than SPX index options from OPRA (metered).</p>
 <div class="tip admonition">
 <p class="admonition-title">Discussion</p>
 <p>How does the pricing model for Databento (pay-per-query) compare to Bloomberg
@@ -583,17 +593,27 @@ is essential when working with futures, which have expiring contracts:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">ES.FUT</span></code></p></td>
 <td><p>All active expirations of a product</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">continuous</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parent</span></code> (options)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EW.OPT</span></code></p></td>
+<td><p>All listed series of an options-on-futures product (here: E-mini S&amp;P 500 end-of-month options — used in HW 4)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">continuous</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ES.c.0</span></code></p></td>
 <td><p>Rolling front-month contract</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">instrument_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">3403</span></code></p></td>
 <td><p>Numeric exchange-assigned ID</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Two options-on-futures quirks worth knowing before HW 4: an option’s raw
+symbol (e.g. <code class="docutils literal notranslate"><span class="pre">EW1N3</span> <span class="pre">C4580</span></code>) names the series, right, and strike but <strong>not the
+expiration date</strong> — that comes from the exchange’s listing rule or its
+<code class="docutils literal notranslate"><span class="pre">definition</span></code> records — and parent-symbol queries also return <strong>user-defined
+spreads</strong> (raw symbols starting <code class="docutils literal notranslate"><span class="pre">UD:</span></code>), multi-leg strategies that must be
+filtered out of an outright-options panel.</p>
 <p>For quick reference, here are the <strong>futures month codes</strong>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>

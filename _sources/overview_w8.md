@@ -1,30 +1,25 @@
-# Week 8: Medium-Sized Data and Remote Machines
+# Week 8: GitHub Actions, and Publishing
 
 ```{toctree}
 :maxdepth: 1
 
-Week8/medium_sized_data_strategies.md
-Week8/polars_exercises.md
-Week8/remote_machines_and_hpc.md
-Week8/exercise_jupyter_on_midway.md
-notebooks/_01_data_sources_overview_ipynb.ipynb
-notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb
+Week9/github_actions_interactive_dashboard.md
+Week9/cron_jobs.md
+notebooks/_01_fed_funds_futures_data.ipynb
+notebooks/_02_fedwatch_replication.ipynb
 ```
 
 ## Agenda
 
-- Medium-sized data strategies and Polars
-- Remote machines and HPC
-- Go over Homework 5: running the Clean TRACE pipeline on RCC
+- A minimal replication of the CME FedWatch tool built on Databento data ([finm-32900/case_study_fedwatch](https://github.com/finm-32900/case_study_fedwatch)):
+  - [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data.ipynb)
+  - [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication.ipynb)
 
 ## Learning Outcomes
 
-- Understand strategies for working with medium-sized datasets (1GB-100GB)
-- Compare Pandas and Polars for data processing at scale
-- Understand lazy evaluation, predicate pushdown, streaming, and Hive partitioning
-- Introduction to TRACE corporate bond data
-- Connect to remote machines via SSH and transfer files with rsync
-- Understand HPC cluster architecture (login nodes, compute nodes, storage)
-- Submit and manage jobs with SLURM (sinteractive, sbatch)
-- Understand why data pipelines must decouple internet-dependent pulls from processing
-- Set up SSH port forwarding to access Jupyter notebooks on remote compute nodes
+- Overview of GitHub Actions
+- Understand cron for scheduling recurring tasks
+- Overview of GitHub Pages
+- Static HTML widgets with plotly
+- Demonstrate ChartBook: https://github.com/jmbejara/chartbook
+- Review LaTeX, and how it should be used in the final project

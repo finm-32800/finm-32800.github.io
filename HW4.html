@@ -177,6 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="acknowledgments.html">Acknowledgments</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -231,20 +232,21 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Web Authentication, GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 </ul>
 </details></li>
 </ul>
@@ -512,7 +514,9 @@ options. The futures strips and option-chain snapshots ship with the case-study
 repo, so this notebook runs fully offline.</p></li>
 <li><p><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html"><span class="std std-doc">SPX Hedging</span></a> (the homework): hedging an equity
 portfolio with S&amp;P 500 index options — costless collars built from the
-market-implied delta map, IV surface, and a Monte Carlo simulation.</p></li>
+market-implied delta map, IV surface, and a Monte Carlo simulation — then
+extending the stale vendor sample with CME E-mini S&amp;P 500 options from
+Databento and validating the substitution on an overlap month.</p></li>
 </ul>
 <p>As in HW 3, the pipeline is orchestrated with <code class="docutils literal notranslate"><span class="pre">doit</span></code>, and this week’s themes
 (unit tests, documentation) run straight through it: your grade is determined by
@@ -527,22 +531,32 @@ required columns, tables, join keys, and filters (PM-settled SPX options,
 <code class="docutils literal notranslate"><span class="pre">am_settlement</span> <span class="pre">=</span> <span class="pre">0</span></code>). Then run <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">pull_WRDS_options_data</span></code> (~200 MB;
 never commit the parquet).</p></li>
 <li><p><strong>Extend the sample with Databento.</strong> The OptionMetrics feed lags badly —
-the pulled data ends August 2023. You will close the gap by pulling recent
-PM-settled S&amp;P 500 (SPXW) options from the OPRA feed via
+the pulled data ends August 2023. You will close the gap by pulling
+<strong>E-mini S&amp;P 500 options on futures</strong> from CME Globex (<code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code>) via
 <a class="reference external" href="https://databento.com">Databento</a>, using your own free-trial API key.
-Three pieces are blanked out for you to complete:</p>
+(SPX index options themselves live on the OPRA feed, which is metered and
+expensive; the E-mini complex tracks it closely — the notebook proves
+this on an overlap sample.) Three pieces are blanked out for you to
+complete:</p>
 <ul class="simple">
-<li><p>the query fields in <code class="docutils literal notranslate"><span class="pre">src/pull_databento_options.py</span></code> (which dataset,
-schema, symbol root, and symbology — think about AM vs. PM settlement),</p></li>
-<li><p>the OSI option-symbol parser,</p></li>
-<li><p>the implied-volatility solver in <code class="docutils literal notranslate"><span class="pre">src/black_scholes.py</span></code> (OPRA carries
-prices only, so IV and greeks are computed, not vendor-supplied).</p></li>
+<li><p>the query constants in <code class="docutils literal notranslate"><span class="pre">src/pull_databento_options.py</span></code> (which dataset,
+schema, and parent symbols — think about which E-mini option roots
+continue the <em>PM-settled</em> series your WRDS query filters on: quarterly
+ES options are AM-settled, like the classic SPX monthlies),</p></li>
+<li><p>the CME contract-symbol parser (<code class="docutils literal notranslate"><span class="pre">EW1N3</span> <span class="pre">C4580</span></code> → root, month, year,
+type, strike — note the expiration <em>date</em> is not in the symbol),</p></li>
+<li><p>the implied-volatility solver in <code class="docutils literal notranslate"><span class="pre">src/black_scholes.py</span></code> (the feed
+carries prices only, so IV and greeks are computed, not
+vendor-supplied — via Black-76 on the parity-implied futures price).</p></li>
 </ul>
-<p>The pull script is <strong>cost-guarded</strong>: it prices every query with a free
+<p>The pull grabs the most recent two weeks <strong>plus a fixed August-2023
+sample</strong> that overlaps OptionMetrics; the notebook uses the overlap to
+validate the E-mini implied vols against the vendor’s, contract by
+contract. It is <strong>cost-guarded</strong>: it prices every query with a free
 <code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> call and refuses to download if the estimate exceeds
-<code class="docutils literal notranslate"><span class="pre">DATABENTO_MAX_COST</span></code> (default <span class="math notranslate nohighlight">\(3.00; the default two-week window costs
-about \)</span>2.50 of your $125 trial credits). Check with <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> first, and
-do not modify the guard.</p>
+<code class="docutils literal notranslate"><span class="pre">DATABENTO_MAX_COST</span></code> (default <span class="math notranslate nohighlight">\(3.00; the default pull costs well under a
+dollar of your \)</span>125 trial credits). Check with <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> first, and do
+not modify the guard.</p>
 </li>
 <li><p><strong>Make the tests pass.</strong> <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">./src</span></code> runs the whole suite. Tests marked
 <code class="docutils literal notranslate"><span class="pre">requires_data</span></code> skip until the parquets exist; the autograder runs the
