@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 9: Medium-Sized Data and Remote Machines &#8212; Full Stack Quantitative Finance</title>
+    <title>Week 9: Medium-Sized Data and Polars &#8212; Full Stack Quantitative Finance</title>
   
   
   
@@ -54,7 +54,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Strategies for Medium-Sized Data" href="Week8/medium_sized_data_strategies.html" />
-    <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
+    <link rel="prev" title="02. Replicating the CME FedWatch Tool" href="notebooks/_02_fedwatch_replication.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -239,8 +239,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 9: Medium-Sized Data and Remote Machines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 9: Medium-Sized Data and Polars</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
@@ -270,7 +269,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5 (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="midterm_report.html">Midterm Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
@@ -467,7 +466,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 9: Medium-Sized Data and Remote Machines</h1>
+    <h1>Week 9: Medium-Sized Data and Polars</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -479,6 +478,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-up-material">Make-Up Material</a></li>
 </ul>
             </nav>
         </div>
@@ -489,8 +489,8 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-medium-sized-data-and-remote-machines">
-<h1>Week 9: Medium-Sized Data and Remote Machines<a class="headerlink" href="#week-9-medium-sized-data-and-remote-machines" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-medium-sized-data-and-polars">
+<h1>Week 9: Medium-Sized Data and Polars<a class="headerlink" href="#week-9-medium-sized-data-and-polars" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -504,9 +504,10 @@ document.write(`
 <section id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
 <ul class="simple">
+<li><p>Final project proposal presentations: Ashish + Omar, Piyush, Ahmad + Jeffrey</p></li>
 <li><p>Medium-sized data strategies and Polars</p></li>
-<li><p>Remote machines and HPC</p></li>
-<li><p>Go over Homework 5: running the Clean TRACE pipeline on RCC</p></li>
+<li><p>Introduction to TRACE: data sources overview and the Clean TRACE cleaning walkthrough</p></li>
+<li><p>Final project logistics: rubric walkthrough, oral defense expectations, and signing up for a final presentation time (all groups must present by August 21)</p></li>
 </ul>
 </section>
 <section id="learning-outcomes">
@@ -516,10 +517,22 @@ document.write(`
 <li><p>Compare Pandas and Polars for data processing at scale</p></li>
 <li><p>Understand lazy evaluation, predicate pushdown, streaming, and Hive partitioning</p></li>
 <li><p>Introduction to TRACE corporate bond data</p></li>
+<li><p>Understand why data pipelines must decouple internet-dependent pulls from processing</p></li>
+</ul>
+</section>
+<section id="make-up-material">
+<h2>Make-Up Material<a class="headerlink" href="#make-up-material" title="Link to this heading">#</a></h2>
+<p>Due to RCC access issues, the discussion of remote machines and HPC—including
+<a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a> and the
+<a class="reference internal" href="Week8/exercise_jupyter_on_midway.html"><span class="std std-doc">Exercise: Jupyter on Midway</span></a>—is
+postponed. We will cover this material in a make-up session at a later date.
+Relatedly, <a class="reference internal" href="HW5.html"><span class="std std-doc">Homework 5</span></a>, which runs the Clean TRACE pipeline on RCC, is
+now <strong>optional</strong>.</p>
+<p>When we cover this material, you will:</p>
+<ul class="simple">
 <li><p>Connect to remote machines via SSH and transfer files with rsync</p></li>
 <li><p>Understand HPC cluster architecture (login nodes, compute nodes, storage)</p></li>
 <li><p>Submit and manage jobs with SLURM (sinteractive, sbatch)</p></li>
-<li><p>Understand why data pipelines must decouple internet-dependent pulls from processing</p></li>
 <li><p>Set up SSH port forwarding to access Jupyter notebooks on remote compute nodes</p></li>
 </ul>
 </section>
@@ -540,12 +553,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="subject_to_change_after_this_week.html"
+       href="notebooks/_02_fedwatch_replication.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
+        <p class="prev-next-title">02. Replicating the CME FedWatch Tool</p>
       </div>
     </a>
     <a class="right-next"
@@ -575,6 +588,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-up-material">Make-Up Material</a></li>
 </ul>
   </nav></div>
 

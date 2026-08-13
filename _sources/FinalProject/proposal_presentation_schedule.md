@@ -10,4 +10,4 @@ For what to prepare and how the proposal is graded, see the [Proposal Presentati
 | Thursday, July 23 | Andrew + Chandler, Anthony + Stefano |
 | Thursday, July 30 | Riley + Marija, Brian + Clara |
 | Thursday, August 6 | Arnold + Cameron, Bobby + George, Iris + Zhicheng |
-| Thursday, August 13 | Ashish + Omar, Ahmad + Jeffrey |
+| Thursday, August 13 | Ashish + Omar (first), Piyush (second), Ahmad + Jeffrey (third) |

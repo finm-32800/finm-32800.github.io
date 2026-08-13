@@ -1,4 +1,14 @@
-# Homework 5
+# Homework 5 (Optional)
+
+```{admonition} This assignment is now optional
+:class: important
+
+**Update (August 13, 2026):** Due to ongoing issues with access to the RCC
+Midway3 cluster, Homework 5 is now **optional** and will not be collected or
+graded. The remote machines and HPC material will be covered in a make-up
+session at a later date. If you would like the hands-on HPC experience, you
+are encouraged to work through this assignment once cluster access is restored.
+```
 
 ## Learning Outcomes
 
@@ -13,7 +23,7 @@
 
 The assignment is located at the following GitHub Classroom link: TBD
 
-**Due Date:** Friday, August 7, 2026 at 11:59 pm CT
+**Due Date:** None---this assignment is optional.
 
 This is a lightweight assignment designed to give you hands-on experience with
 the RCC Midway3 cluster. You will set up your environment, run the Clean TRACE

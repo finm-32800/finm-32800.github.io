@@ -53,7 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="WARNING: Notes subject to change after this week" href="../subject_to_change_after_this_week.html" />
+    <link rel="next" title="Week 9: Medium-Sized Data and Polars" href="../overview_w9.html" />
     <link rel="prev" title="01. 30-Day Fed Funds Futures (ZQ) Data from Databento" href="_01_fed_funds_futures_data.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -239,8 +239,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
@@ -270,7 +269,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5 (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../midterm_report.html">Midterm Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
@@ -477,10 +476,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-methodology">The methodology</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step">Step by step</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-two-numbers-to-a-probability">From two numbers to a probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-worked-example-against-the-real-tool">The worked example — against the real tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-print">Fine print</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-steps-on-live-data">The same steps on live data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-whole-argument-in-one-picture">The whole argument in one picture</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-at-once">All at once</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-close-did-we-get">How close did we get?</a></li>
 </ul>
             </nav>
         </div>
@@ -495,65 +500,133 @@ document.write(`
 <h1>02. Replicating the CME FedWatch Tool<a class="headerlink" href="#replicating-the-cme-fedwatch-tool" title="Link to this heading">#</a></h1>
 <p>The <a class="reference external" href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html">CME FedWatch tool</a>
 publishes the probability of each possible fed funds target range after
-upcoming FOMC meetings, backed out of 30-Day Fed Funds futures (ZQ) prices.
-It is one of the most-quoted numbers in financial journalism — “markets
-price a 58% chance of a hike in September” is FedWatch talking.</p>
-<p>This notebook replicates the <strong>simplest case</strong> of the tool: the <em>next</em>
-scheduled FOMC meeting, with a <strong>binary outcome</strong> — either the Fed leaves
-the target range unchanged or it moves once by 25 bps. That single case
-contains all of the economic content; the full tool then chains the same
-logic across later meetings with a probability tree (out of scope here).</p>
+upcoming FOMC meetings, backed out of 30-Day Fed Funds futures (ZQ)
+prices. It is one of the most-quoted numbers in financial journalism —
+“markets price a 58% chance of a hike in September” is FedWatch talking.</p>
+<p>This notebook replicates the tool’s simplest case: the <em>next</em> scheduled
+meeting, with a binary outcome — the Fed either leaves the target range
+unchanged or moves once by 25 bps. That single case contains all of the
+economic content; the full tool chains the same logic across later
+meetings with a probability tree (out of scope here).</p>
 <p><img alt="CME FedWatch target rate probabilities" src="../_images/fedwatch_target_probabilities.png" /></p>
 <p><em>The published FedWatch tool for the September 16, 2026 meeting, captured
 August 6, 2026. By the end of this notebook we will have reproduced this
-chart from raw futures prices.</em></p>
-<section id="the-methodology">
-<h2>The methodology<a class="headerlink" href="#the-methodology" title="Link to this heading">#</a></h2>
-<p>Recall from notebook 01 that a ZQ contract settles at 100 minus the
-calendar-day <strong>average</strong> EFFR over its month. Three observations turn that
-into meeting probabilities:</p>
-<p><strong>1. A month with no meeting reveals the expected level.</strong> If no FOMC
-meeting falls in a month, the rate should be (expected to be) constant
-through it, so that month’s contract prices the level directly. Using the
-month <em>before</em> the meeting month as this “anchor”:</p>
-<div class="math notranslate nohighlight">
-\[ r_{\text{pre}} = 100 - P_{\text{anchor}}. \]</div>
-<p><strong>2. The meeting month is a day-weighted blend.</strong> Suppose the meeting ends
-(the decision is announced) on day <span class="math notranslate nohighlight">\(d\)</span> of an <span class="math notranslate nohighlight">\(N\)</span>-day month; the new rate
-takes effect the next day. Then <span class="math notranslate nohighlight">\(d\)</span> days accrue at <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> and
-<span class="math notranslate nohighlight">\(N - d\)</span> days at the post-meeting rate <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span>:</p>
+chart from just two inputs: one futures price and one published rate.</em></p>
+<section id="from-two-numbers-to-a-probability">
+<h2>From two numbers to a probability<a class="headerlink" href="#from-two-numbers-to-a-probability" title="Link to this heading">#</a></h2>
+<p>Recall the settlement rule from notebook 01: the ZQ contract for a month
+with <span class="math notranslate nohighlight">\(N\)</span> calendar days settles at <span class="math notranslate nohighlight">\(100 - \bar{r}\)</span>, where <span class="math notranslate nohighlight">\(\bar{r}\)</span> is the
+month’s calendar-day average of the effective federal funds rate (EFFR).
+Before the month is over, the contract trades at the market’s forecast of
+<span class="math notranslate nohighlight">\(\bar{r}\)</span>, so a price <span class="math notranslate nohighlight">\(P\)</span> observed today reveals an <strong>expected average
+rate</strong>, <span class="math notranslate nohighlight">\(R = 100 - P = \mathbb{E}[\bar{r}]\)</span>. (Strictly a futures price
+can also embed a risk premium; over the couple of months ahead of a
+meeting it is small, FedWatch ignores it, and so do we.)</p>
+<p><strong>Step 1 — the current rate is published every morning.</strong> The pre-meeting
+rate needs no model at all: the fed funds rate only moves when the FOMC
+moves it, and the New York Fed publishes each day’s realized EFFR the
+next morning (we pull it from FRED). That latest print — call it
+<span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> — is the rate the market expects to prevail right up to
+decision day. The published FedWatch tool anchors here too.</p>
+<p><strong>Step 2 — the meeting-month contract averages two rates.</strong> The decision
+is announced on day <span class="math notranslate nohighlight">\(d\)</span> of the <span class="math notranslate nohighlight">\(N\)</span>-day meeting month and takes effect the
+next day, so the month’s average straddles the decision: <span class="math notranslate nohighlight">\(d\)</span> days accrue
+at the known <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span>, and the remaining <span class="math notranslate nohighlight">\(N - d\)</span> days accrue at
+the post-meeting rate <span class="math notranslate nohighlight">\(\tilde{r}_{\text{post}}\)</span> — a <em>random variable</em>
+today, because the meeting hasn’t happened yet. Taking expectations of
+the average, the contract’s implied rate is a <strong>day-weighted blend</strong> with
+exactly one unknown, <span class="math notranslate nohighlight">\(r_{\text{post}} \equiv \mathbb{E}[\tilde{r}_{\text{post}}]\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ r_{\text{avg}} = \frac{d}{N}\, r_{\text{pre}} + \frac{N-d}{N}\, r_{\text{post}}
    \quad\Longrightarrow\quad
    r_{\text{post}} = \frac{r_{\text{avg}}\, N - r_{\text{pre}}\, d}{N - d}. \]</div>
-<p><strong>3. Two possible outcomes identify the probability.</strong> If the only outcomes
-are “no change” and one 25 bp move, then
-<span class="math notranslate nohighlight">\(r_{\text{post}} = r_{\text{pre}} + p \cdot (\pm 0.25)\)</span>, so</p>
+<p>Read <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> carefully: it is an expectation, not a possible
+outcome. The Fed moves in 25 bp steps, so the realized post-meeting
+rate will sit on that grid — but its <em>expectation</em> can land anywhere in
+between, and exactly where it lands is what encodes the probabilities.</p>
+<p><strong>Step 3 — an expectation between two outcomes is a probability.</strong> Assume
+the meeting either leaves the target alone or moves it once by 25 bps, in
+the direction the data suggest:</p>
 <div class="math notranslate nohighlight">
-\[ p_{\text{move}} = \frac{|r_{\text{post}} - r_{\text{pre}}|}{0.25},
-   \qquad p_{\text{no change}} = 1 - p_{\text{move}}. \]</div>
-<p><strong>Worked example.</strong> Meeting ends September 16 (<span class="math notranslate nohighlight">\(d = 16\)</span>, <span class="math notranslate nohighlight">\(N = 30\)</span>). The
-August contract trades at 95.67 ⇒ <span class="math notranslate nohighlight">\(r_{\text{pre}} = 4.33\%\)</span>; the September
-contract at 95.78 ⇒ <span class="math notranslate nohighlight">\(r_{\text{avg}} = 4.22\%\)</span>. Then
-<span class="math notranslate nohighlight">\(r_{\text{post}} = (4.22 \times 30 - 4.33 \times 16)/14 \approx 4.09\%\)</span> —
-about 24 bps below <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span>, so the market prices a <strong>94% chance of
-a 25 bp cut</strong>.</p>
-<p><strong>Caveats (documented, not modeled).</strong> This simplest version assumes the
-anchor month has no meeting (true for most meetings; the code warns
-otherwise — FedWatch anchors to realized EFFR in that case). When a meeting
-falls in the last ~3 days of a month, <span class="math notranslate nohighlight">\(N - d\)</span> is tiny and the solved
-<span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> gets noisy, so FedWatch switches to the <em>next</em> month’s
-contract. And moves bigger than 25 bps (like March 2020) violate the binary
-assumption. None of these change the core idea.</p>
+\[\begin{split} \tilde{r}_{\text{post}} =
+   \begin{cases}
+     r_{\text{pre}}          &amp; \text{with probability } 1 - p, \\[2pt]
+     r_{\text{pre}} + \Delta &amp; \text{with probability } p,
+   \end{cases} \end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\Delta = -0.25\)</span> for a cut or <span class="math notranslate nohighlight">\(+0.25\)</span> for a hike. Take the
+expectation of this two-point distribution:</p>
+<div class="math notranslate nohighlight">
+\[ r_{\text{post}} = (1-p)\, r_{\text{pre}} + p\,(r_{\text{pre}} + \Delta)
+   = r_{\text{pre}} + p\, \Delta. \]</div>
+<p>The expected change is the probability times the step size — so the
+probability is the expected change <em>measured in units of one step</em>:</p>
+<div class="math notranslate nohighlight">
+\[ p = \frac{\lvert r_{\text{post}} - r_{\text{pre}} \rvert}{0.25},
+   \qquad p_{\text{no change}} = 1 - p. \]</div>
+<p>The two sanity checks are the intuition: a zero gap means <span class="math notranslate nohighlight">\(p = 0\)</span>, a full
+25 bp gap means <span class="math notranslate nohighlight">\(p = 1\)</span>, and in between <span class="math notranslate nohighlight">\(p\)</span> is how far the expected rate
+has traveled from “no change” toward “one full move.” (Market noise can
+push the gap slightly outside <span class="math notranslate nohighlight">\([0, 0.25]\)</span>; the code clips <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span>.)</p>
+<section id="the-worked-example-against-the-real-tool">
+<h3>The worked example — against the real tool<a class="headerlink" href="#the-worked-example-against-the-real-tool" title="Link to this heading">#</a></h3>
+<p>The September 2026 meeting ends September 16, and September has 30 days:
+<span class="math notranslate nohighlight">\(d = 16\)</span>, <span class="math notranslate nohighlight">\(N = 30\)</span>. On August 5, 2026, the EFFR print was
+<span class="math notranslate nohighlight">\(r_{\text{pre}} = 3.63\%\)</span> and the September contract <code class="docutils literal notranslate"><span class="pre">ZQU6</span></code> closed at
+96.30, implying <span class="math notranslate nohighlight">\(r_{\text{avg}} = 3.70\%\)</span>. Step 2:</p>
+<div class="math notranslate nohighlight">
+\[ r_{\text{post}} = \frac{3.70 \times 30 - 3.63 \times 16}{30 - 16}
+   = \frac{111.00 - 58.08}{14} = 3.78\%. \]</div>
+<p>The expected change is <span class="math notranslate nohighlight">\(+15\)</span> bps, so Step 3 gives
+<span class="math notranslate nohighlight">\(p_{\text{hike}} = 15/25 = 60\%\)</span> and 40% no change.</p>
+<p>Notice what the day-weighting accomplished. The naive reading —
+“September prices 3.70% against 3.63% today, 7 bps is a <span class="math notranslate nohighlight">\(7/25 = 28\%\)</span>
+hike chance” — is wrong, because a September 16 hike affects only the
+last 14 of September’s 30 days. The monthly average <em>dilutes</em> the move by
+<span class="math notranslate nohighlight">\(\tfrac{N-d}{N} = \tfrac{14}{30}\)</span>, and Step 2 exists to undo that
+dilution: <span class="math notranslate nohighlight">\(7 \times \tfrac{30}{14} = 15\)</span> bps — hence 60%, not 28%.</p>
+<p>The FedWatch screenshot at the top, captured the next morning, showed
+<strong>54.5% hike / 45.5% no change</strong> — the same call as our 60/40, about six
+probability points apart. That gap is smaller than it looks: the solve
+for <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> amplifies pricing differences by
+<span class="math notranslate nohighlight">\(N/(N-d) \approx 2.1\)</span>, so one basis point in the implied rate moves the
+probability by roughly nine points. Six points is under a basis point of
+price — about what official settlements versus daily closes, and an
+intraday screenshot versus a previous-day close, account for.</p>
+</section>
+<section id="fine-print">
+<h3>Fine print<a class="headerlink" href="#fine-print" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Meetings near month-end.</strong> Dividing by <span class="math notranslate nohighlight">\(N - d\)</span> amplifies noise by
+<span class="math notranslate nohighlight">\(N/(N-d)\)</span> — about <span class="math notranslate nohighlight">\(10\times\)</span> for a meeting on day 27. When a meeting
+falls in the last ~3 days of a month, FedWatch reads the <em>next</em> month’s
+contract instead, whose whole month accrues at the post-meeting rate;
+<code class="docutils literal notranslate"><span class="pre">fedwatch_monitor</span></code> does the same.</p></li>
+<li><p><strong>The mornings right after a decision.</strong> For a day or two the latest
+EFFR print predates the new target taking effect, so Step 1’s anchor
+can be stale; <code class="docutils literal notranslate"><span class="pre">fedwatch_monitor</span></code> flags those runs (<code class="docutils literal notranslate"><span class="pre">anchor_stale</span></code>).</p></li>
+<li><p><strong>Only two outcomes.</strong> A meeting that might move 50 bps (March 2020)
+violates the binary model. The full tool allows richer outcome sets and
+chains meetings into a probability tree — the single-meeting case here
+is the atom it is built from.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-same-steps-on-live-data">
+<h2>The same steps on live data<a class="headerlink" href="#the-same-steps-on-live-data" title="Link to this heading">#</a></h2>
+<p>Load the three inputs: daily ZQ bars, the EFFR series, and the FOMC
+calendar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">fedwatch</span>
+<span class="kn">import</span> <span class="nn">fedwatch_monitor</span>
+<span class="kn">import</span> <span class="nn">pull_effr</span>
 <span class="kn">import</span> <span class="nn">pull_fed_funds_futures</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pull_fed_funds_futures</span><span class="o">.</span><span class="n">load_fed_funds_futures</span><span class="p">()</span>
+<span class="n">effr</span> <span class="o">=</span> <span class="n">pull_effr</span><span class="o">.</span><span class="n">load_effr</span><span class="p">()</span>
 <span class="n">meetings</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">load_fomc_meetings</span><span class="p">()</span>
 <span class="n">meetings</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
@@ -612,117 +685,50 @@ assumption. None of these change the core idea.</p>
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="step-by-step">
-<h2>Step by step<a class="headerlink" href="#step-by-step" title="Link to this heading">#</a></h2>
-<p>Find the next meeting after the last date in our data, and identify the
-anchor-month and meeting-month contracts.</p>
+<p><strong>Steps 1 and 2 inputs.</strong> Find the next undecided meeting, take the
+latest EFFR print as <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span>, and read <span class="math notranslate nohighlight">\(r_{\text{avg}}\)</span> off the
+meeting-month contract.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">as_of</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="n">meeting_end</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">next_fomc_meeting</span><span class="p">(</span><span class="n">meetings</span><span class="p">,</span> <span class="n">as_of</span><span class="p">)</span>
-<span class="n">meeting_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">meeting_end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
-<span class="n">anchor_month</span> <span class="o">=</span> <span class="n">meeting_month</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;As of </span><span class="si">{</span><span class="n">as_of</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">, the next FOMC decision is </span><span class="si">{</span><span class="n">meeting_end</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Meeting month: </span><span class="si">{</span><span class="n">meeting_month</span><span class="si">}</span><span class="s2"> | anchor month: </span><span class="si">{</span><span class="n">anchor_month</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">meeting_end</span> <span class="o">=</span> <span class="n">fedwatch_monitor</span><span class="o">.</span><span class="n">next_undecided_meeting</span><span class="p">(</span><span class="n">meetings</span><span class="p">,</span> <span class="n">as_of</span><span class="p">)</span>
+<span class="n">d</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">meeting_end</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">meeting_end</span><span class="o">.</span><span class="n">days_in_month</span>
+
+<span class="n">effr_date</span><span class="p">,</span> <span class="n">r_pre</span> <span class="o">=</span> <span class="n">fedwatch_monitor</span><span class="o">.</span><span class="n">latest_effr</span><span class="p">(</span><span class="n">effr</span><span class="p">,</span> <span class="n">as_of</span><span class="p">)</span>
 
 <span class="n">latest</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">latest_prices_by_contract</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="n">by_month</span> <span class="o">=</span> <span class="n">latest</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;contract_month&quot;</span><span class="p">)</span>
-<span class="n">by_month</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">anchor_month</span><span class="p">,</span> <span class="n">meeting_month</span><span class="p">]]</span>
+<span class="n">contract</span> <span class="o">=</span> <span class="n">latest</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;contract_month&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">meeting_end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)]</span>
+<span class="n">r_avg</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">implied_rate</span><span class="p">(</span><span class="n">contract</span><span class="p">[</span><span class="s2">&quot;close&quot;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;As of </span><span class="si">{</span><span class="n">as_of</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">, the next FOMC decision is </span><span class="si">{</span><span class="n">meeting_end</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EFFR print for </span><span class="si">{</span><span class="n">effr_date</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">  =&gt;  r_pre = </span><span class="si">{</span><span class="n">r_pre</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">contract</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> close </span><span class="si">{</span><span class="n">contract</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  =&gt;  r_avg = </span><span class="si">{</span><span class="n">r_avg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>As of 2026-08-05, the next FOMC decision is 2026-09-16
-Meeting month: 2026-09 | anchor month: 2026-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>As of 2026-08-12, the next FOMC decision is 2026-09-16
+EFFR print for 2026-08-12  =&gt;  r_pre = 3.6300%
+ZQU6 close 96.3250  =&gt;  r_avg = 3.6750%
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>symbol</th>
-      <th>date</th>
-      <th>close</th>
-    </tr>
-    <tr>
-      <th>contract_month</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2026-08</th>
-      <td>ZQQ6</td>
-      <td>2026-08-05</td>
-      <td>96.3675</td>
-    </tr>
-    <tr>
-      <th>2026-09</th>
-      <td>ZQU6</td>
-      <td>2026-08-05</td>
-      <td>96.3000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
-<p>Translate the two prices into rates and solve for the expected post-meeting
-rate.</p>
+</div>
+<p><strong>Solve and convert.</strong> The day-weighted solve gives the expected
+post-meeting rate; its gap from <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span>, in units of 25 bps, is
+the probability. The current target range is inferred by snapping
+<span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> to the 25 bp grid (EFFR trades inside the Fed’s range,
+so this is safe).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anchor</span> <span class="o">=</span> <span class="n">by_month</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">anchor_month</span><span class="p">]</span>
-<span class="n">meeting</span> <span class="o">=</span> <span class="n">by_month</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">meeting_month</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r_post</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">solve_post_meeting_rate</span><span class="p">(</span><span class="n">r_avg</span><span class="p">,</span> <span class="n">r_pre</span><span class="p">,</span> <span class="n">meeting_end</span><span class="p">)</span>
+<span class="n">probs_info</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">move_probability</span><span class="p">(</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_post</span><span class="p">)</span>
+<span class="n">lower</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">current_target_range</span><span class="p">(</span><span class="n">r_pre</span><span class="p">)</span>
 
-<span class="n">r_pre</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">implied_rate</span><span class="p">(</span><span class="n">anchor</span><span class="p">[</span><span class="s2">&quot;close&quot;</span><span class="p">])</span>
-<span class="n">r_avg</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">implied_rate</span><span class="p">(</span><span class="n">meeting</span><span class="p">[</span><span class="s2">&quot;close&quot;</span><span class="p">])</span>
-
-<span class="n">d</span> <span class="o">=</span> <span class="n">meeting_end</span><span class="o">.</span><span class="n">day</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">meeting_end</span><span class="o">.</span><span class="n">days_in_month</span>
-<span class="n">r_post</span> <span class="o">=</span> <span class="p">(</span><span class="n">r_avg</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="n">r_pre</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">anchor</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> close </span><span class="si">{</span><span class="n">anchor</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  =&gt;  r_pre  = </span><span class="si">{</span><span class="n">r_pre</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">meeting</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> close </span><span class="si">{</span><span class="n">meeting</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  =&gt;  r_avg  = </span><span class="si">{</span><span class="n">r_avg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;Meeting ends day </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">  =&gt;  &quot;</span>
     <span class="sa">f</span><span class="s2">&quot;r_post = (</span><span class="si">{</span><span class="n">r_avg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">*</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">r_pre</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">*</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">) / </span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">r_post</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%&quot;</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ZQQ6 close 96.3675  =&gt;  r_pre  = 3.6325%
-ZQU6 close 96.3000  =&gt;  r_avg  = 3.7000%
-Meeting ends day 16 of 30  =&gt;  r_post = (3.7000*30 - 3.6325*16) / 14 = 3.7771%
-</pre></div>
-</div>
-</div>
-</div>
-<p>The gap between <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> and <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> identifies the
-probability under the binary-outcome assumption. We also infer the current
-target range by snapping <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> to the 25 bp grid (EFFR trades
-inside the Fed’s range, so this is safe).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probs_info</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">move_probability</span><span class="p">(</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_post</span><span class="p">)</span>
-<span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">current_target_range</span><span class="p">(</span><span class="n">r_pre</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected change: </span><span class="si">{</span><span class="p">(</span><span class="n">r_post</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r_pre</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> bps =&gt; </span><span class="si">{</span><span class="n">probs_info</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current target range (inferred): </span><span class="si">{</span><span class="n">fedwatch</span><span class="o">.</span><span class="n">range_label</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span><span class="si">}</span><span class="s2"> bps&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
@@ -734,22 +740,92 @@ inside the Fed’s range, so this is safe).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Expected change: +14.5 bps =&gt; hike
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Meeting ends day 16 of 30  =&gt;  r_post = (3.6750*30 - 3.6300*16) / 14 = 3.7264%
+Expected change: +9.6 bps =&gt; hike
 Current target range (inferred): 350-375 bps
-P(hike) = |3.7771 - 3.6325| / 0.25 = 57.9%
-P(no change) = 42.1%
+P(hike) = |3.7264 - 3.6300| / 0.25 = 38.6%
+P(no change) = 61.4%
 </pre></div>
 </div>
 </div>
 </div>
+<section id="the-whole-argument-in-one-picture">
+<h3>The whole argument in one picture<a class="headerlink" href="#the-whole-argument-in-one-picture" title="Link to this heading">#</a></h3>
+<p>The rate path is flat at <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> through decision day <span class="math notranslate nohighlight">\(d\)</span>, then
+splits into the two outcomes the binary model allows. The dashed line is
+the <em>expected</em> post-meeting rate from Step 2 — where it sits between the
+branches <strong>is</strong> the probability. The dotted line is the one number the
+contract actually prices: the day-weighted average of the expected path.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sgn</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">r_post</span> <span class="o">&gt;=</span> <span class="n">r_pre</span> <span class="k">else</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="n">r_moved</span> <span class="o">=</span> <span class="n">r_pre</span> <span class="o">+</span> <span class="n">sgn</span> <span class="o">*</span> <span class="mf">0.25</span>
+<span class="n">pad</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">],</span> <span class="p">[</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_pre</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="p">[</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_pre</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">],</span> <span class="p">[</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_moved</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:red&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="p">[</span><span class="n">r_moved</span><span class="p">,</span> <span class="n">r_moved</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:red&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">r_post</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">r_avg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">mid</span><span class="p">,</span>
+    <span class="n">r_pre</span> <span class="o">-</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">pad</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;no change: hold at </span><span class="si">{</span><span class="n">r_pre</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%  (prob </span><span class="si">{</span><span class="n">probs_info</span><span class="p">[</span><span class="s1">&#39;p_no_change&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span> <span class="k">if</span> <span class="n">sgn</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">mid</span><span class="p">,</span>
+    <span class="n">r_moved</span> <span class="o">+</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">pad</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">probs_info</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">r_moved</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%  (prob </span><span class="si">{</span><span class="n">probs_info</span><span class="p">[</span><span class="s1">&#39;p_move&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:red&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span> <span class="k">if</span> <span class="n">sgn</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">r_post</span> <span class="o">-</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">pad</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;expected: $r_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="se">{{</span><span class="s2">post</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">r_post</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span> <span class="k">if</span> <span class="n">sgn</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">r_avg</span> <span class="o">+</span> <span class="n">pad</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;$r_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="se">{{</span><span class="s2">avg</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">r_avg</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%  (the average </span><span class="si">{</span><span class="n">contract</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> prices)&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;day 1&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;day </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="se">\n</span><span class="s2">(decision)&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;day </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_moved</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.07</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">r_pre</span><span class="p">,</span> <span class="n">r_moved</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.07</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fed funds rate (%)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected rate paths through the </span><span class="si">{</span><span class="n">meeting_end</span><span class="si">:</span><span class="s2">%B %Y</span><span class="si">}</span><span class="s2"> meeting month&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/78179dd75e67ac1342471dcba68fe815acc8698ddb7ac0abe995663f42217a35.png" src="../_images/78179dd75e67ac1342471dcba68fe815acc8698ddb7ac0abe995663f42217a35.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="all-at-once">
 <h2>All at once<a class="headerlink" href="#all-at-once" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">fedwatch.compute_fedwatch_forecast</span></code> packages exactly the steps above —
-same numbers, one call. This is what the pipeline’s chart task uses.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fedwatch_monitor.compute_monitor_forecast</span></code> packages exactly the steps
+above, plus the fine-print handling (the month-end contract switch and
+the stale-anchor flag). It is what the pipeline’s chart task and the
+daily monitor (<code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">monitor</span></code>) both call.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">fedwatch</span><span class="o">.</span><span class="n">compute_fedwatch_forecast</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">meetings</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">fedwatch_monitor</span><span class="o">.</span><span class="n">compute_monitor_forecast</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">effr</span><span class="p">,</span> <span class="n">meetings</span><span class="p">)</span>
 <span class="n">probs</span>
 </pre></div>
 </div>
@@ -783,21 +859,23 @@ same numbers, one call. This is what the pipeline’s chart task uses.</p>
       <th>0</th>
       <td>350-375 (no change)</td>
       <td>350-375</td>
-      <td>0.421429</td>
+      <td>0.614286</td>
     </tr>
     <tr>
       <th>1</th>
       <td>375-400 (hike)</td>
       <td>375-400</td>
-      <td>0.578571</td>
+      <td>0.385714</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <p>And the FedWatch-style chart (the pipeline writes this to
-<code class="docutils literal notranslate"><span class="pre">_output/fedwatch_latest_forecast.png</span></code> and an interactive HTML version for
-the chartbook site):</p>
+<code class="docutils literal notranslate"><span class="pre">_output/fedwatch_latest_forecast.png</span></code> and an interactive HTML version
+for the chartbook site). Compare it with the screenshot at the top —
+and remember that if you have refreshed the data since this case study
+was written, the numbers will have moved with the market.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fedwatch_chart</span> <span class="kn">import</span> <span class="n">plot_probabilities_matplotlib</span>
@@ -808,39 +886,24 @@ the chartbook site):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7392721639f47647b8d0b21043c8e57c3bdb30e848b6632ce06b0999ab38a26e.png" src="../_images/7392721639f47647b8d0b21043c8e57c3bdb30e848b6632ce06b0999ab38a26e.png" />
+<img alt="../_images/d65886516183ed763e74ab78f1473813491cbaf8d44500042f78cf4b8d15a25c.png" src="../_images/d65886516183ed763e74ab78f1473813491cbaf8d44500042f78cf4b8d15a25c.png" />
 </div>
 </div>
-</section>
-<section id="how-close-did-we-get">
-<h2>How close did we get?<a class="headerlink" href="#how-close-did-we-get" title="Link to this heading">#</a></h2>
-<p>Compare the bars above with the FedWatch screenshot at the top of this
-notebook, captured when this case study was written (August 6, 2026). For
-the September 16, 2026 meeting, FedWatch showed <strong>45.5% no change / 54.5%
-hike</strong> from an intraday mid price of 96.2975 on <code class="docutils literal notranslate"><span class="pre">ZQU6</span></code>; our pipeline
-computed <strong>42.1% / 57.9%</strong> from the previous day’s close of 96.30 —
-agreement within about 3.5 percentage points. (If you have refreshed the
-data since, the numbers above will have moved with the market.)</p>
-<p>That is the expected tolerance, not a bug. The published tool differs from
-us in small ways:</p>
-<ul class="simple">
-<li><p>it anchors to <strong>realized EFFR</strong> (and handles anchor months that contain a
-meeting), while we anchor purely to the prior-month futures price;</p></li>
-<li><p>it uses official <strong>settlement prices</strong>, while our daily bars’ closes can
-differ slightly, and our history lags by a day;</p></li>
-<li><p>around month ends it switches which contracts it reads, per the caveats
-above.</p></li>
-</ul>
 <p><strong>Exercises</strong></p>
 <ol class="arabic simple">
 <li><p>Recompute the forecast with <code class="docutils literal notranslate"><span class="pre">as_of</span></code> set to the day before the <em>last</em>
-FOMC meeting. Did the market see the decision coming?</p></li>
-<li><p>Plot <code class="docutils literal notranslate"><span class="pre">p_move</span></code> over time for the upcoming meeting by looping
-<code class="docutils literal notranslate"><span class="pre">compute_fedwatch_forecast</span></code> over the as-of dates in the sample. When did
-the market’s mind change?</p></li>
-<li><p>The next-but-one meeting’s month has a meeting in <em>its</em> anchor month
-whenever two meetings fall in adjacent months. Which of our assumptions
-breaks, and how would you fix it using the first meeting’s result?</p></li>
+FOMC meeting (pass <code class="docutils literal notranslate"><span class="pre">as_of=</span></code> to <code class="docutils literal notranslate"><span class="pre">compute_monitor_forecast</span></code>). Did the
+market see the decision coming?</p></li>
+<li><p>Plot <code class="docutils literal notranslate"><span class="pre">p_move</span></code> over time by looping <code class="docutils literal notranslate"><span class="pre">compute_monitor_forecast</span></code> over the
+as-of dates in the sample. When did the market’s mind change? (This
+path-over-time view is exactly what <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">monitor</span></code> accumulates in
+<code class="docutils literal notranslate"><span class="pre">_data/fedwatch_history.parquet</span></code> going forward.)</p></li>
+<li><p>EFFR can only anchor the <em>next</em> meeting: for the meeting after that,
+the pre-meeting rate is unknown today because it depends on the first
+decision. Argue that the first meeting’s <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> is the
+natural anchor for the second, and use it to extend the forecast one
+meeting further out. (You have just built the first branch of
+FedWatch’s probability tree.)</p></li>
 </ol>
 </section>
 </section>
@@ -869,11 +932,11 @@ breaks, and how would you fix it using the first meeting’s result?</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="../subject_to_change_after_this_week.html"
+       href="../overview_w9.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
+        <p class="prev-next-title">Week 9: Medium-Sized Data and Polars</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -893,10 +956,16 @@ breaks, and how would you fix it using the first meeting’s result?</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-methodology">The methodology</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step">Step by step</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-two-numbers-to-a-probability">From two numbers to a probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-worked-example-against-the-real-tool">The worked example — against the real tool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-print">Fine print</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-steps-on-live-data">The same steps on live data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-whole-argument-in-one-picture">The whole argument in one picture</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-at-once">All at once</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-close-did-we-get">How close did we get?</a></li>
 </ul>
   </nav></div>
 

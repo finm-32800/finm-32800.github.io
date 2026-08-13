@@ -239,8 +239,7 @@
 <li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Remote Machines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
@@ -270,7 +269,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5 (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../midterm_report.html">Midterm Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
@@ -534,7 +533,7 @@ just this (shown here, <strong>not</strong> executed):</p>
 <span class="p">)</span>
 
 <span class="n">cost</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get_cost</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">)</span>  <span class="c1"># free metadata call</span>
-<span class="n">assert_within_budget</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>                <span class="c1"># abort BEFORE any paid call</span>
+<span class="n">assert_query_is_free</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>                <span class="c1"># abort unless the estimate is $0.00</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">get_range</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
 </pre></div>
@@ -551,10 +550,11 @@ naming each contract.</p></li>
 <li><p><strong>Schema</strong> <code class="docutils literal notranslate"><span class="pre">ohlcv-1d</span></code> gives daily open/high/low/close/volume bars, the
 coarsest (and cheapest) view of the data. The same query with
 <code class="docutils literal notranslate"><span class="pre">schema=&quot;trades&quot;</span></code> would return every individual trade.</p></li>
-<li><p><strong>The cost guard.</strong> <code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> prices a query for free before we
-commit to it. This pull costs pennies (it shows $0.00 under the course
-subscription), but the guard is a habit worth keeping: the same code
-pointed at a tick-level schema could cost real money.</p></li>
+<li><p><strong>The free-data check.</strong> Everything this project pulls is covered by the
+course’s Databento subscription, so <code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> always comes back
+$0.00 for our query. <code class="docutils literal notranslate"><span class="pre">assert_query_is_free</span></code> verifies that <em>before</em>
+downloading anything and aborts otherwise, so no run of this pipeline can
+ever incur a charge — even if the query gets edited.</p></li>
 </ul>
 <p>The cached file is a target of the <code class="docutils literal notranslate"><span class="pre">doit</span></code> pipeline. To refresh it with the
 latest prices, run <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">forget</span> <span class="pre">pull</span> <span class="pre">&amp;&amp;</span> <span class="pre">doit</span></code>.</p>
@@ -602,53 +602,53 @@ latest prices, run <code class="docutils literal notranslate"><span class="pre">
   <tbody>
     <tr>
       <th>0</th>
-      <td>2026-02-08</td>
-      <td>ZQJ6-ZQX6</td>
-      <td>-44.0</td>
-      <td>-44.0</td>
-      <td>-44.0</td>
-      <td>-44.0</td>
-      <td>3</td>
+      <td>2026-02-15</td>
+      <td>ZQV6</td>
+      <td>96.82</td>
+      <td>96.825</td>
+      <td>96.82</td>
+      <td>96.825</td>
+      <td>18</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2026-02-08</td>
-      <td>ZQ:BF J6-K6-M6</td>
-      <td>1.5</td>
-      <td>1.5</td>
-      <td>1.5</td>
-      <td>1.5</td>
-      <td>2</td>
+      <td>2026-02-15</td>
+      <td>ZQU6-ZQZ6</td>
+      <td>-22.00</td>
+      <td>-22.000</td>
+      <td>-22.00</td>
+      <td>-22.000</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2026-02-08</td>
-      <td>ZQU6-ZQZ6</td>
-      <td>-16.0</td>
-      <td>-15.5</td>
-      <td>-16.0</td>
-      <td>-16.0</td>
-      <td>11</td>
+      <td>2026-02-15</td>
+      <td>ZQN6-ZQV6</td>
+      <td>-24.50</td>
+      <td>-24.500</td>
+      <td>-24.50</td>
+      <td>-24.500</td>
+      <td>29</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2026-02-08</td>
-      <td>ZQH6-ZQU6</td>
-      <td>-34.0</td>
-      <td>-34.0</td>
-      <td>-34.0</td>
-      <td>-34.0</td>
-      <td>3</td>
+      <td>2026-02-15</td>
+      <td>ZQU6-ZQX6</td>
+      <td>-16.00</td>
+      <td>-16.000</td>
+      <td>-16.00</td>
+      <td>-16.000</td>
+      <td>70</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2026-02-08</td>
-      <td>ZQN6-ZQU6</td>
-      <td>-13.5</td>
-      <td>-13.5</td>
-      <td>-13.5</td>
-      <td>-13.5</td>
-      <td>4</td>
+      <td>2026-02-15</td>
+      <td>ZQK6-ZQM6</td>
+      <td>-6.00</td>
+      <td>-6.000</td>
+      <td>-6.00</td>
+      <td>-6.000</td>
+      <td>5</td>
     </tr>
   </tbody>
 </table>
@@ -777,59 +777,59 @@ outright pattern.</p>
   </thead>
   <tbody>
     <tr>
-      <th>7</th>
-      <td>2026-02-08</td>
-      <td>ZQG7</td>
-      <td>96.900</td>
-      <td>96.9150</td>
-      <td>96.890</td>
-      <td>96.9150</td>
+      <th>0</th>
+      <td>2026-02-15</td>
+      <td>ZQV6</td>
+      <td>96.82</td>
+      <td>96.825</td>
+      <td>96.820</td>
+      <td>96.825</td>
       <td>18</td>
-      <td>2027-02</td>
+      <td>2026-10</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>2026-02-08</td>
-      <td>ZQX6</td>
-      <td>96.845</td>
-      <td>96.8600</td>
-      <td>96.835</td>
-      <td>96.8600</td>
-      <td>149</td>
-      <td>2026-11</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2026-02-08</td>
-      <td>ZQG6</td>
-      <td>96.360</td>
-      <td>96.3625</td>
-      <td>96.360</td>
-      <td>96.3625</td>
-      <td>31</td>
-      <td>2026-02</td>
+      <th>6</th>
+      <td>2026-02-15</td>
+      <td>ZQK6</td>
+      <td>96.44</td>
+      <td>96.440</td>
+      <td>96.435</td>
+      <td>96.440</td>
+      <td>157</td>
+      <td>2026-05</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>2026-02-08</td>
-      <td>ZQM6</td>
-      <td>96.510</td>
-      <td>96.5150</td>
-      <td>96.505</td>
-      <td>96.5150</td>
-      <td>299</td>
-      <td>2026-06</td>
+      <td>2026-02-15</td>
+      <td>ZQX6</td>
+      <td>96.90</td>
+      <td>96.900</td>
+      <td>96.900</td>
+      <td>96.900</td>
+      <td>49</td>
+      <td>2026-11</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>2026-02-08</td>
-      <td>ZQQ6</td>
-      <td>96.690</td>
-      <td>96.6900</td>
-      <td>96.665</td>
-      <td>96.6850</td>
-      <td>422</td>
-      <td>2026-08</td>
+      <th>12</th>
+      <td>2026-02-15</td>
+      <td>ZQJ6</td>
+      <td>96.39</td>
+      <td>96.390</td>
+      <td>96.385</td>
+      <td>96.385</td>
+      <td>258</td>
+      <td>2026-04</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2026-02-15</td>
+      <td>ZQZ6</td>
+      <td>96.97</td>
+      <td>96.970</td>
+      <td>96.960</td>
+      <td>96.960</td>
+      <td>38</td>
+      <td>2026-12</td>
     </tr>
   </tbody>
 </table>
@@ -931,7 +931,7 @@ today’s bar.</p>
       <th>6</th>
       <td>ZQQ6</td>
       <td>2026-08</td>
-      <td>2026-08-05</td>
+      <td>2026-08-12</td>
       <td>96.3675</td>
       <td>3.6325</td>
     </tr>
@@ -939,121 +939,121 @@ today’s bar.</p>
       <th>7</th>
       <td>ZQU6</td>
       <td>2026-09</td>
-      <td>2026-08-05</td>
-      <td>96.3000</td>
-      <td>3.7000</td>
+      <td>2026-08-12</td>
+      <td>96.3250</td>
+      <td>3.6750</td>
     </tr>
     <tr>
       <th>8</th>
       <td>ZQV6</td>
       <td>2026-10</td>
-      <td>2026-08-05</td>
-      <td>96.2250</td>
-      <td>3.7750</td>
+      <td>2026-08-12</td>
+      <td>96.2650</td>
+      <td>3.7350</td>
     </tr>
     <tr>
       <th>9</th>
       <td>ZQX6</td>
       <td>2026-11</td>
-      <td>2026-08-05</td>
-      <td>96.1700</td>
-      <td>3.8300</td>
+      <td>2026-08-12</td>
+      <td>96.2050</td>
+      <td>3.7950</td>
     </tr>
     <tr>
       <th>10</th>
       <td>ZQZ6</td>
       <td>2026-12</td>
-      <td>2026-08-05</td>
-      <td>96.0900</td>
-      <td>3.9100</td>
+      <td>2026-08-12</td>
+      <td>96.1300</td>
+      <td>3.8700</td>
     </tr>
     <tr>
       <th>11</th>
       <td>ZQF7</td>
       <td>2027-01</td>
-      <td>2026-08-05</td>
-      <td>96.0600</td>
-      <td>3.9400</td>
+      <td>2026-08-12</td>
+      <td>96.0950</td>
+      <td>3.9050</td>
     </tr>
     <tr>
       <th>12</th>
       <td>ZQG7</td>
       <td>2027-02</td>
-      <td>2026-08-05</td>
-      <td>96.0350</td>
-      <td>3.9650</td>
+      <td>2026-08-12</td>
+      <td>96.0550</td>
+      <td>3.9450</td>
     </tr>
     <tr>
       <th>13</th>
       <td>ZQH7</td>
       <td>2027-03</td>
-      <td>2026-08-05</td>
-      <td>96.0100</td>
-      <td>3.9900</td>
+      <td>2026-08-12</td>
+      <td>96.0250</td>
+      <td>3.9750</td>
     </tr>
     <tr>
       <th>14</th>
       <td>ZQJ7</td>
       <td>2027-04</td>
-      <td>2026-08-05</td>
-      <td>95.9750</td>
-      <td>4.0250</td>
+      <td>2026-08-12</td>
+      <td>95.9900</td>
+      <td>4.0100</td>
     </tr>
     <tr>
       <th>15</th>
       <td>ZQK7</td>
       <td>2027-05</td>
-      <td>2026-08-05</td>
-      <td>95.9650</td>
-      <td>4.0350</td>
+      <td>2026-08-12</td>
+      <td>95.9700</td>
+      <td>4.0300</td>
     </tr>
     <tr>
       <th>16</th>
       <td>ZQM7</td>
       <td>2027-06</td>
-      <td>2026-08-05</td>
-      <td>95.9550</td>
-      <td>4.0450</td>
+      <td>2026-08-12</td>
+      <td>95.9500</td>
+      <td>4.0500</td>
     </tr>
     <tr>
       <th>17</th>
       <td>ZQN7</td>
       <td>2027-07</td>
-      <td>2026-08-05</td>
-      <td>95.9550</td>
-      <td>4.0450</td>
+      <td>2026-08-12</td>
+      <td>95.9400</td>
+      <td>4.0600</td>
     </tr>
     <tr>
       <th>18</th>
       <td>ZQQ7</td>
       <td>2027-08</td>
-      <td>2026-08-05</td>
-      <td>95.9650</td>
-      <td>4.0350</td>
+      <td>2026-08-12</td>
+      <td>95.9400</td>
+      <td>4.0600</td>
     </tr>
     <tr>
       <th>19</th>
       <td>ZQU7</td>
       <td>2027-09</td>
-      <td>2026-08-05</td>
-      <td>95.9750</td>
-      <td>4.0250</td>
+      <td>2026-08-12</td>
+      <td>95.9550</td>
+      <td>4.0450</td>
     </tr>
     <tr>
       <th>20</th>
       <td>ZQV7</td>
       <td>2027-10</td>
-      <td>2026-08-05</td>
-      <td>95.9850</td>
-      <td>4.0150</td>
+      <td>2026-08-12</td>
+      <td>95.9750</td>
+      <td>4.0250</td>
     </tr>
     <tr>
       <th>21</th>
       <td>ZQX7</td>
       <td>2027-11</td>
-      <td>2026-08-05</td>
-      <td>96.0100</td>
-      <td>3.9900</td>
+      <td>2026-08-12</td>
+      <td>95.9850</td>
+      <td>4.0150</td>
     </tr>
     <tr>
       <th>22</th>
@@ -1090,7 +1090,7 @@ each line is a rolling referendum on one month’s average fed funds rate.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c532d790446074bbdd1fef6141914a1c5ca3f45f7db59d5255f45bf80abf9dc8.png" src="../_images/c532d790446074bbdd1fef6141914a1c5ca3f45f7db59d5255f45bf80abf9dc8.png" />
+<img alt="../_images/4162f5c0eac141309b7844cab5bb0794c27c631ab01da1386cf16ab0df381dcf.png" src="../_images/4162f5c0eac141309b7844cab5bb0794c27c631ab01da1386cf16ab0df381dcf.png" />
 </div>
 </div>
 <p>Second, the cross-section on the latest date: the implied average rate for
@@ -1111,7 +1111,7 @@ meeting dates.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/845917b4398010d4bd681716d5edac29fbcbdb8779c320f22c3d5383b8e866bf.png" src="../_images/845917b4398010d4bd681716d5edac29fbcbdb8779c320f22c3d5383b8e866bf.png" />
+<img alt="../_images/503c2cfc90e71efbb72e1126969f9babcd98ef380cb81d1e41ddd1d235d529dc.png" src="../_images/503c2cfc90e71efbb72e1126969f9babcd98ef380cb81d1e41ddd1d235d529dc.png" />
 </div>
 </div>
 </section>
@@ -1121,7 +1121,8 @@ meeting dates.</p>
 <li><p>ZQ futures settle at 100 minus the monthly average EFFR, so prices map
 directly to market-expected policy rates.</p></li>
 <li><p>Databento’s parent symbology + <code class="docutils literal notranslate"><span class="pre">ohlcv-1d</span></code> schema deliver every contract’s
-daily bars in one cheap, cost-guarded query.</p></li>
+daily bars in one query — free under the course subscription, and verified
+free ($0.00 estimate) before anything is downloaded.</p></li>
 <li><p>Symbols encode contract months (root + month code + year digit); spreads
 get filtered out, thin months use the last available close.</p></li>
 </ul>
@@ -1129,9 +1130,10 @@ get filtered out, thin months use the last available close.</p></li>
 <ol class="arabic simple">
 <li><p>Re-run <code class="docutils literal notranslate"><span class="pre">latest_prices_by_contract</span></code> with <code class="docutils literal notranslate"><span class="pre">as_of</span></code> set three months back.
 How did the implied rate path shift?</p></li>
-<li><p>Change the pull’s schema to <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> in a scratch script and estimate
-the cost with <code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> (don’t pull!). How much more expensive
-is minute-level data?</p></li>
+<li><p>In a scratch script, use <code class="docutils literal notranslate"><span class="pre">client.metadata.get_record_count</span></code> (free, like
+<code class="docutils literal notranslate"><span class="pre">get_cost</span></code> — no data is downloaded) to compare our <code class="docutils literal notranslate"><span class="pre">ohlcv-1d</span></code> query with
+the same query at <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> and <code class="docutils literal notranslate"><span class="pre">trades</span></code>. How fast does the volume of
+data grow as the schema gets finer?</p></li>
 <li><p>Look up today’s front-month contract volume. Why is it so much higher
 than the volume 18 months out?</p></li>
 </ol>

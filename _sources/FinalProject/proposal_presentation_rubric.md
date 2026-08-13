@@ -30,7 +30,7 @@ An in-class presentation to the whole class over Zoom.
 
 ### 3. Final Project Presentation
 
-In **week 10**, your group presents the *completed* project, and each member is individually quizzed in an oral defense. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
+A scheduled meeting with the instructor, booked at [https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/). Your group presents the *completed* project, and each member is individually quizzed in an oral defense. All groups must present no later than **Friday, August 21**. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
 
 ## How Presentation Weeks Are Assigned
 
