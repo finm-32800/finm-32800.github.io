@@ -1,78 +1,108 @@
 # Homework 4
 
-- **Due Date:** Friday, August 14, 2026 at 11:59 PM CT
-- **Link to Assignment:** The GitHub Classroom link will be posted on Canvas.
+- **Due Date:** Sunday, August 23, 2026 at 11:59 PM CT
+- **Link to Assignment:** HW 4: https://classroom.github.com/a/ATHvtNp-
 
 ```{note}
-The yield-curve estimation content that previously formed Homework 4 has moved to
-**[Homework 3](./HW3.md)**. Homework 4 is now a short options case study.
+Homework 4 has been reworked. An earlier version of this assignment was an
+options case study; that assignment has been retired, and the options
+notebooks remain class material in Week 7. Homework 4 is now a short, focused
+assignment: **deploy a live, self-updating clone of the CME FedWatch tool.**
 ```
 
 ## Overview
 
-Homework 4 is a deliberately minimal introduction to working with options data,
-built from [finm-32900/case_study_options](https://github.com/finm-32900/case_study_options),
-the pipeline we walk through in class. In class we review both of its case-study
-notebooks; the homework repo itself contains only the SPX side:
+Homework 4 turns the in-class FedWatch case study
+([finm-32900/case_study_fedwatch](https://github.com/finm-32900/case_study_fedwatch))
+into a live monitor. The pipeline pulls 30-Day Fed Funds futures (ZQ) from
+Databento and the effective federal funds rate (EFFR) from FRED, computes the
+market-implied probability of a hike, cut, or no change at the next FOMC
+meeting, and renders the forecast chart into a chartbook site. You will
+(1) fill in the small amount of math that has been removed and (2) publish the
+site so that a GitHub Action rebuilds it every morning, unattended.
 
-- [Corporate Hedging](notebooks/_01_corporate_hedging_ipynb.ipynb) (class only): designing a
-  hedging program for a firm exposed to oil prices, using Brent crude futures and
-  options. The futures strips and option-chain snapshots ship with the case-study
-  repo, so this notebook runs fully offline.
-- [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb) (the homework): hedging an equity
-  portfolio with S&P 500 index options — costless collars built from the
-  market-implied delta map, IV surface, and a Monte Carlo simulation — then
-  extending the stale vendor sample with CME E-mini S&P 500 options from
-  Databento and validating the substitution on an overlap month.
+The two class notebooks from Week 8 walk through everything the pipeline does:
 
-As in HW 3, the pipeline is orchestrated with `doit`, and this week's themes
-(unit tests, documentation) run straight through it: your grade is determined by
-a pytest suite, part of which runs as a GitHub Actions autograder on every push.
+- [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data.ipynb)
+- [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication.ipynb)
+
+This assignment is the Week 8 material—GitHub Actions, cron scheduling, and
+GitHub Pages—put into practice. It is also the course's themes in miniature:
+a reproducible analytical pipeline that runs end-to-end with no human in the
+loop, from raw data pull to published product.
+
+## Learning Outcomes
+
+- Schedule recurring jobs with cron in GitHub Actions
+- Publish a static site with GitHub Pages
+- Manage API keys with Actions repository secrets (in CI) and `.env` files (locally)
+- Run a full `doit` pipeline unattended in CI
+- Understand how fed funds futures prices imply FOMC meeting-outcome probabilities
 
 ## What You Do
 
-1. **Complete the WRDS OptionMetrics pull.** The SQL query in
-   `src/pull_options_data.py` is blanked out; the TODO block spells out the
-   required columns, tables, join keys, and filters (PM-settled SPX options,
-   `am_settlement = 0`). Then run `doit pull_WRDS_options_data` (~200 MB;
-   never commit the parquet).
+The assignment repository's README spells out every step; in brief:
 
-2. **Extend the sample with Databento.** The OptionMetrics feed lags badly —
-   the pulled data ends August 2023. You will close the gap by pulling
-   **E-mini S&P 500 options on futures** from CME Globex (`GLBX.MDP3`) via
-   [Databento](https://databento.com), using your own free-trial API key.
-   (SPX index options themselves live on the OPRA feed, which is metered and
-   expensive; the E-mini complex tracks it closely — the notebook proves
-   this on an overlap sample.) Three pieces are blanked out for you to
-   complete:
-   - the query constants in `src/pull_databento_options.py` (which dataset,
-     schema, and parent symbols — think about which E-mini option roots
-     continue the *PM-settled* series your WRDS query filters on: quarterly
-     ES options are AM-settled, like the classic SPX monthlies),
-   - the CME contract-symbol parser (`EW1N3 C4580` → root, month, year,
-     type, strike — note the expiration *date* is not in the symbol),
-   - the implied-volatility solver in `src/black_scholes.py` (the feed
-     carries prices only, so IV and greeks are computed, not
-     vendor-supplied — via Black-76 on the parity-implied futures price).
+### Task 1: Fill in the FedWatch math (1 point)
 
-   The pull grabs the most recent two weeks **plus a fixed August-2023
-   sample** that overlaps OptionMetrics; the notebook uses the overlap to
-   validate the E-mini implied vols against the vendor's, contract by
-   contract. It is **cost-guarded**: it prices every query with a free
-   `metadata.get_cost` call and refuses to download if the estimate exceeds
-   `DATABENTO_MAX_COST` (default $3.00; the default pull costs well under a
-   dollar of your $125 trial credits). Check with `--dry-run` first, and do
-   not modify the guard.
+Three functions in `src/fedwatch.py` have had their bodies replaced with
+`raise NotImplementedError(...)`: `implied_rate`, `solve_post_meeting_rate`,
+and `move_probability`. Each docstring specifies exactly what the function
+must do, and the [replication notebook](notebooks/_02_fedwatch_replication.ipynb)
+derives the same formulas step by step.
 
-3. **Make the tests pass.** `pytest ./src` runs the whole suite. Tests marked
-   `requires_data` skip until the parquets exist; the autograder runs the
-   no-data tests (including the SQL-completeness and Black-Scholes tests) on
-   every push.
+Your feedback loop runs offline, with no API key:
+
+```bash
+pytest -vv ./src/test_fedwatch.py ./src/test_fedwatch_monitor.py
+```
+
+Once those tests pass, run the full pipeline locally: copy `.env.example` to
+`.env`, add your Databento API key (the pull is cost-guarded and free), and
+run `doit`. The built site lands in `docs/index.html`.
+
+### Task 2: Deploy your daily self-updating site (2 points)
+
+The workflow in `.github/workflows/deploy_pages.yml` rebuilds the pipeline and
+publishes the chartbook site to GitHub Pages—on every push to `main` and on a
+daily cron (14:30 UTC, mid-morning Chicago, after the NY Fed's ~9 AM ET EFFR
+print). You will:
+
+1. Push your completed pipeline to a new **public** repo under your personal
+   GitHub account (the assignment repo itself stays private).
+2. Add your `DATABENTO_API_KEY` as an Actions repository secret—never commit
+   it in code.
+3. Run the workflow once by hand and watch it go green: it pulls the data,
+   executes the notebooks, renders the forecast chart, builds the site, runs
+   the tests, and pushes the result to the `gh-pages` branch.
+4. Enable GitHub Pages on `gh-pages` and confirm your site is live at
+   `https://<you>.github.io/<repo>/`.
+5. Back in the assignment repo, record your attestation: set the flag to
+   `True` and paste your live site URL in `src/monitor_self_attestation.py`,
+   then commit and push.
+
+From then on, the cron refreshes your forecast every morning with no action
+from you. I will visit the URL you provide and check that the site is live
+and current.
 
 ## Grading
 
+3 points total, autograded on every push by GitHub Actions:
+
 | Component | Points |
 |---|---|
-| SQL query completeness (autograded) | 5 |
-| Databento pipeline and Black-Scholes tests (autograded) | 3 |
-| Full fast test suite (autograded) | 2 |
+| FedWatch math tests pass (Task 1) | 1 |
+| Monitor attestation: flag set (Task 2) | 1 |
+| Monitor attestation: live site URL provided (Task 2) | 1 |
+
+I will spot-check the attested URLs to confirm the sites are live and
+updating on schedule.
+
+## Warnings
+
+- The assignment repo must stay **private**—it is your graded work. Your
+  separate deploy repo will be public, including your completed Task 1 code;
+  that is intended for this assignment.
+- Your API key goes into `.env` locally and into the Actions secret in CI. If
+  it ends up in a commit anywhere, revoke it and generate a new one.
+- Do not edit the test files (`test_*.py`).

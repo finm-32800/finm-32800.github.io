@@ -16,6 +16,7 @@ notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb
 - Final project proposal presentations: Ashish + Omar, Piyush, Ahmad + Jeffrey
 - Medium-sized data strategies and Polars
 - Introduction to TRACE: data sources overview and the Clean TRACE cleaning walkthrough
+- Launch the reworked [HW 4](HW4.md): deploy a live, self-updating FedWatch monitor (due Sunday, August 23)
 - Final project logistics: rubric walkthrough, oral defense expectations, and signing up for a final presentation time (all groups must present by August 21)
 
 ## Learning Outcomes

@@ -47,8 +47,6 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'HW4';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -477,8 +475,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-fill-in-the-fedwatch-math-1-point">Task 1: Fill in the FedWatch math (1 point)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-deploy-your-daily-self-updating-site-2-points">Task 2: Deploy your daily self-updating site (2 points)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warnings">Warnings</a></li>
 </ul>
             </nav>
         </div>
@@ -492,79 +496,92 @@ document.write(`
                    <section class="tex2jax_ignore mathjax_ignore" id="homework-4">
 <h1>Homework 4<a class="headerlink" href="#homework-4" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Due Date:</strong> Friday, August 14, 2026 at 11:59 PM CT</p></li>
-<li><p><strong>Link to Assignment:</strong> The GitHub Classroom link will be posted on Canvas.</p></li>
+<li><p><strong>Due Date:</strong> Sunday, August 23, 2026 at 11:59 PM CT</p></li>
+<li><p><strong>Link to Assignment:</strong> HW 4: <a class="reference external" href="https://classroom.github.com/a/ATHvtNp-">https://classroom.github.com/a/ATHvtNp-</a></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The yield-curve estimation content that previously formed Homework 4 has moved to
-<strong><a class="reference internal" href="HW3.html"><span class="std std-doc">Homework 3</span></a></strong>. Homework 4 is now a short options case study.</p>
+<p>Homework 4 has been reworked. An earlier version of this assignment was an
+options case study; that assignment has been retired, and the options
+notebooks remain class material in Week 7. Homework 4 is now a short, focused
+assignment: <strong>deploy a live, self-updating clone of the CME FedWatch tool.</strong></p>
 </div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Homework 4 is a deliberately minimal introduction to working with options data,
-built from <a class="reference external" href="https://github.com/finm-32900/case_study_options">finm-32900/case_study_options</a>,
-the pipeline we walk through in class. In class we review both of its case-study
-notebooks; the homework repo itself contains only the SPX side:</p>
+<p>Homework 4 turns the in-class FedWatch case study
+(<a class="reference external" href="https://github.com/finm-32900/case_study_fedwatch">finm-32900/case_study_fedwatch</a>)
+into a live monitor. The pipeline pulls 30-Day Fed Funds futures (ZQ) from
+Databento and the effective federal funds rate (EFFR) from FRED, computes the
+market-implied probability of a hike, cut, or no change at the next FOMC
+meeting, and renders the forecast chart into a chartbook site. You will
+(1) fill in the small amount of math that has been removed and (2) publish the
+site so that a GitHub Action rebuilds it every morning, unattended.</p>
+<p>The two class notebooks from Week 8 walk through everything the pipeline does:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html"><span class="std std-doc">Corporate Hedging</span></a> (class only): designing a
-hedging program for a firm exposed to oil prices, using Brent crude futures and
-options. The futures strips and option-chain snapshots ship with the case-study
-repo, so this notebook runs fully offline.</p></li>
-<li><p><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html"><span class="std std-doc">SPX Hedging</span></a> (the homework): hedging an equity
-portfolio with S&amp;P 500 index options — costless collars built from the
-market-implied delta map, IV surface, and a Monte Carlo simulation — then
-extending the stale vendor sample with CME E-mini S&amp;P 500 options from
-Databento and validating the substitution on an overlap month.</p></li>
+<li><p><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html"><span class="std std-doc">30-Day Fed Funds Futures Data from Databento</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/_02_fedwatch_replication.html"><span class="std std-doc">Replicating the CME FedWatch Tool</span></a></p></li>
 </ul>
-<p>As in HW 3, the pipeline is orchestrated with <code class="docutils literal notranslate"><span class="pre">doit</span></code>, and this week’s themes
-(unit tests, documentation) run straight through it: your grade is determined by
-a pytest suite, part of which runs as a GitHub Actions autograder on every push.</p>
+<p>This assignment is the Week 8 material—GitHub Actions, cron scheduling, and
+GitHub Pages—put into practice. It is also the course’s themes in miniature:
+a reproducible analytical pipeline that runs end-to-end with no human in the
+loop, from raw data pull to published product.</p>
+</section>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Schedule recurring jobs with cron in GitHub Actions</p></li>
+<li><p>Publish a static site with GitHub Pages</p></li>
+<li><p>Manage API keys with Actions repository secrets (in CI) and <code class="docutils literal notranslate"><span class="pre">.env</span></code> files (locally)</p></li>
+<li><p>Run a full <code class="docutils literal notranslate"><span class="pre">doit</span></code> pipeline unattended in CI</p></li>
+<li><p>Understand how fed funds futures prices imply FOMC meeting-outcome probabilities</p></li>
+</ul>
 </section>
 <section id="what-you-do">
 <h2>What You Do<a class="headerlink" href="#what-you-do" title="Link to this heading">#</a></h2>
-<ol class="arabic">
-<li><p><strong>Complete the WRDS OptionMetrics pull.</strong> The SQL query in
-<code class="docutils literal notranslate"><span class="pre">src/pull_options_data.py</span></code> is blanked out; the TODO block spells out the
-required columns, tables, join keys, and filters (PM-settled SPX options,
-<code class="docutils literal notranslate"><span class="pre">am_settlement</span> <span class="pre">=</span> <span class="pre">0</span></code>). Then run <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">pull_WRDS_options_data</span></code> (~200 MB;
-never commit the parquet).</p></li>
-<li><p><strong>Extend the sample with Databento.</strong> The OptionMetrics feed lags badly —
-the pulled data ends August 2023. You will close the gap by pulling
-<strong>E-mini S&amp;P 500 options on futures</strong> from CME Globex (<code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code>) via
-<a class="reference external" href="https://databento.com">Databento</a>, using your own free-trial API key.
-(SPX index options themselves live on the OPRA feed, which is metered and
-expensive; the E-mini complex tracks it closely — the notebook proves
-this on an overlap sample.) Three pieces are blanked out for you to
-complete:</p>
-<ul class="simple">
-<li><p>the query constants in <code class="docutils literal notranslate"><span class="pre">src/pull_databento_options.py</span></code> (which dataset,
-schema, and parent symbols — think about which E-mini option roots
-continue the <em>PM-settled</em> series your WRDS query filters on: quarterly
-ES options are AM-settled, like the classic SPX monthlies),</p></li>
-<li><p>the CME contract-symbol parser (<code class="docutils literal notranslate"><span class="pre">EW1N3</span> <span class="pre">C4580</span></code> → root, month, year,
-type, strike — note the expiration <em>date</em> is not in the symbol),</p></li>
-<li><p>the implied-volatility solver in <code class="docutils literal notranslate"><span class="pre">src/black_scholes.py</span></code> (the feed
-carries prices only, so IV and greeks are computed, not
-vendor-supplied — via Black-76 on the parity-implied futures price).</p></li>
-</ul>
-<p>The pull grabs the most recent two weeks <strong>plus a fixed August-2023
-sample</strong> that overlaps OptionMetrics; the notebook uses the overlap to
-validate the E-mini implied vols against the vendor’s, contract by
-contract. It is <strong>cost-guarded</strong>: it prices every query with a free
-<code class="docutils literal notranslate"><span class="pre">metadata.get_cost</span></code> call and refuses to download if the estimate exceeds
-<code class="docutils literal notranslate"><span class="pre">DATABENTO_MAX_COST</span></code> (default <span class="math notranslate nohighlight">\(3.00; the default pull costs well under a
-dollar of your \)</span>125 trial credits). Check with <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> first, and do
-not modify the guard.</p>
-</li>
-<li><p><strong>Make the tests pass.</strong> <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">./src</span></code> runs the whole suite. Tests marked
-<code class="docutils literal notranslate"><span class="pre">requires_data</span></code> skip until the parquets exist; the autograder runs the
-no-data tests (including the SQL-completeness and Black-Scholes tests) on
-every push.</p></li>
+<p>The assignment repository’s README spells out every step; in brief:</p>
+<section id="task-1-fill-in-the-fedwatch-math-1-point">
+<h3>Task 1: Fill in the FedWatch math (1 point)<a class="headerlink" href="#task-1-fill-in-the-fedwatch-math-1-point" title="Link to this heading">#</a></h3>
+<p>Three functions in <code class="docutils literal notranslate"><span class="pre">src/fedwatch.py</span></code> have had their bodies replaced with
+<code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">NotImplementedError(...)</span></code>: <code class="docutils literal notranslate"><span class="pre">implied_rate</span></code>, <code class="docutils literal notranslate"><span class="pre">solve_post_meeting_rate</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">move_probability</span></code>. Each docstring specifies exactly what the function
+must do, and the <a class="reference internal" href="notebooks/_02_fedwatch_replication.html"><span class="std std-doc">replication notebook</span></a>
+derives the same formulas step by step.</p>
+<p>Your feedback loop runs offline, with no API key:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-vv<span class="w"> </span>./src/test_fedwatch.py<span class="w"> </span>./src/test_fedwatch_monitor.py
+</pre></div>
+</div>
+<p>Once those tests pass, run the full pipeline locally: copy <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> to
+<code class="docutils literal notranslate"><span class="pre">.env</span></code>, add your Databento API key (the pull is cost-guarded and free), and
+run <code class="docutils literal notranslate"><span class="pre">doit</span></code>. The built site lands in <code class="docutils literal notranslate"><span class="pre">docs/index.html</span></code>.</p>
+</section>
+<section id="task-2-deploy-your-daily-self-updating-site-2-points">
+<h3>Task 2: Deploy your daily self-updating site (2 points)<a class="headerlink" href="#task-2-deploy-your-daily-self-updating-site-2-points" title="Link to this heading">#</a></h3>
+<p>The workflow in <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code> rebuilds the pipeline and
+publishes the chartbook site to GitHub Pages—on every push to <code class="docutils literal notranslate"><span class="pre">main</span></code> and on a
+daily cron (14:30 UTC, mid-morning Chicago, after the NY Fed’s ~9 AM ET EFFR
+print). You will:</p>
+<ol class="arabic simple">
+<li><p>Push your completed pipeline to a new <strong>public</strong> repo under your personal
+GitHub account (the assignment repo itself stays private).</p></li>
+<li><p>Add your <code class="docutils literal notranslate"><span class="pre">DATABENTO_API_KEY</span></code> as an Actions repository secret—never commit
+it in code.</p></li>
+<li><p>Run the workflow once by hand and watch it go green: it pulls the data,
+executes the notebooks, renders the forecast chart, builds the site, runs
+the tests, and pushes the result to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
+<li><p>Enable GitHub Pages on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> and confirm your site is live at
+<code class="docutils literal notranslate"><span class="pre">https://&lt;you&gt;.github.io/&lt;repo&gt;/</span></code>.</p></li>
+<li><p>Back in the assignment repo, record your attestation: set the flag to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> and paste your live site URL in <code class="docutils literal notranslate"><span class="pre">src/monitor_self_attestation.py</span></code>,
+then commit and push.</p></li>
 </ol>
+<p>From then on, the cron refreshes your forecast every morning with no action
+from you. I will visit the URL you provide and check that the site is live
+and current.</p>
+</section>
 </section>
 <section id="grading">
 <h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">#</a></h2>
+<p>3 points total, autograded on every push by GitHub Actions:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Component</p></th>
@@ -572,18 +589,31 @@ every push.</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>SQL query completeness (autograded)</p></td>
-<td><p>5</p></td>
+<tr class="row-even"><td><p>FedWatch math tests pass (Task 1)</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Databento pipeline and Black-Scholes tests (autograded)</p></td>
-<td><p>3</p></td>
+<tr class="row-odd"><td><p>Monitor attestation: flag set (Task 2)</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>Full fast test suite (autograded)</p></td>
-<td><p>2</p></td>
+<tr class="row-even"><td><p>Monitor attestation: live site URL provided (Task 2)</p></td>
+<td><p>1</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>I will spot-check the attested URLs to confirm the sites are live and
+updating on schedule.</p>
+</section>
+<section id="warnings">
+<h2>Warnings<a class="headerlink" href="#warnings" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The assignment repo must stay <strong>private</strong>—it is your graded work. Your
+separate deploy repo will be public, including your completed Task 1 code;
+that is intended for this assignment.</p></li>
+<li><p>Your API key goes into <code class="docutils literal notranslate"><span class="pre">.env</span></code> locally and into the Actions secret in CI. If
+it ends up in a commit anywhere, revoke it and generate a new one.</p></li>
+<li><p>Do not edit the test files (<code class="docutils literal notranslate"><span class="pre">test_*.py</span></code>).</p></li>
+</ul>
 </section>
 </section>
 
@@ -636,8 +666,14 @@ every push.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-fill-in-the-fedwatch-math-1-point">Task 1: Fill in the FedWatch math (1 point)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-deploy-your-daily-self-updating-site-2-points">Task 2: Deploy your daily self-updating site (2 points)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warnings">Warnings</a></li>
 </ul>
   </nav></div>
 
