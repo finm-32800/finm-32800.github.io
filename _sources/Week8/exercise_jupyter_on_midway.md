@@ -10,6 +10,17 @@ In this exercise, you will:
 By the end, you'll have a Jupyter notebook running on a powerful remote machine,
 accessible from your laptop as if it were running locally.
 
+There are two ways to get a notebook-capable environment running on Midway:
+
+1. **The manual option (Steps 1--8 below).** You request a compute node,
+   start Jupyter yourself, and build the SSH tunnel by hand. Do this at least
+   once---every piece of the pattern (SLURM, ports, tunnels) is something you
+   should understand.
+2. **The `scode` option.** RCC provides a tool called `scode` that automates
+   the same pattern, but serves VS Code in your browser (with Jupyter notebook
+   support) instead of the classic Jupyter interface. See
+   [Option 2: VS Code in the Browser with `scode`](#option-2-scode) below.
+
 
 ## Prerequisites
 
@@ -292,6 +303,88 @@ jupyter-notebook --no-browser --ip=$HOST_IP --port=$PORT_NUM
 - Check the queue: `squeue --partition=caslake` to see how busy the partition is.
 
 
+(option-2-scode)=
+## Option 2: VS Code in the Browser with `scode`
+
+RCC provides a tool called `scode` that automates the entire pattern you just
+did by hand: it submits a SLURM batch job, starts a VS Code server (web
+version) on a compute node, and prints the exact SSH tunnel command to run.
+Inside browser-based VS Code you can open `.ipynb` files and work with Jupyter
+notebooks directly, along with a full editor and terminal.
+
+The authoritative instructions are on the RCC website---treat that page as the
+source of truth, since RCC updates the tool from time to time:
+
+> [SCode: VS Code on Midway (RCC documentation)](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/)
+
+In short, after SSHing into a login node, you launch a server with something
+like:
+
+```bash
+scode serve-web -- --account finm32900 --time 01:00:00 --mem 16G
+```
+
+and `scode` prints an `ssh -L ...` tunnel command to run on your laptop and a
+`http://localhost:8000/?tkn=...` URL to open in your browser. Note that this
+is exactly the workflow from Steps 4--6 above---`scode` just scripts it for
+you. Each launch generates a fresh port and token, so always copy the tunnel
+command and URL from the most recent output.
+
+### Quick fix: "channel N: open failed: connect failed: Connection refused"
+
+At the time of writing, `scode` sometimes reports a broken address for the
+compute node, and the tunnel fails even though the server is running fine.
+The symptom: your SSH tunnel logs in successfully, but when you open the URL
+in the browser, the SSH terminal fills with:
+
+```text
+channel 3: open failed: connect failed: Connection refused
+```
+
+**What's going on.** Look at the "Primary node" address that `scode` printed.
+If it looks like `169.254.x.x`, that's the bug: addresses in the
+`169.254.0.0/16` range are *link-local*---they are only meaningful on the
+machine that owns them and are never routable between machines. `scode`
+detected the wrong network interface on the compute node. Your tunnel reaches
+the login node fine, but the login node cannot forward the connection to a
+link-local address, so every browser request is refused. (A healthy launch
+reports a cluster-internal address like `10.x.x.x`.)
+
+**The fix.** Tunnel to the compute node's *hostname* instead of the reported
+IP. Find the node name with `squeue -u $USER` (the `NODELIST` column, e.g.,
+`midway3-0080`), then build the tunnel yourself, keeping the port from the
+`scode` output:
+
+```bash
+ssh -L 8000:<node-name>:<port> <your-cnetid>@midway3.rcc.uchicago.edu
+```
+
+This works because SSH resolves the forwarding destination on the *login
+node*, which knows the cluster-internal hostnames, and the VS Code server
+listens on all of the compute node's interfaces. You can verify the fix from
+the login node before even opening your browser:
+
+```bash
+nc -zv <node-name> <port>   # "succeeded" means the tunnel will work
+```
+
+```{admonition} Watch out for stale tunnels
+:class: warning
+
+If the tunnel command prints `bind [127.0.0.1]:8000: Address already in use`,
+an earlier SSH session is still holding local port 8000 and **no forwarding
+was set up**---the login succeeds anyway, which makes this easy to miss.
+Pressing `Ctrl+C` inside an SSH session does not close it. Close your old SSH
+windows (type `exit` in each), or simply pick a different local port, e.g.,
+`ssh -L 9000:<node-name>:<port> ...` and browse to `http://localhost:9000/...`.
+```
+
+Also note: your campus VPN plays no role in this error. The VPN only affects
+the laptop-to-login-node leg, which is already working by the time you see
+"Connection refused"---the failure is on the login-node-to-compute-node leg,
+entirely inside the cluster.
+
+
 ## Summary
 
 You've now completed the full workflow for running Jupyter on an HPC cluster:
@@ -304,4 +397,6 @@ You've now completed the full workflow for running Jupyter on an HPC cluster:
 
 This same pattern works for any web-based tool running on a remote machine, not
 just Jupyter. Any time you need to access a service running on a port of a
-remote machine, SSH port forwarding is the solution.
+remote machine, SSH port forwarding is the solution. RCC's `scode` tool
+(Option 2 above) automates this exact pattern for VS Code---and now that you've
+done it by hand, you can debug it when the automation misbehaves.

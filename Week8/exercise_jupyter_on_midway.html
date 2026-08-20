@@ -491,6 +491,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue-wait-is-too-long">Queue wait is too long</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-vs-code-in-the-browser-with-scode">Option 2: VS Code in the Browser with <code class="docutils literal notranslate"><span class="pre">scode</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fix-channel-n-open-failed-connect-failed-connection-refused">Quick fix: “channel N: open failed: connect failed: Connection refused”</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
@@ -513,6 +517,17 @@ document.write(`
 </ol>
 <p>By the end, you’ll have a Jupyter notebook running on a powerful remote machine,
 accessible from your laptop as if it were running locally.</p>
+<p>There are two ways to get a notebook-capable environment running on Midway:</p>
+<ol class="arabic simple">
+<li><p><strong>The manual option (Steps 1–8 below).</strong> You request a compute node,
+start Jupyter yourself, and build the SSH tunnel by hand. Do this at least
+once—every piece of the pattern (SLURM, ports, tunnels) is something you
+should understand.</p></li>
+<li><p><strong>The <code class="docutils literal notranslate"><span class="pre">scode</span></code> option.</strong> RCC provides a tool called <code class="docutils literal notranslate"><span class="pre">scode</span></code> that automates
+the same pattern, but serves VS Code in your browser (with Jupyter notebook
+support) instead of the classic Jupyter interface. See
+<a class="reference internal" href="#option-2-scode">Option 2: VS Code in the Browser with <code class="docutils literal notranslate"><span class="pre">scode</span></code></a> below.</p></li>
+</ol>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -764,6 +779,74 @@ activated the virtual environment before starting Jupyter.</p></li>
 </ul>
 </section>
 </section>
+<section id="option-2-vs-code-in-the-browser-with-scode">
+<span id="option-2-scode"></span><h2>Option 2: VS Code in the Browser with <code class="docutils literal notranslate"><span class="pre">scode</span></code><a class="headerlink" href="#option-2-vs-code-in-the-browser-with-scode" title="Link to this heading">#</a></h2>
+<p>RCC provides a tool called <code class="docutils literal notranslate"><span class="pre">scode</span></code> that automates the entire pattern you just
+did by hand: it submits a SLURM batch job, starts a VS Code server (web
+version) on a compute node, and prints the exact SSH tunnel command to run.
+Inside browser-based VS Code you can open <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files and work with Jupyter
+notebooks directly, along with a full editor and terminal.</p>
+<p>The authoritative instructions are on the RCC website—treat that page as the
+source of truth, since RCC updates the tool from time to time:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/">SCode: VS Code on Midway (RCC documentation)</a></p>
+</div></blockquote>
+<p>In short, after SSHing into a login node, you launch a server with something
+like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scode<span class="w"> </span>serve-web<span class="w"> </span>--<span class="w"> </span>--account<span class="w"> </span>finm32900<span class="w"> </span>--time<span class="w"> </span><span class="m">01</span>:00:00<span class="w"> </span>--mem<span class="w"> </span>16G
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">scode</span></code> prints an <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">...</span></code> tunnel command to run on your laptop and a
+<code class="docutils literal notranslate"><span class="pre">http://localhost:8000/?tkn=...</span></code> URL to open in your browser. Note that this
+is exactly the workflow from Steps 4–6 above—<code class="docutils literal notranslate"><span class="pre">scode</span></code> just scripts it for
+you. Each launch generates a fresh port and token, so always copy the tunnel
+command and URL from the most recent output.</p>
+<section id="quick-fix-channel-n-open-failed-connect-failed-connection-refused">
+<h3>Quick fix: “channel N: open failed: connect failed: Connection refused”<a class="headerlink" href="#quick-fix-channel-n-open-failed-connect-failed-connection-refused" title="Link to this heading">#</a></h3>
+<p>At the time of writing, <code class="docutils literal notranslate"><span class="pre">scode</span></code> sometimes reports a broken address for the
+compute node, and the tunnel fails even though the server is running fine.
+The symptom: your SSH tunnel logs in successfully, but when you open the URL
+in the browser, the SSH terminal fills with:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>channel 3: open failed: connect failed: Connection refused
+</pre></div>
+</div>
+<p><strong>What’s going on.</strong> Look at the “Primary node” address that <code class="docutils literal notranslate"><span class="pre">scode</span></code> printed.
+If it looks like <code class="docutils literal notranslate"><span class="pre">169.254.x.x</span></code>, that’s the bug: addresses in the
+<code class="docutils literal notranslate"><span class="pre">169.254.0.0/16</span></code> range are <em>link-local</em>—they are only meaningful on the
+machine that owns them and are never routable between machines. <code class="docutils literal notranslate"><span class="pre">scode</span></code>
+detected the wrong network interface on the compute node. Your tunnel reaches
+the login node fine, but the login node cannot forward the connection to a
+link-local address, so every browser request is refused. (A healthy launch
+reports a cluster-internal address like <code class="docutils literal notranslate"><span class="pre">10.x.x.x</span></code>.)</p>
+<p><strong>The fix.</strong> Tunnel to the compute node’s <em>hostname</em> instead of the reported
+IP. Find the node name with <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> (the <code class="docutils literal notranslate"><span class="pre">NODELIST</span></code> column, e.g.,
+<code class="docutils literal notranslate"><span class="pre">midway3-0080</span></code>), then build the tunnel yourself, keeping the port from the
+<code class="docutils literal notranslate"><span class="pre">scode</span></code> output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:&lt;node-name&gt;:&lt;port&gt;<span class="w"> </span>&lt;your-cnetid&gt;@midway3.rcc.uchicago.edu
+</pre></div>
+</div>
+<p>This works because SSH resolves the forwarding destination on the <em>login
+node</em>, which knows the cluster-internal hostnames, and the VS Code server
+listens on all of the compute node’s interfaces. You can verify the fix from
+the login node before even opening your browser:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nc<span class="w"> </span>-zv<span class="w"> </span>&lt;node-name&gt;<span class="w"> </span>&lt;port&gt;<span class="w">   </span><span class="c1"># &quot;succeeded&quot; means the tunnel will work</span>
+</pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Watch out for stale tunnels</p>
+<p>If the tunnel command prints <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">[127.0.0.1]:8000:</span> <span class="pre">Address</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code>,
+an earlier SSH session is still holding local port 8000 and <strong>no forwarding
+was set up</strong>—the login succeeds anyway, which makes this easy to miss.
+Pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> inside an SSH session does not close it. Close your old SSH
+windows (type <code class="docutils literal notranslate"><span class="pre">exit</span></code> in each), or simply pick a different local port, e.g.,
+<code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">9000:&lt;node-name&gt;:&lt;port&gt;</span> <span class="pre">...</span></code> and browse to <code class="docutils literal notranslate"><span class="pre">http://localhost:9000/...</span></code>.</p>
+</div>
+<p>Also note: your campus VPN plays no role in this error. The VPN only affects
+the laptop-to-login-node leg, which is already working by the time you see
+“Connection refused”—the failure is on the login-node-to-compute-node leg,
+entirely inside the cluster.</p>
+</section>
+</section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>You’ve now completed the full workflow for running Jupyter on an HPC cluster:</p>
@@ -776,7 +859,9 @@ activated the virtual environment before starting Jupyter.</p></li>
 </ol>
 <p>This same pattern works for any web-based tool running on a remote machine, not
 just Jupyter. Any time you need to access a service running on a port of a
-remote machine, SSH port forwarding is the solution.</p>
+remote machine, SSH port forwarding is the solution. RCC’s <code class="docutils literal notranslate"><span class="pre">scode</span></code> tool
+(Option 2 above) automates this exact pattern for VS Code—and now that you’ve
+done it by hand, you can debug it when the automation misbehaves.</p>
 </section>
 </section>
 
@@ -843,6 +928,10 @@ remote machine, SSH port forwarding is the solution.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-refused-in-browser">“Connection refused” in browser</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-exits-immediately">Jupyter exits immediately</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue-wait-is-too-long">Queue wait is too long</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-vs-code-in-the-browser-with-scode">Option 2: VS Code in the Browser with <code class="docutils literal notranslate"><span class="pre">scode</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fix-channel-n-open-failed-connect-failed-connection-refused">Quick fix: “channel N: open failed: connect failed: Connection refused”</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
