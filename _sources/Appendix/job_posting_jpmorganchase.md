@@ -6,16 +6,16 @@
 - **Program:** Data & AI Internship (campus recruiting)
 - **Source:** [jpmorganchase.com/careers/explore-opportunities/programs/data-analytics-opportunities](https://www.jpmorganchase.com/careers/explore-opportunities/programs/data-analytics-opportunities)
 - **Archived copy:** [Wayback Machine](https://web.archive.org/web/2026/https://www.jpmorganchase.com/careers/explore-opportunities/programs/data-analytics-opportunities) · [PDF snapshot](./assets/job_posting_jpmorganchase.pdf)
-- **Accessed:** August 10, 2026
+- **Accessed:** August 11, 2026
 
-This is a campus program description rather than a single job posting — it describes the skills JPMorganChase expects from students entering data-focused roles. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md) for how this page relates to the course.
+This is a campus program description rather than a single job posting — it describes the skills JPMorganChase expects from students entering data-focused roles. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this page relates to the course.
 ```
 
 ```{figure} ./assets/job_posting_jpmorganchase.png
 :width: 90%
 :alt: Screenshot of the JPMorganChase Data & AI internship program page
 
-The program page as it appeared on jpmorganchase.com, captured August 10, 2026.
+The program page as it appeared on jpmorganchase.com, captured August 11, 2026.
 ```
 
 ## Full text

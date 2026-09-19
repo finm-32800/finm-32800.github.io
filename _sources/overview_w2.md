@@ -18,7 +18,7 @@ Week2/env_files.md
 
 We didn't get to everything last week, so we'll start by closing those gaps.
 
-- **In-class examples repo**: Clone <https://github.com/finm-32900/inclass_examples> and take a quick tour. This holds the small, self-contained demos we'll draw on all quarter (virtual environments, env vars, PyDoit, Sphinx, polars, WRDS/Datastream, SQL, LaTeX).
+- **In-class examples repo**: Clone <https://github.com/finm-32800/inclass_examples> and take a quick tour. This holds the small, self-contained demos we'll draw on all quarter (virtual environments, env vars, PyDoit, Sphinx, polars, WRDS/Datastream, SQL, LaTeX).
 - **Virtual Environments**: See [Virtual Environments](./Week1/virtual_environments.md).
   - *Why we care:* I'm going to hand you a series of repositories this quarter, each with its own `requirements.txt` / `environment.yml`. The whole point of pinning dependencies is **reproducibility**---so that you can install the same software versions I used and reproduce my results exactly. Differences in package versions (and in how data gets pulled) are a common, hard-to-debug source of mismatched results.
   - We'll work through `software_environments/` in the in-class repo, which builds the same small app four ways: `conda`, `conda` + `pip`, `uv`, and `pixi`.

@@ -22,6 +22,6 @@ notebooks/_02_spx_hedging_ipynb.ipynb
 - Forking a GitHub project. Creating documentation for you own Python package. Featuring https://github.com/jmbejara/quantstats_lumi
 - How do I generate documentation? What role do [docstrings](https://www.geeksforgeeks.org/python-docstrings/) play?
 - Brief data-vendor overviews (carried over from Week 6): [LSEG Datastream](./Week7/LSEG_datastream.md) and [Databento](./Week7/databento.md), with a hands-on notebook: [Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb)
-- **Launch [HW 4](./HW4.md)**, a minimal options case study built on [finm-32900/case_study_options](https://github.com/finm-32900/case_study_options), and review its notebooks:
+- **Launch [HW 4](./HW4.md)**, a minimal options case study built on [finm-32800/case_study_options](https://github.com/finm-32800/case_study_options), and review its notebooks:
   - [Corporate Hedging](notebooks/_01_corporate_hedging_ipynb.ipynb)
   - [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb)

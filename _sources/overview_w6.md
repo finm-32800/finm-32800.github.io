@@ -18,9 +18,9 @@ Week6/python_packaging_with_hatch.md
 
 - [HW 3](./HW3.md) is due **this Friday, July 24**.
 - **Upgrade ChartBook**: a new major release shipped this week. Run `pip install --upgrade chartbook` (you want 0.1.1 or later). It contains breaking changes we'll discuss tonight; see [The ChartBook Catalog](./Week6/chartbook_catalog.md).
-- **Midterm report: claim your topic now if you haven't.** Every candidate topic is an open issue in [finm-32900/finm_midterm_report](https://github.com/finm-32900/finm_midterm_report); assign one to yourself to claim it. Your merged contribution is due **Monday, August 10 at 11:59 pm CT**. Don't wait to open your pull request: an early draft PR gets you review comments while there is still time to act on them.
+- **Midterm report: claim your topic now if you haven't.** Every candidate topic is an open issue in [finm-32800/finm_midterm_report](https://github.com/finm-32800/finm_midterm_report); assign one to yourself to claim it. Your merged contribution is due **Monday, August 10 at 11:59 pm CT**. Don't wait to open your pull request: an early draft PR gets you review comments while there is still time to act on them.
 - **Peer-feedback survey** for tonight's two groups: same as last week. Submit during the quiet time after each presentation; the [form](./FinalProject/proposal_feedback_survey.md) stays open until **Friday at 11:59 PM** and doubles as the attendance record.
-- **If you present July 30**, your instructor consultation must happen this week; [book it now](https://finm-32900.youcanbook.me/) if you haven't.
+- **If you present July 30**, your instructor consultation must happen this week; [book it now](https://finm-32800.youcanbook.me/) if you haven't.
 
 ## Agenda Item 1: Proposal Presentations (Two Groups)
 
@@ -51,7 +51,7 @@ You have been `pip install`-ing [`chartbook`](https://pypi.org/project/chartbook
 With a real release fresh in mind, work through [Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md) and the packages you can practice on:
 
 - [`finm`](https://pypi.org/project/finm/) ([docs](https://jeremybejarano.com/finm/)) is the course's own published package: `finm.fixedincome` (the yield-curve functions you imported in HW 3), `finm.data` (Fama-French, Federal Reserve, He-Kelly-Manela, and other loaders), and `finm.analytics` (factor analysis). It's the low-stakes place to practice the contribution loop on a package you don't own: fork, branch, PR, review, merge — the same mechanics as the midterm report, now crossing a repository boundary you don't control.
-- [`stockbeta`](https://github.com/finm-32900/stockbeta) is a previous year's practice package, published to [TestPyPI](https://test.pypi.org/project/stockbeta/) but not the real PyPI. TestPyPI is the rehearsal space: the full publish workflow, with none of the consequences of claiming a real package name.
+- [`stockbeta`](https://github.com/finm-32800/stockbeta) is a previous year's practice package, published to [TestPyPI](https://test.pypi.org/project/stockbeta/) but not the real PyPI. TestPyPI is the rehearsal space: the full publish workflow, with none of the consequences of claiming a real package name.
 - Where this is heading: next week's HW 4 (a minimal options case study) is built from the same ChartBook template as your other repos, and these packaging workflows are the muscles it exercises.
 
 % INSTRUCTOR-ONLY (does NOT render).
@@ -72,7 +72,7 @@ With a real release fresh in mind, work through [Writing and Publishing Your Own
 %   options, cds_returns, cds_bond_basis. Bloomberg-gated (excluded):
 %   basis_tips_treas, basis_treas_sf, basis_treas_swap, cip, commodities,
 %   foreign_exchange, sovereign_bonds.
-% - HW4 launch moved to Week 7 (options case study, finm-32900/case_study_options);
+% - HW4 launch moved to Week 7 (options case study, finm-32800/case_study_options);
 %   NOT released tonight. Its notebooks' toctree entries live in overview_w7.md.
 %   Post Classroom link + due date on Canvas next week.
 % - Data vendors (LSEG Datastream, Databento) remain in Week 7; toctree entries in

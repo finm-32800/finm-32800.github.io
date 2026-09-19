@@ -21,8 +21,8 @@ Students should also sign up for an account with the following websites. We will
 
 ## Getting connected to the course discussion board
 
-- Make sure to "watch" the [textbook repository](https://github.com/finm-32900/textbook) so that you will be notified of new posts on the course discussion board. Click the "watch" button on the top right of the page.
-- Consider, if you'd like, posting an introduction here on the course discussion board: https://github.com/orgs/finm-32900/discussions/2 . Post a message explaining that you're looking for a partner to work on the homework with and to work on the final project with.
+- Make sure to "watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you will be notified of new posts on the course discussion board. Click the "watch" button on the top right of the page.
+- Consider, if you'd like, posting an introduction here on the course discussion board: https://github.com/orgs/finm-32800/discussions/2 . Post a message explaining that you're looking for a partner to work on the homework with and to work on the final project with.
 
 ## How to submit HW: Go through in-class HW example
 
@@ -51,7 +51,7 @@ In order to start mastering the many features of Github, please complete the fol
 
  - [Introduction to GitHub](https://github.com/skills/introduction-to-github)
  - [Communicate using Markdown](https://github.com/skills/communicate-using-markdown)
-   - This will give you some ideas on how to more effectively communicate on the course [discussion board](https://github.com/orgs/finm-32900/discussions).
+   - This will give you some ideas on how to more effectively communicate on the course [discussion board](https://github.com/orgs/finm-32800/discussions).
  - [GitHub Pages](https://github.com/skills/github-pages)
    - Later in this course, we will use GitHub Pages to host a website. The textbook for this course is hosted on GitHub Pages.
 

@@ -144,4 +144,4 @@ https://<org-or-username>.github.io/<repo-name>/
 
 ## Example
 
-See a completed tearsheet example here: https://finm-32900.github.io/hw3--solutions/
+See a completed tearsheet example here: https://finm-32800.github.io/hw3--solutions/

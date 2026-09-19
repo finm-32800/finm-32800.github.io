@@ -1,65 +1,53 @@
-Course Syllabus: FINM 32900, Summer 2026
+Course Syllabus: FINM 32800, Autumn 2026
 ========================================
 
-**FINM 32900, Full Stack Quantitative Finance**
+**FINM 32800, Data Pipelines for Quantitative Research**
 
 ##  Summary
 
-**Course Description** "Full Stack Quantitative Finance" is a hands-on course
-centered on a core set of fundamental tools common across 
-financial computing and data science. 
-That is, this course examines elements of
-the analytical pipeline, from data extraction and cleaning to exploratory
-analysis, visualization, and modeling, and finally, publication and deployment.
-It does so with the aim of teaching the tools and principles behind creating
-reproducible and scalable workflows, including build automation, dependency
-management, unit testing, the command-line environment, shell scripting, Git for
-version control, and GitHub for team collaboration. These skills are taught
-through case studies, each of which will additionally give students practical
-experience with key financial data sets and sources such as CRSP and Compustat
-for pricing and financials, bond transactions from FINRA TRACE, options data
-from OptionMetrics, Treasury auction data from TreasuryDirect,
-textual data from EDGAR, and high-frequency trade and quote data from NYSE.
-Prior experience at an intermediate level with Python and the PyData stack is
-assumed.
+**Course Description** *Data Pipelines for Quantitative Research* is a hands-on course centered on building reproducible analytical pipelines: automated and fully reproducible workflows that carry a quantitative analysis from raw data to published result. This course examines every stage of the pipeline, from data extraction and cleaning (extract, transform, load, or ETL), through data validation, exploratory analysis, visualization, modeling, and finally to publication and deployment. In industry, this work is sometimes called *productionizing* research, pairing developers with researchers to translate ideas into practice. The course teaches the core set of tools used to build such pipelines, tools which are common across computing and data science: build automation and CI/CD, dependency management, SQL, unit testing and automated data-quality checks, the Linux command line, SSH and working with remote machines, Git for version control, peer review through GitHub pull requests, and experiment tracking and model monitoring (basic MLOps).
 
-This is an **online course**, taught live over Zoom. Because we meet remotely, we
-put extra emphasis on class participation and on getting to know your classmates.
-Networking with your peers is one of the most valuable parts of the university
-experience—both for learning and for your career—so this term the course is built
-around live, interactive components. The two main vehicles for this are the
-**final-project proposal presentations** (where you present your project plan to
-the class and give and receive live feedback from your classmates) and the
-collaborative **Midterm Report** (a single economic report that the whole class
-builds together). Attendance at the proposal presentations is taken via Zoom.
+These skills are taught through a series of case studies, each of which introduces students to a new set of tools and a new key financial data set: pricing and fundamentals from CRSP and Compustat, options data from OptionMetrics, corporate bond transactions from FINRA TRACE, intraday trades and quotes from NYSE TAQ, and order book data from CME Globex.
 
-- **Class:** Thursdays, 6 - 9 PM CT, online via Zoom. The Zoom link is posted on
-  Canvas. Classes will be recorded.
+*Prior experience at an intermediate level with Python and the PyData stack is assumed.*
+
+This is an in-person course. We put extra emphasis on class participation and on
+getting to know your classmates. Networking with your peers is one of the most
+valuable parts of the university experience, both for learning and for your
+career, so the course is built around live, interactive components. The two main
+vehicles for this are the **final-project proposal presentations** (where you
+present your project plan to the class and give and receive live feedback from
+your classmates) and the collaborative **Midterm Report** (a single economic
+report that the whole class builds together). Attendance at the proposal
+presentations is taken.
+
+- **Class:** One session per week, in person. The day, time, and room are listed
+  on Canvas.
 - **Lecturer:** Jeremy Bejarano, jbejarano@uchicago.edu
-- **Instructor Office Hours:** By appointment over Zoom (link on Canvas). You can
-  also schedule a 1-on-1 consultation using the booking link posted on Canvas.
+- **Instructor Office Hours:** By appointment. Schedule a 1-on-1 consultation
+  using the booking link posted on Canvas.
 - **Teaching Assistant:**
-  - Jared Szajkowski, jszajkowski@uchicago.edu
+  - To be announced on Canvas.
   - Note: Students are strongly encouraged to post questions on the discussion
     page of the class GitHub repository (see below) rather than emailing, so that
     the whole class can benefit from the answers.
 
 - **TA Office Hours:**
-  - Virtual (Zoom): Time TBD. See the Canvas calendar for the schedule and the Zoom link.
+  - To be announced. See the Canvas calendar for the schedule.
 
 - **Textbook:** The text for the course will be published incrementally here:
-  https://finm-32900.github.io/
-- **Website:** Canvas will be used for grades and for publishing Zoom links
+  https://finm-32800.github.io/
+- **Website:** Canvas will be used for grades, announcements, and links
   only. Homework and notes will be posted on the course textbook above. All
   code related to the course, including the code that generates the textbook and the code
-  for the homework assignments will be posted in GitHub repos within the finm-32900 
-  organization here: https://github.com/finm-32900.
+  for the homework assignments will be posted in GitHub repos within the finm-32800 
+  organization here: https://github.com/finm-32800.
   Questions and other discussion should be posted on the GitHub discussion
-page here: https://github.com/orgs/finm-32900/discussions
+page here: https://github.com/orgs/finm-32800/discussions
   Class-related discussions should be posted here as well.
 - **In-class examples:** Many lectures are accompanied by small, runnable code
   examples collected in a companion repository, the **in-class examples repo**:
-  https://github.com/finm-32900/inclass_examples. We use this repository
+  https://github.com/finm-32800/inclass_examples. We use this repository
   throughout the course---individual textbook chapters link to the relevant
   subfolders (for example, `software_environments/`, `pydoit/`, `env_vars/`,
   `sphinx/`, and `unit_tests/`). Clone it and follow along during class.
@@ -78,8 +66,8 @@ page here: https://github.com/orgs/finm-32900/discussions
   allowed to copy each other's code. Each student must write their own solutions
   individually.
 - After assignments are graded, solutions will be posted in separate GitHub
-  repos, found under the `finm-32900` GitHub organization page here: 
-  https://github.com/finm-32900
+  repos, found under the `finm-32800` GitHub organization page here: 
+  https://github.com/finm-32800
 
 ### No Exams
 
@@ -145,7 +133,7 @@ Grades will be based on the following components:
 - **Midterm Report (10%)** is your individual contribution (one figure and one
   paragraph) to the collaborative class economic report.
 - **Proposal Attendance & Feedback (10%)** requires that, for **every** proposal
-  presentation, you both attend (Zoom attendance is taken) **and** submit the
+  presentation, you both attend (attendance is taken) **and** submit the
   peer-feedback survey. Both are required to earn the points, and there are
   **no allowed misses**—attending and giving feedback to your classmates is an
   expected part of this course.
@@ -158,10 +146,10 @@ Grades will be based on the following components:
 
 ## Schedule
 
-The course runs for ten weeks. There are **9 weeks of lectures** (Thursdays,
-starting June 18, 2026), followed by **final project presentations in week 10**.
+The course runs for ten weeks. There are **9 weeks of lectures** (one per week,
+with the meeting schedule on Canvas), followed by **final project presentations in week 10**.
 The lecture schedule follows the ordering of the chapters listed in the GitHub
-book found here: https://finm-32900.github.io/. Each week is its own chapter and
+book found here: https://finm-32800.github.io/. Each week is its own chapter and
 the agenda is listed in the first sub-section of the chapter.
 
 Other key milestones (exact dates to be announced on Canvas and GitHub Classroom):
@@ -185,7 +173,7 @@ Classroom for each assignment's due date.
 ## References
 
 I will provide the lecture notes that we will use in class here:
-https://finm-32900.github.io/. As a prerequisite, you should have some prior
+https://finm-32800.github.io/. As a prerequisite, you should have some prior
 familiarity with Python and the PyData stack (e.g., Numpy, Scipy, Pandas,
 Matplotlib). The following references may serve as useful refreshers:
 

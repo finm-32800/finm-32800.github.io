@@ -11,13 +11,13 @@ The final project this term is organized around three separate events. Read the 
 
 1. **Instructor consultation** — a 1-on-1 meeting you schedule with the instructor, to occur **at least one week before** your group's proposal presentation. This is where you get individual feedback on your plan.
 2. **Proposal presentation** — an in-class presentation (in an assigned week, roughly weeks 5–8) where you advertise your project and product to the class and receive peer feedback.
-3. **Final project presentation** — a scheduled meeting with the instructor, booked at [https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/), where your group presents the completed project and **each group member is individually quizzed in an oral defense** (see the rubric below). All groups must present **no later than Friday, August 21**.
+3. **Final project presentation** — a scheduled meeting with the instructor, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/), where your group presents the completed project and **each group member is individually quizzed in an oral defense** (see the rubric below). All groups must present **no later than Friday, August 21**.
 
 ## Receiving Your Assigned Project
 
   - You will be assigned a project from the list found [here.](./potential_final_projects.md) 
   - Your preference will be taken into account when assigning the projects. You can rank your preferred projects, and indicate your availability to present in one of the proposal-presentation weeks, using a Google Form: **TBD** (the link will be posted on Canvas). Please, only submit one response per group. Your group must have 2 people in it. Students can not choose to work alone and groups can not have more than 2 people. I will use your responses to assign each group both a project and a proposal-presentation week.
-  - You must schedule a **consultation** with me at the beginning of the project (at least one week before your proposal presentation). This meeting is to establish the goals for the project and get individual feedback on your plan. Use the booking link to schedule it: [https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/) (also posted on Canvas).
+  - You must schedule a **consultation** with me at the beginning of the project (at least one week before your proposal presentation). This meeting is to establish the goals for the project and get individual feedback on your plan. Use the booking link to schedule it: [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas).
   - In this consultation meeting, you should come prepared with a list of tasks that each team member will be primarily responsible for. Team members can and should share tasks (e.g., two people can be responsible for the LaTeX writeup whereas everyone should be involved in figuring out how to understand and clean the data). Write this list of tasks in the README.md of the GitHub repo.
 
 ## Final Project Grading Rubric

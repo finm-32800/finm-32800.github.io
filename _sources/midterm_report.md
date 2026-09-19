@@ -16,7 +16,7 @@ Your contribution must follow the repo's style guides so it integrates cleanly w
 
 ## Workflow
 
-The report lives in a private GitHub repository, [finm-32900/finm_midterm_report](https://github.com/finm-32900/finm_midterm_report). Every student receives a collaborator invite by email.
+The report lives in a private GitHub repository, [finm-32800/finm_midterm_report](https://github.com/finm-32800/finm_midterm_report). Every student receives a collaborator invite by email.
 
 1. **Claim an issue.** Each open issue is a coverage area or a dataset, deliberately broad. The specific chart and angle are yours to choose. Assign the issue to yourself, one student per issue. You may also propose your own topic by opening a new issue and coordinating with me there.
 2. **Build it reproducibly.** Work on a branch. Your exhibit gets its own file in `src/`, is wired into `dodo.py`, and pulls data through FRED, the OFR API, or the chartbook catalog (the ftsfr pipelines). Details are in `CODE_STYLE.md`.
@@ -34,7 +34,7 @@ The Midterm Report is 10% of the course grade. Your contribution is graded out o
 |---|---|
 | **Topic and importance.** The exhibit addresses your claimed issue, speaks to the last 6 to 12 months, and cites a source that shows why it matters. | 2 |
 | **Message.** The figure and paragraph carry one clear, coherent point. | 2 |
-| **Style.** The chart matches the chart style guide and the code follows `CODE_STYLE.md`. | 2 |
+| **Style.** The chart matches the chart style guide and the code follows `CODE_STYLE.md`. Cross-references to sections and exhibits use `\label`/`\ref`, never hand-typed numbers. | 2 |
 | **It works.** The pipeline builds your exhibit end to end, and your reviewers verified this before I saw it. | 2 |
 | **Peer review.** Two classmates reviewed your PR, and you completed reviews for two others. | 2 |
 

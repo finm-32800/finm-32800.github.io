@@ -9,7 +9,7 @@
 - **Archived copy:** [Wayback Machine](https://web.archive.org/web/2026/https://job-boards.greenhouse.io/point72/jobs/7829230002) · [PDF snapshot](./assets/job_posting_point72.pdf)
 - **Accessed:** August 10, 2026 (text retrieved from the Greenhouse job-board API)
 
-Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md) for how this posting relates to the course.
+Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this posting relates to the course.
 ```
 
 ```{figure} ./assets/job_posting_point72.png

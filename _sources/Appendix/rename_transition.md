@@ -1,10 +1,10 @@
 # The Rename: From "Data Science Tools" to "Data Pipelines"
 
 ```{note}
-This page is **temporary**. It documents the course's 2026 renaming for students and colleagues who knew it under an earlier name, and it will be removed from future editions of this site. The permanent rationale for the name lives in [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md)
+This page is **temporary**. It documents the course's 2026 renaming for students and colleagues who knew it under an earlier name, and it will be removed from future editions of this site. The permanent rationale for the name lives in [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md)
 ```
 
-This course has carried three names. It began as *Data Science Tools for Finance*, was renamed *FINM 32900: Full Stack Quantitative Finance*, and beginning in Autumn 2026 — as it joins the FinMath program's Core Programming sequence — it becomes **Data Pipelines for Finance**. The material and philosophy carry over; the name is catching up with what the course has always done. The course description has said the same thing from the start: the course "examines elements of the analytical pipeline, from data extraction and cleaning to exploratory analysis, visualization, and modeling, and finally, publication and deployment."
+This course has carried three names. It began as *Data Science Tools for Finance*, was renamed *FINM 32900: Full Stack Quantitative Finance*, and beginning in Autumn 2026 — as it joins the FinMath program's Core Programming sequence — it becomes **FINM 32800: Data Pipelines for Quantitative Research**. The material and philosophy carry over; the name is catching up with what the course has always done. The course description has said the same thing from the start: the course "examines elements of the analytical pipeline, from data extraction and cleaning to exploratory analysis, visualization, and modeling, and finally, publication and deployment."
 
 ## Why not keep "Full Stack Quantitative Finance"?
 
@@ -23,4 +23,5 @@ I was always fond of the original title. But the Core Programming sequence alrea
 | *Data Science Pipelines for Finance* | Same collision with the sibling course. In industry usage, a "data science pipeline" also tends to mean a model-training workflow (data prep, feature engineering, training, evaluation), which is narrower than this course. |
 | *Reproducible Analytical Pipelines for Finance* | Intellectually the most accurate description, and "reproducible analytical pipeline" (RAP) is an established term of art. But it is not a label students or employers search for, and it is long. |
 | *Data Engineering for Quantitative Finance* | The strongest corporate signal, but it promises a full data-engineering curriculum (distributed systems, streaming, warehousing at depth) that this course does not claim to be. |
-| **Data Pipelines for Finance** (chosen) | Short, accurate, and recognizable. It is the phrase that appears, again and again, in the [job postings themselves](./job_postings.md). |
+| *Data Pipelines for Finance* | Close. "Data pipeline" is the phrase that appears, again and again, in the [job postings themselves](./job_postings.md). But "for finance" names only the field, not who the pipeline is built for. |
+| **Data Pipelines for Quantitative Research** (chosen) | Keeps the industry's own word for the skill and adds who it serves. The central idea of the course is pipelines built for researchers, the partnership Citadel describes as "partner with researchers to produce high-value datasets," and quantitative research is the industry's name for the function those engineers support. |

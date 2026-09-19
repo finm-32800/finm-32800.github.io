@@ -9,7 +9,7 @@
 - **Archived copy:** [Wayback Machine, July 27, 2026](https://web.archive.org/web/20260727155328/https://www.citadelsecurities.com/careers/details/senior-research-engineer-data/) · [PDF snapshot](./assets/job_posting_citadel_securities.pdf)
 - **Accessed:** August 10, 2026 (text recovered from the Wayback Machine snapshot; the live page sits behind a bot-verification wall)
 
-Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md) for how this posting relates to the course.
+Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this posting relates to the course.
 ```
 
 ```{figure} ./assets/job_posting_citadel_securities.png

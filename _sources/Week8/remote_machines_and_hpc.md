@@ -443,4 +443,4 @@ We walk through this entire process step-by-step in the
 - [RCC User Guide: sinteractive](https://docs.rcc.uchicago.edu/slurm/sinteractive/) --- Interactive sessions
 - [RCC User Guide: Python & Jupyter](https://docs.rcc.uchicago.edu/software/apps-and-envs/python/) --- Setting up Python and Jupyter on Midway
 - [RCC User Guide: Partitions](https://docs.rcc.uchicago.edu/partitions/) --- Available partitions and their specifications
-- [TRACE Case Study Repository](https://github.com/finm-32900/case_study_clean_trace) --- The TRACE data pipeline used in this course
+- [TRACE Case Study Repository](https://github.com/finm-32800/case_study_clean_trace) --- The TRACE data pipeline used in this course

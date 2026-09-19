@@ -4,7 +4,7 @@ Sphinx is the standard documentation generator for the Python ecosystem. It tran
 
 ```{admonition} In-Class Examples
 :class: tip
-The examples discussed on this page are available in the `inclass_examples` repository: https://github.com/finm-32900/inclass_examples/tree/main/sphinx
+The examples discussed on this page are available in the `inclass_examples` repository: https://github.com/finm-32800/inclass_examples/tree/main/sphinx
 
 Clone the repository and navigate to the `sphinx/` directory to follow along.
 ```
@@ -21,7 +21,7 @@ Sphinx was originally created to generate the official Python language documenta
 
 ## Getting Started: `sphinx-quickstart`
 
-**See Example [`01_quickstart/`](https://github.com/finm-32900/inclass_examples/tree/main/sphinx/01_quickstart)**
+**See Example [`01_quickstart/`](https://github.com/finm-32800/inclass_examples/tree/main/sphinx/01_quickstart)**
 
 ### Installation
 
@@ -112,7 +112,7 @@ The sections below show how to extend this configuration with additional extensi
 
 ## Writing in Markdown with MyST
 
-**See Example [`02_autodoc2_myst/`](https://github.com/finm-32900/inclass_examples/tree/main/sphinx/02_autodoc2_myst)**
+**See Example [`02_autodoc2_myst/`](https://github.com/finm-32800/inclass_examples/tree/main/sphinx/02_autodoc2_myst)**
 
 By default, Sphinx uses reStructuredText (reST) as its markup language. reST is powerful, but its syntax is unfamiliar to most people who already know Markdown. [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/) solves this by letting you write Sphinx documentation in Markdown while retaining access to all of Sphinx's directives and cross-referencing features.
 
@@ -162,7 +162,7 @@ Both formats are fully supported by Sphinx—you can even mix `.rst` and `.md` f
 
 ## Automatic API Documentation with `autodoc2`
 
-**See Example [`02_autodoc2_myst/`](https://github.com/finm-32900/inclass_examples/tree/main/sphinx/02_autodoc2_myst)**
+**See Example [`02_autodoc2_myst/`](https://github.com/finm-32800/inclass_examples/tree/main/sphinx/02_autodoc2_myst)**
 
 One of Sphinx's most powerful features is the ability to automatically generate API reference pages from your Python source code's docstrings. The [autodoc2](https://sphinx-autodoc2.readthedocs.io/) extension handles this.
 
@@ -308,7 +308,7 @@ This stack gives you the flexibility and power of base Sphinx while achieving a 
 - autodoc2 Documentation: [https://sphinx-autodoc2.readthedocs.io/](https://sphinx-autodoc2.readthedocs.io/)
 - sphinx-book-theme Documentation: [https://sphinx-book-theme.readthedocs.io/](https://sphinx-book-theme.readthedocs.io/)
 - MyST-NB Documentation: [https://myst-nb.readthedocs.io/](https://myst-nb.readthedocs.io/)
-- In-Class Sphinx Examples: [https://github.com/finm-32900/inclass_examples/tree/main/sphinx](https://github.com/finm-32900/inclass_examples/tree/main/sphinx)
+- In-Class Sphinx Examples: [https://github.com/finm-32800/inclass_examples/tree/main/sphinx](https://github.com/finm-32800/inclass_examples/tree/main/sphinx)
 
 
 ## Appendix: Jupyter Book

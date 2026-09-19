@@ -78,7 +78,7 @@ Clone the case study repository into your project directory:
 
 ```bash
 cd /project/finm32900/${USER}
-git clone https://github.com/finm-32900/case_study_clean_trace case_study_clean_trace
+git clone https://github.com/finm-32800/case_study_clean_trace case_study_clean_trace
 cd case_study_clean_trace
 ```
 

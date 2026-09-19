@@ -109,7 +109,7 @@ More granular schemas produce more data (and cost more). For most research
 projects, `trades` or `ohlcv-1m` are good starting points.
 
 See the
-[`03_schemas_and_symbology`](https://github.com/finm-32900/inclass_examples/tree/main/databento/03_schemas_and_symbology)
+[`03_schemas_and_symbology`](https://github.com/finm-32800/inclass_examples/tree/main/databento/03_schemas_and_symbology)
 module in the examples repo for runnable comparisons.
 
 ## Getting Started with the Python SDK
@@ -226,13 +226,13 @@ Friday 4 PM CT, with a daily maintenance break from 4–5 PM CT).
 
 For a deeper look at what the SDK does under the hood — raw HTTP requests, HTTP
 Basic Auth, and the fixed-point integer encoding — see module
-[`02_historical_api`](https://github.com/finm-32900/inclass_examples/tree/main/databento/02_historical_api)
+[`02_historical_api`](https://github.com/finm-32800/inclass_examples/tree/main/databento/02_historical_api)
 in the examples repo.
 
 ## Case Study: Treasury Futures Market Brief
 
 The
-[`04_treasury_futures_brief`](https://github.com/finm-32900/inclass_examples/tree/main/databento/04_treasury_futures_brief)
+[`04_treasury_futures_brief`](https://github.com/finm-32800/inclass_examples/tree/main/databento/04_treasury_futures_brief)
 example in the class repo fetches daily OHLCV data and open interest for five
 Treasury futures products spanning the yield curve:
 
@@ -276,7 +276,7 @@ Average daily volume and open interest across Treasury futures products.
 
 ```{tip}
 **Try it yourself.** Clone the
-[examples repo](https://github.com/finm-32900/inclass_examples/tree/main/databento)
+[examples repo](https://github.com/finm-32800/inclass_examples/tree/main/databento)
 and run the `04_treasury_futures_brief` scripts to reproduce these charts, add
 new products, or extend the date range.
 ```
@@ -300,7 +300,7 @@ new products, or extend the date range.
   definitions, dataset catalog
 - [Databento Python SDK (PyPI)](https://pypi.org/project/databento/) — SDK
   installation and changelog
-- [FINM-32900 In-Class Examples: Databento](https://github.com/finm-32900/inclass_examples/tree/main/databento)
+- [FINM-32900 In-Class Examples: Databento](https://github.com/finm-32800/inclass_examples/tree/main/databento)
   — 4 modules covering historical access (SDK and raw HTTP), schemas, symbology,
   and the Treasury futures case study. All historical; we have no live license.
 - [Pulling Market Data From Databento](../notebooks/_01_databento_ipynb.ipynb)

@@ -18,7 +18,7 @@ The main new logistics this week. Full procedure and grading are in the [Proposa
 
 ### The three separate events (don't confuse them)
 
-1. **Instructor consultation**: 1-on-1 with me, [booked via youcanbook.me](https://finm-32900.youcanbook.me/). Must be scheduled at least one week before your proposal presentation. Booking it is [HW 3](./HW3.md) Part 3.
+1. **Instructor consultation**: 1-on-1 with me, [booked via youcanbook.me](https://finm-32800.youcanbook.me/). Must be scheduled at least one week before your proposal presentation. Booking it is [HW 3](./HW3.md) Part 3.
 2. **Proposal presentation**: in-class over Zoom, on your assigned date (posted on Canvas). *Advertise the product you'll build*: what the paper is about, your data sources, and the new table/figure you'll produce. Classmates fill out a peer-feedback survey on every group.
 3. **Final project presentation**: Week 10, completed project + individual oral defense.
 

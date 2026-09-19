@@ -131,7 +131,7 @@ Python lets you run SQL queries against the Datastream library, iterate over
 products, and build datasets that feed directly into your analysis pipeline.
 
 **Example repository:**
-[`wrds_datastream/`](https://github.com/finm-32900/inclass_examples/tree/main/wrds_datastream)
+[`wrds_datastream/`](https://github.com/finm-32800/inclass_examples/tree/main/wrds_datastream)
 — a set of 7 progressive scripts that teach you how to browse, search, and
 retrieve futures data from the `tr_ds_fut` library.
 

@@ -1,6 +1,6 @@
 # Archived Job Postings
 
-Job postings are ephemeral. Once a role is filled the page is taken down, and a link that supported an argument stops resolving. (One posting I had collected while researching this material, a DRW "Python Data Engineer" role, had already vanished from DRW's site before I finished writing.) To keep the evidence in [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md) inspectable, each posting is preserved here on its own page with the full text, a screenshot, a PDF snapshot, and a link to a Wayback Machine copy. All were collected in August 2026.
+Job postings are ephemeral. Once a role is filled the page is taken down, and a link that supported an argument stops resolving. (One posting I had collected while researching this material, a DRW "Python Data Engineer" role, had already vanished from DRW's site before I finished writing.) To keep the evidence in [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) inspectable, each posting is preserved here on its own page with the full text, a screenshot, a PDF snapshot, and a link to a Wayback Machine copy. All were collected in August 2026.
 
 ```{toctree}
 :maxdepth: 1

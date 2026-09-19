@@ -255,7 +255,7 @@ The thing to take away today is that your `requirements.txt` (and, for conda-sty
 
 For now, though: **stick with `conda` + `pip`.** Just know that `uv` and `pixi` exist---we'll go deeper on `uv` in particular, with a smaller example of `pixi`, in a later week.
 
-If you'd like a preview, you can see all four approaches---`conda` only, `conda` + `pip`, `uv`, and `pixi`---running the *same* script side by side in the [`software_environments/`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments) directory of the [in-class examples repository](https://github.com/finm-32900/inclass_examples), which we'll use throughout the course.
+If you'd like a preview, you can see all four approaches---`conda` only, `conda` + `pip`, `uv`, and `pixi`---running the *same* script side by side in the [`software_environments/`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments) directory of the [in-class examples repository](https://github.com/finm-32800/inclass_examples), which we'll use throughout the course.
 
 ### Cheat sheet
 

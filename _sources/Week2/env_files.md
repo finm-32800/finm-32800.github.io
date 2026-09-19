@@ -68,7 +68,7 @@ Recapping **Best Practices**
 
 For practical examples and demonstrations of using environment variables in Python, please refer to the in-class examples repository:
 
-**[Environment Variables Examples](https://github.com/finm-32900/inclass_examples/tree/main/env_vars)**
+**[Environment Variables Examples](https://github.com/finm-32800/inclass_examples/tree/main/env_vars)**
 
 This repository contains complete working examples that demonstrate:
 

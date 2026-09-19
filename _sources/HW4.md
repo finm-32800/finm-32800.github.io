@@ -13,7 +13,7 @@ assignment: **deploy a live, self-updating clone of the CME FedWatch tool.**
 ## Overview
 
 Homework 4 turns the in-class FedWatch case study
-([finm-32900/case_study_fedwatch](https://github.com/finm-32900/case_study_fedwatch))
+([finm-32800/case_study_fedwatch](https://github.com/finm-32800/case_study_fedwatch))
 into a live monitor. The pipeline pulls 30-Day Fed Funds futures (ZQ) from
 Databento and the effective federal funds rate (EFFR) from FRED, computes the
 market-implied probability of a hike, cut, or no change at the next FOMC

@@ -13,7 +13,7 @@ Your final project involves three distinct events. **They are separate**—do no
 A 1-on-1 meeting between your group and the instructor.
 
 - **When:** You must schedule it to occur **at least one week before** your group's proposal presentation.
-- **How to schedule:** Use the booking link—[https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/) (also posted on Canvas). You are responsible for scheduling this yourself.
+- **How to schedule:** Use the booking link—[https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas). You are responsible for scheduling this yourself.
 - **Purpose:** This is where you get *individual* feedback from me on your plan before you present it to the class. Come prepared with your project idea, your data sources, a rough plan for the product you want to build, and the division of responsibilities between the two team members.
 
 ### 2. Proposal Presentation
@@ -30,7 +30,7 @@ An in-class presentation to the whole class over Zoom.
 
 ### 3. Final Project Presentation
 
-A scheduled meeting with the instructor, booked at [https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/). Your group presents the *completed* project, and each member is individually quizzed in an oral defense. All groups must present no later than **Friday, August 21**. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
+A scheduled meeting with the instructor, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/). Your group presents the *completed* project, and each member is individually quizzed in an oral defense. All groups must present no later than **Friday, August 21**. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
 
 ## How Presentation Weeks Are Assigned
 

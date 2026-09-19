@@ -442,7 +442,7 @@ but manageable on a single machine with the right tools.
 
 ### How the Case Study Uses These Concepts
 
-The [case study repository](https://github.com/finm-32900/case_study_clean_trace)
+The [case study repository](https://github.com/finm-32800/case_study_clean_trace)
 applies every strategy discussed on this page:
 
 **Hive partitioning**: All data is organized as

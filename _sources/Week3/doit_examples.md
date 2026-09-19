@@ -1,6 +1,6 @@
 # PyDoit Examples Walkthrough
 
-These examples are available in the [in-class examples repository](https://github.com/finm-32900/inclass_examples). Clone the repository and navigate to the [`pydoit/`](https://github.com/finm-32900/inclass_examples/tree/main/pydoit) directory to follow along.
+These examples are available in the [in-class examples repository](https://github.com/finm-32800/inclass_examples). Clone the repository and navigate to the [`pydoit/`](https://github.com/finm-32800/inclass_examples/tree/main/pydoit) directory to follow along.
 
 ## Quick Start
 

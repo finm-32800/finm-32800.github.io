@@ -1,68 +1,72 @@
-What is Full Stack Quantitative Finance? Why This Course?
-=========================================================
+What Is This Course About? Why Data Pipelines?
+==============================================
 
-## What is Full Stack Quantitative Finance?
+## What does "Data Pipelines for Quantitative Research" mean?
 
-"Full stack quantitative finance" refers to having expertise across the entire
-lifecycle of financial models, from data acquisition to execution. This includes
-managing large datasets, developing and optimizing quantitative models, managing
-the necessary infrastructure, and understanding execution systems. It also
-involves presenting results through effective visualizations or reports. A full
-stack professional in this field bridges the gap between data, modeling,
-infrastructure, reporting, and trading systems.
+Open a job posting for the data engineers who work alongside quantitative
+researchers and you will find duties like these two, from Citadel Securities'
+posting for a Senior Research Engineer (Data):
 
-While the concept of "full stack" implies a broad range of skills and most
-professionals will specialize in one area---whether that’s data engineering,
-DevOps, quantitative research, or some other area---there exists a core
-set of skills that are valuable to professionals in all roles. This course
-aims to teach this core set of skills.
-This course aims to teach the tools and principles
-behind creating reproducible and scalable workflows, including build automation,
-dependency management, unit testing, the command-line environment, shell
-scripting, Git for version control, GitHub for team collaboration, working
-with remote machines for high-performance computing and big data analysis,
-and deployment of financial models and dashboards. 
-My hope is that these tools
-will serve as a technical foundation for any subfield of financial computing 
-or data science that the student wishes to pursue.
+> "Partner with researchers to produce high-value datasets"
+>
+> "Translate high-level market research concepts into scalable processes that
+> further transform the data"
+
+This is the job that this course trains students to do. Different companies
+assign different titles to this role. Commonly used titles include research
+engineer, data engineer, and quantitative developer on a data team, but the work
+is the same: take research that lives in a researcher's head or in a published
+paper and turn it into a production data pipeline that runs reliably every day.
+In short, this course teaches students to *productionize* research, to borrow
+industry's word for it.
+
+A data pipeline is the path from raw source data to a finished analytical
+product: extraction, cleaning, transformation, validation, analysis,
+documentation, and publication, automated end to end. *Quantitative research*
+is who that path serves. Every case study in this course is one of these
+pipelines, and the final project is one built from scratch.
+
+The tools involved are common across computing and data science: build
+automation and CI/CD, dependency management, SQL, unit testing and automated
+data-quality checks, the Linux command line, SSH and working with remote
+machines, Git for version control, peer review through GitHub pull requests,
+and experiment tracking and model monitoring (basic MLOps). My hope is that
+these tools will serve as a technical foundation for any subfield of financial
+computing or data science that the student wishes to pursue. For the hiring
+evidence behind the course's name, straight from the firms' own postings, see
+[Why "Data Pipelines for Quantitative Research"?](../Appendix/why_data_pipelines_for_quantitative_research.md)
 
 
 ## Objectives
 
-Financial data is central to all quantitative finance workflows. 
-And given the increasing complexity of such workflows and the challenges
-associated with working with large data sets, 
-understanding of the full stack is valuable to professionals in all roles.
-For this reason, it is my belief that the core set of skills involved
-in full stack quantitative finance are important for students
-in either financial computing or data science. As a matter of fact,
-since I focus on teaching the tools and principles behind creating
-reproducible and scalable workflows, I derive the inspiration for this course
-from the definition of "data science." From this definition, I identify two
-objectives for this course:
+The work described in postings like the one above has two halves, building the
+pipeline and knowing the data it carries. The course takes its two objectives
+from them directly:
 
-1.	**The "Science" in Data Science.** Teach a core set of software tools and
-principles behind creating modern data analytic workflows that are reproducible
-and scalable from end to end. The idea is that this set of computational tools
-will serve as a technical foundation for any subfield of data science that the
-student wishes to pursue. This is born out of the idea that reproducibility is
-fundamental to good science. 
+1.	**Build the pipeline.** Teach a core set of software tools and the
+principles behind assembling them into analytical workflows that are
+reproducible and scalable from end to end. In production, an analysis creates
+value only when it is repeatable and its pipeline runs reliably and
+predictably, and the same conviction underlies the whole toolkit:
+reproducibility is fundamental to good science. This toolkit serves as a
+technical foundation for whatever subfield of quantitative finance or data
+science a student goes on to pursue.
 
-2.	**The "Data" in Data Science.** Give students
-hands-on experience with a series of important and commonly used financial data
-sets and/or sources, including CRSP, Compustat, FRED, BEA data, FINRA TRACE,
-TreasuryDirect, EDGAR, and NYSE TAQ. Not only does each data set require some
-degree of domain specific knowledge (e.g., to clean and interpret properly), but
-each data set also poses different computational challenges to use effectively.
-For example, using EDGAR means working with large amounts of unstructured text
-or data from NYSE TAQ involves learning to work with big data (approximately 100
-GBs per day). Each case study is designed to give students the basic knowledge
-and tools to use these data sets effectively.
+2.	**Know the data.** Give students hands-on experience with the financial
+data sets quantitative researchers use every day, including CRSP, Compustat,
+FRED, FINRA TRACE, OptionMetrics, NYSE TAQ, and CME Globex order book data.
+Not only does each data set require some degree of domain specific knowledge
+(e.g., to clean and interpret properly), but each data set also poses different
+computational challenges to use effectively. For example, FINRA TRACE means
+working with transaction records at a scale where pandas begins to struggle,
+and CME Globex's intraday order book feeds mean confronting exchange-specific
+quirks head on. Each case study is designed to give students the basic
+knowledge and tools to use these data sets effectively.
 
 
 ## Motivation
 
-### The Full Stack Core Skill Set: A Bridge Between Financial Computing and Data Science
+### The Core Skill Set: A Bridge Between Financial Computing and Data Science
 
 Given the increasing complexity of the computational sciences, the ability to
 produce readable, reusable, and reproducible code and analyses is increasingly
@@ -148,7 +152,7 @@ What are ways in which principles of reproducibility in the hard sciences might 
 
 -->
 
-## Which Full Stack "Tools"?
+## Which Tools?
 
 This course focuses on a specific set of skills and tools. 
 It is not necessarily a course about methodologies or statistical

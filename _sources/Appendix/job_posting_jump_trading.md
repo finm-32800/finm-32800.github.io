@@ -9,7 +9,7 @@
 - **Archived copy:** [Wayback Machine](https://web.archive.org/web/2026/https://www.jumptrading.com/hr/job?gh_jid=8002998) · [PDF snapshot](./assets/job_posting_jump_trading.pdf)
 - **Accessed:** August 10, 2026 (text retrieved from the Greenhouse job-board API)
 
-Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Finance"?](./why_data_pipelines_for_finance.md) for how this posting relates to the course. This one is a campus internship posting — the kind of role current FinMath students apply to directly.
+Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this posting relates to the course. This one is a campus internship posting — the kind of role current FinMath students apply to directly.
 ```
 
 ```{figure} ./assets/job_posting_jump_trading.png

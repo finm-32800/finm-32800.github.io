@@ -3,7 +3,7 @@
 
 Unit testing is an essential part of developing reliable, maintainable software. By following these steps and best practices, you can create effective unit tests for your Python functions, ensuring they behave as intended under various conditions.
 
-For additional worked examples, see the [in-class examples for unit tests](https://github.com/finm-32900/inclass_examples/tree/main/unit_tests).
+For additional worked examples, see the [in-class examples for unit tests](https://github.com/finm-32800/inclass_examples/tree/main/unit_tests).
 
 ## Standard: Unit Tests in a Test File
 

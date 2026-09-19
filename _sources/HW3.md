@@ -43,14 +43,14 @@ The pipeline registers its outputs — the consolidated CRSP Treasury data and t
    ```
    This generates the `docs/` folder — a full static site (`index.html`, the executed notebooks, and dataframe pages).
 
-2. Create a **new, separate public repository under your personal GitHub account** (for example, `finm32900-hw3-site`) to host the site. Do **not** make your assignment repo public, and do not try to enable Pages on it — it stays private inside the class organization. On GitHub's free tier, Pages only works on public repositories, and your assignment repo contains your graded solutions, tests, and git history, none of which should ever be public. The `docs/` folder is deliberately gitignored in the assignment repo.
+2. Create a **new, separate public repository under your personal GitHub account** (for example, `finm32800-hw3-site`) to host the site. Do **not** make your assignment repo public, and do not try to enable Pages on it — it stays private inside the class organization. On GitHub's free tier, Pages only works on public repositories, and your assignment repo contains your graded solutions, tests, and git history, none of which should ever be public. The `docs/` folder is deliberately gitignored in the assignment repo.
 
 3. Copy the built site into the new repo and push it. From the directory containing your assignment repo:
 
    ```bash
-   git clone https://github.com/<your-username>/finm32900-hw3-site.git
-   cp -R <your-hw3-repo>/docs/. finm32900-hw3-site/
-   cd finm32900-hw3-site
+   git clone https://github.com/<your-username>/finm32800-hw3-site.git
+   cp -R <your-hw3-repo>/docs/. finm32800-hw3-site/
+   cd finm32800-hw3-site
    git add .
    git commit -m "Publish ChartBook site"
    git push
@@ -58,7 +58,7 @@ The pipeline registers its outputs — the consolidated CRSP Treasury data and t
 
    The `docs/.` form (with the trailing `/.`) matters: it copies hidden files such as `.nojekyll`, which the site needs to render correctly.
 
-4. Enable **GitHub Pages** on the *new* repo (Settings → Pages → Deploy from a branch → `main` / `/ (root)`). After a few minutes, verify the site is live at `https://<your-username>.github.io/finm32900-hw3-site/`, then record the published URL where the autograder expects it (see the HW repo `README.md`).
+4. Enable **GitHub Pages** on the *new* repo (Settings → Pages → Deploy from a branch → `main` / `/ (root)`). After a few minutes, verify the site is live at `https://<your-username>.github.io/finm32800-hw3-site/`, then record the published URL where the autograder expects it (see the HW repo `README.md`).
 
 Note the separation this gives you: the rendered site is public — that is the point of publishing — but your source code, unit tests, git history, and credentials never leave the private assignment repo. Whenever you rebuild the site, just re-copy `docs/` into the site repo and push again.
 
@@ -70,7 +70,7 @@ For what ChartBook is and how the pieces fit together, see [Project Structure: "
 
 This is separate from the pipeline above — it is part of the **final-project proposal** process, not this homework's grade. Before your assigned proposal-presentation date, you must meet 1-on-1 with the instructor.
 
-- **Booking link:** [https://finm-32900.youcanbook.me/](https://finm-32900.youcanbook.me/)
+- **Booking link:** [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/)
 - You must schedule it to occur **at least one week before** your group's proposal presentation. Booking it before the HW deadline is what's required now — the meeting itself can be later.
 - Come prepared with your assigned paper, your data sources, a rough plan for the product you'll build, and how you'll divide the work.
 

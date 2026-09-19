@@ -1,14 +1,18 @@
-# Full Stack Quantitative Finance
+# Data Pipelines for Quantitative Research
 
 **By Jeremy Bejarano**
 
 Last updated: {sub-ref}`today` 
 
 
-This set of notes is designed to accompany _FINM 32900: Full Stack Quantitative Finance_. 
+This set of notes is designed to accompany _FINM 32800: Data Pipelines for Quantitative Research_. 
 
 **Course Description**
-"Full Stack Quantitative Finance" is a hands-on course centered on key data science tools in quantitative finance. Acknowledging the field's wide scope, the course focuses on a common skill set across various data science subfields. That is, this course examines elements of the analytical pipeline, from data extraction and cleaning to exploratory analysis, visualization, and modeling, and finally, publication and deployment. It does so with the aim of teaching the tools and principles behind creating reproducible and scalable workflows, including build automation, dependency management, unit testing, the command-line environment, shell scripting, Git for version control, and GitHub for team collaboration. These skills are taught through case studies, each of which will additionally give students practical experience with key financial data sets and sources such as CRSP and Compustat for pricing and financials, bond transactions from FINRA TRACE, options data from OptionMetrics, Treasury auction data from TreasuryDirect, textual data from EDGAR, and high-frequency trade and quote data from NYSE. Prior experience at an intermediate level with Python and the PyData stack is assumed.
+*Data Pipelines for Quantitative Research* is a hands-on course centered on building reproducible analytical pipelines: automated and fully reproducible workflows that carry a quantitative analysis from raw data to published result. This course examines every stage of the pipeline, from data extraction and cleaning (extract, transform, load, or ETL), through data validation, exploratory analysis, visualization, modeling, and finally to publication and deployment. In industry, this work is sometimes called *productionizing* research, pairing developers with researchers to translate ideas into practice. The course teaches the core set of tools used to build such pipelines, tools which are common across computing and data science: build automation and CI/CD, dependency management, SQL, unit testing and automated data-quality checks, the Linux command line, SSH and working with remote machines, Git for version control, peer review through GitHub pull requests, and experiment tracking and model monitoring (basic MLOps).
+
+These skills are taught through a series of case studies, each of which introduces students to a new set of tools and a new key financial data set: pricing and fundamentals from CRSP and Compustat, options data from OptionMetrics, corporate bond transactions from FINRA TRACE, intraday trades and quotes from NYSE TAQ, and order book data from CME Globex.
+
+*Prior experience at an intermediate level with Python and the PyData stack is assumed.*
 
 
 ## Table of Contents
@@ -16,6 +20,7 @@ This set of notes is designed to accompany _FINM 32900: Full Stack Quantitative 
 ```{toctree}
 :maxdepth: 1
 README.md
+Appendix/why_data_pipelines_for_quantitative_research_toc.md
 acknowledgments.md
 appendix.md
 ```

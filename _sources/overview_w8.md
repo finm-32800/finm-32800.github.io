@@ -11,7 +11,7 @@ notebooks/_02_fedwatch_replication.ipynb
 
 ## Agenda
 
-- A minimal replication of the CME FedWatch tool built on Databento data ([finm-32900/case_study_fedwatch](https://github.com/finm-32900/case_study_fedwatch)):
+- A minimal replication of the CME FedWatch tool built on Databento data ([finm-32800/case_study_fedwatch](https://github.com/finm-32800/case_study_fedwatch)):
   - [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data.ipynb)
   - [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication.ipynb)
 

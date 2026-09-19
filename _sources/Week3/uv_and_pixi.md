@@ -17,18 +17,18 @@ alternatives you'll increasingly meet in the wild.
 
 ## Same code, four toolchains
 
-The [in-class examples repository](https://github.com/finm-32900/inclass_examples) has a
-[`software_environments/`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments)
+The [in-class examples repository](https://github.com/finm-32800/inclass_examples) has a
+[`software_environments/`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments)
 directory that makes the comparison concrete. The *exact same* script (`analyze.py`, a tiny
 moving-average crossover demo depending on `numpy`, `pandas`, and `matplotlib`) ships in four
 subdirectories. Only the tooling around installing and running it changes:
 
 | Directory | Tool | Manifest | One-liner to run |
 |-----------|------|----------|------------------|
-| [`01_conda_only`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments/01_conda_only) | conda alone | `environment.yml` | `conda activate ... && python analyze.py` |
-| [`02_conda_and_pip`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments/02_conda_and_pip) | conda + pip | `environment.yml` + `requirements.txt` | `conda activate ... && python analyze.py` |
-| [`03_uv`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments/03_uv) | `uv` | `pyproject.toml` | `uv run analyze.py` |
-| [`04_pixi`](https://github.com/finm-32900/inclass_examples/tree/main/software_environments/04_pixi) | `pixi` | `pixi.toml` | `pixi run start` |
+| [`01_conda_only`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments/01_conda_only) | conda alone | `environment.yml` | `conda activate ... && python analyze.py` |
+| [`02_conda_and_pip`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments/02_conda_and_pip) | conda + pip | `environment.yml` + `requirements.txt` | `conda activate ... && python analyze.py` |
+| [`03_uv`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments/03_uv) | `uv` | `pyproject.toml` | `uv run analyze.py` |
+| [`04_pixi`](https://github.com/finm-32800/inclass_examples/tree/main/software_environments/04_pixi) | `pixi` | `pixi.toml` | `pixi run start` |
 
 Clone that repo and follow along---the manifests below are taken directly from it.
 
