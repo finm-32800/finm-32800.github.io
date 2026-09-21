@@ -74,7 +74,7 @@ With a real release fresh in mind, work through [Writing and Publishing Your Own
 %   foreign_exchange, sovereign_bonds.
 % - HW4 launch moved to Week 7 (options case study, finm-32800/case_study_options);
 %   NOT released tonight. Its notebooks' toctree entries live in overview_w7.md.
-%   Post Classroom link + due date on Canvas next week.
+%   Post assignment link + due date on Canvas next week.
 % - Data vendors (LSEG Datastream, Databento) remain in Week 7; toctree entries in
 %   overview_w7.md. Bloomberg stays in the Appendix.
 % - Possible finm live exercise: merge a small options utility (payoff/Black-Scholes

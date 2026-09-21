@@ -1,4 +1,4 @@
-# Week 1: GitHub, GitHub Classroom, and Virtual Environments
+# Week 1: Git, GitHub, and Virtual Environments
 
 ```{toctree}
 :maxdepth: 1
@@ -17,7 +17,7 @@ Week1/midterm_report_and_style_guides.md
 ## Objectives
 
 The broad objective is to define the purpose of the course, the [discussions page on GitHub](https://github.com/orgs/finm-32800/discussions), 
-how to access the [course textbook](https://finm-32800.github.io/), and how to download and submit homework assignments via [GitHub classroom.](https://classroom.github.com/classrooms/151073994-finm-32900-winter-2024)
+how to access the [course textbook](https://finm-32800.github.io/), and how to download and submit homework assignments on GitHub.
 
 
 - Introduction and Syllabus
@@ -30,10 +30,9 @@ how to access the [course textbook](https://finm-32800.github.io/), and how to d
     - [Case Study: Is There A Reproducibility Crisis In Finance?](./Week1/case_study_reproducibility_in_finance.md)
     - Discuss the final project? What will students do? What is the purpose?
 - Demonstrate how course will be using GitHub. Show how to download and submit assignments.
-    - Work through an in-class example of submitting homework on GitHub Classroom. Use the inclass example here: https://classroom.github.com/a/umaHTFal
+    - Work through an in-class example of submitting homework on GitHub, using [HW 0](./HW0.md).
     - Show students how to clone the assignment repository.
-    - Show students how to sign up for GitHub Classroom (use assignment link)
-    - Complete Example HWs together and submit them on GitHub Classroom
+    - Complete the example HW together and submit it by pushing to GitHub
 - Introduce the **in-class examples repo**: <https://github.com/finm-32800/inclass_examples>
     - This holds the small, self-contained demos used throughout the course (virtual environments, env vars, PyDoit, Sphinx, polars, WRDS/Datastream, LaTeX, etc.). Have students clone it now so it's ready when we reference it in later lectures.
     - We'll pull from it the first time when we cover virtual environments (see `software_environments/` and `env_vars/`).

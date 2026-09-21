@@ -21,7 +21,7 @@ are encouraged to work through this assignment once cluster access is restored.
 
 ## Assignment
 
-The assignment is located at the following GitHub Classroom link: TBD
+**Link to Assignment:** TBD
 
 **Due Date:** None---this assignment is optional.
 

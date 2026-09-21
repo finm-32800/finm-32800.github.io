@@ -9,7 +9,7 @@ notebooks/_07_Fama_French_3_factor_ipynb.ipynb
 ```
 
 - **Due Date:** Friday, July 17, 2026 at 11:59 pm CT.
-- **Link to Assignment:** https://classroom.github.com/a/7vHkJyme
+- **Link to Assignment:** TBD
 
 
 ## Part 0 (not graded)

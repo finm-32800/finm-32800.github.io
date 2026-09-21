@@ -7,7 +7,7 @@ notebooks/_02_replicate_GSW2005_ipynb.ipynb
 ```
 
 - **Due Date:** Friday, July 24, 2026 at 11:59 pm CT.
-- **Link to Assignment:** https://classroom.github.com/a/p8tcNbUG
+- **Link to Assignment:** TBD
 
 ## Overview
 

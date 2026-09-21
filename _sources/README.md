@@ -54,12 +54,12 @@ page here: https://github.com/orgs/finm-32800/discussions
 
 ### Assignments
 
-- Assignments are distributed and collected through GitHub Classroom. Check
-  GitHub Classroom for the due date for each assignment. Each assignment is
+- Assignments are distributed and collected through GitHub. Due dates are
+  posted on each assignment's page and on Canvas. Each assignment is
   typically distributed on the day of the lecture and due roughly a week and a
   half later.
-- Assignments are automatically graded via the autograder on GitHub Classroom
-  and solutions will be released shortly after. This means that the due date is
+- Assignments are automatically graded by an autograder that runs on GitHub
+  Actions, and solutions will be released shortly after. This means that the due date is
   strict. Late assignments will not be accepted.
 - Each student is to individually submit their assignment (unless otherwise
   specified). Students are encouraged to work in groups, but students are not
@@ -113,8 +113,8 @@ Grades will be based on the following components:
 | Participation | 5% |
 
 - **Coding Assignments (25%)** are submitted individually and graded using
-  GitHub's automated testing tools (the GitHub Classroom autograder runs as a
-  CI/CD workflow). Because you can re-run the autograder until your code passes,
+  GitHub's automated testing tools (the autograder runs as a CI/CD workflow on
+  GitHub Actions). Because you can re-run the autograder until your code passes,
   the assignments are best thought of as teaching vehicles—the grade primarily
   reflects whether you did the work to complete them.
 - **Final Project (30%)** is completed in groups of 2. Students choose their
@@ -152,7 +152,7 @@ The lecture schedule follows the ordering of the chapters listed in the GitHub
 book found here: https://finm-32800.github.io/. Each week is its own chapter and
 the agenda is listed in the first sub-section of the chapter.
 
-Other key milestones (exact dates to be announced on Canvas and GitHub Classroom):
+Other key milestones (exact dates to be announced on Canvas):
 
 - **Midterm Report** contributions are due mid-quarter. See [Midterm Report](midterm_report.md).
 - **Proposal presentations** take place in class, roughly weeks 5–8.
@@ -160,15 +160,15 @@ Other key milestones (exact dates to be announced on Canvas and GitHub Classroom
 
 ### HW Due Dates
 
-Assignments are distributed and collected through GitHub Classroom. Check GitHub
-Classroom for each assignment's due date.
+Assignments are distributed and collected through GitHub. Due dates will be
+posted here and on Canvas.
 
 - [HW 0: Flexible. Please complete ASAP](HW0.md)
-- [HW 1: TBD — see GitHub Classroom](HW1.md)
-- [HW 2: TBD — see GitHub Classroom](HW2.md)
-- [HW 3: TBD — see GitHub Classroom](HW3.md)
-- [HW 4: TBD — see GitHub Classroom](HW4.md)
-- [HW 5: TBD — see GitHub Classroom](HW5.md)
+- [HW 1: TBD](HW1.md)
+- [HW 2: TBD](HW2.md)
+- [HW 3: TBD](HW3.md)
+- [HW 4: TBD](HW4.md)
+- [HW 5: TBD](HW5.md)
 
 ## References
 

@@ -66,7 +66,7 @@ chapters:
 # so that it can be viewed on GitHub as well.
 - file: lectures/Week1/HW0.md
 # ----------------------------
-# Week 1: GitHub, GitHub Classroom, and Virtual Environments
+# Week 1: Git, GitHub, and Virtual Environments
 # Data: IPUMS CPS
 # HW: Wage growth during the recession
 # TA Session: Setting up VS Code for HW

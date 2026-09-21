@@ -49,7 +49,7 @@ HW 1 is the capstone of everything above---it exercises the whole reproducibilit
   - [HW Guide Part A: CRSP Market Returns Indices](./notebooks/_02_CRSP_market_index_ipynb.ipynb)
   - [HW Guide Part B: Reconstructing the S&P 500 Index](./notebooks/_03_SP500_constituents_and_index_ipynb.ipynb)
 - **The workflow we'll walk through together:**
-  1. Accept the GitHub Classroom assignment, then clone your repo.
+  1. Clone your HW 1 repository.
   2. Create the `finm` conda environment and `pip install -r requirements.txt`. (HW 1 is the first repo with its own pinned dependencies---exactly why we covered environments today.)
   3. Put your WRDS credentials in `.env`.
   4. Run `doit` to pull the CRSP and constituent data and build the pipeline.

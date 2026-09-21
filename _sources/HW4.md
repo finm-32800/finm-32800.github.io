@@ -1,7 +1,7 @@
 # Homework 4
 
 - **Due Date:** Sunday, August 23, 2026 at 11:59 PM CT
-- **Link to Assignment:** HW 4: https://classroom.github.com/a/ATHvtNp-
+- **Link to Assignment:** TBD
 
 ```{note}
 Homework 4 has been reworked. An earlier version of this assignment was an
