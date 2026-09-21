@@ -9,7 +9,7 @@
 - **Archived copy:** [Wayback Machine](https://web.archive.org/web/2026/https://www.janestreet.com/join-jane-street/position/7229633002/) · [PDF snapshot](./assets/job_posting_jane_street.pdf)
 - **Accessed:** August 10, 2026
 
-Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this posting relates to the course.
+Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See the [course map](../Week0/course_map.md) for how this posting relates to the course.
 ```
 
 ```{figure} ./assets/job_posting_jane_street.png

@@ -33,8 +33,9 @@ machines, Git for version control, peer review through GitHub pull requests,
 and experiment tracking and model monitoring (basic MLOps). My hope is that
 these tools will serve as a technical foundation for any subfield of financial
 computing or data science that the student wishes to pursue. For the hiring
-evidence behind the course's name, straight from the firms' own postings, see
-[Why "Data Pipelines for Quantitative Research"?](../Appendix/why_data_pipelines_for_quantitative_research.md)
+evidence, straight from the firms' own postings, see the
+[course map](../Week0/course_map.md) and the
+[archived job postings](../Appendix/job_postings.md).
 
 
 ## Objectives

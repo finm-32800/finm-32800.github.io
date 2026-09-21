@@ -9,7 +9,7 @@
 - **Archived copy:** [Wayback Machine](https://web.archive.org/web/2026/https://www.imc.com/us/careers/jobs/4439297101) · [PDF snapshot](./assets/job_posting_imc.pdf)
 - **Accessed:** August 11, 2026
 
-Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See [Why "Data Pipelines for Quantitative Research"?](./why_data_pipelines_for_quantitative_research.md) for how this posting relates to the course.
+Job postings disappear once roles are filled, so this page preserves the posting's text. Formatting is lightly normalized; boldface *within* sentences and bullets is our added emphasis and is not in the original. See the [course map](../Week0/course_map.md) for how this posting relates to the course.
 ```
 
 ```{figure} ./assets/job_posting_imc.png

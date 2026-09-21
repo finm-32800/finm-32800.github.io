@@ -19,7 +19,9 @@ missed it, the recording and this chapter cover the same ground, and
 ## Objectives
 
 - Understand what this course is, who it is for, and how it differs from the
-  program's other computing courses. See the [course map](./Week0/course_map.md).
+  program's other computing courses. The [course map](./Week0/course_map.md)
+  says who the course is for and shows the job postings behind the skills it
+  teaches.
 - Take a [tour of the course](./Week0/tour_of_the_course.md): this textbook, the
   course's GitHub organization, the discussion board, and a few projects from
   past quarters.
@@ -37,7 +39,9 @@ missed it, the recording and this chapter cover the same ground, and
 
 ## In class
 
-1. Who am I, and what is this course? Walk through the [course map](./Week0/course_map.md).
+1. Who am I, and what is this course? Walk through the
+   [course map](./Week0/course_map.md): who the course is for, the job postings
+   behind its skills, and the schedule of papers.
 2. Tour the textbook, the GitHub organization, and the discussion board.
 3. Clone [HW 0](https://github.com/finm-32800/hw0), create the `finm`
    environment, install from `requirements.txt`, run `doit`, and launch the

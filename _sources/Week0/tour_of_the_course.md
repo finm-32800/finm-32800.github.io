@@ -26,9 +26,12 @@ The course's repositories are collected in one GitHub organization:
 - [`case_study_clean_trace`](https://github.com/finm-32800/case_study_clean_trace)
   is a complete pipeline that cleans the FINRA TRACE corporate bond data. It is
   the kind of project you will be able to read, run, and extend by week 5.
-- [`stockbeta`](https://github.com/finm-32800/stockbeta) is a small Python
-  package, published so that anyone can `pip install` it. We build packages
-  like it in week 4.
+- [`finm`](https://github.com/jmbejara/finm) is a student-led Python package for
+  financial mathematics and quantitative finance. It is published on
+  [PyPI](https://pypi.org/project/finm/), so anyone can `pip install finm`, and
+  its documentation is at <https://jeremybejarano.com/finm/>. It lives under my
+  own GitHub account and not in the course organization. We study how packages
+  like it are built in week 4, and students in this course contribute to it.
 
 Most homework repositories are private. Once you enroll, you will receive your
 own private copy of each one.

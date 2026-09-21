@@ -300,7 +300,7 @@ new products, or extend the date range.
   definitions, dataset catalog
 - [Databento Python SDK (PyPI)](https://pypi.org/project/databento/) — SDK
   installation and changelog
-- [FINM-32900 In-Class Examples: Databento](https://github.com/finm-32800/inclass_examples/tree/main/databento)
+- [FINM 32800 In-Class Examples: Databento](https://github.com/finm-32800/inclass_examples/tree/main/databento)
   — 4 modules covering historical access (SDK and raw HTTP), schemas, symbology,
   and the Treasury futures case study. All historical; we have no live license.
 - [Pulling Market Data From Databento](../notebooks/_01_databento_ipynb.ipynb)

@@ -1,6 +1,6 @@
 # Past Final Projects
 
-Students in previous offerings of this course (then numbered FINM 32900) completed the final projects listed below. Each entry gives the paper (or data series) that the group replicated, the group members, and a link to the group's public GitHub repository; some groups also published a project website. Browse a few of these to get a sense of the scope and polish expected of a finished project (see also the [Final Project Rubric](./final_project_rubric.md) and [Project Previews](./project_previews.md)).
+Students in previous offerings of this course completed the final projects listed below. Each entry gives the paper (or data series) that the group replicated, the group members, and a link to the group's public GitHub repository; some groups also published a project website. Browse a few of these to get a sense of the scope and polish expected of a finished project (see also the [Final Project Rubric](./final_project_rubric.md) and [Project Previews](./project_previews.md)).
 
 Only projects with public repositories are listed. Links were last verified in July 2026.
 

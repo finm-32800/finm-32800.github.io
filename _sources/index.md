@@ -20,7 +20,7 @@ These skills are taught through a series of case studies, each of which introduc
 ```{toctree}
 :maxdepth: 1
 README.md
-Appendix/why_data_pipelines_for_quantitative_research_toc.md
+Appendix/job_postings.md
 acknowledgments.md
 appendix.md
 ```
@@ -28,8 +28,8 @@ appendix.md
 ```{toctree}
 :maxdepth: 1
 :caption: Lectures 📖
-subject_to_change_after_this_week.md
 overview_w0.md
+subject_to_change_after_this_week.md
 overview_w1.md
 overview_w2.md
 overview_w3.md

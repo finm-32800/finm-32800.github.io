@@ -25,7 +25,7 @@ how to access the [course textbook](https://finm-32800.github.io/), and how to d
     - Review [syllabus.](./README.md) 
     - Review [Homework 0"](./HW0.md)
 - What is the purpose and scope of the course?
-    - [What does full stack mean? Where does this course fit in?](./Week1/what_is_this_course_about.md)
+    - [What is this course about? Where does this course fit in?](./Week1/what_is_this_course_about.md)
     - [What are Reproducible Analytical Pipelines?](./Week1/reproducible_analytical_pipelines.md)
     - [Case Study: Is There A Reproducibility Crisis In Finance?](./Week1/case_study_reproducibility_in_finance.md)
     - Discuss the final project? What will students do? What is the purpose?
