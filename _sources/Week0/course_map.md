@@ -39,7 +39,7 @@ change.
 | 2 | Task runners (PyDoit) | Fama and French (1993), the three-factor model | CRSP, Compustat |
 | 3 | Reproducible reports: notebooks, GitHub Pages, LaTeX | Gürkaynak, Sack, and Wright (2006), the Treasury yield curve | CRSP Treasuries |
 | 4 | Python packaging and documentation | Constantinides, Jackwerth, and Savov (2013), index option returns | OptionMetrics, CME Globex |
-| 5 | Unit tests and data validation | Cleaning corporate bond transactions | FINRA TRACE |
+| 5 | Unit tests and data validation | Dickerson, Robotti, and Rossetti (2026), the corporate bond factor replication crisis: cleaning bond transactions | FINRA TRACE |
 | 6 | SQL at scale, remote machines, and HPC | Measuring liquidity from intraday trades and quotes | NYSE TAQ |
 | 7 | The data build tool (dbt) | Bid-ask spreads from daily prices, checked against TAQ | NYSE TAQ, CRSP |
 | 8 | CI/CD with GitHub Actions | Replicating the CME FedWatch tool | CME fed funds futures |
