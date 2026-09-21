@@ -1,0 +1,925 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Appendix: Deriving the Mean-Variance Frontier &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_02_markowitz_derivation';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A Tour of the Data" href="../Week0/data_tour.html" />
+    <link rel="prev" title="Portfolio Selection: Markowitz (1952)" href="_01_markowitz.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/why_data_pipelines_for_quantitative_research_toc.html">Course Rename: Data Pipelines for Quantitative Research</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/why_data_pipelines_for_quantitative_research.html">Why “Data Pipelines for Quantitative Research”?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/rename_transition.html">The Rename: From “Data Science Tools” to “Data Pipelines”</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: GitHub, GitHub Classroom, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/midterm_report_and_style_guides.html">The Midterm Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Virtual Environments, WRDS, and CRSP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Automating the Pipeline with PyDoit, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: ChartBook, GitHub Pages, and Reproducible Reports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Proposal Presentations, LaTeX, and the Midterm Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Python Packages, FINM, and the ChartBook Catalog</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w9.html">Week 9: Medium-Sized Data and Polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5 (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../midterm_report.html">Midterm Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_02_markowitz_derivation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_02_markowitz_derivation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Appendix: Deriving the Mean-Variance Frontier</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-frontier-problem">The frontier problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-order conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-multipliers">Solving for the multipliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-frontier-is-a-hyperbola">The frontier is a hyperbola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-global-minimum-variance-portfolio">The global minimum variance portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-fund-theorem">The two-fund theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tangency-portfolio">The tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-no-short-problem-has-no-closed-form">Why the no-short problem has no closed form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-formulas-numerically">Checking the formulas numerically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="appendix-deriving-the-mean-variance-frontier">
+<h1>Appendix: Deriving the Mean-Variance Frontier<a class="headerlink" href="#appendix-deriving-the-mean-variance-frontier" title="Link to this heading">#</a></h1>
+<p>This appendix derives the formulas used in the
+portfolio selection notebook, <code class="docutils literal notranslate"><span class="pre">01_markowitz</span></code>. The derivation follows
+Merton (1972). At the end, we check every formula numerically.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>There are <span class="math notranslate nohighlight">\(N\)</span> risky assets with expected returns <span class="math notranslate nohighlight">\(\mu\)</span> (an <span class="math notranslate nohighlight">\(N\)</span>-vector) and
+covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> (<span class="math notranslate nohighlight">\(N \times N\)</span>). We assume that <span class="math notranslate nohighlight">\(\Sigma\)</span> is positive
+definite, so no asset is redundant, and that the assets do not all have the
+same expected return. A portfolio is a weight vector <span class="math notranslate nohighlight">\(w\)</span> with
+<span class="math notranslate nohighlight">\(w^\top \mathbf{1} = 1\)</span>. Its expected return is <span class="math notranslate nohighlight">\(w^\top \mu\)</span> and its variance
+is <span class="math notranslate nohighlight">\(w^\top \Sigma w\)</span>.</p>
+</section>
+<section id="the-frontier-problem">
+<h2>The frontier problem<a class="headerlink" href="#the-frontier-problem" title="Link to this heading">#</a></h2>
+<p>For a target expected return <span class="math notranslate nohighlight">\(m\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{w} \; \tfrac{1}{2} w^\top \Sigma w
+\quad \text{subject to} \quad
+w^\top \mu = m, \qquad w^\top \mathbf{1} = 1 .
+\]</div>
+<p>The factor of <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span> only tidies the derivative. The objective is
+strictly convex and the constraints are linear, so the first-order conditions
+identify the unique minimum.</p>
+</section>
+<section id="first-order-conditions">
+<h2>First-order conditions<a class="headerlink" href="#first-order-conditions" title="Link to this heading">#</a></h2>
+<p>Form the Lagrangian with multipliers <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = \tfrac{1}{2} w^\top \Sigma w
+  - \lambda \, (w^\top \mu - m) - \gamma \, (w^\top \mathbf{1} - 1).
+\]</div>
+<p>Differentiating with respect to <span class="math notranslate nohighlight">\(w\)</span> and setting the result to zero,</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma w = \lambda \mu + \gamma \mathbf{1}
+\quad \Longrightarrow \quad
+w = \lambda \, \Sigma^{-1} \mu + \gamma \, \Sigma^{-1} \mathbf{1}. \tag{1}
+\]</div>
+<p>Every frontier portfolio is a combination of the same two vectors,
+<span class="math notranslate nohighlight">\(\Sigma^{-1} \mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma^{-1} \mathbf{1}\)</span>. Only the multipliers depend on
+the target <span class="math notranslate nohighlight">\(m\)</span>.</p>
+</section>
+<section id="solving-for-the-multipliers">
+<h2>Solving for the multipliers<a class="headerlink" href="#solving-for-the-multipliers" title="Link to this heading">#</a></h2>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+A = \mathbf{1}^\top \Sigma^{-1} \mathbf{1}, \quad
+B = \mathbf{1}^\top \Sigma^{-1} \mu, \quad
+C = \mu^\top \Sigma^{-1} \mu, \quad
+D = AC - B^2 .
+\]</div>
+<p>Multiply (1) on the left by <span class="math notranslate nohighlight">\(\mu^\top\)</span> and then by <span class="math notranslate nohighlight">\(\mathbf{1}^\top\)</span>, and use
+the two constraints:</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda C + \gamma B = m, \qquad \lambda B + \gamma A = 1 .
+\]</div>
+<p>This is a <span class="math notranslate nohighlight">\(2 \times 2\)</span> linear system. Its solution is</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = \frac{A m - B}{D}, \qquad \gamma = \frac{C - B m}{D}. \tag{2}
+\]</div>
+<p>We need <span class="math notranslate nohighlight">\(D \neq 0\)</span>. In fact <span class="math notranslate nohighlight">\(D &gt; 0\)</span>: because <span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span> is positive
+definite, the Cauchy-Schwarz inequality gives <span class="math notranslate nohighlight">\(B^2 \le AC\)</span>, with equality only
+if <span class="math notranslate nohighlight">\(\mu\)</span> is proportional to <span class="math notranslate nohighlight">\(\mathbf{1}\)</span>, which we ruled out. Substituting (2)
+into (1) gives the optimal weights,</p>
+<div class="math notranslate nohighlight">
+\[
+w^*(m) = \frac{(C - Bm)\, \Sigma^{-1} \mathbf{1} + (Am - B)\, \Sigma^{-1} \mu}{D}.
+\]</div>
+</section>
+<section id="the-frontier-is-a-hyperbola">
+<h2>The frontier is a hyperbola<a class="headerlink" href="#the-frontier-is-a-hyperbola" title="Link to this heading">#</a></h2>
+<p>Multiply the first-order condition <span class="math notranslate nohighlight">\(\Sigma w = \lambda \mu + \gamma \mathbf{1}\)</span>
+on the left by <span class="math notranslate nohighlight">\(w^\top\)</span> and use the constraints again:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2(m) = w^\top \Sigma w = \lambda m + \gamma
+  = \frac{A m^2 - 2 B m + C}{D}.
+\]</div>
+<p>The variance is a parabola in <span class="math notranslate nohighlight">\(m\)</span>. In the usual picture, with the standard
+deviation <span class="math notranslate nohighlight">\(\sigma\)</span> on the horizontal axis and <span class="math notranslate nohighlight">\(m\)</span> on the vertical axis, the
+curve is a hyperbola.</p>
+</section>
+<section id="the-global-minimum-variance-portfolio">
+<h2>The global minimum variance portfolio<a class="headerlink" href="#the-global-minimum-variance-portfolio" title="Link to this heading">#</a></h2>
+<p>Minimize <span class="math notranslate nohighlight">\(\sigma^2(m)\)</span> over <span class="math notranslate nohighlight">\(m\)</span>: <span class="math notranslate nohighlight">\(2Am - 2B = 0\)</span>, so <span class="math notranslate nohighlight">\(m_{\text{GMV}} = B/A\)</span>.
+Then <span class="math notranslate nohighlight">\(\lambda = 0\)</span> and <span class="math notranslate nohighlight">\(\gamma = 1/A\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[
+w_{\text{GMV}} = \frac{\Sigma^{-1} \mathbf{1}}{A}, \qquad
+\sigma^2_{\text{GMV}} = \frac{1}{A}.
+\]</div>
+<p>With <span class="math notranslate nohighlight">\(\lambda = 0\)</span>, the constraint on the mean does not bind, which is why
+<span class="math notranslate nohighlight">\(\mu\)</span> drops out of the weights. The portfolios on the frontier with
+<span class="math notranslate nohighlight">\(m \ge B/A\)</span> are the <strong>efficient</strong> ones. Those below have the same variance as
+an efficient portfolio and a lower mean.</p>
+</section>
+<section id="the-two-fund-theorem">
+<h2>The two-fund theorem<a class="headerlink" href="#the-two-fund-theorem" title="Link to this heading">#</a></h2>
+<p>Define a second portfolio, <span class="math notranslate nohighlight">\(w_d = \Sigma^{-1} \mu / B\)</span> (assuming <span class="math notranslate nohighlight">\(B \ne 0\)</span>).
+Then (1) can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+w^*(m) = (\gamma A) \, w_{\text{GMV}} + (\lambda B) \, w_d ,
+\qquad \gamma A + \lambda B = 1 .
+\]</div>
+<p>Every frontier portfolio is a mix of the same two funds. This is why the main
+notebook could trace the frontier by mixing two portfolios, and it is the
+first hint of why, in equilibrium, all investors might hold the same risky
+portfolio.</p>
+</section>
+<section id="the-tangency-portfolio">
+<h2>The tangency portfolio<a class="headerlink" href="#the-tangency-portfolio" title="Link to this heading">#</a></h2>
+<p>Add a risk-free asset with return <span class="math notranslate nohighlight">\(r_f &lt; B/A\)</span>. An investor who mixes the
+risk-free asset with a risky portfolio <span class="math notranslate nohighlight">\(w\)</span> moves along a straight line in
+mean-standard deviation space whose slope is the Sharpe ratio of <span class="math notranslate nohighlight">\(w\)</span>. The best
+line is the steepest one:</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{w} \; \frac{w^\top \mu - r_f}{\sqrt{w^\top \Sigma w}}
+\quad \text{subject to} \quad w^\top \mathbf{1} = 1 .
+\]</div>
+<p>The ratio does not change when <span class="math notranslate nohighlight">\(w\)</span> is scaled, so we can drop the constraint,
+solve, and rescale afterward. Setting the derivative of the ratio to zero
+gives <span class="math notranslate nohighlight">\(\Sigma w \propto \mu - r_f \mathbf{1}\)</span>. Rescaling so that the weights
+sum to one,</p>
+<div class="math notranslate nohighlight">
+\[
+w_{\text{tan}} = \frac{\Sigma^{-1} (\mu - r_f \mathbf{1})}{B - A r_f}.
+\]</div>
+<p>The condition <span class="math notranslate nohighlight">\(r_f &lt; B/A\)</span> says that the risk-free rate is below the expected
+return on the minimum variance portfolio. It guarantees that the denominator
+is positive and that the tangency point lies on the efficient half of the
+frontier.</p>
+</section>
+<section id="why-the-no-short-problem-has-no-closed-form">
+<h2>Why the no-short problem has no closed form<a class="headerlink" href="#why-the-no-short-problem-has-no-closed-form" title="Link to this heading">#</a></h2>
+<p>Add the constraint <span class="math notranslate nohighlight">\(w \ge 0\)</span>, with a vector of multipliers <span class="math notranslate nohighlight">\(\nu\)</span>. The
+Karush-Kuhn-Tucker conditions are</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma w = \lambda \mu + \gamma \mathbf{1} + \nu, \qquad
+\nu \ge 0, \qquad w \ge 0, \qquad \nu_i w_i = 0 \text{ for every } i .
+\]</div>
+<p>The last condition, complementary slackness, says that each asset is either
+held (<span class="math notranslate nohighlight">\(w_i &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\nu_i = 0\)</span>) or excluded (<span class="math notranslate nohighlight">\(w_i = 0\)</span>). <em>Given</em> the set of
+held assets, the conditions reduce to the unconstrained problem on that
+subset, and the formula above applies to it. The difficulty is finding the
+set. There are <span class="math notranslate nohighlight">\(2^N - 1\)</span> candidates, and the right one changes with <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Markowitz (1956) showed that the set changes only at a finite number of
+“corner portfolios” and that, between corners, the weights are linear in <span class="math notranslate nohighlight">\(m\)</span>.
+His critical line algorithm walks from corner to corner. So the no-short
+frontier is a chain of hyperbola segments, and it is computed by an algorithm
+and not by a formula. We use a general-purpose numerical solver instead, since
+the problem is a small quadratic program.</p>
+</section>
+<section id="checking-the-formulas-numerically">
+<h2>Checking the formulas numerically<a class="headerlink" href="#checking-the-formulas-numerically" title="Link to this heading">#</a></h2>
+<p>A derivation is a claim, and claims should be tested. Using the data from the
+main notebook, we compare each formula with a numerical optimizer that knows
+nothing about the algebra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">mean_variance</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_crsp</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pull_crsp</span><span class="o">.</span><span class="n">load_extract</span><span class="p">()</span>
+<span class="n">stocks</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;MKT&quot;</span><span class="p">,</span> <span class="s2">&quot;RF&quot;</span><span class="p">])</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">rf</span> <span class="o">=</span> <span class="n">stocks</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">stocks</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">frontier_constants</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A = </span><span class="si">{</span><span class="n">A</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, B = </span><span class="si">{</span><span class="n">B</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, C = </span><span class="si">{</span><span class="n">C</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, D = </span><span class="si">{</span><span class="n">D</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">D</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = 869.2, B = 6.972, C = 0.10746, D = 44.7993
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="mf">0.015</span>  <span class="c1"># a 1.5% monthly expected return</span>
+
+<span class="n">w_formula</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">efficient_weights</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="n">w_numerical</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">minimize_variance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">allow_short</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Largest difference in weights:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w_formula</span> <span class="o">-</span> <span class="n">w_numerical</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance from the weights:    &quot;</span><span class="p">,</span> <span class="n">w_formula</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">w_formula</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance from the formula:    &quot;</span><span class="p">,</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">frontier_variance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">w_formula</span><span class="p">,</span> <span class="n">w_numerical</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Largest difference in weights: 2.749241083677134e-07
+Variance from the weights:     0.002095557416878198
+Variance from the formula:     0.002095557416878199
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_gmv_formula</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span> <span class="o">/</span> <span class="n">A</span>
+<span class="n">w_gmv_numerical</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">minimize_variance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GMV mean, B/A:     &quot;</span><span class="p">,</span> <span class="n">B</span> <span class="o">/</span> <span class="n">A</span><span class="p">,</span> <span class="s2">&quot;vs&quot;</span><span class="p">,</span> <span class="n">w_gmv_numerical</span> <span class="o">@</span> <span class="n">mu</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GMV variance, 1/A: &quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">A</span><span class="p">,</span> <span class="s2">&quot;vs&quot;</span><span class="p">,</span> <span class="n">w_gmv_numerical</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">w_gmv_numerical</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">w_gmv_formula</span><span class="p">,</span> <span class="n">w_gmv_numerical</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GMV mean, B/A:      0.008020736960731642 vs 0.008020735905663112
+GMV variance, 1/A:  0.0011504677635356872 vs 0.0011504677635360983
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_tan_formula</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">rf</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span> <span class="o">*</span> <span class="n">rf</span><span class="p">)</span>
+<span class="n">w_tan_numerical</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">max_sharpe_weights</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">rf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tangency weights sum to:&quot;</span><span class="p">,</span> <span class="n">w_tan_formula</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">assert</span> <span class="n">rf</span> <span class="o">&lt;</span> <span class="n">B</span> <span class="o">/</span> <span class="n">A</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">w_tan_formula</span><span class="p">,</span> <span class="n">w_tan_numerical</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tangency weights sum to: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, the claim about the no-short problem: given the set of assets that
+the constrained solution holds, the unconstrained formula applied to that
+subset reproduces the constrained weights.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_no_short</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">minimize_variance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">allow_short</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">held</span> <span class="o">=</span> <span class="n">w_no_short</span> <span class="o">&gt;</span> <span class="mf">1e-8</span>
+
+<span class="n">w_subset</span> <span class="o">=</span> <span class="n">mean_variance</span><span class="o">.</span><span class="n">efficient_weights</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">held</span><span class="p">],</span> <span class="n">Sigma</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">held</span><span class="p">,</span> <span class="n">held</span><span class="p">)],</span> <span class="n">target</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assets held:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">stocks</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">held</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Largest difference:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w_no_short</span><span class="p">[</span><span class="n">held</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_subset</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">w_no_short</span><span class="p">[</span><span class="n">held</span><span class="p">],</span> <span class="n">w_subset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Assets held: [&#39;AAPL&#39;, &#39;AMZN&#39;, &#39;NVDA&#39;, &#39;XOM&#39;, &#39;JNJ&#39;, &#39;PG&#39;, &#39;KO&#39;, &#39;WMT&#39;, &#39;CAT&#39;, &#39;BA&#39;]
+Largest difference: 3.983215584035804e-07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Markowitz, Harry. “The Optimization of a Quadratic Function Subject to
+Linear Constraints.” <em>Naval Research Logistics Quarterly</em> 3, no. 1-2 (1956):
+111-133.</p></li>
+<li><p>Merton, Robert C. “An Analytic Derivation of the Efficient Portfolio
+Frontier.” <em>Journal of Financial and Quantitative Analysis</em> 7, no. 4 (1972):
+1851-1872.</p></li>
+</ul>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_01_markowitz.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Portfolio Selection: Markowitz (1952)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week0/data_tour.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Tour of the Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-frontier-problem">The frontier problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-conditions">First-order conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-for-the-multipliers">Solving for the multipliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-frontier-is-a-hyperbola">The frontier is a hyperbola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-global-minimum-variance-portfolio">The global minimum variance portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-fund-theorem">The two-fund theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tangency-portfolio">The tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-no-short-problem-has-no-closed-form">Why the no-short problem has no closed form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-formulas-numerically">Checking the formulas numerically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

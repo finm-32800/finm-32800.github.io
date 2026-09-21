@@ -28,6 +28,7 @@ appendix.md
 ```{toctree}
 :maxdepth: 1
 :caption: Lectures 📖
+overview_w0.md
 overview_w1.md
 overview_w2.md
 overview_w3.md

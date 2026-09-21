@@ -199,6 +199,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week0/data_tour.html">A Tour of the Data</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w1.html">Week 1: GitHub, GitHub Classroom, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
@@ -492,14 +502,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-computing-environment">Setting up your computing environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-connected-to-the-course-discussion-board">Getting connected to the course discussion board</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-submit-hw-go-through-in-class-hw-example">How to submit HW: Go through in-class HW example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests-and-github-actions">Unit Tests and GitHub Actions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-skills-tutorials">GitHub Skills Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-set-up-your-computing-environment">Part 1: Set up your computing environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-get-connected-to-the-course">Part 2: Get connected to the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-clone-and-run-the-hw-0-repository">Part 3: Clone and run the HW 0 repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-make-the-tests-pass">Part 4: Make the tests pass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization">Portfolio optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-skills-tutorials">GitHub Skills tutorials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#push-and-watch-the-tests-run-on-github">Push, and watch the tests run on GitHub</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-about-the-hw">Additional Notes about the HW</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-doing-it-this-way">Why are we doing it this way?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-check-if-my-tests-are-passing">How can I check if my tests are passing?</a></li>
@@ -519,48 +530,49 @@ document.write(`
                    <section class="tex2jax_ignore mathjax_ignore" id="homework-0">
 <h1>Homework 0<a class="headerlink" href="#homework-0" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Due date:</strong> Friday, July 10, 2026 at 11:59 pm CT (same as HW 1). This is an ungraded practice homework, but try to finish it as soon as possible during the first week.</p></li>
-<li><p><strong>Link to Assignment:</strong> <a class="reference external" href="https://classroom.github.com/a/yuuC4j0j">https://classroom.github.com/a/yuuC4j0j</a></p></li>
+<li><p><strong>Due date:</strong> None. This is an ungraded practice homework. Try to finish it during the first week, because HW 1 assumes that everything here works.</p></li>
+<li><p><strong>Repository:</strong> <a class="github reference external" href="https://github.com/finm-32800/hw0">finm-32800/hw0</a></p></li>
+<li><p><strong>Goes with:</strong> <a class="reference internal" href="overview_w0.html"><span class="std std-doc">Lecture 0</span></a></p></li>
 </ul>
-<section id="setting-up-your-computing-environment">
-<h2>Setting up your computing environment<a class="headerlink" href="#setting-up-your-computing-environment" title="Link to this heading">#</a></h2>
-<p>You will need to install these and make these accounts to complete the homework in this course.</p>
-<p>Before the first class, please make sure to install the required software and sign up for the required services. Students will need to install the following software on their laptop. Each of these pieces of software are free:</p>
+<p>HW 0 has two purposes. It gets your computer and your accounts ready for the rest of the quarter. And it takes you once through the cycle that every later homework repeats: clone a repository, install its environment, run it, edit the code until the tests pass, and push.</p>
+<section id="part-1-set-up-your-computing-environment">
+<h2>Part 1: Set up your computing environment<a class="headerlink" href="#part-1-set-up-your-computing-environment" title="Link to this heading">#</a></h2>
+<p>Follow <a class="reference internal" href="Week0/getting_set_up.html"><span class="std std-doc">Getting Set Up</span></a> to install the software and create the accounts. <strong>Apply for your WRDS account first,</strong> because approval takes several days and HW 1 requires it.</p>
+</section>
+<section id="part-2-get-connected-to-the-course">
+<h2>Part 2: Get connected to the course<a class="headerlink" href="#part-2-get-connected-to-the-course" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.anaconda.com/download">Anaconda distribution of Python (Individual Edition)</a></p></li>
-<li><p><a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (NOT Visual Studio. Visual Studio Code is different from Visual Studio)</p></li>
-<li><p><a class="reference external" href="https://git-scm.com/">Git</a></p></li>
-<li><p><a class="reference external" href="https://www.gitkraken.com/">GitKraken</a> You will need to use GitKraken Client Pro, which is available for <a class="reference external" href="https://www.gitkraken.com/github-student-developer-pack">free for students.</a></p></li>
-<li><p><a class="reference external" href="https://tug.org/texlive/">TeX Live</a></p></li>
-</ul>
-<p>Students should also sign up for an account with the following websites. We will use free versions of each of these services:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/">GitHub</a></p></li>
-<li><p><a class="reference external" href="https://wrds-www.wharton.upenn.edu/">Wharton Research Data Services (WRDS)</a> Apply for access through the University of Chicago, using the registration form <a class="reference external" href="https://wrds-www.wharton.upenn.edu/register/">here.</a> For any issues that may arise, please contact the WRDS representative for UChicago’s Mathematics department, John Zekos, <a class="reference external" href="mailto:zekos&#37;&#52;&#48;math&#46;uchicago&#46;edu">zekos<span>&#64;</span>math<span>&#46;</span>uchicago<span>&#46;</span>edu</a>.</p></li>
+<li><p>“Watch” the <a class="reference external" href="https://github.com/finm-32800/finm-32800.github.io">course website repository</a> so that you are notified of new posts on the course discussion board. Click the “Watch” button at the top right of the page.</p></li>
+<li><p>Consider posting an introduction on the discussion board: <a class="github reference external" href="https://github.com/orgs/finm-32800/discussions/2">orgs/finm-32800#2</a> . Say that you’re looking for a partner to work on the homework and the final project with.</p></li>
+<li><p>Skim the <a class="reference internal" href="Week0/tour_of_the_course.html"><span class="std std-doc">tour of the course</span></a> and open one of the <a class="reference internal" href="FinalProject/past_final_projects.html"><span class="std std-doc">past final projects</span></a>.</p></li>
 </ul>
 </section>
-<section id="getting-connected-to-the-course-discussion-board">
-<h2>Getting connected to the course discussion board<a class="headerlink" href="#getting-connected-to-the-course-discussion-board" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Make sure to “watch” the <a class="reference external" href="https://github.com/finm-32800/finm-32800.github.io">course website repository</a> so that you will be notified of new posts on the course discussion board. Click the “watch” button on the top right of the page.</p></li>
-<li><p>Consider, if you’d like, posting an introduction here on the course discussion board: <a class="github reference external" href="https://github.com/orgs/finm-32800/discussions/2">orgs/finm-32800#2</a> . Post a message explaining that you’re looking for a partner to work on the homework with and to work on the final project with.</p></li>
-</ul>
+<section id="part-3-clone-and-run-the-hw-0-repository">
+<h2>Part 3: Clone and run the HW 0 repository<a class="headerlink" href="#part-3-clone-and-run-the-hw-0-repository" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Make your own copy of <a class="github reference external" href="https://github.com/finm-32800/hw0">finm-32800/hw0</a>. On that page, click <strong>Fork</strong>. (Once you are enrolled, I will create a private copy of each graded homework for you. HW 0 is public, so a fork works.)</p></li>
+<li><p>Clone your fork and install its environment, as described in <a class="reference internal" href="Week0/clone_and_run.html"><span class="std std-doc">Clone and Run</span></a>.</p></li>
+<li><p>From the base directory of the repository, run <code class="docutils literal notranslate"><span class="pre">doit</span></code>. This downloads a small extract of monthly stock returns from CRSP into the <code class="docutils literal notranslate"><span class="pre">_data</span></code> folder, then executes the notebooks and saves HTML copies of them in <code class="docutils literal notranslate"><span class="pre">_output</span></code>. Once your WRDS account is approved, try pulling the same data directly from WRDS instead: copy <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> to <code class="docutils literal notranslate"><span class="pre">.env</span></code>, fill in your <code class="docutils literal notranslate"><span class="pre">WRDS_USERNAME</span></code>, set <code class="docutils literal notranslate"><span class="pre">NO_CACHE=True</span></code>, and run <code class="docutils literal notranslate"><span class="pre">doit</span></code> again.</p></li>
+<li><p>Launch the dashboard with <code class="docutils literal notranslate"><span class="pre">streamlit</span> <span class="pre">run</span> <span class="pre">src/app.py</span></code>. In the “Two assets” tab, drag the correlation slider toward -1. In the “Many assets” tab, shorten the estimation window and watch what happens to the tangency portfolio weights. Then check the “No short sales” box and compare the two frontiers.</p></li>
+<li><p>Read through the <a class="reference internal" href="notebooks/_01_markowitz.html"><span class="std std-doc">portfolio selection notebook</span></a> and its <a class="reference internal" href="notebooks/_02_markowitz_derivation.html"><span class="std std-doc">appendix</span></a>, which derives the formulas. The sources for both are in the repository’s <code class="docutils literal notranslate"><span class="pre">src</span></code> folder.</p></li>
+</ol>
 </section>
-<section id="how-to-submit-hw-go-through-in-class-hw-example">
-<h2>How to submit HW: Go through in-class HW example<a class="headerlink" href="#how-to-submit-hw-go-through-in-class-hw-example" title="Link to this heading">#</a></h2>
-<p>Go through the in-class HW example together. The link for the GitHub Classroom assignment is above.</p>
-<section id="unit-tests-and-github-actions">
-<h3>Unit Tests and GitHub Actions<a class="headerlink" href="#unit-tests-and-github-actions" title="Link to this heading">#</a></h3>
+<section id="part-4-make-the-tests-pass">
+<h2>Part 4: Make the tests pass<a class="headerlink" href="#part-4-make-the-tests-pass" title="Link to this heading">#</a></h2>
 <p><strong>Which files should I edit?</strong></p>
-<p>In order to complete the homework, you need to adjust the source files so that the unit test files pass. The unit tests are implemented in the files that start with <code class="docutils literal notranslate"><span class="pre">test_FILENAME.py</span></code>. The files indicated by the red bracket below are the test files. In HW0, you will need to edit <code class="docutils literal notranslate"><span class="pre">github_skills.py</span></code> and <code class="docutils literal notranslate"><span class="pre">port_opt.py</span></code>.</p>
-<p><strong>NOTE:</strong> You should not make any edits to the test files. If an edit is made, you will be required to edit the history of your commits to remove any trace of the edits to these files:</p>
-<a class="reference internal image-reference" href="_images/HW0_test_files.png"><img alt="_images/HW0_test_files.png" src="_images/HW0_test_files.png" style="width: 50%;" /></a>
-<p>So, to complete the assignment, you should edit the source files that are being tested. That is, you should make edits to the files highlighted in yellow below:</p>
-<a class="reference internal image-reference" href="_images/HW0_files_to_edit.png"><img alt="_images/HW0_files_to_edit.png" src="_images/HW0_files_to_edit.png" style="width: 50%;" /></a>
+<p>In order to complete the homework, you need to adjust the source files so that the unit tests pass. The unit tests are implemented in the files that start with <code class="docutils literal notranslate"><span class="pre">test_</span></code>. In HW 0, you will need to edit <code class="docutils literal notranslate"><span class="pre">src/port_opt.py</span></code> and <code class="docutils literal notranslate"><span class="pre">src/github_skills.py</span></code>.</p>
+<p><strong>NOTE:</strong> You should not make any edits to the test files. In the graded homeworks, if an edit is made to a test file, you will be required to edit the history of your commits to remove any trace of the edits to these files.</p>
+<section id="portfolio-optimization">
+<h3>Portfolio optimization<a class="headerlink" href="#portfolio-optimization" title="Link to this heading">#</a></h3>
+<p>The notebook computes the global minimum variance portfolio and the tangency portfolio inline. Move that logic into the two functions marked <code class="docutils literal notranslate"><span class="pre">TODO</span></code> in <code class="docutils literal notranslate"><span class="pre">src/port_opt.py</span></code>. Then, from the base directory of the project, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+<p>The five tests in <code class="docutils literal notranslate"><span class="pre">test_port_opt.py</span></code> should now pass. They use small made-up inputs with known answers, so they do not need the data. (The tests in <code class="docutils literal notranslate"><span class="pre">test_mean_variance.py</span></code> pass from the start. They check the frontier code that I wrote.)</p>
 </section>
 <section id="github-skills-tutorials">
-<h3>GitHub Skills Tutorials<a class="headerlink" href="#github-skills-tutorials" title="Link to this heading">#</a></h3>
-<p>In order to start mastering the many features of Github, please complete the following tutorials from the <a class="reference external" href="https://skills.github.com/">GitHub Skills</a> page. Please make sure to use <strong>public repositories</strong> for this in your own GitHub user account. You will provide a link later to demonstrate that it was completed.</p>
+<h3>GitHub Skills tutorials<a class="headerlink" href="#github-skills-tutorials" title="Link to this heading">#</a></h3>
+<p>In order to start mastering the many features of GitHub, please complete the following tutorials from the <a class="reference external" href="https://skills.github.com/">GitHub Skills</a> page. Please make sure to use <strong>public repositories</strong> for this in your own GitHub user account.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/skills/introduction-to-github">Introduction to GitHub</a></p></li>
 <li><p><a class="reference external" href="https://github.com/skills/communicate-using-markdown">Communicate using Markdown</a></p>
@@ -574,12 +586,12 @@ document.write(`
 </ul>
 </li>
 </ul>
-<p>Once you have completed these tutorials, you will receive points by adding the URL to your completed skills repos from above in the HW repo linked above and by indicating that you have finished this task by marking the unit test as passing (by editing the <code class="docutils literal notranslate"><span class="pre">github_skills.py</span></code> file and committing and pushing your changes).</p>
+<p>Once you have completed these tutorials, record them by editing <code class="docutils literal notranslate"><span class="pre">src/github_skills.py</span></code>: add the URL of each of your completed skills repositories and mark each one as finished.</p>
 </section>
+<section id="push-and-watch-the-tests-run-on-github">
+<h3>Push, and watch the tests run on GitHub<a class="headerlink" href="#push-and-watch-the-tests-run-on-github" title="Link to this heading">#</a></h3>
+<p>Commit your changes and push them to your fork. Then open the <strong>Actions</strong> tab of your fork on GitHub. (The first time, GitHub asks you to enable workflows on a fork. Click the button to do so, then push again or press “Run workflow.”) The same tests that you ran on your laptop now run on a fresh machine in the cloud. A green check mark next to your commit means that they passed. In the graded homeworks, this is how your work is scored.</p>
 </section>
-<section id="additional-resources">
-<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
-<p>See the <a class="reference internal" href="appendix.html"><span class="std std-doc">Appendix</span></a> for a video tutorial on setting up Python and Visual Studio Code.</p>
 </section>
 <section id="additional-notes-about-the-hw">
 <h2>Additional Notes about the HW<a class="headerlink" href="#additional-notes-about-the-hw" title="Link to this heading">#</a></h2>
@@ -594,7 +606,7 @@ document.write(`
 </section>
 <section id="how-can-i-check-if-my-tests-are-passing">
 <h3>How can I check if my tests are passing?<a class="headerlink" href="#how-can-i-check-if-my-tests-are-passing" title="Link to this heading">#</a></h3>
-<p>From the command-line, in the base directory of the project, run <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. This is a local test. However, your grade will depend on whether the tests pass in GitHub Actions.</p>
+<p>From the command-line, in the base directory of the project, run <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. This is a local test. In the graded homeworks, your grade will depend on whether the tests pass in GitHub Actions.</p>
 </section>
 <section id="more-information-about-git-and-github">
 <h3>More information about Git and GitHub<a class="headerlink" href="#more-information-about-git-and-github" title="Link to this heading">#</a></h3>
@@ -655,14 +667,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-computing-environment">Setting up your computing environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-connected-to-the-course-discussion-board">Getting connected to the course discussion board</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-submit-hw-go-through-in-class-hw-example">How to submit HW: Go through in-class HW example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests-and-github-actions">Unit Tests and GitHub Actions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-skills-tutorials">GitHub Skills Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-set-up-your-computing-environment">Part 1: Set up your computing environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-get-connected-to-the-course">Part 2: Get connected to the course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-clone-and-run-the-hw-0-repository">Part 3: Clone and run the HW 0 repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-make-the-tests-pass">Part 4: Make the tests pass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization">Portfolio optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-skills-tutorials">GitHub Skills tutorials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#push-and-watch-the-tests-run-on-github">Push, and watch the tests run on GitHub</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-about-the-hw">Additional Notes about the HW</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-doing-it-this-way">Why are we doing it this way?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-check-if-my-tests-are-passing">How can I check if my tests are passing?</a></li>

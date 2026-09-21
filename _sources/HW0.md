@@ -1,53 +1,50 @@
 # Homework 0
 
-- **Due date:** Friday, July 10, 2026 at 11:59 pm CT (same as HW 1). This is an ungraded practice homework, but try to finish it as soon as possible during the first week.
-- **Link to Assignment:** https://classroom.github.com/a/yuuC4j0j
+- **Due date:** None. This is an ungraded practice homework. Try to finish it during the first week, because HW 1 assumes that everything here works.
+- **Repository:** <https://github.com/finm-32800/hw0>
+- **Goes with:** [Lecture 0](./overview_w0.md)
 
-## Setting up your computing environment
+HW 0 has two purposes. It gets your computer and your accounts ready for the rest of the quarter. And it takes you once through the cycle that every later homework repeats: clone a repository, install its environment, run it, edit the code until the tests pass, and push.
 
-You will need to install these and make these accounts to complete the homework in this course.
+## Part 1: Set up your computing environment
 
+Follow [Getting Set Up](./Week0/getting_set_up.md) to install the software and create the accounts. **Apply for your WRDS account first,** because approval takes several days and HW 1 requires it.
 
-Before the first class, please make sure to install the required software and sign up for the required services. Students will need to install the following software on their laptop. Each of these pieces of software are free:
- - [Anaconda distribution of Python (Individual Edition)](https://www.anaconda.com/download)
- - [Visual Studio Code](https://code.visualstudio.com/) (NOT Visual Studio. Visual Studio Code is different from Visual Studio)
- - [Git](https://git-scm.com/)
- - [GitKraken](https://www.gitkraken.com/) You will need to use GitKraken Client Pro, which is available for [free for students.](https://www.gitkraken.com/github-student-developer-pack)
- - [TeX Live](https://tug.org/texlive/)
+## Part 2: Get connected to the course
 
-Students should also sign up for an account with the following websites. We will use free versions of each of these services:
- - [GitHub](https://github.com/)
- - [Wharton Research Data Services (WRDS)](https://wrds-www.wharton.upenn.edu/) Apply for access through the University of Chicago, using the registration form [here.](https://wrds-www.wharton.upenn.edu/register/) For any issues that may arise, please contact the WRDS representative for UChicago's Mathematics department, John Zekos, zekos@math.uchicago.edu. 
+- "Watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you are notified of new posts on the course discussion board. Click the "Watch" button at the top right of the page.
+- Consider posting an introduction on the discussion board: https://github.com/orgs/finm-32800/discussions/2 . Say that you're looking for a partner to work on the homework and the final project with.
+- Skim the [tour of the course](./Week0/tour_of_the_course.md) and open one of the [past final projects](./FinalProject/past_final_projects.md).
 
-## Getting connected to the course discussion board
+## Part 3: Clone and run the HW 0 repository
 
-- Make sure to "watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you will be notified of new posts on the course discussion board. Click the "watch" button on the top right of the page.
-- Consider, if you'd like, posting an introduction here on the course discussion board: https://github.com/orgs/finm-32800/discussions/2 . Post a message explaining that you're looking for a partner to work on the homework with and to work on the final project with.
+1. Make your own copy of <https://github.com/finm-32800/hw0>. On that page, click **Fork**. (Once you are enrolled, I will create a private copy of each graded homework for you. HW 0 is public, so a fork works.)
+2. Clone your fork and install its environment, as described in [Clone and Run](./Week0/clone_and_run.md).
+3. From the base directory of the repository, run `doit`. This downloads a small extract of monthly stock returns from CRSP into the `_data` folder, then executes the notebooks and saves HTML copies of them in `_output`. Once your WRDS account is approved, try pulling the same data directly from WRDS instead: copy `.env.example` to `.env`, fill in your `WRDS_USERNAME`, set `NO_CACHE=True`, and run `doit` again.
+4. Launch the dashboard with `streamlit run src/app.py`. In the "Two assets" tab, drag the correlation slider toward -1. In the "Many assets" tab, shorten the estimation window and watch what happens to the tangency portfolio weights. Then check the "No short sales" box and compare the two frontiers.
+5. Read through the [portfolio selection notebook](notebooks/_01_markowitz.ipynb) and its [appendix](notebooks/_02_markowitz_derivation.ipynb), which derives the formulas. The sources for both are in the repository's `src` folder.
 
-## How to submit HW: Go through in-class HW example
-
-Go through the in-class HW example together. The link for the GitHub Classroom assignment is above. 
-
-### Unit Tests and GitHub Actions
-
+## Part 4: Make the tests pass
 
 **Which files should I edit?**
 
-In order to complete the homework, you need to adjust the source files so that the unit test files pass. The unit tests are implemented in the files that start with `test_FILENAME.py`. The files indicated by the red bracket below are the test files. In HW0, you will need to edit `github_skills.py` and `port_opt.py`.
+In order to complete the homework, you need to adjust the source files so that the unit tests pass. The unit tests are implemented in the files that start with `test_`. In HW 0, you will need to edit `src/port_opt.py` and `src/github_skills.py`.
 
-**NOTE:** You should not make any edits to the test files. If an edit is made, you will be required to edit the history of your commits to remove any trace of the edits to these files:
+**NOTE:** You should not make any edits to the test files. In the graded homeworks, if an edit is made to a test file, you will be required to edit the history of your commits to remove any trace of the edits to these files.
 
-<img src="./assets/HW0_test_files.png" width="50%">
+### Portfolio optimization
 
-So, to complete the assignment, you should edit the source files that are being tested. That is, you should make edits to the files highlighted in yellow below:
+The notebook computes the global minimum variance portfolio and the tangency portfolio inline. Move that logic into the two functions marked `TODO` in `src/port_opt.py`. Then, from the base directory of the project, run
 
-<img src="./assets/HW0_files_to_edit.png" width="50%">
+```bash
+pytest
+```
 
+The five tests in `test_port_opt.py` should now pass. They use small made-up inputs with known answers, so they do not need the data. (The tests in `test_mean_variance.py` pass from the start. They check the frontier code that I wrote.)
 
+### GitHub Skills tutorials
 
-### GitHub Skills Tutorials
-
-In order to start mastering the many features of Github, please complete the following tutorials from the [GitHub Skills](https://skills.github.com/) page. Please make sure to use **public repositories** for this in your own GitHub user account. You will provide a link later to demonstrate that it was completed.
+In order to start mastering the many features of GitHub, please complete the following tutorials from the [GitHub Skills](https://skills.github.com/) page. Please make sure to use **public repositories** for this in your own GitHub user account.
 
  - [Introduction to GitHub](https://github.com/skills/introduction-to-github)
  - [Communicate using Markdown](https://github.com/skills/communicate-using-markdown)
@@ -55,17 +52,15 @@ In order to start mastering the many features of Github, please complete the fol
  - [GitHub Pages](https://github.com/skills/github-pages)
    - Later in this course, we will use GitHub Pages to host a website. The textbook for this course is hosted on GitHub Pages.
 
-Once you have completed these tutorials, you will receive points by adding the URL to your completed skills repos from above in the HW repo linked above and by indicating that you have finished this task by marking the unit test as passing (by editing the `github_skills.py` file and committing and pushing your changes).
+Once you have completed these tutorials, record them by editing `src/github_skills.py`: add the URL of each of your completed skills repositories and mark each one as finished.
 
-## Additional Resources
+### Push, and watch the tests run on GitHub
 
-See the [Appendix](appendix.md) for a video tutorial on setting up Python and Visual Studio Code.
-
+Commit your changes and push them to your fork. Then open the **Actions** tab of your fork on GitHub. (The first time, GitHub asks you to enable workflows on a fork. Click the button to do so, then push again or press "Run workflow.") The same tests that you ran on your laptop now run on a fresh machine in the cloud. A green check mark next to your commit means that they passed. In the graded homeworks, this is how your work is scored.
 
 ## Additional Notes about the HW
 
-
-### Why are we doing it this way? 
+### Why are we doing it this way?
 
 The point of structuring the assignment this way is to give you experience with unit testing, CI/CD, and the concept of test-driven development. These are concepts that you should learn to level-up your software development skills. These are real-world development concepts and getting experience with them should move you beyond the over-simplified approach that you might find in a typical university problem set.
 
@@ -81,7 +76,7 @@ We discussed unit tests and test-driven development in class a little. If you'd 
 
 ### How can I check if my tests are passing?
 
-From the command-line, in the base directory of the project, run `pytest`. This is a local test. However, your grade will depend on whether the tests pass in GitHub Actions.
+From the command-line, in the base directory of the project, run `pytest`. This is a local test. In the graded homeworks, your grade will depend on whether the tests pass in GitHub Actions.
 
 ### More information about Git and GitHub
 
@@ -89,4 +84,3 @@ Also, if you're looking for more instruction about how to use Git, here are two 
 
 - [What is Version Control? (Learn Git Video Course)](https://www.youtube.com/watch?v=M-O8ZNW9icQ)
 - [Using Git with Visual Studio Code (Official Beginner Tutorial)](https://www.youtube.com/watch?v=i_23KUAEtUM)
-
