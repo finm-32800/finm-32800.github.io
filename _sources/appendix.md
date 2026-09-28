@@ -12,7 +12,7 @@
 ## The Bloomberg Terminal
 
 ```{note}
-We are **not covering the Bloomberg Terminal live this quarter** — as an online course, students don't have shared access to a terminal. This reference page is kept here for those who have access elsewhere.
+We are **not covering the Bloomberg Terminal live this quarter**. This reference page is kept here for those who have access to a terminal.
 ```
 
 ```{toctree}
@@ -29,4 +29,17 @@ This material is **not covered in any class session this quarter**. It is kept h
 ```{toctree}
 :maxdepth: 1
 Week8/web_authentication.md
+```
+
+## Job Postings: Sample, Methods and Limitations
+
+The reference document behind
+[what firms ask for](notebooks/_job_postings_findings_ipynb.ipynb): the sample
+frame firm by firm, the three denominators, the four ways of counting and what
+each over- and under-states, the rules that decide what counts as a mention, and
+the claims the data cannot support.
+
+```{toctree}
+:maxdepth: 1
+notebooks/_job_postings_methods_ipynb.ipynb
 ```

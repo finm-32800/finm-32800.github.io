@@ -29,4 +29,12 @@ job_posting_jpmorganchase.md
 - [AQR Capital Management — Portfolio Analytics Engineer](./job_posting_aqr.md)
 - [JPMorganChase — Data & AI Internship Program](./job_posting_jpmorganchase.md)
 
+These ten are the postings the course map quotes, preserved in full. They are a
+sample of a much larger collection:
+[what firms ask for](../notebooks/_job_postings_findings_ipynb.ipynb) reports a
+few thousand postings from 64 firms, with the
+[methods](../notebooks/_job_postings_methods_ipynb.ipynb) behind it. The full text
+of that collection lives in the private `job_postings` repository rather than on
+this site; see the course [README](../README.md) for how to browse it.
+
 Excerpts quoted from these postings are for educational commentary; full attribution and source links appear on each page.

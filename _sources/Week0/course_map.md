@@ -35,6 +35,12 @@ analysis from end to end, testing it, and publishing a result that someone else
 can rebuild. A result that cannot be rebuilt from its raw data cannot be
 trusted, in a journal or on a trading desk.
 
+The ten postings quoted below were picked to illustrate the point. For the wider
+version, see [what firms ask for](../notebooks/_job_postings_findings_ipynb.ipynb):
+a few thousand postings from 64 firms, collected from their own job boards, with
+the sample frame and its limits written down. Building that dataset is also a
+worked example of the kind of pipeline this course is about.
+
 These skills are also sought after in industry, and the evidence is in the job
 postings below. The postings are for research engineers and data engineers, the
 people who work alongside quantitative researchers. Read them in two ways. If
@@ -137,18 +143,19 @@ change.
 | 0 | `requirements.txt`; clone and run | Markowitz (1952), portfolio selection | CRSP extract |
 | 1 | Git, GitHub, virtual environments | Sharpe (1964), the CAPM: build the market portfolio and the S&P 500 | CRSP |
 | 2 | Task runners (PyDoit) | Fama and French (1993), the three-factor model | CRSP, Compustat |
-| 3 | Reproducible reports: notebooks, GitHub Pages, LaTeX | Gürkaynak, Sack, and Wright (2006), the Treasury yield curve | CRSP Treasuries |
-| 4 | Python packaging and documentation | Constantinides, Jackwerth, and Savov (2013), index option returns | OptionMetrics, CME Globex |
-| 5 | Unit tests and data validation | Dickerson, Robotti, and Rossetti (2026), the corporate bond factor replication crisis: cleaning bond transactions | FINRA TRACE |
-| 6 | SQL at scale, remote machines, and HPC | Holden and Jacobsen (2014), measuring liquidity from intraday trades and quotes | NYSE TAQ |
-| 7 | The data build tool (dbt) | Ardia, Guidotti, and Kroencke (2024), bid-ask spreads from daily prices, checked against TAQ | NYSE TAQ, CRSP |
-| 8 | CI/CD with GitHub Actions | Bernanke and Kuttner (2005), monetary policy surprises from fed funds futures: replicating the CME FedWatch tool | CME fed funds futures |
-| 9 | Basic MLOps: monitoring models | Welch and Goyal (2008), predicting the equity premium | All of the above |
+| 3 | Reproducible reports: notebooks, GitHub Pages, LaTeX | Gürkaynak, Sack, and Wright (2006), the Treasury yield curve, together with the expected path of the policy rate read from fed funds futures (the CME FedWatch method) | CRSP Treasuries, CME fed funds futures, FRED |
+| 4 | Python packaging and documentation | Martin and Shi (2025), forecasting crashes with a smile: option-implied crash probabilities from the volatility surface | OptionMetrics, CME Globex |
+| 5 | Unit tests and data validation | Easley, López de Prado, and O'Hara (2012), flow toxicity and liquidity: rebuilding the order book and measuring toxicity in E-mini futures | CME Globex order book (Databento) |
+| 6 | SQL at scale, remote machines, and job schedulers: the WRDS Cloud and Midway | Holden and Jacobsen (2014), measuring liquidity from intraday trades and quotes | NYSE TAQ |
+| 7 | Orchestration across projects: Apache Airflow | Goyal, Welch, and Zafirov (2024), the equity premium predictors | FRED and other public data; the FTSFR pipelines |
+| 8 | CI/CD with GitHub Actions | Bernanke and Kuttner (2005), monetary policy surprises from fed funds futures | CME fed funds futures |
+| 9 | Basic MLOps: experiment tracking and monitoring models | Bejarano et al. (2026), an open benchmark for forecasting across financial markets | The FTSFR datasets |
 
 The arc on the finance side runs from equities (weeks 0 to 2), to interest
-rates and options (weeks 3 and 4), to corporate bonds and market microstructure
-(weeks 5 to 7), and ends with a prediction problem that draws on everything
-before it.
+rates and options (weeks 3 and 4), to market microstructure (weeks 5 and 6),
+and ends with return prediction (weeks 7 to 9), which draws on everything
+before it. Corporate bonds and the cleaning of FINRA TRACE appear in week 5 as
+the opening example of data validation.
 
 ## The final project
 
@@ -198,16 +205,17 @@ archived posting.
 - "Perform data reconciliations, validations, and quality checks" ([Hudson River Trading](../Appendix/job_posting_hudson_river_trading.md))
 - "Build automated data validation test suites that ensure that data is processed and published in accordance with well-defined Service Level Agreements (SLA's) pertaining to data quality, data availability and data correctness" ([Akuna Capital](../Appendix/job_posting_akuna_capital.md))
 
-**Week 6: SQL at scale, remote machines, and HPC**
+**Week 6: SQL at scale, remote machines, and job schedulers**
 
 - "Proficient with SQL or DataFrame libraries like pandas or Polars" ([Jane Street](../Appendix/job_posting_jane_street.md))
 - "Experienced in at least one SQL dialect (PostgreSQL, MSSQL, MYSQL) and able to use others as needed" ([Hudson River Trading](../Appendix/job_posting_hudson_river_trading.md))
 - "Comfortable with the Linux command line" ([Hudson River Trading](../Appendix/job_posting_hudson_river_trading.md))
 - "Unix scripting experience (bash, python, etc.)" ([IMC Trading](../Appendix/job_posting_imc.md))
-
-**Week 7: The data build tool (dbt)**
-
 - "Data Build Tool (DBT)" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
+
+**Week 7: Orchestration across projects (Apache Airflow)**
+
+- "Strong coding skills: proficiency in Python, SQL DBs, Cloud, schedulers, containers, CI/CD, software packaging" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
 - "Translate high-level market research concepts into scalable processes that further transform the data" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
 
 **Week 8: CI/CD with GitHub Actions**
@@ -216,7 +224,7 @@ archived posting.
 - "Ability to work with a team in a fast-paced environment, deploying new software daily" ([Jump Trading](../Appendix/job_posting_jump_trading.md))
 - "Build, deploy, and monitor our data processing pipelines (Java, Python, Spark, Flink)" ([IMC Trading](../Appendix/job_posting_imc.md))
 
-**Week 9: Basic MLOps and monitoring models**
+**Week 9: Basic MLOps: experiment tracking and monitoring models**
 
 - "they engineer data, build and deploy models, and monitor them in production" ([JPMorganChase](../Appendix/job_posting_jpmorganchase.md))
 - "Experience with monitoring, observability, and alerting systems for data pipelines" ([DRW](../Appendix/job_posting_drw.md))
@@ -268,10 +276,11 @@ the full text.
 - **Week 0.** Markowitz, Harry. ["Portfolio Selection."](https://doi.org/10.1111/j.1540-6261.1952.tb01525.x) *The Journal of Finance* 7, no. 1 (1952): 77-91.
 - **Week 1.** Sharpe, William F. ["Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk."](https://doi.org/10.1111/j.1540-6261.1964.tb02865.x) *The Journal of Finance* 19, no. 3 (1964): 425-442.
 - **Week 2.** Fama, Eugene F., and Kenneth R. French. ["Common Risk Factors in the Returns on Stocks and Bonds."](https://doi.org/10.1016/0304-405X(93)90023-5) *Journal of Financial Economics* 33, no. 1 (1993): 3-56.
-- **Week 3.** Gürkaynak, Refet S., Brian Sack, and Jonathan H. Wright. ["The U.S. Treasury Yield Curve: 1961 to the Present."](https://doi.org/10.1016/j.jmoneco.2007.06.029) *Journal of Monetary Economics* 54, no. 8 (2007): 2291-2304. First circulated in 2006 as Finance and Economics Discussion Series paper 2006-28, which is [free from the Federal Reserve Board](https://www.federalreserve.gov/pubs/feds/2006/200628/200628abs.html).
-- **Week 4.** Constantinides, George M., Jens Carsten Jackwerth, and Alexi Savov. ["The Puzzle of Index Option Returns."](https://doi.org/10.1093/rapstu/rat004) *The Review of Asset Pricing Studies* 3, no. 2 (2013): 229-257.
-- **Week 5.** Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. ["The Corporate Bond Factor Replication Crisis."](https://arxiv.org/abs/2604.07880) Working paper, 2026. Also on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966). An earlier version circulated as "Common Pitfalls in the Evaluation of Corporate Bond Strategies." The data and code are at [Open Source Bond Asset Pricing](https://openbondassetpricing.com/).
+- **Week 3.** Gürkaynak, Refet S., Brian Sack, and Jonathan H. Wright. ["The U.S. Treasury Yield Curve: 1961 to the Present."](https://doi.org/10.1016/j.jmoneco.2007.06.029) *Journal of Monetary Economics* 54, no. 8 (2007): 2291-2304. First circulated in 2006 as Finance and Economics Discussion Series paper 2006-28, which is [free from the Federal Reserve Board](https://www.federalreserve.gov/pubs/feds/2006/200628/200628abs.html). The same week reads the expected path of the policy rate from 30-Day Fed Funds futures, following the [CME FedWatch methodology](https://www.cmegroup.com/education/demos-and-tutorials/fed-funds-futures-probability-tree-calculator.html).
+- **Week 4.** Martin, Ian W. R., and Ran Shi. ["Forecasting Crashes with a Smile."](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf) Working paper, 2025. Also circulated as [CEPR Discussion Paper 18524](https://cepr.org/publications/dp18524) and Financial Markets Group Discussion Paper 936.
+- **Week 5.** Easley, David, Marcos M. López de Prado, and Maureen O'Hara. ["Flow Toxicity and Liquidity in a High-Frequency World."](https://doi.org/10.1093/rfs/hhs053) *The Review of Financial Studies* 25, no. 5 (2012): 1457-1493. A [free version](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1695596) is on SSRN.
+- **Week 5, opening example.** Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. ["The Corporate Bond Factor Replication Crisis."](https://arxiv.org/abs/2604.07880) Working paper, 2026. Also on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966). An earlier version circulated as "Common Pitfalls in the Evaluation of Corporate Bond Strategies." The data and code are at [Open Source Bond Asset Pricing](https://openbondassetpricing.com/).
 - **Week 6.** Holden, Craig W., and Stacey Jacobsen. ["Liquidity Measurement Problems in Fast, Competitive Markets: Expensive and Cheap Solutions."](https://doi.org/10.1111/jofi.12127) *The Journal of Finance* 69, no. 4 (2014): 1747-1785. A [free copy](https://host.kelley.iu.edu/cholden/Holden%20and%20Jacobsen%20(2014).pdf) is on Craig Holden's website.
-- **Week 7.** Ardia, David, Emanuele Guidotti, and Tim A. Kroencke. ["Efficient Estimation of Bid-Ask Spreads from Open, High, Low, and Close Prices."](https://doi.org/10.1016/j.jfineco.2024.103916) *Journal of Financial Economics* 161 (2024): 103916. Also on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3892335), with code at the [project website](https://bidask.eguidotti.com/).
+- **Week 7.** Goyal, Amit, Ivo Welch, and Athanasse Zafirov. ["A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction."](https://academic.oup.com/rfs/article/37/11/3490/7749383) *The Review of Financial Studies* 37, no. 11 (2024): 3490-3557. A [free version](https://dx.doi.org/10.2139/ssrn.3929119) is on SSRN. It updates Welch and Goyal, ["A Comprehensive Look at the Empirical Performance of Equity Premium Prediction,"](https://doi.org/10.1093/rfs/hhm014) *The Review of Financial Studies* 21, no. 4 (2008): 1455-1508.
 - **Week 8.** Bernanke, Ben S., and Kenneth N. Kuttner. ["What Explains the Stock Market's Reaction to Federal Reserve Policy?"](https://doi.org/10.1111/j.1540-6261.2005.00760.x) *The Journal of Finance* 60, no. 3 (2005): 1221-1257. A free version is [NBER Working Paper 10402](https://www.nber.org/papers/w10402).
-- **Week 9.** Welch, Ivo, and Amit Goyal. ["A Comprehensive Look at the Empirical Performance of Equity Premium Prediction."](https://doi.org/10.1093/rfs/hhm014) *The Review of Financial Studies* 21, no. 4 (2008): 1455-1508.
+- **Week 9.** Bejarano, Jeremy, Viren Desai, Kausthub Keshava, Arsh Kumar, Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu. ["An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial Markets."](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/) Office of Financial Research Working Paper 26-05, August 2026. The data and code are the [Financial Time Series Forecasting Repository](https://github.com/jmbejara/ftsfr).

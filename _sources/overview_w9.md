@@ -1,44 +1,106 @@
-# Week 9: Medium-Sized Data and Polars
+# Week 9: Basic MLOps --- Experiment Tracking and Monitoring Models
 
-```{toctree}
-:maxdepth: 1
-
-Week8/medium_sized_data_strategies.md
-Week8/polars_exercises.md
-Week8/remote_machines_and_hpc.md
-Week8/exercise_jupyter_on_midway.md
-notebooks/_01_data_sources_overview_ipynb.ipynb
-notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb
+```{note}
+The MLflow chapter for this week is posted before class. Until then, this page is
+the agenda.
 ```
 
-## Agenda
+MLOps is the discipline of keeping a model healthy *after* it ships. A model in
+production is a pipeline that never stops running: new data arrives on a schedule,
+the model recomputes its outputs, and someone has to notice when the data goes bad
+or the model's behavior drifts. Every tool in this course now points at that
+problem, and this week assembles them.
 
-- Final project proposal presentations: Ashish + Omar, Piyush, Ahmad + Jeffrey
-- Medium-sized data strategies and Polars
-- Introduction to TRACE: data sources overview and the Clean TRACE cleaning walkthrough
-- Launch the reworked [HW 4](HW4.md): deploy a live, self-updating FedWatch monitor (due Sunday, August 23)
-- Final project logistics: rubric walkthrough, oral defense expectations, and signing up for a final presentation time (all groups must present by August 21)
+The data is the one you built. The class's predictor dataset from
+[HW 5](./HW5.md) is the input, the Airflow DAGs from week 7 are the scheduler, and
+the benchmark of [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/)
+supplies the models. Nothing this week is a toy.
 
-## Learning Outcomes
+## Announcements
 
-- Understand strategies for working with medium-sized datasets (1GB-100GB)
-- Compare Pandas and Polars for data processing at scale
-- Understand lazy evaluation, predicate pushdown, streaming, and Hive partitioning
-- Introduction to TRACE corporate bond data
-- Understand why data pipelines must decouple internet-dependent pulls from processing
+- **[HW 5](./HW5.md) is due this week.** Both halves: your merged report
+  contribution, and the scheduler work with its incident note.
+- **Final project presentations are next week.** Every group presents in week 10,
+  with an individual oral defense for each member. You will be asked to run and
+  modify your own project live.
+- **The midterm was the only exam.** There is no final exam.
 
-## Make-Up Material
+## Objectives
 
-Due to RCC access issues, the discussion of remote machines and HPC---including
-[Remote Machines and HPC](Week8/remote_machines_and_hpc.md) and the
-[Exercise: Jupyter on Midway](Week8/exercise_jupyter_on_midway.md)---is
-postponed. We will cover this material in a make-up session at a later date.
-Relatedly, [Homework 5](HW5.md), which runs the Clean TRACE pipeline on RCC, is
-now **optional**.
+- Say what experiment tracking is for, and why "which run produced this number?"
+  is a question you must be able to answer months later.
+- Instrument a training run with MLflow: parameters, metrics, artifacts, and the
+  code version, and compare runs.
+- Fit the benchmark's univariate forecasting methods to a panel of series and
+  evaluate them out of sample against the historical mean.
+- Explain why the historical mean is the benchmark that matters in this literature,
+  and what it means for a method to lose to it.
+- Add **drift checks** to a pipeline, so it refuses quietly corrupted inputs rather
+  than publishing them, and distinguish data drift from model decay.
+- Decide, with evidence, when a deployed model should be retired.
+- Close the loop: a scheduled retrain that publishes itself, using the machinery
+  from weeks 7 and 8.
 
-When we cover this material, you will:
+## Agenda Item 1: Experiment Tracking with MLflow
 
-- Connect to remote machines via SSH and transfer files with rsync
-- Understand HPC cluster architecture (login nodes, compute nodes, storage)
-- Submit and manage jobs with SLURM (sinteractive, sbatch)
-- Set up SSH port forwarding to access Jupyter notebooks on remote compute nodes
+- The problem: a notebook that reports 0.043 and a directory of seventeen slightly
+  different scripts is not a result. What you need recorded is the parameters, the
+  data version, the code version, the metric, and the artifact.
+- MLflow's pieces: runs, experiments, parameters, metrics, artifacts, and the
+  tracking UI. Logging from inside a `doit` task, so tracking is part of the
+  pipeline and not a thing you remember to do.
+- Comparing runs, and why the comparison is only meaningful if the data was held
+  fixed. This is the discipline the benchmark paper is built on.
+
+## Agenda Item 2: The Benchmark
+
+[Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/),
+*An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
+Markets* (OFR Working Paper), is the capstone paper for three reasons: its
+pipelines are the [FTSFR](./Week3/ftsfr.md) datasets you met in week 2, its design
+holds the data fixed and varies only the method, and it uses no exogenous
+regressors, which leaves an obvious extension open for you.
+
+- The design: a fixed panel of financial series, a dozen univariate methods, one
+  evaluation protocol. Why that is an experiment-tracking problem by construction.
+- The finding worth sitting with: across financial series, most of these methods
+  struggle to beat simple baselines. That is not a failure of the software.
+- Former students of this course are coauthors, and the reason the paper was
+  possible is that every dataset in it rebuilds from source with one command.
+
+## Agenda Item 3: The Exercise
+
+Take a handful of the benchmark's baseline methods, a historical mean, an ARIMA,
+a Theta method, and one neural method, and run them as a **scheduled DAG** over the
+class's predictor dataset and a few FTSFR series. Log every run to MLflow: the
+method, the data interval, and the out-of-sample error against the historical mean.
+
+Then the two halves of the lesson:
+
+1. **Monitoring.** Watch forecast error as new intervals land. Decide when a model
+   should be retired. The instability of predictor performance over time, which is
+   a table in the paper, becomes something you experience as an operations problem.
+2. **The extension.** The benchmark deliberately uses no exogenous regressors, and
+   the class report has just assembled forty-odd predictors. Add them as exogenous
+   regressors to the equity-premium series and see whether anything survives out of
+   sample. Goyal, Welch, and Zafirov would tell you to expect very little, which is
+   exactly why doing it honestly, with the point-in-time discipline the scheduler
+   enforces, is the right last exercise of the quarter.
+
+## Agenda Item 4: Drift, and Closing the Loop
+
+- **Input drift** versus **model decay**: a schema change, a unit change, a vendor
+  backfill, and a regime change all look different in the logs, and you should be
+  able to tell them apart.
+- Validation checks from week 5, now running on every scheduled arrival, with a
+  threshold that fails the DAG rather than publishing a corrupted forecast.
+- Retrain, publish, and alert with no human in the loop, using Airflow from week 7
+  and Actions from week 8. This is the whole course in one diagram: extract, clean,
+  validate, transform, model, track, publish, monitor, and rerun.
+
+## Looking ahead to Week 10
+
+Final project presentations and oral defenses. Each group presents its completed
+pipeline, and each member is individually quizzed on both the analysis and the
+tools used to build it. See the
+[Final Project Instructions and Rubric](./FinalProject/final_project_rubric.md).

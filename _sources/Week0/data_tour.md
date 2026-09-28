@@ -46,7 +46,7 @@ for a fuller introduction. The ones we use:
   *Week 5.*
 - **NYSE TAQ** (Trade and Quote). Every trade and quote in US equities, stamped
   to the millisecond. It is far too large to download, so we send the
-  computation to the data. *Weeks 6 and 7.*
+  computation to the data. *Week 6.*
 
 ## Databento: CME futures, options on futures, and the order book
 

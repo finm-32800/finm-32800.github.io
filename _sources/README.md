@@ -3,6 +3,8 @@ Course Syllabus: FINM 32800, Autumn 2026
 
 **FINM 32800, Data Pipelines for Quantitative Research**
 
+A PDF version of this syllabus is available for download [here](https://finm-32800.github.io/_static/syllabus_finm_32800_data_pipelines_for_quantitative_research.pdf).
+
 ##  Summary
 
 **Course Description** *Data Pipelines for Quantitative Research* is a hands-on course centered on building reproducible analytical pipelines: automated and fully reproducible workflows that carry a quantitative analysis from raw data to published result. This course examines every stage of the pipeline, from data extraction and cleaning (extract, transform, load, or ETL), through data validation, exploratory analysis, visualization, modeling, and finally to publication and deployment. In industry, this work is sometimes called *productionizing* research, pairing developers with researchers to translate ideas into practice. The course teaches the core set of tools used to build such pipelines, tools which are common across computing and data science: build automation and CI/CD, dependency management, SQL, unit testing and automated data-quality checks, the Linux command line, SSH and working with remote machines, Git for version control, peer review through GitHub pull requests, and experiment tracking and model monitoring (basic MLOps).
@@ -17,9 +19,9 @@ valuable parts of the university experience, both for learning and for your
 career, so the course is built around live, interactive components. The two main
 vehicles for this are the **final-project proposal presentations** (where you
 present your project plan to the class and give and receive live feedback from
-your classmates) and the collaborative **Midterm Report** (a single economic
-report that the whole class builds together). Attendance at the proposal
-presentations is taken.
+your classmates) and the collaborative **class report** (a single economic
+report that the whole class builds together as one of the homework
+assignments). Attendance at the proposal presentations is taken.
 
 - **Class:** One session per week, in person. The day, time, and room are listed
   on Canvas.
@@ -54,10 +56,11 @@ page here: https://github.com/orgs/finm-32800/discussions
 
 ### Assignments
 
-- Assignments are distributed and collected through GitHub. Due dates are
-  posted on each assignment's page and on Canvas. Each assignment is
-  typically distributed on the day of the lecture and due roughly a week and a
-  half later.
+- There are five graded homework assignments, plus an ungraded setup
+  assignment (HW 0). Assignments are distributed and collected through GitHub.
+  Each assignment has one launch date and one due date, roughly two weeks
+  apart; the lectures keep teaching the pieces of an open assignment after it
+  launches. Dates are posted on each assignment's page and on Canvas.
 - Assignments are automatically graded by an autograder that runs on GitHub
   Actions, and solutions will be released shortly after. This means that the due date is
   strict. Late assignments will not be accepted.
@@ -69,19 +72,24 @@ page here: https://github.com/orgs/finm-32800/discussions
   repos, found under the `finm-32800` GitHub organization page here: 
   https://github.com/finm-32800
 
-### No Exams
+### Midterm Exam
 
-This course has **no exams**—no midterm exam and no final exam. In their place:
+There is one exam, a **midterm**, held in class in week 7. It is in-person,
+closed-book, multiple choice, and answered on a bubble sheet. Each question
+has four options and **one or more may be correct**; a question earns its
+point only if every bubble is right. It covers the material through week 6.
+Practice questions in the same format, with their answer key, are handed out
+ahead of time. There is no final exam; the final project is the capstone. See
+[Exam Preparation](exam_prep.md) for the scope and format.
 
-- The **Midterm Report** (a collaborative, class-wide economic report) takes the
-  place of a midterm. See [Midterm Report](midterm_report.md).
-- The **final project**, presented and orally defended at the end of the quarter,
-  takes the place of a final.
+The collaborative **class report** that previously stood in for a midterm is
+now part of one of the homework assignments; see
+[Collaborative Report](collaborative_report.md).
 
 ### Final Project
 
-In lieu of a final exam, students will be organized into groups of 2 (pairs) and
-will each complete a course project. The final project this term is structured
+In place of a final exam, students will be organized into groups of 2 (pairs)
+and will each complete a course project. The final project this term is structured
 around three separate milestones:
 
 1. **Instructor consultation** — each group schedules a 1-on-1 meeting with the
@@ -106,17 +114,23 @@ Grades will be based on the following components:
 | Component | Weight |
 | --- | --- |
 | Coding Assignments | 25% |
+| Midterm Exam | 20% |
 | Final Project | 30% |
-| Proposal Presentation | 20% |
-| Midterm Report | 10% |
-| Proposal Attendance & Feedback | 10% |
+| Proposal Presentation | 15% |
+| Proposal Attendance & Feedback | 5% |
 | Participation | 5% |
 
 - **Coding Assignments (25%)** are submitted individually and graded using
   GitHub's automated testing tools (the autograder runs as a CI/CD workflow on
   GitHub Actions). Because you can re-run the autograder until your code passes,
   the assignments are best thought of as teaching vehicles—the grade primarily
-  reflects whether you did the work to complete them.
+  reflects whether you did the work to complete them. One assignment is your
+  contribution to the collaborative class report: one figure and one paragraph,
+  submitted as a pull request and reviewed by two classmates.
+- **Midterm Exam (20%)** is in-person, closed-book, and multiple choice, with
+  one or more correct options per question and no partial credit. It tests the
+  tools, the data sets, and the papers covered in the notes and the homework
+  through week 6. See [Exam Preparation](exam_prep.md).
 - **Final Project (30%)** is completed in groups of 2. Students choose their
   project from among the options provided at the beginning of the quarter. It is
   graded not only on how well it accomplishes the assigned data cleaning and
@@ -127,12 +141,10 @@ Grades will be based on the following components:
   defense**—you will be asked to defend your analysis and design choices and to
   demonstrate that you can actually run and modify the project (e.g., managing
   the conda environment, running the pipeline, using SSH).
-- **Proposal Presentation (20%)** is graded on the ambition of your project and
+- **Proposal Presentation (15%)** is graded on the ambition of your project and
   on how useful and interesting your classmates judge your proposed "product" to
   be, informed by the peer-feedback surveys.
-- **Midterm Report (10%)** is your individual contribution (one figure and one
-  paragraph) to the collaborative class economic report.
-- **Proposal Attendance & Feedback (10%)** requires that, for **every** proposal
+- **Proposal Attendance & Feedback (5%)** requires that, for **every** proposal
   presentation, you both attend (attendance is taken) **and** submit the
   peer-feedback survey. Both are required to earn the points, and there are
   **no allowed misses**—attending and giving feedback to your classmates is an
@@ -154,7 +166,10 @@ the agenda is listed in the first sub-section of the chapter.
 
 Other key milestones (exact dates to be announced on Canvas):
 
-- **Midterm Report** contributions are due mid-quarter. See [Midterm Report](midterm_report.md).
+- The **midterm exam** is held in class in week 7; practice questions are
+  handed out ahead of time.
+- The **collaborative report** homework ([HW 5](HW5.md)) launches in week 6 and
+  is due in week 9. See [Collaborative Report](collaborative_report.md).
 - **Proposal presentations** take place in class, roughly weeks 5–8.
 - **Final project presentations** take place in week 10.
 
@@ -163,12 +178,12 @@ Other key milestones (exact dates to be announced on Canvas):
 Assignments are distributed and collected through GitHub. Due dates will be
 posted here and on Canvas.
 
-- [HW 0: Flexible. Please complete ASAP](HW0.md)
-- [HW 1: TBD](HW1.md)
-- [HW 2: TBD](HW2.md)
-- [HW 3: TBD](HW3.md)
-- [HW 4: TBD](HW4.md)
-- [HW 5: TBD](HW5.md)
+- [HW 0: Markowitz portfolio selection. Ungraded; please complete ASAP](HW0.md)
+- [HW 1: CRSP, the CAPM, and Fama-French. Launched week 1, due week 3](HW1.md)
+- [HW 2: The yield curve and the policy path. Launched week 3, due week 5](HW2.md)
+- [HW 3: Option-implied crash probabilities. Launched week 4, due week 6](HW3.md)
+- [HW 4: Order book validation and flow toxicity. Launched week 5, due week 7](HW4.md)
+- [HW 5: The collaborative report and Airflow. Launched week 6, due week 9](HW5.md)
 
 ## References
 
@@ -190,6 +205,40 @@ A significant portion of this course is inspired by ["The Missing Semester of
 Your CS Education"](https://missing.csail.mit.edu/), a short course taught in
 the Computer Science department at MIT. I'll rely on the material shown there
 for portions of this course.
+
+
+### The job-postings dataset
+
+The claim that this course teaches what quantitative finance firms hire for is
+backed by a dataset rather than by intuition. Every few months a script collects
+job postings from the applicant-tracking systems that firms use to publish their
+own openings, and counts which technologies the postings name. It currently covers
+64 firms and a few thousand postings, and it is built so any figure can be
+rebuilt from the committed data with no credentials and no network.
+
+- **[What firms ask for](https://finm-32800.github.io/notebooks/_job_postings_findings_ipynb.html)**
+  — the findings.
+- **[Sample, methods and limitations](https://finm-32800.github.io/notebooks/_job_postings_methods_ipynb.html)**
+  — the sample frame firm by firm, the ways of counting, the extraction rules, and
+  what the data cannot support.
+
+The collector and the corpus live in a separate private repository,
+[`finm-32800/job_postings`](https://github.com/finm-32800/job_postings). Posting
+text is reproduced there for educational analysis and is not republished on this
+site. If you want to read the postings themselves, clone that repository and build
+the browsable archive:
+
+```bash
+git clone https://github.com/finm-32800/job_postings.git
+cd job_postings && pip install -r requirements.txt
+doit
+python -m http.server -d _output/job_postings_archive 8000
+```
+
+You can then filter by firm, firm type, tool, or whether the role is still open,
+read the full text of any posting, and expand "why these tools matched" to see the
+sentence behind every extracted feature. If a count looks wrong to you, that is
+where to check it, and I would like to hear about it.
 
 
 ## Software to be used in class

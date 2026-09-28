@@ -1,6 +1,6 @@
-# Midterm Report
+# Collaborative Report
 
-This course has **no exams**. In place of a midterm exam, the entire class collaboratively produces one shared, publication-style **Midterm Report** on the current economy and financial markets. Each student contributes one exhibit and one short write-up, and we assemble these into a single polished PDF.
+As part of [Homework 5](HW5.md), the entire class collaboratively produces one shared, publication-style **report** on the current economy and financial markets. Each student contributes one exhibit and one short write-up, and we assemble these into a single polished PDF. Homework 5 is launched in week 6 and due in week 9; the dates are on Canvas.
 
 This is also a practical exercise in the social coding workflow we cover in class: claiming work through an issue tracker, contributing through pull requests, reviewing other people's work, and following a shared style guide so that many authors produce one coherent document.
 
@@ -24,11 +24,11 @@ The report lives in a private GitHub repository, [finm-32800/finm_midterm_report
 4. **Instructor review.** After both classmate reviews are complete, I review and merge.
 5. **Review two others.** You must also serve as a reviewer on two classmates' pull requests.
 
-All of this must be complete by the deadline: **Monday, August 10 at 11:59 pm CT**.
+All of this must be complete by the assignment's deadline, posted on Canvas.
 
 ## Grading
 
-The Midterm Report is 10% of the course grade. Your contribution is graded out of 10 points.
+Your contribution is graded out of 10 points as part of the homework grade.
 
 | Criterion | Points |
 |---|---|

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 9: Medium-Sized Data and Polars &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -47,14 +47,12 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview_w9';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Strategies for Medium-Sized Data" href="Week8/medium_sized_data_strategies.html" />
-    <link rel="prev" title="02. Replicating the CME FedWatch Tool" href="notebooks/_02_fedwatch_replication.html" /> 
+    <link rel="next" title="Homework 0" href="HW0.html" />
+    <link rel="prev" title="Scheduling Recurring Tasks with Cron" href="Week9/cron_jobs.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -191,6 +189,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -198,6 +197,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/tour_of_the_course.html">A Tour of the Course</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/getting_set_up.html">Getting Set Up</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
@@ -212,89 +212,84 @@
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/virtual_environments.html">Virtual Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week1/midterm_report_and_style_guides.html">The Midterm Report and Style Guides</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Virtual Environments, WRDS, and CRSP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Automating the Pipeline with PyDoit, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: ChartBook, GitHub Pages, and Reproducible Reports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Proposal Presentations, LaTeX, and the Midterm Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w6.html">Week 6: Python Packages, FINM, and the ChartBook Catalog</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 9: Medium-Sized Data and Polars</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Midterm, and Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="HW0.html">Homework 0</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5 (Optional)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="midterm_report.html">Midterm Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5: The Collaborative Report and Airflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaborative_report.html">Collaborative Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
@@ -305,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="exam_prep.html">Exam Preparation</a></li>
 </ul>
 
     </div>
@@ -490,7 +486,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 9: Medium-Sized Data and Polars</h1>
+    <h1>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -500,9 +496,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-up-material">Make-Up Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-experiment-tracking-with-mlflow">Agenda Item 1: Experiment Tracking with MLflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-benchmark">Agenda Item 2: The Benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-exercise">Agenda Item 3: The Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-drift-and-closing-the-loop">Agenda Item 4: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
             </nav>
         </div>
@@ -513,53 +513,119 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-medium-sized-data-and-polars">
-<h1>Week 9: Medium-Sized Data and Polars<a class="headerlink" href="#week-9-medium-sized-data-and-polars" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-</ul>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-basic-mlops-experiment-tracking-and-monitoring-models">
+<h1>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models<a class="headerlink" href="#week-9-basic-mlops-experiment-tracking-and-monitoring-models" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The MLflow chapter for this week is posted before class. Until then, this page is
+the agenda.</p>
 </div>
-<section id="agenda">
-<h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
+<p>MLOps is the discipline of keeping a model healthy <em>after</em> it ships. A model in
+production is a pipeline that never stops running: new data arrives on a schedule,
+the model recomputes its outputs, and someone has to notice when the data goes bad
+or the model’s behavior drifts. Every tool in this course now points at that
+problem, and this week assembles them.</p>
+<p>The data is the one you built. The class’s predictor dataset from
+<a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is the input, the Airflow DAGs from week 7 are the scheduler, and
+the benchmark of <a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>
+supplies the models. Nothing this week is a toy.</p>
+<section id="announcements">
+<h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Final project proposal presentations: Ashish + Omar, Piyush, Ahmad + Jeffrey</p></li>
-<li><p>Medium-sized data strategies and Polars</p></li>
-<li><p>Introduction to TRACE: data sources overview and the Clean TRACE cleaning walkthrough</p></li>
-<li><p>Launch the reworked <a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a>: deploy a live, self-updating FedWatch monitor (due Sunday, August 23)</p></li>
-<li><p>Final project logistics: rubric walkthrough, oral defense expectations, and signing up for a final presentation time (all groups must present by August 21)</p></li>
+<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is due this week.</strong> Both halves: your merged report
+contribution, and the scheduler work with its incident note.</p></li>
+<li><p><strong>Final project presentations are next week.</strong> Every group presents in week 10,
+with an individual oral defense for each member. You will be asked to run and
+modify your own project live.</p></li>
+<li><p><strong>The midterm was the only exam.</strong> There is no final exam.</p></li>
 </ul>
 </section>
-<section id="learning-outcomes">
-<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Understand strategies for working with medium-sized datasets (1GB-100GB)</p></li>
-<li><p>Compare Pandas and Polars for data processing at scale</p></li>
-<li><p>Understand lazy evaluation, predicate pushdown, streaming, and Hive partitioning</p></li>
-<li><p>Introduction to TRACE corporate bond data</p></li>
-<li><p>Understand why data pipelines must decouple internet-dependent pulls from processing</p></li>
+<li><p>Say what experiment tracking is for, and why “which run produced this number?”
+is a question you must be able to answer months later.</p></li>
+<li><p>Instrument a training run with MLflow: parameters, metrics, artifacts, and the
+code version, and compare runs.</p></li>
+<li><p>Fit the benchmark’s univariate forecasting methods to a panel of series and
+evaluate them out of sample against the historical mean.</p></li>
+<li><p>Explain why the historical mean is the benchmark that matters in this literature,
+and what it means for a method to lose to it.</p></li>
+<li><p>Add <strong>drift checks</strong> to a pipeline, so it refuses quietly corrupted inputs rather
+than publishing them, and distinguish data drift from model decay.</p></li>
+<li><p>Decide, with evidence, when a deployed model should be retired.</p></li>
+<li><p>Close the loop: a scheduled retrain that publishes itself, using the machinery
+from weeks 7 and 8.</p></li>
 </ul>
 </section>
-<section id="make-up-material">
-<h2>Make-Up Material<a class="headerlink" href="#make-up-material" title="Link to this heading">#</a></h2>
-<p>Due to RCC access issues, the discussion of remote machines and HPC—including
-<a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a> and the
-<a class="reference internal" href="Week8/exercise_jupyter_on_midway.html"><span class="std std-doc">Exercise: Jupyter on Midway</span></a>—is
-postponed. We will cover this material in a make-up session at a later date.
-Relatedly, <a class="reference internal" href="HW5.html"><span class="std std-doc">Homework 5</span></a>, which runs the Clean TRACE pipeline on RCC, is
-now <strong>optional</strong>.</p>
-<p>When we cover this material, you will:</p>
+<section id="agenda-item-1-experiment-tracking-with-mlflow">
+<h2>Agenda Item 1: Experiment Tracking with MLflow<a class="headerlink" href="#agenda-item-1-experiment-tracking-with-mlflow" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Connect to remote machines via SSH and transfer files with rsync</p></li>
-<li><p>Understand HPC cluster architecture (login nodes, compute nodes, storage)</p></li>
-<li><p>Submit and manage jobs with SLURM (sinteractive, sbatch)</p></li>
-<li><p>Set up SSH port forwarding to access Jupyter notebooks on remote compute nodes</p></li>
+<li><p>The problem: a notebook that reports 0.043 and a directory of seventeen slightly
+different scripts is not a result. What you need recorded is the parameters, the
+data version, the code version, the metric, and the artifact.</p></li>
+<li><p>MLflow’s pieces: runs, experiments, parameters, metrics, artifacts, and the
+tracking UI. Logging from inside a <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, so tracking is part of the
+pipeline and not a thing you remember to do.</p></li>
+<li><p>Comparing runs, and why the comparison is only meaningful if the data was held
+fixed. This is the discipline the benchmark paper is built on.</p></li>
 </ul>
+</section>
+<section id="agenda-item-2-the-benchmark">
+<h2>Agenda Item 2: The Benchmark<a class="headerlink" href="#agenda-item-2-the-benchmark" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>,
+<em>An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
+Markets</em> (OFR Working Paper), is the capstone paper for three reasons: its
+pipelines are the <a class="reference internal" href="Week3/ftsfr.html"><span class="std std-doc">FTSFR</span></a> datasets you met in week 2, its design
+holds the data fixed and varies only the method, and it uses no exogenous
+regressors, which leaves an obvious extension open for you.</p>
+<ul class="simple">
+<li><p>The design: a fixed panel of financial series, a dozen univariate methods, one
+evaluation protocol. Why that is an experiment-tracking problem by construction.</p></li>
+<li><p>The finding worth sitting with: across financial series, most of these methods
+struggle to beat simple baselines. That is not a failure of the software.</p></li>
+<li><p>Former students of this course are coauthors, and the reason the paper was
+possible is that every dataset in it rebuilds from source with one command.</p></li>
+</ul>
+</section>
+<section id="agenda-item-3-the-exercise">
+<h2>Agenda Item 3: The Exercise<a class="headerlink" href="#agenda-item-3-the-exercise" title="Link to this heading">#</a></h2>
+<p>Take a handful of the benchmark’s baseline methods, a historical mean, an ARIMA,
+a Theta method, and one neural method, and run them as a <strong>scheduled DAG</strong> over the
+class’s predictor dataset and a few FTSFR series. Log every run to MLflow: the
+method, the data interval, and the out-of-sample error against the historical mean.</p>
+<p>Then the two halves of the lesson:</p>
+<ol class="arabic simple">
+<li><p><strong>Monitoring.</strong> Watch forecast error as new intervals land. Decide when a model
+should be retired. The instability of predictor performance over time, which is
+a table in the paper, becomes something you experience as an operations problem.</p></li>
+<li><p><strong>The extension.</strong> The benchmark deliberately uses no exogenous regressors, and
+the class report has just assembled forty-odd predictors. Add them as exogenous
+regressors to the equity-premium series and see whether anything survives out of
+sample. Goyal, Welch, and Zafirov would tell you to expect very little, which is
+exactly why doing it honestly, with the point-in-time discipline the scheduler
+enforces, is the right last exercise of the quarter.</p></li>
+</ol>
+</section>
+<section id="agenda-item-4-drift-and-closing-the-loop">
+<h2>Agenda Item 4: Drift, and Closing the Loop<a class="headerlink" href="#agenda-item-4-drift-and-closing-the-loop" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Input drift</strong> versus <strong>model decay</strong>: a schema change, a unit change, a vendor
+backfill, and a regime change all look different in the logs, and you should be
+able to tell them apart.</p></li>
+<li><p>Validation checks from week 5, now running on every scheduled arrival, with a
+threshold that fails the DAG rather than publishing a corrupted forecast.</p></li>
+<li><p>Retrain, publish, and alert with no human in the loop, using Airflow from week 7
+and Actions from week 8. This is the whole course in one diagram: extract, clean,
+validate, transform, model, track, publish, monitor, and rerun.</p></li>
+</ul>
+</section>
+<section id="looking-ahead-to-week-10">
+<h2>Looking ahead to Week 10<a class="headerlink" href="#looking-ahead-to-week-10" title="Link to this heading">#</a></h2>
+<p>Final project presentations and oral defenses. Each group presents its completed
+pipeline, and each member is individually quizzed on both the analysis and the
+tools used to build it. See the
+<a class="reference internal" href="FinalProject/final_project_rubric.html"><span class="std std-doc">Final Project Instructions and Rubric</span></a>.</p>
 </section>
 </section>
 
@@ -578,20 +644,20 @@ now <strong>optional</strong>.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notebooks/_02_fedwatch_replication.html"
+       href="Week9/cron_jobs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">02. Replicating the CME FedWatch Tool</p>
+        <p class="prev-next-title">Scheduling Recurring Tasks with Cron</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week8/medium_sized_data_strategies.html"
+       href="HW0.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Strategies for Medium-Sized Data</p>
+        <p class="prev-next-title">Homework 0</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -611,9 +677,13 @@ now <strong>optional</strong>.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-up-material">Make-Up Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-experiment-tracking-with-mlflow">Agenda Item 1: Experiment Tracking with MLflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-benchmark">Agenda Item 2: The Benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-exercise">Agenda Item 3: The Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-drift-and-closing-the-loop">Agenda Item 4: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
   </nav></div>
 

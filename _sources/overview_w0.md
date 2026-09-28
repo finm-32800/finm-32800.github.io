@@ -3,6 +3,7 @@
 ```{toctree}
 :maxdepth: 1
 Week0/course_map.md
+notebooks/_job_postings_findings_ipynb.ipynb
 Week0/tour_of_the_course.md
 Week0/getting_set_up.md
 Week0/clone_and_run.md
@@ -22,6 +23,9 @@ missed it, the recording and this chapter cover the same ground, and
   program's other computing courses. The [course map](./Week0/course_map.md)
   says who the course is for and shows the job postings behind the skills it
   teaches.
+- See [what firms ask for](notebooks/_job_postings_findings_ipynb.ipynb): the
+  same argument as the course map, made from a few thousand job postings across
+  64 firms rather than ten hand-picked ones.
 - Take a [tour of the course](./Week0/tour_of_the_course.md): this textbook, the
   course's GitHub organization, the discussion board, and a few projects from
   past quarters.

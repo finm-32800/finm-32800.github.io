@@ -1,0 +1,2596 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Job Postings: Sample, Methods and Limitations &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_job_postings_methods_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lecture 0: Portfolio Selection and a First Look at the Course" href="../overview_w0.html" />
+    <link rel="prev" title="Web Authentication and Authorization" href="../Week8/web_authentication.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Job Postings: Sample, Methods and Limitations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Midterm, and Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Collaborative Report and Airflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collaborative_report.html">Collaborative Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_job_postings_methods_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_job_postings_methods_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Job Postings: Sample, Methods and Limitations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-sample-is-and-what-it-is-not">What the sample is, and what it is not</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample-frame">The sample frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-denominators">Three denominators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excluding-trading-roles-what-it-costs">Excluding trading roles: what it costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-ways-of-counting-and-why-the-choice-matters-more-than-the-sample-size">Four ways of counting, and why the choice matters more than the sample size</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-estimators-demonstrated">The estimators, demonstrated</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-live-test-does-the-weighting-hold-when-one-firm-gets-huge">A live test: does the weighting hold when one firm gets huge?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-names-no-orchestrator-at-all">Who names no orchestrator at all</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#every-other-layer">Every other layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-mention-is-decided">How a mention is decided</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-evidence">Worked evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collection-history">Collection history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-language-model-is-and-is-not">Where the language model is, and is not</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="job-postings-sample-methods-and-limitations">
+<h1>Job Postings: Sample, Methods and Limitations<a class="headerlink" href="#job-postings-sample-methods-and-limitations" title="Link to this heading">#</a></h1>
+<p>The reference document behind <a class="reference internal" href="_job_postings_findings_ipynb.html"><span class="std std-doc">What Firms Ask For</span></a>.
+Everything the findings page asserts is derived here, and everything it defers
+is spelled out here: the sample frame, what each way of counting over- and
+under-states, the rules that decide what counts as a mention, and the claims
+this data cannot support.</p>
+<p>Both notebooks load the same committed tables through <code class="docutils literal notranslate"><span class="pre">jobpostings.report</span></code> and
+neither recomputes anything, so the two cannot drift apart on a number.</p>
+<p>Nothing here touches the network. Collection is a separate manual step
+(<code class="docutils literal notranslate"><span class="pre">src/collect_parallel.py</span></code>); this notebook consumes what that step committed,
+which is what makes the figures reproducible from a clone.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jobpostings</span> <span class="kn">import</span> <span class="n">report</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">report</span><span class="o">.</span><span class="n">headline</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>collection runs: 2026-09-25, 2026-09-27
+11,346 postings from 64 firms
+9,237 technical postings
+1,600 mention a pipeline, ETL/ELT or orchestration
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-the-sample-is-and-what-it-is-not">
+<h2>What the sample is, and what it is not<a class="headerlink" href="#what-the-sample-is-and-what-it-is-not" title="Link to this heading">#</a></h2>
+<p>The sample frame is <code class="docutils literal notranslate"><span class="pre">data_manual/manifest.yml</span></code>: firms whose careers systems
+expose a machine-readable endpoint we have found and validated. That is a real
+selection rule with real consequences.</p>
+<ul class="simple">
+<li><p>It is <strong>not a random sample</strong> of quantitative finance. It over-represents
+firms that publish openly and under-represents firms that recruit through
+networks and headhunters. Coverage is systematically worse for banks, which
+run fragmented legacy applicant-tracking systems.</p></li>
+<li><p>Postings measure <strong>hiring intent</strong>, not deployed infrastructure. A firm can
+run Airflow for a decade and never name it; a firm can name a tool it is only
+beginning to adopt.</p></li>
+<li><p>Firms differ in how specific they are. Some publish their whole stack; others
+name almost nothing. <strong>A zero is ambiguous</strong> between “does not use it” and
+“does not say”.</p></li>
+</ul>
+<p>Those are not boilerplate. They are the difference between a defensible reading
+and an overreach, and the frame below is printed in full so they can be checked.</p>
+</section>
+<section id="the-sample-frame">
+<h2>The sample frame<a class="headerlink" href="#the-sample-frame" title="Link to this heading">#</a></h2>
+<p>One row per firm. Firms with zero postings are kept rather than dropped: they
+are either targets whose route is unresolved, firms whose own system was failing
+when we last collected, or firms with no machine-readable board at all. Keeping
+them visible preserves the denominator of <em>attempted</em> coverage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">frame</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;frame&quot;</span><span class="p">]</span>
+<span class="n">collected</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s2">&quot;n_postings&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pending</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s2">&quot;n_postings&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">view</span> <span class="o">=</span> <span class="n">collected</span><span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;firm_name&quot;</span><span class="p">,</span> <span class="s2">&quot;firm_type&quot;</span><span class="p">,</span> <span class="s2">&quot;route&quot;</span><span class="p">,</span> <span class="s2">&quot;sampling&quot;</span><span class="p">,</span> <span class="s2">&quot;stored_scope&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;n_postings&quot;</span><span class="p">,</span> <span class="s2">&quot;n_technical&quot;</span><span class="p">,</span> <span class="s2">&quot;n_pipeline&quot;</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;n_postings&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">view</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Firm&quot;</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Route&quot;</span><span class="p">,</span> <span class="s2">&quot;Sampling&quot;</span><span class="p">,</span> <span class="s2">&quot;Stored scope&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Postings&quot;</span><span class="p">,</span> <span class="s2">&quot;Technical&quot;</span><span class="p">,</span> <span class="s2">&quot;Pipeline-mentioning&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">view</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Firm</th>
+      <th>Type</th>
+      <th>Route</th>
+      <th>Sampling</th>
+      <th>Stored scope</th>
+      <th>Postings</th>
+      <th>Technical</th>
+      <th>Pipeline-mentioning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>JPMorganChase</td>
+      <td>bank</td>
+      <td>oracle_recruiting</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>2425</td>
+      <td>2425</td>
+      <td>501</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HSBC</td>
+      <td>bank</td>
+      <td>eightfold</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>1472</td>
+      <td>176</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Citi</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>1023</td>
+      <td>1023</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Goldman Sachs</td>
+      <td>bank</td>
+      <td>oracle_recruiting</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>559</td>
+      <td>559</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Barclays</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>421</td>
+      <td>421</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Morgan Stanley</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>400</td>
+      <td>400</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Deutsche Bank</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>361</td>
+      <td>361</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Jane Street</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>230</td>
+      <td>150</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Bank of America</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>220</td>
+      <td>220</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Point72 (incl. Cubist Systematic Strategies)</td>
+      <td>multistrat</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>220</td>
+      <td>166</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Millennium Management</td>
+      <td>multistrat</td>
+      <td>eightfold</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>215</td>
+      <td>162</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Vanguard</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>211</td>
+      <td>211</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Qube Research &amp; Technologies</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>199</td>
+      <td>182</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Fidelity Investments</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>192</td>
+      <td>192</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Citadel Securities</td>
+      <td>market_maker</td>
+      <td>wayback_sitemap</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>189</td>
+      <td>152</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Northern Trust</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>181</td>
+      <td>181</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>IMC Trading</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>175</td>
+      <td>115</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Wells Fargo</td>
+      <td>bank</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>171</td>
+      <td>171</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Optiver</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>166</td>
+      <td>108</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>DRW</td>
+      <td>prop_trading</td>
+      <td>drw_next</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>164</td>
+      <td>122</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Citadel</td>
+      <td>multistrat</td>
+      <td>wayback_sitemap</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>154</td>
+      <td>108</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>BlackRock</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>154</td>
+      <td>154</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Jump Trading</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>113</td>
+      <td>94</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>WorldQuant</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>101</td>
+      <td>87</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Jefferies</td>
+      <td>bank</td>
+      <td>oracle_recruiting</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>92</td>
+      <td>92</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Tower Research Capital</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>91</td>
+      <td>74</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>The D. E. Shaw Group</td>
+      <td>systematic</td>
+      <td>deshaw</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>90</td>
+      <td>42</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Invesco</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>90</td>
+      <td>90</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Squarepoint Capital</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>89</td>
+      <td>58</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Hudson River Trading</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>87</td>
+      <td>62</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>PIMCO</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>84</td>
+      <td>84</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Schonfeld Strategic Advisors</td>
+      <td>multistrat</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>80</td>
+      <td>40</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Wellington Management</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>76</td>
+      <td>76</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Capital Group</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>67</td>
+      <td>67</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>T. Rowe Price</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>63</td>
+      <td>63</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Man Group (incl. AHL)</td>
+      <td>asset_manager</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>59</td>
+      <td>38</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Two Sigma</td>
+      <td>systematic</td>
+      <td>avature</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>53</td>
+      <td>43</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>The Voleon Group</td>
+      <td>systematic</td>
+      <td>ashby</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>53</td>
+      <td>38</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>G-Research</td>
+      <td>systematic</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>53</td>
+      <td>53</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>AQR Capital Management</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>51</td>
+      <td>36</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Virtu Financial</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>49</td>
+      <td>36</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Flow Traders</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>47</td>
+      <td>33</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Akuna Capital</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>42</td>
+      <td>33</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Old Mission Capital</td>
+      <td>market_maker</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>37</td>
+      <td>29</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Clear Street</td>
+      <td>fintech</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>36</td>
+      <td>19</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Dimensional Fund Advisors</td>
+      <td>asset_manager</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>30</td>
+      <td>30</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Verition Fund Management</td>
+      <td>multistrat</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>26</td>
+      <td>17</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Wolverine Trading</td>
+      <td>market_maker</td>
+      <td>pinpoint</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>24</td>
+      <td>19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Belvedere Trading</td>
+      <td>market_maker</td>
+      <td>lever</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>21</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Arrowstreet Capital</td>
+      <td>systematic</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>19</td>
+      <td>19</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Five Rings</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>16</td>
+      <td>13</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>Bridgewater Associates</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>15</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>GSA Capital</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>12</td>
+      <td>10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>Brevan Howard</td>
+      <td>multistrat</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>12</td>
+      <td>12</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>Graham Capital Management</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>9</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>PDT Partners</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>9</td>
+      <td>9</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>Winton</td>
+      <td>asset_manager</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>9</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>XTX Markets Technologies</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>9</td>
+      <td>8</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>Headlands Technologies</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>8</td>
+      <td>6</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>Radix Trading</td>
+      <td>prop_trading</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>8</td>
+      <td>8</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>Marshall Wace</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>7</td>
+      <td>6</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>Quadrature Capital</td>
+      <td>systematic</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>ExodusPoint Capital</td>
+      <td>multistrat</td>
+      <td>greenhouse</td>
+      <td>census</td>
+      <td>all_postings</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>PEAK6</td>
+      <td>market_maker</td>
+      <td>workday</td>
+      <td>census</td>
+      <td>technical_only</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Stored</span> <span class="pre">scope</span></code> matters when comparing the Postings column across firms. Some
+adapters (Workday, Oracle) filter to technical titles before storing; the rest
+store the whole board. So <code class="docutils literal notranslate"><span class="pre">n_postings</span></code> is not comparable across routes, while
+<code class="docutils literal notranslate"><span class="pre">n_technical</span></code> is. The analysis uses technical denominators throughout.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">collected</span><span class="p">)</span><span class="si">}</span><span class="s2"> firms collected, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)</span><span class="si">}</span><span class="s2"> in the frame with no data</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pending</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 firms collected, 9 in the frame with no data
+
+  unresolved   Acadian Asset Management
+  broken       Balyasny Asset Management
+  unresolved   BNP Paribas
+  unsamplable  Capula Investment Management
+  unsamplable  Hudson Bay Capital
+  unresolved   Rokos Capital Management
+  unsamplable  Susquehanna International Group
+  unresolved   State Street Global Advisors
+  unsamplable  UBS
+</pre></div>
+</div>
+</div>
+</div>
+<p>Statuses are deliberately distinguished, because they would otherwise all read
+as “no data”:</p>
+<ul class="simple">
+<li><p><strong>unresolved</strong> — not found yet. Says nothing about the firm. Discovery is
+non-deterministic: one firm resolved on one run and came back “no
+machine-readable board” on the next with its endpoint working the whole time.</p></li>
+<li><p><strong>unsamplable</strong> — looked at, no route we can use. Mostly this means <em>we have
+not written the adapter</em>, not that the firm cannot be reached; that
+distinction is recorded per firm.</p></li>
+<li><p><strong>broken</strong> — the route works in principle and the firm’s own system is
+failing.</p></li>
+</ul>
+<p>Per-firm caveats live in the manifest and travel into the frame, so a count and
+its caveat cannot drift apart.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s2">&quot;limitations&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;n_postings&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;limitations&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AQR Capital Management (resolved, n=51)
+  Postings name essentially no infrastructure products.
+
+Arrowstreet Capital (resolved, n=19)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returned total=23 and requires offset paging (20 per page); a second site, Campus_Careers, on the same host/tenant holds 4 additional student/intern postings and must be queried separately to get full coverage.
+
+Balyasny Asset Management (broken, n=0)
+  Workday tenant returns HTTP 401 &quot;Unable to verify credentials for system account 39$1476&quot; on the CXS API and serves a &quot;Workday is currently unavailable&quot; page for individual roles. Failure is on the firm&#39;s side, not a block on us. Retry on each run.
+
+Bank of America (resolved, n=220)
+  POST to the CXS endpoint returns total=1950 with 20 postings per page (paginate via offset); this Workday site is experienced/lateral hiring only — campus/university roles live on a separate Avature board (bankcampuscareers.tal.net), and no other ghr site name resolved.
+
+Barclays (resolved, n=421)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=784 and pages correctly at offset=760; Workday caps each response at 20 postings, so full harvest needs ~40 paged requests plus per-job /job/&lt;externalPath&gt; calls for descriptions.
+
+Belvedere Trading (resolved, n=21)
+  belvederetrading.com/careers links directly to jobs.lever.co/belvederetrading; the v0 postings endpoint returns all 21 live postings in one unpaginated response with full descriptions, so no sampling limitation beyond it showing only currently-published roles.
+
+BlackRock (resolved, n=154)
+  careers.blackrock.com is a Radancy/TalentBrew front end whose experienced-hire apply links all resolve to this Workday tenant (total 315, paginates cleanly to offset 300); early-career/campus postings are the sampling gap, since those apply through blackrock.tal.net and Beamery flows instead and are not in this Workday site (no other site name on the tenant responded).
+
+Brevan Howard (resolved, n=12)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=28 and full pagination (offset=20 yields the remaining 8); brevanhoward.com/careers is a Phenom CareerConnect front-end (tenant BHABHAGB) but the underlying req/apply system is this Workday tenant, so a Phenom-only scrape could in principle surface postings not in this feed.
+
+Bridgewater Associates (resolved, n=15)
+  Public Greenhouse board carries ~15 roles total, far fewer than the firm hires. Token is only discoverable in the JSON embedded at bridgewater.com/jobboard. Any per-firm rate here rests on a handful of postings.
+
+Capital Group (resolved, n=67)
+  POST returned total=184 but only 20 per page, so full harvest requires paging offset in increments of 20 (limit caps at 20).
+
+Capula Investment Management (unsamplable, n=0)
+  Careers pages link exclusively to Workable. Workable has a public API but the account slug could not be determined; revisit if the slug is found.
+
+Citadel (resolved, n=154)
+  citadel.com blocks automated fetching (Cloudflare 403) for every client we tried. The live career sitemap supplies the URL list, but posting text comes from Wayback Machine snapshots, so vintages are mixed and some archived postings are no longer open. Treat Citadel counts as recent-history, not a current snapshot. Text extraction also picks up site navigation chrome, which is stripped in normalisation.
+
+Citadel Securities (resolved, n=189)
+  [medium confidence at discovery] Citadel Securities runs no third-party ATS — the apply form is their in-house Gild system posting to WordPress admin-ajax.php with an opaque job_id UUID — and all HTML careers pages are Cloudflare-challenged (403), so the only live machine-readable source is the Yoast career-sitemap.xml (82 posting URLs, lastmod 2026-09-28), with per-posting title/location scraped through the Wayback Machine, which means individual postings may be stale or missing relative to the sitemap.
+
+Citi (resolved, n=1023)
+  POST with {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:N,&quot;searchText&quot;:&quot;&quot;} works and reports total=2000, but offsets &gt;=2000 silently wrap back to page 1 while the response facets sum to ~4383 postings, so full coverage requires paging per facet (e.g. Country_and_Jurisdiction); the citi.eightfold.ai/api/apply/v2/jobs?domain=citi.com alternative returns HTTP 403 &quot;Not authorized for PCSX&quot;.
+
+The D. E. Shaw Group (resolved, n=90)
+  Server-rendered pages, text extracted from HTML. Some listings are umbrella &quot;all positions in X&quot; pages rather than single roles.
+
+Deutsche Bank (resolved, n=361)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:N,&quot;searchText&quot;:&quot;&quot;} returns total=1141 and paginates to offset 1120; limit is capped at 20 per request so full harvest needs ~58 paged calls, and per-job descriptions require the /wday/cxs/db/DBWebsite/job/&lt;externalPath&gt; detail endpoint.
+
+Dimensional Fund Advisors (resolved, n=30)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:N,&quot;searchText&quot;:&quot;&quot;} returns total=70 on the first page only (later pages report total=0), so paginate by offset until a page returns fewer than limit; the official careers.dimensional.com site links to this same dimensional.wd5.myworkdayjobs.com/DFA_Careers board, and list entries give titles/locations/externalPath but need a per-job fetch for full descriptions.
+
+DRW (resolved, n=164)
+  Listing comes from the __NEXT_DATA__ blob on the listings page; job text is scraped from each detail page&#39;s embedded props, so extraction is more fragile than a real API.
+
+ExodusPoint Capital (resolved, n=2)
+  Very small public board; counts are not meaningful alone.
+
+Fidelity Investments (resolved, n=192)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=827 with 20 postings per page; tenant is fmr (FMR LLC, Fidelity&#39;s legal entity) and offset=800 still returns rows, but the API caps limit at 20 and reports total=0 on deep offsets, so pagination must loop on a non-empty jobPostings array rather than trusting total.
+
+Flow Traders (resolved, n=47)
+  Token read directly out of a fetch() call in the HTML of https://www.flowtraders.com/careers; API returned meta.total=47 with full content for every job, so no sampling limitation.
+
+Goldman Sachs (resolved, n=559)
+  Oracle Fusion tenant hdpc, site CX_2 (not the usual CX_1001, which returns an empty list). higher.gs.com is the marketing front end; this is the ATS behind it. Initially recorded unsamplable because our adapter had no site fallback, so the wrong site number looked like a firm with no board.
+
+Graham Capital Management (resolved, n=9)
+  Token read directly from the API_URL constant in the JS on https://www.grahamcapital.com/careers/; endpoint returns meta.total=9 with full content, so all postings are covered in one unpaginated response.
+
+G-Research (resolved, n=53)
+  POST with {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=64 and 20 postings per page; paginate by offset (offset=60 returned the final 4, but reports total=0 on non-first pages, so trust the first page&#39;s total).
+
+Headlands Technologies (resolved, n=8)
+  headlandstech.com/careers/ links apply buttons directly to job-boards.greenhouse.io/headlandstechnologiesllc, and the API returns all 8 postings with full content and meta.total=8, though one is a generic &quot;Opportunistic Applications&quot; evergreen req rather than a specific opening.
+
+Hudson River Trading (resolved, n=87)
+  Board token is not discoverable from hudsonrivertrading.com, which only links a two-post &quot;talent community&quot; board (token hrttalentcommunity). The real board is wehrtyou.
+
+HSBC (resolved, n=1472)
+  Eightfold API returns count=1467 and pages deep (start=1400 still returns global roles), but the server caps page size at 10 regardless of num, so a full pull needs ~147 sequential requests.
+
+Hudson Bay Capital (unsamplable, n=0)
+  No applicant-tracking system at all. The careers page is a static Webflow marketing page whose only application path is a mailto: address, so there is nothing to collect.
+
+Invesco (resolved, n=90)
+  careers.invesco.com fingerprints as myworkdayjobs; the IVZ site reports total=246 and paginates cleanly to offset 240, but a second Workday site (IVZearlycareers, tenant invesco, 6 postings) holds interns/early-career roles and must be scraped separately to get full coverage.
+
+Jane Street (resolved, n=230)
+  Postings name languages and systems but almost no infrastructure products. The only &quot;airflow&quot; matches are data-centre cooling roles and are excluded by the tool rules.
+
+Jefferies (resolved, n=92)
+  careers.jefferies.com is a Cloudflare-fronted vanity shim (returns 522 to curl) whose inline JS names the real Oracle Recruiting Cloud host hdid.fa.us2.oraclecloud.com, which serves all 167 experienced-hire postings (TotalJobsCount == items returned) in one unauthenticated GET; note that Jefferies runs campus/graduate recruiting on a separate Oleeo board at jefferies.tal.net, so student and intern programs are NOT in this feed.
+
+JPMorganChase (resolved, n=2425)
+  jpmorganchase.com/careers links to Oracle Recruiting CE site CX_1001 on jpmc.fa.oraclecloud.com; the REST finder returns TotalJobsCount 7494 and I sampled pages at offsets 0/50/100/200/1000/5000/7450/7490 (last page returned 4 rows, confirming full pagination) rather than downloading all 7494 — note that `offset` is silently ignored unless the `facetsList` finder argument is included, which would otherwise make every page identical.
+
+Marshall Wace (resolved, n=7)
+  mwam.com&#39;s own careers pages link to job-boards.greenhouse.io/mw-tech-grad; sampling limitation: Marshall Wace splits postings across several Greenhouse boards — mw-tech-grad (7 grad/associate roles) and mwinternshipprogram (7 internships) return postings, while the main &#39;marshallwace&#39; board and &#39;mwam-imperial-placements&#39; currently return 0, and experienced-hire roles appear to be agency-sourced rather than posted.
+
+Millennium Management (resolved, n=215)
+  List endpoint omits descriptions; each posting needs a second detail call.
+
+Morgan Stanley (resolved, n=400)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=1345 and pages cleanly to offset 1300 (deep pages report total=0 but still return 20 postings, so paginate until an empty jobPostings array rather than trusting total); I directly sampled only 40 postings across two pages, and Morgan Stanley&#39;s morganstanley.eightfold.ai mirror returns 403 &quot;Not authorized&quot; so Workday is the usable endpoint.
+
+Northern Trust (resolved, n=181)
+  careers.northerntrust.com 301-redirects to ntrs.wd1.myworkdayjobs.com/northerntrust; POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=639 with 20 postings per page, and offset=620 still returns 19 rows, so full coverage requires paginating offset in steps of 20 (the `total` field reads 0 on non-zero-offset responses, so use the first page&#39;s total as the stop condition).
+
+Optiver (resolved, n=166)
+  Board token is optiverus, not optiver; the obvious guess returns an empty board. Found by discovery on 2026-09-25 but missed on the 2026-09-27 sweep, so it is pinned here rather than left to chance.
+
+PEAK6 (resolved, n=1)
+  peak6.com/careers is an Ongig embed (text-analyzer.ongig.com, group_id 1767) whose 75 listings all apply into Workday tenant peak6group split across 7 CXS sites, so the PEAK6 site alone returns only 14 (incl. the trading associate/internship reqs); scrape the siblings too for full coverage: apexfintechsolutions (49), WeInsure (5), CapMan (3), Bruce (2), ppcareers (1), TFIG (1), plus empty evilgeniuses/zogo.
+
+PIMCO (resolved, n=84)
+  POST with {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:N,&quot;searchText&quot;:&quot;&quot;} returns total=195 on the first page and paginates cleanly to offset=180 (15 rows), but limit is capped at 20 per request and the `total` field reports 0 on non-zero offsets, so paginate until an empty page rather than trusting `total`.
+
+Quadrature Capital (resolved, n=4)
+  Very small public board (single digits); counts are not meaningful alone.
+
+Qube Research &amp; Technologies (resolved, n=199)
+  qube-rt.com/careers is 403/robots-disallowed to crawlers, but real apply links resolve to job-boards.greenhouse.io/quberesearchandtechnologies and the Greenhouse API returns all 199 postings with full content in one unpaginated call (meta.total=199).
+
+Radix Trading (resolved, n=8)
+  Radix Trading (radixtrading.co) splits postings across TWO Greenhouse boards linked from its homepage — radixuniversity (8 jobs, students/postdocs) and radixexperienced (7 jobs, https://boards-api.greenhouse.io/v1/boards/radixexperienced/jobs?content=true) — so scraping only one token samples roughly half of the 15 open roles.
+
+Schonfeld Strategic Advisors (resolved, n=80)
+  Standardised on Prefect; their stack blurb &quot;AWS, Prefect, Coder, Kubernetes&quot; recurs across unrelated roles, so Prefect counts here are driven by boilerplate repetition as much as by distinct requirements.
+
+Susquehanna International Group (unsamplable, n=0)
+  Careers site runs on iCIMS behind a Jibe front end (careers.sig.com, client code &#39;sig&#39;). Endpoint exists; we have no adapter for iCIMS/Jibe.
+
+T. Rowe Price (resolved, n=63)
+  POST returned total=138 with 20 postings per page (paginate via offset); a second site &#39;TRowePriceInternational&#39; on the same host/tenant holds 29 additional non-US postings, so scraping only the TRowePrice site misses international roles.
+
+Two Sigma (resolved, n=53)
+  Avature portal. Detail URLs ignore the slug, only the numeric id matters. Text is extracted from server-rendered HTML, not an API.
+
+UBS (unsamplable, n=0)
+  Board runs on IBM Kenexa BrassRing Talent Gateway (jobs.ubs.com/TGnewUI, partnerid 25008, several siteids). Endpoint exists; we have no adapter for BrassRing.
+
+Vanguard (resolved, n=211)
+  POST {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returns total=401 and 20 postings per page; www.vanguardjobs.com is a Symphony Talent/m-cloud WordPress front end whose embedded config names Workday as the ATS, and paging to offset=380 still returns rows (the `total` field resets to 0 on non-zero offsets, so page until jobPostings is empty rather than trusting it).
+
+Verition Fund Management (resolved, n=26)
+  Token read from the Greenhouse embed script (for=veritiongroupllc) on https://www.verition.com/open-positions, whose gh_jid links match ids in the API; the single content=true call returned all 26 jobs (meta.total=26), so no pagination limitation.
+
+The Voleon Group (resolved, n=53)
+  voleon.com/jobs embeds jobs.ashbyhq.com/voleon/embed?version=2 and the Ashby posting API returns all 53 live postings in one unpaginated response; a stale Lever board (jobs.lever.co/voleon) still exists but its API returns an empty array.
+
+Wellington Management (resolved, n=76)
+  POST with {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:0,&quot;searchText&quot;:&quot;&quot;} returned HTTP 200 with total=129 but only 20 postings per page, so pagination via offset is required to retrieve all listings.
+
+Wells Fargo (resolved, n=171)
+  POST with {&quot;appliedFacets&quot;:{},&quot;limit&quot;:20,&quot;offset&quot;:N,&quot;searchText&quot;:&quot;&quot;} returns total=1705 and 20 postings per page (max limit 20); offset=1700 returns the final 5, confirming full pagination, though `total` is only populated on the offset=0 request and reads 0 on subsequent pages — the mirror host wd1.myworkdaysite.com with path /wday/cxs/wf/WellsFargoJobs/jobs returns byte-identical results.
+
+Wolverine Trading (resolved, n=24)
+  Pinpoint board at careers.wolve.com (wolve.com is the corporate domain). Adapter added 2026-09-27 after discovery identified the platform but had no route for it.
+
+XTX Markets Technologies (resolved, n=9)
+  Only the technology subsidiary posts to this board; XTX&#39;s main hiring is elsewhere, so the sample is a small slice of the firm.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="three-denominators">
+<h2>Three denominators<a class="headerlink" href="#three-denominators" title="Link to this heading">#</a></h2>
+<p>A share is meaningless without its denominator, and the choice moves the answer
+by a factor of five.</p>
+<ul class="simple">
+<li><p><strong>all_technical</strong> — every posting with a technical title. Wide; it includes
+low-latency C++ and trading roles that would never name an orchestrator, so it
+<em>understates</em> prevalence among the people who build pipelines.</p></li>
+<li><p><strong>pipeline_mentioning</strong> — technical postings whose text mentions a pipeline,
+ETL/ELT or orchestration. Much closer to the population the course is about,
+but selected on the outcome’s own vocabulary, so it <em>overstates</em> prevalence
+relative to engineering hiring generally.</p></li>
+<li><p><strong>pipeline_distinct_roles</strong> — the same pool with one row per (firm, title), so
+a role advertised in six offices counts once. The robustness check.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">]</span>
+<span class="n">denoms</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">summary</span><span class="p">[</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;firm_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ALL&quot;</span><span class="p">][[</span><span class="s2">&quot;denominator&quot;</span><span class="p">,</span> <span class="s2">&quot;denominator_n&quot;</span><span class="p">,</span> <span class="s2">&quot;n_firms_in_pool&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;denominator&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">denoms</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>denominator_n</th>
+      <th>n_firms_in_pool</th>
+    </tr>
+    <tr>
+      <th>denominator</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>all_technical</th>
+      <td>9237</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>pipeline_distinct_roles</th>
+      <td>1349</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>pipeline_mentioning</th>
+      <td>1600</td>
+      <td>57</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="excluding-trading-roles-what-it-costs">
+<h2>Excluding trading roles: what it costs<a class="headerlink" href="#excluding-trading-roles-what-it-costs" title="Link to this heading">#</a></h2>
+<p>The technical-title filter excludes trading roles. That is a choice, so here is
+what it discards: postings with a trading title that fail the filter, and how
+many tool mentions are inside them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">idx</span><span class="p">,</span> <span class="n">long</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;idx&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;long&quot;</span><span class="p">]</span>
+<span class="n">TRADE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\btrad(?:er|ing)\b|\bmarket mak&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">excluded</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[(</span><span class="o">~</span><span class="n">idx</span><span class="p">[</span><span class="s2">&quot;is_technical&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">TRADE</span><span class="p">))]</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">excluded</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">])</span>
+<span class="n">inside</span> <span class="o">=</span> <span class="n">long</span><span class="p">[</span><span class="n">long</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">ids</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;postings with a trading title excluded by the filter: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  as a share of all </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> postings: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">excluded</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  tool mentions inside them: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inside</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">inside</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>postings with a trading title excluded by the filter: 157
+  as a share of all 11,346 postings: 1.4%
+  tool mentions inside them: 184
+display
+Python                                      77
+SQL (any dialect)                           34
+R                                           16
+C++                                         12
+Data-quality / validation work (generic)    10
+Bloomberg                                    7
+MATLAB                                       5
+kdb+ / q                                     5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="four-ways-of-counting-and-why-the-choice-matters-more-than-the-sample-size">
+<h2>Four ways of counting, and why the choice matters more than the sample size<a class="headerlink" href="#four-ways-of-counting-and-why-the-choice-matters-more-than-the-sample-size" title="Link to this heading">#</a></h2>
+<p>Firms differ in board size by three orders of magnitude, from a handful of
+postings to several thousand. So “what share of postings name this tool” is
+largely a statement about whoever posts the most.</p>
+<ul class="simple">
+<li><p><strong>n_postings / n_firms</strong> — raw counts, no weighting. Look at these first.</p></li>
+<li><p><strong>% firms naming it</strong> — the extensive margin: the fraction of firms with at
+least one such posting. The most assumption-light. A firm cannot inflate it by
+posting more, by reposting one role across offices, or by repeating a stack
+blurb. It cannot distinguish one mention from many.</p></li>
+<li><p><strong>% postings (pooled)</strong> — total mentions over total postings. Dominated by the
+largest boards.</p></li>
+<li><p><strong>% postings (firm mean)</strong> — equal weight per firm. Immune to board size, but
+a two-posting firm reports 0% or 50% as though either were a measurement.</p></li>
+<li><p><strong>% postings (shrunk)</strong> — the firm mean with each rate pulled toward the
+pooled rate in proportion to how little data the firm has (beta-binomial
+empirical Bayes).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">index/firm_rates.csv</span></code> holds the numerator and denominator behind every firm, so
+the shrinkage is inspectable rather than a black box.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="o">.</span><span class="n">tools_table</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">],</span> <span class="n">layers</span><span class="o">=</span><span class="n">report</span><span class="o">.</span><span class="n">SCHEDULING_LAYERS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tool</th>
+      <th>Layer</th>
+      <th>Postings</th>
+      <th>Firms</th>
+      <th>Firms in pool</th>
+      <th>% firms naming it</th>
+      <th>% postings (shrunk)</th>
+      <th>% postings (firm mean)</th>
+      <th>% postings (pooled)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Apache Airflow</td>
+      <td>orchestrator</td>
+      <td>164</td>
+      <td>33</td>
+      <td>57</td>
+      <td>57.9</td>
+      <td>13.1</td>
+      <td>13.8</td>
+      <td>10.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Dagster</td>
+      <td>orchestrator</td>
+      <td>23</td>
+      <td>14</td>
+      <td>57</td>
+      <td>24.6</td>
+      <td>1.8</td>
+      <td>3.7</td>
+      <td>1.4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Slurm</td>
+      <td>hpc_scheduler</td>
+      <td>26</td>
+      <td>12</td>
+      <td>57</td>
+      <td>21.1</td>
+      <td>2.2</td>
+      <td>4.1</td>
+      <td>1.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Argo Workflows / Argo CD</td>
+      <td>durable_workflow</td>
+      <td>23</td>
+      <td>10</td>
+      <td>57</td>
+      <td>17.5</td>
+      <td>1.5</td>
+      <td>1.6</td>
+      <td>1.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA AutoSys</td>
+      <td>enterprise_scheduler</td>
+      <td>28</td>
+      <td>9</td>
+      <td>57</td>
+      <td>15.8</td>
+      <td>1.7</td>
+      <td>0.9</td>
+      <td>1.8</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Prefect</td>
+      <td>orchestrator</td>
+      <td>13</td>
+      <td>9</td>
+      <td>57</td>
+      <td>15.8</td>
+      <td>1.1</td>
+      <td>3.5</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>AWS Step Functions</td>
+      <td>durable_workflow</td>
+      <td>42</td>
+      <td>8</td>
+      <td>57</td>
+      <td>14.0</td>
+      <td>2.3</td>
+      <td>1.3</td>
+      <td>2.6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>BMC Control-M</td>
+      <td>enterprise_scheduler</td>
+      <td>25</td>
+      <td>8</td>
+      <td>57</td>
+      <td>14.0</td>
+      <td>1.8</td>
+      <td>1.6</td>
+      <td>1.6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Azure Data Factory</td>
+      <td>durable_workflow</td>
+      <td>10</td>
+      <td>6</td>
+      <td>57</td>
+      <td>10.5</td>
+      <td>0.6</td>
+      <td>0.4</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Temporal.io</td>
+      <td>durable_workflow</td>
+      <td>20</td>
+      <td>5</td>
+      <td>57</td>
+      <td>8.8</td>
+      <td>1.1</td>
+      <td>0.4</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Hadoop YARN</td>
+      <td>hpc_scheduler</td>
+      <td>9</td>
+      <td>5</td>
+      <td>57</td>
+      <td>8.8</td>
+      <td>0.6</td>
+      <td>0.3</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Kueue</td>
+      <td>hpc_scheduler</td>
+      <td>2</td>
+      <td>2</td>
+      <td>57</td>
+      <td>3.5</td>
+      <td>0.2</td>
+      <td>0.2</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Make / Makefiles</td>
+      <td>build_runner</td>
+      <td>2</td>
+      <td>2</td>
+      <td>57</td>
+      <td>3.5</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>cron / systemd timers</td>
+      <td>enterprise_scheduler</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>1.8</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>HTCondor</td>
+      <td>hpc_scheduler</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>1.8</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Luigi</td>
+      <td>orchestrator</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>1.8</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Apache NiFi</td>
+      <td>durable_workflow</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>1.8</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Tidal Workload Automation</td>
+      <td>enterprise_scheduler</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>1.8</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="the-estimators-demonstrated">
+<h3>The estimators, demonstrated<a class="headerlink" href="#the-estimators-demonstrated" title="Link to this heading">#</a></h3>
+<p>One firm with a single posting that names the tool, against one firm with a
+thousand postings that never does. Watch what each estimator does as the small
+firm gains data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">jobpostings.index</span> <span class="kn">import</span> <span class="n">_estimators</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">_estimators</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">size</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]))</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;mentioning firm&#39;s postings&quot;</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="si">% f</span><span class="s2">irms naming it&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;firms_any&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="s2">&quot;pooled&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;pooled&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">&quot;firm mean&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;firm_mean&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">&quot;shrunk&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;shrunk&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mentioning firm's postings</th>
+      <th>% firms naming it</th>
+      <th>pooled</th>
+      <th>firm mean</th>
+      <th>shrunk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>50.0</td>
+      <td>0.10</td>
+      <td>50.0</td>
+      <td>2.43</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10</td>
+      <td>50.0</td>
+      <td>0.99</td>
+      <td>50.0</td>
+      <td>17.01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100</td>
+      <td>50.0</td>
+      <td>9.09</td>
+      <td>50.0</td>
+      <td>42.51</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1000</td>
+      <td>50.0</td>
+      <td>50.00</td>
+      <td>50.0</td>
+      <td>50.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The firm mean always gives the one-posting firm half the vote. Pooled almost
+never does. The shrunk estimate earns its way from one to the other as evidence
+accumulates. The extensive margin sits at 50% throughout, because it only asks
+<em>whether</em> a firm names the tool, never how loudly.</p>
+<p>One property worth stating because it is easy to assume otherwise: the shrunk
+estimate does <strong>not</strong> have to lie between the firm mean and the pooled rate. It
+is a per-firm convex combination that is then averaged, so when firm size
+correlates with a firm’s own rate it can sit outside that interval. It does so
+for a small number of rows in this corpus, by small margins.</p>
+</section>
+<section id="a-live-test-does-the-weighting-hold-when-one-firm-gets-huge">
+<h3>A live test: does the weighting hold when one firm gets huge?<a class="headerlink" href="#a-live-test-does-the-weighting-hold-when-one-firm-gets-huge" title="Link to this heading">#</a></h3>
+<p>Collection was briefly capped at 250 postings per firm as a storage budget. When
+the cap was removed, one firm’s contribution grew roughly tenfold and the corpus
+grew by half. That is a natural experiment on the estimators, and the results
+are recorded here because they are the justification for the weighting scheme:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>estimator</p></th>
+<th class="head"><p>mean absolute move</p></th>
+<th class="head"><p>max</p></th>
+<th class="head"><p>rows moving &gt;1pp</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>% postings (firm mean)</p></td>
+<td><p>0.078pp</p></td>
+<td><p>0.474pp</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>% postings (shrunk)</p></td>
+<td><p>0.410pp</p></td>
+<td><p>3.067pp</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>% postings (pooled)</p></td>
+<td><p>0.881pp</p></td>
+<td><p>7.319pp</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>% firms naming it</p></td>
+<td><p>1.025pp</p></td>
+<td><p>5.263pp</p></td>
+<td><p>32</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Equal weight per firm was essentially immune: not one row moved by a percentage
+point. Pooled moved as a volume-weighted statistic must, shifting toward the new
+firm’s profile — Java +7.3pp, CI/CD +6.9, Kubernetes +5.1, Terraform +4.8 — none
+of which reflects a change in the market.</p>
+<p>The extensive margin moved most, which refutes a claim made earlier in this
+work. It is immune to <em>volume inflation of a mention already counted</em>, but not
+to <em>discovering a mention that truncation had hidden</em>. 32 tools gained firms and
+none lost any: a strictly one-directional correction, so the cap had been
+biasing the firm count downward. Capping is now opt-in and unused.</p>
+</section>
+</section>
+<section id="who-names-no-orchestrator-at-all">
+<h2>Who names no orchestrator at all<a class="headerlink" href="#who-names-no-orchestrator-at-all" title="Link to this heading">#</a></h2>
+<p>Not random, and not a gap in the data. Latency-first proprietary shops describe
+building their own scheduling layer instead of adopting a product.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ORCH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;airflow&quot;</span><span class="p">,</span> <span class="s2">&quot;prefect&quot;</span><span class="p">,</span> <span class="s2">&quot;dagster&quot;</span><span class="p">,</span> <span class="s2">&quot;luigi&quot;</span><span class="p">,</span> <span class="s2">&quot;control_m&quot;</span><span class="p">,</span> <span class="s2">&quot;autosys&quot;</span><span class="p">]</span>
+<span class="n">per_firm</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">long</span><span class="p">[</span><span class="n">long</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">ORCH</span><span class="p">)]</span>
+    <span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;firm&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;posting_id&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;nunique&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">ORCH</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">tech</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="s2">&quot;denom_all_technical&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;firm&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;technical&quot;</span><span class="p">)</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;firm&quot;</span><span class="p">)[[</span><span class="s2">&quot;firm_name&quot;</span><span class="p">,</span> <span class="s2">&quot;firm_type&quot;</span><span class="p">]]</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tech</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">per_firm</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;firm_name&quot;</span><span class="p">,</span> <span class="s2">&quot;firm_type&quot;</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">none_named</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="n">ORCH</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">substantial</span> <span class="o">=</span> <span class="n">none_named</span><span class="p">[</span><span class="n">none_named</span><span class="p">[</span><span class="s2">&quot;technical&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="s2">&quot;technical&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Firms with 20+ technical postings naming no orchestration product:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">substantial</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;firm_name&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;technical&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> technical  (</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;firm_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">substantial</span><span class="p">[</span><span class="s1">&#39;technical&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> technical postings at those firms.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Firms with 20+ technical postings naming no orchestration product:
+
+  Jane Street                      150 technical  (prop_trading)
+  Citadel                          108 technical  (multistrat)
+  Jump Trading                      94 technical  (prop_trading)
+  PIMCO                             84 technical  (asset_manager)
+  Hudson River Trading              62 technical  (prop_trading)
+  Two Sigma                         43 technical  (systematic)
+  The D. E. Shaw Group              42 technical  (systematic)
+  AQR Capital Management            36 technical  (systematic)
+  Akuna Capital                     33 technical  (market_maker)
+  Old Mission Capital               29 technical  (market_maker)
+
+681 technical postings at those firms.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="every-other-layer">
+<h2>Every other layer<a class="headerlink" href="#every-other-layer" title="Link to this heading">#</a></h2>
+<p>The full ranking for each layer, so the syllabus can be argued from the data
+rather than from the orchestration slice alone.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">LAYERS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;transform&quot;</span><span class="p">,</span> <span class="s2">&quot;datastore&quot;</span><span class="p">,</span> <span class="s2">&quot;streaming&quot;</span><span class="p">,</span> <span class="s2">&quot;storage_format&quot;</span><span class="p">,</span> <span class="s2">&quot;container&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ci&quot;</span><span class="p">,</span> <span class="s2">&quot;data_quality&quot;</span><span class="p">,</span> <span class="s2">&quot;mlops&quot;</span><span class="p">,</span> <span class="s2">&quot;ingestion&quot;</span><span class="p">,</span> <span class="s2">&quot;vendor_data&quot;</span><span class="p">,</span> <span class="s2">&quot;language&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">LAYERS</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">tools_table</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">],</span> <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== </span><span class="si">{</span><span class="n">layer</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">[[</span><span class="s2">&quot;Tool&quot;</span><span class="p">,</span> <span class="s2">&quot;Postings&quot;</span><span class="p">,</span> <span class="s2">&quot;Firms&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">% f</span><span class="s2">irms naming it&quot;</span><span class="p">,</span> <span class="s2">&quot;% postings (shrunk)&quot;</span><span class="p">]]</span>
+        <span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== transform ===
+        Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+Apache Spark       297     28               49.1                 14.6
+      pandas        98     26               45.6                  7.2
+       NumPy        69     20               35.1                  4.8
+         dbt        50     14               24.6                  3.3
+         Ray        31     11               19.3                  2.6
+        Dask        21     11               19.3                  1.6
+      Polars        20     11               19.3                  1.6
+      DuckDB         5      3                5.3                  0.4
+
+=== datastore ===
+             Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+SQL (any dialect)       599     46               80.7                 37.5
+       PostgreSQL       162     32               56.1                 12.5
+        Snowflake       195     25               43.9                 11.7
+          MongoDB       104     19               33.3                  5.6
+            Redis        77     19               33.3                  4.5
+       Databricks       212     18               31.6                 10.5
+         BigQuery        32     11               19.3                  2.3
+       ClickHouse        13      8               14.0                  1.1
+         kdb+ / q        19      7               12.3                  1.5
+         ArcticDB         6      1                1.8                  0.6
+
+=== streaming ===
+        Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+Apache Kafka       322     36               63.2                 18.7
+Apache Flink        53     14               24.6                  2.9
+    RabbitMQ        32     10               17.5                  1.8
+ AWS Kinesis        18      6               10.5                  1.1
+
+=== storage_format ===
+          Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+Apache Iceberg        66     14               24.6                  3.7
+    Delta Lake        55     13               22.8                  3.1
+Apache Parquet        44     12               21.1                  2.6
+  Apache Arrow        12      6               10.5                  0.9
+
+=== container ===
+      Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+Kubernetes       601     40               70.2                 33.0
+    Docker       477     38               66.7                 26.6
+      Helm        37     18               31.6                  2.4
+
+=== ci ===
+           Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+CI/CD (generic)       843     44               77.2                 44.3
+      Terraform       362     37               64.9                 18.7
+        Jenkins       219     25               43.9                 11.1
+ GitHub Actions        67     17               29.8                  3.7
+      GitLab CI        54     14               24.6                  2.8
+       TeamCity        13      5                8.8                  0.8
+
+=== data_quality ===
+                                           Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+       Data-quality / validation work (generic)       478     46               80.7                 29.1
+Reproducibility / versioning language (generic)       103     26               45.6                  6.5
+                             Great Expectations         8      5                8.8                  0.5
+
+=== mlops ===
+         Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+       MLflow        31     13               22.8                  1.9
+AWS SageMaker        32     10               17.5                  1.9
+Feature store        19      9               15.8                  1.2
+     Kubeflow        14      7               12.3                  0.8
+
+=== ingestion ===
+                  Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+dlt / Meltano / Singer         7      2                3.5                  0.4
+               Airbyte         1      1                1.8                  0.1
+
+=== vendor_data ===
+                      Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+Alternative data (generic)        28     13               22.8                  2.5
+                 Bloomberg        17     13               22.8                  2.9
+          LSEG / Refinitiv        10      8               14.0                  1.6
+         ICE Data Services         8      6               10.5                  1.0
+                   FactSet         4      2                3.5                  0.6
+               FINRA TRACE         1      1                1.8                  0.1
+
+=== language ===
+        Tool  Postings  Firms  % firms naming it  % postings (shrunk)
+      Python      1131     53               93.0                 72.8
+        Java       574     36               63.2                 27.2
+Bash / shell       133     32               56.1                  8.5
+         C++       143     29               50.9                 13.5
+          Go       139     27               47.4                  8.4
+        Rust        63     20               35.1                  5.3
+       Scala        61     20               35.1                  3.6
+           R        37     16               28.1                  2.6
+      MATLAB         1      1                1.8                  0.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-a-mention-is-decided">
+<h2>How a mention is decided<a class="headerlink" href="#how-a-mention-is-decided" title="Link to this heading">#</a></h2>
+<p>Every feature comes from a declarative rule in <code class="docutils literal notranslate"><span class="pre">src/tool_rules.yml</span></code>. The rules
+carry context tests because a naive keyword search is wrong in ways that change
+conclusions, and they are unit-tested against the exact strings that fooled
+earlier versions.</p>
+<p>The clearest case: “airflow” is also a facilities term. At two firms in this
+corpus the only matches were data-centre cooling roles, and counting those would
+have put a firm that never names an orchestrator at the top of the Airflow list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="s2">&quot;tool_rules.yml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+<span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;  airflow:&quot;</span><span class="p">),</span> <span class="n">rules</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;  dagster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rules</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  airflow:
+    display: Apache Airflow
+    layer: orchestrator
+    patterns: [&#39;\bairflow\b&#39;]
+    exclude_if_context:
+      - &#39;cooling&#39;
+      - &#39;\brack(-|\s)?level\b&#39;
+      - &#39;\bracks?\b&#39;
+      - &#39;CRAH|CRAC|HVAC&#39;
+      - &#39;airflow management&#39;
+      - &#39;liquid cooling&#39;
+      - &#39;containment&#39;
+      - &#39;data cent(er|re)&#39;
+      - &#39;\bCDUs?\b|\bRDHx\b&#39;
+    note: &gt;-
+      &quot;Airflow&quot; is also a facilities term. Jane Street&#39;s and HRT&#39;s only matches
+      were data-centre cooling roles (&quot;redundancy topologies, containment,
+      airflow management&quot;, &quot;rack-level cooling and airflow&quot;). Excluding those is
+      the difference between Jane Street appearing to be an Airflow shop and the
+      truth, which is that it never names an orchestrator.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other traps the rules guard against, each found by getting it wrong first:
+<code class="docutils literal notranslate"><span class="pre">scalable</span></code> matching Scala, <code class="docutils literal notranslate"><span class="pre">array</span></code> matching Ray, “temporal data” matching
+<a class="reference external" href="http://Temporal.io">Temporal.io</a>, a stack trace matching FINRA TRACE, Monte Carlo simulation matching
+a data-observability vendor, and Yarn the JavaScript package manager matching
+Hadoop YARN.</p>
+</section>
+<section id="worked-evidence">
+<h2>Worked evidence<a class="headerlink" href="#worked-evidence" title="Link to this heading">#</a></h2>
+<p>Counts are only as good as the sentences behind them. These are pulled
+programmatically from the corpus, so they cannot drift from the numbers above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">quotes</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print real sentences behind a tool&#39;s count, at most one per firm.&quot;&quot;&quot;</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">long</span><span class="p">[</span><span class="n">long</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tool</span><span class="p">][</span><span class="s2">&quot;posting_id&quot;</span><span class="p">])</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;posting_id&quot;</span><span class="p">)</span>
+    <span class="n">seen</span><span class="p">,</span> <span class="n">shown</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;postings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jsonl&quot;</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">shown</span> <span class="o">&gt;=</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hits</span> <span class="ow">or</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;firm&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;\b</span><span class="si">{</span><span class="n">tool</span><span class="si">}</span><span class="s2">\b&quot;</span><span class="p">,</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;firm&quot;</span><span class="p">])</span>
+            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="o">-</span> <span class="n">window</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]),</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="o">+</span> <span class="n">window</span><span class="p">)</span>
+            <span class="n">firm</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">],</span> <span class="s2">&quot;firm_name&quot;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">firm</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">]</span><span class="se">\n</span><span class="s2">  ...</span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="n">lo</span><span class="p">:</span><span class="n">hi</span><span class="p">]</span><span class="si">}</span><span class="s2">...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">shown</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="n">quotes</span><span class="p">(</span><span class="s2">&quot;airflow&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Bank of America — Quantitative Finance Analyst]
+  ...ata stores and big data environments. Hands-on expertise with data technologies and computing frameworks including but not limited to, Python, Spark, Airflow, Javascript and SQL. Ability to research new data technologies, architect novel data solutions for business problems and prove design approach throug...
+
+[Barclays — AVP - Data Scientist &amp; AI Engineer]
+  ...be expected to work hands-on across on prem &amp; cloud Compliance AI Platform. This requires strong proficiency in data ingestion and processing (Kafka, Airflow, Spark), cloud-based data platforms (Databricks, Snowflake, AWS S3/Azure), and SQL-based data transformation (dbt, PySpark). The candidate must demon...
+
+[BlackRock — Data Engineer – AWS Native Data Platforms, Vice President]
+  ...pelines for batch and event‑driven workloads, with a focus on reliability, scalability, and security. Develop and operate data workflows using Apache Airflow for orchestration and Python and SQL for transformation and data quality logic. Implement data transformations and models using modern analytics engi...
+
+[Brevan Howard — Front Office Data Engineer]
+  ...ations. Desirable Experience working with market data providers such as Bloomberg, Refinitiv or ICE. Experience with orchestration frameworks such as Airflow, Prefect or Dagster. Experience building internal tools or dashboards using Dash, Streamlit or similar frameworks. Experience with GoldenSource or ot...
+
+[Bridgewater Associates — Research Associate, Equities Data Engineer]
+  ...ata-aria-posinset=&quot;5&quot; data-aria-level=&quot;1&quot;&gt;&lt;span data-contrast=&quot;auto&quot;&gt;Familiarity with distributed processing and workflow orchestration (e.g., Spark, Airflow, or equivalents).&lt;/span&gt;&lt;span data-ccp-props=&quot;{&amp;quot;335551550&amp;quot;:1,&amp;quot;335551620&amp;quot;:1}&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/li&gt; &lt;/ul&gt; &lt;ul&gt; &lt;li data-leveltext=&quot;&quot;...
+
+[Capital Group — Data and AI Engineering Manager]
+  ...ed Qualifications : 10+ years building full-stack data products end-to-end, hands-on across a modern lakehouse stack (Databricks, Unity Catalog, dbt, Airflow/Astronomer); Databricks Apps experience a plus Software engineering depth across multi-tier systems, with hands-on experience delivering information ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">quotes</span><span class="p">(</span><span class="s2">&quot;control_m&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">quotes</span><span class="p">(</span><span class="s2">&quot;dagster&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Barclays — Data Engineer - Analyst]
+  ...ood communication skills (both verbal and written) Desirable skills/Preferred Qualifications: • Experience with orchestration tools (Snowflake Tasks, Dagster, Prefect) • Experience in data visualization and data analytics infra using Tableau (or similar BI tool) will be a value add • Past experience with l...
+
+[BlackRock — Senior Data Architect/Data Engineer, Aladdin Engineering - Vice President]
+  ...s layer approach. Exposure to orchestration tools (e.g., Directed acyclic graph-based workflow orchestration framework for data and batch processing, Dagster, Prefect) and patterns for dependency management and backfills. Streaming and event-driven data experience (e.g., distributed event streaming and mes...
+
+[Brevan Howard — Front Office Data Engineer]
+  ...perience working with market data providers such as Bloomberg, Refinitiv or ICE. Experience with orchestration frameworks such as Airflow, Prefect or Dagster. Experience building internal tools or dashboards using Dash, Streamlit or similar frameworks. Experience with GoldenSource or other enterprise data ...
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="collection-history">
+<h2>Collection history<a class="headerlink" href="#collection-history" title="Link to this heading">#</a></h2>
+<p>One row per run. Several runs are needed before any trend claim is available;
+<code class="docutils literal notranslate"><span class="pre">observations.csv</span></code> is built so the same tables can be recomputed per run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">runs_table</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;run_log.csv&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;run_date&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">firms</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;firm&quot;</span><span class="p">,</span> <span class="s2">&quot;nunique&quot;</span><span class="p">),</span> <span class="n">postings</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;n_in_run&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span> <span class="n">new</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">runs_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>firms</th>
+      <th>postings</th>
+      <th>new</th>
+    </tr>
+    <tr>
+      <th>run_date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-09-25</th>
+      <td>28</td>
+      <td>1993</td>
+      <td>1993</td>
+    </tr>
+    <tr>
+      <th>2026-09-27</th>
+      <td>64</td>
+      <td>7655</td>
+      <td>5664</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="where-the-language-model-is-and-is-not">
+<h2>Where the language model is, and is not<a class="headerlink" href="#where-the-language-model-is-and-is-not" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">src/discover_sources.py</span></code> asks Claude exactly one question per firm: which
+applicant-tracking system, and what is the endpoint? That is genuinely fuzzy
+work — one firm’s board token is <code class="docutils literal notranslate"><span class="pre">wehrtyou</span></code>, another’s appears only inside JSON
+embedded in an unrelated page, a third’s differs from the obvious guess by two
+characters and the obvious guess returns an empty board.</p>
+<p>The answer is then validated by calling the endpoint and requiring real postings
+back before anything is written to the manifest.</p>
+<p><strong>Claude never reads a posting, never extracts a feature and never produces a
+number.</strong> Every count here comes from the declarative regexes above. The
+proposer does not have to be trusted, because the gate confers the trust: a
+hand-written proposal clears exactly the same check.</p>
+<p>That boundary generalises well beyond job postings. Use the model where judgment
+is cheap to check and expensive to automate, and keep it away from anything you
+intend to report as a measurement.</p>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week8/web_authentication.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Web Authentication and Authorization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../overview_w0.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture 0: Portfolio Selection and a First Look at the Course</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-sample-is-and-what-it-is-not">What the sample is, and what it is not</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample-frame">The sample frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-denominators">Three denominators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excluding-trading-roles-what-it-costs">Excluding trading roles: what it costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-ways-of-counting-and-why-the-choice-matters-more-than-the-sample-size">Four ways of counting, and why the choice matters more than the sample size</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-estimators-demonstrated">The estimators, demonstrated</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-live-test-does-the-weighting-hold-when-one-firm-gets-huge">A live test: does the weighting hold when one firm gets huge?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-names-no-orchestrator-at-all">Who names no orchestrator at all</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#every-other-layer">Every other layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-mention-is-decided">How a mention is decided</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-evidence">Worked evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collection-history">Collection history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-language-model-is-and-is-not">Where the language model is, and is not</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

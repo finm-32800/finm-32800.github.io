@@ -1,6 +1,6 @@
-# The Midterm Report and Style Guides
+# The Collaborative Report and Style Guides
 
-In place of a midterm exam, the class will collaboratively produce a single, polished, publication-style [Midterm Report](../midterm_report.md). We'll write our own **style guide** for it together.
+As one of the homework assignments, the class will collaboratively produce a single, polished, publication-style [Collaborative Report](../collaborative_report.md). We'll write our own **style guide** for it together.
 
 Most organizations that publish reports maintain their own style guide—specifying things like fonts, colors, chart conventions, and accessibility requirements—so that many contributors produce one coherent document. A few public- and private-sector examples to look at:
 

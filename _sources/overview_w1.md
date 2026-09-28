@@ -6,44 +6,120 @@ Week1/what_is_this_course_about.md
 Week1/reproducible_analytical_pipelines.md
 Week1/case_study_reproducibility_in_finance.md
 Week1/virtual_environments.md
-Week1/midterm_report_and_style_guides.md
+Week2/WRDS_intro_and_web_queries.md
+notebooks/_01_wrds_python_package_ipynb.ipynb
+Week2/env_files.md
 ```
 
+The paper this week is Sharpe (1964) and the object is the CAPM's market
+portfolio. The tools are the three that everything else in the course sits on:
+Git, GitHub, and a pinned environment. By the end of class you will have cloned
+a repository, built its environment, connected to WRDS, and pulled your first
+data.
 
-## To start in class: Homework 0 
+## Announcements
 
-- Complete the steps to set up your computing environment. These are described in the ungraded homework, ["Homework 0"](./HW0.md). While the due date is flexible, you should do this as soon as possible. These steps will guide you through the set up needed to complete the homework in this course. 
+- **Apply for your WRDS account today.** Approval takes several days and
+  [HW 1](./HW1.md) cannot run without it. The registration link and the
+  UChicago contact are in [Getting Set Up](./Week0/getting_set_up.md).
+- **[HW 0](./HW0.md) is ungraded and due to nobody, but do it now.** It sets up
+  your machine and walks the full cycle every later assignment repeats: clone,
+  install, run, edit, test, push. HW 1 assumes all of it works.
+- **[HW 1](./HW1.md) launches today** and is due at the end of week 3. The date
+  is on Canvas.
+- **Clone the in-class examples repo**:
+  <https://github.com/finm-32800/inclass_examples>. It holds the small,
+  self-contained demos we draw on all quarter (environments, env vars, PyDoit,
+  SQL, LaTeX, Polars, Sphinx). We use `software_environments/` and `env_vars/`
+  tonight.
+- **Watch the course website repository** so you get discussion-board posts:
+  <https://github.com/finm-32800/finm-32800.github.io>. Ask questions on the
+  [discussion board](https://github.com/orgs/finm-32800/discussions) rather than
+  by email.
+- **Start thinking about a final-project partner.** Projects are done in pairs.
+  The project list and the preference survey go out in week 2.
 
 ## Objectives
 
-The broad objective is to define the purpose of the course, the [discussions page on GitHub](https://github.com/orgs/finm-32800/discussions), 
-how to access the [course textbook](https://finm-32800.github.io/), and how to download and submit homework assignments on GitHub.
+- Know what this course is and where it fits:
+  [What is this course about?](./Week1/what_is_this_course_about.md) and the
+  [course map](./Week0/course_map.md), which shows the job postings behind the
+  skills and the schedule of papers.
+- Be able to say what a reproducible analytical pipeline is and why it is the
+  organizing idea of the course:
+  [Reproducible Analytical Pipelines](./Week1/reproducible_analytical_pipelines.md).
+- Understand the stakes:
+  [Is There a Reproducibility Crisis in Finance?](./Week1/case_study_reproducibility_in_finance.md)
+- Use Git and GitHub for the course's workflow: clone, branch, commit, push, and
+  read a pull request.
+- Create and pin a [virtual environment](./Week1/virtual_environments.md), and
+  explain why an analysis that runs on your laptop and nowhere else is not a
+  result.
+- Connect to WRDS and pull CRSP data:
+  [Introduction to WRDS and WRDS Web Queries](./Week2/WRDS_intro_and_web_queries.md),
+  then automate it with the
+  [WRDS Python package](notebooks/_01_wrds_python_package_ipynb.ipynb).
+- Keep credentials out of Git: [Env Files](./Week2/env_files.md).
+- State what the CAPM claims and what the market portfolio is in practice.
 
+## Agenda
 
-- Introduction and Syllabus
-    - Who am I?
-    - Review [syllabus.](./README.md) 
-    - Review [Homework 0"](./HW0.md)
-- What is the purpose and scope of the course?
-    - [What is this course about? Where does this course fit in?](./Week1/what_is_this_course_about.md)
-    - [What are Reproducible Analytical Pipelines?](./Week1/reproducible_analytical_pipelines.md)
-    - [Case Study: Is There A Reproducibility Crisis In Finance?](./Week1/case_study_reproducibility_in_finance.md)
-    - Discuss the final project? What will students do? What is the purpose?
-- Demonstrate how course will be using GitHub. Show how to download and submit assignments.
-    - Work through an in-class example of submitting homework on GitHub, using [HW 0](./HW0.md).
-    - Show students how to clone the assignment repository.
-    - Complete the example HW together and submit it by pushing to GitHub
-- Introduce the **in-class examples repo**: <https://github.com/finm-32800/inclass_examples>
-    - This holds the small, self-contained demos used throughout the course (virtual environments, env vars, PyDoit, Sphinx, polars, WRDS/Datastream, LaTeX, etc.). Have students clone it now so it's ready when we reference it in later lectures.
-    - We'll pull from it the first time when we cover virtual environments (see `software_environments/` and `env_vars/`).
-- Discuss [Virtual Environments](./Week1/virtual_environments.md)
-- Discuss and start [Homework 0](./HW0.md)
+1. **Introduction.** Who I am, and the [syllabus](./README.md). Walk the
+   [course map](./Week0/course_map.md): who the course is for, the postings
+   behind its skills, and the nine papers.
+2. **What we are building all quarter.**
+   [What is this course about?](./Week1/what_is_this_course_about.md),
+   [Reproducible Analytical Pipelines](./Week1/reproducible_analytical_pipelines.md),
+   and the [reproducibility case study](./Week1/case_study_reproducibility_in_finance.md).
+   Then the final project in outline, so you know what you are working toward.
+3. **Git and GitHub, by doing.** Clone [HW 0](./HW0.md), make a change, commit,
+   push. This is also how every assignment is submitted. Point at the two
+   [GitHub Skills](https://skills.github.com/) tutorials that are HW 1 Part 1:
+   [review pull requests](https://github.com/skills/review-pull-requests) and
+   [resolve merge conflicts](https://github.com/skills/resolve-merge-conflicts).
+4. **Virtual environments.** [Virtual Environments](./Week1/virtual_environments.md),
+   worked through `software_environments/` in the in-class repo, which builds the
+   same small app four ways: `conda`, `conda` + `pip`, `uv`, and `pixi`. Create
+   the `finm` environment now; every repo this quarter installs into it.
+   *Why we care:* you will be handed a series of repositories, each with pinned
+   dependencies, and the pinning is the only reason my results and yours agree.
+5. **First contact with WRDS.**
+   [WRDS and web queries](./Week2/WRDS_intro_and_web_queries.md) to explore CRSP
+   by hand, so the automated pull is not a black box. Then the
+   [WRDS Python package notebook](notebooks/_01_wrds_python_package_ipynb.ipynb)
+   to automate the same query, and
+   [Env Files](./Week2/env_files.md) plus `env_vars/` in the in-class repo for
+   where the credentials live. Creating a `.pgpass` file so the pulls
+   authenticate without prompting is covered in that notebook, and HW 1 needs it.
+6. **The CAPM, and what the market portfolio is in practice.** The theory says
+   market beta is the only priced risk. The practical object is a
+   value-weighted index of everything, which is what CRSP publishes and what you
+   are about to rebuild. This is the framing for HW 1's first half; the alphas
+   the CAPM leaves behind are next week's problem.
+7. **Launch [HW 1](./HW1.md).** Clone it, build the environment, put credentials
+   in `.env`, run `doit`, run `pytest`, watch it fail, and start filling in
+   `calc_CRSP_indices.py` together.
 
-## Homework 0
+## Homework
 
-Learning objects for [HW0](./HW0.md): 
-Introduction to GitHub, using unit tests and GitHub actions for autograding.
+[HW 1](./HW1.md) launches today and is due at the end of week 3. It is one
+assignment covering two papers. This week's half rebuilds the CRSP
+value-weighted and equal-weighted market indices and reconstructs the S&P 500
+from its constituents:
 
-## Extra Time:
+- [HW Guide Part A: CRSP Market Returns Indices](notebooks/_02_CRSP_market_index_ipynb.ipynb)
+- [HW Guide Part B: Reconstructing the S&P 500 Index](notebooks/_03_SP500_constituents_and_index_ipynb.ipynb)
 
-If we have extra time, we will begin discussing how to pull data from WRDS and how this will factor into HW 1. 
+Next week's half merges CRSP with Compustat and replicates Fama and French
+(1993). You do not need to wait for it to start Parts 1 and 2.
+
+The way to work is the same in every assignment: run `doit` so the data is
+pulled, then run `pytest`, read the failing test, and write the code that
+passes it. Do not edit the test files.
+
+## Looking ahead to Week 2
+
+Once you have a pull you trust, the next question is how to make a dozen of them
+run in the right order with one command. That is the **PyDoit task runner**, and
+the case study is the **Fama-French 1993** replication that completes HW 1. Week
+2 is also when the final-project list and the partner-preference survey go out.

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Homework 4 &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Homework 4: Order Book Validation and Flow Toxicity &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -51,8 +51,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Homework 5 (Optional)" href="HW5.html" />
-    <link rel="prev" title="Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve" href="notebooks/_02_replicate_GSW2005_ipynb.html" /> 
+    <link rel="next" title="Homework 5: The Collaborative Report and Airflow" href="HW5.html" />
+    <link rel="prev" title="Homework 3: Option-Implied Crash Probabilities" href="HW3.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -189,6 +189,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -196,6 +197,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/tour_of_the_course.html">A Tour of the Course</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/getting_set_up.html">Getting Set Up</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
@@ -210,89 +212,84 @@
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/virtual_environments.html">Virtual Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week1/midterm_report_and_style_guides.html">The Midterm Report and Style Guides</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Virtual Environments, WRDS, and CRSP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Automating the Pipeline with PyDoit, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: ChartBook, GitHub Pages, and Reproducible Reports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Proposal Presentations, LaTeX, and the Midterm Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w6.html">Week 6: Python Packages, FINM, and the ChartBook Catalog</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Medium-Sized Data and Polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Midterm, and Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="HW0.html">Homework 0</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5 (Optional)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="midterm_report.html">Midterm Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5: The Collaborative Report and Airflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaborative_report.html">Collaborative Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
@@ -303,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="exam_prep.html">Exam Preparation</a></li>
 </ul>
 
     </div>
@@ -488,7 +486,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Homework 4</h1>
+    <h1>Homework 4: Order Book Validation and Flow Toxicity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -500,13 +498,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-fill-in-the-fedwatch-math-1-point">Task 1: Fill in the FedWatch math (1 point)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-deploy-your-daily-self-updating-site-2-points">Task 2: Deploy your daily self-updating site (2 points)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warnings">Warnings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 </ul>
             </nav>
         </div>
@@ -517,127 +509,56 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="homework-4">
-<h1>Homework 4<a class="headerlink" href="#homework-4" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="homework-4-order-book-validation-and-flow-toxicity">
+<h1>Homework 4: Order Book Validation and Flow Toxicity<a class="headerlink" href="#homework-4-order-book-validation-and-flow-toxicity" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Due Date:</strong> Sunday, August 23, 2026 at 11:59 PM CT</p></li>
-<li><p><strong>Link to Assignment:</strong> TBD</p></li>
+<li><p><strong>Launched:</strong> week 5. <strong>Due:</strong> week 7. The date is posted on Canvas.</p></li>
+<li><p><strong>Link to Assignment:</strong> posted at launch</p></li>
+<li><p><strong>Goes with:</strong> weeks 5 and 6</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Homework 4 has been reworked. An earlier version of this assignment was an
-options case study; that assignment has been retired, and the options
-notebooks remain class material in Week 7. Homework 4 is now a short, focused
-assignment: <strong>deploy a live, self-updating clone of the CME FedWatch tool.</strong></p>
-</div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Homework 4 turns the in-class FedWatch case study
-(<a class="reference external" href="https://github.com/finm-32800/case_study_fedwatch">finm-32800/case_study_fedwatch</a>)
-into a live monitor. The pipeline pulls 30-Day Fed Funds futures (ZQ) from
-Databento and the effective federal funds rate (EFFR) from FRED, computes the
-market-implied probability of a hike, cut, or no change at the next FOMC
-meeting, and renders the forecast chart into a chartbook site. You will
-(1) fill in the small amount of math that has been removed and (2) publish the
-site so that a GitHub Action rebuilds it every morning, unattended.</p>
-<p>The two class notebooks from Week 8 walk through everything the pipeline does:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html"><span class="std std-doc">30-Day Fed Funds Futures Data from Databento</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/_02_fedwatch_replication.html"><span class="std std-doc">Replicating the CME FedWatch Tool</span></a></p></li>
-</ul>
-<p>This assignment is the Week 8 material—GitHub Actions, cron scheduling, and
-GitHub Pages—put into practice. It is also the course’s themes in miniature:
-a reproducible analytical pipeline that runs end-to-end with no human in the
-loop, from raw data pull to published product.</p>
+<p>A limit order book is the state of a market at an instant, and a market maker
+lives inside it. In this assignment you rebuild the E-mini S&amp;P 500 futures
+book from the raw message feed, validate your reconstruction against the
+vendor’s own book, and then measure the toxicity of order flow following
+<a class="reference external" href="https://doi.org/10.1093/rfs/hhs053">Easley, López de Prado, and O’Hara (2012)</a>,
+<em>Flow Toxicity and Liquidity in a High-Frequency World</em>, whose VPIN measure was
+built on exactly this contract.</p>
+<p>The assignment starts locally on one trading day and then scales. Pull the
+market-by-order (<code class="docutils literal notranslate"><span class="pre">mbo</span></code>) and top-ten-levels (<code class="docutils literal notranslate"><span class="pre">mbp-10</span></code>) schemas for ES from
+Databento’s CME Globex feed. Replay the messages to rebuild the book, and
+diff your book against the vendor’s <code class="docutils literal notranslate"><span class="pre">mbp-10</span></code> snapshot: every discrepancy is a
+bug you can locate, which makes this the cleanest data-validation exercise in
+the course. Classify trades by the bulk volume method and by the tick rule and
+check them against each other. Then compute VPIN in volume time. The full run
+covers a quarter of trading days, and the days are independent, so it runs as
+an array of batch jobs on a cluster: either UChicago’s Midway3 with SLURM or
+the WRDS Cloud with Grid Engine. Which platform hosts the graded run is
+announced at launch; the other is used in class.</p>
+<p>The extension aimed at options desks: pull top-of-book quotes for the E-mini
+options and ask whether options market makers widen their quoted spreads when
+the underlying’s order flow turns toxic.</p>
 </section>
 <section id="learning-outcomes">
 <h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Schedule recurring jobs with cron in GitHub Actions</p></li>
-<li><p>Publish a static site with GitHub Pages</p></li>
-<li><p>Manage API keys with Actions repository secrets (in CI) and <code class="docutils literal notranslate"><span class="pre">.env</span></code> files (locally)</p></li>
-<li><p>Run a full <code class="docutils literal notranslate"><span class="pre">doit</span></code> pipeline unattended in CI</p></li>
-<li><p>Understand how fed funds futures prices imply FOMC meeting-outcome probabilities</p></li>
+<li><p>Reconstruct a limit order book from market-by-order messages and validate it against a reference.</p></li>
+<li><p>Write data-validation tests with a known ground truth, and trade-classification checks without one.</p></li>
+<li><p>Compute VPIN and reproduce the toxicity-before-stress pattern of Easley, López de Prado, and O’Hara (2012).</p></li>
+<li><p>Work with data that does not fit on a laptop: Polars, Parquet, lazy evaluation, and a job scheduler on a remote machine.</p></li>
+<li><p>Connect to a cluster over SSH, move data with <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, submit and monitor a job array, and bring results back.</p></li>
 </ul>
 </section>
-<section id="what-you-do">
-<h2>What You Do<a class="headerlink" href="#what-you-do" title="Link to this heading">#</a></h2>
-<p>The assignment repository’s README spells out every step; in brief:</p>
-<section id="task-1-fill-in-the-fedwatch-math-1-point">
-<h3>Task 1: Fill in the FedWatch math (1 point)<a class="headerlink" href="#task-1-fill-in-the-fedwatch-math-1-point" title="Link to this heading">#</a></h3>
-<p>Three functions in <code class="docutils literal notranslate"><span class="pre">src/fedwatch.py</span></code> have had their bodies replaced with
-<code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">NotImplementedError(...)</span></code>: <code class="docutils literal notranslate"><span class="pre">implied_rate</span></code>, <code class="docutils literal notranslate"><span class="pre">solve_post_meeting_rate</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">move_probability</span></code>. Each docstring specifies exactly what the function
-must do, and the <a class="reference internal" href="notebooks/_02_fedwatch_replication.html"><span class="std std-doc">replication notebook</span></a>
-derives the same formulas step by step.</p>
-<p>Your feedback loop runs offline, with no API key:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-vv<span class="w"> </span>./src/test_fedwatch.py<span class="w"> </span>./src/test_fedwatch_monitor.py
-</pre></div>
-</div>
-<p>Once those tests pass, run the full pipeline locally: copy <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> to
-<code class="docutils literal notranslate"><span class="pre">.env</span></code>, add your Databento API key (the pull is cost-guarded and free), and
-run <code class="docutils literal notranslate"><span class="pre">doit</span></code>. The built site lands in <code class="docutils literal notranslate"><span class="pre">docs/index.html</span></code>.</p>
-</section>
-<section id="task-2-deploy-your-daily-self-updating-site-2-points">
-<h3>Task 2: Deploy your daily self-updating site (2 points)<a class="headerlink" href="#task-2-deploy-your-daily-self-updating-site-2-points" title="Link to this heading">#</a></h3>
-<p>The workflow in <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code> rebuilds the pipeline and
-publishes the chartbook site to GitHub Pages—on every push to <code class="docutils literal notranslate"><span class="pre">main</span></code> and on a
-daily cron (14:30 UTC, mid-morning Chicago, after the NY Fed’s ~9 AM ET EFFR
-print). You will:</p>
-<ol class="arabic simple">
-<li><p>Push your completed pipeline to a new <strong>public</strong> repo under your personal
-GitHub account (the assignment repo itself stays private).</p></li>
-<li><p>Add your <code class="docutils literal notranslate"><span class="pre">DATABENTO_API_KEY</span></code> as an Actions repository secret—never commit
-it in code.</p></li>
-<li><p>Run the workflow once by hand and watch it go green: it pulls the data,
-executes the notebooks, renders the forecast chart, builds the site, runs
-the tests, and pushes the result to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
-<li><p>Enable GitHub Pages on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> and confirm your site is live at
-<code class="docutils literal notranslate"><span class="pre">https://&lt;you&gt;.github.io/&lt;repo&gt;/</span></code>.</p></li>
-<li><p>Back in the assignment repo, record your attestation: set the flag to
-<code class="docutils literal notranslate"><span class="pre">True</span></code> and paste your live site URL in <code class="docutils literal notranslate"><span class="pre">src/monitor_self_attestation.py</span></code>,
-then commit and push.</p></li>
-</ol>
-<p>From then on, the cron refreshes your forecast every morning with no action
-from you. I will visit the URL you provide and check that the site is live
-and current.</p>
-</section>
-</section>
-<section id="grading">
-<h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">#</a></h2>
-<p>3 points total, autograded on every push by GitHub Actions:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Component</p></th>
-<th class="head"><p>Points</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>FedWatch math tests pass (Task 1)</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-odd"><td><p>Monitor attestation: flag set (Task 2)</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>Monitor attestation: live site URL provided (Task 2)</p></td>
-<td><p>1</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>I will spot-check the attested URLs to confirm the sites are live and
-updating on schedule.</p>
-</section>
-<section id="warnings">
-<h2>Warnings<a class="headerlink" href="#warnings" title="Link to this heading">#</a></h2>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The assignment repo must stay <strong>private</strong>—it is your graded work. Your
-separate deploy repo will be public, including your completed Task 1 code;
-that is intended for this assignment.</p></li>
-<li><p>Your API key goes into <code class="docutils literal notranslate"><span class="pre">.env</span></code> locally and into the Actions secret in CI. If
-it ends up in a commit anywhere, revoke it and generate a new one.</p></li>
-<li><p>Do not edit the test files (<code class="docutils literal notranslate"><span class="pre">test_*.py</span></code>).</p></li>
+<li><p>Databento <code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code>: <code class="docutils literal notranslate"><span class="pre">mbo</span></code>, <code class="docutils literal notranslate"><span class="pre">mbp-10</span></code>, and <code class="docutils literal notranslate"><span class="pre">mbp-1</span></code> for E-mini S&amp;P 500 futures and E-mini options, free under the course license.</p></li>
+<li><p>The in-class contrast is NYSE TAQ on the WRDS Cloud, following Holden and Jacobsen (2014); see <a class="reference internal" href="notebooks/_01_databento_ipynb.html"><span class="std std-doc">Pulling Market Data From Databento</span></a> for the vendor’s schemas.</p></li>
 </ul>
+<p>Details, the date range, the platform for the graded run, and the repository
+link are posted at launch. An optional practice run on Midway3, with a
+different pipeline, is in <a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html"><span class="std std-doc">Optional Lab: Clean TRACE on Midway</span></a>.</p>
 </section>
 </section>
 
@@ -656,12 +577,12 @@ it ends up in a commit anywhere, revoke it and generate a new one.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notebooks/_02_replicate_GSW2005_ipynb.html"
+       href="HW3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</p>
+        <p class="prev-next-title">Homework 3: Option-Implied Crash Probabilities</p>
       </div>
     </a>
     <a class="right-next"
@@ -669,7 +590,7 @@ it ends up in a commit anywhere, revoke it and generate a new one.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 5 (Optional)</p>
+        <p class="prev-next-title">Homework 5: The Collaborative Report and Airflow</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -691,13 +612,7 @@ it ends up in a commit anywhere, revoke it and generate a new one.</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-do">What You Do</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-fill-in-the-fedwatch-math-1-point">Task 1: Fill in the FedWatch math (1 point)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-deploy-your-daily-self-updating-site-2-points">Task 2: Deploy your daily self-updating site (2 points)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warnings">Warnings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 </ul>
   </nav></div>
 

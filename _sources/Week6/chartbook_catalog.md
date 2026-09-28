@@ -5,13 +5,13 @@
 1. Understand the difference between a ChartBook *pipeline* and a ChartBook *catalog*, and why a catalog is the right tool for sharing data between repositories.
 2. Upgrade to ChartBook 0.1.x and understand what changed in this release (a breaking manifest redesign, catalog auto-discovery, and a simpler install).
 3. Set up a personal catalog on your own machine, register cloned pipeline repos in it, and load their data by name with `data.load(...)`.
-4. Apply this to the [Midterm Report](../midterm_report.md): build your figure on top of data produced by the [FTSFR pipeline repos](https://github.com/orgs/ftsfr/repositories) instead of re-writing data pulls from scratch.
+4. Apply this to the [Collaborative Report](../collaborative_report.md): build your figure on top of data produced by the [FTSFR pipeline repos](https://github.com/orgs/ftsfr/repositories) instead of re-writing data pulls from scratch.
 
 ## The Problem: Dependencies Between Repositories
 
 By now you have built several *pipelines*: repositories where `doit` pulls raw data, transforms it, and produces registered dataframes, charts, and notebook reports. Each pipeline is self-contained, which is exactly what makes it reproducible.
 
-But real analytical work is rarely one repository deep. Your midterm-report figure might need consolidated CRSP Treasury data, or the Fed's published yield curve, or Markit CDS spreads. Some other repository has *already* solved that data problem, carefully. Your options:
+But real analytical work is rarely one repository deep. Your collaborative-report figure might need consolidated CRSP Treasury data, or the Fed's published yield curve, or Markit CDS spreads. Some other repository has *already* solved that data problem, carefully. Your options:
 
 1. **Copy the pull code** into your repo. Fast today, painful forever: the copy drifts out of date, bugs get fixed in one place but not the other, and every project pays the full data-cleaning cost again.
 2. **Copy the output file** by hand. Now nobody knows how that parquet was made. This violates everything this course stands for.
@@ -146,9 +146,9 @@ chartbook data get-path --pipeline ftsfr/fed_yield_curve --dataframe fed_yield_c
 chartbook data get-docs --pipeline ftsfr/fed_yield_curve --dataframe fed_yield_curve
 ```
 
-## Using the Catalog for Your Midterm Report Contribution
+## Using the Catalog for Your Collaborative Report Contribution
 
-This is the workflow for your [Midterm Report](../midterm_report.md) figure: rather than writing a new data pull from scratch, build on a dataset an FTSFR pipeline already produces. Clone the repo, register it, run it, then `data.load(...)` inside your contribution's code in the midterm-report repo. Your contribution stays reproducible (the data's provenance is a registered, documented pipeline), and the report becomes a *downstream consumer* of maintained data rather than a pile of one-off scripts.
+This is the workflow for your [Collaborative Report](../collaborative_report.md) figure: rather than writing a new data pull from scratch, build on a dataset an FTSFR pipeline already produces. Clone the repo, register it, run it, then `data.load(...)` inside your contribution's code in the collaborative-report repo. Your contribution stays reproducible (the data's provenance is a registered, documented pipeline), and the report becomes a *downstream consumer* of maintained data rather than a pile of one-off scripts.
 
 ### Which FTSFR repos can you use?
 
@@ -170,4 +170,4 @@ Not every FTSFR pipeline is runnable by students: some require a Bloomberg Termi
 
 The remaining pipelines (`basis_tips_treas`, `basis_treas_sf`, `basis_treas_swap`, `cip`, `commodities`, `foreign_exchange`, `sovereign_bonds`) require Bloomberg Terminal data and are off the menu for this exercise, though you're welcome to read their code.
 
-Pick the pipeline closest to your claimed midterm-report topic. Where possible, choose one that also relates to your final-project paper, so the effort compounds.
+Pick the pipeline closest to your claimed collaborative-report topic. Where possible, choose one that also relates to your final-project paper, so the effort compounds.

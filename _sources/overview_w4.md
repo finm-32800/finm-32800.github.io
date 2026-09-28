@@ -1,67 +1,152 @@
-# Week 4: ChartBook, GitHub Pages, and Reproducible Reports
+# Week 4: Python Packaging and Documentation with Sphinx
 
 ```{toctree}
 :maxdepth: 1
-Week4/reports_with_jupyter_notebooks.md
-Week3/github_pages_preview.md
+Week6/python_packaging_with_hatch.md
+Week5/sphinx.md
+Week6/chartbook_catalog.md
+Week7/databento.md
+notebooks/_01_databento_ipynb.ipynb
+Week7/LSEG_datastream.md
+notebooks/_01_corporate_hedging_ipynb.ipynb
+notebooks/_02_spx_hedging_ipynb.ipynb
 ```
+
+So far your code has lived in repositories that only you run. A **package** is
+code organized so that a teammate can `pip install` it and build on it, and
+**documentation** is what makes that possible. This is the week that turns your
+coursework into something you can hand a hiring manager, and the paper is
+Martin and Shi (2025): the deliverable in [HW 3](./HW3.md) is an installable,
+tested package that recovers the market's own probability distribution from
+option prices.
 
 ## Announcements
 
-- **Project assignments go out Friday morning.** Each group will be emailed its assigned paper from the [Potential Final Projects](./FinalProject/potential_final_projects.md) list. If you haven't submitted your project preferences yet, please do so by tonight.
-- **Proposal presentations begin next week, Thursday July 16.** The schedule of who presents when, and your assigned date, will be posted on Canvas.
-- [HW 3](./HW3.md) is assigned, due **Friday, July 24**: the yield-curve pipeline, published as a ChartBook site on GitHub Pages.
+- **[HW 2](./HW2.md) is due next week.** Questions at the start of class.
+- **[HW 3](./HW3.md) launches today,** due in week 6: option-implied crash
+  probabilities.
+- **Proposal presentations start next week.** The schedule is on Canvas. If you
+  present in week 5 or 6, your
+  [consultation](https://finm-32800.youcanbook.me/) must already be booked.
+- **Databento API keys.** You need one for HW 3 and again for HW 4. Everything
+  we use is on the CME Globex feed (`GLBX.MDP3`), which is free under the course
+  license; the equity-options feed is metered, so do not point a pull at it.
 
-## Agenda Item 1: Final Project Proposal Schedule and Requirements
+## Objectives
 
-The main new logistics this week. Full procedure and grading are in the [Proposal Presentation Rubric](./FinalProject/proposal_presentation_rubric.md); walk through it in class.
+- Explain the anatomy of a published Python package: `pyproject.toml`, a build
+  backend, versioning, dependencies, and CLI entry points
+  ([Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md)).
+- Build and publish a package with `hatch`, and know what TestPyPI is for.
+- Explain what semantic versioning promises, and what a breaking change obliges
+  you to do.
+- Generate documentation from the code itself with [Sphinx](./Week5/sphinx.md),
+  and say what role [docstrings](https://www.geeksforgeeks.org/python-docstrings/)
+  play in it.
+- Contribute to a package you do not own: fork, branch, PR, review, merge.
+- Consume data another repository produces through a ChartBook catalog
+  ([The ChartBook Catalog](./Week6/chartbook_catalog.md)).
+- Know the options data on offer and their quirks: the OptionMetrics volatility
+  surface via WRDS, and CME Globex via [Databento](./Week7/databento.md).
 
-### The three separate events (don't confuse them)
+## Agenda Item 1: Anatomy of a Package
 
-1. **Instructor consultation**: 1-on-1 with me, [booked via youcanbook.me](https://finm-32800.youcanbook.me/). Must be scheduled at least one week before your proposal presentation. Booking it is [HW 3](./HW3.md) Part 3.
-2. **Proposal presentation**: in-class over Zoom, on your assigned date (posted on Canvas). *Advertise the product you'll build*: what the paper is about, your data sources, and the new table/figure you'll produce. Classmates fill out a peer-feedback survey on every group.
-3. **Final project presentation**: Week 10, completed project + individual oral defense.
+Work through
+[Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md):
+`pyproject.toml` as the single source of truth, the Hatchling build backend,
+dynamic versioning, and the one-line `[project.scripts]` entry that creates a
+CLI command. Then the packages you can practice on:
 
-### How the proposal is graded (20% of course grade)
+- [`finm`](https://pypi.org/project/finm/) ([docs](https://jeremybejarano.com/finm/))
+  is the course's own published package: `finm.fixedincome` (the yield-curve
+  functions you imported in HW 2), `finm.data` (Fama-French, Federal Reserve,
+  He-Kelly-Manela and other loaders), and `finm.analytics`. It is the low-stakes
+  place to practice the contribution loop on a package you do not own, crossing
+  a repository boundary you do not control.
+- [`stockbeta`](https://github.com/finm-32800/stockbeta) is a practice package
+  published to [TestPyPI](https://test.pypi.org/project/stockbeta/) and not to
+  the real PyPI. TestPyPI is the rehearsal space: the full publish workflow with
+  none of the consequences of claiming a real name.
+- [`chartbook`](https://pypi.org/project/chartbook/) is the package you have been
+  installing all quarter. Reading its [changelog](https://backofficedev.github.io/chartbook/changelog.html)
+  is a live case study in how a release is actually cut: changelog entry, version
+  bump, `hatch build` producing the wheel and sdist, publish. Semantic versioning
+  as a contract, and why a breaking change in a `0.x` package bumps the minor
+  version.
 
-- **Ambition (8 pts)**: is the proposed product meaningfully more than a mechanical replication?
-- **Usefulness & interest (8 pts)**: judged partly from classmates' peer-feedback surveys. Make the case for why someone would clone your repo.
-- **Clarity of data sources & analysis (4 pts)**: clearly explain your data and what your new table/figure will show.
+## Agenda Item 2: Documentation with Sphinx
 
-Plus Proposal Attendance & Feedback (10% of course grade): you must attend *every* proposal session and submit the peer-feedback survey for *every* group; no allowed misses.
+[Sphinx](./Week5/sphinx.md) is the tool that builds the documentation for pandas,
+and for this textbook. It generates browsable reference pages from your code, so
+the docs sit next to the code and do not fall behind it.
 
-### Resources to point students to
+- Docstrings as the source: what `autodoc` reads and what conventions make it
+  readable.
+- Forking a project and standing up its docs, featuring
+  <https://github.com/jmbejara/quantstats_lumi>.
+- Your final project is the natural first candidate for a documented, installable
+  package.
 
-- [Proposal Presentation Rubric](./FinalProject/proposal_presentation_rubric.md): the procedure and grading above.
-- [Final Project Instructions and Rubric](./FinalProject/final_project_rubric.md): how the *project itself* is graded.
-- [Potential Final Projects](./FinalProject/potential_final_projects.md): every assigned paper, its tasks, and its data sources.
-- [Project Previews](./FinalProject/project_previews.md): what a finished replication looks like (papers #1, #2, #4).
+## Agenda Item 3: The ChartBook Catalog
 
-## Agenda Item 2: Notebooks as Reports
+The question a package forces on you is the same one the class report will force
+in week 6: **what should your code do when it needs data another repository
+already produces?** Copying pull code duplicates work and drifts.
+[The ChartBook Catalog](./Week6/chartbook_catalog.md) is the answer.
 
-Start with the report itself. [Reports with Jupyter Notebooks](./Week4/reports_with_jupyter_notebooks.md): why notebooks are for *reporting*, not pipeline steps; using `nbconvert` to execute a notebook from the command line and export it to HTML; and how a notebook fits into the `doit` workflow (as in the course [project template](./Week3/project_structure.md) and the yield-curve repo's `task_run_notebooks`).
+- Pipelines vs. catalogs: a catalog is a `chartbook.toml` with a `[pipelines]`
+  registry. The [FTSFR organization](https://github.com/orgs/ftsfr/repositories)
+  is the production-scale example: about twenty pipeline repos plus one catalog
+  repo.
+- **Hands-on:** clone a couple of FTSFR pipeline repos, register them in your
+  global catalog (`chartbook catalog add`, or `members` auto-discovery), build
+  and browse the combined site, and load another repo's dataframe by name with
+  `data.load(pipeline=..., dataframe=...)`.
+- The chapter lists which FTSFR repos run on free public data or WRDS alone. The
+  Bloomberg-gated ones are off the menu.
 
-## Agenda Item 3: ChartBook Deep Dive
+## Agenda Item 4: Options Data and the Options Case Study
 
-This is the follow-on to Week 3's [project-structure discussion](./Week3/project_structure.md) that we didn't get to. [ChartBook](https://pypi.org/project/chartbook/) is a catalog for a data project's pipelines, dataframes, and charts that generates a searchable static website from them, bundling the notebook reports above with the pipeline's data into one site.
+Two data vendors, then the options material the homework builds on.
 
-- **Where it sits in the pipeline**: `chartbook build` is just another `doit` task (`task_build_chartbook_site` in the yield-curve repo). The site is a *build target*, regenerated from the catalog whenever the data changes; it is part of the automated project structure, not a manual afterthought.
-- **The catalog, `chartbook.toml`**: register each `[dataframes.*]` (its data sources, how it's pulled, path to the parquet) and each `[charts.*]` (name, description, the dataframe it comes from, path to the HTML/PDF). Demo this with the yield-curve pipeline's two registered dataframes (consolidated CRSP Treasuries, the Fed's published GSW series); the `[charts.*]` section is where a registered chart would go; a good live exercise is to add one.
-- **The CLI**: `chartbook build` generates the site (it's the `task_build_chartbook_site` task); `chartbook ls` lists every pipeline, dataframe, and chart in the catalog; `chartbook data get-path` returns a dataframe's parquet path; and the Python API `data.load(pipeline=..., dataframe=...)` loads it straight into pandas or polars. (Run `chartbook ls` against your `~/.chartbook/chartbook.toml` catalog to see the FTSFR aggregation in action.)
-- **Pipeline vs. catalog**: a single project is a *pipeline*; multiple pipelines aggregate into one *catalog* site, the pattern behind the [FTSFR repository](./Week3/ftsfr.md).
-- **A note for next week**: ChartBook is my own package, published to PyPI. Building on it now sets up our discussion in two weeks on how you publish and contribute to an open-source package.
+- [Databento](./Week7/databento.md) and the hands-on
+  [Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb):
+  schemas, symbology, and cost control. CME Globex is free under our license,
+  and it is where the E-mini S&P 500 options in HW 3 come from.
+- [LSEG Datastream](./Week7/LSEG_datastream.md), briefly, for the vendor
+  landscape.
+- The options case study,
+  [finm-32800/case_study_options](https://github.com/finm-32800/case_study_options),
+  reviewed through its two notebooks:
+  [Corporate Hedging](notebooks/_01_corporate_hedging_ipynb.ipynb) and
+  [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb). These are class material,
+  not the assignment; they establish the vocabulary the assignment assumes.
 
-## Agenda Item 4: Publishing to GitHub Pages
+## Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities
 
-- [Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/` folder of static HTML becomes a live website (Settings → Pages → Deploy from a branch → `main` / `/docs`), and why the repo can stay private while the site is public.
-- The ChartBook `docs/` site is exactly this kind of folder, so the two steps compose: `chartbook build` produces `docs/`, GitHub Pages serves it.
+[HW 3](./HW3.md) follows
+[Martin and Shi (2025)](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf),
+*Forecasting Crashes with a Smile*. You recover the risk-neutral distribution of
+returns from the volatility smile by the Breeden-Litzenberger method, turn it
+into an option-implied crash probability, and apply the paper's corrections to
+get a bound that forecasts out of sample.
 
-## Agenda Item 5: Launch HW 3, the Yield-Curve Pipeline as a Published Site
+The arc is the lesson. Build the density from the OptionMetrics volatility
+surface and get a number. Discover that the surface's observed strikes stop well
+short of the crash thresholds, so at short horizons the number rests on an
+extrapolation convention. Rebuild the density from raw quotes on E-mini S&P 500
+options from Databento, where every listed strike is quoted, and meet the
+convexity violations the vendor's smoothed surface hid from you. Two data
+sources, one seam between them, and the seam is the point.
 
-Now put it together on real data. [HW 3](./HW3.md) (due Fri July 24) is a complete, reproducible pipeline that ends in a *published website*. Students estimate the U.S. Treasury yield curve with the Nelson-Siegel-Svensson model (Gurkaynak, Sack & Wright 2006), using the [`finm`](https://jeremybejarano.com/finm/) package for the yield-curve functions and `doit` to orchestrate the WRDS/Fed data pulls, model fit, and notebooks. The deliverable is a ChartBook site published to GitHub Pages, the same publishing workflow their final-project chartbook will use.
+The code you complete is a small, pip-installable package with tests, which is
+why the assignment sits in this week. Smile fitting and density extraction is
+daily work on an options market-making desk.
 
-We launch the case study together in class; students finish the `TODO`s and publish on their own. Everything above (notebook reports, ChartBook, GitHub Pages) is what makes this final step work.
+## Looking ahead to Week 5
 
-% INSTRUCTOR-ONLY: Deferred to Week 5 (see overview_w5.md): LaTeX / PDF reports, the
-% midterm report (single shared repo, GitHub pull requests), and publishing a PyPI
-% package. Do NOT introduce the midterm report this week.
+Week 5 is **unit tests and data validation**: how a pipeline checks its own data
+before it publishes anything. The opening example is the cleaning of FINRA TRACE,
+where every filter is a convention, and [HW 4](./HW4.md) then moves to a case
+with a ground truth: rebuilding the E-mini order book from the raw message feed
+and validating it against the vendor's own book.

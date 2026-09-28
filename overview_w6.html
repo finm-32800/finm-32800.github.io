@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 6: Python Packages, FINM, and the ChartBook Catalog &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 6: SQL at Scale, Remote Machines, and Job Schedulers &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -51,8 +51,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The ChartBook Catalog: Data Dependencies Across Repositories" href="Week6/chartbook_catalog.html" />
-    <link rel="prev" title="GitHub Issues and Pull Requests: Enhancing Collaborative Development" href="Week6/GitHub_pull_requests.html" /> 
+    <link rel="next" title="Strategies for Medium-Sized Data" href="Week8/medium_sized_data_strategies.html" />
+    <link rel="prev" title="Cleaning TRACE Corporate Bond Data: A Walkthrough" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -189,6 +189,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -196,6 +197,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/tour_of_the_course.html">A Tour of the Course</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/getting_set_up.html">Getting Set Up</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
@@ -210,89 +212,84 @@
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/virtual_environments.html">Virtual Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week1/midterm_report_and_style_guides.html">The Midterm Report and Style Guides</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Virtual Environments, WRDS, and CRSP</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Automating the Pipeline with PyDoit, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: ChartBook, GitHub Pages, and Reproducible Reports</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Proposal Presentations, LaTeX, and the Midterm Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 6: Python Packages, FINM, and the ChartBook Catalog</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Unit Tests and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_corporate_hedging_ipynb.html">Case Study: Hedging Oil Price Exposure As An E&amp;P</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: GitHub Actions, and Publishing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w9.html">Week 9: Medium-Sized Data and Polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Midterm, and Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="HW0.html">Homework 0</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="HW3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5 (Optional)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="midterm_report.html">Midterm Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5: The Collaborative Report and Airflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaborative_report.html">Collaborative Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
@@ -303,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="exam_prep.html">Exam Preparation</a></li>
 </ul>
 
     </div>
@@ -488,7 +486,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 6: Python Packages, FINM, and the ChartBook Catalog</h1>
+    <h1>Week 6: SQL at Scale, Remote Machines, and Job Schedulers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -498,12 +496,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-proposal-presentations-two-groups">Agenda Item 1: Proposal Presentations (Two Groups)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-midterm-report-and-the-chartbook-catalog">Agenda Item 2: The Midterm Report and the ChartBook Catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-shipping-a-release-chartbook-0-1-0-as-a-case-study">Agenda Item 3: Shipping a Release: ChartBook 0.1.0 as a Case Study</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-finm-stockbeta-and-writing-your-own-package">Agenda Item 4: <code class="docutils literal notranslate"><span class="pre">finm</span></code>, <code class="docutils literal notranslate"><span class="pre">stockbeta</span></code>, and Writing Your Own Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-medium-data-polars-and-parquet">Agenda Item 1: Medium Data, Polars, and Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-remote-machines-and-two-schedulers">Agenda Item 2: Remote Machines and Two Schedulers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud">Agenda Item 3: NYSE TAQ on the WRDS Cloud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-hw-4s-cluster-half">Agenda Item 4: HW 4’s Cluster Half</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-5-the-collaborative-report">Agenda Item 5: Launch HW 5, the Collaborative Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-7">Looking ahead to Week 7</a></li>
 </ul>
             </nav>
         </div>
@@ -514,67 +514,173 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-6-python-packages-finm-and-the-chartbook-catalog">
-<h1>Week 6: Python Packages, FINM, and the ChartBook Catalog<a class="headerlink" href="#week-6-python-packages-finm-and-the-chartbook-catalog" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-6-sql-at-scale-remote-machines-and-job-schedulers">
+<h1>Week 6: SQL at Scale, Remote Machines, and Job Schedulers<a class="headerlink" href="#week-6-sql-at-scale-remote-machines-and-job-schedulers" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 </ul>
 </div>
-<section id="learning-outcomes">
-<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>See the next two final-project proposals and give substantive peer feedback.</p></li>
-<li><p>Understand the ChartBook <em>catalog</em>: how it pins together data dependencies between repositories, and how to set one up on your own machine (<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">The ChartBook Catalog</span></a>) using cloned pipelines from the <a class="reference external" href="https://github.com/orgs/ftsfr/repositories">FTSFR organization</a>.</p></li>
-<li><p>Understand what changed in this week’s ChartBook 0.1.x release (manifest format v2, catalog auto-discovery, single install) and how a release like this is actually cut: changelog, semantic versioning, <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">build</span></code>, publish to PyPI.</p></li>
-<li><p>Understand the anatomy of a published Python package (<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, a build backend, versioning, CLI entry points), and know the packages we’ll keep working with: <a class="reference external" href="https://pypi.org/project/chartbook/"><code class="docutils literal notranslate"><span class="pre">chartbook</span></code></a>, <a class="reference external" href="https://pypi.org/project/finm/"><code class="docutils literal notranslate"><span class="pre">finm</span></code></a>, and the TestPyPI practice package <a class="reference external" href="https://test.pypi.org/project/stockbeta/"><code class="docutils literal notranslate"><span class="pre">stockbeta</span></code></a>.</p></li>
-<li><p>Know the plan for your Midterm Report figure: build it on data produced by an FTSFR pipeline, consumed through your catalog with <code class="docutils literal notranslate"><span class="pre">data.load(...)</span></code>.</p></li>
-</ul>
-</section>
+<p>When the data outgrows your laptop, the toolkit changes. Polars replaces pandas,
+Parquet replaces CSV, and the computation moves to a machine you reach over SSH
+and operate entirely from the command line. This is why so many postings insist on
+Linux and “Unix scripting,” and why “schedulers” appears in Citadel’s list of
+required skills.</p>
+<p>We use <strong>two</strong> schedulers this week, deliberately. The WRDS Cloud runs <strong>Grid
+Engine</strong> (<code class="docutils literal notranslate"><span class="pre">qsub</span></code>, <code class="docutils literal notranslate"><span class="pre">qrsh</span></code>, <code class="docutils literal notranslate"><span class="pre">qsas</span></code>); UChicago’s Midway3 runs <strong>SLURM</strong> (<code class="docutils literal notranslate"><span class="pre">sbatch</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sinteractive</span></code>). They do the same job in different dialects, and seeing both is
+the point: what you are learning is batch scheduling, not one vendor’s commands.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> is due <strong>this Friday, July 24</strong>.</p></li>
-<li><p><strong>Upgrade ChartBook</strong>: a new major release shipped this week. Run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">chartbook</span></code> (you want 0.1.1 or later). It contains breaking changes we’ll discuss tonight; see <a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">The ChartBook Catalog</span></a>.</p></li>
-<li><p><strong>Midterm report: claim your topic now if you haven’t.</strong> Every candidate topic is an open issue in <a class="reference external" href="https://github.com/finm-32800/finm_midterm_report">finm-32800/finm_midterm_report</a>; assign one to yourself to claim it. Your merged contribution is due <strong>Monday, August 10 at 11:59 pm CT</strong>. Don’t wait to open your pull request: an early draft PR gets you review comments while there is still time to act on them.</p></li>
-<li><p><strong>Peer-feedback survey</strong> for tonight’s two groups: same as last week. Submit during the quiet time after each presentation; the <a class="reference internal" href="FinalProject/proposal_feedback_survey.html"><span class="std std-doc">form</span></a> stays open until <strong>Friday at 11:59 PM</strong> and doubles as the attendance record.</p></li>
-<li><p><strong>If you present July 30</strong>, your instructor consultation must happen this week; <a class="reference external" href="https://finm-32800.youcanbook.me/">book it now</a> if you haven’t.</p></li>
+<li><p><strong><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> is due this week.</strong></p></li>
+<li><p><strong><a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a> is due next week.</strong> Its cluster half is tonight’s material,
+so bring your working single-day reconstruction to class.</p></li>
+<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> launches today,</strong> due in week 9. It has two halves: your
+contribution to the class report, and then Airflow over the whole thing in
+week 7.</p></li>
+<li><p><strong>Accept your invite to the report repo.</strong> Every student gets a GitHub
+collaborator invite to the private report repository. Check your email or
+<a class="reference external" href="https://github.com/notifications">github.com/notifications</a> and confirm tonight
+that you can open it.</p></li>
+<li><p><strong>Confirm your cluster access tonight.</strong> You need the WRDS Cloud (the same WRDS
+account, over SSH) and Midway3 (RCC). If either fails, we fix it in class, not
+the night before HW 4 is due.</p></li>
+<li><p><strong>The midterm is next week,</strong> in the first 75 minutes of class, covering weeks 0
+through 6. Practice questions and their answer key are handed out; see
+<a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
+<li><p><strong>Proposal presentations continue.</strong> Same format, same required survey.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-proposal-presentations-two-groups">
-<h2>Agenda Item 1: Proposal Presentations (Two Groups)<a class="headerlink" href="#agenda-item-1-proposal-presentations-two-groups" title="Link to this heading">#</a></h2>
-<p>Two more groups present tonight, in the order on the <a class="reference internal" href="FinalProject/proposal_presentation_schedule.html"><span class="std std-doc">schedule</span></a>: 10 minutes to present, 5 minutes of Q&amp;A, then ~5 minutes of quiet time to submit the <a class="reference internal" href="FinalProject/proposal_feedback_survey.html"><span class="std std-doc">peer-feedback survey</span></a>. Same reminder as last week: the presentation is an <em>advertisement</em> for the product you’ll build (<a class="reference internal" href="FinalProject/proposal_presentation_rubric.html"><span class="std std-doc">rubric</span></a>).</p>
-</section>
-<section id="agenda-item-2-the-midterm-report-and-the-chartbook-catalog">
-<h2>Agenda Item 2: The Midterm Report and the ChartBook Catalog<a class="headerlink" href="#agenda-item-2-the-midterm-report-and-the-chartbook-catalog" title="Link to this heading">#</a></h2>
-<p>First, a working check-in on the <a class="reference internal" href="midterm_report.html"><span class="std std-doc">Midterm Report</span></a>: confirm every topic issue has an owner, then review one or two open pull requests live, applying the <a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">PR workflow</span></a> from last week.</p>
-<p>Then the architecture question the report forces on us: <strong>what should your contribution do when it needs data that another repository already produces?</strong> Copying pull code duplicates work and drifts out of date. The answer is the ChartBook <em>catalog</em>, covered in tonight’s new chapter, <a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">The ChartBook Catalog: Data Dependencies Across Repositories</span></a>:</p>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Pipelines vs. catalogs: a catalog is a <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> with a <code class="docutils literal notranslate"><span class="pre">[pipelines]</span></code> registry, and the <a class="reference external" href="https://github.com/orgs/ftsfr/repositories">FTSFR organization</a> (~20 pipeline repos plus one <a class="reference external" href="https://github.com/ftsfr/catalog"><code class="docutils literal notranslate"><span class="pre">catalog</span></code></a> repo) is the production-scale example.</p></li>
-<li><p><strong>Hands-on</strong>: clone FTSFR pipeline repos, register them in your global catalog (<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">add</span></code>, or <code class="docutils literal notranslate"><span class="pre">members</span></code> auto-discovery), build and browse the combined site, and load another repo’s dataframe by name with <code class="docutils literal notranslate"><span class="pre">data.load(pipeline=...,</span> <span class="pre">dataframe=...)</span></code>.</p></li>
-<li><p><strong>For your midterm figure</strong>: build it on data an FTSFR pipeline already produces. The chapter lists exactly which repos run on free public data or WRDS alone (eleven of them); the Bloomberg-dependent ones are off the menu.</p></li>
-<li><p><strong>Live demo</strong>: wire one midterm-report contribution to consume an FTSFR dataframe this way, so the report becomes a downstream consumer of maintained pipelines rather than a pile of one-off pulls.</p></li>
+<li><p>Choose sensible strategies for data between 1 GB and 100 GB:
+<a class="reference internal" href="Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a>.</p></li>
+<li><p>Use Polars and explain lazy evaluation, predicate pushdown, streaming, and Hive
+partitioning; know when it beats pandas and when it does not:
+<a class="reference internal" href="Week8/polars_exercises.html"><span class="std std-doc">Polars Exercises</span></a>.</p></li>
+<li><p>Connect to a remote machine over SSH, move data with <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, and work entirely
+from the command line: <a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a>.</p></li>
+<li><p>Describe HPC cluster architecture: login nodes, compute nodes, and shared versus
+scratch storage, and why you must never compute on a login node.</p></li>
+<li><p>Submit, monitor, and collect a <strong>job array</strong> under SLURM, and do the equivalent
+under Grid Engine on the WRDS Cloud.</p></li>
+<li><p>Forward a port to reach a Jupyter notebook running on a compute node:
+<a class="reference internal" href="Week8/exercise_jupyter_on_midway.html"><span class="std std-doc">Exercise: Jupyter on Midway</span></a>.</p></li>
+<li><p>Explain how liquidity is measured from intraday trades and quotes, and why the
+choice of data source changes the answer.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-shipping-a-release-chartbook-0-1-0-as-a-case-study">
-<h2>Agenda Item 3: Shipping a Release: ChartBook 0.1.0 as a Case Study<a class="headerlink" href="#agenda-item-3-shipping-a-release-chartbook-0-1-0-as-a-case-study" title="Link to this heading">#</a></h2>
-<p>You have been <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>-ing <a class="reference external" href="https://pypi.org/project/chartbook/"><code class="docutils literal notranslate"><span class="pre">chartbook</span></code></a> all quarter, and this week it shipped a breaking release (0.1.0 on July 22, 0.1.1 on July 23). That makes it a live case study in how real packages evolve and how a release actually happens:</p>
+<section id="agenda-item-1-medium-data-polars-and-parquet">
+<h2>Agenda Item 1: Medium Data, Polars, and Parquet<a class="headerlink" href="#agenda-item-1-medium-data-polars-and-parquet" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a> and
+<a class="reference internal" href="Week8/polars_exercises.html"><span class="std std-doc">Polars Exercises</span></a>.</p>
 <ul class="simple">
-<li><p><strong>What changed and why</strong>: read the <a class="reference external" href="https://backofficedev.github.io/chartbook/changelog.html">changelog</a> together. Manifest format v2 (one <code class="docutils literal notranslate"><span class="pre">[project]</span></code> table, every field optional, de-prefixed entity names), scoped pipeline IDs like <code class="docutils literal notranslate"><span class="pre">ftsfr/crsp_treasury</span></code>, catalog auto-discovery, and the retirement of the <code class="docutils literal notranslate"><span class="pre">[data]</span></code>/<code class="docutils literal notranslate"><span class="pre">[plotting]</span></code>/<code class="docutils literal notranslate"><span class="pre">[all]</span></code> extras in favor of a single install.</p></li>
-<li><p><strong>Versioning as a contract</strong>: semantic versioning, why a breaking change in a <code class="docutils literal notranslate"><span class="pre">0.x</span></code> package bumps the minor version (<code class="docutils literal notranslate"><span class="pre">0.0.21</span></code> → <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code>), and how a migration script eases users across a breaking change.</p></li>
-<li><p><strong>How the release was cut</strong>: the walk from a green test suite to a published version — changelog entry, version bump, <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">build</span></code> producing the wheel and sdist, publish to PyPI. I’ll show the actual process I used for this release.</p></li>
-<li><p><strong>Anatomy of the package</strong> along the way, from the <a class="reference external" href="https://github.com/backofficedev/chartbook">chartbook repo</a>: <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> as the single source of truth, the Hatchling build backend, dynamic versioning, and the one-line <code class="docutils literal notranslate"><span class="pre">[project.scripts]</span></code> entry (<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">=</span> <span class="pre">&quot;chartbook.cli:main&quot;</span></code>) that creates the CLI command.</p></li>
+<li><p>The three escapes when data will not fit: use less of it (columns, rows,
+dtypes), stream it, or move to a bigger machine. Most problems are solved by the
+first.</p></li>
+<li><p>Parquet as a columnar format: why reading three columns of a hundred costs
+almost nothing, and why partitioning matters.</p></li>
+<li><p>Polars: expressions, the lazy API, and reading a query plan. Predicate and
+projection pushdown are the reason a lazy scan of a partitioned dataset can beat
+loading a single file.</p></li>
+<li><p><strong>Decoupling pulls from processing.</strong> A pipeline that re-downloads on every run
+is not reproducible and is not polite to the vendor. The pull is one task with a
+cached target; everything downstream reads the cache.</p></li>
 </ul>
 </section>
-<section id="agenda-item-4-finm-stockbeta-and-writing-your-own-package">
-<h2>Agenda Item 4: <code class="docutils literal notranslate"><span class="pre">finm</span></code>, <code class="docutils literal notranslate"><span class="pre">stockbeta</span></code>, and Writing Your Own Package<a class="headerlink" href="#agenda-item-4-finm-stockbeta-and-writing-your-own-package" title="Link to this heading">#</a></h2>
-<p>With a real release fresh in mind, work through <a class="reference internal" href="Week6/python_packaging_with_hatch.html"><span class="std std-doc">Writing and Publishing Your Own Python Packages</span></a> and the packages you can practice on:</p>
+<section id="agenda-item-2-remote-machines-and-two-schedulers">
+<h2>Agenda Item 2: Remote Machines and Two Schedulers<a class="headerlink" href="#agenda-item-2-remote-machines-and-two-schedulers" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a>, then the comparison.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://pypi.org/project/finm/"><code class="docutils literal notranslate"><span class="pre">finm</span></code></a> (<a class="reference external" href="https://jeremybejarano.com/finm/">docs</a>) is the course’s own published package: <code class="docutils literal notranslate"><span class="pre">finm.fixedincome</span></code> (the yield-curve functions you imported in HW 3), <code class="docutils literal notranslate"><span class="pre">finm.data</span></code> (Fama-French, Federal Reserve, He-Kelly-Manela, and other loaders), and <code class="docutils literal notranslate"><span class="pre">finm.analytics</span></code> (factor analysis). It’s the low-stakes place to practice the contribution loop on a package you don’t own: fork, branch, PR, review, merge — the same mechanics as the midterm report, now crossing a repository boundary you don’t control.</p></li>
-<li><p><a class="reference external" href="https://github.com/finm-32800/stockbeta"><code class="docutils literal notranslate"><span class="pre">stockbeta</span></code></a> is a previous year’s practice package, published to <a class="reference external" href="https://test.pypi.org/project/stockbeta/">TestPyPI</a> but not the real PyPI. TestPyPI is the rehearsal space: the full publish workflow, with none of the consequences of claiming a real package name.</p></li>
-<li><p>Where this is heading: next week’s HW 4 (a minimal options case study) is built from the same ChartBook template as your other repos, and these packaging workflows are the muscles it exercises.</p></li>
+<li><p>SSH keys, config files, and <code class="docutils literal notranslate"><span class="pre">rsync</span></code>. Getting results <em>back</em> is half the job.</p></li>
+<li><p>Cluster anatomy: login node versus compute node, and shared home versus scratch.
+Note the limits: WRDS Cloud gives roughly ten concurrent batch slots, three
+interactive slots, a one-week wall clock, a 10 GB home directory, and scratch
+that is purged after seven days.</p></li>
+<li><p><strong>SLURM on Midway3:</strong> <code class="docutils literal notranslate"><span class="pre">sinteractive</span></code> for a shell on a compute node, <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> for
+a batch job, and <code class="docutils literal notranslate"><span class="pre">--array</span></code> for a job array over independent units of work.
+<a class="reference internal" href="Week8/exercise_jupyter_on_midway.html"><span class="std std-doc">Exercise: Jupyter on Midway</span></a> covers port
+forwarding.</p></li>
+<li><p><strong>Grid Engine on the WRDS Cloud:</strong> <code class="docutils literal notranslate"><span class="pre">qrsh</span></code> for interactive work, <code class="docutils literal notranslate"><span class="pre">qsub</span></code> for
+batch, <code class="docutils literal notranslate"><span class="pre">qsas</span></code> for SAS. The same concepts under different names.</p></li>
+<li><p><strong>The mapping is the lesson.</strong> Put the two side by side: submit, query the
+queue, kill a job, request memory, request an array. Once you can translate,
+the next scheduler you meet costs you an afternoon, not a week.</p></li>
 </ul>
+</section>
+<section id="agenda-item-3-nyse-taq-on-the-wrds-cloud">
+<h2>Agenda Item 3: NYSE TAQ on the WRDS Cloud<a class="headerlink" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud" title="Link to this heading">#</a></h2>
+<p>The in-class case study is
+<a class="reference external" href="https://doi.org/10.1111/jofi.12127">Holden and Jacobsen (2014)</a>,
+<em>Liquidity Measurement Problems in Fast, Competitive Markets</em>. They show that
+measuring spreads and price impact from Monthly TAQ, with its second-resolution
+timestamps and its missing withdrawn quotes, gives materially distorted answers
+against Daily TAQ. The methodological point is the same one we met in TRACE: the
+data source is part of the result.</p>
+<ul class="simple">
+<li><p>The authors publish SAS code that runs <strong>on the WRDS Cloud</strong>, computes the full
+NBBO, and produces the standard liquidity measures. We run it there.</p></li>
+<li><p><strong>In-class lab:</strong> each student submits one <code class="docutils literal notranslate"><span class="pre">qsub</span></code> job that computes the NBBO for
+one ticker-day, then brings the output back and analyzes it in Python. You are
+driving someone else’s production code as a black box through a scheduler,
+which is an ordinary and useful thing to be able to do.</p></li>
+<li><p>Contrast with HW 4: TAQ is equities on the WRDS Cloud; the E-mini order book is
+futures on Midway. Two datasets, two schedulers, one skill.</p></li>
+</ul>
+</section>
+<section id="agenda-item-4-hw-4s-cluster-half">
+<h2>Agenda Item 4: HW 4’s Cluster Half<a class="headerlink" href="#agenda-item-4-hw-4s-cluster-half" title="Link to this heading">#</a></h2>
+<p>Bring your single-day reconstruction from last week. Tonight it becomes a job
+array over a quarter of trading days: a submit script, one array task per day,
+results written to scratch, aggregated, and <code class="docutils literal notranslate"><span class="pre">rsync</span></code>’d back. The platform for the
+graded run is announced with the assignment; the other platform is the lab above.
+Keep the local single-day path working, because it is the fallback if a cluster is
+down.</p>
+<p>An optional practice run on Midway with a different pipeline, cleaning TRACE, is
+in <a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html"><span class="std std-doc">Optional Lab: Clean TRACE on Midway</span></a>.
+It is not graded and it is a good rehearsal.</p>
+</section>
+<section id="agenda-item-5-launch-hw-5-the-collaborative-report">
+<h2>Agenda Item 5: Launch HW 5, the Collaborative Report<a class="headerlink" href="#agenda-item-5-launch-hw-5-the-collaborative-report" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is the class’s one shared artifact. The whole class produces a
+single publication-style PDF on the state of the equity premium predictors, and
+the topics are the predictors of
+<a class="reference external" href="https://academic.oup.com/rfs/article/37/11/3490/7749383">Goyal, Welch, and Zafirov (2024)</a>.
+There are more predictors in that paper than there are students, so everyone gets
+their own.</p>
+<ul class="simple">
+<li><p><strong>Read the instructions:</strong> <a class="reference internal" href="collaborative_report.html"><span class="std std-doc">Collaborative Report</span></a> has
+what you contribute, the workflow, and the rubric.</p></li>
+<li><p><strong>Style guides.</strong>
+<a class="reference internal" href="Week1/collaborative_report_and_style_guides.html"><span class="std std-doc">The Collaborative Report and Style Guides</span></a>:
+organizations that publish reports keep a style guide so that many contributors
+produce one coherent document. We look at a few real ones and write ours.</p></li>
+<li><p><strong>Claim an issue.</strong> Each open issue is one predictor. Assign it to yourself, one
+student per issue. Claim early.</p></li>
+<li><p><strong>Build it reproducibly.</strong> Your exhibit is its own file in <code class="docutils literal notranslate"><span class="pre">src/</span></code>, wired into
+<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, pulling through FRED, the OFR API, or the
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook catalog</span></a>. It ships with a test that the
+shared repo’s CI runs on every contribution.</p></li>
+<li><p><strong>Open a draft PR early.</strong> You need two classmate reviews, and you owe two
+reviews to others. An early draft PR gets you comments while there is still time
+to act on them. The workflow is the one from
+<a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>.</p></li>
+<li><p><strong>Live walkthrough</strong> of the repo skeleton, then review an open PR together.</p></li>
+</ul>
+</section>
+<section id="looking-ahead-to-week-7">
+<h2>Looking ahead to Week 7<a class="headerlink" href="#looking-ahead-to-week-7" title="Link to this heading">#</a></h2>
+<p>The <strong>midterm</strong> is in the first 75 minutes. After it, <strong>Apache Airflow</strong>:
+<code class="docutils literal notranslate"><span class="pre">doit</span></code> orders the steps inside one project, and an orchestrator orders many
+projects. Your report contributions are twenty-odd small pipelines with one
+consumer, which is exactly the structure Airflow exists for.</p>
 </section>
 </section>
 
@@ -593,20 +699,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Week6/GitHub_pull_requests.html"
+       href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">GitHub Issues and Pull Requests: Enhancing Collaborative Development</p>
+        <p class="prev-next-title">Cleaning TRACE Corporate Bond Data: A Walkthrough</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week6/chartbook_catalog.html"
+       href="Week8/medium_sized_data_strategies.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The ChartBook Catalog: Data Dependencies Across Repositories</p>
+        <p class="prev-next-title">Strategies for Medium-Sized Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -626,12 +732,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-proposal-presentations-two-groups">Agenda Item 1: Proposal Presentations (Two Groups)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-midterm-report-and-the-chartbook-catalog">Agenda Item 2: The Midterm Report and the ChartBook Catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-shipping-a-release-chartbook-0-1-0-as-a-case-study">Agenda Item 3: Shipping a Release: ChartBook 0.1.0 as a Case Study</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-finm-stockbeta-and-writing-your-own-package">Agenda Item 4: <code class="docutils literal notranslate"><span class="pre">finm</span></code>, <code class="docutils literal notranslate"><span class="pre">stockbeta</span></code>, and Writing Your Own Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-medium-data-polars-and-parquet">Agenda Item 1: Medium Data, Polars, and Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-remote-machines-and-two-schedulers">Agenda Item 2: Remote Machines and Two Schedulers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud">Agenda Item 3: NYSE TAQ on the WRDS Cloud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-hw-4s-cluster-half">Agenda Item 4: HW 4’s Cluster Half</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-5-the-collaborative-report">Agenda Item 5: Launch HW 5, the Collaborative Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-7">Looking ahead to Week 7</a></li>
 </ul>
   </nav></div>
 

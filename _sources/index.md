@@ -14,6 +14,8 @@ These skills are taught through a series of case studies, each of which introduc
 
 *Prior experience at an intermediate level with Python and the PyData stack is assumed.*
 
+**Syllabus:** [web version](README.md) or [PDF download](https://finm-32800.github.io/_static/syllabus_finm_32800_data_pipelines_for_quantitative_research.pdf).
+
 
 ## Table of Contents
 
@@ -50,8 +52,9 @@ HW2.md
 HW3.md
 HW4.md
 HW5.md
-midterm_report.md
+collaborative_report.md
 final_project.md
+exam_prep.md
 ```
 
 
