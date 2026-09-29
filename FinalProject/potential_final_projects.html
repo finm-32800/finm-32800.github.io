@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -297,7 +297,7 @@
 <li class="toctree-l2"><a class="reference internal" href="proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
 <li class="toctree-l2"><a class="reference internal" href="past_final_projects.html">Past Final Projects</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">List of Potential Final Projects</a></li>
 </ul>
@@ -498,47 +498,48 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-and-return-prediction">Machine Learning and Return Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-virtue-of-complexity-in-return-prediction">1. The Virtue of Complexity in Return Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-flow-and-market-microstructure">Order Flow and Market Microstructure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-retail-investor-activity">1. Tracking Retail Investor Activity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#informed-trading-intensity">2. Informed Trading Intensity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-signals-in-the-cross-section-of-returns">3. Sparse Signals in the Cross-Section of Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-estimation-of-bid-ask-spreads-from-open-high-low-and-close-prices">4. Efficient Estimation of Bid-Ask Spreads from Open, High, Low, and Close Prices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-tug-of-war-overnight-versus-intraday-expected-returns">5. A Tug of War: Overnight versus Intraday Expected Returns</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-cycles-and-financial-crises">Credit Cycles and Financial Crises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictable-financial-crises">2. Predictable Financial Crises</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-market-sentiment-and-the-business-cycle">3. Credit-Market Sentiment and the Business Cycle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-frequency-futures-volatility-and-tail-risk">High-Frequency Futures: Volatility and Tail Risk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploiting-the-errors-a-simple-approach-for-improved-volatility-forecasting">6. Exploiting the Errors: A Simple Approach for Improved Volatility Forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tails-fears-and-risk-premia">7. Tails, Fears, and Risk Premia</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corporate-events-and-anomalies">Corporate Events and Anomalies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictable-corporate-distributions-and-stock-returns">4. Predictable Corporate Distributions and Stock Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monetary-policy-and-return-predictability">Monetary Policy and Return Predictability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pre-fomc-announcement-drift">8. The Pre-FOMC Announcement Drift</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stock-returns-over-the-fomc-cycle">9. Stock Returns over the FOMC Cycle</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#options-and-crash-risk">Options and Crash Risk</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-crashes-with-a-smile">5. Forecasting Crashes with a Smile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-in-derivatives-markets-forecasting-prices-with-prices">6. Information in Derivatives Markets: Forecasting Prices with Prices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-and-the-cross-section">Machine Learning and the Cross-Section</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-asset-pricing-via-machine-learning">10. Empirical Asset Pricing via Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinking-the-cross-section">11. Shrinking the Cross-Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-timing">12. Factor Timing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-replication-crisis-in-finance">13. Is There a Replication Crisis in Finance?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-the-equity-premium-the-classics">Predicting the Equity Premium: The Classics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-comprehensive-look-at-the-empirical-performance-of-equity-premium-prediction">7. A Comprehensive Look at the Empirical Performance of Equity Premium Prediction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-regressions">8. Predictive Regressions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-returns-with-financial-ratios">9. Predicting Returns with Financial Ratios</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-aggregate-wealth-and-expected-stock-returns">10. Consumption, Aggregate Wealth, and Expected Stock Returns</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-dividends-and-stock-returns-predictable-new-evidence-using-m-a-cash-flows">11. Are Dividends and Stock Returns Predictable? New Evidence Using M&amp;A Cash Flows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rates-funding-and-liquidity">Rates, Funding, and Liquidity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-free-interest-rates">14. Risk-Free Interest Rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-risk-premiums-with-machine-learning">15. Bond Risk Premiums with Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-as-information-for-illiquidity">16. Noise as Information for Illiquidity</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures">Equity Term Structures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures-without-dividend-strips-data">12. Equity Term Structures without Dividend Strips Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-duration-and-predictability">13. Equity Duration and Predictability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures-without-dividend-strips-data">17. Equity Term Structures without Dividend Strips Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-duration-and-predictability">18. Equity Duration and Predictability</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-finance-and-fiscal-policy">Macro-Finance and Fiscal Policy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios">14. Debt and Deficits: Fiscal Analysis with Stationary Ratios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios">19. Debt and Deficits: Fiscal Analysis with Stationary Ratios</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-cash-flow-news">Daily Cash Flow News</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cash-flow-news-and-stock-price-dynamics">15. Cash Flow News and Stock Price Dynamics</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-global-is-predictability-the-power-of-financial-transfer-learning">16. How Global is Predictability? The Power of Financial Transfer Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cash-flow-news-and-stock-price-dynamics">20. Cash Flow News and Stock Price Dynamics</a></li>
 </ul>
 </li>
 </ul>
@@ -553,293 +554,436 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="list-of-potential-final-projects">
 <h1>List of Potential Final Projects<a class="headerlink" href="#list-of-potential-final-projects" title="Link to this heading">#</a></h1>
-<p>The project that you are assigned will come from one of several categories below. Each of these projects involves replicating a well-known finance paper.
+<p>The project that you are assigned will come from one of the categories below. Each project asks you to do the same thing: take a finance paper, rebuild its dataset from the original sources, reproduce the tables and figures that carry its main result, and then extend the sample to the present.
 If you can’t access the papers below, you can find a link to them here: <a class="reference external" href="https://drive.google.com/drive/folders/1uaFsV1nn9MeO_XIRcolBnKcbkHKCEHu8?usp=drive_link">https://drive.google.com/drive/folders/1uaFsV1nn9MeO_XIRcolBnKcbkHKCEHu8?usp=drive_link</a></p>
-<p>Not sure what a finished replication looks like? See the <a class="reference internal" href="project_previews.html"><span class="std std-doc">Project Previews</span></a> page, which walks through three of the papers below (#1, #2, and #4) with the actual figures and tables you would reproduce.</p>
-<section id="machine-learning-and-return-prediction">
-<h2>Machine Learning and Return Prediction<a class="headerlink" href="#machine-learning-and-return-prediction" title="Link to this heading">#</a></h2>
-<section id="the-virtue-of-complexity-in-return-prediction">
-<h3>1. <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3984925">The Virtue of Complexity in Return Prediction</a><a class="headerlink" href="#the-virtue-of-complexity-in-return-prediction" title="Link to this heading">#</a></h3>
-<p>Conventional wisdom says market-return forecasting models should be small and simple. This paper proves the opposite: “simple models severely understate return predictability compared to ‘complex’ models in which the number of parameters exceeds the number of observations.” The authors forecast the monthly excess return of the CRSP value-weighted index using random Fourier features built from the 15 Goyal–Welch predictors, and show that out-of-sample forecasting and market-timing performance <em>improves</em> as model complexity grows—even with as few as 12 training observations and up to 12,000 parameters.</p>
-<p>The pipeline: build and volatility-standardize the Goyal–Welch predictors (1926–2020), generate random Fourier features, run recursive out-of-sample ridge regressions across a grid of model sizes and shrinkage values, and trace out the “virtue of complexity” curves for prediction accuracy and market-timing performance.</p>
-<p><em>This paper is featured on the <a class="reference internal" href="project_previews.html"><span class="std std-doc">Project Previews</span></a> page.</em></p>
+<p>Every project here can be built from data the course already has: WRDS (CRSP, Compustat, daily TAQ, OptionMetrics, Mergent FISD, CRSP Treasury, Lipper TASS), Databento’s CME Globex feed, Bloomberg in the trading lab, and free public sources such as FRED, SEC EDGAR, and Ken French’s library. Where a paper’s original vendor is something we do not have, the entry says what to substitute and what coverage you give up.</p>
+<p>Not sure what a finished replication looks like? The <a class="reference internal" href="project_previews.html"><span class="std std-doc">Project Previews</span></a> page walks through three projects that students in this course actually built — one each for the published site, the written report, and the proposal presentation — and <a class="reference internal" href="past_final_projects.html"><span class="std std-doc">Past Final Projects</span></a> links the finished repositories from the last four cohorts.</p>
+<p>Table and figure numbers below refer to the published version of each paper unless the entry says otherwise. Check them against whichever copy you work from; several of these papers circulated for years as working papers with different numbering.</p>
+<section id="order-flow-and-market-microstructure">
+<h2>Order Flow and Market Microstructure<a class="headerlink" href="#order-flow-and-market-microstructure" title="Link to this heading">#</a></h2>
+<section id="tracking-retail-investor-activity">
+<h3>1. <a class="reference external" href="https://doi.org/10.1111/jofi.13033">Tracking Retail Investor Activity</a><a class="headerlink" href="#tracking-retail-investor-activity" title="Link to this heading">#</a></h3>
+<p>Most U.S. retail equity orders never reach an exchange. They are sold to wholesalers—Citadel Securities, Virtu, and a few others—who internalize them and report the prints to a FINRA trade reporting facility with a small amount of sub-penny price improvement. This paper turns that piece of plumbing into a measurement device: an off-exchange print whose price sits just below a round penny is a retail <em>buy</em>, just above it is a retail <em>sell</em>. Out of public data comes a signed retail order-flow series for every U.S. stock, and it is now the standard retail-flow proxy in academic work and on trading desks alike.</p>
+<p>The pipeline is a TAQ exercise end to end: read daily TAQ trades, keep the off-exchange prints, classify each one by the sub-penny remainder of its price, aggregate signed volume to the stock-day, and then ask whether the resulting order imbalance predicts returns over the following weeks.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Predictor summary statistics</strong>: construct the 15 predictors, apply the paper’s volatility standardization (Section V.A), and produce a summary-statistics table and time-series overview plot (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Figure 7 (out-of-sample market timing performance, T = 12)</strong>: out-of-sample R², coefficient norm, expected return, and volatility as functions of model complexity and ridge shrinkage</p></li>
-<li><p><strong>Replicate Figure 8 (Sharpe ratio, alpha, information ratio, T = 12)</strong>: the crux result—market-timing performance rising with complexity</p></li>
-<li><p><strong>Replicate Figure 11 (variable importance)</strong>: change in out-of-sample R² and Sharpe ratio from dropping each predictor one at a time</p></li>
+<li><p><strong>Build the retail trade panel</strong>: classify retail buys and sells in daily TAQ over the paper’s sample, and report retail volume share by size decile and through time, with a summary table and a time-series figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate the descriptive results on retail order imbalance</strong>: its persistence, its cross-sectional distribution, and how it varies with firm size and share price</p></li>
+<li><p><strong>Replicate the main predictability result</strong>: weekly portfolio sorts on retail order imbalance and the matching Fama-MacBeth regressions, including the horizon over which the effect decays</p></li>
+<li><p><strong>Replicate the earnings-announcement evidence</strong>: retail order imbalance in the days around announcements and its relation to the announcement return</p></li>
+<li><p><strong>Update</strong>: extend the panel through the most recent TAQ year and ask whether the predictability survived the move to zero commissions in 2019 and the retail boom of 2020-2021</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong>: Amit Goyal’s website (the updated Goyal–Welch predictor dataset, free and public); CRSP (value-weighted index returns, via WRDS)</p></li>
+<li><p><strong>Data sources</strong> (all on WRDS): daily TAQ (<code class="docutils literal notranslate"><span class="pre">taqmsec</span></code>), CRSP daily and monthly stock files, IBES or Compustat for announcement dates, Fama-French factors</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>The computational burden is the main challenge. When the feature count P far exceeds the training window T, solve the ridge regression in its dual (kernel) form, which only requires inverting a T × T matrix. You may use a coarser grid of P values and fewer random-feature repetitions than the paper’s 1,000 (e.g., 50–100), which preserves the shape of the curves.</p></li>
-<li><p>The paper is available on SSRN and published in the <em>Journal of Finance</em> (2024); use whichever version is convenient.</p></li>
+<li><p>Daily TAQ is big. Build one year on a subset of stocks first and only then scale up; this is a natural WRDS Cloud or Midway job (week 6).</p></li>
+<li><p>The classification rule is simple enough to state in a sentence and easy to get subtly wrong. Write unit tests against hand-constructed prints before running anything at scale.</p></li>
+<li><p>Later work disputes how much retail flow the rule actually captures. Comparing your volume shares against the paper’s, and against the later critiques, is a good use of the “own exhibit” requirement.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Kelly, Bryan, Semyon Malamud, and Kangying Zhou. “The Virtue of Complexity in Return Prediction.” The Journal of Finance 79, no. 1 (2024): 459–503. Available at SSRN: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3984925">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3984925</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/c6b30d98ac64229e36b0f60b57a6b9c1/KellyMalamudZhou2024VirtueOfComplexity.pdf"><span class="xref download myst">KellyMalamudZhou2024VirtueOfComplexity.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Boehmer, Ekkehart, Charles M. Jones, Xiaoyan Zhang, and Xinran Zhang. “Tracking Retail Investor Activity.” The Journal of Finance 76, no. 5 (2021): 2249-2305. <a class="reference external" href="https://doi.org/10.1111/jofi.13033">https://doi.org/10.1111/jofi.13033</a> (working paper: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2822105">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2822105</a>)</p></li>
 </ul>
 </section>
-</section>
-<section id="credit-cycles-and-financial-crises">
-<h2>Credit Cycles and Financial Crises<a class="headerlink" href="#credit-cycles-and-financial-crises" title="Link to this heading">#</a></h2>
-<section id="predictable-financial-crises">
-<h3>2. <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jofi.13105">Predictable Financial Crises</a><a class="headerlink" href="#predictable-financial-crises" title="Link to this heading">#</a></h3>
-<p>Using a panel of 42 countries from 1950 to 2016, this paper shows that “crises are substantially predictable”: when rapid credit growth coincides with rapid asset price growth—the “R-zone”—the probability of a financial crisis within three years rises to 40% or more. The predictability challenges the conventional view that crises arrive as unforecastable shocks and implies policymakers have time to act.</p>
-<p>The project is a cross-country panel-data assembly exercise: merge the Baron–Verner–Xiong crisis chronology with credit growth for households and businesses (BIS Total Credit Statistics, IMF Global Debt Database) and real equity and house price growth (BIS, OECD, JST Macrohistory, IMF IFS), then compute crisis probabilities conditional on credit and price growth quantiles.</p>
-<p><em>This paper is featured on the <a class="reference internal" href="project_previews.html"><span class="std std-doc">Project Previews</span></a> page.</em></p>
+<section id="informed-trading-intensity">
+<h3>2. <a class="reference external" href="https://doi.org/10.1111/jofi.13320">Informed Trading Intensity</a><a class="headerlink" href="#informed-trading-intensity" title="Link to this heading">#</a></h3>
+<p>Every standard measure of informed trading—PIN, VPIN, Kyle’s lambda—starts from a model of how informed traders behave and then applies it to data. This paper inverts the order. It takes a set of trades that are known to be informed, namely the purchases Schedule 13D filers are later forced to disclose, and trains a machine learning model to recognize them from ordinary microstructure inputs. The fitted measure, informed trading intensity (ITI), “increases before earnings, mergers and acquisitions, and news announcements,” and it works because “it captures nonlinearities and interactions between informed trading, volume, and volatility” that the closed-form measures assume away.</p>
+<p>The pipeline: build daily microstructure features from TAQ (order imbalance, volume, volatility, spreads, and their intraday shape), label days using 13D filings from EDGAR, train and cross-validate the classifier, then evaluate the fitted measure on events it never saw and in cross-sectional return regressions. If you liked the VPIN half of HW 4, this is the project that picks up where it stops.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Replicate Table 1 (summary statistics)</strong>: crisis counts by country and decade compared across chronologies, plus summary statistics of credit growth and asset price growth (this and Figure 1 are the data-cleaning deliverables)</p></li>
-<li><p><strong>Replicate Figure 1 (event history)</strong>: the timeline of financial crises across countries in the sample</p></li>
-<li><p><strong>Replicate Table 3 (crisis probabilities by price and debt growth quantiles)</strong>: the R-zone result—crisis probabilities in the double-sort of credit growth against asset price growth, for the business and household sectors</p></li>
-<li><p><strong>Replicate Table 4 (regression version)</strong>: predictive regressions of crisis onset on the R-zone indicators, with the paper’s standard-error treatment</p></li>
-<li><p><strong>Replicate Figure 3 (fraction of countries in the R-zone)</strong>: time series showing global credit-market overheating, peaking before 1929, 2008, and other crisis waves</p></li>
+<li><p><strong>Build the feature panel</strong>: daily TAQ-derived microstructure features plus the 13D event labels, with a summary table and a figure of the features in the days around labeled events (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate the estimation of ITI</strong>: the training design, the cross-validation, and the reported model performance</p></li>
+<li><p><strong>Replicate the event evidence</strong>: ITI in the days before earnings announcements, M&amp;A announcements, and news</p></li>
+<li><p><strong>Replicate the asset-pricing results</strong>: the return-reversal evidence and the cross-sectional pricing tests</p></li>
+<li><p><strong>Benchmark against VPIN and PIN</strong> on the same sample—a direct extension of HW 4, and the natural place for your own exhibit</p></li>
+<li><p><strong>Validate against the authors’ series</strong>: the fitted stock-day ITI measure for 1993-2024 is posted at <a class="reference external" href="https://bogousslavsky.github.io/data/">https://bogousslavsky.github.io/data/</a>, which gives you a true benchmark rather than a published table</p></li>
+<li><p><strong>Update</strong>: extend the measure past the posted series</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong> (all free and public): Baron–Verner–Xiong (2021) crisis chronology (posted online); BIS Total Credit Statistics and Residential Property Price database; IMF Global Debt Database and International Financial Statistics (share price indices); OECD Housing Prices; Jordà–Schularick–Taylor Macrohistory database; World Bank WDI (inflation)</p></li>
+<li><p><strong>Data sources</strong>: daily TAQ and CRSP (WRDS); SEC EDGAR Schedule 13D filings (free); IBES or Compustat announcement dates; the paper’s news source is RavenPack, which we do not have—substitute EDGAR 8-K filing timestamps</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>The paper’s primary equity-index source is Global Financial Data, which we do not have. Use the IMF IFS share price indices and the JST Macrohistory equity data instead—the paper itself uses these as supplementary sources, and coverage is adequate for nearly all country-years in the sample.</p></li>
-<li><p>Use the working paper version (HBS Working Paper 20-130) for table and figure numbering.</p></li>
+<li><p>The posted ITI series makes this one of the best-validated replications on the list: you can score your own measure against the authors’ stock-day by stock-day rather than against four significant digits in a table.</p></li>
+<li><p>Be careful with the labels. Schedule 13D discloses the purchase window after the fact, and how you map filings to trading days determines everything downstream.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Greenwood, Robin, Samuel G. Hanson, Andrei Shleifer, and Jakob Ahm Sørensen. “Predictable Financial Crises.” The Journal of Finance 77, no. 2 (2022): 863–921. <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jofi.13105">https://onlinelibrary.wiley.com/doi/abs/10.1111/jofi.13105</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/476a3192dc1ee692396291cd8b89730b/GreenwoodHansonShleiferSorensen2022PredictableFinancialCrises.pdf"><span class="xref download myst">GreenwoodHansonShleiferSorensen2022PredictableFinancialCrises.pdf</span></a> (HBS working paper version)</p></li>
+<li><p><strong>Citation</strong>: Bogousslavsky, Vincent, Vyacheslav Fos, and Dmitriy Muravyev. “Informed Trading Intensity.” The Journal of Finance 79, no. 2 (2024): 903-948. <a class="reference external" href="https://doi.org/10.1111/jofi.13320">https://doi.org/10.1111/jofi.13320</a></p></li>
 </ul>
 </section>
-<section id="credit-market-sentiment-and-the-business-cycle">
-<h3>3. <a class="reference external" href="https://academic.oup.com/qje/article/132/3/1373/3787666">Credit-Market Sentiment and the Business Cycle</a><a class="headerlink" href="#credit-market-sentiment-and-the-business-cycle" title="Link to this heading">#</a></h3>
-<p>Using U.S. data from 1929 to 2015, this paper shows that “elevated credit-market sentiment in year t−2 is associated with a decline in economic activity in years t and t+1.” The mechanism is “predictable mean reversion in credit-market conditions”: when credit risk is aggressively priced—narrow spreads, a high junk-bond share of issuance—spreads subsequently widen, and the widening coincides with the onset of a contraction. Investor sentiment in credit markets, not just financial frictions, emerges as a driver of business cycles.</p>
-<p>The pipeline is a two-step time-series exercise: first forecast annual changes in the Baa–Treasury spread using the year t−2 sentiment proxies (the log credit spread and the Greenwood–Hanson high-yield issuance share), then regress real GDP-per-capita growth on the predicted spread change. Nearly a century of annual data, all from public sources.</p>
+<section id="sparse-signals-in-the-cross-section-of-returns">
+<h3>3. <a class="reference external" href="https://doi.org/10.1111/jofi.12733">Sparse Signals in the Cross-Section of Returns</a><a class="headerlink" href="#sparse-signals-in-the-cross-section-of-returns" title="Link to this heading">#</a></h3>
+<p>This paper hands the LASSO the entire cross-section of lagged one-minute returns and asks it to forecast each stock’s return one minute ahead, with no economic prior about which stocks should matter. It works: “the LASSO increases both out-of-sample fit and forecast-implied Sharpe ratios by identifying predictors that are unexpected, short-lived, and sparse.” And the predictors it picks are not noise—they tend to be stocks with fresh news about fundamentals. It is the cleanest academic statement of what a short-horizon statistical arbitrage desk actually does.</p>
+<p>The pipeline: build one-minute return bars for the cross-section from TAQ, then run a rolling LASSO for every stock in every minute, which is a genuinely large estimation problem and the reason this project needs a cluster.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Construct the dataset and replicate Figure I (the Baa–Treasury spread, 1929–2015)</strong>: assemble the credit spread, the high-yield share, GDP per capita, inflation, and Treasury yields, with a summary-statistics table (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Table I (forecasting growth with credit spreads and stock prices)</strong>: OLS regressions of real GDP-per-capita growth on lagged spread changes and S&amp;P 500 returns, with Newey–West standard errors</p></li>
-<li><p><strong>Replicate Table II (the two-step sentiment results)</strong>: the first-stage spread-change forecasting regressions and the second-stage effect of predicted spread changes on growth—the paper’s central result</p></li>
-<li><p><strong>Replicate Figure II (credit-market sentiment and economic growth)</strong>: the fitted relationship over the full 1929–2015 sample</p></li>
-<li><p><strong>Update</strong>: extend the dataset and Tables I–II through the most recent available year—the post-2015 period (COVID, the 2022 tightening) is an interesting out-of-sample test</p></li>
+<li><p><strong>Build the minute-bar panel</strong>: one-minute returns for the sample stocks from TAQ with the paper’s filters, plus a summary table and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Tables I and II (out-of-sample fit)</strong>: the LASSO’s out-of-sample fit and its improvement over the AR(3), market, and other benchmarks</p></li>
+<li><p><strong>Replicate Tables IV and V (trading strategies)</strong>: performance of the forecast-implied strategies net of trading costs, and their turnover</p></li>
+<li><p><strong>Replicate Table VI and Figures 4-6 (what gets selected)</strong>: the characteristics of the selected predictors and how often they are used</p></li>
+<li><p><strong>Replicate Table VII (news)</strong>: the change in the LASSO’s selection rate around news about a company</p></li>
+<li><p><strong>Update</strong>: extend to a recent year and ask whether the effect has decayed as the strategy became crowded</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong> (free and public unless noted): FRED (Moody’s Baa yield, long-term Treasury yields, real GDP per capita, CPI); Robert Shiller’s website (S&amp;P 500 returns and P/E); Greenwood–Hanson high-yield share (posted with their paper’s data; can be extended from Mergent FISD on WRDS); Federal Reserve Board website (excess bond premium, for the EBP robustness variant)</p></li>
+<li><p><strong>Data sources</strong>: daily TAQ (WRDS) for the minute bars; CRSP for the cross-section and for delisting; the paper’s news source is Dow Jones news flashes, which we do not have—substitute EDGAR 8-K filing timestamps</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>The high-yield share is the one input not on FRED. Use the series posted with Greenwood and Hanson (2013) (“Issuer Quality and Corporate Bond Returns,” data on Robin Greenwood’s HBS page) and extend it using Mergent FISD ratings and issuance data if you take on the update task.</p></li>
+<li><p>This is the most compute-hungry project on the list: a LASSO per stock per minute over several years. It is a job-array problem, and Midway or the WRDS Cloud (week 6) is the right home for it. Scale the universe down before you scale it up.</p></li>
+<li><p>The working paper version posted on Alex Chinco’s site has the same tables and is free.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: López-Salido, David, Jeremy C. Stein, and Egon Zakrajšek. “Credit-Market Sentiment and the Business Cycle.” The Quarterly Journal of Economics 132, no. 3 (2017): 1373–1426. <a class="reference external" href="https://academic.oup.com/qje/article/132/3/1373/3787666">https://academic.oup.com/qje/article/132/3/1373/3787666</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/b7293f27c22bf97671231b3d7a1280b9/LopezSalidoSteinZakrajsek2017CreditMarketSentiment.pdf"><span class="xref download myst">LopezSalidoSteinZakrajsek2017CreditMarketSentiment.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Chinco, Alex, Adam D. Clark-Joseph, and Mao Ye. “Sparse Signals in the Cross-Section of Returns.” The Journal of Finance 74, no. 1 (2019): 449-492. <a class="reference external" href="https://doi.org/10.1111/jofi.12733">https://doi.org/10.1111/jofi.12733</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/d93ef8e2f8a377380e48739c9079765d/ChincoClarkJosephYe2019SparseSignals.pdf"><span class="xref download myst">ChincoClarkJosephYe2019SparseSignals.pdf</span></a> (working paper version)</p></li>
 </ul>
 </section>
-</section>
-<section id="corporate-events-and-anomalies">
-<h2>Corporate Events and Anomalies<a class="headerlink" href="#corporate-events-and-anomalies" title="Link to this heading">#</a></h2>
-<section id="predictable-corporate-distributions-and-stock-returns">
-<h3>4. <a class="reference external" href="https://academic.oup.com/rfs/article/28/4/1199/1929063">Predictable Corporate Distributions and Stock Returns</a><a class="headerlink" href="#predictable-corporate-distributions-and-stock-returns" title="Link to this heading">#</a></h3>
-<p>Firms tend to announce distributions—dividend increases, special dividends, stock dividends, and stock splits—“on the anniversary of a like announcement at the same firm.” The market underreacts to this predictability: “a simple strategy that involves purchasing firms with high predicted probabilities of distribution announcements earns significant abnormal monthly returns,” distinct from earnings-announcement and seasonality effects.</p>
-<p>The pipeline: identify the four event types from the CRSP distribution master file (1963–2012) using the paper’s filters, estimate a Cox proportional hazard model of follow-on announcements (elapsed time plus firm characteristics), then form monthly portfolios of stocks with the highest predicted event probabilities and measure their four-factor alphas. The hazard estimation is rolling and out-of-sample, exactly the kind of point-in-time discipline this course emphasizes.</p>
-<p><em>This paper is featured on the <a class="reference internal" href="project_previews.html"><span class="std std-doc">Project Previews</span></a> page.</em></p>
+<section id="efficient-estimation-of-bid-ask-spreads-from-open-high-low-and-close-prices">
+<h3>4. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2024.103916">Efficient Estimation of Bid-Ask Spreads from Open, High, Low, and Close Prices</a><a class="headerlink" href="#efficient-estimation-of-bid-ask-spreads-from-open-high-low-and-close-prices" title="Link to this heading">#</a></h3>
+<p>You can measure the effective spread directly if you have the trades and quotes. Most of the time you do not—you have daily open, high, low, and close, and that is all. The estimators that recover spreads from those four numbers (Roll, Corwin-Schultz, Abdi-Ranaldo) are biased downward when trading is infrequent, which is exactly the case where you most want them. This paper derives estimators that account for discretely observed prices and combines them optimally “to minimize estimation variance,” producing the EDGE estimator now shipping in the <code class="docutils literal notranslate"><span class="pre">bidask</span></code> package.</p>
+<p>What makes this a good course project is the validation structure. The estimator has a published reference implementation, and the quantity it estimates has an observable ground truth in TAQ. You are not comparing your output to a printed table, you are comparing it to the thing itself.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Replicate Table 1 and Figure 1 (event occurrence and recurrence)</strong>: event counts by year and the probability of each event conditional on prior occurrence, including the frequency distribution by months since the previous event (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Figure 5 (baseline hazard rates)</strong>: the estimated hazard function showing the spikes at 12, 24, and 36 months—the paper’s key descriptive fact</p></li>
-<li><p><strong>Replicate Table 3 (hazard model estimates)</strong>: Cox model coefficients for each of the four event types</p></li>
-<li><p><strong>Replicate Table 5 (portfolio returns)</strong>: raw returns and Fama–French–Carhart alphas for portfolios of stocks with high predicted probabilities of any distribution event</p></li>
+<li><p><strong>Build the price and benchmark panel</strong>: CRSP daily open/high/low/close for the sample, plus TAQ effective spreads for the same stock-months as ground truth, with a summary table and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate the Monte Carlo</strong>: bias and RMSE of EDGE against Roll, Corwin-Schultz, and Abdi-Ranaldo as trading frequency falls</p></li>
+<li><p><strong>Replicate the empirical comparison</strong>: each estimator’s correlation with TAQ effective spreads, by size decile and through time</p></li>
+<li><p><strong>Implement the estimator from the paper’s equations</strong>, then test your implementation against the <code class="docutils literal notranslate"><span class="pre">bidask</span></code> package output—the package is the oracle, your code is what is being tested</p></li>
+<li><p><strong>Extend to futures</strong>: apply the estimators to E-mini and Treasury futures from Databento, where the true spread is observable from the top of book at essentially no data cost</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong> (all available on WRDS): CRSP distribution master file (<code class="docutils literal notranslate"><span class="pre">crsp.msedist</span></code>; e.g., special dividends are distribution codes 5533/5538) and monthly/daily stock files; Compustat (ROA, cash balances); Fama–French–Carhart factors (<code class="docutils literal notranslate"><span class="pre">ff.factors_monthly</span></code>)</p></li>
+<li><p><strong>Data sources</strong>: CRSP daily stock file and daily TAQ (WRDS); Databento GLBX (<code class="docutils literal notranslate"><span class="pre">mbp-1</span></code>) for the futures extension; reference implementation at <a class="github reference external" href="https://github.com/eguidotti/bidask">eguidotti/bidask</a></p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>The Cox proportional hazard model is available in Python via the <code class="docutils literal notranslate"><span class="pre">lifelines</span></code> package (<code class="docutils literal notranslate"><span class="pre">CoxPHFitter</span></code>).</p></li>
-<li><p>Follow the paper’s sample filters carefully (share codes 10/11, the 5% dividend-increase threshold, and the 20–90 trading-day spacing rule for prior dividends)—getting the event sample right is most of the battle.</p></li>
+<li><p>Do not call the package and stop. The deliverable is your own implementation plus the test suite that proves it matches.</p></li>
+<li><p>The futures extension is the most interesting part and is not in the paper. Futures give you a clean, cheap ground truth in an asset class where the daily-data estimators are used constantly and validated rarely.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Bessembinder, Hendrik, and Feng Zhang. “Predictable Corporate Distributions and Stock Returns.” The Review of Financial Studies 28, no. 4 (2015): 1199–1241. <a class="reference external" href="https://academic.oup.com/rfs/article/28/4/1199/1929063">https://academic.oup.com/rfs/article/28/4/1199/1929063</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/c2cfd9cedb1a11141e79b0d52ec28c4a/BessembinderZhang2015PredictableCorporateDistributions.pdf"><span class="xref download myst">BessembinderZhang2015PredictableCorporateDistributions.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Ardia, David, Emanuele Guidotti, and Tim A. Kroencke. “Efficient estimation of bid-ask spreads from open, high, low, and close prices.” Journal of Financial Economics 161 (2024): 103916. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2024.103916">https://doi.org/10.1016/j.jfineco.2024.103916</a> (working paper: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3892335">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3892335</a>)</p></li>
 </ul>
 </section>
-</section>
-<section id="options-and-crash-risk">
-<h2>Options and Crash Risk<a class="headerlink" href="#options-and-crash-risk" title="Link to this heading">#</a></h2>
-<section id="forecasting-crashes-with-a-smile">
-<h3>5. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf">Forecasting Crashes with a Smile</a><a class="headerlink" href="#forecasting-crashes-with-a-smile" title="Link to this heading">#</a></h3>
-<p>This paper derives “option-implied bounds on the probability of a crash in an individual stock” from the prices of options on the stock and on the S&amp;P 500 index, using the Fréchet–Hoeffding copula bounds to handle any correlation structure between the two. The lower bound “successfully forecasts crashes both in and out of sample” and, unlike risk-neutral crash probabilities, avoids “crying wolf” during crisis periods.</p>
-<p>The pipeline: pull month-end OptionMetrics volatility surfaces for the S&amp;P 500 index and its constituent firms (1996–2022), filter and interpolate the smiles, recover risk-neutral CDFs via Breeden–Litzenberger, and combine the stock and index marginals into the crash-probability bounds. Section 2 and Appendix D spell out the computational steps.</p>
+<section id="a-tug-of-war-overnight-versus-intraday-expected-returns">
+<h3>5. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2019.03.011">A Tug of War: Overnight versus Intraday Expected Returns</a><a class="headerlink" href="#a-tug-of-war-overnight-versus-intraday-expected-returns" title="Link to this heading">#</a></h3>
+<p>Split every daily return into its overnight (close-to-open) and intraday (open-to-close) halves and a strange thing appears: each half persists strongly on its own, while the two offset each other across periods, and the offsetting reversal runs for years. The punchline is the one every quant remembers—“profits of 14 trading strategies are earned either entirely overnight or entirely intraday.” Momentum is an overnight strategy. Several others are entirely intraday. Anyone who trades a factor book at the open or the close has to know which of these they are in.</p>
+<p>The pipeline is mostly CRSP: open prices, close prices, and careful handling of the corporate actions that make close-to-open returns misleading. The volume evidence pulls in TAQ.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Replicate Table 1 (summary statistics)</strong>: realized crash frequencies, the upper and lower crash-probability bounds, and risk-neutral crash probabilities, averaged across firms and across time</p></li>
-<li><p><strong>Replicate Figure 1 (Apple and AIG)</strong>: time series of upper and lower bounds on the probability of a 20% one-month crash for Apple and AIG</p></li>
-<li><p><strong>Replicate Figure 2 (cross-sectional medians)</strong>: time series of the cross-sectional median upper and lower bounds, together with the crash probability of the S&amp;P 500 index itself</p></li>
-<li><p><strong>Replicate Table 2 (regression tests)</strong>: in-sample regressions of realized crash indicators on the lower bound, the upper bound, and the risk-neutral crash probability</p></li>
+<li><p><strong>Build the overnight/intraday decomposition</strong>: firm-level overnight and intraday return series from CRSP, with the paper’s screens, plus a summary table and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate the persistence and reversal tests</strong>, including Figure 2, the t-statistics of the overnight/intraday persistence test across horizons</p></li>
+<li><p><strong>Replicate the strategy table</strong>: the overnight/intraday decomposition of returns for the 14 strategies—the central result</p></li>
+<li><p><strong>Replicate Figures 1 and 3 (trading volume)</strong>: dollar volume by 30-minute interval across the day, and large versus small trades</p></li>
+<li><p><strong>Update</strong>: extend through the most recent year, including the period after 2019 when retail participation and closing-auction volume both jumped</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong> (all available on WRDS):</p>
-<ul>
-<li><p>OptionMetrics IvyDB US: volatility surfaces (<code class="docutils literal notranslate"><span class="pre">optionm_all.vsurfd{year}</span></code>; the S&amp;P 500 index is <code class="docutils literal notranslate"><span class="pre">secid</span> <span class="pre">=</span> <span class="pre">108105</span></code>) and the zero-coupon yield curve (<code class="docutils literal notranslate"><span class="pre">optionm_all.zerocd</span></code>)</p></li>
-<li><p>CRSP: stock prices, returns, volume, shares outstanding, and S&amp;P 500 constituent membership (<code class="docutils literal notranslate"><span class="pre">crsp.msp500list</span></code>)</p></li>
-<li><p>CRSP–OptionMetrics link table (<code class="docutils literal notranslate"><span class="pre">wrdsapps_link_crsp_optionm</span></code>)</p></li>
-</ul>
-</li>
+<li><p><strong>Data sources</strong>: CRSP daily stock file (open, close, returns) on WRDS; Ken French’s library for the factors and for the strategy definitions; daily TAQ for the intraday volume figures</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>Use the OptionMetrics volatility surface file rather than raw option quotes—the surface already accounts for the early-exercise premium in American-style single-name options, which is why the paper (and the related literature) works from it. Only out-of-the-money options are used to compute the risk-neutral marginals.</p></li>
+<li><p>CRSP daily open prices begin in 1992, which sets the start of the decomposition. The paper is explicit about this and so should you be.</p></li>
+<li><p>Overnight returns are unusually sensitive to distribution and split adjustments. The unit tests for this project write themselves.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Martin, Ian W. R., and Ran Shi. “Forecasting Crashes with a Smile.” Working paper, September 2025. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf">https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/054aec8242a92d848223d075bc897059/MartinShi2025ForecastingCrashesWithASmile.pdf"><span class="xref download myst">MartinShi2025ForecastingCrashesWithASmile.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Lou, Dong, Christopher Polk, and Spyros Skouras. “A tug of war: Overnight versus intraday expected returns.” Journal of Financial Economics 134, no. 1 (2019): 192-213. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2019.03.011">https://doi.org/10.1016/j.jfineco.2019.03.011</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/d96bcdc16287043c5de7a2544508db20/LouPolkSkouras2019TugOfWar.pdf"><span class="xref download myst">LouPolkSkouras2019TugOfWar.pdf</span></a> (accepted version)</p></li>
 </ul>
 </section>
-<section id="information-in-derivatives-markets-forecasting-prices-with-prices">
-<h3>6. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/ARFE_published.pdf">Information in Derivatives Markets: Forecasting Prices with Prices</a><a class="headerlink" href="#information-in-derivatives-markets-forecasting-prices-with-prices" title="Link to this heading">#</a></h3>
-<p>This survey covers “work that uses information in derivative and other asset prices to forecast movements in financial markets.” Its centerpiece is the SVIX index—the risk-neutral variance of the S&amp;P 500 return, computed from index option prices—which measures the equity premium in real time: for a log investor, the expected excess return on the market equals <span class="math notranslate nohighlight">\(R_f \cdot \text{SVIX}^2\)</span>. The survey updates the forecasting regressions of Martin (2017) through December 2022 and shows they hold up out of sample.</p>
-<p>The pipeline: pull S&amp;P 500 index option prices from OptionMetrics, compute the SVIX integral of out-of-the-money put and call prices over strikes (Equation 19), and run forecasting regressions of realized excess returns on SVIX². Figures 1 and 2 extend this from log utility to power utility using the risk-neutral moment formula in Equation 49.</p>
+</section>
+<section id="high-frequency-futures-volatility-and-tail-risk">
+<h2>High-Frequency Futures: Volatility and Tail Risk<a class="headerlink" href="#high-frequency-futures-volatility-and-tail-risk" title="Link to this heading">#</a></h2>
+<section id="exploiting-the-errors-a-simple-approach-for-improved-volatility-forecasting">
+<h3>6. <a class="reference external" href="https://doi.org/10.1016/j.jeconom.2015.10.007">Exploiting the Errors: A Simple Approach for Improved Volatility Forecasting</a><a class="headerlink" href="#exploiting-the-errors-a-simple-approach-for-improved-volatility-forecasting" title="Link to this heading">#</a></h3>
+<p>Realized volatility is measured, not observed, and how well it is measured varies enormously from day to day. The standard HAR model ignores that and treats every day’s realized variance as equally informative. This paper lets the model’s own coefficients depend on the estimated measurement error: “the models exhibit stronger persistence, and in turn generate more responsive forecasts, when the measurement error is relatively low.” The resulting HARQ model beats HAR out of sample, and the idea—weight your regressors by how precisely you measured them—generalizes far past volatility.</p>
+<p>This is the project where you build realized measures from raw ticks. Databento’s CME Globex feed is flat-rate for this course, so the data is free, and the work is the work: bars, realized variance, realized quarticity, bipower variation, and the forecast evaluation on top.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Construct the SVIX index</strong> at 1-, 3-, 6-, and 12-month horizons, daily from January 1996 to the present; plot the series and report summary statistics (this is the data-cleaning deliverable; compare with the plots in Martin (2017))</p></li>
-<li><p><strong>Replicate Table 1 (forecasting the market)</strong>: regressions of realized excess returns on SVIX² at 1-, 3-, 6-, and 12-month horizons, with Newey–West standard errors, for both the full 1996–2022 sample and the 2012–2022 subsample</p></li>
-<li><p><strong>Replicate Figures 1 and 2 (the equity premium under power utility)</strong>: the 1-month and 1-year equity premium for risk aversion γ = 1, 2, 3, computed from risk-neutral moments of the market return</p></li>
-<li><p><strong>Update</strong>: extend Table 1 and the SVIX series from the paper’s end date (December 2022) through the most recent available data</p></li>
+<li><p><strong>Build the realized measure panel</strong>: daily RV, RQ, bipower variation, and noise-robust RV for the E-mini S&amp;P 500 and a set of liquid CME products, with Table 2’s summary statistics and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 1 (simulation)</strong>: the simulation evidence that motivates the HARQ specification</p></li>
+<li><p><strong>Replicate Table 3 (in-sample estimates)</strong> and <strong>Tables 4 and 5 (out-of-sample forecast losses)</strong>, including the losses stratified by the level of measurement error—the crux result</p></li>
+<li><p><strong>Replicate Tables 7 and 8 (weekly and monthly horizons)</strong></p></li>
+<li><p><strong>Replicate Tables 9 and 10 (noise-robust RV)</strong>: HARQ against HAR models built on noise-robust realized variances</p></li>
+<li><p><strong>Update</strong>: run the whole comparison on the modern sample, where tick frequency is orders of magnitude higher than in the paper’s data</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong> (all available on WRDS): OptionMetrics IvyDB US for S&amp;P 500 index options (<code class="docutils literal notranslate"><span class="pre">secid</span> <span class="pre">=</span> <span class="pre">108105</span></code>) and the zero-coupon yield curve; CRSP for S&amp;P 500 total returns</p></li>
+<li><p><strong>Data sources</strong>: Databento <code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code> (free under the course subscription), <code class="docutils literal notranslate"><span class="pre">trades</span></code> or <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> for ES, NQ, ZN, CL, and GC; the paper’s stock-level results use TAQ, which is on WRDS if you want that leg too</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>Do not attempt Table 2 (currency forecasting with quanto contracts): the quanto forward data from Kremens and Martin (2019) is proprietary (Markit Totem) and not available on WRDS. Table 3 is from Martin and Wagner (2019) and is out of scope for this project.</p></li>
-<li><p>S&amp;P 500 (SPX) options are European style, so no early-exercise adjustment is needed—raw option prices can be used directly in the SVIX integral.</p></li>
+<li><p>Two Databento facts shape this project. History for <code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code> starts 2010-06-06, and on many days before 2017-05-21 the OHLCV schemas return fewer bars than actually traded. Build your bars from <code class="docutils literal notranslate"><span class="pre">trades</span></code> and validate them against <code class="docutils literal notranslate"><span class="pre">ohlcv-1m</span></code> on a post-2017 day before you trust anything earlier. That validation is exactly the HW 4 pattern applied to a new question.</p></li>
+<li><p>Choosing the sampling frequency is a real decision with a literature behind it, not a default. Say what you chose and why.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Martin, Ian W. R. “Information in Derivatives Markets: Forecasting Prices with Prices.” Annual Review of Financial Economics 17 (2025): 295–319. <a class="reference external" href="https://doi.org/10.1146/annurev-financial-082123-105811">https://doi.org/10.1146/annurev-financial-082123-105811</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/a99978354f8712907f68746923cf79dd/Martin2025InformationInDerivativesMarkets.pdf"><span class="xref download myst">Martin2025InformationInDerivativesMarkets.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Bollerslev, Tim, Andrew J. Patton, and Rogier Quaedvlieg. “Exploiting the errors: A simple approach for improved volatility forecasting.” Journal of Econometrics 192, no. 1 (2016): 1-18. Free copy: <a class="reference external" href="https://public.econ.duke.edu/~ap172/BPQ_Exploiting_Errors_JoE_2016.pdf">https://public.econ.duke.edu/~ap172/BPQ_Exploiting_Errors_JoE_2016.pdf</a></p></li>
 </ul>
 </section>
-</section>
-<section id="predicting-the-equity-premium-the-classics">
-<h2>Predicting the Equity Premium: The Classics<a class="headerlink" href="#predicting-the-equity-premium-the-classics" title="Link to this heading">#</a></h2>
-<section id="a-comprehensive-look-at-the-empirical-performance-of-equity-premium-prediction">
-<h3>7. <a class="reference external" href="https://doi.org/10.1093/rfs/hhm014">A Comprehensive Look at the Empirical Performance of Equity Premium Prediction</a><a class="headerlink" href="#a-comprehensive-look-at-the-empirical-performance-of-equity-premium-prediction" title="Link to this heading">#</a></h3>
-<p>This is the classic skeptic’s paper on market-return forecasting—and the source of the predictor dataset used in the “Virtue of Complexity” project above. The authors “comprehensively reexamine the performance of variables that have been suggested by the academic literature to be good predictors of the equity premium” (dividend ratios, earnings ratios, book-to-market, interest rates and spreads, inflation, net issuance, and more) and find that “by and large, these models have predicted poorly both in-sample and out-of-sample for 30 years”; most would not have helped a real-time investor time the market.</p>
-<p>The heart of the project is constructing the predictor variables from primary sources and then comparing in-sample fit against honest out-of-sample forecasts, following the paper’s recursive estimation scheme. Amit Goyal posts the finished dataset (updated annually) on his website—you should use it to <em>validate</em> your construction, not as your data source.</p>
+<section id="tails-fears-and-risk-premia">
+<h3>7. <a class="reference external" href="https://doi.org/10.1111/j.1540-6261.2011.01695.x">Tails, Fears, and Risk Premia</a><a class="headerlink" href="#tails-fears-and-risk-premia" title="Link to this heading">#</a></h3>
+<p>How much of the equity premium is payment for ordinary volatility, and how much is payment for the rare, violent move? This paper separates them by estimating jump tails twice: once under the physical measure, from high-frequency index returns, and once under the risk-neutral measure, from deep out-of-the-money index puts. The gap between the two is a direct, model-light reading of investor fear, and the paper shows that “the compensation for rare events accounts for a large fraction of the equity and variance risk premia in the S&amp;P 500 market index.”</p>
+<p>It is the one project on this list that uses both halves of the course’s derivatives material at once: the high-frequency futures data from HW 4 and the option surface from HW 3.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Construct the annual predictor dataset from primary sources</strong> (CRSP, Compustat, FRED, and Robert Shiller’s website), and produce a summary-statistics table plus a validation table showing correlations between your series and Goyal’s posted series (this is the data-cleaning deliverable and the bulk of the work)</p></li>
-<li><p><strong>Replicate Table 1 (annual predictive performance)</strong>: in-sample and out-of-sample R² for each individual predictor, following the paper’s recursive out-of-sample procedure</p></li>
-<li><p><strong>Replicate Figures 1 and 2 (cumulative squared-error plots)</strong>: the paper’s signature graphs showing cumulative out-of-sample performance of each predictor relative to the historical-mean benchmark over time</p></li>
-<li><p><strong>Update</strong>: extend Table 1 and the figures through the most recent available year and compare with the follow-up paper by Goyal, Welch, and Zafirov (2024)</p></li>
+<li><p><strong>Build both panels</strong>: high-frequency S&amp;P 500 returns and the out-of-the-money index option panel, with summary statistics and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 1 (mean jump intensities)</strong> and <strong>Figure 1 (implied measures)</strong></p></li>
+<li><p><strong>Replicate Tables 5 and 7 (risk-neutral tail estimation)</strong>: the extreme-value fit to the option-implied tails</p></li>
+<li><p><strong>Replicate Figure 2 (equity and variance risk premia due to large jumps)</strong>—the paper’s headline decomposition</p></li>
+<li><p><strong>Replicate Figure 6 (time-of-day factor)</strong>: the intraday pattern in the jump intensity</p></li>
+<li><p><strong>Update</strong>: extend through the present, which now includes February 2018, March 2020, and August 2024 as out-of-sample tail events</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong>: CRSP (market returns, T-bill/risk-free rates), Compustat (book values, corporate issuance), FRED (interest rates, inflation), Robert Shiller’s website (long-history dividends and earnings); Amit Goyal’s website for validation</p></li>
+<li><p><strong>Data sources</strong>: Databento <code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code> for E-mini S&amp;P 500 high-frequency returns from June 2010 (free); daily TAQ on WRDS for SPY high-frequency returns before 2010; OptionMetrics IvyDB US on WRDS for SPX options (<code class="docutils literal notranslate"><span class="pre">secid</span> <span class="pre">=</span> <span class="pre">108105</span></code>) and the zero-coupon curve; CRSP for index returns</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>You do not need to replicate every row of Table 1—cover the main price-based predictors (dp, dy, ep, b/m), the interest-rate variables (tbl, lty, ltr, tms, dfy, dfr), inflation, and net equity issuance. The corporate-issuance and cross-sectional-premium variables may be skipped.</p></li>
-<li><p>This project pairs naturally with the “Virtue of Complexity” project above: same data, opposite conclusion.</p></li>
+<li><p>The paper’s high-frequency sample predates Databento’s history. Use TAQ’s SPY trades for the early period and E-mini futures for the modern one, and document the seam honestly—the two instruments do not have the same trading hours, which matters for overnight jumps.</p></li>
+<li><p>The extreme-value estimation is the hard part. Budget time for it and write the tests against simulated data where you know the tail index.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Welch, Ivo, and Amit Goyal. “A Comprehensive Look at the Empirical Performance of Equity Premium Prediction.” The Review of Financial Studies 21, no. 4 (2008): 1455–1508. <a class="reference external" href="https://doi.org/10.1093/rfs/hhm014">https://doi.org/10.1093/rfs/hhm014</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/7fb9b661d20b734657dc356e86873b96/WelchGoyal2008EquityPremiumPrediction.pdf"><span class="xref download myst">WelchGoyal2008EquityPremiumPrediction.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Bollerslev, Tim, and Viktor Todorov. “Tails, Fears, and Risk Premia.” The Journal of Finance 66, no. 6 (2011): 2165-2211. <a class="reference external" href="https://doi.org/10.1111/j.1540-6261.2011.01695.x">https://doi.org/10.1111/j.1540-6261.2011.01695.x</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/a7acfca8a72a7689bde206d8241e2e8b/BollerslevTodorov2011TailsFearsRiskPremia.pdf"><span class="xref download myst">BollerslevTodorov2011TailsFearsRiskPremia.pdf</span></a> (working paper version)</p></li>
 </ul>
 </section>
-<section id="predictive-regressions">
-<h3>8. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X99000410">Predictive Regressions</a><a class="headerlink" href="#predictive-regressions" title="Link to this heading">#</a></h3>
-<p>This is the classic paper on the econometrics of return forecasting—the source of the “Stambaugh bias.” When a return is regressed on a persistent lagged regressor like the dividend yield, “the regression disturbance is correlated with the regressor’s innovations,” so the OLS slope is biased upward in finite samples: for 1927–1996, “the bias equals one-third of the OLS estimate.” The paper characterizes the finite-sample distribution of the predictive slope and contrasts frequentist p-values with Bayesian posteriors under different priors.</p>
-<p>The data work is light (monthly value-weighted NYSE returns and dividend yields from CRSP), so the heart of this project is simulation: Monte Carlo evaluation of the finite-sample distribution of the OLS estimator and posterior simulation for the Bayesian analysis. This is a project for a group that wants to go deep on econometrics rather than data engineering.</p>
+</section>
+<section id="monetary-policy-and-return-predictability">
+<h2>Monetary Policy and Return Predictability<a class="headerlink" href="#monetary-policy-and-return-predictability" title="Link to this heading">#</a></h2>
+<section id="the-pre-fomc-announcement-drift">
+<h3>8. <a class="reference external" href="https://doi.org/10.1111/jofi.12196">The Pre-FOMC Announcement Drift</a><a class="headerlink" href="#the-pre-fomc-announcement-drift" title="Link to this heading">#</a></h3>
+<p>Large average excess returns on U.S. equities are earned in the twenty-four hours <em>before</em> scheduled FOMC announcements—before anyone can know what the committee decided. The effect is big enough to account for a substantial share of the equity premium since 1994, it is not explained by the policy surprise itself, and it does not appear before other macroeconomic releases. It is one of the most cited anomalies in monetary-policy finance and one of the most heavily traded.</p>
+<p>The daily half of this replication is cheap: a calendar and CRSP. The intraday half is where the work is, because the paper’s headline window is a 2pm-to-2pm return that spans the overnight session, which means you need an instrument that trades overnight. E-mini S&amp;P 500 futures are that instrument, and they are free under the course’s Databento subscription.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Construct the data</strong>: monthly value-weighted NYSE excess returns and the dividend-price ratio (dividends over the trailing 12 months), 1927–1996 and extended to the present; report OLS estimates of the predictive slope and the dividend yield’s autocorrelation for each of the paper’s four subsamples (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Table 1 (finite-sample properties of the OLS slope)</strong>: simulate the bias, skewness, and true p-values of the OLS estimator across the four sample periods</p></li>
-<li><p><strong>Replicate Table 2 (Bayesian posterior moments)</strong>: posterior mean, standard deviation, and P(β ≤ 0) for the predictive slope under the paper’s prior and conditioning specifications</p></li>
-<li><p><strong>Replicate Figure 1 (estimates of β and ρ)</strong>: compare OLS, bias-adjusted, and Bayesian estimates across subperiods</p></li>
-<li><p><strong>Update</strong>: re-run Table 1 and Table 2 on a sample extended through the most recent available year</p></li>
+<li><p><strong>Assemble the FOMC calendar and the return panel</strong>: scheduled and unscheduled meeting dates, daily S&amp;P 500 excess returns, and the 2pm-to-2pm intraday windows, reproducing <strong>Table 1 (summary statistics)</strong> (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 2 (main daily regression)</strong>: the pre-FOMC dummy in daily S&amp;P 500 returns, with the paper’s standard errors, plus <strong>Table 4 (alternative samples)</strong></p></li>
+<li><p><strong>Replicate Figure 1 (cumulative returns around the announcement)</strong> and <strong>Table 5 (returns before, at, and after the FOMC news)</strong></p></li>
+<li><p><strong>Replicate Table 8 (fixed income instruments)</strong> and <strong>Table 6 (international indices)</strong>, and <strong>Table 7 (other economic news)</strong>—the placebo that makes the result interesting</p></li>
+<li><p><strong>Replicate Table 12 (out-of-sample analysis)</strong></p></li>
+<li><p><strong>Update</strong>: extend through 2026. The drift is widely claimed to have weakened after publication; settle it on your own data and say so plainly either way</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong>: CRSP monthly stock file (value-weighted NYSE returns with and without dividends; one-month T-bill rate)</p></li>
-<li><p><strong>Citation</strong>: Stambaugh, Robert F. “Predictive Regressions.” Journal of Financial Economics 54, no. 3 (1999): 375–421. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X99000410">https://www.sciencedirect.com/science/article/pii/S0304405X99000410</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/64e859e73e964be3def6e9cbb3dd7301/Stambaugh1999PredictiveRegressions.pdf"><span class="xref download myst">Stambaugh1999PredictiveRegressions.pdf</span></a></p></li>
-</ul>
-</section>
-<section id="predicting-returns-with-financial-ratios">
-<h3>9. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X04000686">Predicting Returns with Financial Ratios</a><a class="headerlink" href="#predicting-returns-with-financial-ratios" title="Link to this heading">#</a></h3>
-<p>This paper is the rejoinder to Stambaugh (1999) above: small-sample corrections that treat the dividend yield’s persistence as a free parameter “can substantially understate forecasting power.” Because the yield’s autocorrelation ρ cannot exceed one (prices would explode), imposing ρ ≈ 1 gives a conservative but far more powerful test. With it, “dividend yield predicts market returns during the period 1946–2000, as well as in various subsamples,” and book-to-market and the earnings-price ratio predict returns over 1963–2000.</p>
-<p>The project builds the aggregate financial ratios from CRSP and Compustat, then implements three estimators side by side: standard OLS, the Stambaugh bias adjustment, and the paper’s ρ ≈ 1 bound. This pairs naturally with the Stambaugh project above—same data, opposite conclusion.</p>
-<ul class="simple">
-<li><p><strong>Tasks</strong>:</p>
-<ul>
-<li><p><strong>Replicate Table 1 (summary statistics)</strong>: moments and autocorrelations of equal- and value-weighted NYSE returns, dividend yield, book-to-market, and the earnings-price ratio, for the full sample and both halves (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Table 2 (dividend yield predictability, 1946–2000)</strong>: monthly predictive regressions of nominal, real, and excess NYSE returns on log dividend yield, reporting OLS, Stambaugh-adjusted, and ρ ≈ 1 estimates with p-values</p></li>
-<li><p><strong>Replicate Table 3 (subsample results)</strong>: the same regressions for 1946–1972 and 1973–2000</p></li>
-<li><p><strong>Replicate Table 5 (book-to-market) or Table 6 (earnings-price ratio)</strong>: predictive regressions for 1963–1994 and 1963–2000 using the same three estimators</p></li>
-<li><p><strong>Update</strong>: extend Tables 1 and 2 through the most recent available year</p></li>
-</ul>
-</li>
-<li><p><strong>Data sources</strong>: CRSP (equal- and value-weighted NYSE index returns, dividends, one-month T-bill rate); Compustat (book equity and operating earnings for the aggregate ratios); CPI from FRED for real returns</p></li>
-<li><p><strong>Citation</strong>: Lewellen, Jonathan. “Predicting Returns with Financial Ratios.” Journal of Financial Economics 74, no. 2 (2004): 209–235. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X04000686">https://www.sciencedirect.com/science/article/pii/S0304405X04000686</a> (free copy: <a class="reference external" href="https://web.mit.edu/lewellen/www/Documents/FinancialRatios.pdf">https://web.mit.edu/lewellen/www/Documents/FinancialRatios.pdf</a>)</p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/5940313bae0fb897b060398f82f9993d/Lewellen2004PredictingReturnsFinancialRatios.pdf"><span class="xref download myst">Lewellen2004PredictingReturnsFinancialRatios.pdf</span></a></p></li>
-</ul>
-</section>
-<section id="consumption-aggregate-wealth-and-expected-stock-returns">
-<h3>10. <a class="reference external" href="https://doi.org/10.1111/0022-1082.00347">Consumption, Aggregate Wealth, and Expected Stock Returns</a><a class="headerlink" href="#consumption-aggregate-wealth-and-expected-stock-returns" title="Link to this heading">#</a></h3>
-<p>This classic paper introduces <em>cay</em>, the deviation of log consumption from its shared trend with log asset wealth and log labor income. The authors find that “fluctuations in the consumption-wealth ratio are strong predictors of both real stock returns and excess returns,” beating the dividend yield and other popular forecasters at short and intermediate horizons. The economic logic: when consumers expect returns to fall, they let consumption drift below its long-run relationship with wealth and income, so <em>cay</em> reveals expectations in real time.</p>
-<p>The pipeline: assemble quarterly consumption, labor income, and household net worth from NIPA and the Flow of Funds, estimate the cointegrating relationship by dynamic least squares (Stock–Watson), construct <em>cay</em> as the estimated trend deviation, and run forecasting regressions of S&amp;P Composite and CRSP value-weighted returns on it. All data is free and publicly available; only the CRSP returns require WRDS.</p>
-<ul class="simple">
-<li><p><strong>Tasks</strong>:</p>
-<ul>
-<li><p><strong>Construct <em>cay</em></strong>: build the consumption, labor income, and wealth series (the paper’s appendix describes the NIPA and Flow of Funds components), estimate the cointegrating regression by DLS, and validate your series against the updated <em>cay</em> posted on Sydney Ludvigson’s website; report Table II (summary statistics of <em>cay</em> and the financial variables) as the data-cleaning deliverable</p></li>
-<li><p><strong>Replicate Figure 1 (excess returns and trend deviations)</strong>: the standardized <em>cay</em> series plotted against excess returns with NBER recession shading</p></li>
-<li><p><strong>Replicate Table III (one-quarter-ahead forecasting regressions)</strong>: real and excess returns on the S&amp;P Composite and CRSP value-weighted indexes regressed on lagged <em>cay</em> and competitor predictors</p></li>
-<li><p><strong>Replicate Table VI (long-horizon regressions)</strong>: consumption growth (Panel A) and excess returns (Panel B) at horizons of 1 to 24 quarters regressed on lagged <em>cay</em>, the dividend yield, and other forecasters</p></li>
-<li><p><strong>Update</strong>: extend <em>cay</em> and the forecasting regressions through the most recent available quarter</p></li>
-</ul>
-</li>
-<li><p><strong>Data sources</strong>: BEA NIPA tables via FRED (consumption, labor income components); Federal Reserve Z.1 Financial Accounts via FRED (household net worth); CRSP (value-weighted returns, 30-day T-bill); Robert Shiller’s website (S&amp;P Composite prices, dividends, earnings); Sydney Ludvigson’s website (updated <em>cay</em> for validation)</p></li>
+<li><p><strong>Data sources</strong>: CRSP and Ken French’s library for daily returns; the Federal Reserve Board’s website for the FOMC calendar (free); Databento <code class="docutils literal notranslate"><span class="pre">GLBX.MDP3</span></code> E-mini S&amp;P 500 for the intraday windows from June 2010; daily TAQ (SPY) for intraday windows from 2003; fed funds futures for the Kuttner policy surprise, which you already built in HW 2</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>NIPA and Flow of Funds data have been heavily revised since 2001, so your point estimates will differ somewhat from the paper’s—matching the qualitative patterns and validating against Ludvigson’s posted series is the standard for success.</p></li>
+<li><p>The paper’s intraday data come from Thomson Reuters TickHistory and <a class="reference external" href="http://Tickdata.com">Tickdata.com</a>, neither of which we have. The E-mini plus TAQ substitution above covers 2003 forward; the 1994-2002 intraday evidence is out of reach and should be reported as such.</p></li>
+<li><p>HW 2 gives you the fed funds futures machinery for free. Reuse it rather than rebuilding it.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Lettau, Martin, and Sydney Ludvigson. “Consumption, Aggregate Wealth, and Expected Stock Returns.” The Journal of Finance 56, no. 3 (2001): 815–849. <a class="reference external" href="https://doi.org/10.1111/0022-1082.00347">https://doi.org/10.1111/0022-1082.00347</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/01f0044af3de17527cad677c594357b6/LettauLudvigson2001ConsumptionAggregateWealth.pdf"><span class="xref download myst">LettauLudvigson2001ConsumptionAggregateWealth.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Lucca, David O., and Emanuel Moench. “The Pre-FOMC Announcement Drift.” The Journal of Finance 70, no. 1 (2015): 329-371. <a class="reference external" href="https://doi.org/10.1111/jofi.12196">https://doi.org/10.1111/jofi.12196</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/982cff36ce541d5624e2e7d8175e4a8c/LuccaMoench2015PreFOMCAnnouncementDrift.pdf"><span class="xref download myst">LuccaMoench2015PreFOMCAnnouncementDrift.pdf</span></a> (New York Fed Staff Report 512)</p></li>
 </ul>
 </section>
-<section id="are-dividends-and-stock-returns-predictable-new-evidence-using-m-a-cash-flows">
-<h3>11. <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2578393">Are Dividends and Stock Returns Predictable? New Evidence Using M&amp;A Cash Flows</a><a class="headerlink" href="#are-dividends-and-stock-returns-predictable-new-evidence-using-m-a-cash-flows" title="Link to this heading">#</a></h3>
-<p>Aggregate dividend growth is famously unpredictable by the dividend-price ratio—Cochrane’s “the dog that did not bark.” This paper argues that result is “due to the mismeasurement of dividends used in empirical work”: the standard CRSP index-extracted dividend measure misses cash paid to shareholders in M&amp;A transactions. Once M&amp;A cash dividends are included, “the adjusted R² from a regression of dividend growth on the lagged dividend-price ratio goes from being negative (−1.07%) to positive (17.47%).”</p>
-<p>The pipeline is a bottom-up aggregation exercise: sum dividends security-by-security from the CRSP monthly stock file—ordinary (distribution codes 1xxx), liquidation (2xx2/2xx8), and M&amp;A cash dividends (codes 3000–3400)—into aggregate dividend growth and dividend-price series, then run the classic predictability regressions with and without the M&amp;A component.</p>
+<section id="stock-returns-over-the-fomc-cycle">
+<h3>9. <a class="reference external" href="https://doi.org/10.1111/jofi.12818">Stock Returns over the FOMC Cycle</a><a class="headerlink" href="#stock-returns-over-the-fomc-cycle" title="Link to this heading">#</a></h3>
+<p>The claim is almost absurdly sharp: “since 1994, the equity premium is earned entirely in weeks 0, 2, 4, and 6 in Federal Open Market Committee (FOMC) cycle time, that is, even weeks starting from the last FOMC meeting.” Odd weeks earn nothing. The authors trace it to informal communication from the Fed—the even-week pattern lines up with Board of Governors meetings and with the timing of leaks to the financial press.</p>
+<p>The data here is nearly free, which shifts the difficulty entirely onto construction. Everything depends on the calendar: what counts as day zero, how unscheduled meetings are handled, how weeks are counted across a year with eight meetings and fifty-two weeks. This is a testing project as much as a replication project.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
-<li><p><strong>Replicate Table 1 and Figure 1 (the dividend measures)</strong>: descriptive statistics of the comprehensive dividend measure versus the standard CRSP index-extracted measures, and the time series of aggregate cash flows split by type (this is the data-cleaning deliverable)</p></li>
-<li><p><strong>Replicate Figures 3 and 4 (dividend growth and dividend-price ratios)</strong>: time-series comparison of the new and traditional measures</p></li>
-<li><p><strong>Replicate Table 3 (annual predictability regressions)</strong>: dividend growth and returns regressed on the lagged dividend-price ratio, showing the reversal of the “dog that did not bark” result</p></li>
-<li><p><strong>Replicate Table 6 (VAR estimates and long-run coefficients)</strong>: the Campbell–Shiller/Cochrane present-value decomposition with the corrected dividend measure</p></li>
-<li><p><strong>Update</strong>: extend the dividend series and Table 3 through the most recent available year</p></li>
+<li><p><strong>Build FOMC cycle time</strong>: the meeting calendar, the day-zero convention, and the mapping from calendar days to cycle weeks, reproducing <strong>Figure 2 (the histogram of meeting timing within the year)</strong> (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Figure 1 (stock returns over the FOMC cycle, 1994-2016)</strong>—the picture everybody has seen</p></li>
+<li><p><strong>Replicate Table 2 (international stock returns over the FOMC cycle)</strong></p></li>
+<li><p><strong>Replicate Table 6 (the even-week effect and Board of Governors meetings)</strong>—the mechanism</p></li>
+<li><p><strong>Replicate Table 9 (predicting target changes with even-week returns that follow market declines)</strong> and the Figure 4 mean-reversion evidence</p></li>
+<li><p><strong>Update</strong>: extend through 2026, covering the zero-lower-bound years, the 2022-2023 hiking cycle, and the post-2011 press-conference regime</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong>: CRSP monthly stock file and distribution events (via WRDS); Robert Shiller’s website (CPI); Amit Goyal’s website (risk-free rate); BEA NIPA (personal consumption expenditure)</p></li>
+<li><p><strong>Data sources</strong>: CRSP and Ken French’s library for daily returns (free); the Federal Reserve Board’s website for the FOMC and Board meeting calendars; international index returns—the paper uses Datastream, substitute Bloomberg in the trading lab or free index data; fed funds futures from HW 2</p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>This is a newer working paper rather than an established classic—but that cuts both ways: it is a live research question, and the replication itself (bottom-up dividend aggregation from CRSP distribution codes) is exactly the kind of careful data construction this course is about.</p></li>
+<li><p>Build the calendar as its own tested module with its own exhibits. If the calendar is wrong, everything downstream is wrong and nothing will tell you.</p></li>
+<li><p>The authors post their data and the FOMC cycle-time variable, which gives you a reconciliation target for the hardest part of the build.</p></li>
 </ul>
 </li>
-<li><p><strong>Citation</strong>: Sabbatucci, Riccardo. “Are Dividends and Stock Returns Predictable? New Evidence Using M&amp;A Cash Flows.” Working paper, November 2022. Available at SSRN: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2578393">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2578393</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/608e497aa6178423d8c300919a594d52/Sabbatucci2022DividendsMACashFlows.pdf"><span class="xref download myst">Sabbatucci2022DividendsMACashFlows.pdf</span></a></p></li>
+<li><p><strong>Citation</strong>: Cieslak, Anna, Adair Morse, and Annette Vissing-Jorgensen. “Stock Returns over the FOMC Cycle.” The Journal of Finance 74, no. 5 (2019): 2201-2248. <a class="reference external" href="https://doi.org/10.1111/jofi.12818">https://doi.org/10.1111/jofi.12818</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/8a74c5b64a5ff4bcd755107d09f0d3e6/CieslakMorseVissingJorgensen2019FOMCCycle.pdf"><span class="xref download myst">CieslakMorseVissingJorgensen2019FOMCCycle.pdf</span></a> (working paper version)</p></li>
+</ul>
+</section>
+</section>
+<section id="machine-learning-and-the-cross-section">
+<h2>Machine Learning and the Cross-Section<a class="headerlink" href="#machine-learning-and-the-cross-section" title="Link to this heading">#</a></h2>
+<section id="empirical-asset-pricing-via-machine-learning">
+<h3>10. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa009">Empirical Asset Pricing via Machine Learning</a><a class="headerlink" href="#empirical-asset-pricing-via-machine-learning" title="Link to this heading">#</a></h3>
+<p>The paper that moved machine learning from the periphery of asset pricing to its center. It runs a controlled comparison—OLS, penalized linear models, dimension reduction, random forests, boosted trees, and neural networks—on a single problem, measuring risk premia for the U.S. cross-section, using 94 stock characteristics, eight macro predictors, and industry dummies. Trees and neural networks win, most of the gain comes from allowing nonlinear interactions, and the same handful of characteristics (price trends, liquidity, volatility) drives every method.</p>
+<p>This is the largest engineering job on the list and the closest to what a systematic equity team actually maintains. It is also the project where the course’s cluster material stops being optional.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the characteristic panel</strong>: the 94 characteristics from CRSP and Compustat with point-in-time discipline, the macro predictors, and the industry dummies, with a coverage table and a figure showing how coverage changes over the decades (this is the data-cleaning deliverable, and it is most of the project)</p></li>
+<li><p><strong>Replicate Table 1 (monthly out-of-sample stock-level prediction performance)</strong>: out-of-sample R² by method, overall and split by large and small stocks</p></li>
+<li><p><strong>Replicate Table 3 (Diebold-Mariano comparisons)</strong> and <strong>Table 5 (portfolio-level out-of-sample R²)</strong></p></li>
+<li><p><strong>Replicate Figures 4 and 5 (variable importance)</strong> and <strong>Table 4 (macroeconomic variable importance)</strong></p></li>
+<li><p><strong>Replicate Tables 7 and 8 and Figure 9 (machine learning portfolios)</strong>: performance, drawdown, turnover, and cumulative returns</p></li>
+<li><p><strong>Update</strong>: extend the sample forward and report how the out-of-sample R² has held up</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: CRSP and Compustat on WRDS; Welch-Goyal macro predictors from Amit Goyal’s website (free); Dacheng Xiu’s website posts the characteristic list and supporting material</p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>The compute is the constraint, not the statistics. Use Midway with job arrays (week 6), shrink the neural-network ensembles, and coarsen the hyperparameter grid—and say in the report exactly what you shrank and what it cost you.</p></li>
+<li><p>Point-in-time construction of the accounting characteristics is where replications of this paper usually go wrong. Test the lag conventions explicitly.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Gu, Shihao, Bryan Kelly, and Dacheng Xiu. “Empirical Asset Pricing via Machine Learning.” The Review of Financial Studies 33, no. 5 (2020): 2223-2273. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa009">https://doi.org/10.1093/rfs/hhaa009</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/7b9ae3c0b288d2ae59d871753ad6585d/GuKellyXiu2020EmpiricalAssetPricingML.pdf"><span class="xref download myst">GuKellyXiu2020EmpiricalAssetPricingML.pdf</span></a> (working paper version)</p></li>
+</ul>
+</section>
+<section id="shrinking-the-cross-section">
+<h3>11. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2019.06.008">Shrinking the Cross-Section</a><a class="headerlink" href="#shrinking-the-cross-section" title="Link to this heading">#</a></h3>
+<p>Given a hundred candidate return predictors, what is the stochastic discount factor? Run an unpenalized regression and you fit noise; drop everything but a handful of factors and you throw away real information. This paper shows that the right answer is economically motivated shrinkage: a prior that says the SDF should not load heavily on low-variance principal components, which turns out to be equivalent to a particular ridge-plus-lasso estimator. The resulting SDF is sparse in PC space rather than in characteristic space, and it holds up out of sample where sparse characteristic models do not.</p>
+<p>It is one of the most directly usable pieces of research on this list. The estimator is what a multi-factor equity desk reaches for when it has more signals than history.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the anomaly portfolio set</strong>: the 50 anomaly portfolios from CRSP and Compustat, plus the interaction-based characteristic-managed portfolios, with a summary table and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 1 (largest SDF factors, 50 anomaly portfolios)</strong> and <strong>Table 3 (largest SDF factors, models with interactions)</strong></p></li>
+<li><p><strong>Replicate the cross-validated shrinkage path</strong>: out-of-sample R² and Sharpe ratio across the two-dimensional penalty grid, which is the paper’s central figure</p></li>
+<li><p><strong>Replicate Table 4 (out-of-sample alpha in the withheld sample)</strong></p></li>
+<li><p><strong>Update</strong>: re-estimate on data through the present and report how the withheld-sample result looks now that the withheld sample is history</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: CRSP and Compustat on WRDS; Serhiy Kozak posts the MATLAB code and the supporting portfolio data at <a class="github reference external" href="https://github.com/serhiykozak/SCS">serhiykozak/SCS</a></p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>The reference code is MATLAB. Porting it to a tested Python package is a legitimate and valuable part of this project—but the report has to show the ported code reproduces the original numbers, not merely that it runs.</p></li>
+<li><p>The same portfolio construction feeds project 12 and project 17. If two groups take those, coordinate on the build.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Kozak, Serhiy, Stefan Nagel, and Shrihari Santosh. “Shrinking the cross-section.” Journal of Financial Economics 135, no. 2 (2020): 271-292. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2019.06.008">https://doi.org/10.1016/j.jfineco.2019.06.008</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/871105e7b5a2881419f967f38f3ce193/KozakNagelSantosh2020ShrinkingTheCrossSection.pdf"><span class="xref download myst">KozakNagelSantosh2020ShrinkingTheCrossSection.pdf</span></a> (working paper version)</p></li>
+</ul>
+</section>
+<section id="factor-timing">
+<h3>12. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa017">Factor Timing</a><a class="headerlink" href="#factor-timing" title="Link to this heading">#</a></h3>
+<p>Timing the market is famously hard. Timing <em>factors</em>, this paper argues, is not: “market-neutral equity factors are strongly and robustly predictable, and exploiting this predictability leads to substantial improvement in portfolio performance relative to static factor investing.” The predictor is the one every value investor already knows—each factor’s own book-to-market ratio—applied to the dominant principal components of a large anomaly cross-section. The implication for the SDF is uncomfortable: its conditional variance moves far more than standard models allow.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the anomaly portfolios and their book-to-market ratios</strong>: the long-short anomaly set, its principal components, and the factor-level valuation ratios, reproducing <strong>Table 1 (percentage of variance explained by anomaly PCs)</strong> (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 2 and Figure 1 (predicting dominant equity components with BE/ME ratios)</strong>—the core predictability result</p></li>
+<li><p><strong>Replicate Table 3 (predicting individual anomaly returns)</strong> and <strong>Table 5 (out-of-sample R² of various forecasting methods)</strong></p></li>
+<li><p><strong>Replicate Table 6 (performance of various portfolio strategies)</strong>: the economic value of factor timing</p></li>
+<li><p><strong>Replicate Table 7 and Figure 2 (variance of the SDF)</strong> and <strong>Table 8 (SDF variance and macroeconomic variables)</strong></p></li>
+<li><p><strong>Update</strong>: extend through the present, which now includes the 2020-2021 value drawdown and reversal</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: CRSP and Compustat on WRDS; the anomaly-portfolio code and data that back both this paper and project 11, at <a class="github reference external" href="https://github.com/serhiykozak/SCS">serhiykozak/SCS</a></p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Shares its portfolio construction with project 11. Building that layer as a tested, installable package that both projects could use is the kind of engineering the rubric rewards.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Haddad, Valentin, Serhiy Kozak, and Shrihari Santosh. “Factor Timing.” The Review of Financial Studies 33, no. 5 (2020): 1980-2018. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa017">https://doi.org/10.1093/rfs/hhaa017</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/9712b5daa70e5dc47abfefeb6f7b1a37/HaddadKozakSantosh2020FactorTiming.pdf"><span class="xref download myst">HaddadKozakSantosh2020FactorTiming.pdf</span></a></p></li>
+</ul>
+</section>
+<section id="is-there-a-replication-crisis-in-finance">
+<h3>13. <a class="reference external" href="https://doi.org/10.1111/jofi.13249">Is There a Replication Crisis in Finance?</a><a class="headerlink" href="#is-there-a-replication-crisis-in-finance" title="Link to this heading">#</a></h3>
+<p>Hundreds of published return predictors, most of them tested on the same U.S. data, many of them now suspected of being nothing. This paper answers the charge with a Bayesian hierarchical model of factor replication estimated on 153 factors, and finds that most of them do replicate, that they cluster into thirteen economic themes, and that the evidence is <em>strengthened</em> rather than weakened by the sheer number of factors, because a hierarchical prior learns from the population of factors rather than testing each in isolation. The out-of-sample test is a new dataset covering 93 countries.</p>
+<p>For this course the paper has a special status: the authors publish their full code, and the global factor data is downloadable directly from WRDS. That makes this the one project where a complete reference pipeline exists—so the deliverable is not discovery, it is a tested Python rebuild that reconciles against it, which is precisely the skill the course is about.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Pull and profile the global factor dataset from WRDS</strong>, then <strong>rebuild a subset of the factors from raw CRSP and Compustat</strong> and reconcile your series against the published ones, with a reconciliation table and figure (this is the data-cleaning deliverable and the heart of the project)</p></li>
+<li><p><strong>Replicate Figure 1 (replication rates versus the literature)</strong></p></li>
+<li><p><strong>Replicate Figure 6 (replication rates in global data)</strong> and <strong>Figure 12 (alphas by size group and region)</strong></p></li>
+<li><p><strong>Replicate Figures 13 and 14 (tangency portfolio weights and the evolution of the tangency Sharpe ratio)</strong></p></li>
+<li><p><strong>Replicate Figure 2 (out-of-sample performance of marginally significant factors)</strong> and <strong>Figure 3 (the false-discovery-rate simulation)</strong></p></li>
+<li><p><strong>Update</strong>: extend the factor set through the most recent data and report which clusters have held up</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: the Global Factor Data on WRDS; CRSP and Compustat (North America and Global) for the rebuild; reference code at <a class="github reference external" href="https://github.com/bkelly-lab/ReplicationCrisis">bkelly-lab/ReplicationCrisis</a></p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Because the reference implementation exists, the bar for this project is higher than for the others. The report must be explicit about what your pipeline does differently and why every difference is either intentional or a bug you found.</p></li>
+<li><p>The reference code is R and SAS. The port is the work.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Jensen, Theis Ingerslev, Bryan Kelly, and Lasse Heje Pedersen. “Is There a Replication Crisis in Finance?” The Journal of Finance 78, no. 5 (2023): 2465-2518. <a class="reference external" href="https://doi.org/10.1111/jofi.13249">https://doi.org/10.1111/jofi.13249</a> (NBER working paper 28432: <a class="reference external" href="https://www.nber.org/papers/w28432">https://www.nber.org/papers/w28432</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="rates-funding-and-liquidity">
+<h2>Rates, Funding, and Liquidity<a class="headerlink" href="#rates-funding-and-liquidity" title="Link to this heading">#</a></h2>
+<section id="risk-free-interest-rates">
+<h3>14. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2021.06.012">Risk-Free Interest Rates</a><a class="headerlink" href="#risk-free-interest-rates" title="Link to this heading">#</a></h3>
+<p>What is the actual risk-free rate? Treasury yields are contaminated by the convenience yield investors pay for safe, liquid collateral; OIS and repo rates carry their own frictions. This paper reads the risk-free rate out of option prices instead. A box spread on an index—long a call spread, short the matching put spread—has a fixed, known payoff regardless of where the index lands, so its price is a pure discount factor. The authors “estimate risk-free interest rates unaffected by convenience yields on safe assets by inferring them from risky asset prices without relying on any specific model of risk,” and find Treasuries carry a convenience yield of roughly 40 basis points, quadrupling in the financial crisis.</p>
+<p>The pipeline is an options-data project with a rates payoff: build box spreads from the SPX and DJX option surfaces, extract the implied discount curve out to three years, and compare it against every other risk-free benchmark.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the option-implied rate panel</strong>: box spreads from SPX and DJX options across strikes and maturities, reproducing <strong>Tables 1 and 3 (summary statistics of SPX and DJX option-implied rates)</strong> (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Table 2 (comparison with other implied and observed rates)</strong> and <strong>Table 4 (the DJX-SPX difference)</strong></p></li>
+<li><p><strong>Replicate Table 7 (the influence of bid-ask spreads on estimated rates)</strong>—the robustness check that decides whether the result is real</p></li>
+<li><p><strong>Replicate Table 9 (effects of fed funds surprises on yields around FOMC announcements)</strong>, reusing the policy-surprise machinery from HW 2</p></li>
+<li><p><strong>Replicate Table 11 (government bond arbitrage)</strong></p></li>
+<li><p><strong>Update</strong>: extend through 2026, covering the 2020 dash-for-cash, the 2022-2023 hiking cycle, and the 2023 debt-ceiling episode—all periods where the convenience yield should move</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: OptionMetrics IvyDB US on WRDS (SPX <code class="docutils literal notranslate"><span class="pre">secid</span> <span class="pre">=</span> <span class="pre">108105</span></code>, DJX, and the zero-coupon curve); FRED for OIS, Treasury bills, and GC repo; fed funds futures from HW 2</p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Both index option classes are European-style, so no early-exercise adjustment is needed. Filtering the surface is still the whole game—which strikes, which maturities, which bid-ask widths—and every filter needs a test.</p></li>
+<li><p>This builds directly on the option material in HW 3 but asks a rates question, which makes it a good fit for a group that wants derivatives without doing another volatility project.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: van Binsbergen, Jules H., William F. Diamond, and Marco Grotteria. “Risk-free interest rates.” Journal of Financial Economics 143, no. 1 (2022): 1-29. <a class="reference external" href="https://doi.org/10.1016/j.jfineco.2021.06.012">https://doi.org/10.1016/j.jfineco.2021.06.012</a></p></li>
+<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/d8619ceb6448ed7452ae932f25dd7ec0/vanBinsbergenDiamondGrotteria2022RiskFreeInterestRates.pdf"><span class="xref download myst">vanBinsbergenDiamondGrotteria2022RiskFreeInterestRates.pdf</span></a> (NBER working paper 26138)</p></li>
+</ul>
+</section>
+<section id="bond-risk-premiums-with-machine-learning">
+<h3>15. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa062">Bond Risk Premiums with Machine Learning</a><a class="headerlink" href="#bond-risk-premiums-with-machine-learning" title="Link to this heading">#</a></h3>
+<p>Treasury excess returns are predictable in-sample and stubbornly hard to predict out of sample. This paper brings the full machine learning toolkit—penalized regressions, trees, and neural networks—to bear on the problem, with a large macroeconomic panel alongside the yield curve itself, and finds economically meaningful out-of-sample gains concentrated in the periods where a bond investor would most want them.</p>
+<p>This project has a feature no other entry on this list has: a <strong>corrigendum</strong>, published in the same issue, that revised the paper’s empirical results. So the replication has a built-in question with a right answer—does your pipeline reproduce the original numbers, the corrected ones, or neither? That is the most honest test of a replication there is, and the write-up should confront it directly.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the bond return and predictor panel</strong>: Treasury excess returns by maturity, the yield-curve factors, and the macro panel, with a summary table and a coverage figure (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate the main out-of-sample R² results</strong> by maturity and method, against the Cochrane-Piazzesi and yields-only benchmarks</p></li>
+<li><p><strong>Replicate the economic-value results</strong>: the utility gains and portfolio performance for a mean-variance bond investor</p></li>
+<li><p><strong>Replicate the variable-importance evidence</strong>: which macro groups the models actually use</p></li>
+<li><p><strong>Reconcile against the corrigendum</strong>: state which set of published numbers your pipeline matches, and diagnose the difference</p></li>
+<li><p><strong>Update</strong>: extend through 2026, which now includes the 2022 bond drawdown—by a wide margin the hardest out-of-sample period in the modern data</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: CRSP Treasury (Fama-Bliss discount bond returns) on WRDS, and the Gürkaynak-Sack-Wright curve from the Federal Reserve (free)—you built the GSW machinery in HW 2; FRED-MD for the macro panel (free); Ludvigson and Ng’s factors, posted on Sydney Ludvigson’s website</p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Read the corrigendum before you write any code, not after.</p></li>
+<li><p>Reuse HW 2’s yield-curve work rather than rebuilding it. The novelty here is the forecasting layer, and the report should be judged on that.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Bianchi, Daniele, Matthias Büchner, and Andrea Tamoni. “Bond Risk Premiums with Machine Learning.” The Review of Financial Studies 34, no. 2 (2021): 1046-1089. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa062">https://doi.org/10.1093/rfs/hhaa062</a>. Corrigendum: The Review of Financial Studies 34, no. 2 (2021): 1090-1103. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa098">https://doi.org/10.1093/rfs/hhaa098</a></p></li>
+</ul>
+</section>
+<section id="noise-as-information-for-illiquidity">
+<h3>16. <a class="reference external" href="https://doi.org/10.1111/jofi.12083">Noise as Information for Illiquidity</a><a class="headerlink" href="#noise-as-information-for-illiquidity" title="Link to this heading">#</a></h3>
+<p>When arbitrage capital is plentiful, Treasury prices line up along a smooth yield curve because somebody is paid to make them. When capital withdraws, individual bonds drift away from the curve and stay there. This paper turns that observation into a market-wide illiquidity measure: fit a smooth curve to Treasury prices every day, and take the root-mean-squared pricing error as “noise.” The series is quiet for years and then explodes in 1998, 2008, and every episode since, and it prices hedge fund and currency-carry returns in the cross-section.</p>
+<p>The curve-fitting step is HW 2’s machinery pointed at a different question, which makes this an efficient project with a high bar: the replication starts from something you already have, so the asset-pricing half is where the group has to earn its grade.</p>
+<ul class="simple">
+<li><p><strong>Tasks</strong>:</p>
+<ul>
+<li><p><strong>Build the daily Treasury panel and fit the curve</strong>: CUSIP-level Treasury quotes with the paper’s filters, a Svensson fit each day, and the resulting noise series, reproducing <strong>Figure 1 (example yield curves against market-observed yields)</strong> (this is the data-cleaning deliverable)</p></li>
+<li><p><strong>Replicate Figure 2 (the daily noise measure, in basis points)</strong> and <strong>Figure 3 (the 2008-2009 episode in detail)</strong></p></li>
+<li><p><strong>Replicate the summary statistics and the comparison with other illiquidity measures</strong> (VIX, the on-the-run premium, TED spread, and the Pastor-Stambaugh measure)</p></li>
+<li><p><strong>Replicate the hedge fund results</strong>, including <strong>Figure 4 (exit rates of noise-beta-sorted funds)</strong>, and the currency-carry cross-section</p></li>
+<li><p><strong>Update</strong>: extend through 2026, which adds March 2020 and the March 2023 bank stress—both periods when the measure should light up, and a genuine out-of-sample test of whether it still does</p></li>
+</ul>
+</li>
+<li><p><strong>Data sources</strong>: the CRSP US Treasury Database on WRDS for daily CUSIP-level quotes; Lipper TASS on WRDS for hedge fund returns; FRED for VIX, TED, and rates; Kenneth French and Lubos Pastor’s data for the benchmark factors</p></li>
+<li><p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Because HW 2 gives you the curve fitting, the replication core here is cheaper than on most projects. The expectation is correspondingly higher on the asset-pricing side and on the update.</p></li>
+<li><p>Bond selection filters (bills in or out, on-the-run treatment, maturity screens) move the level of the noise measure materially. Make them explicit, test them, and show the sensitivity.</p></li>
+</ul>
+</li>
+<li><p><strong>Citation</strong>: Hu, Grace Xing, Jun Pan, and Jiang Wang. “Noise as Information for Illiquidity.” The Journal of Finance 68, no. 6 (2013): 2341-2382. <a class="reference external" href="https://doi.org/10.1111/jofi.12083">https://doi.org/10.1111/jofi.12083</a> (free copy: <a class="reference external" href="https://en.saif.sjtu.edu.cn/junpan/HuPanWang.pdf">https://en.saif.sjtu.edu.cn/junpan/HuPanWang.pdf</a>)</p></li>
 </ul>
 </section>
 </section>
 <section id="equity-term-structures">
 <h2>Equity Term Structures<a class="headerlink" href="#equity-term-structures" title="Link to this heading">#</a></h2>
 <section id="equity-term-structures-without-dividend-strips-data">
-<h3>12. <a class="reference external" href="https://ssrn.com/abstract=3533486">Equity Term Structures without Dividend Strips Data</a><a class="headerlink" href="#equity-term-structures-without-dividend-strips-data" title="Link to this heading">#</a></h3>
+<h3>17. <a class="reference external" href="https://ssrn.com/abstract=3533486">Equity Term Structures without Dividend Strips Data</a><a class="headerlink" href="#equity-term-structures-without-dividend-strips-data" title="Link to this heading">#</a></h3>
 <p>Traded dividend strips directly reveal the term structure of equity risk premia, but the data only start around 2004 and cover few assets. This paper estimates “a rich affine model of equity prices, dividends, returns, and their dynamics” from a large cross-section of anomaly portfolios and shows that the model “prices dividend strips of the market and equity portfolios without using strips data in the estimation.” The result is a synthetic equity term structure extending back to the 1970s.</p>
-<p>The data work is a classic cross-sectional asset pricing pipeline: build 102 value-weighted portfolios (terciles on 51 characteristics) from CRSP and Compustat following Kozak, Nagel, and Santosh (2020), compute portfolio dividend yields, and extract principal components. The author’s website (<a class="reference external" href="https://www.serhiykozak.com/data">https://www.serhiykozak.com/data</a>) posts the portfolio data and the model-implied yields, so you can validate each step of your pipeline.</p>
+<p>The data work is a classic cross-sectional asset pricing pipeline: build 102 value-weighted portfolios (terciles on 51 characteristics) from CRSP and Compustat following Kozak, Nagel, and Santosh (2020), compute portfolio dividend yields, and extract principal components. The author posts the estimation code and supporting data at <a class="github reference external" href="https://github.com/serhiykozak/EquityTS">serhiykozak/EquityTS</a>, so you can validate each step of your pipeline.</p>
 <ul class="simple">
 <li><p><strong>Tasks</strong>:</p>
 <ul>
@@ -847,13 +991,13 @@ If you can’t access the papers below, you can find a link to them here: <a cla
 <li><p><strong>Replicate Figures 1 and 2 (factor yields and factor returns)</strong>: time series of the market and the three PC factors that make up the state vector (this plus Table I is the data-cleaning deliverable)</p></li>
 <li><p><strong>Replicate Figure 7 (model-implied forward equity yields for the market)</strong>: estimate the model and plot forward equity yields across maturities, 1973–2020</p></li>
 <li><p><strong>Replicate Figure 8 (term structures conditional on NBER recessions)</strong>: average term structures in recessions versus expansions—the cyclicality result at the heart of the equity term structure literature</p></li>
-<li><p><strong>Validate</strong> your model-implied yields against the estimates posted on the author’s website</p></li>
+<li><p><strong>Validate</strong> your model-implied yields against the author’s posted estimation code and data</p></li>
 </ul>
 </li>
-<li><p><strong>Data sources</strong>: CRSP and Compustat (WRDS); one-year risk-free rate and Gürkaynak–Sack–Wright Treasury yields (Federal Reserve, free); benchmark data and code from <a class="reference external" href="https://www.serhiykozak.com/data">https://www.serhiykozak.com/data</a></p></li>
+<li><p><strong>Data sources</strong>: CRSP and Compustat (WRDS); one-year risk-free rate and Gürkaynak–Sack–Wright Treasury yields (Federal Reserve, free); benchmark data and code from <a class="github reference external" href="https://github.com/serhiykozak/EquityTS">serhiykozak/EquityTS</a></p></li>
 <li><p><strong>Notes</strong>:</p>
 <ul>
-<li><p>Skip Figures 3–6 and Table IV: they compare the model to traded dividend strip and futures data (van Binsbergen–Koijen, Bansal et al.), which is proprietary and not on WRDS. The validation step against the author’s posted yields plays that role instead.</p></li>
+<li><p>Skip Figures 3–6 and Table IV: they compare the model to traded dividend strip and futures data (van Binsbergen–Koijen, Bansal et al.), which is proprietary and not on WRDS. The validation step against the author’s posted code plays that role instead.</p></li>
 </ul>
 </li>
 <li><p><strong>Citation</strong>: Giglio, Stefano, Bryan Kelly, and Serhiy Kozak. “Equity Term Structures without Dividend Strips Data.” Journal of Finance 79, no. 6 (2024): 4143–4196. Available at SSRN: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3533486">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3533486</a></p></li>
@@ -861,7 +1005,7 @@ If you can’t access the papers below, you can find a link to them here: <a cla
 </ul>
 </section>
 <section id="equity-duration-and-predictability">
-<h3>13. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X25001229">Equity Duration and Predictability</a><a class="headerlink" href="#equity-duration-and-predictability" title="Link to this heading">#</a></h3>
+<h3>18. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0304405X25001229">Equity Duration and Predictability</a><a class="headerlink" href="#equity-duration-and-predictability" title="Link to this heading">#</a></h3>
 <p>Why do expected returns—rather than dividend growth—dominate stock price movements in postwar data, when the opposite held for the previous three centuries? This paper’s answer is rising equity duration: as firms cut payout ratios after 1945, the market became a longer-duration asset, and “expected returns vary more for payouts further into the future.” The authors document this in three datasets: S&amp;P 500 dividend strips (a short-duration version of the market), the aggregate market from 1629 to 2022, and payout-sorted stock portfolios. “Between 1629 and 1945, expected returns explain around 35% of the variation in the dividend-to-price ratio. In the post-1945 period, this increases to 90%.”</p>
 <p>The method is the same throughout: predictive regressions of returns and dividend growth on the dividend-to-price ratio, with the R²-style decomposition ER + EDG = 1. The authors post their data and code (Mendeley Data, linked from the article), the dividend strip series is on Benjamin Golez’s webpage, and the 1629–2015 historical series comes from Golez and Koudijs (2018).</p>
 <ul class="simple">
@@ -888,7 +1032,7 @@ If you can’t access the papers below, you can find a link to them here: <a cla
 <section id="macro-finance-and-fiscal-policy">
 <h2>Macro-Finance and Fiscal Policy<a class="headerlink" href="#macro-finance-and-fiscal-policy" title="Link to this heading">#</a></h2>
 <section id="debt-and-deficits-fiscal-analysis-with-stationary-ratios">
-<h3>14. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/Debt%20and%20Deficits%20250806.pdf">Debt and Deficits: Fiscal Analysis with Stationary Ratios</a><a class="headerlink" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios" title="Link to this heading">#</a></h3>
+<h3>19. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/Debt%20and%20Deficits%20250806.pdf">Debt and Deficits: Fiscal Analysis with Stationary Ratios</a><a class="headerlink" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios" title="Link to this heading">#</a></h3>
 <p>This paper asks how governments ultimately deal with a weak fiscal position: do taxes rise, does spending fall, or do the returns to holders of government debt adjust? The debt-GDP ratio is nonstationary in long historical data, so the authors instead construct a stationary “fiscal position” measure—a loglinear combination of tax revenue, government spending, and the market value of government debt. They find that “fiscal adjustment, particularly through changes in spending, is the empirically relevant channel” for resolving weak fiscal positions.</p>
 <p>This project involves assembling long historical time series (US 1841–2022, UK 1727–2022) by splicing together data from several public sources—a valuable exercise in data cleaning and documentation. All data is free and publicly available; no WRDS subscriptions are needed. The internet appendix (section IA.1) describes the data sources in detail.</p>
 <ul class="simple">
@@ -915,7 +1059,7 @@ If you can’t access the papers below, you can find a link to them here: <a cla
 <section id="daily-cash-flow-news">
 <h2>Daily Cash Flow News<a class="headerlink" href="#daily-cash-flow-news" title="Link to this heading">#</a></h2>
 <section id="cash-flow-news-and-stock-price-dynamics">
-<h3>15. <a class="reference external" href="https://doi.org/10.1111/jofi.12901">Cash Flow News and Stock Price Dynamics</a><a class="headerlink" href="#cash-flow-news-and-stock-price-dynamics" title="Link to this heading">#</a></h3>
+<h3>20. <a class="reference external" href="https://doi.org/10.1111/jofi.12901">Cash Flow News and Stock Price Dynamics</a><a class="headerlink" href="#cash-flow-news-and-stock-price-dynamics" title="Link to this heading">#</a></h3>
 <p>On any given day, anywhere from zero to more than 100 firms announce dividends, making daily cash flow news extremely lumpy. This paper builds a daily “bottom-up” measure of aggregate dividend growth from firm-level dividend <em>announcements</em>—matching each firm’s declared dividend to its own announcement in the same fiscal quarter one year earlier—and decomposes it into “a persistent component, jumps, and temporary shocks.” The persistent component turns out to be “a highly significant predictor of future growth in dividends and consumption,” leading measures of the state of the economy by a substantial margin.</p>
 <p>The pipeline: construct the daily dividend growth series from CRSP declaration dates (dollar-weighted, firm-matched, year-over-year), extract a smooth persistent growth component from the very noisy daily series with a state-space model, then run predictive regressions of dividend growth, GDP growth, and consumption growth on the extracted component. The data construction is the heart of the project; the filtering step can be done with a simplified model (see notes).</p>
 <ul class="simple">
@@ -934,24 +1078,11 @@ If you can’t access the papers below, you can find a link to them here: <a cla
 <li><p>CRSP no longer provides declaration dates before 1962 (the paper’s footnote 10—its pre-1964 observations come from an older CRSP vintage), so replicate the 1973–2016 sample, which is the paper’s main focus. Checkpoints for your Figure 1: on April 24, 2014, roughly <span class="math notranslate nohighlight">\(7.1bn of dividends were announced, and the lone June 22, 2014 announcer is Costco (\)</span>155.6m versus $135.3m a year before, gross growth 1.15).</p></li>
 <li><p>The dollar dividend is the declared dividend per share times shares outstanding on the announcement day. Follow the paper’s filters: share codes 10/11, NYSE/AMEX/NASDAQ, valid price and shares outstanding, one dividend per firm per day (aggregate duplicates).</p></li>
 <li><p>You are not required to implement the paper’s full Bayesian model. For the bottom panel of Figure 3, any documented outlier-robust filter is acceptable—for example, Student-t measurement errors in the state-space model, or winsorizing days with few announcing firms before applying the Kalman smoother. For Tables II and IV, the standard for success is matching the sign and statistical significance of the coefficients on the persistent component, not the exact magnitudes, since your extracted series will differ from the paper’s.</p></li>
-<li><p>Skip Tables VI through IX (the present value model and same-day return dynamics): their results depend on daily innovations from the full jump model, and Table VIII additionally requires re-estimating the model weekly over 30 years. This paper shares an author with the M&amp;A cash flows project above and pairs naturally with it: announced versus distributed dividends is the theme of both.</p></li>
+<li><p>Skip Tables VI through IX (the present value model and same-day return dynamics): their results depend on daily innovations from the full jump model, and Table VIII additionally requires re-estimating the model weekly over 30 years.</p></li>
 </ul>
 </li>
 <li><p><strong>Citation</strong>: Pettenuzzo, Davide, Riccardo Sabbatucci, and Allan Timmermann. “Cash Flow News and Stock Price Dynamics.” The Journal of Finance 75, no. 4 (2020): 2221–2270. <a class="reference external" href="https://doi.org/10.1111/jofi.12901">https://doi.org/10.1111/jofi.12901</a></p></li>
 <li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/381df0203e6e9d5367474e68c79b9f25/Pettenuzzo_et_al_2020_Cash_Flow_News_and_Stock_Price_Dynamics.pdf"><span class="xref download myst">Pettenuzzo_et_al_2020_Cash_Flow_News_and_Stock_Price_Dynamics.pdf</span></a></p></li>
-</ul>
-</section>
-</section>
-<section id="misc">
-<h2>Misc<a class="headerlink" href="#misc" title="Link to this heading">#</a></h2>
-<section id="how-global-is-predictability-the-power-of-financial-transfer-learning">
-<h3>16. <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4620157">How Global is Predictability? The Power of Financial Transfer Learning</a><a class="headerlink" href="#how-global-is-predictability-the-power-of-financial-transfer-learning" title="Link to this heading">#</a></h3>
-<p>Should an investor predicting stock returns in a given country use only that country’s data, pooled global data, or some combination of the two? This paper’s answer: “a common global model predicts stock returns more effectively than local models estimated individually for each country, even when the global model is estimated without local data.” The authors introduce a “generalized elastic net” (GENet) that estimates a combined global-and-local model—each country’s coefficients are penalized for deviating from the global model rather than from zero—and find that the resulting model is “96% global—nearly the same function predicts stock returns across countries and over the past century.”</p>
-<p>The empirical setting is a large cross-country panel: stock returns are regressed directly on 111 ex ante stock characteristics (the Jensen–Kelly–Pedersen global dataset), estimated with penalized regressions and evaluated out of sample from 2000 onward. A striking reverse-transfer exercise shows that a model trained on post-1982 data from outside the US successfully predicts US stock returns from 1926 to 1981. The paper also finds that risk-based signals are purely global, while mispricing-related signals carry significant local components.</p>
-<ul class="simple">
-<li><p><strong>Tasks</strong>: to be determined (specific tables and figures will be assigned later)</p></li>
-<li><p><strong>Citation</strong>: Hellum, Oliver, Lasse Heje Pedersen, and Anders Rønn-Nielsen. “How Global is Predictability? The Power of Financial Transfer Learning.” Working paper, October 2025. Available at SSRN: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4620157">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4620157</a></p></li>
-<li><p><strong>Paper PDF</strong>: <a class="reference download internal" download="" href="../_downloads/1017d2e444b8bac4da7445123ffc2bbb/Hellum_et_al_2023_How_Global_is_Predictability_The_Power_of_Financial_Transfer_Learning.pdf"><span class="xref download myst">Hellum_et_al_2023_How_Global_is_Predictability_The_Power_of_Financial_Transfer_Learning.pdf</span></a></p></li>
 </ul>
 </section>
 </section>
@@ -1005,47 +1136,48 @@ If you can’t access the papers below, you can find a link to them here: <a cla
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-and-return-prediction">Machine Learning and Return Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-virtue-of-complexity-in-return-prediction">1. The Virtue of Complexity in Return Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-flow-and-market-microstructure">Order Flow and Market Microstructure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-retail-investor-activity">1. Tracking Retail Investor Activity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#informed-trading-intensity">2. Informed Trading Intensity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-signals-in-the-cross-section-of-returns">3. Sparse Signals in the Cross-Section of Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-estimation-of-bid-ask-spreads-from-open-high-low-and-close-prices">4. Efficient Estimation of Bid-Ask Spreads from Open, High, Low, and Close Prices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-tug-of-war-overnight-versus-intraday-expected-returns">5. A Tug of War: Overnight versus Intraday Expected Returns</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-cycles-and-financial-crises">Credit Cycles and Financial Crises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictable-financial-crises">2. Predictable Financial Crises</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-market-sentiment-and-the-business-cycle">3. Credit-Market Sentiment and the Business Cycle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-frequency-futures-volatility-and-tail-risk">High-Frequency Futures: Volatility and Tail Risk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploiting-the-errors-a-simple-approach-for-improved-volatility-forecasting">6. Exploiting the Errors: A Simple Approach for Improved Volatility Forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tails-fears-and-risk-premia">7. Tails, Fears, and Risk Premia</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corporate-events-and-anomalies">Corporate Events and Anomalies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictable-corporate-distributions-and-stock-returns">4. Predictable Corporate Distributions and Stock Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monetary-policy-and-return-predictability">Monetary Policy and Return Predictability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pre-fomc-announcement-drift">8. The Pre-FOMC Announcement Drift</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stock-returns-over-the-fomc-cycle">9. Stock Returns over the FOMC Cycle</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#options-and-crash-risk">Options and Crash Risk</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-crashes-with-a-smile">5. Forecasting Crashes with a Smile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-in-derivatives-markets-forecasting-prices-with-prices">6. Information in Derivatives Markets: Forecasting Prices with Prices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-and-the-cross-section">Machine Learning and the Cross-Section</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-asset-pricing-via-machine-learning">10. Empirical Asset Pricing via Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinking-the-cross-section">11. Shrinking the Cross-Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-timing">12. Factor Timing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-replication-crisis-in-finance">13. Is There a Replication Crisis in Finance?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-the-equity-premium-the-classics">Predicting the Equity Premium: The Classics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-comprehensive-look-at-the-empirical-performance-of-equity-premium-prediction">7. A Comprehensive Look at the Empirical Performance of Equity Premium Prediction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-regressions">8. Predictive Regressions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-returns-with-financial-ratios">9. Predicting Returns with Financial Ratios</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-aggregate-wealth-and-expected-stock-returns">10. Consumption, Aggregate Wealth, and Expected Stock Returns</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-dividends-and-stock-returns-predictable-new-evidence-using-m-a-cash-flows">11. Are Dividends and Stock Returns Predictable? New Evidence Using M&amp;A Cash Flows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rates-funding-and-liquidity">Rates, Funding, and Liquidity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-free-interest-rates">14. Risk-Free Interest Rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-risk-premiums-with-machine-learning">15. Bond Risk Premiums with Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-as-information-for-illiquidity">16. Noise as Information for Illiquidity</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures">Equity Term Structures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures-without-dividend-strips-data">12. Equity Term Structures without Dividend Strips Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-duration-and-predictability">13. Equity Duration and Predictability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-term-structures-without-dividend-strips-data">17. Equity Term Structures without Dividend Strips Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-duration-and-predictability">18. Equity Duration and Predictability</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-finance-and-fiscal-policy">Macro-Finance and Fiscal Policy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios">14. Debt and Deficits: Fiscal Analysis with Stationary Ratios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debt-and-deficits-fiscal-analysis-with-stationary-ratios">19. Debt and Deficits: Fiscal Analysis with Stationary Ratios</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-cash-flow-news">Daily Cash Flow News</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cash-flow-news-and-stock-price-dynamics">15. Cash Flow News and Stock Price Dynamics</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-global-is-predictability-the-power-of-financial-transfer-learning">16. How Global is Predictability? The Power of Financial Transfer Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cash-flow-news-and-stock-price-dynamics">20. Cash Flow News and Stock Price Dynamics</a></li>
 </ul>
 </li>
 </ul>

@@ -1,14 +1,25 @@
 # Past Final Projects
 
-Students in previous offerings of this course completed the final projects listed below. Each entry gives the paper (or data series) that the group replicated, the group members, and a link to the group's public GitHub repository; some groups also published a project website. Browse a few of these to get a sense of the scope and polish expected of a finished project (see also the [Final Project Rubric](./final_project_rubric.md) and [Project Previews](./project_previews.md)).
+Students in previous offerings of this course completed the final projects listed below. Each entry gives the paper (or data series) that the group replicated, the group members, and a link to the group's public GitHub repository; some groups also published a project website. Browse a few of these to get a sense of the scope and polish expected of a finished project. The [Project Previews](./project_previews.md) page walks through three of them in detail, and the [Final Project Rubric](./final_project_rubric.md) is what they were graded against.
 
-Only projects with public repositories are listed. Links were last verified in July 2026.
+Only projects with public repositories are listed. Links were last verified in September 2026.
+
+## Summer 2026
+
+- **The Virtue of Complexity in Return Prediction** (Kelly, Malamud, and Zhou 2024) — Ahmed Alahmadi and Jeff Key. [GitHub repo](https://github.com/ahmedas91/kmz2024-replication)
+- **Predictable Financial Crises** (Greenwood, Hanson, Shleifer, and Sørensen 2022) — Brian Nguyen and Clara Duan. [GitHub repo](https://github.com/Chief-Justice-Brian/p02_greenwood_et_al_2022)
+- **Credit-Market Sentiment and the Business Cycle** (López-Salido, Stein, and Zakrajšek 2017) — Fernando Raffo Pedraza and Bangjie Xu. [GitHub repo](https://github.com/fernando-raffo/p03_lopez_salido_stein_zakrajsek_2017) · [project site](https://fernando-raffo.github.io/p03_lopez_salido_stein_zakrajsek_2017/)
+- **Forecasting Crashes with a Smile** (Martin and Shi 2025) — Riley Haas and Marija Jovicic. [GitHub repo](https://github.com/rileykhaas/forecasting_crashes_smile)
+- **Information in Derivatives Markets: Forecasting Prices with Prices** (Martin 2025) — Chandler Bird and Andrew Heekin. [GitHub repo](https://github.com/ChandlerB1rd/p06_martin_2025)
+- **A Comprehensive Look at the Empirical Performance of Equity Premium Prediction** (Welch and Goyal 2008) — Piyush Sharma. [GitHub repo](https://github.com/psharma-chicago/welch-goyal-equity-premium)
+- **Predictive Regressions** (Stambaugh 1999) — Ashish Maheshwari and Omar Anabtawi. [GitHub repo](https://github.com/ashishkmaheshwari/finm32900_stambaugh_final_project) · [project site](https://ashishkmaheshwari.github.io/finm32900_stambaugh_final_project/)
+- **Predicting Returns with Financial Ratios** (Lewellen 2004) — Anthony Mazy and Stefano Ramponi. [GitHub repo](https://github.com/amazingmazy/Financial-Ratios-Project)
+- **Consumption, Aggregate Wealth, and Expected Stock Returns** (Lettau and Ludvigson 2001) — Iris Wang and Zhicheng Zhou. [GitHub repo](https://github.com/supportzhicheng/Study_of_Cay_and_Predictivity_Lab)
 
 ## Winter 2026
 
 - **Market Expectations in the Cross-Section of Present Values** (Kelly and Pruitt 2013) — Zara Nip and Dylan Wang. [GitHub repo](https://github.com/zaranip/p01_kelly_pruitt_2013) · [project site](https://zaranip.github.io/p01_kelly_pruitt_2013/)
 - **Man vs. Machine Learning: The Term Structure of Earnings Expectations and Conditional Biases** (van Binsbergen, Han, and Lopez-Lira) — Dong Yan and YiLong Lin. [GitHub repo](https://github.com/PrentendYan/p02_van_binsbergen_han_lopez-lira_2022) · [project site](https://prentendyan.github.io/p02_van_binsbergen_han_lopez-lira_2022/)
-- **Predictive Regressions: A Present-Value Approach** (van Binsbergen and Koijen 2010) — Yilun Cai and Moxiao Li. [GitHub repo](https://github.com/MOXIAO1998/p03_binsbergen_koijen_2010) · [project site](https://moxiao1998.github.io/p03_binsbergen_koijen_2010/)
 - **Holding Period Effects in Dividend Strip Returns** (Golez and Jackwerth 2024) — Jie Lin and Zimeng Yi. [GitHub repo](https://github.com/jlin12-cpu/p04_golez_jackwerth_2024) · [project site](https://jlin12-cpu.github.io/p04_golez_jackwerth_2024/)
 - **Can ChatGPT Forecast Stock Price Movements?** (Lopez-Lira and Tang 2023) — Sophie Lara and Thomas Hillenbrand. [GitHub repo](https://github.com/thomashillenbrand/p05_lopez-lira_tang_2023) · [project site](https://thomashillenbrand.github.io/p05_lopez-lira_tang_2023/)
 - **Can ChatGPT Forecast Stock Price Movements?** (Lopez-Lira and Tang 2023) — Dylan Pan and Samos Zhu. [GitHub repo](https://github.com/samos722/p05_zhu-pan_2026) · [project site](https://samos722.github.io/p05_zhu-pan_2026/)
@@ -17,7 +28,6 @@ Only projects with public repositories are listed. Links were last verified in J
 - **Monetary Tightening and US Bank Fragility in 2023** (Jiang, Matvos, Piskorski, and Seru 2023) — Anoushka Gehani and Hashir Bawany. [GitHub repo](https://github.com/anoushkauoc/p08_jiang_et_al_2024) · [project site](https://anoushkauoc.github.io/p08_jiang_et_al_2024/)
 - **Exchange Rates and Asset Prices in a Global Demand System** (Koijen and Yogo) — Allen Wu, Xiongfei Wang, and Nandini Krishnan. [GitHub repo](https://github.com/songting-byte/p09_koijen_yogo_2020) · [project site](https://songting-byte.github.io/p09_koijen_yogo_2020/)
 - **Segmented Arbitrage: Treasury Spot-Futures** (Siriwardane, Sunderam, and Wallen) — George Lord and Max Zhalilo. [GitHub repo](https://github.com/maxz073/p10_Siriwardane_et_al_2026) · [project site](https://maxz073.github.io/p10_Siriwardane_et_al_2026/)
-- **Segmented Arbitrage: Corporate CDS-Bond Basis** (Siriwardane, Sunderam, and Wallen) — Flavio Gorini Ferreira and Jacopo Michelacci. [GitHub repo](https://github.com/JacopoMichelacci/p12_siriwardane_sunderam_wallen_2023) · [project site](https://jacopomichelacci.github.io/p12_siriwardane_sunderam_wallen_2023/)
 - **The CDS-Bond Basis** (Bai and Collin-Dufresne 2019) — Nicholas Kebo and Lucie Martin. [GitHub repo](https://github.com/kebo1234/p13_Bai_Collin-Dufresne_2019) · [project site](https://kebo1234.github.io/p13_Bai_Collin-Dufresne_2019/)
 - **The U.S. Treasury Yield Curve: Construction and Model Comparison** (Gürkaynak, Sack, and Wright 2007) — Annie Reynolds and Phoebe Fingold. [GitHub repo](https://github.com/pfingold/p14_gurkaynak_sack_wright_2007) · [project site](https://pfingold.github.io/p14_gurkaynak_sack_wright_2007/)
 - **An Anatomy of Commodity Futures Risk Premia** (Szymanowska, de Roon, Nijman, and van den Goorbergh 2014) — Daniil Garbuzov and Oliver Mitchell. [GitHub repo](https://github.com/daniilygarbuzov/Szymanowska_Premia_Replication_Garbuzov_Mitchell_2026) · [project site](https://daniilygarbuzov.github.io/Szymanowska_Premia_Replication_Garbuzov_Mitchell_2026/)

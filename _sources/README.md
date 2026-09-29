@@ -88,9 +88,10 @@ now part of one of the homework assignments; see
 
 ### Final Project
 
-In place of a final exam, students will be organized into groups of 2 (pairs)
-and will each complete a course project. The final project this term is structured
-around three separate milestones:
+In place of a final exam, students will be organized into groups of exactly four
+and will each complete a course project. Students cannot work alone, and a group
+of any other size requires the instructor's permission in advance. The final
+project this term is structured around three separate milestones:
 
 1. **Instructor consultation** — each group schedules a 1-on-1 meeting with the
    instructor (at least one week before their proposal presentation) to get
@@ -131,7 +132,8 @@ Grades will be based on the following components:
   one or more correct options per question and no partial credit. It tests the
   tools, the data sets, and the papers covered in the notes and the homework
   through week 6. See [Exam Preparation](exam_prep.md).
-- **Final Project (30%)** is completed in groups of 2. Students choose their
+- **Final Project (30%)** is completed in groups of exactly four; any other size
+  requires the instructor's permission in advance. Students choose their
   project from among the options provided at the beginning of the quarter. It is
   graded not only on how well it accomplishes the assigned data cleaning and
   analysis task, but primarily on whether (1) the steps to reproduce it are fully

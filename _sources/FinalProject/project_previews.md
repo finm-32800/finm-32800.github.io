@@ -1,99 +1,76 @@
-# Project Previews: What Does a Replication Look Like?
+# Project Previews: What a Finished Project Looks Like
 
-Every final project on the [list of potential projects](potential_final_projects.md) asks you to do the same thing: take a published finance paper, rebuild its dataset from the original sources, and reproduce the tables and figures that carry its main result. That description can sound dry until you see what the outputs actually look like. This page walks through three of the papers on the list and shows the exact exhibits you would recreate—two figures and a table from each—along with why each one is worth your time.
+Every final project asks you to do the same thing: take a finance paper, rebuild its dataset from the original sources, reproduce the tables and figures that carry its main result, and ship the whole thing as something another person can clone and run. That description stays abstract until you see what a finished one looks like.
 
-A replication is not a homework problem with a known answer key. These are real research artifacts. When your Figure 5 has spikes in the same places as the published Figure 5, you have independently verified a fact about the world, and you understand that fact at a level no amount of reading can produce.
+So this page does not show you figures clipped out of published papers. It shows you three projects that students in this course actually built, one for each of the three things you are graded on: the **published site**, the **written report**, and the **proposal presentation**. Each section says what to look at and why it is worth copying.
 
-## 1. Can a model with 12,000 parameters and 12 observations beat the market?
+## 1. The published site
 
-**Kelly, Malamud, and Zhou, "The Virtue of Complexity in Return Prediction" (Journal of Finance, 2024)** — project #1 on the list.
+**Jie Lin and Zimeng Yi** — Golez and Jackwerth (2024), *Holding Period Effects in Dividend Strip Returns*. Their project recovers dividend strip prices from S&P 500 index option quotes and measures how strip returns depend on the holding period.
 
-Everything you learn in a first econometrics course says this paper should not work. It forecasts the monthly stock market return using models with *more parameters than observations*—up to 12,000 random Fourier features estimated on as few as 12 months of data. Classical statistics calls that hopelessly overfit. Modern machine learning theory ("benign overfitting," "double descent") says otherwise, and this paper brings that insight to finance: out-of-sample performance keeps *improving* as models get more complex.
+- **[Project site](https://jlin12-cpu.github.io/p04_golez_jackwerth_2024/)**
 
-The evidence is in the "virtue of complexity" curves. The x-axis is model complexity $c$ (parameters per observation). Everything to the right of $c = 1$ is a model that perfectly memorizes its training data—and performance out of sample keeps getting better:
+Open it and look at the sidebar before you read anything. It has two sections, **Pipeline Charts** and **Pipeline Dataframes**, and the second one is the pipeline itself. Eighteen registered dataframes, each with its own page, and each page records which dataframes it was built from:
 
-```{figure} figures/KMZ2024_Figure7_VoCCurves.png
-:width: 90%
-
-Figure 7 of the paper. Out-of-sample R², coefficient norm, expected return, and volatility of the market-timing strategy as model complexity grows (12-month training window). Expected returns rise and volatility falls precisely in the "ridgeless" region that classical statistics says should be a disaster.
+```
+optionmetrics_spx_monthly, crsp_sp500_daily   ->  clean_options
+clean_options                                 ->  implied_rates  ->  implied_rates_1y
+clean_options, implied_rates                  ->  strip_prices
+clean_options, implied_rates                  ->  all_strip_prices
+strip_prices, all_strip_prices,
+  clean_crsp_sp500_monthly, fama_french_monthly,
+  crsp_treasury_returns                       ->  monthly_returns
 ```
 
-```{figure} figures/KMZ2024_Figure8_SharpeRatio.png
-:width: 90%
+You can read the whole data lineage of the project off the navigation without running a single line of code. The eight raw vendor pulls sit at the top with no parents; `monthly_returns`, the table the paper's results come out of, names all five of the inputs that feed it.
 
-Figure 8 of the paper. The payoff: Sharpe ratio, alpha, and information ratio of the timing strategy all increase with complexity, with Sharpe ratios exceeding 0.4 at the highest complexity levels.
-```
+**What to look at:**
 
-And the head-to-head that makes the point concrete: the complex nonlinear model against the classic linear "kitchen sink" regression built from the same 15 Goyal–Welch predictors. The linear model's out-of-sample R² is catastrophically negative; the complex model's is positive, with better Sharpe ratios and far smaller maximum losses:
+- **The naming tells you the stage.** Raw pulls keep the vendor's name (`optionmetrics_spx_raw`, `crsp_sp500_daily`, `fred_treasury_rates`). Cleaned versions are `clean_*`. Derived quantities are named for the thing they are, not the step that made them: `implied_rates`, `strip_prices`, `monthly_returns`. Someone who has never seen the project can find the right table on the first guess.
+- **Provenance is recorded, not implied.** Open `clean_options` and the page says it was derived from `optionmetrics_spx_monthly` and `crsp_sp500_daily`. That is what turns a folder of parquet files into a catalog: not the files, the description of where each one came from.
+- **Raw and cleaned are both registered.** Publishing only the finished tables would have been less work. Registering the raw pulls beside them is what lets a reader check the cleaning instead of trusting it.
+- **The Chart List is indexed by category and tag**, so charts are findable by subject rather than by filename.
 
-```{figure} figures/KMZ2024_TableI_GoyalWelchComparison.png
-:width: 90%
+This is the standard to aim at for your own ChartBook site, and it is worth opening on the day you start rather than the week you finish. Deciding what to register, and what to call it, gets much harder to change later.
 
-Table I of the paper. The high-complexity model ("Nonlinear") beats the Goyal–Welch linear kitchen-sink model at every training window—12, 60, and 120 months.
-```
+## 2. The written report
 
-**Why this one is fun to replicate.** The data is a single, small, public CSV (the Goyal–Welch predictors)—so unlike most projects, zero time is spent fighting data vendors. All the difficulty is computational: writing a recursive out-of-sample loop that runs thousands of ridge regressions efficiently (there is an elegant trick—solving ridge in its dual form—that turns an impossible computation into a fast one). When your VoC curves come out with the right shape, you will have reproduced one of the most provocative results in modern empirical asset pricing, one that overturns thirty years of conventional wisdom descending from Goyal and Welch's famous critique (which is also on the project list, as #7—same data, opposite conclusion).
+**Anthony Mazy and Stefano Ramponi** — Lewellen (2004), *Predicting Returns with Financial Ratios*. Thirteen pages, fifteen numbered exhibits, every statistic generated by the code.
 
-## 2. Financial crises are predictable
+- **[Repository](https://github.com/amazingmazy/Financial-Ratios-Project)**
 
-**Greenwood, Hanson, Shleifer, and Sørensen, "Predictable Financial Crises" (Journal of Finance, 2022)** — project #2 on the list.
+The report is built from `reports/replication_report.tex`. What makes it worth studying is not the prose, it is the machinery behind the numbers, and that machinery is all in the repository:
 
-The conventional view after 2008 was that financial crises are lightning strikes: devastating, but essentially impossible to see coming. This paper assembles a panel of 42 countries over 1950–2016 and argues the opposite. When credit growth and asset prices boom *together*—the authors call this the "Red zone" or R-zone—the probability of a crisis within three years rises to 40% or more. Crises are not bolts from the blue; they follow overheated credit markets with a long, measurable lead.
+- **`src/paper_values.py`** holds the paper's published numbers, transcribed by hand from the PDF. The module is deliberately data-only and imports nothing from the pipeline, "so it can be read as a standalone reference and diffed against the PDF." It opens with a block headed `TRANSCRIPTION HAZARD -- read before editing`. Transcribing a table wrong is the quietest way for a replication to go wrong, and they treated that risk as a first-class part of the design.
+- **`tests/test_replication_vs_paper.py`** parameterizes one test per (predictor, window) cell, so a single number missing produces a single named failure instead of one opaque red mark. Two of the paper's tables rest on a firm screen the paper never specifies, so those cells cannot be pinned exactly; the suite records that reason and the expected outcome rather than widening the tolerance to paper over it. Their comment explaining why is the best single sentence about testing in any project on this page:
 
-The first exhibit is the paper's event history—decades of crises across dozens of countries, with the R-zone warning signal marked alongside:
+  > Loosening tolerances until these passed would make the whole suite meaningless — a tolerance is only worth anything if it was fixed before the numbers were seen.
 
-```{figure} figures/GHSS2022_Figure1_EventHistory.png
-:width: 100%
+  Write the paper's numbers down first, in their own file, before you have computed yours. Then the suite can tell you something.
+- **`src/diagnose_bm.py`** is a standalone diagnostic that traces an outlier B/M or E/P statistic back to the exact month and fiscal-year data that produced it, written, in its own words, so they could stop "guessing at fixes blind." It is the difference between knowing a number is off and knowing why.
+- **`src/public_fallback.py`** lets parts of the project run without WRDS credentials, so a reader who has no subscription can still get somewhere. Almost nobody thinks to do this, and it is the single thing that most widens the audience for a replication.
 
-Figure 1 of the paper (working paper version). Financial crises (red dots) across 42 countries, 1950–2016, with R-zone episodes (blue crosses). Look at any country: the crosses tend to come first, then the dots. Japan's late-1980s bubble, Scandinavia around 1990, and the global cluster of 2007–2008 all show the pattern.
-```
+**The lesson.** Your replication will not match everything, and that is normal — it happens to professional replicators on every paper. What earns the points is that you noticed, that the report says so, and that the repository holds the evidence.
 
-Aggregating the signal across countries produces a global overheating index that peaks—ominously—right before the world's great crisis waves:
+## 3. The proposal presentation
 
-```{figure} figures/GHSS2022_Figure3_RZoneFraction.png
-:width: 75%
+**Riley Haas and Marija Jovicic** — Martin and Shi, *Forecasting Crashes with a Smile*. Their proposal scored 19.5 out of 20, and four classmates asked to be put in touch about the code afterward, which is the outcome the proposal grade is really measuring.
 
-Figure 3 of the paper. The fraction of countries in the R-zone. The two great spikes come just before 1990 (Japan and Scandinavia) and 2008 (everyone).
-```
+- **[Repository](https://github.com/rileykhaas/forecasting_crashes_smile)**
 
-The headline numbers are in the double-sort table: take country-years sorted by debt growth and asset-price growth, and read off the crisis probability in each cell. In the boom-boom corner, the three-year crisis probability hits 45%:
+This paper is the basis of **[HW 3](../HW3.md)**, so the replication half will be familiar to you by the time you see this. Study their extension.
 
-```{figure} figures/GHSS2022_Table3_CrisisProbabilities.png
-:width: 85%
+**What their proposal did:**
 
-Table 3 of the paper. Crisis probabilities by asset-price growth (rows) and debt growth (columns). The bottom-right cells—high price growth, high debt growth—are the R-zone, where crisis probabilities reach 45% at the three-year horizon, versus roughly 7% unconditionally.
-```
+- **It found a gap in the paper's reasoning, not in its data.** The paper bounds the crash probability of an individual stock. Riley and Marija pointed out that the average of individual crash probabilities is *not* the probability of a sector crash, because idiosyncratic volatility diversifies away in a portfolio. That is a conceptual objection, and it is the kind of idea a data hunt does not produce.
+- **It proposed a direct measurement, not a workaround.** Rather than aggregating single-name bounds, measure sector crash probability straight from the option surfaces of sector ETFs.
+- **It named the product concretely.** An installable `crashbounds` package, plus a three-level case study on the failure of Silicon Valley Bank. Not "a cleaned dataset" in the abstract — a thing with a name that somebody could `pip install`.
+- **It told the class who would use it, and the class believed it.** The four follow-up requests were the proof.
 
-**Why this one is fun to replicate.** This is the project for anyone interested in macro, policy, or risk. The data assembly is a genuinely international undertaking—BIS credit statistics, IMF databases, OECD house prices, the Jordà–Schularick–Taylor Macrohistory database—exactly the kind of multi-source merge that real policy shops (central banks, the IMF, macro hedge funds) do constantly. And the result you reproduce has teeth: a former Fed governor could have looked at your Figure 3 in 2006 and seen the storm coming. Since the paper's sample ends in 2016, you can also compute where every country sits in the R-zone *today*.
+**The structure to steal.** State the paper's claim in one slide. Name the specific thing the paper does not do. Say what you will build. Say who would clone it and why. Then defend all four when the room asks.
 
-## 3. Firms are creatures of habit—and the market doesn't fully notice
+## One thing to keep in mind
 
-**Bessembinder and Zhang, "Predictable Corporate Distributions and Stock Returns" (Review of Financial Studies, 2015)** — project #4 on the list.
+All three of these were built by groups of **two**. Yours has four, so aim past them: a more complete replication, tests that cover more of it, and an extension with more in it. The rubric asks the same things of you that it asked of them, and you have twice the hands.
 
-Here is a simple fact hiding in plain sight in CRSP: firms announce dividend increases, special dividends, stock splits, and stock dividends on a schedule—very often on the anniversary of the last such announcement. Announcements are good news, the calendar tells you when they are coming, and yet the market is systematically surprised. A strategy that simply buys stocks with a high predicted probability of an announcement earns significant abnormal returns.
-
-The raw material is fifty years of corporate distribution events:
-
-```{figure} figures/BZ2015_Figure1_EventCounts.png
-:width: 70%
-
-Figure 1 of the paper. The four distribution event types, 1963–2012: roughly 37,000 dividend increases, 7,700 special dividends, 11,600 stock dividends, and 14,100 stock splits, all identified from CRSP distribution codes.
-```
-
-The anniversary effect jumps out of the estimated hazard rates. The probability of a follow-on announcement spikes at *exactly* 12, 24, and 36 months after the last one:
-
-```{figure} figures/BZ2015_Figure5_HazardRates.png
-:width: 100%
-
-Figure 5 of the paper. Cumulative baseline hazard rates from the Cox proportional hazard model. The vertical jumps at 12, 24, and 36 months are firms repeating last year's announcement on schedule. Corporate behavior is this mechanical.
-```
-
-Turning the pattern into a strategy: each month, buy the stocks with the highest model-predicted probability of an announcement. The returns are large, and the gap between months when the predicted event happens and when it doesn't confirms the market is genuinely surprised by news it could have forecast:
-
-```{figure} figures/BZ2015_Table5_PortfolioReturns.png
-:width: 100%
-
-Table 5, Panel A of the paper. Portfolios of high-probability stocks earn 1.4–1.9% per month, and returns are sharply higher in months when the predicted event is realized—evidence that the market underreacts to predictable good news.
-```
-
-**Why this one is fun to replicate.** This is the closest thing on the list to how a quantitative trading desk actually works: find a behavioral regularity, build a predictive model with strict point-in-time discipline (the paper's hazard model is re-estimated each month using only data available at the time), form portfolios, and measure alpha against standard factors. Along the way you learn survival analysis (the Cox model, borrowed from biostatistics), serious CRSP event-data work, and honest out-of-sample strategy evaluation. And the anniversary spikes in Figure 5 are simply a delight to reproduce—when your version shows the same jumps at 12, 24, and 36 months, you will have caught corporate America keeping a calendar.
+For the full set of finished projects from the last four cohorts, with repositories and sites, see [Past Final Projects](past_final_projects.md).

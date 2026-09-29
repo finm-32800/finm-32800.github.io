@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Project Previews: What Does a Replication Look Like? &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Project Previews: What a Finished Project Looks Like &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -47,8 +47,6 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'FinalProject/project_previews';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -297,7 +295,7 @@
 <li class="toctree-l2"><a class="reference internal" href="proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Project Previews: What a Finished Project Looks Like</a></li>
 <li class="toctree-l2"><a class="reference internal" href="past_final_projects.html">Past Final Projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
@@ -488,7 +486,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project Previews: What Does a Replication Look Like?</h1>
+    <h1>Project Previews: What a Finished Project Looks Like</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -498,9 +496,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#can-a-model-with-12-000-parameters-and-12-observations-beat-the-market">1. Can a model with 12,000 parameters and 12 observations beat the market?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-crises-are-predictable">2. Financial crises are predictable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#firms-are-creatures-of-habitand-the-market-doesnt-fully-notice">3. Firms are creatures of habit—and the market doesn’t fully notice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-published-site">1. The published site</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-written-report">2. The written report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proposal-presentation">3. The proposal presentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-keep-in-mind">One thing to keep in mind</a></li>
 </ul>
             </nav>
         </div>
@@ -511,89 +510,76 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="project-previews-what-does-a-replication-look-like">
-<h1>Project Previews: What Does a Replication Look Like?<a class="headerlink" href="#project-previews-what-does-a-replication-look-like" title="Link to this heading">#</a></h1>
-<p>Every final project on the <a class="reference internal" href="potential_final_projects.html"><span class="std std-doc">list of potential projects</span></a> asks you to do the same thing: take a published finance paper, rebuild its dataset from the original sources, and reproduce the tables and figures that carry its main result. That description can sound dry until you see what the outputs actually look like. This page walks through three of the papers on the list and shows the exact exhibits you would recreate—two figures and a table from each—along with why each one is worth your time.</p>
-<p>A replication is not a homework problem with a known answer key. These are real research artifacts. When your Figure 5 has spikes in the same places as the published Figure 5, you have independently verified a fact about the world, and you understand that fact at a level no amount of reading can produce.</p>
-<section id="can-a-model-with-12-000-parameters-and-12-observations-beat-the-market">
-<h2>1. Can a model with 12,000 parameters and 12 observations beat the market?<a class="headerlink" href="#can-a-model-with-12-000-parameters-and-12-observations-beat-the-market" title="Link to this heading">#</a></h2>
-<p><strong>Kelly, Malamud, and Zhou, “The Virtue of Complexity in Return Prediction” (Journal of Finance, 2024)</strong> — project #1 on the list.</p>
-<p>Everything you learn in a first econometrics course says this paper should not work. It forecasts the monthly stock market return using models with <em>more parameters than observations</em>—up to 12,000 random Fourier features estimated on as few as 12 months of data. Classical statistics calls that hopelessly overfit. Modern machine learning theory (“benign overfitting,” “double descent”) says otherwise, and this paper brings that insight to finance: out-of-sample performance keeps <em>improving</em> as models get more complex.</p>
-<p>The evidence is in the “virtue of complexity” curves. The x-axis is model complexity <span class="math notranslate nohighlight">\(c\)</span> (parameters per observation). Everything to the right of <span class="math notranslate nohighlight">\(c = 1\)</span> is a model that perfectly memorizes its training data—and performance out of sample keeps getting better:</p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/KMZ2024_Figure7_VoCCurves.png"><img alt="../_images/KMZ2024_Figure7_VoCCurves.png" src="../_images/KMZ2024_Figure7_VoCCurves.png" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Figure 7 of the paper. Out-of-sample R², coefficient norm, expected return, and volatility of the market-timing strategy as model complexity grows (12-month training window). Expected returns rise and volatility falls precisely in the “ridgeless” region that classical statistics says should be a disaster.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/KMZ2024_Figure8_SharpeRatio.png"><img alt="../_images/KMZ2024_Figure8_SharpeRatio.png" src="../_images/KMZ2024_Figure8_SharpeRatio.png" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Figure 8 of the paper. The payoff: Sharpe ratio, alpha, and information ratio of the timing strategy all increase with complexity, with Sharpe ratios exceeding 0.4 at the highest complexity levels.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>And the head-to-head that makes the point concrete: the complex nonlinear model against the classic linear “kitchen sink” regression built from the same 15 Goyal–Welch predictors. The linear model’s out-of-sample R² is catastrophically negative; the complex model’s is positive, with better Sharpe ratios and far smaller maximum losses:</p>
-<figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/KMZ2024_TableI_GoyalWelchComparison.png"><img alt="../_images/KMZ2024_TableI_GoyalWelchComparison.png" src="../_images/KMZ2024_TableI_GoyalWelchComparison.png" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Table I of the paper. The high-complexity model (“Nonlinear”) beats the Goyal–Welch linear kitchen-sink model at every training window—12, 60, and 120 months.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p><strong>Why this one is fun to replicate.</strong> The data is a single, small, public CSV (the Goyal–Welch predictors)—so unlike most projects, zero time is spent fighting data vendors. All the difficulty is computational: writing a recursive out-of-sample loop that runs thousands of ridge regressions efficiently (there is an elegant trick—solving ridge in its dual form—that turns an impossible computation into a fast one). When your VoC curves come out with the right shape, you will have reproduced one of the most provocative results in modern empirical asset pricing, one that overturns thirty years of conventional wisdom descending from Goyal and Welch’s famous critique (which is also on the project list, as #7—same data, opposite conclusion).</p>
+                   <section class="tex2jax_ignore mathjax_ignore" id="project-previews-what-a-finished-project-looks-like">
+<h1>Project Previews: What a Finished Project Looks Like<a class="headerlink" href="#project-previews-what-a-finished-project-looks-like" title="Link to this heading">#</a></h1>
+<p>Every final project asks you to do the same thing: take a finance paper, rebuild its dataset from the original sources, reproduce the tables and figures that carry its main result, and ship the whole thing as something another person can clone and run. That description stays abstract until you see what a finished one looks like.</p>
+<p>So this page does not show you figures clipped out of published papers. It shows you three projects that students in this course actually built, one for each of the three things you are graded on: the <strong>published site</strong>, the <strong>written report</strong>, and the <strong>proposal presentation</strong>. Each section says what to look at and why it is worth copying.</p>
+<section id="the-published-site">
+<h2>1. The published site<a class="headerlink" href="#the-published-site" title="Link to this heading">#</a></h2>
+<p><strong>Jie Lin and Zimeng Yi</strong> — Golez and Jackwerth (2024), <em>Holding Period Effects in Dividend Strip Returns</em>. Their project recovers dividend strip prices from S&amp;P 500 index option quotes and measures how strip returns depend on the holding period.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://jlin12-cpu.github.io/p04_golez_jackwerth_2024/">Project site</a></strong></p></li>
+</ul>
+<p>Open it and look at the sidebar before you read anything. It has two sections, <strong>Pipeline Charts</strong> and <strong>Pipeline Dataframes</strong>, and the second one is the pipeline itself. Eighteen registered dataframes, each with its own page, and each page records which dataframes it was built from:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optionmetrics_spx_monthly</span><span class="p">,</span> <span class="n">crsp_sp500_daily</span>   <span class="o">-&gt;</span>  <span class="n">clean_options</span>
+<span class="n">clean_options</span>                                 <span class="o">-&gt;</span>  <span class="n">implied_rates</span>  <span class="o">-&gt;</span>  <span class="n">implied_rates_1y</span>
+<span class="n">clean_options</span><span class="p">,</span> <span class="n">implied_rates</span>                  <span class="o">-&gt;</span>  <span class="n">strip_prices</span>
+<span class="n">clean_options</span><span class="p">,</span> <span class="n">implied_rates</span>                  <span class="o">-&gt;</span>  <span class="n">all_strip_prices</span>
+<span class="n">strip_prices</span><span class="p">,</span> <span class="n">all_strip_prices</span><span class="p">,</span>
+  <span class="n">clean_crsp_sp500_monthly</span><span class="p">,</span> <span class="n">fama_french_monthly</span><span class="p">,</span>
+  <span class="n">crsp_treasury_returns</span>                       <span class="o">-&gt;</span>  <span class="n">monthly_returns</span>
+</pre></div>
+</div>
+<p>You can read the whole data lineage of the project off the navigation without running a single line of code. The eight raw vendor pulls sit at the top with no parents; <code class="docutils literal notranslate"><span class="pre">monthly_returns</span></code>, the table the paper’s results come out of, names all five of the inputs that feed it.</p>
+<p><strong>What to look at:</strong></p>
+<ul class="simple">
+<li><p><strong>The naming tells you the stage.</strong> Raw pulls keep the vendor’s name (<code class="docutils literal notranslate"><span class="pre">optionmetrics_spx_raw</span></code>, <code class="docutils literal notranslate"><span class="pre">crsp_sp500_daily</span></code>, <code class="docutils literal notranslate"><span class="pre">fred_treasury_rates</span></code>). Cleaned versions are <code class="docutils literal notranslate"><span class="pre">clean_*</span></code>. Derived quantities are named for the thing they are, not the step that made them: <code class="docutils literal notranslate"><span class="pre">implied_rates</span></code>, <code class="docutils literal notranslate"><span class="pre">strip_prices</span></code>, <code class="docutils literal notranslate"><span class="pre">monthly_returns</span></code>. Someone who has never seen the project can find the right table on the first guess.</p></li>
+<li><p><strong>Provenance is recorded, not implied.</strong> Open <code class="docutils literal notranslate"><span class="pre">clean_options</span></code> and the page says it was derived from <code class="docutils literal notranslate"><span class="pre">optionmetrics_spx_monthly</span></code> and <code class="docutils literal notranslate"><span class="pre">crsp_sp500_daily</span></code>. That is what turns a folder of parquet files into a catalog: not the files, the description of where each one came from.</p></li>
+<li><p><strong>Raw and cleaned are both registered.</strong> Publishing only the finished tables would have been less work. Registering the raw pulls beside them is what lets a reader check the cleaning instead of trusting it.</p></li>
+<li><p><strong>The Chart List is indexed by category and tag</strong>, so charts are findable by subject rather than by filename.</p></li>
+</ul>
+<p>This is the standard to aim at for your own ChartBook site, and it is worth opening on the day you start rather than the week you finish. Deciding what to register, and what to call it, gets much harder to change later.</p>
 </section>
-<section id="financial-crises-are-predictable">
-<h2>2. Financial crises are predictable<a class="headerlink" href="#financial-crises-are-predictable" title="Link to this heading">#</a></h2>
-<p><strong>Greenwood, Hanson, Shleifer, and Sørensen, “Predictable Financial Crises” (Journal of Finance, 2022)</strong> — project #2 on the list.</p>
-<p>The conventional view after 2008 was that financial crises are lightning strikes: devastating, but essentially impossible to see coming. This paper assembles a panel of 42 countries over 1950–2016 and argues the opposite. When credit growth and asset prices boom <em>together</em>—the authors call this the “Red zone” or R-zone—the probability of a crisis within three years rises to 40% or more. Crises are not bolts from the blue; they follow overheated credit markets with a long, measurable lead.</p>
-<p>The first exhibit is the paper’s event history—decades of crises across dozens of countries, with the R-zone warning signal marked alongside:</p>
-<figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="../_images/GHSS2022_Figure1_EventHistory.png"><img alt="../_images/GHSS2022_Figure1_EventHistory.png" src="../_images/GHSS2022_Figure1_EventHistory.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Figure 1 of the paper (working paper version). Financial crises (red dots) across 42 countries, 1950–2016, with R-zone episodes (blue crosses). Look at any country: the crosses tend to come first, then the dots. Japan’s late-1980s bubble, Scandinavia around 1990, and the global cluster of 2007–2008 all show the pattern.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Aggregating the signal across countries produces a global overheating index that peaks—ominously—right before the world’s great crisis waves:</p>
-<figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="../_images/GHSS2022_Figure3_RZoneFraction.png"><img alt="../_images/GHSS2022_Figure3_RZoneFraction.png" src="../_images/GHSS2022_Figure3_RZoneFraction.png" style="width: 75%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Figure 3 of the paper. The fraction of countries in the R-zone. The two great spikes come just before 1990 (Japan and Scandinavia) and 2008 (everyone).</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The headline numbers are in the double-sort table: take country-years sorted by debt growth and asset-price growth, and read off the crisis probability in each cell. In the boom-boom corner, the three-year crisis probability hits 45%:</p>
-<figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="../_images/GHSS2022_Table3_CrisisProbabilities.png"><img alt="../_images/GHSS2022_Table3_CrisisProbabilities.png" src="../_images/GHSS2022_Table3_CrisisProbabilities.png" style="width: 85%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Table 3 of the paper. Crisis probabilities by asset-price growth (rows) and debt growth (columns). The bottom-right cells—high price growth, high debt growth—are the R-zone, where crisis probabilities reach 45% at the three-year horizon, versus roughly 7% unconditionally.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p><strong>Why this one is fun to replicate.</strong> This is the project for anyone interested in macro, policy, or risk. The data assembly is a genuinely international undertaking—BIS credit statistics, IMF databases, OECD house prices, the Jordà–Schularick–Taylor Macrohistory database—exactly the kind of multi-source merge that real policy shops (central banks, the IMF, macro hedge funds) do constantly. And the result you reproduce has teeth: a former Fed governor could have looked at your Figure 3 in 2006 and seen the storm coming. Since the paper’s sample ends in 2016, you can also compute where every country sits in the R-zone <em>today</em>.</p>
+<section id="the-written-report">
+<h2>2. The written report<a class="headerlink" href="#the-written-report" title="Link to this heading">#</a></h2>
+<p><strong>Anthony Mazy and Stefano Ramponi</strong> — Lewellen (2004), <em>Predicting Returns with Financial Ratios</em>. Thirteen pages, fifteen numbered exhibits, every statistic generated by the code.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://github.com/amazingmazy/Financial-Ratios-Project">Repository</a></strong></p></li>
+</ul>
+<p>The report is built from <code class="docutils literal notranslate"><span class="pre">reports/replication_report.tex</span></code>. What makes it worth studying is not the prose, it is the machinery behind the numbers, and that machinery is all in the repository:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">src/paper_values.py</span></code></strong> holds the paper’s published numbers, transcribed by hand from the PDF. The module is deliberately data-only and imports nothing from the pipeline, “so it can be read as a standalone reference and diffed against the PDF.” It opens with a block headed <code class="docutils literal notranslate"><span class="pre">TRANSCRIPTION</span> <span class="pre">HAZARD</span> <span class="pre">--</span> <span class="pre">read</span> <span class="pre">before</span> <span class="pre">editing</span></code>. Transcribing a table wrong is the quietest way for a replication to go wrong, and they treated that risk as a first-class part of the design.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">tests/test_replication_vs_paper.py</span></code></strong> parameterizes one test per (predictor, window) cell, so a single number missing produces a single named failure instead of one opaque red mark. Two of the paper’s tables rest on a firm screen the paper never specifies, so those cells cannot be pinned exactly; the suite records that reason and the expected outcome rather than widening the tolerance to paper over it. Their comment explaining why is the best single sentence about testing in any project on this page:</p>
+<blockquote>
+<div><p>Loosening tolerances until these passed would make the whole suite meaningless — a tolerance is only worth anything if it was fixed before the numbers were seen.</p>
+</div></blockquote>
+<p>Write the paper’s numbers down first, in their own file, before you have computed yours. Then the suite can tell you something.</p>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">src/diagnose_bm.py</span></code></strong> is a standalone diagnostic that traces an outlier B/M or E/P statistic back to the exact month and fiscal-year data that produced it, written, in its own words, so they could stop “guessing at fixes blind.” It is the difference between knowing a number is off and knowing why.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">src/public_fallback.py</span></code></strong> lets parts of the project run without WRDS credentials, so a reader who has no subscription can still get somewhere. Almost nobody thinks to do this, and it is the single thing that most widens the audience for a replication.</p></li>
+</ul>
+<p><strong>The lesson.</strong> Your replication will not match everything, and that is normal — it happens to professional replicators on every paper. What earns the points is that you noticed, that the report says so, and that the repository holds the evidence.</p>
 </section>
-<section id="firms-are-creatures-of-habitand-the-market-doesnt-fully-notice">
-<h2>3. Firms are creatures of habit—and the market doesn’t fully notice<a class="headerlink" href="#firms-are-creatures-of-habitand-the-market-doesnt-fully-notice" title="Link to this heading">#</a></h2>
-<p><strong>Bessembinder and Zhang, “Predictable Corporate Distributions and Stock Returns” (Review of Financial Studies, 2015)</strong> — project #4 on the list.</p>
-<p>Here is a simple fact hiding in plain sight in CRSP: firms announce dividend increases, special dividends, stock splits, and stock dividends on a schedule—very often on the anniversary of the last such announcement. Announcements are good news, the calendar tells you when they are coming, and yet the market is systematically surprised. A strategy that simply buys stocks with a high predicted probability of an announcement earns significant abnormal returns.</p>
-<p>The raw material is fifty years of corporate distribution events:</p>
-<figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="../_images/BZ2015_Figure1_EventCounts.png"><img alt="../_images/BZ2015_Figure1_EventCounts.png" src="../_images/BZ2015_Figure1_EventCounts.png" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Figure 1 of the paper. The four distribution event types, 1963–2012: roughly 37,000 dividend increases, 7,700 special dividends, 11,600 stock dividends, and 14,100 stock splits, all identified from CRSP distribution codes.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The anniversary effect jumps out of the estimated hazard rates. The probability of a follow-on announcement spikes at <em>exactly</em> 12, 24, and 36 months after the last one:</p>
-<figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="../_images/BZ2015_Figure5_HazardRates.png"><img alt="../_images/BZ2015_Figure5_HazardRates.png" src="../_images/BZ2015_Figure5_HazardRates.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Figure 5 of the paper. Cumulative baseline hazard rates from the Cox proportional hazard model. The vertical jumps at 12, 24, and 36 months are firms repeating last year’s announcement on schedule. Corporate behavior is this mechanical.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Turning the pattern into a strategy: each month, buy the stocks with the highest model-predicted probability of an announcement. The returns are large, and the gap between months when the predicted event happens and when it doesn’t confirms the market is genuinely surprised by news it could have forecast:</p>
-<figure class="align-default" id="id9">
-<a class="reference internal image-reference" href="../_images/BZ2015_Table5_PortfolioReturns.png"><img alt="../_images/BZ2015_Table5_PortfolioReturns.png" src="../_images/BZ2015_Table5_PortfolioReturns.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Table 5, Panel A of the paper. Portfolios of high-probability stocks earn 1.4–1.9% per month, and returns are sharply higher in months when the predicted event is realized—evidence that the market underreacts to predictable good news.</span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p><strong>Why this one is fun to replicate.</strong> This is the closest thing on the list to how a quantitative trading desk actually works: find a behavioral regularity, build a predictive model with strict point-in-time discipline (the paper’s hazard model is re-estimated each month using only data available at the time), form portfolios, and measure alpha against standard factors. Along the way you learn survival analysis (the Cox model, borrowed from biostatistics), serious CRSP event-data work, and honest out-of-sample strategy evaluation. And the anniversary spikes in Figure 5 are simply a delight to reproduce—when your version shows the same jumps at 12, 24, and 36 months, you will have caught corporate America keeping a calendar.</p>
+<section id="the-proposal-presentation">
+<h2>3. The proposal presentation<a class="headerlink" href="#the-proposal-presentation" title="Link to this heading">#</a></h2>
+<p><strong>Riley Haas and Marija Jovicic</strong> — Martin and Shi, <em>Forecasting Crashes with a Smile</em>. Their proposal scored 19.5 out of 20, and four classmates asked to be put in touch about the code afterward, which is the outcome the proposal grade is really measuring.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://github.com/rileykhaas/forecasting_crashes_smile">Repository</a></strong></p></li>
+</ul>
+<p>This paper is the basis of <strong><a class="reference internal" href="../HW3.html"><span class="std std-doc">HW 3</span></a></strong>, so the replication half will be familiar to you by the time you see this. Study their extension.</p>
+<p><strong>What their proposal did:</strong></p>
+<ul class="simple">
+<li><p><strong>It found a gap in the paper’s reasoning, not in its data.</strong> The paper bounds the crash probability of an individual stock. Riley and Marija pointed out that the average of individual crash probabilities is <em>not</em> the probability of a sector crash, because idiosyncratic volatility diversifies away in a portfolio. That is a conceptual objection, and it is the kind of idea a data hunt does not produce.</p></li>
+<li><p><strong>It proposed a direct measurement, not a workaround.</strong> Rather than aggregating single-name bounds, measure sector crash probability straight from the option surfaces of sector ETFs.</p></li>
+<li><p><strong>It named the product concretely.</strong> An installable <code class="docutils literal notranslate"><span class="pre">crashbounds</span></code> package, plus a three-level case study on the failure of Silicon Valley Bank. Not “a cleaned dataset” in the abstract — a thing with a name that somebody could <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>.</p></li>
+<li><p><strong>It told the class who would use it, and the class believed it.</strong> The four follow-up requests were the proof.</p></li>
+</ul>
+<p><strong>The structure to steal.</strong> State the paper’s claim in one slide. Name the specific thing the paper does not do. Say what you will build. Say who would clone it and why. Then defend all four when the room asks.</p>
+</section>
+<section id="one-thing-to-keep-in-mind">
+<h2>One thing to keep in mind<a class="headerlink" href="#one-thing-to-keep-in-mind" title="Link to this heading">#</a></h2>
+<p>All three of these were built by groups of <strong>two</strong>. Yours has four, so aim past them: a more complete replication, tests that cover more of it, and an extension with more in it. The rubric asks the same things of you that it asked of them, and you have twice the hands.</p>
+<p>For the full set of finished projects from the last four cohorts, with repositories and sites, see <a class="reference internal" href="past_final_projects.html"><span class="std std-doc">Past Final Projects</span></a>.</p>
 </section>
 </section>
 
@@ -645,9 +631,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#can-a-model-with-12-000-parameters-and-12-observations-beat-the-market">1. Can a model with 12,000 parameters and 12 observations beat the market?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-crises-are-predictable">2. Financial crises are predictable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#firms-are-creatures-of-habitand-the-market-doesnt-fully-notice">3. Firms are creatures of habit—and the market doesn’t fully notice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-published-site">1. The published site</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-written-report">2. The written report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proposal-presentation">3. The proposal presentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-thing-to-keep-in-mind">One thing to keep in mind</a></li>
 </ul>
   </nav></div>
 

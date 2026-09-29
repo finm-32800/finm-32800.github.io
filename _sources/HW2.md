@@ -8,7 +8,8 @@ notebooks/_01_fed_funds_futures_data.ipynb
 notebooks/_02_fedwatch_replication.ipynb
 ```
 
-- **Launched:** week 3. **Due:** week 5. The date is posted on Canvas.
+- **Launched:** week 3. **Due:** Tuesday, October 27, at the start of the
+  week 5 session, two weeks after it launches. Also posted on Canvas.
 - **Link to Assignment:** TBD
 - **Goes with:** week 3
 

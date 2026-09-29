@@ -12,8 +12,9 @@ Follow [Getting Set Up](./Week0/getting_set_up.md) to install the software and c
 
 ## Part 2: Get connected to the course
 
-- "Watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you are notified of new posts on the course discussion board. Click the "Watch" button at the top right of the page.
-- Consider posting an introduction on the discussion board: https://github.com/orgs/finm-32800/discussions/2 . Say that you're looking for a partner to work on the homework and the final project with.
+- "Watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you are notified of new posts on the course discussion board. The board is attached to that repository, so this is the only place to subscribe. Click **Watch** at the top right, choose **Custom**, check **Discussions**, and click **Apply** — the default setting of "Participating and @mentions" does not notify you of new threads. Then confirm the repository is listed at <https://github.com/watching>.
+  - To get these as email rather than only in your GitHub inbox, go to <https://github.com/settings/notifications> and, under **Subscriptions → Watching**, check **Email**.
+- Consider posting an introduction in the **Introductions** thread on the [discussion board](https://github.com/orgs/finm-32800/discussions). Say that you're looking for people to work with on the homework and on the final project, which is done in groups of four.
 - Skim the [tour of the course](./Week0/tour_of_the_course.md) and open one of the [past final projects](./FinalProject/past_final_projects.md).
 
 ## Part 3: Clone and run the HW 0 repository

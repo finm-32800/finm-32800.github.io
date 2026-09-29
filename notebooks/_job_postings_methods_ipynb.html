@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -295,7 +295,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
@@ -535,7 +535,7 @@ neither recomputes anything, so the two cannot drift apart on a number.</p>
 which is what makes the figures reproducible from a clone.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jobpostings</span> <span class="kn">import</span> <span class="n">report</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobpostings</span><span class="w"> </span><span class="kn">import</span> <span class="n">report</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 <span class="n">report</span><span class="o">.</span><span class="n">headline</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -1632,7 +1632,7 @@ what it discards: postings with a trading title that fail the filter, and how
 many tool mentions are inside them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="n">idx</span><span class="p">,</span> <span class="n">long</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;idx&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;long&quot;</span><span class="p">]</span>
 <span class="n">TRADE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\btrad(?:er|ing)\b|\bmarket mak&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
@@ -1950,9 +1950,9 @@ thousand postings that never does. Watch what each estimator does as the small
 firm gains data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">jobpostings.index</span> <span class="kn">import</span> <span class="n">_estimators</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jobpostings.index</span><span class="w"> </span><span class="kn">import</span> <span class="n">_estimators</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
@@ -2316,10 +2316,10 @@ Hadoop YARN.</p>
 programmatically from the corpus, so they cannot drift from the numbers above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
 
-<span class="k">def</span> <span class="nf">quotes</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quotes</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print real sentences behind a tool&#39;s count, at most one per firm.&quot;&quot;&quot;</span>
     <span class="n">hits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">long</span><span class="p">[</span><span class="n">long</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tool</span><span class="p">][</span><span class="s2">&quot;posting_id&quot;</span><span class="p">])</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;posting_id&quot;</span><span class="p">)</span>

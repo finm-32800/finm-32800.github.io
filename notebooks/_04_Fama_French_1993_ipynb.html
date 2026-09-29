@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -295,7 +295,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_rubric.html">Proposal Presentation Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_feedback_survey.html">Proposal Peer-Feedback Survey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/proposal_presentation_schedule.html">Proposal Presentation Schedule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What Does a Replication Look Like?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
 </ul>
@@ -548,17 +548,17 @@ of videos on this linked website. Those may be helpful for this exercise.</p>
 <p>The code is lightly edited from the code provided by WRDS on their website.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
-<span class="kn">import</span> <span class="nn">calc_Fama_French_1993</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_Compustat</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
-<span class="kn">import</span> <span class="nn">shared_portfolio_sorts</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calc_Fama_French_1993</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_Compustat</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_stock</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shared_portfolio_sorts</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 </pre></div>
@@ -605,17 +605,17 @@ of videos on this linked website. Those may be helpful for this exercise.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Index: 585566 entries, 0 to 85565
+Index: 592717 entries, 0 to 92716
 Data columns (total 5 columns):
  #   Column    Non-Null Count   Dtype         
 ---  ------    --------------   -----         
- 0   gvkey     585566 non-null  string        
- 1   datadate  585566 non-null  datetime64[ns]
- 2   year      585566 non-null  int32         
- 3   be        425381 non-null  Float64       
- 4   count     585566 non-null  int64         
+ 0   gvkey     592717 non-null  string        
+ 1   datadate  592717 non-null  datetime64[ns]
+ 2   year      592717 non-null  int32         
+ 3   be        431354 non-null  Float64       
+ 4   count     592717 non-null  int64         
 dtypes: Float64(1), datetime64[ns](1), int32(1), int64(1), string(1)
-memory usage: 25.1 MB
+memory usage: 25.4 MB
 </pre></div>
 </div>
 </div>
@@ -640,7 +640,7 @@ memory usage: 25.1 MB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Index: 3375482 entries, 0 to 7329
+Index: 3375612 entries, 0 to 7072
 Data columns (total 25 columns):
  #   Column            Dtype         
 ---  ------            -----         
@@ -670,7 +670,7 @@ Data columns (total 25 columns):
  23  market_cap        Float64       
  24  jdate             datetime64[ns]
 dtypes: Float64(10), Int64(4), datetime64[ns](2), string(9)
-memory usage: 714.6 MB
+memory usage: 714.7 MB
 </pre></div>
 </div>
 </div>
@@ -925,7 +925,7 @@ memory usage: 714.6 MB
   </thead>
   <tbody>
     <tr>
-      <th>3340613</th>
+      <th>3340743</th>
       <td>93436</td>
       <td>53453</td>
       <td>2024-08-30</td>
@@ -949,7 +949,7 @@ memory usage: 714.6 MB
       <td>7.413798e+11</td>
     </tr>
     <tr>
-      <th>3340614</th>
+      <th>3340744</th>
       <td>93436</td>
       <td>53453</td>
       <td>2024-09-30</td>
@@ -973,7 +973,7 @@ memory usage: 714.6 MB
       <td>6.840044e+11</td>
     </tr>
     <tr>
-      <th>3340615</th>
+      <th>3340745</th>
       <td>93436</td>
       <td>53453</td>
       <td>2024-10-31</td>
@@ -997,7 +997,7 @@ memory usage: 714.6 MB
       <td>8.358137e+11</td>
     </tr>
     <tr>
-      <th>3340616</th>
+      <th>3340746</th>
       <td>93436</td>
       <td>53453</td>
       <td>2024-11-29</td>
@@ -1021,7 +1021,7 @@ memory usage: 714.6 MB
       <td>7.981812e+11</td>
     </tr>
     <tr>
-      <th>3340617</th>
+      <th>3340747</th>
       <td>93436</td>
       <td>53453</td>
       <td>2024-12-31</td>
@@ -1096,7 +1096,7 @@ memory usage: 714.6 MB
   </thead>
   <tbody>
     <tr>
-      <th>267273</th>
+      <th>267280</th>
       <td>93436</td>
       <td>2020-06-30</td>
       <td>2020-06-30</td>
@@ -1117,7 +1117,7 @@ memory usage: 714.6 MB
       <td>75743666460.0</td>
     </tr>
     <tr>
-      <th>267274</th>
+      <th>267281</th>
       <td>93436</td>
       <td>2021-06-30</td>
       <td>2021-06-30</td>
@@ -1138,7 +1138,7 @@ memory usage: 714.6 MB
       <td>677340172180.0</td>
     </tr>
     <tr>
-      <th>267275</th>
+      <th>267282</th>
       <td>93436</td>
       <td>2022-06-30</td>
       <td>2022-06-30</td>
@@ -1159,7 +1159,7 @@ memory usage: 714.6 MB
       <td>1092190584240.0</td>
     </tr>
     <tr>
-      <th>267276</th>
+      <th>267283</th>
       <td>93436</td>
       <td>2023-06-30</td>
       <td>2023-06-30</td>
@@ -1180,7 +1180,7 @@ memory usage: 714.6 MB
       <td>389741520000.0</td>
     </tr>
     <tr>
-      <th>267277</th>
+      <th>267284</th>
       <td>93436</td>
       <td>2024-06-28</td>
       <td>2024-06-30</td>
@@ -1286,7 +1286,7 @@ memory usage: 714.6 MB
   </thead>
   <tbody>
     <tr>
-      <th>251453</th>
+      <th>251457</th>
       <td>93436</td>
       <td>2020-06-30</td>
       <td>2020-06-30</td>
@@ -1310,7 +1310,7 @@ memory usage: 714.6 MB
       <td>0.000087</td>
     </tr>
     <tr>
-      <th>251454</th>
+      <th>251458</th>
       <td>93436</td>
       <td>2021-06-30</td>
       <td>2021-06-30</td>
@@ -1334,7 +1334,7 @@ memory usage: 714.6 MB
       <td>0.000033</td>
     </tr>
     <tr>
-      <th>251455</th>
+      <th>251459</th>
       <td>93436</td>
       <td>2022-06-30</td>
       <td>2022-06-30</td>
@@ -1358,7 +1358,7 @@ memory usage: 714.6 MB
       <td>0.000028</td>
     </tr>
     <tr>
-      <th>251456</th>
+      <th>251460</th>
       <td>93436</td>
       <td>2023-06-30</td>
       <td>2023-06-30</td>
@@ -1382,7 +1382,7 @@ memory usage: 714.6 MB
       <td>0.000115</td>
     </tr>
     <tr>
-      <th>251457</th>
+      <th>251461</th>
       <td>93436</td>
       <td>2024-06-28</td>
       <td>2024-06-30</td>
@@ -1476,7 +1476,7 @@ memory usage: 714.6 MB
   </thead>
   <tbody>
     <tr>
-      <th>3351517</th>
+      <th>3351647</th>
       <td>2024-08-30</td>
       <td>93436</td>
       <td>NS</td>
@@ -1499,7 +1499,7 @@ memory usage: 714.6 MB
       <td>1.0</td>
     </tr>
     <tr>
-      <th>3351518</th>
+      <th>3351648</th>
       <td>2024-09-30</td>
       <td>93436</td>
       <td>NS</td>
@@ -1522,7 +1522,7 @@ memory usage: 714.6 MB
       <td>1.0</td>
     </tr>
     <tr>
-      <th>3351519</th>
+      <th>3351649</th>
       <td>2024-10-31</td>
       <td>93436</td>
       <td>NS</td>
@@ -1545,7 +1545,7 @@ memory usage: 714.6 MB
       <td>1.0</td>
     </tr>
     <tr>
-      <th>3351520</th>
+      <th>3351650</th>
       <td>2024-11-29</td>
       <td>93436</td>
       <td>NS</td>
@@ -1568,7 +1568,7 @@ memory usage: 714.6 MB
       <td>1.0</td>
     </tr>
     <tr>
-      <th>3351521</th>
+      <th>3351651</th>
       <td>2024-12-31</td>
       <td>93436</td>
       <td>NS</td>
@@ -1754,8 +1754,8 @@ memory usage: 714.6 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=np.float64(0.9957359737794075), pvalue=np.float64(0.0))
-PearsonRResult(statistic=np.float64(0.9837143680426613), pvalue=np.float64(0.0))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=0.9957863096976141, pvalue=0.0)
+PearsonRResult(statistic=0.9836257648736928, pvalue=0.0)
 </pre></div>
 </div>
 </div>
@@ -1802,37 +1802,37 @@ PearsonRResult(statistic=np.float64(0.9837143680426613), pvalue=np.float64(0.0))
     <tr>
       <th>2024-08-31</th>
       <td>-0.0349</td>
-      <td>-0.0110</td>
-      <td>-0.037305</td>
-      <td>-0.005784</td>
+      <td>-0.0113</td>
+      <td>-0.037794</td>
+      <td>-0.006434</td>
     </tr>
     <tr>
       <th>2024-09-30</th>
       <td>-0.0013</td>
-      <td>-0.0277</td>
-      <td>-0.004319</td>
-      <td>-0.019403</td>
+      <td>-0.0273</td>
+      <td>-0.004466</td>
+      <td>-0.019756</td>
     </tr>
     <tr>
       <th>2024-10-31</th>
-      <td>-0.0099</td>
-      <td>0.0086</td>
-      <td>-0.007552</td>
-      <td>0.005494</td>
+      <td>-0.0095</td>
+      <td>0.0091</td>
+      <td>-0.006956</td>
+      <td>0.006263</td>
     </tr>
     <tr>
       <th>2024-11-30</th>
-      <td>0.0446</td>
-      <td>0.0015</td>
-      <td>0.052736</td>
-      <td>-0.009843</td>
+      <td>0.0449</td>
+      <td>0.0038</td>
+      <td>0.053805</td>
+      <td>-0.007620</td>
     </tr>
     <tr>
       <th>2024-12-31</th>
-      <td>-0.0271</td>
-      <td>-0.0300</td>
-      <td>-0.025333</td>
-      <td>-0.031386</td>
+      <td>-0.0270</td>
+      <td>-0.0297</td>
+      <td>-0.025032</td>
+      <td>-0.031060</td>
     </tr>
   </tbody>
 </table>
@@ -1863,7 +1863,7 @@ PearsonRResult(statistic=np.float64(0.9837143680426613), pvalue=np.float64(0.0))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16ba0fdf83f341ec1ca8868f8c1f5dfe3714a34f50624d87c453a8323a04d35c.png" src="../_images/16ba0fdf83f341ec1ca8868f8c1f5dfe3714a34f50624d87c453a8323a04d35c.png" />
+<img alt="../_images/98fa1ea0a13ae79693c46c5b35c19d8026825fe8520d70f2d9a2dd1a164f19fe.png" src="../_images/98fa1ea0a13ae79693c46c5b35c19d8026825fe8520d70f2d9a2dd1a164f19fe.png" />
 </div>
 </div>
 </section>

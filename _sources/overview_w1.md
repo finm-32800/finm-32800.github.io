@@ -25,8 +25,9 @@ data.
 - **[HW 0](./HW0.md) is ungraded and due to nobody, but do it now.** It sets up
   your machine and walks the full cycle every later assignment repeats: clone,
   install, run, edit, test, push. HW 1 assumes all of it works.
-- **[HW 1](./HW1.md) launches today** and is due at the end of week 3. The date
-  is on Canvas.
+- **[HW 1](./HW1.md) launches today** and is due Tuesday, October 20, at the
+  start of the week 4 session. **Aim to be done by October 13,** when
+  [HW 2](./HW2.md) launches. The third week is slack, not the plan.
 - **Clone the in-class examples repo**:
   <https://github.com/finm-32800/inclass_examples>. It holds the small,
   self-contained demos we draw on all quarter (environments, env vars, PyDoit,
@@ -36,8 +37,8 @@ data.
   <https://github.com/finm-32800/finm-32800.github.io>. Ask questions on the
   [discussion board](https://github.com/orgs/finm-32800/discussions) rather than
   by email.
-- **Start thinking about a final-project partner.** Projects are done in pairs.
-  The project list and the preference survey go out in week 2.
+- **Start thinking about a final-project group.** Projects are done in groups of
+  four. The project list and the preference survey go out in week 2.
 
 ## Objectives
 
@@ -102,7 +103,8 @@ data.
 
 ## Homework
 
-[HW 1](./HW1.md) launches today and is due at the end of week 3. It is one
+[HW 1](./HW1.md) launches today and is due Tuesday, October 20, though you
+should aim to finish it by October 13, when HW 2 launches. It is one
 assignment covering two papers. This week's half rebuilds the CRSP
 value-weighted and equal-weighted market indices and reconstructs the S&P 500
 from its constituents:
@@ -122,4 +124,4 @@ passes it. Do not edit the test files.
 Once you have a pull you trust, the next question is how to make a dozen of them
 run in the right order with one command. That is the **PyDoit task runner**, and
 the case study is the **Fama-French 1993** replication that completes HW 1. Week
-2 is also when the final-project list and the partner-preference survey go out.
+2 is also when the final-project list and the group-preference survey go out.

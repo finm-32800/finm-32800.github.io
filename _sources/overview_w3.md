@@ -17,9 +17,12 @@ as a **build target** the pipeline regenerates whenever the data changes.
 
 ## Announcements
 
-- **[HW 1](./HW1.md) is due at the end of this week.** The date is on Canvas.
-- **[HW 2](./HW2.md) launches today,** due in week 5: the Treasury yield curve
-  and the policy path, published as a ChartBook site on GitHub Pages.
+- **[HW 1](./HW1.md) is due next Tuesday, October 20,** at the start of class.
+  This is the week to finish it: ask your questions tonight, because from here
+  on the material is HW 2.
+- **[HW 2](./HW2.md) launches today,** due Tuesday, October 27, two weeks from
+  tonight: the Treasury yield curve and the policy path, published as a
+  ChartBook site on GitHub Pages.
 - **Project assignments.** Each group is emailed its assigned paper from the
   [Potential Final Projects](./FinalProject/potential_final_projects.md) list. If
   you have not submitted your preferences, do it today.

@@ -22,7 +22,9 @@ option prices.
 
 ## Announcements
 
-- **[HW 2](./HW2.md) is due next week.** Questions at the start of class.
+- **[HW 1](./HW1.md) is due tonight,** at the start of class.
+- **[HW 2](./HW2.md) is due next Tuesday, October 27.** Questions at the start
+  of class.
 - **[HW 3](./HW3.md) launches today,** due in week 6: option-implied crash
   probabilities.
 - **Proposal presentations start next week.** The schedule is on Canvas. If you

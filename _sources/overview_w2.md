@@ -19,16 +19,18 @@ motivates it is the **Fama-French (1993)** replication that finishes
 
 ## Announcements
 
-- **[HW 1](./HW1.md) is due at the end of week 3.** We take questions at the
+- **[HW 1](./HW1.md) is due Tuesday, October 20,** but aim to finish it by next
+  week, October 13, when [HW 2](./HW2.md) launches. We take questions at the
   start of class. Parts 3 and 4, the Fama-French factors and the investment
   sort, are what we cover tonight.
 - **Final project list and survey.** The
   [Potential Final Projects](./FinalProject/potential_final_projects.md) list is
-  posted, and the preference survey goes out this week. Find your partner now:
-  each group is **exactly 2 people**, and **one person per group** submits the
+  posted, and the preference survey goes out this week. Form your group now:
+  each group is **exactly 4 people**, and **one person per group** submits the
   survey. Assignments are emailed after it closes.
-- **[HW 2](./HW2.md) launches next week**, so HW 1 and HW 2 will overlap by a
-  few days. That is by design and it is how the rest of the quarter runs.
+- **[HW 2](./HW2.md) launches next week**, so HW 1 and HW 2 overlap by a week.
+  Every assignment from here on overlaps the next one that way, which is why the
+  recommended HW 1 finish is a week before its deadline.
 
 ## Objectives
 
@@ -88,9 +90,10 @@ motivates it is the **Fama-French (1993)** replication that finishes
 
 This is the week you meet the final projects.
 
-- **What a replication looks like.** Walk the
-  [Project Previews](./FinalProject/project_previews.md) page: papers with the
-  actual figures and tables you would reproduce.
+- **What a finished project looks like.** Walk the
+  [Project Previews](./FinalProject/project_previews.md) page: three real
+  projects from past cohorts, one each for the site, the report, and the
+  proposal, with what to notice and what not to copy.
 - **The full list.**
   [Potential Final Projects](./FinalProject/potential_final_projects.md),
   organized by topic. Each entry states the exact tables and figures to

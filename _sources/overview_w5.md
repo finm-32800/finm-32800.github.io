@@ -22,7 +22,7 @@ exact, which is rebuilding an order book and diffing it against the vendor's own
 
 ## Announcements
 
-- **[HW 2](./HW2.md) is due this week.**
+- **[HW 2](./HW2.md) is due tonight,** at the start of class.
 - **[HW 3](./HW3.md) is due next week.**
 - **[HW 4](./HW4.md) launches today,** due in week 7: order book validation and
   flow toxicity. Its cluster half is taught next week, in week 6.

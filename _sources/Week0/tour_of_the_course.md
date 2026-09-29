@@ -51,11 +51,12 @@ Questions about the homework, the final project, and the course go on the
 email. That way everyone benefits from the answer.
 
 - To be notified of new posts, "watch" the
-  [course website repository](https://github.com/finm-32800/finm-32800.github.io):
-  click the **Watch** button at the top right of that page.
-- Introduce yourself in the
-  [introductions thread](https://github.com/orgs/finm-32800/discussions/2). It
-  is also the place to find partners for the final project.
+  [course website repository](https://github.com/finm-32800/finm-32800.github.io)
+  — the board is attached to it. Click **Watch** at the top right, then choose
+  **Custom**, check **Discussions**, and click **Apply**. Leaving it on the
+  default "Participating and @mentions" will not notify you of new threads.
+- Introduce yourself in the **Introductions** thread. It is also the place to
+  find the other three members of your final-project group.
 
 ## Past final projects
 

@@ -15,6 +15,6 @@ FinalProject/potential_final_projects.md
  - Proposal Presentation Rubric: [Proposal Presentation Rubric](./FinalProject/proposal_presentation_rubric.md)
  - Proposal Peer-Feedback Survey: [What the Peer-Feedback Survey Asks](./FinalProject/proposal_feedback_survey.md)
  - Proposal Presentation Schedule: [Proposal Presentation Schedule](./FinalProject/proposal_presentation_schedule.md)
- - Project Previews: [What Does a Replication Look Like?](./FinalProject/project_previews.md)
+ - Project Previews: [What a Finished Project Looks Like](./FinalProject/project_previews.md)
  - Past Projects: [Past Final Projects](./FinalProject/past_final_projects.md)
  - Potential Projects: [Potential Final Projects](./FinalProject/potential_final_projects.md)
