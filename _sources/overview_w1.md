@@ -82,9 +82,9 @@ data.
 3. **Git and GitHub, by doing.** Clone [HW 0](./HW0.md), make a change, commit,
    push. This is also how every assignment is submitted. Point at the two
    [GitHub Skills](https://skills.github.com/) tutorials that are HW 1 Part 1:
-   [introduction to Git](https://github.com/skills/introduction-to-git),
-   [review pull requests](https://github.com/skills/review-pull-requests), and
-   [resolve merge conflicts](https://github.com/skills/resolve-merge-conflicts).
+   [introduction to GitHub](https://github.com/skills/introduction-to-github),
+   [communicate using Markdown](https://github.com/skills/communicate-using-markdown), and
+   [introduction to Git](https://github.com/skills/introduction-to-git).
 4. **Virtual environments.** [Virtual Environments](./Week1/virtual_environments.md),
    worked through `software_environments/` in the in-class repo, which builds the
    same small app four ways: `conda`, `conda` + `pip`, `uv`, and `pixi`. Create

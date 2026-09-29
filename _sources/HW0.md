@@ -30,7 +30,7 @@ Follow [Getting Set Up](./Week0/getting_set_up.md) to install the software and c
 
 **Which files should I edit?**
 
-In order to complete the homework, you need to adjust the source files so that the unit tests pass. The unit tests are implemented in the files that start with `test_`. In HW 0, you will need to edit `src/port_opt.py` and `src/github_skills.py`.
+In order to complete the homework, you need to adjust the source files so that the unit tests pass. The unit tests are implemented in the files that start with `test_`. In HW 0, you will need to edit `src/port_opt.py`.
 
 **NOTE:** You should not make any edits to the test files. In the graded homeworks, if an edit is made to a test file, you will be required to edit the history of your commits to remove any trace of the edits to these files.
 
@@ -43,16 +43,6 @@ pytest
 ```
 
 The five tests in `test_port_opt.py` should now pass. They use small made-up inputs with known answers, so they do not need the data. (The tests in `test_mean_variance.py` pass from the start. They check the frontier code that I wrote.)
-
-### GitHub Skills tutorials
-
-In order to start mastering the many features of GitHub, please complete the following tutorials from the [GitHub Skills](https://skills.github.com/) page. Please make sure to use **public repositories** for this in your own GitHub user account.
-
- - [Introduction to GitHub](https://github.com/skills/introduction-to-github)
- - [Communicate using Markdown](https://github.com/skills/communicate-using-markdown)
-   - This will give you some ideas on how to more effectively communicate on the course [discussion board](https://github.com/orgs/finm-32800/discussions).
-
-Once you have completed these tutorials, record them by editing `src/github_skills.py`: add the URL of each of your completed skills repositories and mark each one as finished.
 
 ### Push, and watch the tests run on GitHub
 

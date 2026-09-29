@@ -65,9 +65,9 @@ Fama-French factor construction, if you want to see it done in SAS first:
 
 Complete the following tutorials from the [GitHub Skills](https://skills.github.com/) page, using **public repositories** in your own GitHub account, and record the links in the assignment as instructed.
 
+ - [Introduction to GitHub](https://github.com/skills/introduction-to-github)
+ - [Communicate using Markdown](https://github.com/skills/communicate-using-markdown)
  - [Introduction to Git](https://github.com/skills/introduction-to-git)
- - [Review pull requests](https://github.com/skills/review-pull-requests)
- - [Resolve merge conflicts](https://github.com/skills/resolve-merge-conflicts)
 
 ## Part 2 (graded, 19 pts): the market portfolio and the S&P 500
 
