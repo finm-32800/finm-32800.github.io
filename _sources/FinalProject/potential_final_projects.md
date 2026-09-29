@@ -5,7 +5,7 @@ If you can't access the papers below, you can find a link to them here: https://
 
 Every project here can be built from data the course already has: WRDS (CRSP, Compustat, daily TAQ, OptionMetrics, Mergent FISD, CRSP Treasury, Lipper TASS), Databento's CME Globex feed, Bloomberg in the trading lab, and free public sources such as FRED, SEC EDGAR, and Ken French's library. Where a paper's original vendor is something we do not have, the entry says what to substitute and what coverage you give up.
 
-Not sure what a finished replication looks like? The [Project Previews](project_previews.md) page walks through three projects that students in this course actually built — one each for the published site, the written report, and the proposal presentation — and [Past Final Projects](past_final_projects.md) links the finished repositories from the last four cohorts.
+Not sure what a finished replication looks like? The [Project Previews](project_previews.md) page walks through three projects that students in this course actually built — one each for the published site, the written report, and the extension — and [Past Final Projects](past_final_projects.md) links the finished repositories from the last four cohorts.
 
 Table and figure numbers below refer to the published version of each paper unless the entry says otherwise. Check them against whichever copy you work from; several of these papers circulated for years as working papers with different numbering.
 

@@ -16,12 +16,12 @@ These skills are taught through a series of case studies, each of which introduc
 This is an in-person course. We put extra emphasis on class participation and on
 getting to know your classmates. Networking with your peers is one of the most
 valuable parts of the university experience, both for learning and for your
-career, so the course is built around live, interactive components. The two main
-vehicles for this are the **final-project proposal presentations** (where you
-present your project plan to the class and give and receive live feedback from
-your classmates) and the collaborative **class report** (a single economic
+career, so the course is built around live, interactive components. The main
+vehicles for this are the live programming exercises in class, the group
+**final project**, and the collaborative **class report** (a single economic
 report that the whole class builds together as one of the homework
-assignments). Attendance at the proposal presentations is taken.
+assignments, where you review two classmates' work and two classmates review
+yours).
 
 - **Class:** One session per week, in person. The day, time, and room are listed
   on Canvas.
@@ -54,13 +54,35 @@ page here: https://github.com/orgs/finm-32800/discussions
   subfolders (for example, `software_environments/`, `pydoit/`, `env_vars/`,
   `sphinx/`, and `unit_tests/`). Clone it and follow along during class.
 
-### Assignments
+### Coursework at a Glance
 
-- There are five graded homework assignments, plus an ungraded setup
-  assignment (HW 0). Assignments are distributed and collected through GitHub.
-  Each assignment has one launch date and one due date, roughly two weeks
-  apart; the lectures keep teaching the pieces of an open assignment after it
-  launches. Dates are posted on each assignment's page and on Canvas.
+The graded work has three parts: homework, one midterm, and a group project.
+From week 4 on, one homework or exam is due each week, and never two.
+
+| Week | Date | Due |
+| --- | --- | --- |
+| 4 | Tuesday, October 20 | [HW 1](HW1.md): CRSP, the CAPM, and Fama-French |
+| 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
+| 6 | Tuesday, November 3 | [HW 3](HW3.md): option-implied crash probabilities |
+| 7 | Tuesday, November 10 | [HW 4](HW4.md): order book validation and flow toxicity |
+| 8 | Tuesday, November 17 | Midterm, in class |
+| | Tuesday, November 24 | No class: Thanksgiving break |
+| 9 | Tuesday, December 1 | [HW 5](HW5.md): your figure for the class report |
+| 10 | Week of December 8 | Final project presentation |
+
+The homework comes early on purpose. The four coding assignments are finished
+by week 7, and the midterm follows a week later, before Thanksgiving. What
+remains after the break is your figure for the class report and your project.
+
+### Homework
+
+- There are five homework assignments: four coding assignments, and your
+  contribution to the class report, which is one figure and one paragraph.
+  [HW 0](HW0.md) is ungraded setup; please complete it as soon as possible.
+- Homework is distributed and collected through GitHub, and it is due at the
+  start of class. The assignments launch in class in weeks 1, 3, 4, 5, and 6,
+  each in the week its material is taught, and the lectures keep teaching the
+  pieces of an open assignment after it launches.
 - Assignments are automatically graded by an autograder that runs on GitHub
   Actions, and solutions will be released shortly after. This means that the due date is
   strict. Late assignments will not be accepted.
@@ -74,38 +96,30 @@ page here: https://github.com/orgs/finm-32800/discussions
 
 ### Midterm Exam
 
-There is one exam, a **midterm**, held in class in week 7. It is in-person,
+There is one exam, a **midterm**, held in class in week 8. It is in-person,
 closed-book, multiple choice, and answered on a bubble sheet. Each question
 has four options and **one or more may be correct**; a question earns its
-point only if every bubble is right. It covers the material through week 6.
+point only if every bubble is right. It covers the material through week 7, so
+it comes after all four coding assignments are done.
 Practice questions in the same format, with their answer key, are handed out
 ahead of time. There is no final exam; the final project is the capstone. See
 [Exam Preparation](exam_prep.md) for the scope and format.
-
-The collaborative **class report** that previously stood in for a midterm is
-now part of one of the homework assignments; see
-[Collaborative Report](collaborative_report.md).
 
 ### Final Project
 
 In place of a final exam, students will be organized into groups of exactly four
 and will each complete a course project. Students cannot work alone, and a group
-of any other size requires the instructor's permission in advance. The final
-project this term is structured around three separate milestones:
+of any other size requires the instructor's permission in advance. The project
+has two steps:
 
-1. **Instructor consultation** — each group schedules a 1-on-1 meeting with the
-   instructor (at least one week before their proposal presentation) to get
-   individual feedback on their plan.
-2. **Proposal presentation** — each group presents their project plan to the
-   class (in an assigned week, roughly weeks 5–8), advertising the data sources
-   and the reusable "product" they intend to build. Classmates ask questions and
-   submit feedback surveys.
-3. **Final project presentation** — in week 10, each group presents the completed
+1. **Consultation.** Each group schedules a 1-on-1 meeting with the instructor,
+   in weeks 4 through 6, to get individual feedback on their plan: the data
+   sources and the reusable "product" they intend to build.
+2. **Final presentation.** In week 10, each group presents the completed
    project and each member is individually quizzed in an oral defense of both
    their analysis and the tools used to build it.
 
 See the [Final Project Instructions and Rubric](FinalProject/final_project_rubric.md)
-and the [Proposal Presentation Rubric](FinalProject/proposal_presentation_rubric.md)
 for full details.
 
 ## Assessment
@@ -114,25 +128,23 @@ Grades will be based on the following components:
 
 | Component | Weight |
 | --- | --- |
-| Coding Assignments | 25% |
-| Midterm Exam | 20% |
-| Final Project | 30% |
-| Proposal Presentation | 15% |
-| Proposal Attendance & Feedback | 5% |
+| Homework | 30% |
+| Midterm Exam | 25% |
+| Final Project | 40% |
 | Participation | 5% |
 
-- **Coding Assignments (25%)** are submitted individually and graded using
+- **Homework (30%)** is submitted individually and graded using
   GitHub's automated testing tools (the autograder runs as a CI/CD workflow on
   GitHub Actions). Because you can re-run the autograder until your code passes,
   the assignments are best thought of as teaching vehicles—the grade primarily
   reflects whether you did the work to complete them. One assignment is your
   contribution to the collaborative class report: one figure and one paragraph,
   submitted as a pull request and reviewed by two classmates.
-- **Midterm Exam (20%)** is in-person, closed-book, and multiple choice, with
+- **Midterm Exam (25%)** is in-person, closed-book, and multiple choice, with
   one or more correct options per question and no partial credit. It tests the
   tools, the data sets, and the papers covered in the notes and the homework
-  through week 6. See [Exam Preparation](exam_prep.md).
-- **Final Project (30%)** is completed in groups of exactly four; any other size
+  through week 7. See [Exam Preparation](exam_prep.md).
+- **Final Project (40%)** is completed in groups of exactly four; any other size
   requires the instructor's permission in advance. Students choose their
   project from among the options provided at the beginning of the quarter. It is
   graded not only on how well it accomplishes the assigned data cleaning and
@@ -143,14 +155,6 @@ Grades will be based on the following components:
   defense**—you will be asked to defend your analysis and design choices and to
   demonstrate that you can actually run and modify the project (e.g., managing
   the conda environment, running the pipeline, using SSH).
-- **Proposal Presentation (15%)** is graded on the ambition of your project and
-  on how useful and interesting your classmates judge your proposed "product" to
-  be, informed by the peer-feedback surveys.
-- **Proposal Attendance & Feedback (5%)** requires that, for **every** proposal
-  presentation, you both attend (attendance is taken) **and** submit the
-  peer-feedback survey. Both are required to earn the points, and there are
-  **no allowed misses**—attending and giving feedback to your classmates is an
-  expected part of this course.
 - **Participation (5%)** depends on the positive impact you have on the class.
   This includes participating in in-class discussions and/or answering questions
   on the class GitHub page (or on Canvas). Students are in no way penalized for
@@ -162,30 +166,13 @@ Grades will be based on the following components:
 
 The course runs for ten weeks. There are **9 weeks of lectures** (one per week,
 with the meeting schedule on Canvas), followed by **final project presentations in week 10**.
-The lecture schedule follows the ordering of the chapters listed in the GitHub
+There is no class on November 24, during Thanksgiving break, so week 9 meets on
+December 1. The lecture schedule follows the ordering of the chapters listed in the GitHub
 book found here: https://finm-32800.github.io/. Each week is its own chapter and
 the agenda is listed in the first sub-section of the chapter.
 
-Other key milestones (exact dates to be announced on Canvas):
-
-- The **midterm exam** is held in class in week 7; practice questions are
-  handed out ahead of time.
-- The **collaborative report** homework ([HW 5](HW5.md)) launches in week 6 and
-  is due in week 9. See [Collaborative Report](collaborative_report.md).
-- **Proposal presentations** take place in class, roughly weeks 5–8.
-- **Final project presentations** take place in week 10.
-
-### HW Due Dates
-
-Assignments are distributed and collected through GitHub. Due dates will be
-posted here and on Canvas.
-
-- [HW 0: Markowitz portfolio selection. Ungraded; please complete ASAP](HW0.md)
-- [HW 1: CRSP, the CAPM, and Fama-French. Launched week 1, due week 3](HW1.md)
-- [HW 2: The yield curve and the policy path. Launched week 3, due week 5](HW2.md)
-- [HW 3: Option-implied crash probabilities. Launched week 4, due week 6](HW3.md)
-- [HW 4: Order book validation and flow toxicity. Launched week 5, due week 7](HW4.md)
-- [HW 5: The collaborative report and Airflow. Launched week 6, due week 9](HW5.md)
+The due dates are in the table under Coursework at a Glance, above, and on
+Canvas. Each assignment's page gives its launch date and its due date.
 
 ## References
 

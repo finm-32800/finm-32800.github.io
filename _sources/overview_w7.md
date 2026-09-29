@@ -1,12 +1,11 @@
-# Week 7: Midterm, and Orchestration Across Projects with Apache Airflow
+# Week 7: Orchestration Across Projects with Apache Airflow
 
 ```{note}
 The Airflow chapter for this week is posted before class. Until then, this page
 is the agenda.
 ```
 
-Two things happen this week. The **midterm** takes the first 75 minutes. Then we
-step up one level in the automation stack.
+This week we step up one level in the automation stack.
 
 `doit` orders the steps *inside* one project. A workflow orchestrator orders *many
 projects*: it runs each pipeline on a schedule or when the data it depends on
@@ -18,16 +17,14 @@ rebuild when all of them have landed.
 
 ## Announcements
 
-- **The midterm is tonight,** in the first 75 minutes of class. In person,
-  closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
-  through 6. Each question has four options, **one or more may be correct**, and a
-  question earns its point only if every bubble is right. There is no partial
-  credit and no final exam. See [Exam Preparation](./exam_prep.md).
-- **[HW 4](./HW4.md) is due this week.**
-- **[HW 5](./HW5.md) is due in week 9.** Your report contribution should be an
-  open pull request by now, not a plan. Tonight's material is the second half of
-  the assignment, so you can start it before your contribution is merged.
-- **Proposal presentations continue.** Same format, same required survey.
+- **[HW 4](./HW4.md) is due tonight,** at the start of class. It is the last of
+  the four coding assignments.
+- **The midterm is next week,** Tuesday, November 17, in the first 75 minutes of
+  class. It covers weeks 0 through 7, tonight included. Practice questions and
+  their answer key are handed out; see [Exam Preparation](./exam_prep.md).
+- **[HW 5](./HW5.md) is due Tuesday, December 1.** Aim to open your pull request
+  before Thanksgiving. Tonight's Airflow lab runs on the report's pipelines. It
+  is done in class and is not graded.
 
 ## Objectives
 
@@ -47,12 +44,7 @@ rebuild when all of them have landed.
   outage.
 - Explain what makes a task idempotent and why a scheduler is unusable without it.
 
-## Agenda Item 1: The Midterm
-
-First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
-and start time are on Canvas.
-
-## Agenda Item 2: Why Another Scheduler?
+## Agenda Item 1: Why Another Scheduler?
 
 You already have `doit`, and `cron` is coming in week 8. Airflow is not a
 replacement for either, and the honest version of this week starts with when *not*
@@ -68,7 +60,7 @@ to use it.
   This is the trade every data platform team argues about, and you should be able
   to argue both sides.
 
-## Agenda Item 3: Airflow Concepts, Then the Course's DAGs
+## Agenda Item 2: Airflow Concepts, Then the Course's DAGs
 
 - DAGs, tasks, and operators. Logical date versus wall-clock time, and the data
   interval. `catchup` and what it means to have a scheduler decide it owes you
@@ -85,7 +77,7 @@ to use it.
   that regenerates itself whenever any input updates, which is the thesis of this
   course in one artifact.
 
-## Agenda Item 4: Operating It
+## Agenda Item 3: Operating It
 
 Reading about a scheduler teaches you nothing. You run one.
 
@@ -102,7 +94,7 @@ Reading about a scheduler teaches you nothing. You run one.
 
 The shared instance stays a projector demo that I run. You run yours locally.
 
-## Agenda Item 5: The Paper
+## Agenda Item 4: The Paper
 
 [Goyal, Welch, and Zafirov (2024)](https://academic.oup.com/rfs/article/37/11/3490/7749383),
 *A Comprehensive 2022 Look at the Empirical Performance of Equity Premium
@@ -116,8 +108,9 @@ fits models to it.
 
 ## Looking ahead to Week 8
 
-Week 8 is **CI/CD with GitHub Actions**, and the contrast with what you ran
-tonight is the point of the week. Both are automation triggered by an event; one
+The **midterm** is in the first 75 minutes. After it, **CI/CD with GitHub
+Actions**, and the contrast with what you ran tonight is the point of the week.
+Both are automation triggered by an event; one
 is triggered by a push and one by a clock or a dataset. The case study is a live
 FedWatch monitor that rebuilds itself every morning, computing the policy
 surprises of Bernanke and Kuttner (2005) from the futures data you already pulled

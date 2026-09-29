@@ -23,23 +23,23 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 
 ## Announcements
 
-- **[HW 3](./HW3.md) is due this week.**
-- **[HW 4](./HW4.md) is due next week.** Its cluster half is tonight's material,
-  so bring your working single-day reconstruction to class.
-- **[HW 5](./HW5.md) launches today,** due in week 9. It has two halves: your
-  contribution to the class report, and then Airflow over the whole thing in
-  week 7.
+- **[HW 3](./HW3.md) is due tonight,** at the start of class.
+- **[HW 4](./HW4.md) is due next week,** Tuesday, November 10. Tonight's lab takes
+  it to a cluster, so bring your working single-day reconstruction to class.
+- **[HW 5](./HW5.md) launches today,** due Tuesday, December 1: one figure and
+  one paragraph for the class report. It is the last homework, and the smallest.
+  Aim to open your pull request before Thanksgiving.
 - **Accept your invite to the report repo.** Every student gets a GitHub
   collaborator invite to the private report repository. Check your email or
   [github.com/notifications](https://github.com/notifications) and confirm tonight
   that you can open it.
 - **Confirm your cluster access tonight.** You need the WRDS Cloud (the same WRDS
-  account, over SSH) and Midway3 (RCC). If either fails, we fix it in class, not
-  the night before HW 4 is due.
-- **The midterm is next week,** in the first 75 minutes of class, covering weeks 0
-  through 6. Practice questions and their answer key are handed out; see
-  [Exam Preparation](./exam_prep.md).
-- **Proposal presentations continue.** Same format, same required survey.
+  account, over SSH) and Midway3 (RCC). If either fails, we fix it in class.
+- **The midterm is in two weeks,** Tuesday, November 17, in the first 75 minutes
+  of class, covering weeks 0 through 7. Practice questions and their answer key
+  are handed out; see [Exam Preparation](./exam_prep.md).
+- **Project consultations end this week.** If your group has not had one, book
+  it today: [youcanbook.me](https://finm-32800.youcanbook.me/).
 
 ## Objectives
 
@@ -114,14 +114,13 @@ data source is part of the result.
 - Contrast with HW 4: TAQ is equities on the WRDS Cloud; the E-mini order book is
   futures on Midway. Two datasets, two schedulers, one skill.
 
-## Agenda Item 4: HW 4's Cluster Half
+## Agenda Item 4: Lab, HW 4 on a Cluster
 
 Bring your single-day reconstruction from last week. Tonight it becomes a job
 array over a quarter of trading days: a submit script, one array task per day,
-results written to scratch, aggregated, and `rsync`'d back. The platform for the
-graded run is announced with the assignment; the other platform is the lab above.
-Keep the local single-day path working, because it is the fallback if a cluster is
-down.
+results written to scratch, aggregated, and `rsync`'d back. This lab is done in
+class and is not graded. The graded part of HW 4 is the single-day path on your
+laptop, so keep it working.
 
 An optional practice run on Midway with a different pipeline, cleaning TRACE, is
 in [Optional Lab: Clean TRACE on Midway](./Week8/optional_lab_clean_trace_on_midway.md).
@@ -136,8 +135,8 @@ the topics are the predictors of
 There are more predictors in that paper than there are students, so everyone gets
 their own.
 
-- **Read the instructions:** [Collaborative Report](./collaborative_report.md) has
-  what you contribute, the workflow, and the rubric.
+- **Read the instructions:** what you contribute, the workflow, and the rubric
+  are posted with the assignment when it launches.
 - **Style guides.**
   [The Collaborative Report and Style Guides](./Week1/collaborative_report_and_style_guides.md):
   organizations that publish reports keep a style guide so that many contributors
@@ -156,7 +155,7 @@ their own.
 
 ## Looking ahead to Week 7
 
-The **midterm** is in the first 75 minutes. After it, **Apache Airflow**:
+Week 7 is **Apache Airflow**:
 `doit` orders the steps inside one project, and an orchestrator orders many
 projects. Your report contributions are twenty-odd small pipelines with one
 consumer, which is exactly the structure Airflow exists for.

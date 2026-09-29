@@ -52,7 +52,6 @@ HW2.md
 HW3.md
 HW4.md
 HW5.md
-collaborative_report.md
 final_project.md
 exam_prep.md
 ```

@@ -8,7 +8,6 @@ Week6/chartbook_catalog.md
 Week7/databento.md
 notebooks/_01_databento_ipynb.ipynb
 Week7/LSEG_datastream.md
-notebooks/_01_corporate_hedging_ipynb.ipynb
 notebooks/_02_spx_hedging_ipynb.ipynb
 ```
 
@@ -25,11 +24,11 @@ option prices.
 - **[HW 1](./HW1.md) is due tonight,** at the start of class.
 - **[HW 2](./HW2.md) is due next Tuesday, October 27.** Questions at the start
   of class.
-- **[HW 3](./HW3.md) launches today,** due in week 6: option-implied crash
-  probabilities.
-- **Proposal presentations start next week.** The schedule is on Canvas. If you
-  present in week 5 or 6, your
-  [consultation](https://finm-32800.youcanbook.me/) must already be booked.
+- **[HW 3](./HW3.md) launches today,** due Tuesday, November 3, in week 6:
+  option-implied crash probabilities.
+- **Project consultations start this week** and run through week 6. If your group
+  has not booked its [consultation](https://finm-32800.youcanbook.me/), do it
+  now.
 - **Databento API keys.** You need one for HW 3 and again for HW 4. Everything
   we use is on the CME Globex feed (`GLBX.MDP3`), which is free under the course
   license; the equity-options feed is metered, so do not point a pull at it.
@@ -119,10 +118,10 @@ Two data vendors, then the options material the homework builds on.
   landscape.
 - The options case study,
   [finm-32800/case_study_options](https://github.com/finm-32800/case_study_options),
-  reviewed through its two notebooks:
-  [Corporate Hedging](notebooks/_01_corporate_hedging_ipynb.ipynb) and
-  [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb). These are class material,
-  not the assignment; they establish the vocabulary the assignment assumes.
+  reviewed through [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb), which
+  harmonizes the WRDS OptionMetrics panel with the Databento E-mini chain. This
+  is class material, not the assignment; it establishes the vocabulary the
+  assignment assumes.
 
 ## Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities
 

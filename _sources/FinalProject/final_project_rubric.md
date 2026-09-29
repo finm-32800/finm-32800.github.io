@@ -3,21 +3,21 @@
 
 In this project, you'll replicate tables, figures, or data series from a well known finance paper using the principles of reproducible analytical pipelines (RAPs) learned in this class. Your replication must be automated from end-to-end, formatted using the [cookiecutter chartbook template](https://github.com/backofficedev/cookiecutter_chartbook). To create a new project, use [cruft](https://cruft.github.io/cruft/): `cruft create https://github.com/backofficedev/cookiecutter_chartbook`. See [Project Structure: "Chartbook" Template](../Week3/project_structure.md) for more details.
 
-This term, the final project is more than a replication—it is a **product**. On top of replicating a table and a figure from your assigned paper (and reproducing them with updated numbers), you must build something that other people would actually want to use: for example, a cleaned, well-documented dataset and the code that produces it, plus your own new summary table and figure that say something interesting using that data. A central part of the project is **advertising** this product to your classmates during the [proposal presentation](./proposal_presentation_rubric.md)—convincing them why they would want to clone your repository and run your code.
+This term, the final project is more than a replication—it is a **product**. On top of replicating a table and a figure from your assigned paper (and reproducing them with updated numbers), you must build something that other people would actually want to use: for example, a cleaned, well-documented dataset and the code that produces it, plus your own new summary table and figure that say something interesting using that data. A central part of the project is making the case for this product: why someone would want to clone your repository and run your code.
 
-## The Three Project Milestones
+## The Two Steps
 
-The final project this term is organized around three separate events. Read the [Proposal Presentation Rubric](./proposal_presentation_rubric.md) for the full procedure; in brief:
+The final project this term has two steps:
 
-1. **Instructor consultation** — a 1-on-1 meeting you schedule with the instructor, to occur **at least one week before** your group's proposal presentation. This is where you get individual feedback on your plan.
-2. **Proposal presentation** — an in-class presentation (in an assigned week, roughly weeks 5–8) where you advertise your project and product to the class and receive peer feedback.
-3. **Final project presentation** — a scheduled meeting with the instructor, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/), where your group presents the completed project and **each group member is individually quizzed in an oral defense** (see the rubric below). All groups must present **no later than Friday, August 21**.
+1. **Consultation** — a 1-on-1 meeting you schedule with the instructor, to occur **in weeks 4 through 6**. This is where you get individual feedback on your plan.
+2. **Final presentation** — a scheduled meeting with the instructor in week 10, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/), where your group presents the completed project and **each group member is individually quizzed in an oral defense** (see the rubric below). All groups must present **no later than Friday, December 11**.
 
 ## Receiving Your Assigned Project
 
   - You will be assigned a project from the list found [here.](./potential_final_projects.md) 
-  - Your preference will be taken into account when assigning the projects. You can rank your preferred projects, and indicate your availability to present in one of the proposal-presentation weeks, using a Google Form: **TBD** (the link will be posted on Canvas). Please, only submit one response per group. **Your group must have exactly 4 people in it.** Students can not choose to work alone, and a group of any other size requires my permission in advance. I will use your responses to assign each group both a project and a proposal-presentation week.
-  - You must schedule a **consultation** with me at the beginning of the project (at least one week before your proposal presentation). This meeting is to establish the goals for the project and get individual feedback on your plan. Use the booking link to schedule it: [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas).
+  - Your preference will be taken into account when assigning the projects. You can rank your preferred projects using a Google Form: **TBD** (the link will be posted on Canvas). Please, only submit one response per group. **Your group must have exactly 4 people in it.** Students can not choose to work alone, and a group of any other size requires my permission in advance. I will use your responses to assign each group a project.
+  - You must schedule a **consultation** with me at the beginning of the project, in weeks 4 through 6. This meeting is to establish the goals for the project and get individual feedback on your plan. Use the booking link to schedule it: [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas).
+  - Come to the consultation ready to say what your paper is about, what data sources it uses, and what product you plan to build and who would use it.
   - In this consultation meeting, you should come prepared with a list of tasks that each of the four team members will be primarily responsible for. Team members can and should share tasks (e.g., two people can be responsible for the LaTeX writeup whereas everyone should be involved in figuring out how to understand and clean the data). Write this list of tasks in the README.md of the GitHub repo, and make sure every member owns something that produces code.
 
 ## Final Project Grading Rubric

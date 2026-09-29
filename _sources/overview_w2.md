@@ -93,7 +93,7 @@ This is the week you meet the final projects.
 - **What a finished project looks like.** Walk the
   [Project Previews](./FinalProject/project_previews.md) page: three real
   projects from past cohorts, one each for the site, the report, and the
-  proposal, with what to notice and what not to copy.
+  extension, with what to notice and what not to copy.
 - **The full list.**
   [Potential Final Projects](./FinalProject/potential_final_projects.md),
   organized by topic. Each entry states the exact tables and figures to

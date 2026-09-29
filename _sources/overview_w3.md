@@ -26,9 +26,8 @@ as a **build target** the pipeline regenerates whenever the data changes.
 - **Project assignments.** Each group is emailed its assigned paper from the
   [Potential Final Projects](./FinalProject/potential_final_projects.md) list. If
   you have not submitted your preferences, do it today.
-- **Proposal presentations begin in week 5.** The schedule is posted on Canvas.
-  Your **instructor consultation must happen at least one week before you
-  present**, so if you present in week 5, book it now:
+- **Book your project consultation.** Each group meets with me once, in weeks 4
+  through 6, for feedback on its plan:
   [youcanbook.me](https://finm-32800.youcanbook.me/).
 
 ## Objectives
@@ -146,25 +145,18 @@ published GSW series, ZQ futures from Databento, and FRED), and the deliverable
 is a ChartBook site on GitHub Pages. We launch it in class; you finish the
 `TODO`s and publish on your own.
 
-## Proposal Presentations: Procedure and Grading
+## Final Project: The Two Steps
 
-Presentations begin in week 5. The full procedure and rubric are in the
-[Proposal Presentation Rubric](./FinalProject/proposal_presentation_rubric.md);
-we walk it in class. Three separate events, not to be confused:
+The full procedure and rubric are in the
+[Final Project Instructions and Rubric](./FinalProject/final_project_rubric.md);
+we walk it in class. Two steps:
 
-1. **Instructor consultation.** One-on-one with me,
-   [booked via youcanbook.me](https://finm-32800.youcanbook.me/), at least one
-   week before your proposal presentation.
-2. **Proposal presentation** (15% of the course grade), in class on your assigned
-   date. *Advertise the product you will build*: what the paper is about, your
-   data sources, and the new table or figure you will produce. Classmates submit
-   a peer-feedback survey on every group.
-3. **Final presentation and oral defense**, week 10: the completed project, with
+1. **Consultation.** One-on-one with me,
+   [booked via youcanbook.me](https://finm-32800.youcanbook.me/), in weeks 4
+   through 6. Come ready to say what the paper is about, your data sources, and
+   the product you will build: the new table or figure, and who would use it.
+2. **Final presentation and oral defense**, week 10: the completed project, with
    each member individually quizzed.
-
-**Proposal attendance and feedback** is a further 5% of the grade: you must
-attend every proposal session and submit the survey for every group, with no
-allowed misses.
 
 ## Looking ahead to Week 4
 

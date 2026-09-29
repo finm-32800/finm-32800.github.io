@@ -5,7 +5,7 @@
 1. Understand the difference between a ChartBook *pipeline* and a ChartBook *catalog*, and why a catalog is the right tool for sharing data between repositories.
 2. Upgrade to ChartBook 0.1.x and understand what changed in this release (a breaking manifest redesign, catalog auto-discovery, and a simpler install).
 3. Set up a personal catalog on your own machine, register cloned pipeline repos in it, and load their data by name with `data.load(...)`.
-4. Apply this to the [Collaborative Report](../collaborative_report.md): build your figure on top of data produced by the [FTSFR pipeline repos](https://github.com/orgs/ftsfr/repositories) instead of re-writing data pulls from scratch.
+4. Apply this to the collaborative report ([HW 5](../HW5.md)): build your figure on top of data produced by the [FTSFR pipeline repos](https://github.com/orgs/ftsfr/repositories) instead of re-writing data pulls from scratch.
 
 ## The Problem: Dependencies Between Repositories
 
@@ -148,7 +148,7 @@ chartbook data get-docs --pipeline ftsfr/fed_yield_curve --dataframe fed_yield_c
 
 ## Using the Catalog for Your Collaborative Report Contribution
 
-This is the workflow for your [Collaborative Report](../collaborative_report.md) figure: rather than writing a new data pull from scratch, build on a dataset an FTSFR pipeline already produces. Clone the repo, register it, run it, then `data.load(...)` inside your contribution's code in the collaborative-report repo. Your contribution stays reproducible (the data's provenance is a registered, documented pipeline), and the report becomes a *downstream consumer* of maintained data rather than a pile of one-off scripts.
+This is the workflow for your collaborative report ([HW 5](../HW5.md)) figure: rather than writing a new data pull from scratch, build on a dataset an FTSFR pipeline already produces. Clone the repo, register it, run it, then `data.load(...)` inside your contribution's code in the collaborative-report repo. Your contribution stays reproducible (the data's provenance is a registered, documented pipeline), and the report becomes a *downstream consumer* of maintained data rather than a pile of one-off scripts.
 
 ### Which FTSFR repos can you use?
 

@@ -27,8 +27,8 @@ Questions test three things in roughly equal measure:
 
 ## The Midterm
 
-The midterm is held in class in **week 7** and covers the material through
-week 6: all lecture notes, in-class discussions, the notebooks linked from the
+The midterm is held in class in **week 8**, on Tuesday, November 17, and covers
+the material through week 7: all lecture notes, in-class discussions, the notebooks linked from the
 weekly chapters, and Homework 1 through 4. The date and room are posted on
 Canvas. There is no final exam.
 

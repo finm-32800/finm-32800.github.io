@@ -22,6 +22,11 @@ data.
 - **Apply for your WRDS account today.** Approval takes several days and
   [HW 1](./HW1.md) cannot run without it. The registration link and the
   UChicago contact are in [Getting Set Up](./Week0/getting_set_up.md).
+- **Complete the GitHub username survey on Canvas today.** Your private copy
+  of [HW 1](./HW1.md) is created from your answer, so you have no repository
+  to work in until it is in. GitHub then emails you an invitation to the
+  [hw-finm-32800](https://github.com/hw-finm-32800) organization. Accept it
+  within seven days, after which it expires.
 - **[HW 0](./HW0.md) is ungraded and due to nobody, but do it now.** It sets up
   your machine and walks the full cycle every later assignment repeats: clone,
   install, run, edit, test, push. HW 1 assumes all of it works.

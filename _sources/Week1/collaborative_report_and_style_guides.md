@@ -1,6 +1,6 @@
 # The Collaborative Report and Style Guides
 
-As one of the homework assignments, the class will collaboratively produce a single, polished, publication-style [Collaborative Report](../collaborative_report.md). We'll write our own **style guide** for it together.
+As one of the homework assignments ([HW 5](../HW5.md)), the class will collaboratively produce a single, polished, publication-style report. We'll write our own **style guide** for it together.
 
 Most organizations that publish reports maintain their own style guide—specifying things like fonts, colors, chart conventions, and accessibility requirements—so that many contributors produce one coherent document. A few public- and private-sector examples to look at:
 

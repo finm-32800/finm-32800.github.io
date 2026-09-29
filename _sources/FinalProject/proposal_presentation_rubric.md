@@ -1,12 +1,12 @@
 # Proposal Presentation Rubric
 
-Because this is an online course, we put extra emphasis on getting to know each other and learning from one another's work. A central part of the final project this term is the **proposal presentation**: each group presents the plan for their final project to the class, advertises the "product" they intend to build, and gets live feedback from their classmates.
+This is an in-person course, and we put extra emphasis on getting to know each other and learning from one another's work. A central part of the final project this term is the **proposal presentation**: each group presents the plan for their final project to the class, advertises the "product" they intend to build, and gets live feedback from their classmates.
 
 This page explains the full procedure and how the proposal presentation is graded. See the [Final Project Instructions and Rubric](./final_project_rubric.md) for the project itself.
 
-## The Three Separate Events
+## The Three Steps
 
-Your final project involves three distinct events. **They are separate**—do not confuse them.
+Your final project has three steps. **They are separate**—do not confuse them.
 
 ### 1. Instructor Consultation
 
@@ -14,23 +14,24 @@ A 1-on-1 meeting between your group and the instructor.
 
 - **When:** You must schedule it to occur **at least one week before** your group's proposal presentation.
 - **How to schedule:** Use the booking link—[https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas). You are responsible for scheduling this yourself.
-- **Purpose:** This is where you get *individual* feedback from me on your plan before you present it to the class. Come prepared with your project idea, your data sources, a rough plan for the product you want to build, and the division of responsibilities between the two team members.
+- **Purpose:** This is where you get *individual* feedback from me on your plan before you present it to the class. Come prepared with your project idea, your data sources, a rough plan for the product you want to build, and the division of responsibilities among the four team members.
 
 ### 2. Proposal Presentation
 
-An in-class presentation to the whole class over Zoom.
+An in-class presentation to the whole class.
 
-- **When:** In an assigned week, roughly **weeks 5–8** (extending into week 9 if needed). With about 12 groups, roughly three groups present each week.
+- **When:** In an assigned week, **weeks 5–8**.
+- **Time limit:** Each group has **10 minutes: 7 to present and 3 for questions.** A timer runs, and we stop at 10 minutes whether or not you have finished. Plan for 7 and rehearse it.
 - **What you present:** Tell the audience
   - what your paper/project is about,
   - what **data sources** it uses, and
   - the **product** you plan to build and why it is interesting and useful. This is an *advertisement*: convince your classmates why they would want to clone your repository and run your code. Describe your own new table and figure and what they reveal, and explain what you are contributing (e.g., a cleaned, shareable dataset and the code to produce it).
 - **Live feedback:** Classmates ask questions during your presentation, and **every student fills out a peer-feedback survey** about your proposal. The survey is written to help *you*: it asks the audience to say, in their own words, what your paper is about and why it matters, whether they would actually use your replication code and your proposed extension (and specifically how), and how clearly you explained each. This shows you whether your message landed and whether classmates see real value in what you are building. I use the aggregated feedback to help grade your proposal (see [How the peer feedback is used](#how-the-peer-feedback-is-used) below).
-- **When the survey happens:** You will get a few minutes of quiet feedback time in class right after each group's Q&A, and the form stays open until **11:59 PM the day after the presentation** so you can revise or expand your comments. The link is posted on Canvas and pasted into the Zoom chat.
+- **When the survey happens:** Take notes during each talk. After the last group of the night, everyone gets five minutes in class to start the surveys, and the form stays open until **11:59 PM the day after the presentation** so you can finish, revise, or expand your comments. The link is posted on Canvas.
 
 ### 3. Final Project Presentation
 
-A scheduled meeting with the instructor, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/). Your group presents the *completed* project, and each member is individually quizzed in an oral defense. All groups must present no later than **Friday, August 21**. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
+A scheduled meeting with the instructor in week 10, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/). Your group presents the *completed* project, and each member is individually quizzed in an oral defense. All groups must present no later than **Friday, December 11**. See the oral-defense item in the [Final Project Rubric](./final_project_rubric.md).
 
 ## How Presentation Weeks Are Assigned
 
@@ -61,7 +62,7 @@ The peer-feedback survey is qualitative by design, but it maps onto the three gr
 
 Networking with and learning from your classmates is an expected part of this course, so attending the proposal presentations and giving thoughtful feedback is required.
 
-- For **every** proposal presentation, you must **both** (a) **attend** (Zoom attendance is taken) **and** (b) **submit the peer-feedback survey** for each presenting group.
+- For **every** proposal presentation, you must **both** (a) **attend** (attendance is taken) **and** (b) **submit the peer-feedback survey** for each presenting group.
 - Both are required to earn the points. There are **no allowed misses**—you are expected to attend all of the proposal presentations and give feedback on every group.
 - Your feedback is not only a grading input for the presenters; it is how the class learns from each other's projects, so please make your comments substantive.
-- **How attendance is recorded:** Your name and the timestamp on each survey response are the attendance record, and the Zoom participant report is the backup and cross-check. The form stays open until 11:59 PM the day after the presentation, so submitting a thoughtful response by then satisfies both the attendance and the feedback requirement.
+- **How it is recorded:** Attendance is taken in class. Your name on each survey response is the record of your feedback. The form stays open until 11:59 PM the day after the presentation.

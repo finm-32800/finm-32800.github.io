@@ -12,6 +12,7 @@ Follow [Getting Set Up](./Week0/getting_set_up.md) to install the software and c
 
 ## Part 2: Get connected to the course
 
+- **Fill out the GitHub username survey on Canvas.** It asks for your name, your UChicago email, your GitHub username, and the URL of your GitHub profile. I use your answer to create your private copy of each graded homework, starting with [HW 1](./HW1.md), so do this as soon as you have a GitHub account. Afterward, GitHub emails you an invitation to the [hw-finm-32800](https://github.com/hw-finm-32800) organization. Accept it within seven days, after which it expires.
 - "Watch" the [course website repository](https://github.com/finm-32800/finm-32800.github.io) so that you are notified of new posts on the course discussion board. The board is attached to that repository, so this is the only place to subscribe. Click **Watch** at the top right, choose **Custom**, check **Discussions**, and click **Apply** — the default setting of "Participating and @mentions" does not notify you of new threads. Then confirm the repository is listed at <https://github.com/watching>.
   - To get these as email rather than only in your GitHub inbox, go to <https://github.com/settings/notifications> and, under **Subscriptions → Watching**, check **Email**.
 - Consider posting an introduction in the **Introductions** thread on the [discussion board](https://github.com/orgs/finm-32800/discussions). Say that you're looking for people to work with on the homework and on the final project, which is done in groups of four.

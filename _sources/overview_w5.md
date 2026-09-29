@@ -23,17 +23,12 @@ exact, which is rebuilding an order book and diffing it against the vendor's own
 ## Announcements
 
 - **[HW 2](./HW2.md) is due tonight,** at the start of class.
-- **[HW 3](./HW3.md) is due next week.**
-- **[HW 4](./HW4.md) launches today,** due in week 7: order book validation and
-  flow toxicity. Its cluster half is taught next week, in week 6.
-- **Proposal presentations start tonight.** See the schedule on Canvas. Format:
-  10 minutes to present, 5 minutes of Q&A, then quiet time for everyone to submit
-  the peer-feedback survey.
-- **The peer-feedback survey is required from everyone, for every group**
-  (5% of the course grade, no allowed misses). Read the questions on the
-  [Proposal Peer-Feedback Survey](./FinalProject/proposal_feedback_survey.md) page
-  *before* the presentations so you know what to listen for. Submissions also
-  serve as the attendance record.
+- **[HW 3](./HW3.md) is due next week,** Tuesday, November 3.
+- **[HW 4](./HW4.md) launches today,** due Tuesday, November 10, in week 7:
+  order book validation and flow toxicity. It is the last of the four coding
+  assignments. The graded work runs on your laptop; next week's lab takes it to
+  a cluster.
+- **Project consultations continue** through next week. Every group needs one.
 - **Databento keys again.** HW 4 pulls `mbo` and `mbp-10` for the E-mini, both on
   the free CME Globex feed. Reconstruction runs on one day locally before
   anything scales.
@@ -54,16 +49,7 @@ exact, which is rebuilding an order book and diffing it against the vendor's own
   how a reconstruction can be validated exactly against a reference book.
 - Explain what order-flow toxicity means and what VPIN measures.
 
-## Agenda Item 1: Proposal Presentations
-
-The first groups present, in the order on the schedule: 10 minutes to present,
-5 minutes of class Q&A, then quiet time for everyone to submit the
-[peer-feedback survey](./FinalProject/proposal_feedback_survey.md), one response
-per group. Presenters: the presentation is an *advertisement* for the product you
-will build, not a literature review
-([rubric](./FinalProject/proposal_presentation_rubric.md)).
-
-## Agenda Item 2: What Makes a Good Test
+## Agenda Item 1: What Makes a Good Test
 
 [Unit Tests](./Week5/unit_tests.md), with the `pytest` examples in the
 [in-class repo](https://github.com/finm-32800/inclass_examples).
@@ -82,7 +68,7 @@ will build, not a literature review
   sane. Both belong in the pipeline, and the second one runs on every rebuild.
   Gaps, duplicates, schema drift, unit changes, and stale timestamps.
 
-## Agenda Item 3: No Ground Truth --- Cleaning FINRA TRACE
+## Agenda Item 2: No Ground Truth --- Cleaning FINRA TRACE
 
 Corporate bond transactions are reported to FINRA, and the raw feed contains
 cancellations, corrections, reversals, agency double-counts, and prices that
@@ -99,7 +85,7 @@ each consequential.
   is a convention, the only defense is that your convention is documented, tested,
   and rerunnable. That is the whole argument of this course, in one dataset.
 
-## Agenda Item 4: A Ground Truth --- The Order Book
+## Agenda Item 3: A Ground Truth --- The Order Book
 
 Now the opposite situation. A limit order book is the state of a market at an
 instant. Databento's CME Globex feed gives you both the raw messages (`mbo`,
@@ -121,18 +107,19 @@ cleanest validation exercise in the course.
   contract, which is the contract you will use. This is what the Chicago options
   market makers who hire from this program do all day.
 
-## Agenda Item 5: Launch HW 4
+## Agenda Item 4: Launch HW 4
 
 [HW 4](./HW4.md) starts local and small: one trading day, `mbo` and `mbp-10` for
 the E-mini, rebuild the book, validate it, classify the trades, compute VPIN.
-Next week it scales to a quarter of trading days on a cluster, because the days
-are independent and that is what a job array is for. The extension aimed at
-options desks asks whether options market makers widen their quoted spreads when
-the underlying's flow turns toxic.
+That is the graded work, and it is due in week 7. Next week's lab scales it to a
+quarter of trading days on a cluster, because the days are independent and that
+is what a job array is for. The lab is done in class and is not graded. The
+optional extension aimed at options desks asks whether options market makers
+widen their quoted spreads when the underlying's flow turns toxic.
 
 ## Looking ahead to Week 6
 
-Week 6 is the machinery that makes HW 4's full run possible: **Polars and
+Week 6 is the machinery that makes a full run of HW 4 possible: **Polars and
 Parquet, remote machines over SSH, and two batch schedulers** (Grid Engine on the
 WRDS Cloud, SLURM on Midway), with NYSE TAQ and Holden-Jacobsen (2014) as the
-in-class case study. [HW 5](./HW5.md), the collaborative report, also launches.
+in-class case study. [HW 5](./HW5.md), the class report, also launches.

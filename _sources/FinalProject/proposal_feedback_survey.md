@@ -37,17 +37,8 @@ their message came across.
 
 1. **Your name** (short answer, required)
 2. **Which group are you giving feedback on?** (dropdown, required)
-   - Fernando + Bangjie
-   - Michael + David
-   - Andrew + Chandler
-   - Anthony + Stefano
-   - Riley + Marija
-   - Brian + Clara
-   - Arnold + Cameron
-   - Bobby + George
-   - Ashish + Omar
-   - Ahmad + Jeffrey
-   - Iris + Zhicheng
+   - One entry per presenting group, from the
+     [schedule](./proposal_presentation_schedule.md).
 
 ## Section 2 — Did the message land? (the paper)
 

@@ -2,7 +2,7 @@
 
 Every final project asks you to do the same thing: take a finance paper, rebuild its dataset from the original sources, reproduce the tables and figures that carry its main result, and ship the whole thing as something another person can clone and run. That description stays abstract until you see what a finished one looks like.
 
-So this page does not show you figures clipped out of published papers. It shows you three projects that students in this course actually built, one for each of the three things you are graded on: the **published site**, the **written report**, and the **proposal presentation**. Each section says what to look at and why it is worth copying.
+So this page does not show you figures clipped out of published papers. It shows you three projects that students in this course actually built, one for each of three things a good project gets right: the **published site**, the **written report**, and the **extension**. Each section says what to look at and why it is worth copying.
 
 ## 1. The published site
 
@@ -52,22 +52,22 @@ The report is built from `reports/replication_report.tex`. What makes it worth s
 
 **The lesson.** Your replication will not match everything, and that is normal — it happens to professional replicators on every paper. What earns the points is that you noticed, that the report says so, and that the repository holds the evidence.
 
-## 3. The proposal presentation
+## 3. The extension
 
-**Riley Haas and Marija Jovicic** — Martin and Shi, *Forecasting Crashes with a Smile*. Their proposal scored 19.5 out of 20, and four classmates asked to be put in touch about the code afterward, which is the outcome the proposal grade is really measuring.
+**Riley Haas and Marija Jovicic** — Martin and Shi, *Forecasting Crashes with a Smile*. In their cohort, each group pitched its plan to the class. Theirs scored 19.5 out of 20, and four classmates asked to be put in touch about the code afterward, which is the outcome an extension is really aiming at.
 
 - **[Repository](https://github.com/rileykhaas/forecasting_crashes_smile)**
 
 This paper is the basis of **[HW 3](../HW3.md)**, so the replication half will be familiar to you by the time you see this. Study their extension.
 
-**What their proposal did:**
+**What their plan did:**
 
 - **It found a gap in the paper's reasoning, not in its data.** The paper bounds the crash probability of an individual stock. Riley and Marija pointed out that the average of individual crash probabilities is *not* the probability of a sector crash, because idiosyncratic volatility diversifies away in a portfolio. That is a conceptual objection, and it is the kind of idea a data hunt does not produce.
 - **It proposed a direct measurement, not a workaround.** Rather than aggregating single-name bounds, measure sector crash probability straight from the option surfaces of sector ETFs.
 - **It named the product concretely.** An installable `crashbounds` package, plus a three-level case study on the failure of Silicon Valley Bank. Not "a cleaned dataset" in the abstract — a thing with a name that somebody could `pip install`.
 - **It told the class who would use it, and the class believed it.** The four follow-up requests were the proof.
 
-**The structure to steal.** State the paper's claim in one slide. Name the specific thing the paper does not do. Say what you will build. Say who would clone it and why. Then defend all four when the room asks.
+**The structure to steal,** for your consultation and for your final presentation. State the paper's claim in one sentence. Name the specific thing the paper does not do. Say what you will build. Say who would clone it and why. Then defend all four when asked.
 
 ## One thing to keep in mind
 

@@ -18,8 +18,9 @@ supplies the models. Nothing this week is a toy.
 
 ## Announcements
 
-- **[HW 5](./HW5.md) is due this week.** Both halves: your merged report
-  contribution, and the scheduler work with its incident note.
+- **[HW 5](./HW5.md) is due tonight,** at the start of class: your merged
+  contribution to the class report. Tonight's forecasting lab is done in class
+  and is not graded.
 - **Final project presentations are next week.** Every group presents in week 10,
   with an individual oral defense for each member. You will be asked to run and
   modify your own project live.

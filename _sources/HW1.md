@@ -17,7 +17,9 @@ notebooks/_07_Fama_French_3_factor_ipynb.ipynb
   carrying two assignments at once.
 - **Link to Assignment:** a private copy is created for you in the
   [hw-finm-32800](https://github.com/hw-finm-32800) organization. The link to
-  yours is on Canvas.
+  yours is on Canvas. **Your copy is created from your answer to the GitHub
+  username survey on Canvas,** so fill that out first. You can open your copy
+  once you accept the invitation that GitHub emails you.
 - **Goes with:** weeks 1 and 2
 
 ## Overview

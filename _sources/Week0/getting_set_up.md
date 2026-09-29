@@ -18,7 +18,9 @@ started without it.
 ## Accounts
 
 - [GitHub](https://github.com/). Use an account you are happy to show an
-  employer. Your work in this course can become part of your portfolio.
+  employer. Your work in this course can become part of your portfolio. Once
+  you have it, fill out the GitHub username survey on Canvas. Your private
+  copies of the graded homework are created from your answer.
 - [WRDS](https://wrds-www.wharton.upenn.edu/), as described above.
 
 ## Software
