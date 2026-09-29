@@ -38,7 +38,7 @@ You will indicate your project preferences and your availability to present in o
 
 ## Grading
 
-### Proposal Presentation — 20% of the course grade
+### Proposal Presentation — 15% of the course grade
 
 The proposal presentation is graded primarily on:
 
@@ -48,6 +48,7 @@ The proposal presentation is graded primarily on:
 
 Points are prorated by discretion based on the difficulty of the underlying project.
 
+(how-the-peer-feedback-is-used)=
 #### How the peer feedback is used
 
 The peer-feedback survey is qualitative by design, but it maps onto the three grading criteria above:
@@ -56,7 +57,7 @@ The peer-feedback survey is qualitative by design, but it maps onto the three gr
 - **Ambition (8 points)** is informed by how the class describes your proposed extension and the significance of the underlying paper — whether they see it as going meaningfully beyond a mechanical replication.
 - **Clarity (4 points)** is informed by the two 1–5 clarity ratings (how clearly you explained the replication, and how clearly you explained the extension), corroborated by how accurately the audience was able to restate your paper and your product in their own words.
 
-### Proposal Attendance & Feedback — 10% of the course grade
+### Proposal Attendance & Feedback — 5% of the course grade
 
 Networking with and learning from your classmates is an expected part of this course, so attending the proposal presentations and giving thoughtful feedback is required.
 
