@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
@@ -260,12 +260,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Midterm, and CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -481,7 +481,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</h1>
+    <h1>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,10 +493,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-experiment-tracking-with-mlflow">Agenda Item 1: Experiment Tracking with MLflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-benchmark">Agenda Item 2: The Benchmark</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-exercise">Agenda Item 3: The Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-drift-and-closing-the-loop">Agenda Item 4: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-exam">Agenda Item 1: The Exam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-experiment-tracking-with-mlflow">Agenda Item 2: Experiment Tracking with MLflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-benchmark">Agenda Item 3: The Benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-exercise">Agenda Item 4: The Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-drift-and-closing-the-loop">Agenda Item 5: Drift, and Closing the Loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
             </nav>
@@ -508,13 +509,15 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-basic-mlops-experiment-tracking-and-monitoring-models">
-<h1>Week 9: Basic MLOps — Experiment Tracking and Monitoring Models<a class="headerlink" href="#week-9-basic-mlops-experiment-tracking-and-monitoring-models" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-exam-and-basic-mlops-experiment-tracking-and-monitoring-models">
+<h1>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models<a class="headerlink" href="#week-9-exam-and-basic-mlops-experiment-tracking-and-monitoring-models" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The MLflow chapter for this week is posted before class. Until then, this page is
 the agenda.</p>
 </div>
+<p>Two things happen this week. The <strong>exam</strong> takes the first 75 minutes. Then
+MLOps.</p>
 <p>MLOps is the discipline of keeping a model healthy <em>after</em> it ships. A model in
 production is a pipeline that never stops running: new data arrives on a schedule,
 the model recomputes its outputs, and someone has to notice when the data goes bad
@@ -527,13 +530,17 @@ supplies the models. Nothing this week is a toy.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is due tonight,</strong> at the start of class: your merged
-contribution to the class report. Tonight’s forecasting lab is done in class
-and is not graded.</p></li>
+<li><p><strong>The exam is tonight,</strong> in the first 75 minutes of class. In person,
+closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
+through 8. Each question has four options, <strong>one or more may be correct</strong>, and a
+question earns its point only if every bubble is right. There is no partial
+credit. See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
+<li><p><strong>Nothing else is due.</strong> All five homeworks are behind you. Tonight’s
+forecasting lab is done in class and is not graded.</p></li>
 <li><p><strong>Final project presentations are next week.</strong> Every group presents in week 10,
 with an individual oral defense for each member. You will be asked to run and
 modify your own project live.</p></li>
-<li><p><strong>The midterm was the only exam.</strong> There is no final exam.</p></li>
+<li><p><strong>This is the only exam.</strong> There is no separate final exam.</p></li>
 </ul>
 </section>
 <section id="objectives">
@@ -554,8 +561,13 @@ than publishing them, and distinguish data drift from model decay.</p></li>
 from weeks 7 and 8.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-experiment-tracking-with-mlflow">
-<h2>Agenda Item 1: Experiment Tracking with MLflow<a class="headerlink" href="#agenda-item-1-experiment-tracking-with-mlflow" title="Link to this heading">#</a></h2>
+<section id="agenda-item-1-the-exam">
+<h2>Agenda Item 1: The Exam<a class="headerlink" href="#agenda-item-1-the-exam" title="Link to this heading">#</a></h2>
+<p>First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
+and start time are on Canvas.</p>
+</section>
+<section id="agenda-item-2-experiment-tracking-with-mlflow">
+<h2>Agenda Item 2: Experiment Tracking with MLflow<a class="headerlink" href="#agenda-item-2-experiment-tracking-with-mlflow" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The problem: a notebook that reports 0.043 and a directory of seventeen slightly
 different scripts is not a result. What you need recorded is the parameters, the
@@ -567,8 +579,8 @@ pipeline and not a thing you remember to do.</p></li>
 fixed. This is the discipline the benchmark paper is built on.</p></li>
 </ul>
 </section>
-<section id="agenda-item-2-the-benchmark">
-<h2>Agenda Item 2: The Benchmark<a class="headerlink" href="#agenda-item-2-the-benchmark" title="Link to this heading">#</a></h2>
+<section id="agenda-item-3-the-benchmark">
+<h2>Agenda Item 3: The Benchmark<a class="headerlink" href="#agenda-item-3-the-benchmark" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>,
 <em>An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
 Markets</em> (OFR Working Paper), is the capstone paper for three reasons: its
@@ -584,8 +596,8 @@ struggle to beat simple baselines. That is not a failure of the software.</p></l
 possible is that every dataset in it rebuilds from source with one command.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-the-exercise">
-<h2>Agenda Item 3: The Exercise<a class="headerlink" href="#agenda-item-3-the-exercise" title="Link to this heading">#</a></h2>
+<section id="agenda-item-4-the-exercise">
+<h2>Agenda Item 4: The Exercise<a class="headerlink" href="#agenda-item-4-the-exercise" title="Link to this heading">#</a></h2>
 <p>Take a handful of the benchmark’s baseline methods, a historical mean, an ARIMA,
 a Theta method, and one neural method, and run them as a <strong>scheduled DAG</strong> over the
 class’s predictor dataset and a few FTSFR series. Log every run to MLflow: the
@@ -603,8 +615,8 @@ exactly why doing it honestly, with the point-in-time discipline the scheduler
 enforces, is the right last exercise of the quarter.</p></li>
 </ol>
 </section>
-<section id="agenda-item-4-drift-and-closing-the-loop">
-<h2>Agenda Item 4: Drift, and Closing the Loop<a class="headerlink" href="#agenda-item-4-drift-and-closing-the-loop" title="Link to this heading">#</a></h2>
+<section id="agenda-item-5-drift-and-closing-the-loop">
+<h2>Agenda Item 5: Drift, and Closing the Loop<a class="headerlink" href="#agenda-item-5-drift-and-closing-the-loop" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Input drift</strong> versus <strong>model decay</strong>: a schema change, a unit change, a vendor
 backfill, and a regime change all look different in the logs, and you should be
@@ -675,10 +687,11 @@ tools used to build it. See the
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-experiment-tracking-with-mlflow">Agenda Item 1: Experiment Tracking with MLflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-the-benchmark">Agenda Item 2: The Benchmark</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-exercise">Agenda Item 3: The Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-drift-and-closing-the-loop">Agenda Item 4: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-exam">Agenda Item 1: The Exam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-experiment-tracking-with-mlflow">Agenda Item 2: Experiment Tracking with MLflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-benchmark">Agenda Item 3: The Benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-exercise">Agenda Item 4: The Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-drift-and-closing-the-loop">Agenda Item 5: Drift, and Closing the Loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
   </nav></div>

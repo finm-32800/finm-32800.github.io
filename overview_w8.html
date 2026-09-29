@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 8: Midterm, and CI/CD with GitHub Actions &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 8: CI/CD with GitHub Actions &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
@@ -260,12 +260,12 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: Midterm, and CI/CD with GitHub Actions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: CI/CD with GitHub Actions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -481,7 +481,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 8: Midterm, and CI/CD with GitHub Actions</h1>
+    <h1>Week 8: CI/CD with GitHub Actions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,11 +493,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-midterm">Agenda Item 1: The Midterm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-github-actions-from-the-inside">Agenda Item 2: GitHub Actions from the Inside</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-scheduling-and-the-boundary">Agenda Item 3: Scheduling, and the Boundary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-publishing-a-live-site">Agenda Item 4: Publishing a Live Site</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-the-case-study-a-live-fedwatch-monitor">Agenda Item 5: The Case Study — A Live FedWatch Monitor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-github-actions-from-the-inside">Agenda Item 1: GitHub Actions from the Inside</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-scheduling-and-the-boundary">Agenda Item 2: Scheduling, and the Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-publishing-a-live-site">Agenda Item 3: Publishing a Live Site</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-case-study-a-live-fedwatch-monitor">Agenda Item 4: The Case Study — A Live FedWatch Monitor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-9">Looking ahead to Week 9</a></li>
 </ul>
             </nav>
@@ -509,16 +508,14 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-midterm-and-ci-cd-with-github-actions">
-<h1>Week 8: Midterm, and CI/CD with GitHub Actions<a class="headerlink" href="#week-8-midterm-and-ci-cd-with-github-actions" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-ci-cd-with-github-actions">
+<h1>Week 8: CI/CD with GitHub Actions<a class="headerlink" href="#week-8-ci-cd-with-github-actions" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
 </ul>
 </div>
-<p>Two things happen this week. The <strong>midterm</strong> takes the first 75 minutes. Then we
-turn to CI/CD.</p>
 <p>CI/CD means continuous integration and continuous deployment: every time code is
 pushed, an automated service checks out the change, runs the full test suite, and,
 if everything passes, rebuilds and republishes the output with no human in the
@@ -533,16 +530,13 @@ model that must rebuild itself every morning whether or not anyone pushed code.<
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>The midterm is tonight,</strong> in the first 75 minutes of class. In person,
-closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
-through 7. Each question has four options, <strong>one or more may be correct</strong>, and a
-question earns its point only if every bubble is right. There is no partial
-credit and no final exam. See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
-<li><p><strong>Nothing else is due tonight.</strong> The four coding assignments are behind you.</p></li>
-<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is due Tuesday, December 1.</strong> Open your pull request before
-the break, so that your two reviewers have time to read it.</p></li>
+<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is due tonight,</strong> at the start of class. It is the last
+homework.</p></li>
 <li><p><strong>No class next week.</strong> November 24 falls in Thanksgiving break. Week 9 meets
 on December 1.</p></li>
+<li><p><strong>The exam is December 1,</strong> in the first 75 minutes of class, covering weeks 0
+through 8, tonight included. Practice questions and their answer key are
+handed out tonight; see <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
 <li><p><strong>Final project work should be underway.</strong> Week 10 is the presentation and the
 oral defense, and the defense assumes you can run and modify your own project
 live: manage the environment, run the pipeline, and use SSH.</p></li>
@@ -571,13 +565,8 @@ futures, and what Bernanke and Kuttner (2005) find about the stock market’s
 reaction to it.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-the-midterm">
-<h2>Agenda Item 1: The Midterm<a class="headerlink" href="#agenda-item-1-the-midterm" title="Link to this heading">#</a></h2>
-<p>First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
-and start time are on Canvas.</p>
-</section>
-<section id="agenda-item-2-github-actions-from-the-inside">
-<h2>Agenda Item 2: GitHub Actions from the Inside<a class="headerlink" href="#agenda-item-2-github-actions-from-the-inside" title="Link to this heading">#</a></h2>
+<section id="agenda-item-1-github-actions-from-the-inside">
+<h2>Agenda Item 1: GitHub Actions from the Inside<a class="headerlink" href="#agenda-item-1-github-actions-from-the-inside" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The anatomy of a workflow file: <code class="docutils literal notranslate"><span class="pre">on</span></code>, <code class="docutils literal notranslate"><span class="pre">jobs</span></code>, <code class="docutils literal notranslate"><span class="pre">runs-on</span></code>, <code class="docutils literal notranslate"><span class="pre">steps</span></code>, and where the
 YAML lives.</p></li>
@@ -592,8 +581,8 @@ one Python version.</p></li>
 <li><p><strong>Self-hosted runners,</strong> briefly, and why this course uses one.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-scheduling-and-the-boundary">
-<h2>Agenda Item 3: Scheduling, and the Boundary<a class="headerlink" href="#agenda-item-3-scheduling-and-the-boundary" title="Link to this heading">#</a></h2>
+<section id="agenda-item-2-scheduling-and-the-boundary">
+<h2>Agenda Item 2: Scheduling, and the Boundary<a class="headerlink" href="#agenda-item-2-scheduling-and-the-boundary" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="Week9/cron_jobs.html"><span class="std std-doc">Cron Jobs</span></a>: the classic Unix scheduler, the five fields, and
 the traps (the environment a cron job inherits is not your shell’s, and a job that
 overruns its interval will overlap itself). Then <code class="docutils literal notranslate"><span class="pre">schedule:</span></code> in a GitHub Actions
@@ -627,16 +616,16 @@ workflow, which is cron with someone else’s machine.</p>
 </table>
 </div>
 </section>
-<section id="agenda-item-4-publishing-a-live-site">
-<h2>Agenda Item 4: Publishing a Live Site<a class="headerlink" href="#agenda-item-4-publishing-a-live-site" title="Link to this heading">#</a></h2>
+<section id="agenda-item-3-publishing-a-live-site">
+<h2>Agenda Item 3: Publishing a Live Site<a class="headerlink" href="#agenda-item-3-publishing-a-live-site" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html"><span class="std std-doc">GitHub Actions and an Interactive Dashboard</span></a>:
 Plotly figures exported as self-contained HTML, a <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder, and a workflow
 that rebuilds and republishes it. The site is interactive in the browser with no
 server anywhere, which is why this is the cheapest way to put a live number in
 front of someone.</p>
 </section>
-<section id="agenda-item-5-the-case-study-a-live-fedwatch-monitor">
-<h2>Agenda Item 5: The Case Study — A Live FedWatch Monitor<a class="headerlink" href="#agenda-item-5-the-case-study-a-live-fedwatch-monitor" title="Link to this heading">#</a></h2>
+<section id="agenda-item-4-the-case-study-a-live-fedwatch-monitor">
+<h2>Agenda Item 4: The Case Study — A Live FedWatch Monitor<a class="headerlink" href="#agenda-item-4-the-case-study-a-live-fedwatch-monitor" title="Link to this heading">#</a></h2>
 <p>In HW 2 you computed FOMC meeting-outcome probabilities from 30-Day Fed Funds
 futures on one date. A number computed once is an exercise; a number that is right
 every morning is a product. The case study,
@@ -664,11 +653,12 @@ is the machine that captures that, every day, without being asked.</p>
 </section>
 <section id="looking-ahead-to-week-9">
 <h2>Looking ahead to Week 9<a class="headerlink" href="#looking-ahead-to-week-9" title="Link to this heading">#</a></h2>
-<p>The last week is <strong>basic MLOps</strong>: what it takes to keep a model healthy after it
+<p>The <strong>exam</strong> is in the first 75 minutes. After it, the last week is <strong>basic
+MLOps</strong>: what it takes to keep a model healthy after it
 ships. Experiment tracking with MLflow, drift checks on the inputs, and fitting the
 forecasting methods of the open benchmark of Bejarano et al. (2026) to the
 predictor dataset the whole class built. It meets on December 1, after the
-break, and <a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is due.</p>
+break.</p>
 </section>
 </section>
 
@@ -722,11 +712,10 @@ break, and <a class="reference internal" href="HW5.html"><span class="std std-do
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-midterm">Agenda Item 1: The Midterm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-github-actions-from-the-inside">Agenda Item 2: GitHub Actions from the Inside</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-scheduling-and-the-boundary">Agenda Item 3: Scheduling, and the Boundary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-publishing-a-live-site">Agenda Item 4: Publishing a Live Site</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-the-case-study-a-live-fedwatch-monitor">Agenda Item 5: The Case Study — A Live FedWatch Monitor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-github-actions-from-the-inside">Agenda Item 1: GitHub Actions from the Inside</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-scheduling-and-the-boundary">Agenda Item 2: Scheduling, and the Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-publishing-a-live-site">Agenda Item 3: Publishing a Live Site</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-case-study-a-live-fedwatch-monitor">Agenda Item 4: The Case Study — A Live FedWatch Monitor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-9">Looking ahead to Week 9</a></li>
 </ul>
   </nav></div>

@@ -1,7 +1,7 @@
 # Homework 5: The Class Report
 
-- **Launched:** week 6. **Due:** Tuesday, December 1, at the start of the
-  week 9 session. Also posted on Canvas.
+- **Launched:** week 6. **Due:** Tuesday, November 17, at the start of the
+  week 8 session. Also posted on Canvas.
 - **Link to Assignment:** posted at launch
 - **Goes with:** week 6
 

@@ -26,18 +26,17 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 - **[HW 3](./HW3.md) is due tonight,** at the start of class.
 - **[HW 4](./HW4.md) is due next week,** Tuesday, November 10. Tonight's lab takes
   it to a cluster, so bring your working single-day reconstruction to class.
-- **[HW 5](./HW5.md) launches today,** due Tuesday, December 1: one figure and
+- **[HW 5](./HW5.md) launches today,** due Tuesday, November 17: one figure and
   one paragraph for the class report. It is the last homework, and the smallest.
-  Aim to open your pull request before Thanksgiving.
+  Open your pull request by next week.
 - **Accept your invite to the report repo.** Every student gets a GitHub
   collaborator invite to the private report repository. Check your email or
   [github.com/notifications](https://github.com/notifications) and confirm tonight
   that you can open it.
 - **Confirm your cluster access tonight.** You need the WRDS Cloud (the same WRDS
   account, over SSH) and Midway3 (RCC). If either fails, we fix it in class.
-- **The midterm is in two weeks,** Tuesday, November 17, in the first 75 minutes
-  of class, covering weeks 0 through 7. Practice questions and their answer key
-  are handed out; see [Exam Preparation](./exam_prep.md).
+- **The exam is Tuesday, December 1,** in week 9, covering weeks 0 through 8.
+  See [Exam Preparation](./exam_prep.md).
 - **Project consultations end this week.** If your group has not had one, book
   it today: [youcanbook.me](https://finm-32800.youcanbook.me/).
 

@@ -56,7 +56,7 @@ page here: https://github.com/orgs/finm-32800/discussions
 
 ### Coursework at a Glance
 
-The graded work has three parts: homework, one midterm, and a group project.
+The graded work has three parts: homework, one exam, and a group project.
 From week 4 on, one homework or exam is due each week, and never two.
 
 | Week | Date | Due |
@@ -65,14 +65,13 @@ From week 4 on, one homework or exam is due each week, and never two.
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
 | 6 | Tuesday, November 3 | [HW 3](HW3.md): option-implied crash probabilities |
 | 7 | Tuesday, November 10 | [HW 4](HW4.md): order book validation and flow toxicity |
-| 8 | Tuesday, November 17 | Midterm, in class |
+| 8 | Tuesday, November 17 | [HW 5](HW5.md): your figure for the class report |
 | | Tuesday, November 24 | No class: Thanksgiving break |
-| 9 | Tuesday, December 1 | [HW 5](HW5.md): your figure for the class report |
+| 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
 
-The homework comes early on purpose. The four coding assignments are finished
-by week 7, and the midterm follows a week later, before Thanksgiving. What
-remains after the break is your figure for the class report and your project.
+The homework comes early on purpose. All of it is finished before
+Thanksgiving. What remains after the break is the exam and your project.
 
 ### Homework
 
@@ -94,15 +93,16 @@ remains after the break is your figure for the class report and your project.
   repos, found under the `finm-32800` GitHub organization page here: 
   https://github.com/finm-32800
 
-### Midterm Exam
+### Exam
 
-There is one exam, a **midterm**, held in class in week 8. It is in-person,
+There is one exam, held in class in week 9. It is in-person,
 closed-book, multiple choice, and answered on a bubble sheet. Each question
 has four options and **one or more may be correct**; a question earns its
-point only if every bubble is right. It covers the material through week 7, so
-it comes after all four coding assignments are done.
+point only if every bubble is right. It covers the material through week 8,
+including Apache Airflow and GitHub Actions.
 Practice questions in the same format, with their answer key, are handed out
-ahead of time. There is no final exam; the final project is the capstone. See
+ahead of time. There is no separate final exam; the final project is the
+capstone. See
 [Exam Preparation](exam_prep.md) for the scope and format.
 
 ### Final Project
@@ -129,7 +129,7 @@ Grades will be based on the following components:
 | Component | Weight |
 | --- | --- |
 | Homework | 30% |
-| Midterm Exam | 25% |
+| Exam | 25% |
 | Final Project | 40% |
 | Participation | 5% |
 
@@ -140,10 +140,10 @@ Grades will be based on the following components:
   reflects whether you did the work to complete them. One assignment is your
   contribution to the collaborative class report: one figure and one paragraph,
   submitted as a pull request and reviewed by two classmates.
-- **Midterm Exam (25%)** is in-person, closed-book, and multiple choice, with
+- **Exam (25%)** is in-person, closed-book, and multiple choice, with
   one or more correct options per question and no partial credit. It tests the
   tools, the data sets, and the papers covered in the notes and the homework
-  through week 7. See [Exam Preparation](exam_prep.md).
+  through week 8. See [Exam Preparation](exam_prep.md).
 - **Final Project (40%)** is completed in groups of exactly four; any other size
   requires the instructor's permission in advance. Students choose their
   project from among the options provided at the beginning of the quarter. It is

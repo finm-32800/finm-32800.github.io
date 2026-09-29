@@ -1,12 +1,12 @@
 # Exam Preparation
 
-This page is the running outline of what the midterm covers. It is the single
+This page is the running outline of what the exam covers. It is the single
 source of truth for scope: if a page, notebook, or paper is listed here, it is
 fair game.
 
 ## Format
 
-The midterm is in-person, closed-book, closed-notes, multiple choice, answered
+The exam is in-person, closed-book, closed-notes, multiple choice, answered
 on a bubble sheet. Each question has four options, (A) through (D), and **one or
 more options may be correct**. Most questions have more than one correct
 option, and in some every option is correct. You are not told how many to
@@ -25,17 +25,19 @@ Questions test three things in roughly equal measure:
 - **The papers.** What each replicated paper did, how the replication constructs
   it, and what it finds.
 
-## The Midterm
+## The Exam
 
-The midterm is held in class in **week 8**, on Tuesday, November 17, and covers
-the material through week 7: all lecture notes, in-class discussions, the notebooks linked from the
-weekly chapters, and Homework 1 through 4. The date and room are posted on
-Canvas. There is no final exam.
+The exam is held in class in **week 9**, on Tuesday, December 1, in the first
+75 minutes, and covers the material through week 8: all lecture notes,
+in-class discussions, the notebooks linked from the weekly chapters, and
+Homework 1 through 5. That includes Apache Airflow (week 7) and GitHub
+Actions (week 8). The room is posted on Canvas. There is no separate final
+exam.
 
 ## Practice Questions
 
 A set of practice questions in the same format, with the answer key, is handed
-out ahead of the midterm. It is not graded. Work it under exam conditions and
+out ahead of the exam. It is not graded. Work it under exam conditions and
 grade yourself; the answer key explains why each option is right or wrong.
 
 ## Online Notes
@@ -49,13 +51,13 @@ the notebooks they link to are the scope.
 ## Homework Assignments
 
 Each homework page and the notebooks it links to ("HW guides") may appear on
-either exam. Questions about the homework ask what the pipeline does and why,
+the exam. Questions about the homework ask what the pipeline does and why,
 not for the numerical results.
 
 ## Papers
 
 The following papers and methods are covered in the notes and may appear on the
-midterm. More are added here as the quarter progresses.
+exam. More are added here as the quarter progresses.
 
 - Markowitz, H. (1952). Portfolio Selection. *Journal of Finance*, 7(1), 77--91.
 - Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium
@@ -83,5 +85,15 @@ midterm. More are added here as the quarter progresses.
   competitive markets: Expensive and cheap solutions. *Journal of Finance*,
   69(4), 1747--1785. Computing the NBBO and standard liquidity measures from
   TAQ, and why the choice between Daily and Monthly TAQ changes the answer.
+
+- Goyal, A., Welch, I., & Zafirov, A. (2024). A comprehensive 2022 look at the
+  empirical performance of equity premium prediction. *Review of Financial
+  Studies*, 37(11), 3490--3557. The predictors of the class report, the
+  historical-mean benchmark, and why a forecast at date *t* may use only what
+  was known at *t*.
+- Bernanke, B. S., & Kuttner, K. N. (2005). What explains the stock market's
+  reaction to Federal Reserve policy? *Journal of Finance*, 60(3),
+  1221--1257. Measuring the policy surprise from the fed funds futures price
+  change on the announcement day.
 
 *Additional papers are posted here as the course progresses.*

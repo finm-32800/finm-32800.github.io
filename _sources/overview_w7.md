@@ -19,12 +19,11 @@ rebuild when all of them have landed.
 
 - **[HW 4](./HW4.md) is due tonight,** at the start of class. It is the last of
   the four coding assignments.
-- **The midterm is next week,** Tuesday, November 17, in the first 75 minutes of
-  class. It covers weeks 0 through 7, tonight included. Practice questions and
-  their answer key are handed out; see [Exam Preparation](./exam_prep.md).
-- **[HW 5](./HW5.md) is due Tuesday, December 1.** Aim to open your pull request
-  before Thanksgiving. Tonight's Airflow lab runs on the report's pipelines. It
-  is done in class and is not graded.
+- **[HW 5](./HW5.md) is due next week,** Tuesday, November 17. Your pull request
+  should be open by now, so your two reviewers have time. Tonight's Airflow lab
+  runs on the report's pipelines. It is done in class and is not graded.
+- **Tonight's material is on the exam,** Tuesday, December 1. See
+  [Exam Preparation](./exam_prep.md).
 
 ## Objectives
 
@@ -108,8 +107,8 @@ fits models to it.
 
 ## Looking ahead to Week 8
 
-The **midterm** is in the first 75 minutes. After it, **CI/CD with GitHub
-Actions**, and the contrast with what you ran tonight is the point of the week.
+Week 8 is **CI/CD with GitHub Actions**, and the contrast with what you ran
+tonight is the point of the week.
 Both are automation triggered by an event; one
 is triggered by a push and one by a clock or a dataset. The case study is a live
 FedWatch monitor that rebuilds itself every morning, computing the policy

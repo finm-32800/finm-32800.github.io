@@ -1,13 +1,10 @@
-# Week 8: Midterm, and CI/CD with GitHub Actions
+# Week 8: CI/CD with GitHub Actions
 
 ```{toctree}
 :maxdepth: 1
 Week9/github_actions_interactive_dashboard.md
 Week9/cron_jobs.md
 ```
-
-Two things happen this week. The **midterm** takes the first 75 minutes. Then we
-turn to CI/CD.
 
 CI/CD means continuous integration and continuous deployment: every time code is
 pushed, an automated service checks out the change, runs the full test suite, and,
@@ -24,16 +21,13 @@ model that must rebuild itself every morning whether or not anyone pushed code.
 
 ## Announcements
 
-- **The midterm is tonight,** in the first 75 minutes of class. In person,
-  closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
-  through 7. Each question has four options, **one or more may be correct**, and a
-  question earns its point only if every bubble is right. There is no partial
-  credit and no final exam. See [Exam Preparation](./exam_prep.md).
-- **Nothing else is due tonight.** The four coding assignments are behind you.
-- **[HW 5](./HW5.md) is due Tuesday, December 1.** Open your pull request before
-  the break, so that your two reviewers have time to read it.
+- **[HW 5](./HW5.md) is due tonight,** at the start of class. It is the last
+  homework.
 - **No class next week.** November 24 falls in Thanksgiving break. Week 9 meets
   on December 1.
+- **The exam is December 1,** in the first 75 minutes of class, covering weeks 0
+  through 8, tonight included. Practice questions and their answer key are
+  handed out tonight; see [Exam Preparation](./exam_prep.md).
 - **Final project work should be underway.** Week 10 is the presentation and the
   oral defense, and the defense assumes you can run and modify your own project
   live: manage the environment, run the pipeline, and use SSH.
@@ -59,12 +53,7 @@ model that must rebuild itself every morning whether or not anyone pushed code.
   futures, and what Bernanke and Kuttner (2005) find about the stock market's
   reaction to it.
 
-## Agenda Item 1: The Midterm
-
-First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
-and start time are on Canvas.
-
-## Agenda Item 2: GitHub Actions from the Inside
+## Agenda Item 1: GitHub Actions from the Inside
 
 - The anatomy of a workflow file: `on`, `jobs`, `runs-on`, `steps`, and where the
   YAML lives.
@@ -78,7 +67,7 @@ and start time are on Canvas.
   one Python version.
 - **Self-hosted runners,** briefly, and why this course uses one.
 
-## Agenda Item 3: Scheduling, and the Boundary
+## Agenda Item 2: Scheduling, and the Boundary
 
 [Cron Jobs](./Week9/cron_jobs.md): the classic Unix scheduler, the five fields, and
 the traps (the environment a cron job inherits is not your shell's, and a job that
@@ -93,7 +82,7 @@ Then draw the boundary explicitly, because you have now used all three:
 | Actions / cron | a push, or a clock | one repository | tests on every change; one job on a schedule |
 | Airflow | a clock, or data landing | many projects, with history | pipelines depend on each other, and you need to know what ran |
 
-## Agenda Item 4: Publishing a Live Site
+## Agenda Item 3: Publishing a Live Site
 
 [GitHub Actions and an Interactive Dashboard](./Week9/github_actions_interactive_dashboard.md):
 Plotly figures exported as self-contained HTML, a `docs/` folder, and a workflow
@@ -101,7 +90,7 @@ that rebuilds and republishes it. The site is interactive in the browser with no
 server anywhere, which is why this is the cheapest way to put a live number in
 front of someone.
 
-## Agenda Item 5: The Case Study --- A Live FedWatch Monitor
+## Agenda Item 4: The Case Study --- A Live FedWatch Monitor
 
 In HW 2 you computed FOMC meeting-outcome probabilities from 30-Day Fed Funds
 futures on one date. A number computed once is an exercise; a number that is right
@@ -131,8 +120,9 @@ is the machine that captures that, every day, without being asked.
 
 ## Looking ahead to Week 9
 
-The last week is **basic MLOps**: what it takes to keep a model healthy after it
+The **exam** is in the first 75 minutes. After it, the last week is **basic
+MLOps**: what it takes to keep a model healthy after it
 ships. Experiment tracking with MLflow, drift checks on the inputs, and fitting the
 forecasting methods of the open benchmark of Bejarano et al. (2026) to the
 predictor dataset the whole class built. It meets on December 1, after the
-break, and [HW 5](./HW5.md) is due.
+break.

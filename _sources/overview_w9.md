@@ -1,9 +1,12 @@
-# Week 9: Basic MLOps --- Experiment Tracking and Monitoring Models
+# Week 9: Exam, and Basic MLOps --- Experiment Tracking and Monitoring Models
 
 ```{note}
 The MLflow chapter for this week is posted before class. Until then, this page is
 the agenda.
 ```
+
+Two things happen this week. The **exam** takes the first 75 minutes. Then
+MLOps.
 
 MLOps is the discipline of keeping a model healthy *after* it ships. A model in
 production is a pipeline that never stops running: new data arrives on a schedule,
@@ -18,13 +21,17 @@ supplies the models. Nothing this week is a toy.
 
 ## Announcements
 
-- **[HW 5](./HW5.md) is due tonight,** at the start of class: your merged
-  contribution to the class report. Tonight's forecasting lab is done in class
-  and is not graded.
+- **The exam is tonight,** in the first 75 minutes of class. In person,
+  closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
+  through 8. Each question has four options, **one or more may be correct**, and a
+  question earns its point only if every bubble is right. There is no partial
+  credit. See [Exam Preparation](./exam_prep.md).
+- **Nothing else is due.** All five homeworks are behind you. Tonight's
+  forecasting lab is done in class and is not graded.
 - **Final project presentations are next week.** Every group presents in week 10,
   with an individual oral defense for each member. You will be asked to run and
   modify your own project live.
-- **The midterm was the only exam.** There is no final exam.
+- **This is the only exam.** There is no separate final exam.
 
 ## Objectives
 
@@ -42,7 +49,12 @@ supplies the models. Nothing this week is a toy.
 - Close the loop: a scheduled retrain that publishes itself, using the machinery
   from weeks 7 and 8.
 
-## Agenda Item 1: Experiment Tracking with MLflow
+## Agenda Item 1: The Exam
+
+First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
+and start time are on Canvas.
+
+## Agenda Item 2: Experiment Tracking with MLflow
 
 - The problem: a notebook that reports 0.043 and a directory of seventeen slightly
   different scripts is not a result. What you need recorded is the parameters, the
@@ -53,7 +65,7 @@ supplies the models. Nothing this week is a toy.
 - Comparing runs, and why the comparison is only meaningful if the data was held
   fixed. This is the discipline the benchmark paper is built on.
 
-## Agenda Item 2: The Benchmark
+## Agenda Item 3: The Benchmark
 
 [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/),
 *An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
@@ -69,7 +81,7 @@ regressors, which leaves an obvious extension open for you.
 - Former students of this course are coauthors, and the reason the paper was
   possible is that every dataset in it rebuilds from source with one command.
 
-## Agenda Item 3: The Exercise
+## Agenda Item 4: The Exercise
 
 Take a handful of the benchmark's baseline methods, a historical mean, an ARIMA,
 a Theta method, and one neural method, and run them as a **scheduled DAG** over the
@@ -88,7 +100,7 @@ Then the two halves of the lesson:
    exactly why doing it honestly, with the point-in-time discipline the scheduler
    enforces, is the right last exercise of the quarter.
 
-## Agenda Item 4: Drift, and Closing the Loop
+## Agenda Item 5: Drift, and Closing the Loop
 
 - **Input drift** versus **model decay**: a schema change, a unit change, a vendor
   backfill, and a regime change all look different in the logs, and you should be
