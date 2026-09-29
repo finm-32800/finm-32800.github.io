@@ -5,8 +5,7 @@
 notebooks/_02_CRSP_market_index_ipynb.ipynb
 notebooks/_03_SP500_constituents_and_index_ipynb.ipynb
 notebooks/_04_Fama_French_1993_ipynb.ipynb
-notebooks/_06_CAPM_analysis_ipynb.ipynb
-notebooks/_07_Fama_French_3_factor_ipynb.ipynb
+notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb
 ```
 
 - **Launched:** week 1. **Due:** Tuesday, October 20, at the start of the
@@ -38,7 +37,7 @@ is to run `pytest`, read the failing test, and write the code that passes it.
 Run `doit` first so that the data is pulled before the tests run. Do not edit
 the test files.
 
-The four graded parts are worth 33 points in total, one per test. Every push
+The four graded parts are worth 34 points in total, one per test. Every push
 runs the suite on the course runner and posts your score to the repository's
 Actions tab. Search the repository for `TODO` to find the blanks.
 
@@ -62,10 +61,11 @@ Fama-French factor construction, if you want to see it done in SAS first:
  - [Fama-French SMB and HML: SAS Replication](https://vimeo.com/447603278)
  - [1. Book Equity](https://vimeo.com/447631819), [2. CRSP Stock Data](https://vimeo.com/447635241), [3. CRSP](https://vimeo.com/447867614), [4. Merge CRSP and Compustat, B/M Ratio](https://vimeo.com/447871296), [5. Calculating Fama-French Factors](https://vimeo.com/447876324)
 
-## Part 1 (graded, 2 pts): GitHub Skills
+## Part 1 (graded, 3 pts): GitHub Skills
 
 Complete the following tutorials from the [GitHub Skills](https://skills.github.com/) page, using **public repositories** in your own GitHub account, and record the links in the assignment as instructed.
 
+ - [Introduction to Git](https://github.com/skills/introduction-to-git)
  - [Review pull requests](https://github.com/skills/review-pull-requests)
  - [Resolve merge conflicts](https://github.com/skills/resolve-merge-conflicts)
 
@@ -81,12 +81,13 @@ constituents two ways and see why only one of them is a tradable strategy.
 
 ## Part 3 (graded, 9 pts): Fama-French 1993
 
-Before the construction details, understand what the factors are *for*. Two
-companion notebooks run the asset-pricing analysis on the very portfolios your
-pipeline produces:
+Before the construction details, understand what the factors are *for*.
+[From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md)
+explains, without derivations, how the HW 0 tangency portfolio leads to the
+CAPM and then to multifactor models. A companion notebook then runs the
+asset-pricing analysis on the very portfolios your pipeline produces:
 
- - [CAPM Analysis of Size, Value, and Investment Portfolios](notebooks/_06_CAPM_analysis_ipynb.ipynb): regress each portfolio's excess returns on the market factor and find the significant alphas the CAPM leaves behind.
- - [Fama-French 3-Factor Analysis](notebooks/_07_Fama_French_3_factor_ipynb.ipynb): add SMB and HML and test whether the multifactor model absorbs those alphas.
+ - [Testing the CAPM and the Fama-French Three-Factor Model](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb): check whether the market is the tangency portfolio, find the alphas the CAPM leaves behind, and test how many of them SMB and HML absorb.
 
 Then replicate the portfolio analysis from [Fama and French (1993)](https://www.jufinance.com/mag/fin534_16/Common_risk_factors_Fama_French_JFE1993.pdf), following the guide:
 

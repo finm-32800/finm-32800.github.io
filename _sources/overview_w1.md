@@ -9,6 +9,7 @@ Week1/virtual_environments.md
 Week2/WRDS_intro_and_web_queries.md
 notebooks/_01_wrds_python_package_ipynb.ipynb
 Week2/env_files.md
+Week3/from_mean_variance_to_factor_models.md
 ```
 
 The paper this week is Sharpe (1964) and the object is the CAPM's market
@@ -81,7 +82,8 @@ data.
 3. **Git and GitHub, by doing.** Clone [HW 0](./HW0.md), make a change, commit,
    push. This is also how every assignment is submitted. Point at the two
    [GitHub Skills](https://skills.github.com/) tutorials that are HW 1 Part 1:
-   [review pull requests](https://github.com/skills/review-pull-requests) and
+   [introduction to Git](https://github.com/skills/introduction-to-git),
+   [review pull requests](https://github.com/skills/review-pull-requests), and
    [resolve merge conflicts](https://github.com/skills/resolve-merge-conflicts).
 4. **Virtual environments.** [Virtual Environments](./Week1/virtual_environments.md),
    worked through `software_environments/` in the in-class repo, which builds the
@@ -101,7 +103,9 @@ data.
    market beta is the only priced risk. The practical object is a
    value-weighted index of everything, which is what CRSP publishes and what you
    are about to rebuild. This is the framing for HW 1's first half; the alphas
-   the CAPM leaves behind are next week's problem.
+   the CAPM leaves behind are next week's problem. For how the CAPM follows
+   from the HW 0 tangency portfolio, see
+   [From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md).
 7. **Launch [HW 1](./HW1.md).** Clone it, build the environment, put credentials
    in `.env`, run `doit`, run `pytest`, watch it fail, and start filling in
    `calc_CRSP_indices.py` together.

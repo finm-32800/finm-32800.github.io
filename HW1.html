@@ -208,7 +208,6 @@
 <li class="toctree-l2"><a class="reference internal" href="Week0/data_tour.html">A Tour of the Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
@@ -217,8 +216,10 @@
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
@@ -276,8 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -495,7 +495,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-0-not-graded-background-videos">Part 0 (not graded): background videos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-graded-2-pts-github-skills">Part 1 (graded, 2 pts): GitHub Skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-graded-3-pts-github-skills">Part 1 (graded, 3 pts): GitHub Skills</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-graded-19-pts-the-market-portfolio-and-the-s-p-500">Part 2 (graded, 19 pts): the market portfolio and the S&amp;P 500</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-graded-9-pts-fama-french-1993">Part 3 (graded, 9 pts): Fama-French 1993</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-graded-3-pts-the-investment-sort">Part 4 (graded, 3 pts): the investment sort</a></li>
@@ -516,8 +516,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
 </ul>
 </div>
 <ul class="simple">
@@ -548,7 +547,7 @@ unit tests that compare your series to published references. The way to work
 is to run <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, read the failing test, and write the code that passes it.
 Run <code class="docutils literal notranslate"><span class="pre">doit</span></code> first so that the data is pulled before the tests run. Do not edit
 the test files.</p>
-<p>The four graded parts are worth 33 points in total, one per test. Every push
+<p>The four graded parts are worth 34 points in total, one per test. Every push
 runs the suite on the course runner and posts your score to the repository’s
 Actions tab. Search the repository for <code class="docutils literal notranslate"><span class="pre">TODO</span></code> to find the blanks.</p>
 <p>You will need the <code class="docutils literal notranslate"><span class="pre">wrds</span></code> package and a <code class="docutils literal notranslate"><span class="pre">.pgpass</span></code> file so that the pulls can
@@ -572,10 +571,11 @@ file” in <a class="reference internal" href="notebooks/_01_wrds_python_package
 <li><p><a class="reference external" href="https://vimeo.com/447631819">1. Book Equity</a>, <a class="reference external" href="https://vimeo.com/447635241">2. CRSP Stock Data</a>, <a class="reference external" href="https://vimeo.com/447867614">3. CRSP</a>, <a class="reference external" href="https://vimeo.com/447871296">4. Merge CRSP and Compustat, B/M Ratio</a>, <a class="reference external" href="https://vimeo.com/447876324">5. Calculating Fama-French Factors</a></p></li>
 </ul>
 </section>
-<section id="part-1-graded-2-pts-github-skills">
-<h2>Part 1 (graded, 2 pts): GitHub Skills<a class="headerlink" href="#part-1-graded-2-pts-github-skills" title="Link to this heading">#</a></h2>
+<section id="part-1-graded-3-pts-github-skills">
+<h2>Part 1 (graded, 3 pts): GitHub Skills<a class="headerlink" href="#part-1-graded-3-pts-github-skills" title="Link to this heading">#</a></h2>
 <p>Complete the following tutorials from the <a class="reference external" href="https://skills.github.com/">GitHub Skills</a> page, using <strong>public repositories</strong> in your own GitHub account, and record the links in the assignment as instructed.</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/skills/introduction-to-git">Introduction to Git</a></p></li>
 <li><p><a class="reference external" href="https://github.com/skills/review-pull-requests">Review pull requests</a></p></li>
 <li><p><a class="reference external" href="https://github.com/skills/resolve-merge-conflicts">Resolve merge conflicts</a></p></li>
 </ul>
@@ -593,12 +593,13 @@ constituents two ways and see why only one of them is a tradable strategy.</p>
 </section>
 <section id="part-3-graded-9-pts-fama-french-1993">
 <h2>Part 3 (graded, 9 pts): Fama-French 1993<a class="headerlink" href="#part-3-graded-9-pts-fama-french-1993" title="Link to this heading">#</a></h2>
-<p>Before the construction details, understand what the factors are <em>for</em>. Two
-companion notebooks run the asset-pricing analysis on the very portfolios your
-pipeline produces:</p>
+<p>Before the construction details, understand what the factors are <em>for</em>.
+<a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html"><span class="std std-doc">From Mean-Variance to Factor Models</span></a>
+explains, without derivations, how the HW 0 tangency portfolio leads to the
+CAPM and then to multifactor models. A companion notebook then runs the
+asset-pricing analysis on the very portfolios your pipeline produces:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html"><span class="std std-doc">CAPM Analysis of Size, Value, and Investment Portfolios</span></a>: regress each portfolio’s excess returns on the market factor and find the significant alphas the CAPM leaves behind.</p></li>
-<li><p><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html"><span class="std std-doc">Fama-French 3-Factor Analysis</span></a>: add SMB and HML and test whether the multifactor model absorbs those alphas.</p></li>
+<li><p><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">Testing the CAPM and the Fama-French Three-Factor Model</span></a>: check whether the market is the tangency portfolio, find the alphas the CAPM leaves behind, and test how many of them SMB and HML absorb.</p></li>
 </ul>
 <p>Then replicate the portfolio analysis from <a class="reference external" href="https://www.jufinance.com/mag/fin534_16/Common_risk_factors_Fama_French_JFE1993.pdf">Fama and French (1993)</a>, following the guide:</p>
 <ul class="simple">
@@ -669,7 +670,7 @@ pipeline produces:</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-0-not-graded-background-videos">Part 0 (not graded): background videos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-graded-2-pts-github-skills">Part 1 (graded, 2 pts): GitHub Skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-graded-3-pts-github-skills">Part 1 (graded, 3 pts): GitHub Skills</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-graded-19-pts-the-market-portfolio-and-the-s-p-500">Part 2 (graded, 19 pts): the market portfolio and the S&amp;P 500</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-graded-9-pts-fama-french-1993">Part 3 (graded, 9 pts): Fama-French 1993</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-graded-3-pts-the-investment-sort">Part 4 (graded, 3 pts): the investment sort</a></li>

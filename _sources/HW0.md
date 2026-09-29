@@ -51,8 +51,6 @@ In order to start mastering the many features of GitHub, please complete the fol
  - [Introduction to GitHub](https://github.com/skills/introduction-to-github)
  - [Communicate using Markdown](https://github.com/skills/communicate-using-markdown)
    - This will give you some ideas on how to more effectively communicate on the course [discussion board](https://github.com/orgs/finm-32800/discussions).
- - [GitHub Pages](https://github.com/skills/github-pages)
-   - Later in this course, we will use GitHub Pages to host a website. The textbook for this course is hosted on GitHub Pages.
 
 Once you have completed these tutorials, record them by editing `src/github_skills.py`: add the URL of each of your completed skills repositories and mark each one as finished.
 

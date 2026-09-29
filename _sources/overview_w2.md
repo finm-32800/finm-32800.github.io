@@ -67,14 +67,17 @@ motivates it is the **Fama-French (1993)** replication that finishes
    *→ HW 1 Part 3:* you complete the `WHERE` clauses of the Compustat and
    CRSP-Compustat link queries in `src/pull_CRSP_Compustat.py`. These are tested
    against a small in-memory database, so you can iterate without WRDS.
-4. **Why the factors exist, before how they are built.** The CAPM says every
-   portfolio's alpha should be zero. We test that on portfolios sorted by size,
-   book-to-market, and investment in the
-   [CAPM analysis notebook](notebooks/_06_CAPM_analysis_ipynb.ipynb), find the
-   alphas it leaves behind, and watch SMB and HML absorb them in the
-   [three-factor notebook](notebooks/_07_Fama_French_3_factor_ipynb.ipynb). That
-   is the argument of Fama and French (1993) in two notebooks, and the reason
-   we are about to build the factors.
+4. **Why the factors exist, before how they are built.** Start from HW 0: if
+   every investor holds the tangency portfolio, it must be the market, and
+   that is the CAPM. If investors also hedge changes in their opportunities,
+   more factors appear. [From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md)
+   tells that story in words. The
+   [CAPM and Fama-French notebook](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
+   then tests it on portfolios sorted by size, book-to-market, and investment:
+   the market alone is not the tangency portfolio, the CAPM leaves alphas
+   behind, and SMB and HML absorb some of them but not all. That is the
+   argument of Fama and French (1993), and the reason we are about to build
+   the factors.
 5. **The case study, end to end.** Walk the
    [Fama-French pipeline](notebooks/_04_Fama_French_1993_ipynb.ipynb): automated
    CRSP and Compustat pulls feeding book equity, the exchange and share-code

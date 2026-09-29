@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Financial Time Series Forecasting Repository (FTSFR) &#8212; Data Pipelines for Quantitative Research</title>
+    <title>From Mean-Variance to Factor Models &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -47,12 +47,14 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Week3/ftsfr';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week3/from_mean_variance_to_factor_models';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX" href="../overview_w3.html" />
-    <link rel="prev" title="Modern Environment Tools: uv and pixi" href="uv_and_pixi.html" /> 
+    <link rel="next" title="WARNING: Notes subject to change after this week" href="../subject_to_change_after_this_week.html" />
+    <link rel="prev" title="Env Files, Secrets, and the Separations of Settings from Code" href="../Week2/env_files.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -206,7 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
@@ -214,17 +216,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">From Mean-Variance to Factor Models</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -367,7 +369,7 @@
       
       
       
-      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek3/ftsfr.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek3/from_mean_variance_to_factor_models.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,7 +399,7 @@
       
       
       
-      <li><a href="../_sources/Week3/ftsfr.md" target="_blank"
+      <li><a href="../_sources/Week3/from_mean_variance_to_factor_models.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -481,7 +483,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Financial Time Series Forecasting Repository (FTSFR)</h1>
+    <h1>From Mean-Variance to Factor Models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -491,26 +493,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-project-matters">Why This Project Matters</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-current-research">The Problem with Current Research</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-finance-specific-benchmarks-matter">Why Finance-Specific Benchmarks Matter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-the-replication-crisis">Addressing the Replication Crisis</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-datasets-are-included">What Datasets Are Included</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-data-11-datasets">Returns Data (11 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-spread-data-5-datasets">Basis Spread Data (5 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-financial-data-9-datasets">Other Financial Data (9 datasets)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-codebase-is-useful">Why the Codebase is Useful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-world-example-of-task-runner-automation">A Real-World Example of Task Runner Automation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducible-research-infrastructure">Reproducible Research Infrastructure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-complex-dependencies">Managing Complex Dependencies</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings-from-baseline-forecasting">Key Findings from Baseline Forecasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-course-material">Connection to Course Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-funds-are-enough">Two funds are enough</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-everyone-holds-it-it-is-the-market-the-capm">If everyone holds it, it is the market: the CAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-one-period-is-not-enough-the-icapm">When one period is not enough: the ICAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-icapm-to-fama-french">From the ICAPM to Fama-French</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-data-comes-in">Where the data comes in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -521,128 +509,136 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="financial-time-series-forecasting-repository-ftsfr">
-<h1>Financial Time Series Forecasting Repository (FTSFR)<a class="headerlink" href="#financial-time-series-forecasting-repository-ftsfr" title="Link to this heading">#</a></h1>
-<p>The Financial Time Series Forecasting Repository (FTSFR) is an open-source benchmark designed to enable standardized, “apples-to-apples” comparisons of time series forecasting methods on financial data. The project addresses a critical gap in quantitative finance research: until now, no comprehensive forecasting benchmark existed specifically for financial markets.</p>
-<p><strong>Resources:</strong></p>
+                   <section class="tex2jax_ignore mathjax_ignore" id="from-mean-variance-to-factor-models">
+<h1>From Mean-Variance to Factor Models<a class="headerlink" href="#from-mean-variance-to-factor-models" title="Link to this heading">#</a></h1>
+<p>In Lecture 0 you solved one investor’s portfolio problem. This page asks what
+happens when <em>every</em> investor solves it, and how that question leads first to
+the CAPM and then to multifactor models like Fama-French. The theory itself is
+outside the scope of this course. It is here so that you know why the factors
+you build in HW 1 exist. There are no derivations, and the only formulas are
+ones you have already seen.</p>
+<section id="two-funds-are-enough">
+<h2>Two funds are enough<a class="headerlink" href="#two-funds-are-enough" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../notebooks/_02_markowitz_derivation.html"><span class="std std-doc">appendix to the HW 0 notebook</span></a>
+proved the <strong>two-fund theorem</strong>: every portfolio on the mean-variance frontier
+is a mix of the same two portfolios. Add a risk-free asset and the two funds
+become especially simple. An investor who mixes the risk-free asset with a risky
+portfolio <span class="math notranslate nohighlight">\(w\)</span> moves along a straight line whose slope is the Sharpe ratio of
+<span class="math notranslate nohighlight">\(w\)</span>, so the best risky portfolio is the one that solves</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{w} \; \frac{w^\top \mu - r_f}{\sqrt{w^\top \Sigma w}}
+\quad \text{subject to} \quad w^\top \mathbf{1} = 1 ,
+\]</div>
+<p>which is the <strong>tangency portfolio</strong> from HW 0. Nothing in this problem depends
+on how risk averse the investor is. A cautious investor and an aggressive one
+hold the <em>same</em> risky portfolio and differ only in how much they put in it
+versus the risk-free asset. This is two-fund separation with a risk-free
+asset, due to Tobin (1958).</p>
+</section>
+<section id="if-everyone-holds-it-it-is-the-market-the-capm">
+<h2>If everyone holds it, it is the market: the CAPM<a class="headerlink" href="#if-everyone-holds-it-it-is-the-market-the-capm" title="Link to this heading">#</a></h2>
+<p>Now suppose all investors agree on <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span>. Then they all hold the
+same tangency portfolio, in different amounts. Add up everyone’s holdings and
+you get every share outstanding, which is the value-weighted <strong>market
+portfolio</strong>. So in equilibrium the tangency portfolio <em>is</em> the market.</p>
+<p>That one fact is the Capital Asset Pricing Model of Sharpe (1964), Lintner
+(1965), and Mossin (1966). Saying the market is the tangency portfolio is the
+same as saying that each asset’s expected excess return is proportional to its
+beta with the market:</p>
+<div class="math notranslate nohighlight">
+\[
+E[R_i] - r_f = \beta_i \, \big(E[R_m] - r_f\big).
+\]</div>
+<p>The intuition is the first-order condition of the tangency problem. At the
+optimum, no asset can be tilted toward without lowering the Sharpe ratio, so an
+asset’s reward must be in line with how much it adds to the market’s risk,
+which is its beta.</p>
+<p>This is what makes the CAPM testable. Regress a portfolio’s excess return on
+the market’s excess return. If the CAPM holds, the intercept (Jensen’s alpha)
+is zero. A nonzero alpha means the market is <em>not</em> the tangency portfolio: some
+mix of the market and that portfolio has a higher Sharpe ratio than the market
+alone (Gibbons, Ross, and Shanken 1989). “The CAPM fails” and “the market is
+not mean-variance efficient” are the same statement.</p>
+</section>
+<section id="when-one-period-is-not-enough-the-icapm">
+<h2>When one period is not enough: the ICAPM<a class="headerlink" href="#when-one-period-is-not-enough-the-icapm" title="Link to this heading">#</a></h2>
+<p>Markowitz’s problem has one period. Real investors live through many, and the
+investment opportunities they face change over time: interest rates move,
+expected returns rise and fall, volatility comes and goes. Merton (1973) showed
+that a long-horizon investor cares about more than next period’s wealth. They
+also care about how good their opportunities will be afterward, so they value
+assets that pay off when opportunities get worse, as a hedge.</p>
+<p>In this <strong>Intertemporal CAPM (ICAPM)</strong>, two funds are no longer enough.
+Investors hold the tangency portfolio <em>plus</em> a hedging portfolio for each
+source of change in the opportunity set (each “state variable”). Expected
+returns then depend on several betas: one on the market and one on each
+state-variable portfolio. One period gave one factor. Many periods give many
+factors.</p>
+<p>Breeden (1979) showed that all of Merton’s betas can be collapsed into a single
+beta with aggregate consumption. That is the Consumption CAPM. It is elegant but
+hard to test, because consumption is measured poorly and infrequently.</p>
+</section>
+<section id="from-the-icapm-to-fama-french">
+<h2>From the ICAPM to Fama-French<a class="headerlink" href="#from-the-icapm-to-fama-french" title="Link to this heading">#</a></h2>
+<p>The ICAPM says that extra factors should exist, but not what they are. Fama and
+French (1993) went the other way and started from the data. Sorting stocks on
+size and book-to-market leaves large CAPM alphas, so they built two portfolios
+to capture them: <strong>SMB</strong> (small minus big) and <strong>HML</strong> (high minus low
+book-to-market). Fama and French (1996) and Fama (1996) then read the
+three-factor model as an ICAPM, with SMB and HML standing in for unnamed state
+variables that investors want to hedge. Fama calls the portfolios investors hold
+in that world “multifactor efficient.”</p>
+<p>Two caveats. First, this is an interpretation, not a derivation. Nobody has
+shown which state variables SMB and HML track, and others argue the premiums
+come from mispricing instead of risk (Lakonishok, Shleifer, and Vishny 1994).
+Second, the Arbitrage Pricing Theory of Ross (1976) justifies multifactor models
+by a different route, with no investor optimization at all.</p>
+<p>In mean-variance terms the story comes back to where it started. The CAPM says
+the market alone is the tangency portfolio. A multifactor model says the
+tangency portfolio is a mix of the factors, so Mkt, SMB, and HML together should
+reach a higher Sharpe ratio than the market alone, and no other portfolio should
+have alpha once all three are in the regression.</p>
+</section>
+<section id="where-the-data-comes-in">
+<h2>Where the data comes in<a class="headerlink" href="#where-the-data-comes-in" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">CAPM and Fama-French notebook</span></a>
+tests both claims on the portfolios your HW 1 pipeline builds. It computes the
+tangency portfolio of the factors with the HW 0 formula, finds the alphas the
+CAPM leaves behind, and checks how many of them SMB and HML absorb.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>GitHub Repository: <a class="github reference external" href="https://github.com/jmbejara/ftsfr">jmbejara/ftsfr</a></p></li>
-<li><p>Documentation: <a class="reference external" href="https://jeremybejarano.com/ftsfr/">https://jeremybejarano.com/ftsfr/</a></p></li>
-<li><p>Simplified, separated repositories: <a class="github reference external" href="https://github.com/ftsfr">ftsfr</a></p></li>
+<li><p>Breeden, Douglas T. “An Intertemporal Asset Pricing Model with Stochastic
+Consumption and Investment Opportunities.” <em>Journal of Financial Economics</em>
+7, no. 3 (1979): 265-296.</p></li>
+<li><p>Fama, Eugene F. “Multifactor Portfolio Efficiency and Multifactor Asset
+Pricing.” <em>Journal of Financial and Quantitative Analysis</em> 31, no. 4 (1996):
+441-465.</p></li>
+<li><p>Fama, Eugene F., and Kenneth R. French. “Common Risk Factors in the Returns on
+Stocks and Bonds.” <em>Journal of Financial Economics</em> 33, no. 1 (1993): 3-56.</p></li>
+<li><p>Fama, Eugene F., and Kenneth R. French. “Multifactor Explanations of Asset
+Pricing Anomalies.” <em>Journal of Finance</em> 51, no. 1 (1996): 55-84.</p></li>
+<li><p>Gibbons, Michael R., Stephen A. Ross, and Jay Shanken. “A Test of the
+Efficiency of a Given Portfolio.” <em>Econometrica</em> 57, no. 5 (1989): 1121-1152.</p></li>
+<li><p>Lakonishok, Josef, Andrei Shleifer, and Robert W. Vishny. “Contrarian
+Investment, Extrapolation, and Risk.” <em>Journal of Finance</em> 49, no. 5 (1994):
+1541-1578.</p></li>
+<li><p>Lintner, John. “The Valuation of Risk Assets and the Selection of Risky
+Investments in Stock Portfolios and Capital Budgets.” <em>Review of Economics and
+Statistics</em> 47, no. 1 (1965): 13-37.</p></li>
+<li><p>Merton, Robert C. “An Intertemporal Capital Asset Pricing Model.”
+<em>Econometrica</em> 41, no. 5 (1973): 867-887.</p></li>
+<li><p>Mossin, Jan. “Equilibrium in a Capital Asset Market.” <em>Econometrica</em> 34, no. 4
+(1966): 768-783.</p></li>
+<li><p>Ross, Stephen A. “The Arbitrage Theory of Capital Asset Pricing.” <em>Journal of
+Economic Theory</em> 13, no. 3 (1976): 341-360.</p></li>
+<li><p>Sharpe, William F. “Capital Asset Prices: A Theory of Market Equilibrium under
+Conditions of Risk.” <em>Journal of Finance</em> 19, no. 3 (1964): 425-442.</p></li>
+<li><p>Tobin, James. “Liquidity Preference as Behavior Towards Risk.” <em>Review of
+Economic Studies</em> 25, no. 2 (1958): 65-86.</p></li>
 </ul>
-<section id="why-this-project-matters">
-<h2>Why This Project Matters<a class="headerlink" href="#why-this-project-matters" title="Link to this heading">#</a></h2>
-<section id="the-problem-with-current-research">
-<h3>The Problem with Current Research<a class="headerlink" href="#the-problem-with-current-research" title="Link to this heading">#</a></h3>
-<p>The time-series forecasting community increasingly recognizes the need for standardized evaluation frameworks. The absence of standardized benchmark datasets has meant that most studies evaluate their methods on limited, arbitrarily selected time series, making meaningful comparisons across methods virtually impossible. This lack of standardization has resulted in poor quality evaluations and irreproducible comparisons across forecasting studies.</p>
-<p>While several benchmark repositories have emerged (such as the Monash Time Series Forecasting Repository), they remain limited in their coverage of financial markets. The FRED-MD database provides macroeconomic series but focuses on real economic indicators rather than financial market data. Other benchmarks like UCR and UEA archives do not include coverage of time series from the financial domain at all.</p>
-</section>
-<section id="why-finance-specific-benchmarks-matter">
-<h3>Why Finance-Specific Benchmarks Matter<a class="headerlink" href="#why-finance-specific-benchmarks-matter" title="Link to this heading">#</a></h3>
-<p>According to the “No Free Lunch” Theorem, there is no single forecasting method that performs best for all time series. To improve financial forecasting, we need to evaluate methods on datasets from the financial domain that reflect how data commonly appears in the relevant finance literature. This means using:</p>
-<ul class="simple">
-<li><p>The same data sources as canonical papers</p></li>
-<li><p>The same domain-specific cleaning and normalization procedures established in the literature</p></li>
-</ul>
-</section>
-<section id="addressing-the-replication-crisis">
-<h3>Addressing the Replication Crisis<a class="headerlink" href="#addressing-the-replication-crisis" title="Link to this heading">#</a></h3>
-<p>Finance faces an active debate about a potential “replication crisis.” Studies find that predictors’ average strength is only 54% of the original strength outside the original sample, with 32% becoming insignificant. While much of this involves data snooping, some involves coding bugs and lack of standardization. Standardized, open-source data infrastructure helps prevent simple errors from invalidating years of research.</p>
-</section>
-</section>
-<section id="what-datasets-are-included">
-<h2>What Datasets Are Included<a class="headerlink" href="#what-datasets-are-included" title="Link to this heading">#</a></h2>
-<p>The repository provides <strong>25 datasets</strong> organized into three main categories:</p>
-<section id="returns-data-11-datasets">
-<h3>Returns Data (11 datasets)<a class="headerlink" href="#returns-data-11-datasets" title="Link to this heading">#</a></h3>
-<p>Asset return series spanning multiple asset classes:</p>
-<ul class="simple">
-<li><p><strong>Equities</strong>: CRSP stock returns, Fama-French 25 portfolios (size and book-to-market)</p></li>
-<li><p><strong>Fixed Income</strong>: Treasury bonds and portfolios, corporate bonds and portfolios</p></li>
-<li><p><strong>Credit</strong>: CDS contracts and portfolios</p></li>
-<li><p><strong>Other</strong>: Commodity futures, foreign exchange, SPX options portfolios</p></li>
-</ul>
-</section>
-<section id="basis-spread-data-5-datasets">
-<h3>Basis Spread Data (5 datasets)<a class="headerlink" href="#basis-spread-data-5-datasets" title="Link to this heading">#</a></h3>
-<p>Arbitrage basis spreads that serve as critical early warning indicators of stress in the financial system:</p>
-<ul class="simple">
-<li><p>CDS-bond basis</p></li>
-<li><p>Covered interest parity (CIP) deviations</p></li>
-<li><p>TIPS-Treasury spreads</p></li>
-<li><p>Treasury spot-futures basis</p></li>
-<li><p>Treasury-swap spreads</p></li>
-</ul>
-</section>
-<section id="other-financial-data-9-datasets">
-<h3>Other Financial Data (9 datasets)<a class="headerlink" href="#other-financial-data-9-datasets" title="Link to this heading">#</a></h3>
-<p>Specialized datasets critical for financial stability monitoring:</p>
-<ul class="simple">
-<li><p>Bank and bank holding company (BHC) cash liquidity and leverage from Call Reports</p></li>
-<li><p>HKM intermediary risk factors (daily and monthly)</p></li>
-<li><p>Treasury yield curves (Nelson-Siegel-Svensson zero-coupon yields)</p></li>
-</ul>
-</section>
-</section>
-<section id="why-the-codebase-is-useful">
-<h2>Why the Codebase is Useful<a class="headerlink" href="#why-the-codebase-is-useful" title="Link to this heading">#</a></h2>
-<section id="a-real-world-example-of-task-runner-automation">
-<h3>A Real-World Example of Task Runner Automation<a class="headerlink" href="#a-real-world-example-of-task-runner-automation" title="Link to this heading">#</a></h3>
-<p>The FTSFR codebase demonstrates exactly the kind of complex, multi-stage data science workflow that task runners like PyDoit are designed to manage. The project uses PyDoit to automate:</p>
-<ol class="arabic simple">
-<li><p><strong>Data Collection</strong>: Pulling data from multiple sources (WRDS, Bloomberg, FRED, OptionMetrics)</p></li>
-<li><p><strong>Data Cleaning</strong>: Applying canonical cleaning procedures from seminal finance papers</p></li>
-<li><p><strong>Data Transformation</strong>: Converting raw data into analysis-ready formats</p></li>
-<li><p><strong>Validation</strong>: Replicating key tables and figures from original papers to verify correctness</p></li>
-<li><p><strong>Forecasting</strong>: Running baseline forecasting models across all datasets</p></li>
-</ol>
-</section>
-<section id="reproducible-research-infrastructure">
-<h3>Reproducible Research Infrastructure<a class="headerlink" href="#reproducible-research-infrastructure" title="Link to this heading">#</a></h3>
-<p>The repository provides:</p>
-<ul class="simple">
-<li><p><strong>Automated ETL pipeline</strong> that streamlines data retrieval from multiple sources</p></li>
-<li><p><strong>Validated implementations</strong> of canonical data cleaning procedures from seminal papers</p></li>
-<li><p><strong>Virtual environments</strong> ensuring perfect reproducibility across different computing environments</p></li>
-<li><p><strong>Open-source scripts</strong> that automate the download, cleaning, and assembly of datasets</p></li>
-</ul>
-</section>
-<section id="managing-complex-dependencies">
-<h3>Managing Complex Dependencies<a class="headerlink" href="#managing-complex-dependencies" title="Link to this heading">#</a></h3>
-<p>Financial data requires specialized treatment reflecting market microstructure, regulatory requirements, and established academic conventions. The task runner manages dependencies between:</p>
-<ul class="simple">
-<li><p>Raw data downloads</p></li>
-<li><p>Cleaning scripts specific to each asset class</p></li>
-<li><p>Portfolio construction</p></li>
-<li><p>Validation against published results</p></li>
-<li><p>Forecasting experiments</p></li>
-</ul>
-<p>This is precisely the kind of complex dependency management that makes task runners essential for research workflows.</p>
-</section>
-</section>
-<section id="key-findings-from-baseline-forecasting">
-<h2>Key Findings from Baseline Forecasting<a class="headerlink" href="#key-findings-from-baseline-forecasting" title="Link to this heading">#</a></h2>
-<p>The repository includes baseline forecasting results using 12 methods ranging from classical statistical models (ARIMA, ETS, Theta) to modern deep learning architectures (Transformer variants, N-BEATS, TimesFM). Key findings include:</p>
-<ul class="simple">
-<li><p><strong>Model effectiveness varies by asset class</strong>: The answer to “which model works best?” depends on the task</p></li>
-<li><p><strong>Returns remain difficult to forecast</strong>: Even the best models achieve out-of-sample R-squared values near zero for asset returns, consistent with decades of empirical finance</p></li>
-<li><p><strong>ML-based global models show gains for non-return series</strong>: Machine learning approaches yield meaningful accuracy improvements for basis spreads, liquidity metrics, and other supervisory indicators where classical baselines fall short</p></li>
-</ul>
-</section>
-<section id="connection-to-course-material">
-<h2>Connection to Course Material<a class="headerlink" href="#connection-to-course-material" title="Link to this heading">#</a></h2>
-<p>The FTSFR project exemplifies why task runners matter for data science research:</p>
-<ol class="arabic simple">
-<li><p><strong>Workflow Management</strong>: The <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file documents the entire pipeline from raw data to forecasting results</p></li>
-<li><p><strong>Reproducibility</strong>: Anyone with access to the data sources can reproduce the exact datasets and results</p></li>
-<li><p><strong>Data Integrity</strong>: Changes to cleaning procedures automatically trigger re-runs of dependent tasks</p></li>
-<li><p><strong>Collaboration</strong>: The standardized workflow enables researchers worldwide to contribute and validate results</p></li>
-</ol>
-<p>When you examine the FTSFR codebase, pay attention to how the <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file structures the dependencies between data collection, cleaning, and analysis tasks. This is exactly the pattern we discussed in the task runners section of this course.</p>
-<div class="tip admonition">
-<p class="admonition-title">Discussion</p>
-<p>Let’s open up the FTSFR repository and take a look at the structure of the <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file. Then, let’s open up a simpler version of one of it’s modules. For example, let’s open up</p>
-</div>
 </section>
 </section>
 
@@ -661,20 +657,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="uv_and_pixi.html"
+       href="../Week2/env_files.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Modern Environment Tools: uv and pixi</p>
+        <p class="prev-next-title">Env Files, Secrets, and the Separations of Settings from Code</p>
       </div>
     </a>
     <a class="right-next"
-       href="../overview_w3.html"
+       href="../subject_to_change_after_this_week.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</p>
+        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -694,26 +690,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-project-matters">Why This Project Matters</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-current-research">The Problem with Current Research</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-finance-specific-benchmarks-matter">Why Finance-Specific Benchmarks Matter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-the-replication-crisis">Addressing the Replication Crisis</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-datasets-are-included">What Datasets Are Included</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-data-11-datasets">Returns Data (11 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-spread-data-5-datasets">Basis Spread Data (5 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-financial-data-9-datasets">Other Financial Data (9 datasets)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-codebase-is-useful">Why the Codebase is Useful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-world-example-of-task-runner-automation">A Real-World Example of Task Runner Automation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducible-research-infrastructure">Reproducible Research Infrastructure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-complex-dependencies">Managing Complex Dependencies</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings-from-baseline-forecasting">Key Findings from Baseline Forecasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-course-material">Connection to Course Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-funds-are-enough">Two funds are enough</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-everyone-holds-it-it-is-the-market-the-capm">If everyone holds it, it is the market: the CAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-one-period-is-not-enough-the-icapm">When one period is not enough: the ICAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-icapm-to-fama-french">From the ICAPM to Fama-French</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-data-comes-in">Where the data comes in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

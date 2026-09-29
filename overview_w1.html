@@ -47,12 +47,14 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview_w1';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="What Is This Course About? Why Data Pipelines?" href="Week1/what_is_this_course_about.html" />
-    <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
+    <link rel="prev" title="A Tour of the Data" href="Week0/data_tour.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -206,7 +208,6 @@
 <li class="toctree-l2"><a class="reference internal" href="Week0/data_tour.html">A Tour of the Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 1: Git, GitHub, and Virtual Environments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
@@ -215,8 +216,10 @@
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
@@ -274,8 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -517,6 +519,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
 </ul>
 </div>
 <p>The paper this week is Sharpe (1964) and the object is the CAPM’s market
@@ -593,7 +596,8 @@ Then the final project in outline, so you know what you are working toward.</p><
 <li><p><strong>Git and GitHub, by doing.</strong> Clone <a class="reference internal" href="HW0.html"><span class="std std-doc">HW 0</span></a>, make a change, commit,
 push. This is also how every assignment is submitted. Point at the two
 <a class="reference external" href="https://skills.github.com/">GitHub Skills</a> tutorials that are HW 1 Part 1:
-<a class="reference external" href="https://github.com/skills/review-pull-requests">review pull requests</a> and
+<a class="reference external" href="https://github.com/skills/introduction-to-git">introduction to Git</a>,
+<a class="reference external" href="https://github.com/skills/review-pull-requests">review pull requests</a>, and
 <a class="reference external" href="https://github.com/skills/resolve-merge-conflicts">resolve merge conflicts</a>.</p></li>
 <li><p><strong>Virtual environments.</strong> <a class="reference internal" href="Week1/virtual_environments.html"><span class="std std-doc">Virtual Environments</span></a>,
 worked through <code class="docutils literal notranslate"><span class="pre">software_environments/</span></code> in the in-class repo, which builds the
@@ -613,7 +617,9 @@ authenticate without prompting is covered in that notebook, and HW 1 needs it.</
 market beta is the only priced risk. The practical object is a
 value-weighted index of everything, which is what CRSP publishes and what you
 are about to rebuild. This is the framing for HW 1’s first half; the alphas
-the CAPM leaves behind are next week’s problem.</p></li>
+the CAPM leaves behind are next week’s problem. For how the CAPM follows
+from the HW 0 tangency portfolio, see
+<a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html"><span class="std std-doc">From Mean-Variance to Factor Models</span></a>.</p></li>
 <li><p><strong>Launch <a class="reference internal" href="HW1.html"><span class="std std-doc">HW 1</span></a>.</strong> Clone it, build the environment, put credentials
 in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, run <code class="docutils literal notranslate"><span class="pre">doit</span></code>, run <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, watch it fail, and start filling in
 <code class="docutils literal notranslate"><span class="pre">calc_CRSP_indices.py</span></code> together.</p></li>
@@ -660,12 +666,12 @@ the case study is the <strong>Fama-French 1993</strong> replication that complet
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="subject_to_change_after_this_week.html"
+       href="Week0/data_tour.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
+        <p class="prev-next-title">A Tour of the Data</p>
       </div>
     </a>
     <a class="right-next"

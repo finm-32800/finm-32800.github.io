@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="What is a build system or task runner?" href="Week3/what_is_a_task_runner.html" />
-    <link rel="prev" title="Env Files, Secrets, and the Separations of Settings from Code" href="Week2/env_files.html" /> 
+    <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -206,7 +206,6 @@
 <li class="toctree-l2"><a class="reference internal" href="Week0/data_tour.html">A Tour of the Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
@@ -215,8 +214,10 @@
 <li class="toctree-l2"><a class="reference internal" href="Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
@@ -274,8 +275,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html">CAPM Analysis of Size, Value, and Investment Portfolios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html">Fama-French 3-Factor Analysis of Investment Portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -579,14 +579,17 @@ rest.
 <em>→ HW 1 Part 3:</em> you complete the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses of the Compustat and
 CRSP-Compustat link queries in <code class="docutils literal notranslate"><span class="pre">src/pull_CRSP_Compustat.py</span></code>. These are tested
 against a small in-memory database, so you can iterate without WRDS.</p></li>
-<li><p><strong>Why the factors exist, before how they are built.</strong> The CAPM says every
-portfolio’s alpha should be zero. We test that on portfolios sorted by size,
-book-to-market, and investment in the
-<a class="reference internal" href="notebooks/_06_CAPM_analysis_ipynb.html"><span class="std std-doc">CAPM analysis notebook</span></a>, find the
-alphas it leaves behind, and watch SMB and HML absorb them in the
-<a class="reference internal" href="notebooks/_07_Fama_French_3_factor_ipynb.html"><span class="std std-doc">three-factor notebook</span></a>. That
-is the argument of Fama and French (1993) in two notebooks, and the reason
-we are about to build the factors.</p></li>
+<li><p><strong>Why the factors exist, before how they are built.</strong> Start from HW 0: if
+every investor holds the tangency portfolio, it must be the market, and
+that is the CAPM. If investors also hedge changes in their opportunities,
+more factors appear. <a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html"><span class="std std-doc">From Mean-Variance to Factor Models</span></a>
+tells that story in words. The
+<a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">CAPM and Fama-French notebook</span></a>
+then tests it on portfolios sorted by size, book-to-market, and investment:
+the market alone is not the tangency portfolio, the CAPM leaves alphas
+behind, and SMB and HML absorb some of them but not all. That is the
+argument of Fama and French (1993), and the reason we are about to build
+the factors.</p></li>
 <li><p><strong>The case study, end to end.</strong> Walk the
 <a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html"><span class="std std-doc">Fama-French pipeline</span></a>: automated
 CRSP and Compustat pulls feeding book equity, the exchange and share-code
@@ -645,12 +648,12 @@ and the expected path of the policy rate, published as a website.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Week2/env_files.html"
+       href="subject_to_change_after_this_week.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Env Files, Secrets, and the Separations of Settings from Code</p>
+        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
       </div>
     </a>
     <a class="right-next"
