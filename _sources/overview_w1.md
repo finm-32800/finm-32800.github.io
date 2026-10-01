@@ -80,8 +80,8 @@ data.
    and the [reproducibility case study](./Week1/case_study_reproducibility_in_finance.md).
    Then the final project in outline, so you know what you are working toward.
 3. **Git and GitHub, by doing.** Clone [HW 0](./HW0.md), make a change, commit,
-   push. This is also how every assignment is submitted. Point at the two
-   [GitHub Skills](https://skills.github.com/) tutorials that are HW 1 Part 1:
+   push. This is also how every assignment is submitted. Point at the three
+   [GitHub Skills](https://skills.github.com/) tutorials that are HW 1 Part A:
    [introduction to GitHub](https://github.com/skills/introduction-to-github),
    [communicate using Markdown](https://github.com/skills/communicate-using-markdown), and
    [introduction to Git](https://github.com/skills/introduction-to-git).
@@ -118,11 +118,11 @@ assignment covering two papers. This week's half rebuilds the CRSP
 value-weighted and equal-weighted market indices and reconstructs the S&P 500
 from its constituents:
 
-- [HW Guide Part A: CRSP Market Returns Indices](notebooks/_02_CRSP_market_index_ipynb.ipynb)
-- [HW Guide Part B: Reconstructing the S&P 500 Index](notebooks/_03_SP500_constituents_and_index_ipynb.ipynb)
+- [HW 1 Guide B: The CRSP Market Index](notebooks/_03_CRSP_market_index_ipynb.ipynb)
+- [HW 1 Guide C: Reconstructing the S&P 500](notebooks/_04_SP500_constituents_and_index_ipynb.ipynb)
 
 Next week's half merges CRSP with Compustat and replicates Fama and French
-(1993). You do not need to wait for it to start Parts 1 and 2.
+(1993). You do not need to wait for it to start Parts A to C.
 
 The way to work is the same in every assignment: run `doit` so the data is
 pulled, then run `pytest`, read the failing test, and write the code that

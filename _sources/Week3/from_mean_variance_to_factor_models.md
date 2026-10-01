@@ -100,7 +100,7 @@ have alpha once all three are in the regression.
 
 ## Where the data comes in
 
-The [CAPM and Fama-French notebook](../notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
+[HW 1 Guide E](../notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
 tests both claims on the portfolios your HW 1 pipeline builds. It computes the
 tangency portfolio of the factors with the HW 0 formula, finds the alphas the
 CAPM leaves behind, and checks how many of them SMB and HML absorb.

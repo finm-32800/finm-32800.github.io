@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HW 1 Guide D: Constructing the Fama-French Factors &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_05_Fama_French_1993_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HW 1 Guide E: Testing the CAPM and the Three-Factor Model" href="_06_CAPM_and_Fama_French_ipynb.html" />
+    <link rel="prev" title="HW 1 Guide C: Reconstructing the S&amp;P 500" href="_04_SP500_constituents_and_index_ipynb.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_05_Fama_French_1993_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_05_Fama_French_1993_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>HW 1 Guide D: Constructing the Fama-French Factors</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prep-data">Prep Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-load-data">Step 1. Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calculate-book-equity">Step 2. Calculate Book Equity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-subset-crsp-to-common-stock-and-proper-exchanges">Step 3. Subset CRSP to Common Stock and Proper Exchanges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-market-equity">Step 4.  Calculate Market Equity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-merge-crsp-and-compustat">Step 5. Merge CRSP and Compustat</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-crsp-compustat-merged-ccm-database">What is the CRSP/Compustat Merged (CCM) database?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuing-with-the-methodology">Continuing with the methodology</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-of-the-sample-survives-each-step">How much of the sample survives each step</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-portfolios-and-factors">Create Portfolios and Factors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-portfolios-by-size-and-book-to-market">Step 6. Create Portfolios by Size and Book-to-Market.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-calculation-of-ff-factors">Step 7. Calculation of FF factors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-with-ken-frenchs-factors">Compare with Ken French’s factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-investment-sort">The investment sort</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-d-constructing-the-fama-french-factors">
+<h1>HW 1 Guide D: Constructing the Fama-French Factors<a class="headerlink" href="#hw-1-guide-d-constructing-the-fama-french-factors" title="Link to this heading">#</a></h1>
+<p><strong>Summary</strong></p>
+<p>The Fama and French (1993) paper, “Common Risk Factors in the Returns on Stocks and Bonds,” revolutionized asset pricing theory by challenging the Capital Asset Pricing Model (CAPM) with a three-factor model that includes market risk, size (market capitalization), and book-to-market value as predictors of stock returns. They demonstrated that the market factor alone does not fully explain stock returns and that small stocks and stocks with high book-to-market ratios yield higher returns than can be explained
+by market beta alone, suggesting that these factors capture additional risks not accounted for by the CAPM. This seminal work has significantly influenced academic research and investment practices by highlighting the importance of size and value factors in asset pricing, thereby laying the groundwork for more sophisticated models and strategies in finance.</p>
+<p><strong>Learning Outcomes</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Work with CRSP and Compustat datasets</strong>: Gain hands-on experience in using financial data sources that provide stock market prices and firm-level accounting data, which are essential for empirical research in finance.</p></li>
+<li><p><strong>Leverage the CRSP/Compustat Merged (CCM) database</strong>: Understand the purpose and structure of the CCM linking table, and use it to accurately merge CRSP’s market data with Compustat’s fundamental data.</p></li>
+<li><p><strong>Construct Fama-French portfolios and factors</strong>: Use market capitalization and book-to-market ratios to classify firms into portfolios, calculate value-weighted returns, and compute the size (SMB) and value (HML) factors.</p></li>
+<li><p><strong>Compare your results with established benchmarks</strong>: Validate your manually computed Fama-French factors against the official data from Kenneth French’s library and analyze any differences.</p></li>
+</ol>
+<p><strong>Game Plan</strong></p>
+<p>The code underlying this notebook follows the methodology described in <a class="reference external" href="https://wrds-www.wharton.upenn.edu/pages/wrds-research/applications/risk-factors-and-industry-benchmarks/fama-french-factors/">https://wrds-www.wharton.upenn.edu/pages/wrds-research/applications/risk-factors-and-industry-benchmarks/fama-french-factors/</a> . I will quote from that methodology extensively. There is also a set
+of videos on this linked website. Those may be helpful for this exercise.</p>
+<p>The code is lightly edited from the code provided by WRDS on their website.</p>
+<p>That code lives in <code class="docutils literal notranslate"><span class="pre">src/shared_portfolio_sorts.py</span></code> (the steps every
+portfolio sort shares) and <code class="docutils literal notranslate"><span class="pre">src/calc_Fama_French_1993.py</span></code> (the size and
+book-to-market sort and the factors). The <code class="docutils literal notranslate"><span class="pre">doit</span></code> tasks
+<code class="docutils literal notranslate"><span class="pre">calc_Fama_French_1993</span></code> and <code class="docutils literal notranslate"><span class="pre">calc_inv_portfolios</span></code> run it, and
+<code class="docutils literal notranslate"><span class="pre">calc_Fama_French_diagnostics</span></code> measures the result. This guide does not
+rerun the pipeline. It looks at the raw data to explain each filter, then
+loads what the tasks saved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">calc_Fama_French_diagnostics</span>
+<span class="kn">import</span> <span class="nn">figures</span>
+<span class="kn">import</span> <span class="nn">pull_CRSP_Compustat</span>
+<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prep-data">
+<h2>Prep Data<a class="headerlink" href="#prep-data" title="Link to this heading">#</a></h2>
+<section id="step-1-load-data">
+<h3>Step 1. Load Data<a class="headerlink" href="#step-1-load-data" title="Link to this heading">#</a></h3>
+<p>In order to replicate the factors from this paper, we need data from CRSP and Compustat. The CRSP data provides the stock prices while Compustat provides the fundamentals. We also use the CRSP/Compustat Linking Table to merge the two datasets. The merge is not straightforward, but there is a standard procedure used that is embodied in the linking table provided by CRSP and available on WRDS.</p>
+<ul class="simple">
+<li><p>The <strong>CRSP dataset</strong> contains stock market data, including prices, returns, and shares outstanding, for securities traded on major U.S. exchanges. This dataset is essential for measuring market performance and calculating variables such as market equity.</p></li>
+<li><p>The <strong>Compustat dataset</strong>, on the other hand, provides firm-level fundamental accounting data, such as book equity, revenue, and earnings, which are used to measure financial characteristics of companies.</p></li>
+<li><p>Finally, the <strong>CRSP/Compustat Linking Table (CCM)</strong> acts as a bridge between these two datasets by mapping CRSP’s security identifiers (PERMNO, PERMCO) to Compustat’s firm identifiers (GVKEY). This linking table resolves complexities such as multiple securities per firm, corporate actions, and differing coverage periods, ensuring accurate integration of the datasets.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">pull_CRSP_Compustat</span></code> task pulls all three; the loaders below read what it saved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span> <span class="o">=</span> <span class="n">pull_CRSP_Compustat</span><span class="o">.</span><span class="n">load_compustat</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+<span class="n">crsp</span> <span class="o">=</span> <span class="n">pull_CRSP_stock</span><span class="o">.</span><span class="n">load_CRSP_monthly_file</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+<span class="n">ccm</span> <span class="o">=</span> <span class="n">pull_CRSP_Compustat</span><span class="o">.</span><span class="n">load_CRSP_Comp_Link_Table</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-calculate-book-equity">
+<h3>Step 2. Calculate Book Equity<a class="headerlink" href="#step-2-calculate-book-equity" title="Link to this heading">#</a></h3>
+<p>“We used Compustat XpressFeed (annual data) as the source of historical accounting data in order to calculate the value of Book Equity. Different from quarterly data, annual data is unrestated (ideal for backtesting). Book Equity is defined as the Compustat book value of stockholders’ equity plus balance sheet deferred taxes and investment tax credit (if available) minus book value of preferred stock. We did not modify the original formula that adds deferred taxes and investment tax credit. According to Kenneth French’s website (as of May 2018) , it had been changes to the treatment of deferred taxes described in FASB 109.</p>
+<p>To estimate book value of preferred stock they use the redemption or liquidation or par value of preferred stock (in that order). Since Book Equity is almost missing for the whole sample during the 1950’s, we constrained our sample to begin in 1960. Additionally, we created a variable that counts number of annual records in Compustat files.”</p>
+<p>The fallbacks for preferred stock exist because the preferred stock fields
+are often missing. The share of missing values in each input shows how much
+each fallback matters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span><span class="p">[[</span><span class="s2">&quot;seq&quot;</span><span class="p">,</span> <span class="s2">&quot;txditc&quot;</span><span class="p">,</span> <span class="s2">&quot;pstkrv&quot;</span><span class="p">,</span> <span class="s2">&quot;pstkl&quot;</span><span class="p">,</span> <span class="s2">&quot;pstk&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>seq       0.188
+txditc    0.239
+pstkrv    0.174
+pstkl     0.170
+pstk      0.175
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-subset-crsp-to-common-stock-and-proper-exchanges">
+<h3>Step 3. Subset CRSP to Common Stock and Proper Exchanges<a class="headerlink" href="#step-3-subset-crsp-to-common-stock-and-proper-exchanges" title="Link to this heading">#</a></h3>
+<p>NOTE: I am using the updates CIZ version of the CRSP flat file. This means that I don’t have to merge the CRSP event files with the time series files and I don’t need to apply delisting returns, as they are already applied.</p>
+<p>“For the purpose of this procedure we used CRSP monthly data (users can extend this calculation to daily data). The first step in working with CRSP was to merge CRSP “event” and “time-series” files. CRSP event files contain historical information on the exchange code (crucial to identify firms listed in NYSE), share codes (to identify common stocks) and delisting returns. CRSP time-series files (as CRSP.MSF) contain information such as prices, returns and shares outstanding. We merged both files using a macro program (named ‘crspmerge’).”</p>
+<p>The CIZ format describes each security with several fields instead of one
+share code. Counting their values in the pulled file shows what the
+common-stock screen is choosing among:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crsp</span><span class="p">[[</span><span class="s2">&quot;sharetype&quot;</span><span class="p">,</span> <span class="s2">&quot;issuertype&quot;</span><span class="p">,</span> <span class="s2">&quot;usincflg&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sharetype  issuertype  usincflg
+NS         CORP        Y           2775891
+           ACOR        Y            661277
+           CORP        N            241208
+AD         CORP        N            149043
+NS         REIT        Y             69397
+UG         CORP        Y             41832
+SB         REIT        Y             35195
+AD         ACOR        N             19028
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crsp</span><span class="p">[</span><span class="s2">&quot;primaryexch&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>primaryexch
+Q    2167429
+N    1287940
+A     485932
+X      64671
+R        986
+B        103
+I         12
+Name: count, dtype: Int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that when we do this with the new CIZ format, we also need to apply the following filters:</p>
+<p><strong>1. <code class="docutils literal notranslate"><span class="pre">conditionaltype</span> <span class="pre">=</span> <span class="pre">'RW'</span></code></strong></p>
+<ul class="simple">
+<li><p>Filters securities with a “Regular Way” trading status, indicating standard settlement transactions (typically T+2 for equities) without special conditions like halted or suspended trading.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RW</span></code> (Regular Way) ensures the security is traded under normal market operations.</p></li>
+<li><p>Excludes securities with conditional trading statuses (e.g., halted, suspended, or special settlement terms).</p></li>
+</ul>
+<p><strong>2. <code class="docutils literal notranslate"><span class="pre">TradingStatusFlg</span> <span class="pre">=</span> <span class="pre">'A'</span></code></strong></p>
+<ul class="simple">
+<li><p>Identifies securities that are <strong>actively trading</strong> (not halted or suspended).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> (Active) means the security is actively traded on the exchange during the period.</p></li>
+<li><p>Contrasts with flags like <code class="docutils literal notranslate"><span class="pre">H</span></code> (Halted) or <code class="docutils literal notranslate"><span class="pre">S</span></code> (Suspended), which indicate temporary trading interruptions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crsp</span><span class="p">[[</span><span class="s2">&quot;conditionaltype&quot;</span><span class="p">,</span> <span class="s2">&quot;tradingstatusflg&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>conditionaltype  tradingstatusflg
+RW               A                   3940193
+NT               X                     64671
+RW               H                      1120
+                 S                       929
+NW               A                       160
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-calculate-market-equity">
+<h3>Step 4.  Calculate Market Equity<a class="headerlink" href="#step-4-calculate-market-equity" title="Link to this heading">#</a></h3>
+<p>NOTE: I am using the updates CIZ version of the CRSP flat file. This means that I don’t have to merge the CRSP event files with the time series files and I don’t need to apply delisting returns, as they are already applied.</p>
+<p>“Second, we added delisting returns (to reduce any bias in portfolio returns) and calculated Market Capitalization (ME) for each CRSP security (abs(prc)*shrout). There were cases when the same firm (permco) had two or more securities (permno) on the same date. For the purpose of ME for the firm, we aggregated all ME for a given permco, date. This aggregated ME was assigned to the CRSP permno that has the largest ME. Finally, ME at June and December were flagged since (1) December ME will be used to create Book-to-Market ratio (BEME) and (2) June ME has to be positive in order to be part of the portfolio.”</p>
+<p>How common is a firm with more than one security? Count the securities
+(<code class="docutils literal notranslate"><span class="pre">permno</span></code>) per firm (<code class="docutils literal notranslate"><span class="pre">permco</span></code>) in each month:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crsp</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;permco&quot;</span><span class="p">,</span> <span class="s2">&quot;jdate&quot;</span><span class="p">])[</span><span class="s2">&quot;permno&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>permno
+1    3927376
+2      37666
+3        846
+4        153
+7        100
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-merge-crsp-and-compustat">
+<h3>Step 5. Merge CRSP and Compustat<a class="headerlink" href="#step-5-merge-crsp-and-compustat" title="Link to this heading">#</a></h3>
+<section id="what-is-the-crsp-compustat-merged-ccm-database">
+<h4>What is the CRSP/Compustat Merged (CCM) database?<a class="headerlink" href="#what-is-the-crsp-compustat-merged-ccm-database" title="Link to this heading">#</a></h4>
+<p>To successfully replicate the Fama-French factors, we need to merge the CRSP and Compustat datasets. This step is not straightforward due to the differences in their data structures, coverage, and primary identifiers. CRSP data primarily tracks securities, while Compustat focuses on firm-level accounting data, making it necessary to carefully link the two. Luckily, we have access to the <strong>CRSP/Compustat Merged (CCM) database</strong>, which serves as an intermediary table designed to simplify the merging process by providing pre-established links between the datasets.</p>
+<p>It is important to note that the CCM database is not a direct merging of the CRSP and Compustat datasets. Instead, it is a linking table that matches CRSP identifiers (such as PERMNO and PERMCO) with Compustat’s GVKEY identifier. By leveraging CCM, we can handle complexities such as companies with multiple securities, historical changes due to mergers and acquisitions, and discrepancies in data coverage between the two datasets. For example, the linking table includes fields to identify “primary” matches (e.g., <code class="docutils literal notranslate"><span class="pre">linkprim</span> <span class="pre">=</span> <span class="pre">'P'</span></code>) and remove duplicate or ambiguous links, ensuring the integrity of the merged data.</p>
+<p>The CCM database is critical because it eliminates the need to manually match identifiers across datasets, a process that can be error-prone and time-consuming. Using CCM ensures that we can accurately align CRSP’s market data with Compustat’s fundamental data, allowing us to calculate variables like the book-to-market ratio and market capitalization, which are essential for constructing Fama-French portfolios and factors. In this step, we will merge the datasets using CCM while cleaning the data to handle duplicates and ambiguities, laying the foundation for the next steps in the analysis.</p>
+<p>In summary, the CCM provides link identifiers between CRSP’s PERMNO/PERMCO and Compustat’s GVKEY. This linking is complex because:</p>
+<ul class="simple">
+<li><p>Companies can have multiple securities (PERMNOs)</p></li>
+<li><p>Companies merge, split, or change names</p></li>
+<li><p>Corporate structures change over time</p></li>
+</ul>
+<p>The CCM database handles these complexities for us.</p>
+</section>
+<section id="continuing-with-the-methodology">
+<h4>Continuing with the methodology<a class="headerlink" href="#continuing-with-the-methodology" title="Link to this heading">#</a></h4>
+<p>Following along with the linked methodology from above,</p>
+<blockquote>
+<div><p>“We merged CRSP and Compustat using the CRSP CCM product (as of April 2010). We matched Compustat’s gvkey (from calendar year t-1) to CRSP’s permno as of June year t. Data was cleaned for unnecessary duplicates. First there were cases when different gvkeys exist for same permno-date. We solved these duplicates by only keeping those cases that are flagged as ‘primary’ matches by CRSP’s CCM (linkprim=‘P’ ). There were other unnecessary duplicates that were removed. Some companies may have two annual accounting records in the same calendar year. This is produced by change in the fiscal year end during the same calendar year. In these cases, we selected the last annual record for a given calendar year.</p>
+</div></blockquote>
+<blockquote>
+<div><p>After data cleaning, the book-to-market ratio for every firm in the sample were calculated by dividing Book Equity (for fiscal year that ends on year t-1) over the market value of its common equity at the end of December year t -1. These book-to-market ratios and Market Capitalization (as of December year t-1) were assigned to June year t in order to create portfolios.”</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="how-much-of-the-sample-survives-each-step">
+<h2>How much of the sample survives each step<a class="headerlink" href="#how-much-of-the-sample-survives-each-step" title="Link to this heading">#</a></h2>
+<p>Each filter above removes observations. The <code class="docutils literal notranslate"><span class="pre">calc_Fama_French_diagnostics</span></code>
+task counts what is left after each step of the pipeline, using the same
+functions that build the portfolios. The unit changes along the way: Compustat
+is one row per firm-year, the CRSP monthly file one row per stock-month, and
+the June files one row per stock per June.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attrition</span><span class="p">,</span> <span class="n">ff_compare</span><span class="p">,</span> <span class="n">inv_compare</span> <span class="o">=</span> <span class="n">calc_Fama_French_diagnostics</span><span class="o">.</span><span class="n">load_diagnostics</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">OUTPUT_DIR</span>
+<span class="p">)</span>
+<span class="n">attrition</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dataset</th>
+      <th>Step</th>
+      <th>Unit</th>
+      <th>Observations</th>
+      <th>Distinct IDs</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Compustat</td>
+      <td>Annual fundamentals, as pulled</td>
+      <td>firm-year</td>
+      <td>592717</td>
+      <td>46823</td>
+      <td>gvkey</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Compustat</td>
+      <td>With positive book equity</td>
+      <td>firm-year</td>
+      <td>431354</td>
+      <td>35346</td>
+      <td>gvkey</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CRSP</td>
+      <td>Monthly stock file, as pulled</td>
+      <td>stock-month</td>
+      <td>4007073</td>
+      <td>31003</td>
+      <td>permno</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CRSP</td>
+      <td>Common stock on NYSE, AMEX, and Nasdaq</td>
+      <td>stock-month</td>
+      <td>3375612</td>
+      <td>26040</td>
+      <td>permno</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CRSP</td>
+      <td>One security per firm (largest permno in permco)</td>
+      <td>stock-month</td>
+      <td>3340748</td>
+      <td>25910</td>
+      <td>permno</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CRSP</td>
+      <td>June observations with a prior-December ME</td>
+      <td>stock-June</td>
+      <td>267285</td>
+      <td>24901</td>
+      <td>permno</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CRSP-Compustat</td>
+      <td>June observations linked through CCM</td>
+      <td>stock-June</td>
+      <td>251462</td>
+      <td>22165</td>
+      <td>permno</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CRSP-Compustat</td>
+      <td>Held in one of the six portfolios</td>
+      <td>stock-month</td>
+      <td>2647979</td>
+      <td>21038</td>
+      <td>permno</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Three steps do most of the work. Requiring positive book equity drops about a
+quarter of Compustat firm-years. The common-stock and exchange screen drops
+ADRs, REITs, foreign-incorporated firms, and securities that trade off the
+three main exchanges. And moving from monthly data to June observations is a
+change of unit, not a loss: each stock contributes one June per year, which
+is when portfolios are formed.</p>
+</section>
+<section id="create-portfolios-and-factors">
+<h2>Create Portfolios and Factors<a class="headerlink" href="#create-portfolios-and-factors" title="Link to this heading">#</a></h2>
+<section id="step-6-create-portfolios-by-size-and-book-to-market">
+<h3>Step 6. Create Portfolios by Size and Book-to-Market.<a class="headerlink" href="#step-6-create-portfolios-by-size-and-book-to-market" title="Link to this heading">#</a></h3>
+<p>“Every June (year t) we calculated the median equity value of NYSE-listed firms using Market Capitalization at June t. We used this median to classify firms as Small or Big on portfolios created at the end of June year t. In a similar fashion, as of June year t, firms are broken into three book-to-market equity groups (Low, Medium, and High) based on the 30% and 70% break-points of the NYSE-firms with positive book-to-market equity. In both cases (for size and book-to-market classification), we restricted our sample to those firms with positive book-to-market, positive market cap at June, common equity (share code 10 and 11) and at least two years in Compustat annual file.</p>
+<p>We created a total of six size and book-to-market equity portfolios. Portfolios are created at the end of June and kept for 12 months. Within each portfolio a monthly value-weighted return is calculated (each month, the weight is the Market Capitalization as of June year t adjusted by any change in price between the end June t and the end of the previous month).”</p>
+<p><img alt="Fama-French Portfolio Splits" src="../_images/fama_french_portfolio_splits.gif" /></p>
+<p>The number of firms in each portfolio shows how the sort evolves. The jump in
+the early 1970s is Nasdaq entering CRSP. Because the breakpoints come from
+NYSE firms only, the small-firm portfolios absorb most of the Nasdaq listings.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4c66cd9ce4a20ea0c58aba4c6bd78c4ef426709df964cf295222a5b9b0a7ee58.png" src="../_images/4c66cd9ce4a20ea0c58aba4c6bd78c4ef426709df964cf295222a5b9b0a7ee58.png" />
+</div>
+</div>
+</section>
+<section id="step-7-calculation-of-ff-factors">
+<h3>Step 7. Calculation of FF factors<a class="headerlink" href="#step-7-calculation-of-ff-factors" title="Link to this heading">#</a></h3>
+<p>“The size factor, Small minus Big (SMB) , is the difference of average return on the three Small-firm portfolios and the average return on the three Big-firm portfolios.</p>
+<p>The value factor, High minus Low (HML) , is the difference between the average return on the two High book-to-market equity portfolios and the average return on the two Low book-to-market equity portfolios. For comparison purpose, we also calculate the number of firms in each portfolio.”</p>
+</section>
+</section>
+<section id="compare-with-ken-frenchs-factors">
+<h2>Compare with Ken French’s factors<a class="headerlink" href="#compare-with-ken-frenchs-factors" title="Link to this heading">#</a></h2>
+<p>The test of the whole pipeline is whether the SMB and HML it builds from raw
+CRSP and Compustat data match the factors Ken French publishes. The
+correlations, from 1970 on:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ff_compare</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>smb_actual</th>
+      <th>hml_actual</th>
+      <th>smb_manual</th>
+      <th>hml_manual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>smb_actual</th>
+      <td>1.000</td>
+      <td>-0.149</td>
+      <td>0.996</td>
+      <td>-0.196</td>
+    </tr>
+    <tr>
+      <th>hml_actual</th>
+      <td>-0.149</td>
+      <td>1.000</td>
+      <td>-0.134</td>
+      <td>0.984</td>
+    </tr>
+    <tr>
+      <th>smb_manual</th>
+      <td>0.996</td>
+      <td>-0.134</td>
+      <td>1.000</td>
+      <td>-0.192</td>
+    </tr>
+    <tr>
+      <th>hml_manual</th>
+      <td>-0.196</td>
+      <td>0.984</td>
+      <td>-0.192</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Plotting cumulative returns makes small, persistent differences visible,
+which a correlation can hide:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/384d1f296dcf75f5546974717ac1cf3bf7a5793959c8f4a07d76990cf7122500.png" src="../_images/384d1f296dcf75f5546974717ac1cf3bf7a5793959c8f4a07d76990cf7122500.png" />
+</div>
+</div>
+<p>The match is close but not exact. The differences come from data vintages
+(Compustat and CRSP revise history), from the move to the CIZ version of
+CRSP, and from small screening choices that the published methodology does
+not pin down. The tests in <code class="docutils literal notranslate"><span class="pre">src/test_calc_Fama_French_1993.py</span></code> check for this
+kind of statistical closeness, not for an exact match.</p>
+</section>
+<section id="the-investment-sort">
+<h2>The investment sort<a class="headerlink" href="#the-investment-sort" title="Link to this heading">#</a></h2>
+<p>The same machinery builds a second sort, on corporate investment, as in the
+five-factor model of Fama and French (2015). Investment is asset growth: the
+change in total assets from fiscal year <span class="math notranslate nohighlight">\(t-2\)</span> to <span class="math notranslate nohighlight">\(t-1\)</span>, divided by total
+assets in <span class="math notranslate nohighlight">\(t-2\)</span>. Each June, the 30th and 70th percentiles of investment among
+NYSE firms split all stocks into Low (conservative), Medium, and High
+(aggressive) portfolios, held from July to the next June.</p>
+<p>Everything up to the merge with Compustat is shared with the size and
+book-to-market sort: the same book equity, market equity, and universe
+screens. Only the sorting variable and its breakpoints are new, which is why
+<code class="docutils literal notranslate"><span class="pre">src/calc_inv_portfolios.py</span></code> is short. Its portfolios track Ken French’s
+“Portfolios Formed on INV” closely:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inv_compare</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pearson R</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>High</th>
+      <td>0.981</td>
+    </tr>
+    <tr>
+      <th>Low</th>
+      <td>0.958</td>
+    </tr>
+    <tr>
+      <th>Medium</th>
+      <td>0.982</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_04_SP500_constituents_and_index_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">HW 1 Guide C: Reconstructing the S&amp;P 500</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_06_CAPM_and_Fama_French_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prep-data">Prep Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-load-data">Step 1. Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calculate-book-equity">Step 2. Calculate Book Equity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-subset-crsp-to-common-stock-and-proper-exchanges">Step 3. Subset CRSP to Common Stock and Proper Exchanges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-market-equity">Step 4.  Calculate Market Equity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-merge-crsp-and-compustat">Step 5. Merge CRSP and Compustat</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-crsp-compustat-merged-ccm-database">What is the CRSP/Compustat Merged (CCM) database?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuing-with-the-methodology">Continuing with the methodology</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-of-the-sample-survives-each-step">How much of the sample survives each step</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-portfolios-and-factors">Create Portfolios and Factors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-portfolios-by-size-and-book-to-market">Step 6. Create Portfolios by Size and Book-to-Market.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-calculation-of-ff-factors">Step 7. Calculation of FF factors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-with-ken-frenchs-factors">Compare with Ken French’s factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-investment-sort">The investment sort</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

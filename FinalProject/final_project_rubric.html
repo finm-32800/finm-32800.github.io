@@ -221,7 +221,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -272,10 +272,11 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -532,7 +533,7 @@ document.write(`
 For each assertion in the following, I enumerate the points each is worth in <strong>bold</strong> and there are a total of 202 points available in total.</p>
 <ul class="simple">
 <li><p><strong>4/4</strong> You must generate a single LaTeX document that briefly describes the nature of the replication project and contains all the tables and charts that your code produces. You should give a high level overview of how the replication project went. Where did you find success, where were the challenges? Also, explain the data sources that you used? The LaTeX document should not contain code snippets, but only give the tables and charts and a high level discussion of the project.</p></li>
-<li><p><strong>4/4</strong> Provide at least one jupyter notebook that gives a brief tour of the cleaned data and some of the analysis that is performed in the code. You can think of this as giving the reader a tour of the code that you have written. You can provide code snippets in this notebook. It should look something like one of the HW guides that we used, e.g. <a class="reference internal" href="../notebooks/_04_Fama_French_1993_ipynb.html"><span class="std std-doc">HW Guide: Replicate Fama-French 1993</span></a></p></li>
+<li><p><strong>4/4</strong> Provide at least one jupyter notebook that gives a brief tour of the cleaned data and some of the analysis that is performed in the code. You can think of this as giving the reader a tour of the code that you have written. You can provide code snippets in this notebook. It should look something like one of the HW guides that we used, e.g. <a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html"><span class="std std-doc">HW 1 Guide D: Constructing the Fama-French Factors</span></a></p></li>
 <li><p><strong>20/20</strong> Replicate the series, tables, and/or figures listed for your assigned project. Choose a reasonable tolerance and construct unit tests to ensure that your numbers match the paper’s within this tolerance.</p></li>
 <li><p><strong>20/20</strong> Now, reproduce the series, tables, and/or figures with updated numbers. That is, replicating the numbers from the paper require performing the calculations over the same time period as that of the paper. In this task, you’ll recalculate the series, tables, and/or figures using numbers up until the present (or at least the most recently available numbers).</p></li>
 <li><p><strong>20/20</strong> Outside of the tables, figures, or derived series that you are to replicate, have you also provided a table of your own summary statistics AND charts that gives you and the reader of sufficient understanding of the underlying data. These tables and/or figures must be typeset on LaTeX and you must provide captions on the Tables and Figure that properly describe them and motivate them. That is, you must tell me in the caption what I should learn or take away from each table and figure. You are to choose how many figures and or tables is sufficient for your case, but it will usually be one of each.</p></li>

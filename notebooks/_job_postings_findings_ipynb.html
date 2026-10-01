@@ -221,7 +221,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -272,10 +272,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -782,9 +783,9 @@ which appears in nearly every “top data pipeline tools” article, is named on
 in the entire corpus.</p>
 <p>The two columns disagree in a way worth understanding. A tool can be named by
 many firms but in very few of their postings — breadth without depth. Dagster is
-the clearest case: a quarter of firms mention it, almost always as an acceptable
-alternative inside a list that begins with Airflow, rather than as the thing
-they build on.</p>
+the clearest case: second only to Airflow by firms, but named in barely more than
+one posting per firm, almost always as an acceptable alternative inside a list
+that begins with Airflow, rather than as the thing they build on.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
@@ -986,8 +987,8 @@ Airflow, and half the industry still buys it rather than writing it.</p>
 <p><strong>HPC schedulers invert that split exactly.</strong> Slurm is most common at
 proprietary trading firms and absent from asset managers. Where banks inherited
 a batch-operations department, prop shops inherited a compute cluster.</p>
-<p><strong>Banks buy platforms.</strong> Databricks and Snowflake are near-universal at banks
-and common at asset managers, and thin everywhere else. A bank’s data
+<p><strong>Banks buy platforms.</strong> Databricks and Snowflake are near-universal at banks,
+common at asset managers, and thin at trading firms. A bank’s data
 engineering is procurement and governance; a prop shop’s is building.</p>
 <p>Both halves are worth knowing before you choose where to work, and the tools in
 this course sit between them.</p>
@@ -1152,9 +1153,8 @@ prerequisites, not the subject. Below them the picture is a delivery-and-
 correctness stack rather than a modelling one — CI/CD language, data-quality
 language, containers, infrastructure-as-code — and then Airflow.</p>
 <p><strong>Containers deserve a note, because this course does not cover them.</strong>
-Kubernetes is named by 70% of firms in the sample and Docker by 67%, making them
-the most widely named infrastructure tools in the corpus, ahead of Airflow at
-58%. That is a real gap between what the data shows and what the syllabus
+Kubernetes and Docker are named by more firms than any other product in the
+corpus, ahead of Airflow (the table above has the numbers). That is a real gap between what the data shows and what the syllabus
 teaches, and it is worth naming rather than hiding.</p>
 <p>The reason for the choice: containers solve <em>where your code runs</em>, which is a
 deployment concern owned by a platform team at most of these firms, while this
@@ -1256,8 +1256,9 @@ point-in-time correctness, backfills, look-ahead bias).</p>
 </table>
 </div></div></div>
 </div>
-<p>Data-quality language appears in a larger share of firms than any product, in
-every firm type, by a wide margin. That is the strongest evidence in this
+<p>Data-quality language is named by more firms than any product, and in every firm
+type it is at least as common as the most-named product there. (The fintech
+column is a single firm, so it is one board, not a population.) That is the strongest evidence in this
 dataset for the shape of the course: the durable skill is reasoning about
 whether a number is right, and the tooling is how you make that reasoning
 repeatable.</p>

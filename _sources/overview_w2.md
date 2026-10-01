@@ -4,7 +4,7 @@
 :maxdepth: 1
 Week3/what_is_a_task_runner.md
 Week3/doit_examples.md
-notebooks/_05_basics_of_SQL_ipynb.ipynb
+notebooks/_02_basics_of_SQL_ipynb.ipynb
 Week3/project_structure.md
 Week3/uv_and_pixi.md
 Week3/ftsfr.md
@@ -39,7 +39,7 @@ motivates it is the **Fama-French (1993)** replication that finishes
 - Write `doit` tasks with correct file dependencies and targets, and read a
   `dodo.py` as a dependency graph: [PyDoit Examples](./Week3/doit_examples.md).
 - Write enough SQL to query CRSP and Compustat and to make the joins these
-  queries need: [Basics of SQL](notebooks/_05_basics_of_SQL_ipynb.ipynb).
+  queries need: [Basics of SQL](notebooks/_02_basics_of_SQL_ipynb.ipynb).
 - Know the layout a data project should have, and why:
   [the ChartBook project template](./Week3/project_structure.md).
 - State what the CAPM fails to explain and how SMB and HML absorb it, and
@@ -49,7 +49,7 @@ motivates it is the **Fama-French (1993)** replication that finishes
 
 ## Agenda
 
-1. **HW 1 questions.** Parts 1 and 2 should be working; if your WRDS pull is not
+1. **HW 1 questions.** Parts A to C should be working; if your WRDS pull is not
    authenticating, we fix that first.
 2. **Why task runners?** [Build Systems and Task Runners](./Week3/what_is_a_task_runner.md):
    what problem they solve and where `doit` sits relative to Make and friends.
@@ -58,13 +58,13 @@ motivates it is the **Fama-French (1993)** replication that finishes
    [in-class examples repo](https://github.com/finm-32800/inclass_examples).
    Tasks, file dependencies, targets, and why a correct dependency graph is the
    whole point.
-   *→ HW 1 Part 3:* you complete `task_calc_Fama_French_1993` and
+   *→ HW 1 Part D:* you complete `task_calc_Fama_French_1993` and
    `task_calc_inv_portfolios` in `dodo.py`.
 3. **Just enough SQL.** In class I show only what is needed to query CRSP and
    Compustat and to make the simple joins our queries require. Work through
-   [Basics of SQL](notebooks/_05_basics_of_SQL_ipynb.ipynb) on your own for the
+   [Basics of SQL](notebooks/_02_basics_of_SQL_ipynb.ipynb) on your own for the
    rest.
-   *→ HW 1 Part 3:* you complete the `WHERE` clauses of the Compustat and
+   *→ HW 1 Part D:* you complete the `WHERE` clauses of the Compustat and
    CRSP-Compustat link queries in `src/pull_CRSP_Compustat.py`. These are tested
    against a small in-memory database, so you can iterate without WRDS.
 4. **Why the factors exist, before how they are built.** Start from HW 0: if
@@ -72,14 +72,14 @@ motivates it is the **Fama-French (1993)** replication that finishes
    that is the CAPM. If investors also hedge changes in their opportunities,
    more factors appear. [From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md)
    tells that story in words. The
-   [CAPM and Fama-French notebook](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
+   [HW 1 Guide E](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
    then tests it on portfolios sorted by size, book-to-market, and investment:
    the market alone is not the tangency portfolio, the CAPM leaves alphas
    behind, and SMB and HML absorb some of them but not all. That is the
    argument of Fama and French (1993), and the reason we are about to build
    the factors.
 5. **The case study, end to end.** Walk the
-   [Fama-French pipeline](notebooks/_04_Fama_French_1993_ipynb.ipynb): automated
+   Fama-French pipeline with [HW 1 Guide D](notebooks/_05_Fama_French_1993_ipynb.ipynb): automated
    CRSP and Compustat pulls feeding book equity, the exchange and share-code
    screens, NYSE breakpoints, the six size/book-to-market portfolios, and unit
    tests against the Ken French library.

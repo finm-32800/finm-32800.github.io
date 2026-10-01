@@ -221,7 +221,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -272,10 +272,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="HW0.html">Homework 0</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -512,7 +513,7 @@ document.write(`
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -549,7 +550,7 @@ recommended HW 1 finish is a week before its deadline.</p></li>
 <li><p>Write <code class="docutils literal notranslate"><span class="pre">doit</span></code> tasks with correct file dependencies and targets, and read a
 <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> as a dependency graph: <a class="reference internal" href="Week3/doit_examples.html"><span class="std std-doc">PyDoit Examples</span></a>.</p></li>
 <li><p>Write enough SQL to query CRSP and Compustat and to make the joins these
-queries need: <a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html"><span class="std std-doc">Basics of SQL</span></a>.</p></li>
+queries need: <a class="reference internal" href="notebooks/_02_basics_of_SQL_ipynb.html"><span class="std std-doc">Basics of SQL</span></a>.</p></li>
 <li><p>Know the layout a data project should have, and why:
 <a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">the ChartBook project template</span></a>.</p></li>
 <li><p>State what the CAPM fails to explain and how SMB and HML absorb it, and
@@ -561,7 +562,7 @@ construct the factors from raw CRSP and Compustat.</p></li>
 <section id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>HW 1 questions.</strong> Parts 1 and 2 should be working; if your WRDS pull is not
+<li><p><strong>HW 1 questions.</strong> Parts A to C should be working; if your WRDS pull is not
 authenticating, we fix that first.</p></li>
 <li><p><strong>Why task runners?</strong> <a class="reference internal" href="Week3/what_is_a_task_runner.html"><span class="std std-doc">Build Systems and Task Runners</span></a>:
 what problem they solve and where <code class="docutils literal notranslate"><span class="pre">doit</span></code> sits relative to Make and friends.
@@ -570,13 +571,13 @@ Then hands-on with <a class="reference internal" href="Week3/doit_examples.html"
 <a class="reference external" href="https://github.com/finm-32800/inclass_examples">in-class examples repo</a>.
 Tasks, file dependencies, targets, and why a correct dependency graph is the
 whole point.
-<em>→ HW 1 Part 3:</em> you complete <code class="docutils literal notranslate"><span class="pre">task_calc_Fama_French_1993</span></code> and
+<em>→ HW 1 Part D:</em> you complete <code class="docutils literal notranslate"><span class="pre">task_calc_Fama_French_1993</span></code> and
 <code class="docutils literal notranslate"><span class="pre">task_calc_inv_portfolios</span></code> in <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>.</p></li>
 <li><p><strong>Just enough SQL.</strong> In class I show only what is needed to query CRSP and
 Compustat and to make the simple joins our queries require. Work through
-<a class="reference internal" href="notebooks/_05_basics_of_SQL_ipynb.html"><span class="std std-doc">Basics of SQL</span></a> on your own for the
+<a class="reference internal" href="notebooks/_02_basics_of_SQL_ipynb.html"><span class="std std-doc">Basics of SQL</span></a> on your own for the
 rest.
-<em>→ HW 1 Part 3:</em> you complete the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses of the Compustat and
+<em>→ HW 1 Part D:</em> you complete the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses of the Compustat and
 CRSP-Compustat link queries in <code class="docutils literal notranslate"><span class="pre">src/pull_CRSP_Compustat.py</span></code>. These are tested
 against a small in-memory database, so you can iterate without WRDS.</p></li>
 <li><p><strong>Why the factors exist, before how they are built.</strong> Start from HW 0: if
@@ -584,14 +585,14 @@ every investor holds the tangency portfolio, it must be the market, and
 that is the CAPM. If investors also hedge changes in their opportunities,
 more factors appear. <a class="reference internal" href="Week3/from_mean_variance_to_factor_models.html"><span class="std std-doc">From Mean-Variance to Factor Models</span></a>
 tells that story in words. The
-<a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">CAPM and Fama-French notebook</span></a>
+<a class="reference internal" href="notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">HW 1 Guide E</span></a>
 then tests it on portfolios sorted by size, book-to-market, and investment:
 the market alone is not the tangency portfolio, the CAPM leaves alphas
 behind, and SMB and HML absorb some of them but not all. That is the
 argument of Fama and French (1993), and the reason we are about to build
 the factors.</p></li>
 <li><p><strong>The case study, end to end.</strong> Walk the
-<a class="reference internal" href="notebooks/_04_Fama_French_1993_ipynb.html"><span class="std std-doc">Fama-French pipeline</span></a>: automated
+Fama-French pipeline with <a class="reference internal" href="notebooks/_05_Fama_French_1993_ipynb.html"><span class="std std-doc">HW 1 Guide D</span></a>: automated
 CRSP and Compustat pulls feeding book equity, the exchange and share-code
 screens, NYSE breakpoints, the six size/book-to-market portfolios, and unit
 tests against the Ken French library.</p></li>

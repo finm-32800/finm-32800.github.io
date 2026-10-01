@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Testing the CAPM and the Fama-French Three-Factor Model &#8212; Data Pipelines for Quantitative Research</title>
+    <title>HW 1 Guide E: Testing the CAPM and the Three-Factor Model &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -54,7 +54,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Homework 2: The Yield Curve and the Policy Path" href="../HW2.html" />
-    <link rel="prev" title="HW Guide Part A: Replicate Fama-French 1993" href="_04_Fama_French_1993_ipynb.html" /> 
+    <link rel="prev" title="HW 1 Guide D: Constructing the Fama-French Factors" href="_05_Fama_French_1993_ipynb.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -223,7 +223,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_05_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -274,10 +274,11 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="_02_CRSP_market_index_ipynb.html">HW Guide Part A: CRSP Market Returns Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_03_SP500_constituents_and_index_ipynb.html">HW Guide Part B: Reconstructing the S&amp;P 500 Index</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_04_Fama_French_1993_ipynb.html">HW Guide Part A: Replicate Fama-French 1993</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Testing the CAPM and the Fama-French Three-Factor Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -483,7 +484,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Testing the CAPM and the Fama-French Three-Factor Model</h1>
+    <h1>HW 1 Guide E: Testing the CAPM and the Three-Factor Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -514,8 +515,8 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="testing-the-capm-and-the-fama-french-three-factor-model">
-<h1>Testing the CAPM and the Fama-French Three-Factor Model<a class="headerlink" href="#testing-the-capm-and-the-fama-french-three-factor-model" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-e-testing-the-capm-and-the-three-factor-model">
+<h1>HW 1 Guide E: Testing the CAPM and the Three-Factor Model<a class="headerlink" href="#hw-1-guide-e-testing-the-capm-and-the-three-factor-model" title="Link to this heading">#</a></h1>
 <p>The page
 <a class="reference external" href="https://finm-32800.github.io/Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a>
 tells the theory story in words: if every investor holds the tangency
@@ -546,16 +547,18 @@ R_{p,t} - R_{f,t} = \alpha_p + \beta_{p} (R_{m,t} - R_{f,t})
 <p>The CAPM is this regression with <span class="math notranslate nohighlight">\(s_p = h_p = 0\)</span>. A nonzero alpha means that
 the factors’ tangency portfolio can be improved on by adding portfolio <span class="math notranslate nohighlight">\(p\)</span>
 (Gibbons, Ross, and Shanken 1989), so the two views always agree.</p>
+<p>The calculations are in <code class="docutils literal notranslate"><span class="pre">src/calc_CAPM_and_FF3.py</span></code>, and the <code class="docutils literal notranslate"><span class="pre">doit</span></code> task
+<code class="docutils literal notranslate"><span class="pre">calc_CAPM_and_FF3</span></code> saves the tables this guide discusses. In HW 1 this part
+has no blanks to fill and no tests: it is here to show what the portfolios
+you built in Part D are for.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-
-<span class="kn">import</span> <span class="nn">finm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_CAPM_and_FF3</span>
+<span class="kn">import</span> <span class="nn">figures</span>
 <span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -564,33 +567,17 @@ the factors’ tangency portfolio can be improved on by adding portfolio <span c
 <h2>Load the data<a class="headerlink" href="#load-the-data" title="Link to this heading">#</a></h2>
 <p>The portfolio returns come from the HW 1 pipeline. The market factor, SMB,
 HML, and the risk-free rate are Ken French’s official series
-(<code class="docutils literal notranslate"><span class="pre">FF_FACTORS.parquet</span></code>).</p>
+(<code class="docutils literal notranslate"><span class="pre">FF_FACTORS.parquet</span></code>). Excess returns subtract the risk-free rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_bm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">/FF_1993_vwret.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
-    <span class="n">index</span><span class="o">=</span><span class="s2">&quot;jdate&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;sbport&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;vwret&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">portfolios</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">excess_returns</span> <span class="o">=</span> <span class="n">calc_CAPM_and_FF3</span><span class="o">.</span><span class="n">load_test_assets</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span>
 <span class="p">)</span>
-<span class="n">investment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">/univ_3_inv_vwret.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
-    <span class="n">index</span><span class="o">=</span><span class="s2">&quot;jdate&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;inv_port&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;vwret_inv&quot;</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">calc_CAPM_and_FF3</span><span class="o">.</span><span class="n">load_tables</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">excess_returns</span><span class="p">)</span><span class="si">}</span><span class="s2"> months, </span><span class="si">{</span><span class="n">excess_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">excess_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="p">)</span>
-<span class="n">size_bm</span> <span class="o">=</span> <span class="n">size_bm</span><span class="p">[[</span><span class="s2">&quot;SL&quot;</span><span class="p">,</span> <span class="s2">&quot;SME&quot;</span><span class="p">,</span> <span class="s2">&quot;SH&quot;</span><span class="p">,</span> <span class="s2">&quot;BL&quot;</span><span class="p">,</span> <span class="s2">&quot;BME&quot;</span><span class="p">,</span> <span class="s2">&quot;BH&quot;</span><span class="p">]]</span>
-<span class="n">investment</span> <span class="o">=</span> <span class="n">investment</span><span class="p">[[</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">]]</span>
-
-<span class="n">factors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">/FF_FACTORS.parquet&quot;</span><span class="p">)</span>
-<span class="n">factors</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;jdate&quot;</span><span class="p">,</span> <span class="s2">&quot;mktrf&quot;</span><span class="p">:</span> <span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;smb&quot;</span><span class="p">:</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;hml&quot;</span><span class="p">:</span> <span class="s2">&quot;HML&quot;</span><span class="p">,</span> <span class="s2">&quot;rf&quot;</span><span class="p">:</span> <span class="s2">&quot;RF&quot;</span><span class="p">}</span>
-<span class="p">)</span>
-<span class="c1"># Convert nullable Float64 to numpy float64 for the regression package</span>
-<span class="n">factors</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;jdate&quot;</span><span class="p">)[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">,</span> <span class="s2">&quot;RF&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
-
-<span class="n">portfolios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">size_bm</span><span class="p">,</span> <span class="n">investment</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">portfolios</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">common_dates</span> <span class="o">=</span> <span class="n">portfolios</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">factors</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">portfolios</span> <span class="o">=</span> <span class="n">portfolios</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common_dates</span><span class="p">]</span>
-<span class="n">factors</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common_dates</span><span class="p">]</span>
-<span class="n">excess_returns</span> <span class="o">=</span> <span class="n">portfolios</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">common_dates</span><span class="p">)</span><span class="si">}</span><span class="s2"> months, </span><span class="si">{</span><span class="n">common_dates</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">common_dates</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">excess_returns</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -715,31 +702,22 @@ is that portfolio. The three-factor model says that the tangency portfolio
 is a mix of Mkt-RF, SMB, and HML.</p>
 <p>SMB and HML are long-short portfolios, so a “weight” here is the size of the
 position in each factor per dollar in the market.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<p>The calculation is short enough to show in full:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tangency</span><span class="p">(</span><span class="n">excess</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tangency weights and annualized Sharpe ratio from monthly excess returns.&quot;&quot;&quot;</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">excess</span><span class="o">.</span><span class="n">cov</span><span class="p">(),</span> <span class="n">excess</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">w</span> <span class="o">/</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">excess</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">portfolio</span> <span class="o">=</span> <span class="n">excess</span> <span class="o">@</span> <span class="n">w</span>
     <span class="n">sharpe</span> <span class="o">=</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">portfolio</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">sharpe</span>
-
-
-<span class="n">w_mkt</span><span class="p">,</span> <span class="n">sharpe_mkt</span> <span class="o">=</span> <span class="n">tangency</span><span class="p">(</span><span class="n">factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]])</span>
-<span class="n">w_ff3</span><span class="p">,</span> <span class="n">sharpe_ff3</span> <span class="o">=</span> <span class="n">tangency</span><span class="p">(</span><span class="n">factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sharpe ratio, market alone:           </span><span class="si">{</span><span class="n">sharpe_mkt</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sharpe ratio, tangency of Mkt/SMB/HML: </span><span class="si">{</span><span class="n">sharpe_ff3</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">w_ff3</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;tangency weight&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;tangency&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sharpe ratio, market alone:           0.44
-Sharpe ratio, tangency of Mkt/SMB/HML: 0.61
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -758,20 +736,25 @@ Sharpe ratio, tangency of Mkt/SMB/HML: 0.61
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>tangency weight</th>
+      <th>Sharpe ratio (annual)</th>
+      <th>Mkt-RF</th>
+      <th>SMB</th>
+      <th>HML</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Mkt-RF</th>
+      <th>Market alone</th>
+      <td>0.44</td>
+      <td>1.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Mkt + SMB + HML</th>
+      <td>0.61</td>
       <td>0.42</td>
-    </tr>
-    <tr>
-      <th>SMB</th>
       <td>0.05</td>
-    </tr>
-    <tr>
-      <th>HML</th>
       <td>0.53</td>
     </tr>
   </tbody>
@@ -784,34 +767,7 @@ CAPM: the market is not on the efficient frontier, because tilting toward
 small and value stocks improves it. The chart shows the same thing. Each
 line starts at zero excess return (the risk-free asset) and its slope is a
 Sharpe ratio, as in HW 0.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">annual_mean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">excess_returns</span><span class="p">,</span> <span class="n">factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">12</span>
-<span class="n">annual_vol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">excess_returns</span><span class="p">,</span> <span class="n">factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">annual_vol</span><span class="p">[</span><span class="n">portfolios</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span> <span class="n">annual_mean</span><span class="p">[</span><span class="n">portfolios</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">annual_vol</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]],</span> <span class="n">annual_mean</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">)</span>
-<span class="c1"># The middle of the chart is crowded, so a few labels get their own offsets</span>
-<span class="n">label_offsets</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">48</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;BME&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">),</span> <span class="s2">&quot;BL&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="s2">&quot;Mkt-RF&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)}</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">annual_mean</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
-        <span class="n">name</span><span class="p">,</span>
-        <span class="p">(</span><span class="n">annual_vol</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">annual_mean</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span>
-        <span class="n">xytext</span><span class="o">=</span><span class="n">label_offsets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
-        <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-
-<span class="n">vol_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">annual_vol</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vol_grid</span><span class="p">,</span> <span class="n">sharpe_mkt</span> <span class="o">*</span> <span class="n">vol_grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Market alone (Sharpe </span><span class="si">{</span><span class="n">sharpe_mkt</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vol_grid</span><span class="p">,</span> <span class="n">sharpe_ff3</span> <span class="o">*</span> <span class="n">vol_grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mkt + SMB + HML (Sharpe </span><span class="si">{</span><span class="n">sharpe_ff3</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Annualized volatility&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Annualized mean excess return&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Portfolios and the best Sharpe ratio each model can reach&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/beecfad2e3cbf2d7df81d0c5bc3a47b2c5c6873b07954c294a266c4a51c8fd6c.png" src="../_images/beecfad2e3cbf2d7df81d0c5bc3a47b2c5c6873b07954c294a266c4a51c8fd6c.png" />
 </div>
@@ -825,29 +781,7 @@ R-squared. If the CAPM holds, every alpha is zero; a |t| above about 2 means
 the data reject that for that portfolio.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">name</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;Alpha (annual)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="p">,</span>
-            <span class="s2">&quot;t(Alpha)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="p">,</span>
-            <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Beta </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">betas</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
-            <span class="s2">&quot;R-squared&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-
-
-<span class="n">capm_results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">p</span><span class="p">:</span> <span class="n">finm</span><span class="o">.</span><span class="n">run_capm_regression</span><span class="p">(</span>
-        <span class="n">excess_returns</span><span class="o">=</span><span class="n">excess_returns</span><span class="p">[</span><span class="n">p</span><span class="p">],</span>
-        <span class="n">market_excess_returns</span><span class="o">=</span><span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">],</span>
-        <span class="n">annualization_factor</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">portfolios</span><span class="o">.</span><span class="n">columns</span>
-<span class="p">}</span>
-<span class="n">capm_table</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">capm_results</span><span class="p">)</span>
-<span class="n">capm_table</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;capm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -952,20 +886,10 @@ predicts. These are the patterns Fama and French set out to explain.</p>
 </section>
 <section id="adding-smb-and-hml">
 <h2>Adding SMB and HML<a class="headerlink" href="#adding-smb-and-hml" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">run_fama_french_regression</span></code> takes raw returns and subtracts the risk-free
-rate itself.</p>
+<p>The same regressions with SMB and HML added:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ff3_results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">p</span><span class="p">:</span> <span class="n">finm</span><span class="o">.</span><span class="n">run_fama_french_regression</span><span class="p">(</span>
-        <span class="n">returns</span><span class="o">=</span><span class="n">portfolios</span><span class="p">[</span><span class="n">p</span><span class="p">],</span>
-        <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span>
-        <span class="n">annualization_factor</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">portfolios</span><span class="o">.</span><span class="n">columns</span>
-<span class="p">}</span>
-<span class="n">ff3_table</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">ff3_results</span><span class="p">)</span>
-<span class="n">ff3_table</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;ff3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1104,17 +1028,7 @@ growth.</p>
 <p>Put the two models side by side.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;CAPM alpha&quot;</span><span class="p">:</span> <span class="n">capm_table</span><span class="p">[</span><span class="s2">&quot;Alpha (annual)&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;CAPM t&quot;</span><span class="p">:</span> <span class="n">capm_table</span><span class="p">[</span><span class="s2">&quot;t(Alpha)&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;FF3 alpha&quot;</span><span class="p">:</span> <span class="n">ff3_table</span><span class="p">[</span><span class="s2">&quot;Alpha (annual)&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;FF3 t&quot;</span><span class="p">:</span> <span class="n">ff3_table</span><span class="p">[</span><span class="s2">&quot;t(Alpha)&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;CAPM R2&quot;</span><span class="p">:</span> <span class="n">capm_table</span><span class="p">[</span><span class="s2">&quot;R-squared&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;FF3 R2&quot;</span><span class="p">:</span> <span class="n">ff3_table</span><span class="p">[</span><span class="s2">&quot;R-squared&quot;</span><span class="p">],</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-<span class="n">comparison</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;alpha_comparison&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1233,17 +1147,7 @@ growth.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">overall</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="n">model</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;Mean |alpha| (annual)&quot;</span><span class="p">:</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;Alpha (annual)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
-            <span class="s2">&quot;Mean R-squared&quot;</span><span class="p">:</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;R-squared&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
-            <span class="s2">&quot;Portfolios with |t| &gt; 1.96&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;t(Alpha)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1.96</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
-        <span class="p">}</span>
-        <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">table</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;CAPM&quot;</span><span class="p">,</span> <span class="n">capm_table</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;FF3&quot;</span><span class="p">,</span> <span class="n">ff3_table</span><span class="p">)]</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-<span class="n">overall</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;model_summary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1316,14 +1220,7 @@ of that spread through HML: conservative firms tend to be value firms, and
 aggressive firms tend to be growth firms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spread</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;CAPM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">capm_results</span><span class="p">[</span><span class="s2">&quot;Low&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha_annualized</span> <span class="o">-</span> <span class="n">capm_results</span><span class="p">[</span><span class="s2">&quot;High&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="p">],</span>
-        <span class="s2">&quot;FF3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ff3_results</span><span class="p">[</span><span class="s2">&quot;Low&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha_annualized</span> <span class="o">-</span> <span class="n">ff3_results</span><span class="p">[</span><span class="s2">&quot;High&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="p">],</span>
-    <span class="p">},</span>
-    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Alpha, Low minus High investment (annual)&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="n">spread</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="p">[</span><span class="s2">&quot;investment_spread&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1412,12 +1309,12 @@ Efficiency of a Given Portfolio.” <em>Econometrica</em> 57, no. 5 (1989):
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_04_Fama_French_1993_ipynb.html"
+       href="_05_Fama_French_1993_ipynb.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">HW Guide Part A: Replicate Fama-French 1993</p>
+        <p class="prev-next-title">HW 1 Guide D: Constructing the Fama-French Factors</p>
       </div>
     </a>
     <a class="right-next"

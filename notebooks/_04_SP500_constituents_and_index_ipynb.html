@@ -1,0 +1,1416 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HW 1 Guide C: Reconstructing the S&amp;P 500 &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_04_SP500_constituents_and_index_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HW 1 Guide D: Constructing the Fama-French Factors" href="_05_Fama_French_1993_ipynb.html" />
+    <link rel="prev" title="HW 1 Guide B: The CRSP Market Index" href="_03_CRSP_market_index_ipynb.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_04_SP500_constituents_and_index_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_04_SP500_constituents_and_index_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>HW 1 Guide C: Reconstructing the S&P 500</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-reconstruct-the-s-p-500-index">Why Reconstruct the S&amp;P 500 Index?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#official-s-p-500-index-methodology">Official S&amp;P 500 Index Methodology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-the-market-capitalization-of-each-constituent-company">1. Determine the Market Capitalization of Each Constituent Company</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjust-the-market-capitalization-for-free-float">2. Adjust the Market Capitalization for Free Float</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-total-market-capitalization-of-the-index">3. Calculate the Total Market Capitalization of the Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-divisor">4. Calculate the Divisor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-index-level">5. Calculate the Index Level</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-s-p-500-index-with-data-from-crsp">Approximating the S&amp;P 500 Index with data from CRSP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-required-for-approximation">Data Required for Approximation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-constituent-data">Load the Constituent Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-crsp-stock-and-index-data">Load the CRSP Stock and Index Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-a-simple-sum-of-market-caps">Method A: Simple Sum of Market Caps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-b-portfolio-rebalancing">Method B: Portfolio Rebalancing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-approximations">Comparing the Approximations</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-c-reconstructing-the-s-p-500">
+<h1>HW 1 Guide C: Reconstructing the S&amp;P 500<a class="headerlink" href="#hw-1-guide-c-reconstructing-the-s-p-500" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The <strong>S&amp;P 500 Index</strong> is one of the most well-known benchmarks for the U.S. equity market. It represents the performance of 500 large-cap companies across various industries, serving as a proxy for the overall stock market. Constructing an index of this nature involves aggregation of market data, weighting by market capitalization, and accounting for changes in index membership over time. This lecture introduces the mechanics of the S&amp;P 500 index, provides an overview of its construction, and guides you through a case study on approximating its level and returns using data from CRSP and WRDS. Some of the information needed to perfectly replicate the S&amp;P 500 index is proprietary and not available through WRDS. So, the approximation in the next section will be imperfect. However, it will be close enough. For now, we will use this note to get a better understanding of how the S&amp;P 500 is constructed.</p>
+<section id="why-reconstruct-the-s-p-500-index">
+<h3>Why Reconstruct the S&amp;P 500 Index?<a class="headerlink" href="#why-reconstruct-the-s-p-500-index" title="Link to this heading">#</a></h3>
+<p>Reconstructing the S&amp;P 500 index from its underlying constituents is a valuable exercise for students of quantitative finance. This process:</p>
+<ol class="arabic simple">
+<li><p><strong>Provides Practical Data Experience</strong>: You’ll gain hands-on experience with downloading and processing real financial data from Wharton Research Data Services (WRDS) and CRSP.</p></li>
+<li><p><strong>Develops Insight into Index Construction</strong>: By breaking down the methodology, you will better understand the structure and mechanics of market-capitalization-weighted indices.</p></li>
+<li><p><strong>Builds Programming Skills</strong>: The reconstruction process requires advanced data handling, including merging datasets, calculating weights, and implementing rebalancing rules.</p></li>
+<li><p><strong>Reveals Approximation Techniques</strong>: As the S&amp;P 500’s official calculation includes proprietary adjustments, this exercise demonstrates how to approximate real-world phenomena using accessible data and mathematical techniques.</p></li>
+<li><p><strong>Enhances Quantitative Finance Skills</strong>: The reconstruction builds your ability to analyze returns, index performance, and the impact of portfolio rebalancing.</p></li>
+</ol>
+</section>
+<section id="learning-goals">
+<h3>Learning Goals<a class="headerlink" href="#learning-goals" title="Link to this heading">#</a></h3>
+<p>By the end of this lecture and exercise, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain the construction methodology of the S&amp;P 500 index.</p></li>
+<li><p>Use historical data on index constituents, prices, and shares outstanding to approximate the index.</p></li>
+<li><p>Implement two methods for approximating the index:</p>
+<ul>
+<li><p><strong>Method A</strong>: a simple sum of the market caps of the index’s constituents</p></li>
+<li><p><strong>Method B</strong>: an approximation that assumes that a trader forms a porfolio holding the index’s constituents and rebalances the portfolio quarterly.</p></li>
+</ul>
+</li>
+<li><p>Compare your reconstructed index to the actual S&amp;P 500 index by analyzing the correlation of levels and returns.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="official-s-p-500-index-methodology">
+<h2>Official S&amp;P 500 Index Methodology<a class="headerlink" href="#official-s-p-500-index-methodology" title="Link to this heading">#</a></h2>
+<p>The S&amp;P 500 index contains approximately 500 of the largest publicly traded U.S. companies by market capitalization, selected by the S&amp;P Dow Jones Indices committee based on criteria such as liquidity, profitability, and market size. The index is a <strong>market-capitalization-weighted index</strong>, meaning that each stock in the index is weighted by its market cap. The index is rebalanced quarterly to reflect changes in membership and market values, ensuring it accurately represents the large-cap equity market. Key features of the index include:</p>
+<p>A full description of the methodology used to calculate the S&amp;P 500 index is available <a class="reference external" href="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-index-math.pdf">here</a>. However, the following steps provide a simplified overview of the calculation process.</p>
+<section id="determine-the-market-capitalization-of-each-constituent-company">
+<h3>1. Determine the Market Capitalization of Each Constituent Company<a class="headerlink" href="#determine-the-market-capitalization-of-each-constituent-company" title="Link to this heading">#</a></h3>
+<p>The market capitalization of a company represents its total equity value in the stock market. It is determined by multiplying the current market price per share by the total number of outstanding shares.</p>
+<div class="math notranslate nohighlight">
+\[
+  \text{MarketCap}_{i, t} = P_{i,t} \times \text{Shrout}_{i,t},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{i,t}\)</span> is the stock price and <span class="math notranslate nohighlight">\(\text{Shrout}_{i,t}\)</span> is the number of shares outstanding.</p>
+</section>
+<section id="adjust-the-market-capitalization-for-free-float">
+<h3>2. Adjust the Market Capitalization for Free Float<a class="headerlink" href="#adjust-the-market-capitalization-for-free-float" title="Link to this heading">#</a></h3>
+<p>The S&amp;P 500 utilizes a “free-float market capitalization-weighted methodology”. This method focuses solely on the shares readily available for trading by the public, excluding those held by company insiders or governments. Therefore, the next crucial step involves adjusting the market capitalization to account for the “free float” of each company’s shares. Free float refers to the portion of outstanding shares that are readily available for trading in the open market. This adjustment ensures that the index accurately reflects the true market value of the companies based on the shares that investors can actively buy and sell.</p>
+<p>To calculate the free-float market capitalization, an Investable Weight Factor (IWF) is employed. The IWF represents the percentage of a company’s total outstanding shares that are included in the index calculation. It is used to adjust for various factors, including foreign ownership restrictions, that might affect a stock’s actual weight in the index.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Free-float MarketCap}_{i, t} = \text{MarketCap}_{i, t} \times \text{IWF}_{i},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{IWF}_{i}\)</span> represents the proportion of a company’s shares that are freely available for trading.</p>
+<p>The IWF is typically expressed as a percentage and is obtained from financial data providers. For example, if 80% of a company’s shares are available for public trading, its IWF would be 0.8.</p>
+</section>
+<section id="calculate-the-total-market-capitalization-of-the-index">
+<h3>3. Calculate the Total Market Capitalization of the Index<a class="headerlink" href="#calculate-the-total-market-capitalization-of-the-index" title="Link to this heading">#</a></h3>
+<p>Once the free-float market capitalization is calculated for each company, these values are summed to arrive at the total market capitalization of the S&amp;P 500. This aggregate value serves as the numerator in the index calculation.</p>
+<p>The total market cap of the index is</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MarketCapSP500}_{t} = \sum_{i \in \mathcal{I}_{S\&amp;P, t}} \text{MarketCap}_{i, t},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{I}_{S\&amp;P, t}\)</span> represents the set of constituents at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+<section id="calculate-the-divisor">
+<h3>4. Calculate the Divisor<a class="headerlink" href="#calculate-the-divisor" title="Link to this heading">#</a></h3>
+<p>The divisor is a critical element in the S&amp;P 500 calculation. It is a proprietary value determined by S&amp;P Dow Jones Indices and is used to scale the index down to a more manageable and reportable level. The divisor is subject to adjustments over time to account for various corporate actions that could influence the index’s value. These actions include:</p>
+<ul class="simple">
+<li><p><strong>Stock Splits:</strong> When a company splits its stock, the number of outstanding shares increases, while the price per share decreases proportionally. The divisor is adjusted to prevent this corporate action from artificially impacting the index level.</p></li>
+<li><p><strong>Dividends:</strong> While regular cash dividends do not directly affect the index level, special dividends, which are larger, one-time distributions, can influence the divisor.</p></li>
+<li><p><strong>Spinoffs:</strong> When a company spins off a subsidiary into a separate publicly traded entity, the divisor is adjusted to reflect the change in the index’s composition.</p></li>
+<li><p><strong>Index Reconstitution:</strong> The S&amp;P 500 periodically adds or removes companies to ensure it continues to represent the leading U.S. equities. These changes also necessitate adjustments to the divisor.</p></li>
+</ul>
+<p>The divisor plays a crucial role in maintaining the index’s continuity over time. The divisor adjustment process ensures that these actions do not introduce artificial jumps or drops in the index level.
+By adjusting for corporate actions and changes in the index’s constituents, the divisor ensures that the S&amp;P 500 remains a consistent and reliable benchmark for tracking the performance of the U.S. equity market. The formula for the divisor adjustment depends on the specific corporate action and is detailed in S&amp;P Dow Jones Indices’ methodology documents (see <a class="reference external" href="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-index-math.pdf">S&amp;P Dow Jones Indices’ Index Mathematics Methodology</a>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Corporate Action</p></th>
+<th class="head"><p>Impact on Divisor</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Stock Split</strong></p></td>
+<td><p>Adjusted to maintain index continuity</p></td>
+<td><p>A 2-for-1 stock split doubles shares but halves the price.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Special Dividend</strong></p></td>
+<td><p>Adjusted to account for the distribution</p></td>
+<td><p>A one-time dividend reduces market capitalization.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Spinoff</strong></p></td>
+<td><p>Adjusted to reflect the spun-off entity’s market cap</p></td>
+<td><p>A parent company spins off a subsidiary as a new company.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Index Reconstitution</strong></p></td>
+<td><p>Adjusted for additions/removals in the index</p></td>
+<td><p>A new company is added, requiring a reweighting of constituents.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="calculate-the-index-level">
+<h3>5. Calculate the Index Level<a class="headerlink" href="#calculate-the-index-level" title="Link to this heading">#</a></h3>
+<p>Finally, the S&amp;P 500 index level is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Index Level}_{t} = \frac{1}{\text{Divisor}_{t}} \times \sum_{i \in \mathcal{I}_{S\&amp;P, t}} P_{i,t} \times \text{Free-float Shrout}_{i,t},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{i,t}\)</span> is the stock price of company <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\text{Free-float Shrout}_{i,t}\)</span> is the number of freely traded shares of company <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(\text{Divisor}\)</span> is the proprietary scaling factor.</p>
+<p>This formula aggregates the weighted market capitalizations of all constituents, scaled by the divisor to produce the reported index level.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="approximating-the-s-p-500-index-with-data-from-crsp">
+<h2>Approximating the S&amp;P 500 Index with data from CRSP<a class="headerlink" href="#approximating-the-s-p-500-index-with-data-from-crsp" title="Link to this heading">#</a></h2>
+<p>As discussed in the introduction, the S&amp;P 500 index is a proprietary calculation and not available through WRDS. However, we can approximate the index level and returns using data from CRSP. Here, we will implement two methods for approximating the index:</p>
+<ul class="simple">
+<li><p><strong>Method A</strong>: a simple sum of the market caps of the index’s constituents</p></li>
+<li><p><strong>Method B</strong>: an approximation that assumes that a trader forms a porfolio holding the index’s constituents and rebalances the portfolio quarterly.
+We will then compare the reconstructed index to the actual S&amp;P 500 index by analyzing the correlation of levels and returns.</p></li>
+</ul>
+<section id="data-required-for-approximation">
+<h3>Data Required for Approximation<a class="headerlink" href="#data-required-for-approximation" title="Link to this heading">#</a></h3>
+<p>To reconstruct the S&amp;P 500 index, we need:</p>
+<ol class="arabic simple">
+<li><p><strong>Constituent Data</strong>: Membership data indicating which stocks were part of the index at each point in time.</p></li>
+<li><p><strong>Price and Shares Outstanding Data</strong>: Stock-level data to calculate market capitalizations.</p></li>
+<li><p><strong>Index Level and Return Data</strong>: Official S&amp;P 500 data for comparison and normalization.</p></li>
+</ol>
+<p>Data on the historical constituents of the S&amp;P 500 is available through WRDS, while price and shares outstanding data can be accessed through CRSP.</p>
+<p>Let’s explore that data now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">calc_SP500_index</span>
+<span class="kn">import</span> <span class="nn">figures</span>
+<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
+<span class="kn">import</span> <span class="nn">pull_SP500_constituents</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-the-constituent-data">
+<h4>Load the Constituent Data<a class="headerlink" href="#load-the-constituent-data" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">pull_SP500_constituents</span></code> task pulls the membership history from the
+<code class="docutils literal notranslate"><span class="pre">crsp_m_indexes.dsp500list_v2</span></code> table on WRDS and saves it. Here it is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_constituents</span> <span class="o">=</span> <span class="n">pull_SP500_constituents</span><span class="o">.</span><span class="n">load_constituents</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+<span class="n">df_constituents</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>permno</th>
+      <th>indno</th>
+      <th>mbrstartdt</th>
+      <th>mbrenddt</th>
+      <th>mbrflg</th>
+      <th>indfam</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10006</td>
+      <td>1000500</td>
+      <td>1957-03-01</td>
+      <td>1984-07-18</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10030</td>
+      <td>1000500</td>
+      <td>1957-03-01</td>
+      <td>1969-01-08</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10049</td>
+      <td>1000500</td>
+      <td>1925-12-31</td>
+      <td>1932-10-01</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10057</td>
+      <td>1000500</td>
+      <td>1957-03-01</td>
+      <td>1992-07-02</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10078</td>
+      <td>1000500</td>
+      <td>1992-08-20</td>
+      <td>2010-01-28</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Dictionary of columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">permno</span></code>, <em>int64</em>:  Permno of the constituent, where a permno is a unique identifier for a stock issued by CRSP.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indno</span></code>, <em>int64</em>:  Index number of the constituent, where the index number is a unique identifier for the S&amp;P 500 index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mbrstartdt</span></code>, <em>object</em>:  Membership start date of the constituent in the S&amp;P 500 index (inclusive). This is the first date the stock IS a constituent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mbrenddt</span></code>, <em>object</em>:  Membership end date of the constituent in the S&amp;P 500 index (exclusive). This is the first date the stock is NO LONGER a constituent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mbrflg</span></code>, <em>object</em>:  Membership flag of the constituent in the S&amp;P 500 index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indfam</span></code>, <em>int64</em>:  Index family of the constituent, where the index family is a unique identifier for the S&amp;P 500 index.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_constituents</span><span class="p">[</span><span class="s2">&quot;permno&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1968
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_constituents</span><span class="p">[</span><span class="s2">&quot;mbrflg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mbrflg
+NORM    2097
+Name: count, dtype: Int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># There is only one index family for all the constituents.</span>
+<span class="n">df_constituents</span><span class="p">[</span><span class="s2">&quot;indfam&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>indfam
+1100500    2097
+Name: count, dtype: Int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># There is only one index number for all the constituents.</span>
+<span class="n">df_constituents</span><span class="p">[</span><span class="s2">&quot;indno&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>indno
+1000500    2097
+Name: count, dtype: Int64
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">get_constituents_on_date</span></code> returns the members of the index on a given date.
+You write it in this part of the homework, so read the definitions of
+<code class="docutils literal notranslate"><span class="pre">mbrstartdt</span></code> and <code class="docutils literal notranslate"><span class="pre">mbrenddt</span></code> above carefully. Comparing the members on March
+1 and April 1, 2019, shows a change in between: on March 19, two stocks left
+the index and two joined, so the count is the same on both dates but the
+membership is not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">before</span> <span class="o">=</span> <span class="n">calc_SP500_index</span><span class="o">.</span><span class="n">get_constituents_on_date</span><span class="p">(</span>
+    <span class="n">df_constituents</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">&quot;2019-03-01&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">after</span> <span class="o">=</span> <span class="n">calc_SP500_index</span><span class="o">.</span><span class="n">get_constituents_on_date</span><span class="p">(</span>
+    <span class="n">df_constituents</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">&quot;2019-04-01&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Members on 2019-03-01: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">before</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Members on 2019-04-01: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">after</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">changed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">before</span><span class="p">[</span><span class="s2">&quot;permno&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">after</span><span class="p">[</span><span class="s2">&quot;permno&quot;</span><span class="p">])</span>
+<span class="n">df_constituents</span><span class="p">[</span><span class="n">df_constituents</span><span class="p">[</span><span class="s2">&quot;permno&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">changed</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Members on 2019-03-01: 505
+Members on 2019-04-01: 505
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>permno</th>
+      <th>indno</th>
+      <th>mbrstartdt</th>
+      <th>mbrenddt</th>
+      <th>mbrflg</th>
+      <th>indfam</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>536</th>
+      <td>18420</td>
+      <td>1000500</td>
+      <td>2019-03-19</td>
+      <td>2026-08-31</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>537</th>
+      <td>18421</td>
+      <td>1000500</td>
+      <td>2019-03-19</td>
+      <td>2026-08-31</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>90441</td>
+      <td>1000500</td>
+      <td>2004-12-20</td>
+      <td>2019-03-19</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>90442</td>
+      <td>1000500</td>
+      <td>2015-09-21</td>
+      <td>2019-03-19</td>
+      <td>NORM</td>
+      <td>1100500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="load-the-crsp-stock-and-index-data">
+<h4>Load the CRSP Stock and Index Data<a class="headerlink" href="#load-the-crsp-stock-and-index-data" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">df_msf</span></code> is the CRSP monthly stock file. This file contains the price and shares outstanding data for all stocks in the CRSP database.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">permno</span></code>: Permno of the stock, which is a unique identifier for a stock issued by CRSP.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date</span></code>: Date of the observation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prc</span></code>: Price of the stock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shrout</span></code>: Shares outstanding of the stock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchcd</span></code>: Exchange code of the stock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shrcd</span></code>: Share code of the stock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">siccd</span></code>: Standard Industrial Classification code of the stock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cfacshr</span></code>: Cumulative adjustment factor for shares outstanding. This adjust, e.g., for stock splits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cfacpr</span></code>: Cumulative adjustment factor for price. This adjust, e.g., for stock splits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ret</span></code>: Return of the stock, including dividends.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retx</span></code>: Return of the stock, excluding dividends.</p></li>
+</ul>
+<p>The cumulative adjustment factors are used to adjust for corporate actions that affect the stock price, such as stock splits. So</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;adj_shrout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;shrout&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;cfacshr&quot;</span><span class="p">]</span>
+<span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;adj_prc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;prc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">/</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;cfacpr&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Total market cap is then</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;market_cap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;adj_prc&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_msf</span><span class="p">[</span><span class="s2">&quot;adj_shrout&quot;</span><span class="p">]</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Note that the price is converted to an absolute value because CRSP reports negative prices when price data is missing and quote data is used in its place. Negative prices indicate that CRSP has used the midpoint of the bid-ask spread as the price. Since we don’t mind using quote data or price data, we can safely convert the price to an absolute value.</p>
+<p>Also, as an additional note, CRSP reports that “cfacshr” and “cfacpr” are not always equal. This means that we cannot use <code class="docutils literal notranslate"><span class="pre">market_cap</span></code> = <code class="docutils literal notranslate"><span class="pre">prc</span></code> * <code class="docutils literal notranslate"><span class="pre">shrout</span></code> alone. We need to use the cumulative adjustment factors to adjust for corporate actions that affect the stock price, such as stock splits. “cfacshr” and “cfacpr” are not always equal because of less common distribution events, spinoffs, and rights. See here: <a class="reference external" href="https://vimeo.com/443061703">CRSP - Useful Variables</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">df_msix</span></code> is the CRSP monthly index file. This file contains the return and level of the S&amp;P 500 index.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">caldt</span></code>: Date of the observation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sprtrn</span></code>: Return of the S&amp;P 500 index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spindx</span></code>: Level of the S&amp;P 500 index.</p></li>
+</ul>
+<p>This dataframe also contains information about the CRSP value-weighted index and equal-weighted index, along with the 10 deciles of the CRSP market cap index:
+((Monthly)NYSE/AMEX/NASDAQ Capitalization Deciles, Annual Rebalanced (msix)) <a class="reference external" href="https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_a_indexes/msix/">https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_a_indexes/msix/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_msix</span> <span class="o">=</span> <span class="n">pull_CRSP_stock</span><span class="o">.</span><span class="n">load_CRSP_index_files</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+<span class="n">df_msix</span><span class="p">[[</span><span class="s2">&quot;caldt&quot;</span><span class="p">,</span> <span class="s2">&quot;sprtrn&quot;</span><span class="p">,</span> <span class="s2">&quot;spindx&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>caldt</th>
+      <th>sprtrn</th>
+      <th>spindx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>715</th>
+      <td>2024-08-30</td>
+      <td>0.022835</td>
+      <td>5648.4</td>
+    </tr>
+    <tr>
+      <th>716</th>
+      <td>2024-09-30</td>
+      <td>0.020197</td>
+      <td>5762.48</td>
+    </tr>
+    <tr>
+      <th>717</th>
+      <td>2024-10-31</td>
+      <td>-0.009897</td>
+      <td>5705.45</td>
+    </tr>
+    <tr>
+      <th>718</th>
+      <td>2024-11-29</td>
+      <td>0.057301</td>
+      <td>6032.38</td>
+    </tr>
+    <tr>
+      <th>719</th>
+      <td>2024-12-31</td>
+      <td>-0.02499</td>
+      <td>5881.63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="method-a-simple-sum-of-market-caps">
+<h3>Method A: Simple Sum of Market Caps<a class="headerlink" href="#method-a-simple-sum-of-market-caps" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Market Cap Calculation</strong>: For each stock in the index, compute the market capitalization as:</p>
+<div class="math notranslate nohighlight">
+\[
+   \text{MarketCap}_{i, t} = P_{i,t} \times \text{Shrout}_{i,t}.
+   \]</div>
+<p>The total market cap of the index is:</p>
+<div class="math notranslate nohighlight">
+\[
+   \text{MarketCapSP500}_{t} = \sum_{i \in \mathcal{I}_{S\&amp;P, t}} \text{MarketCap}_{i, t},
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{I}_{S\&amp;P, t}\)</span> represents the set of constituents at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</li>
+<li><p><strong>Index Level Approximation</strong>: Using the market cap ratio, calculate the approximated index level:</p>
+<div class="math notranslate nohighlight">
+\[
+   \text{IndexLevelApproxA}_{t} = \frac{\text{MarketCapSP500}_{t}}{\text{MarketCapSP500}_{t-1}} \times \text{IndexLevelApproxA}_{t-1}.
+   \]</div>
+<p>Normalize <span class="math notranslate nohighlight">\(\text{IndexLevelApproxA}\)</span> at the start date to match the actual S&amp;P 500 level.</p>
+</li>
+<li><p><strong>Return Approximation</strong>: Calculate the returns as:</p>
+<div class="math notranslate nohighlight">
+\[
+   R_{A, t} = \frac{\text{IndexLevelApproxA}_{t}}{\text{IndexLevelApproxA}_{t-1}} - 1.
+   \]</div>
+</li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">calc_SP500_index_approximations</span></code> task runs both methods for every month
+from 1990 on and saves the result next to the official index (<code class="docutils literal notranslate"><span class="pre">sprtrn</span></code> and
+<code class="docutils literal notranslate"><span class="pre">spindx</span></code>). Load it, and compare approximation A with the official returns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;sp500_index_approximations.parquet&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;sprtrn&quot;</span><span class="p">,</span> <span class="s2">&quot;ret_approx_A&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sprtrn</th>
+      <th>ret_approx_A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sprtrn</th>
+      <td>1.0000</td>
+      <td>0.9963</td>
+    </tr>
+    <tr>
+      <th>ret_approx_A</th>
+      <td>0.9963</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7f43cb2a508107526d45bf10a3a6c7602f26847d0c49fa972d06aa7abfeef735.png" src="../_images/7f43cb2a508107526d45bf10a3a6c7602f26847d0c49fa972d06aa7abfeef735.png" />
+</div>
+</div>
+<p>Notice that the difference in the cumulative returns is quite large by the end of the sample. However, the correlation between the returns is quite high (over 0.99). This
+just shows the consequences of compounding small differences over a long period of time.</p>
+<p>Part of the reason why these series are so different is that the approximation method does not account for quarterly rebalancing.</p>
+<p><strong>Why Method A Does Not Represent a Self-Financing Portfolio Strategy</strong></p>
+<p>A <strong>self-financing trading strategy</strong> is one where no money is added or withdrawn after the initial investment—all rebalancing is funded by selling existing holdings. Mathematically, if <span class="math notranslate nohighlight">\(w_{i,t}\)</span> denotes the portfolio weight of stock <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, a self-financing portfolio earns return:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{t+1} = \sum_i w_{i,t} \cdot R_{i,t+1}
+\]</div>
+<p>That is, the portfolio return equals the weighted average of individual stock returns, where weights are determined <em>before</em> observing returns.</p>
+<p>Method A does not satisfy this property. It calculates returns as the percentage change in total market cap:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{A,t} = \frac{\sum_{i \in \mathcal{I}_t} \text{MarketCap}_{i,t}}{\sum_{j \in \mathcal{I}_{t-1}} \text{MarketCap}_{j,t-1}} - 1
+\]</div>
+<p>When the index composition changes between <span class="math notranslate nohighlight">\(t-1\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, the numerator and denominator sum over <em>different</em> sets of stocks. For example, if stock B is removed and stock C is added, Method A effectively assumes you could buy C and sell B at their <em>prior</em> prices—but you cannot. Transactions must occur at current market prices. This creates a mismatch that does not correspond to any tradable portfolio.</p>
+<p>Method B (described next) resolves this by computing portfolio returns using weights that are known at the start of each period, which is the defining property of a self-financing strategy.</p>
+</section>
+<hr class="docutils" />
+<section id="method-b-portfolio-rebalancing">
+<h3>Method B: Portfolio Rebalancing<a class="headerlink" href="#method-b-portfolio-rebalancing" title="Link to this heading">#</a></h3>
+<p>This method assumes that a trader forms a porfolio holding the index’s constituents and rebalances the portfolio quarterly. Let’s assume that the total amount of money in the portfolio at the beginning of the period is 1 (e.g. $1 million). Then, assume that at each rebalancing date (in this case, quarterly), the trader buys and sells stocks such that the portfolio weights are equal to the weights of the index’s constituents with respect to the ratio of the market cap of each stock to the total market cap of the index.</p>
+<ol class="arabic">
+<li><p><strong>Weight Calculation</strong>: For each stock <span class="math notranslate nohighlight">\(i\)</span>, calculate its weight in the index:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   w_{i, t} = \begin{cases}
+   \frac{\text{MarketCap}_{i, t}}{\text{MarketCapSP500}_{t}} &amp; \text{if } i \in \mathcal{I}_{S\&amp;P, t} \\
+   0 &amp; \text{otherwise}
+   \end{cases}
+   \end{split}\]</div>
+</li>
+<li><p><strong>Portfolio Rebalancing</strong>: Implement quarterly rebalancing. The portfolio weights <span class="math notranslate nohighlight">\(w^p_{i, t}\)</span> are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   w^p_{i, t} =
+   \begin{cases}
+   w_{i, t} &amp; \text{if } t \text{ is a rebalancing date}, \\
+   w^p_{i, t-1} &amp; \text{otherwise},
+   \end{cases}
+   \end{split}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</li>
+<li><p><strong>Return Approximation</strong>: Calculate the portfolio return as:</p>
+<div class="math notranslate nohighlight">
+\[
+   R_{B, t+1} = \sum_{i} w^p_{i, t} \times R_{i, t+1},
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(R_{i, t+1}\)</span> is the return of stock <span class="math notranslate nohighlight">\(i\)</span> between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+</li>
+<li><p><strong>Index Level Approximation</strong>: Use the approximated returns to calculate the index level, normalized to match the official S&amp;P 500 at the start date.</p></li>
+</ol>
+<p><strong>IMPORTANT</strong>: To make this method work as accurately as possible, use the <code class="docutils literal notranslate"><span class="pre">retx</span></code> variable for <span class="math notranslate nohighlight">\(R_{i, t+1}\)</span>. This is because the <code class="docutils literal notranslate"><span class="pre">ret</span></code> variable includes dividends, which are not part of the S&amp;P 500 index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;sprtrn&quot;</span><span class="p">,</span> <span class="s2">&quot;ret_approx_B&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sprtrn</th>
+      <th>ret_approx_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sprtrn</th>
+      <td>1.0000</td>
+      <td>0.9992</td>
+    </tr>
+    <tr>
+      <th>ret_approx_B</th>
+      <td>0.9992</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fee97901873c01c1e3106287a9fd6e5b33ac2d3a6ac691d4e98e79d6b915ed53.png" src="../_images/fee97901873c01c1e3106287a9fd6e5b33ac2d3a6ac691d4e98e79d6b915ed53.png" />
+</div>
+</div>
+<p>Above we can now see that the cumulative returns are very similar. The correlation between the returns is even higher (over 0.998).</p>
+</section>
+<hr class="docutils" />
+<section id="comparing-the-approximations">
+<h3>Comparing the Approximations<a class="headerlink" href="#comparing-the-approximations" title="Link to this heading">#</a></h3>
+<p>Once both methods are implemented, compare the reconstructed index to the actual S&amp;P 500 by:</p>
+<ol class="arabic simple">
+<li><p><strong>Correlation of Returns</strong>: Measure the correlation between the approximated returns and the official S&amp;P 500 returns.</p></li>
+<li><p><strong>Index Level Alignment</strong>: Plot the approximated index levels against the official levels to assess how well each method tracks the S&amp;P 500 over time.</p></li>
+<li><p><strong>Impact of Rebalancing</strong>: Analyze how quarterly rebalancing affects the accuracy of the reconstruction.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;sprtrn&quot;</span><span class="p">,</span> <span class="s2">&quot;ret_approx_A&quot;</span><span class="p">,</span> <span class="s2">&quot;ret_approx_B&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sprtrn</th>
+      <th>ret_approx_A</th>
+      <th>ret_approx_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sprtrn</th>
+      <td>1.0000</td>
+      <td>0.9963</td>
+      <td>0.9992</td>
+    </tr>
+    <tr>
+      <th>ret_approx_A</th>
+      <td>0.9963</td>
+      <td>1.0000</td>
+      <td>0.9956</td>
+    </tr>
+    <tr>
+      <th>ret_approx_B</th>
+      <td>0.9992</td>
+      <td>0.9956</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f88bdcd8ec8cafa33d9e7adc02fb6c968eda3a702ca2d3ea8b905209d8ed4d99.png" src="../_images/f88bdcd8ec8cafa33d9e7adc02fb6c968eda3a702ca2d3ea8b905209d8ed4d99.png" />
+</div>
+</div>
+<p>Above we saw that the rebalanced portfolio method is more accurate than the simple sum of market caps method. The cumulative returns are much more similar and the correlation between the returns is higher.</p>
+</section>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_03_CRSP_market_index_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">HW 1 Guide B: The CRSP Market Index</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_05_Fama_French_1993_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HW 1 Guide D: Constructing the Fama-French Factors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-reconstruct-the-s-p-500-index">Why Reconstruct the S&amp;P 500 Index?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#official-s-p-500-index-methodology">Official S&amp;P 500 Index Methodology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-the-market-capitalization-of-each-constituent-company">1. Determine the Market Capitalization of Each Constituent Company</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjust-the-market-capitalization-for-free-float">2. Adjust the Market Capitalization for Free Float</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-total-market-capitalization-of-the-index">3. Calculate the Total Market Capitalization of the Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-divisor">4. Calculate the Divisor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-index-level">5. Calculate the Index Level</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-s-p-500-index-with-data-from-crsp">Approximating the S&amp;P 500 Index with data from CRSP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-required-for-approximation">Data Required for Approximation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-constituent-data">Load the Constituent Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-crsp-stock-and-index-data">Load the CRSP Stock and Index Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-a-simple-sum-of-market-caps">Method A: Simple Sum of Market Caps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-b-portfolio-rebalancing">Method B: Portfolio Rebalancing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-approximations">Comparing the Approximations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
