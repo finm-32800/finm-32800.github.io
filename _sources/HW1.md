@@ -116,4 +116,6 @@ CAPM leaves behind, and how many of them SMB and HML absorb.
 - [HW 1 Guide E: Testing the CAPM and the Three-Factor Model](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
 
 For the theory behind it, without derivations, read
-[From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md).
+[From Mean-Variance to the CAPM](notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb)
+and
+[From the CAPM to Multifactor Models](notebooks/_08_CAPM_to_multifactor_models_ipynb.ipynb).

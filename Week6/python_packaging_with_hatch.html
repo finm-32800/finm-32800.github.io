@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -214,7 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -222,6 +222,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -1090,7 +1091,7 @@ document.write(`
 <section id="loading-factor-data">
 <h4>Loading Factor Data<a class="headerlink" href="#loading-factor-data" title="Link to this heading">#</a></h4>
 <p>Demonstrate how to load factor data using the library:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">finm.data.fama_french</span> <span class="kn">import</span> <span class="n">load_fama_french_factors</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">finm.data.fama_french</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_fama_french_factors</span>
 
 <span class="c1"># Load Fama-French three-factor data</span>
 <span class="n">factors</span> <span class="o">=</span> <span class="n">load_fama_french_factors</span><span class="p">(</span><span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1107,8 +1108,8 @@ document.write(`
 </pre></div>
 </div>
 <p><strong>Library Example</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">finm.data.fama_french</span> <span class="kn">import</span> <span class="n">load_fama_french_factors</span>
-<span class="kn">from</span> <span class="nn">finm.analytics.factor_analysis</span> <span class="kn">import</span> <span class="n">run_fama_french_regression</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">finm.data.fama_french</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_fama_french_factors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">finm.analytics.factor_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_fama_french_regression</span>
 
 <span class="c1"># Load Fama-French factors</span>
 <span class="n">factors</span> <span class="o">=</span> <span class="n">load_fama_french_factors</span><span class="p">(</span><span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1229,13 +1230,13 @@ As an example, let’s now make our own quick modification to the <code class="d
 <h4>Why Typer?<a class="headerlink" href="#why-typer" title="Link to this heading">#</a></h4>
 <ul>
 <li><p><strong>Type-Hint-Based Interface</strong>: Typer uses standard Python type hints and decorators to define commands and options, resulting in very readable and maintainable code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typer</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">()</span>
 
 <span class="c1"># Typer example</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Stock ticker symbol&quot;</span><span class="p">)):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Stock ticker symbol&quot;</span><span class="p">)):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze a stock&#39;s factor exposures.&quot;&quot;&quot;</span>
     <span class="k">pass</span>
 

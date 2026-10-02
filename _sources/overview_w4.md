@@ -30,8 +30,10 @@ option prices.
   has not booked its [consultation](https://finm-32800.youcanbook.me/), do it
   now.
 - **Databento API keys.** You need one for HW 3 and again for HW 4. Everything
-  we use is on the CME Globex feed (`GLBX.MDP3`), which is free under the course
-  license; the equity-options feed is metered, so do not point a pull at it.
+  we use is on the CME Globex feed (`GLBX.MDP3`) and stays inside the course
+  license. The license covers the full order book (`mbo`, `mbp-10`) only for
+  roughly the most recent month; older order-book data is billed, so pull a
+  recent date.
 
 ## Objectives
 

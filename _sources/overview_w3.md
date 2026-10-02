@@ -139,8 +139,7 @@ futures, the way the CME FedWatch tool does:
 - [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data.ipynb)
 - [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication.ipynb)
 
-The last task puts them on the same axes on the same date and asks you to
-explain the gap. The pipeline pulls from four sources (CRSP via WRDS, the Fed's
+The pipeline pulls from four sources (CRSP via WRDS, the Fed's
 published GSW series, ZQ futures from Databento, and FRED), and the deliverable
 is a ChartBook site on GitHub Pages. We launch it in class; you finish the
 `TODO`s and publish on your own.

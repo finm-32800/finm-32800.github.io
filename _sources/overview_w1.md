@@ -9,7 +9,7 @@ Week1/virtual_environments.md
 Week2/WRDS_intro_and_web_queries.md
 notebooks/_01_wrds_python_package_ipynb.ipynb
 Week2/env_files.md
-Week3/from_mean_variance_to_factor_models.md
+notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb
 ```
 
 The paper this week is Sharpe (1964) and the object is the CAPM's market
@@ -105,7 +105,7 @@ data.
    are about to rebuild. This is the framing for HW 1's first half; the alphas
    the CAPM leaves behind are next week's problem. For how the CAPM follows
    from the HW 0 tangency portfolio, see
-   [From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md).
+   [From Mean-Variance to the CAPM](notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb).
 7. **Launch [HW 1](./HW1.md).** Clone it, build the environment, put credentials
    in `.env`, run `doit`, run `pytest`, watch it fail, and start filling in
    `calc_CRSP_indices.py` together.

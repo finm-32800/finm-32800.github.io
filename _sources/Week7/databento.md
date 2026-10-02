@@ -22,14 +22,6 @@ UChicago has a Databento subscription for FINM students, providing access to
 futures, Treasury futures, and other major derivatives (including the options
 on those futures).
 
-One licensing detail matters in practice: the course subscription is a
-**flat-rate license for GLBX.MDP3 only**. Queries against that dataset cost
-$0.00, while every other Databento dataset — for example **OPRA**, the
-consolidated feed for listed equity options like SPX/SPXW — bills
-pay-as-you-go per query. This is exactly why the HW 4 case study extends its
-S&P 500 option panel with CME **E-mini options on futures** (free under the
-subscription) rather than SPX index options from OPRA (metered).
-
 ```{admonition} Discussion
 :class: tip
 How does the pricing model for Databento (pay-per-query) compare to Bloomberg

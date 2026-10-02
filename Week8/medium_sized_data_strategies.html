@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -214,7 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -222,6 +222,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -677,7 +678,7 @@ unlocking many of the performance benefits described above.</p>
 <h3>Eager vs. Lazy Execution<a class="headerlink" href="#eager-vs-lazy-execution" title="Link to this heading">#</a></h3>
 <p>In <strong>eager</strong> mode (the default in Pandas, and available in Polars via <code class="docutils literal notranslate"><span class="pre">pl.read_*</span></code>),
 each operation executes immediately when called:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
 <span class="c1"># --- Eager execution ---</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;trades.csv&quot;</span><span class="p">)</span>                   <span class="c1"># Reads entire file now</span>
@@ -882,7 +883,7 @@ process the data in chunks, or use a tool that handles this for you.</p>
 <section id="the-old-way-manual-chunking-in-pandas">
 <h3>The Old Way: Manual Chunking in Pandas<a class="headerlink" href="#the-old-way-manual-chunking-in-pandas" title="Link to this heading">#</a></h3>
 <p>Pandas offers a <code class="docutils literal notranslate"><span class="pre">chunksize</span></code> parameter for reading files in pieces:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="c1"># Manual chunking: you manage iteration, aggregation, and edge cases</span>
 <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
@@ -904,7 +905,7 @@ process the data in chunks, or use a tool that handles this for you.</p>
 <section id="the-polars-way-automatic-streaming">
 <h3>The Polars Way: Automatic Streaming<a class="headerlink" href="#the-polars-way-automatic-streaming" title="Link to this heading">#</a></h3>
 <p>Polars’ streaming engine handles all of this automatically:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
 <span class="n">q</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">scan_csv</span><span class="p">(</span><span class="s2">&quot;large_file.csv&quot;</span><span class="p">)</span>
@@ -976,7 +977,7 @@ Spark, DuckDB, and PyArrow.</p>
 <p>Polars supports scanning Hive-partitioned Parquet datasets out of the box.
 When <code class="docutils literal notranslate"><span class="pre">scan_parquet</span></code> receives a directory path, Hive partition parsing is
 <strong>enabled by default</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
 <span class="c1"># Polars automatically detects the hive partition structure</span>
 <span class="c1"># and adds &quot;year&quot; and &quot;month&quot; as columns in the LazyFrame</span>
@@ -1034,7 +1035,7 @@ applies every strategy discussed on this page:</p>
 <code class="docutils literal notranslate"><span class="pre">_data/{dataset}/year=YYYY/month=MM/data.parquet</span></code>. Utility functions manage
 partition paths, scan for existing partitions, and write new ones:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the case study: partition path utility</span>
-<span class="k">def</span> <span class="nf">partition_path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">partition_path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">base_dir</span> <span class="o">/</span> <span class="n">dataset</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;year=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;month=</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">/</span> <span class="s2">&quot;data.parquet&quot;</span>
 </pre></div>
 </div>

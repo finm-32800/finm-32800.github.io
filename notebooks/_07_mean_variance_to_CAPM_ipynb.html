@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>From Mean-Variance to Factor Models &#8212; Data Pipelines for Quantitative Research</title>
+    <title>From Mean-Variance to the CAPM &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -49,7 +49,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Week3/from_mean_variance_to_factor_models';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_07_mean_variance_to_CAPM_ipynb';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -191,7 +191,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -199,12 +199,12 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
 </ul>
 </details></li>
@@ -214,24 +214,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="what_is_a_task_runner.html">What is a build system or task runner?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="doit_examples.html">PyDoit Examples Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
@@ -242,15 +243,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,17 +276,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW3.html">Homework 3: Option-Implied Crash Probabilities</a></li>
@@ -370,7 +371,7 @@
       
       
       
-      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek3/from_mean_variance_to_factor_models.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_07_mean_variance_to_CAPM_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -400,7 +401,7 @@
       
       
       
-      <li><a href="../_sources/Week3/from_mean_variance_to_factor_models.md" target="_blank"
+      <li><a href="../_sources/notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -410,7 +411,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -484,7 +485,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>From Mean-Variance to Factor Models</h1>
+    <h1>From Mean-Variance to the CAPM</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -494,11 +495,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-funds-are-enough">Two funds are enough</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-everyone-holds-it-it-is-the-market-the-capm">If everyone holds it, it is the market: the CAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-one-period-is-not-enough-the-icapm">When one period is not enough: the ICAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-icapm-to-fama-french">From the ICAPM to Fama-French</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-data-comes-in">Where the data comes in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-one-investor-holds-the-tangency-portfolio">Step 1: One investor holds the tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-two-kinds-of-risk">Step 2: Two kinds of risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-assumptions">Step 3: The assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-supply-equals-demand-so-the-market-is-the-tangency-portfolio">Step 4: Supply equals demand, so the market is the tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-the-capm">Step 5: The CAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-what-the-capm-predicts">Step 6: What the CAPM predicts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -510,133 +512,309 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="from-mean-variance-to-factor-models">
-<h1>From Mean-Variance to Factor Models<a class="headerlink" href="#from-mean-variance-to-factor-models" title="Link to this heading">#</a></h1>
-<p>In Lecture 0 you solved one investor’s portfolio problem. This page asks what
-happens when <em>every</em> investor solves it, and how that question leads first to
-the CAPM and then to multifactor models like Fama-French. The theory itself is
-outside the scope of this course. It is here so that you know why the factors
-you build in HW 1 exist. There are no derivations, and the only formulas are
-ones you have already seen.</p>
-<section id="two-funds-are-enough">
-<h2>Two funds are enough<a class="headerlink" href="#two-funds-are-enough" title="Link to this heading">#</a></h2>
-<p>The <a class="reference internal" href="../notebooks/_02_markowitz_derivation.html"><span class="std std-doc">appendix to the HW 0 notebook</span></a>
-proved the <strong>two-fund theorem</strong>: every portfolio on the mean-variance frontier
-is a mix of the same two portfolios. Add a risk-free asset and the two funds
-become especially simple. An investor who mixes the risk-free asset with a risky
-portfolio <span class="math notranslate nohighlight">\(w\)</span> moves along a straight line whose slope is the Sharpe ratio of
-<span class="math notranslate nohighlight">\(w\)</span>, so the best risky portfolio is the one that solves</p>
+                   <section class="tex2jax_ignore mathjax_ignore" id="from-mean-variance-to-the-capm">
+<h1>From Mean-Variance to the CAPM<a class="headerlink" href="#from-mean-variance-to-the-capm" title="Link to this heading">#</a></h1>
+<p>In HW 0 you solved one investor’s portfolio problem. This page asks what
+happens when <em>every</em> investor solves it. The answer is the Capital Asset
+Pricing Model (CAPM), the theory behind the market index you build in HW 1.
+It gives statements and intuition only. Each step links to the paper where
+the result is proved.</p>
+<p>The figures use ten well-known stocks from CRSP (Apple, Microsoft, Exxon,
+J&amp;J, Walmart, Coca-Cola, JPMorgan, GE, Ford, and Disney), monthly from 1990
+through 2024. They were picked with hindsight from among today’s best-known
+companies, so their average returns are higher than a typical stock’s. That
+does not matter for pictures about risk, but it means these figures are not
+a test of anything. The calculations are in
+<code class="docutils literal notranslate"><span class="pre">src/calc_asset_pricing_theory.py</span></code>.</p>
+<section id="step-1-one-investor-holds-the-tangency-portfolio">
+<h2>Step 1: One investor holds the tangency portfolio<a class="headerlink" href="#step-1-one-investor-holds-the-tangency-portfolio" title="Link to this heading">#</a></h2>
+<p>The <strong>tangency portfolio</strong> is the portfolio of risky assets with the highest
+Sharpe ratio. From HW 0, its weights are</p>
 <div class="math notranslate nohighlight">
 \[
-\max_{w} \; \frac{w^\top \mu - r_f}{\sqrt{w^\top \Sigma w}}
-\quad \text{subject to} \quad w^\top \mathbf{1} = 1 ,
+w_T \propto \Sigma^{-1}(\mu - r_f \mathbf{1}).
 \]</div>
-<p>which is the <strong>tangency portfolio</strong> from HW 0. Nothing in this problem depends
-on how risk averse the investor is. A cautious investor and an aggressive one
-hold the <em>same</em> risky portfolio and differ only in how much they put in it
-versus the risk-free asset. This is two-fund separation with a risk-free
-asset, due to Tobin (1958).</p>
+<p><strong>Statement (Tobin separation).</strong> When there is a risk-free asset, every
+mean-variance investor holds the same risky portfolio, the tangency
+portfolio. Risk aversion only decides how wealth is split between the
+tangency portfolio and the risk-free asset.</p>
+<p><strong>Intuition.</strong> Mixing the risk-free asset with a risky portfolio traces a
+straight line that starts at <span class="math notranslate nohighlight">\(r_f\)</span>, and its slope is that portfolio’s Sharpe
+ratio. Every investor wants the steepest line, whatever point on it they
+pick. A cautious investor lends part of their wealth at <span class="math notranslate nohighlight">\(r_f\)</span>, and an
+aggressive one borrows to hold more than 100% in the tangency portfolio.
+Both hold the same mix of risky assets.</p>
+<p>In the figure, the gray curve is the frontier of the ten stocks alone.
+The blue line is the steepest line from the risk-free asset that still
+touches it, and it touches at the tangency portfolio. The two investors sit
+on that line, one below the tangency point and one above.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/09ea8beb52995e64ffcc0bff76a73be7c1ffc6205f0d5a3663474aa11e6a1110.png" src="../_images/09ea8beb52995e64ffcc0bff76a73be7c1ffc6205f0d5a3663474aa11e6a1110.png" />
+</div>
+</div>
+<p>The
+<a class="reference external" href="https://finm-32800.github.io/notebooks/_02_markowitz_derivation.html">HW 0 appendix</a>
+proves the general two-fund theorem: without a risk-free asset, every
+frontier portfolio mixes the same two funds (Merton 1972). Tobin separation
+is the special case where one of the two funds is the risk-free asset.
+<em>Paper: <a class="reference external" href="https://doi.org/10.2307/2296205">Tobin (1958)</a>.</em></p>
 </section>
-<section id="if-everyone-holds-it-it-is-the-market-the-capm">
-<h2>If everyone holds it, it is the market: the CAPM<a class="headerlink" href="#if-everyone-holds-it-it-is-the-market-the-capm" title="Link to this heading">#</a></h2>
-<p>Now suppose all investors agree on <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span>. Then they all hold the
-same tangency portfolio, in different amounts. Add up everyone’s holdings and
-you get every share outstanding, which is the value-weighted <strong>market
-portfolio</strong>. So in equilibrium the tangency portfolio <em>is</em> the market.</p>
-<p>That one fact is the Capital Asset Pricing Model of Sharpe (1964), Lintner
-(1965), and Mossin (1966). Saying the market is the tangency portfolio is the
-same as saying that each asset’s expected excess return is proportional to its
-beta with the market:</p>
+<section id="step-2-two-kinds-of-risk">
+<h2>Step 2: Two kinds of risk<a class="headerlink" href="#step-2-two-kinds-of-risk" title="Link to this heading">#</a></h2>
+<p><strong>Definition.</strong> Regress a stock’s excess return on the market’s excess
+return. This is the <em>market model</em> of
+<a class="reference external" href="https://doi.org/10.1287/mnsc.9.2.277">Sharpe (1963)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-E[R_i] - r_f = \beta_i \, \big(E[R_m] - r_f\big).
+R_i - r_f = a_i + \beta_i (R_M - r_f) + \varepsilon_i .
 \]</div>
-<p>The intuition is the first-order condition of the tangency problem. At the
-optimum, no asset can be tilted toward without lowering the Sharpe ratio, so an
-asset’s reward must be in line with how much it adds to the market’s risk,
-which is its beta.</p>
-<p>This is what makes the CAPM testable. Regress a portfolio’s excess return on
-the market’s excess return. If the CAPM holds, the intercept (Jensen’s alpha)
-is zero. A nonzero alpha means the market is <em>not</em> the tangency portfolio: some
-mix of the market and that portfolio has a higher Sharpe ratio than the market
-alone (Gibbons, Ross, and Shanken 1989). “The CAPM fails” and “the market is
-not mean-variance efficient” are the same statement.</p>
+<p>The first part, <span class="math notranslate nohighlight">\(\beta_i (R_M - r_f)\)</span>, is the <strong>systematic</strong> part of the
+return. It moves with the whole market. The rest, <span class="math notranslate nohighlight">\(\varepsilon_i\)</span>, is the
+<strong>idiosyncratic</strong> part, which comes from news about the firm itself. The two
+parts are uncorrelated, so the variance splits in two:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_i^2 = \underbrace{\beta_i^2 \sigma_M^2}_{\text{systematic}}
+  + \underbrace{\sigma_{\varepsilon_i}^2}_{\text{idiosyncratic}} .
+\]</div>
+<p>The figure splits Ford’s monthly return from 2006 through 2010 into the two
+parts. The market part is mostly the 2008 crash, which hit every stock. The
+firm-specific part is Ford’s own story: the near-bankruptcy of the U.S. auto
+industry, then April 2009, when Ford rose 127% while its market part
+accounted for 25 points of that.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0accb1d7cf105755ff04b57b75ade3fcc17cc454392c73aff308bd0c75b9814d.png" src="../_images/0accb1d7cf105755ff04b57b75ade3fcc17cc454392c73aff308bd0c75b9814d.png" />
+</div>
+</div>
+<p>For most single stocks, idiosyncratic risk is most of the risk. For these
+ten, the market explains between 15% (Walmart) and 42% (Disney) of the
+variance. Put all ten in one equal-weighted portfolio, and the market
+explains 77%.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d74a261808d187a7419e570d253be83bc79a7e0550370cb2a3f1215306051e5f.png" src="../_images/d74a261808d187a7419e570d253be83bc79a7e0550370cb2a3f1215306051e5f.png" />
+</div>
+</div>
+<p><strong>Statement (diversification).</strong> In a portfolio of many stocks, the
+idiosyncratic parts largely cancel and the systematic part remains. In an
+equal-weighted portfolio of <span class="math notranslate nohighlight">\(N\)</span> stocks, the idiosyncratic variance shrinks
+roughly like <span class="math notranslate nohighlight">\(1/N\)</span>, and the systematic variance stays near the market’s.</p>
+<p><strong>Intuition.</strong> Firm-specific news is good for some firms and bad for others,
+so across many firms it averages out. Market-wide news hits all of them at
+once, so averaging cannot remove it.</p>
+<p>The figure draws <span class="math notranslate nohighlight">\(N\)</span> stocks at random from every CRSP stock with a full
+return history since 1990, 200 times for each <span class="math notranslate nohighlight">\(N\)</span>, and reports the average
+volatility of the equal-weighted portfolio. One stock has a volatility of
+38% a year, ten have 20%, and a hundred have 17%, close to the market’s 15%.
+Past a few dozen stocks, adding more barely helps, because what is left is
+systematic risk. <em>Paper:
+<a class="reference external" href="https://doi.org/10.1111/j.1540-6261.1968.tb00315.x">Evans and Archer (1968)</a>.</em></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2950262220066839ab9dc66cd130effc9b40b92389977ac6b3c3137431bd17fd.png" src="../_images/2950262220066839ab9dc66cd130effc9b40b92389977ac6b3c3137431bd17fd.png" />
+</div>
+</div>
+<p>This is why the single stocks sit far to the right of the frontier in the
+Step 1 figure: each carries idiosyncratic risk that a portfolio can shed.
+Mean-variance optimization is diversification done optimally. For each
+level of expected return, it sheds as much of that risk as it can.</p>
 </section>
-<section id="when-one-period-is-not-enough-the-icapm">
-<h2>When one period is not enough: the ICAPM<a class="headerlink" href="#when-one-period-is-not-enough-the-icapm" title="Link to this heading">#</a></h2>
-<p>Markowitz’s problem has one period. Real investors live through many, and the
-investment opportunities they face change over time: interest rates move,
-expected returns rise and fall, volatility comes and goes. Merton (1973) showed
-that a long-horizon investor cares about more than next period’s wealth. They
-also care about how good their opportunities will be afterward, so they value
-assets that pay off when opportunities get worse, as a hedge.</p>
-<p>In this <strong>Intertemporal CAPM (ICAPM)</strong>, two funds are no longer enough.
-Investors hold the tangency portfolio <em>plus</em> a hedging portfolio for each
-source of change in the opportunity set (each “state variable”). Expected
-returns then depend on several betas: one on the market and one on each
-state-variable portfolio. One period gave one factor. Many periods give many
-factors.</p>
-<p>Breeden (1979) showed that all of Merton’s betas can be collapsed into a single
-beta with aggregate consumption. That is the Consumption CAPM. It is elegant but
-hard to test, because consumption is measured poorly and infrequently.</p>
+<section id="step-3-the-assumptions">
+<h2>Step 3: The assumptions<a class="headerlink" href="#step-3-the-assumptions" title="Link to this heading">#</a></h2>
+<p>To go from one investor to a market, the CAPM assumes:</p>
+<ul class="simple">
+<li><p>Every investor is a mean-variance optimizer with a one-period horizon.</p></li>
+<li><p>Investors agree on <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span> (homogeneous beliefs).</p></li>
+<li><p>Anyone can borrow or lend any amount at <span class="math notranslate nohighlight">\(r_f\)</span>. There are no taxes or
+trading costs, and no investor is big enough to move prices.</p></li>
+<li><p><strong>Risky assets are in positive net supply.</strong> They are the shares that
+exist, and their total value is the market capitalization.</p></li>
+<li><p><strong>The risk-free asset is in zero net supply.</strong> It is a loan between
+investors, so every dollar lent is a dollar borrowed.</p></li>
+</ul>
 </section>
-<section id="from-the-icapm-to-fama-french">
-<h2>From the ICAPM to Fama-French<a class="headerlink" href="#from-the-icapm-to-fama-french" title="Link to this heading">#</a></h2>
-<p>The ICAPM says that extra factors should exist, but not what they are. Fama and
-French (1993) went the other way and started from the data. Sorting stocks on
-size and book-to-market leaves large CAPM alphas, so they built two portfolios
-to capture them: <strong>SMB</strong> (small minus big) and <strong>HML</strong> (high minus low
-book-to-market). Fama and French (1996) and Fama (1996) then read the
-three-factor model as an ICAPM, with SMB and HML standing in for unnamed state
-variables that investors want to hedge. Fama calls the portfolios investors hold
-in that world “multifactor efficient.”</p>
-<p>Two caveats. First, this is an interpretation, not a derivation. Nobody has
-shown which state variables SMB and HML track, and others argue the premiums
-come from mispricing instead of risk (Lakonishok, Shleifer, and Vishny 1994).
-Second, the Arbitrage Pricing Theory of Ross (1976) justifies multifactor models
-by a different route, with no investor optimization at all.</p>
-<p>In mean-variance terms the story comes back to where it started. The CAPM says
-the market alone is the tangency portfolio. A multifactor model says the
-tangency portfolio is a mix of the factors, so Mkt, SMB, and HML together should
-reach a higher Sharpe ratio than the market alone, and no other portfolio should
-have alpha once all three are in the regression.</p>
+<section id="step-4-supply-equals-demand-so-the-market-is-the-tangency-portfolio">
+<h2>Step 4: Supply equals demand, so the market is the tangency portfolio<a class="headerlink" href="#step-4-supply-equals-demand-so-the-market-is-the-tangency-portfolio" title="Link to this heading">#</a></h2>
+<p><strong>Statement.</strong> In equilibrium, the market portfolio, which holds every risky
+asset in proportion to its market value, is the tangency portfolio.</p>
+<p><strong>Intuition.</strong> By Step 1, every investor’s risky holdings are the same
+portfolio at different sizes. Add them up, and total demand for risky assets
+is the tangency portfolio, scaled up. Supply is the shares outstanding,
+which is the market portfolio. Prices adjust until demand equals supply, and
+at those prices the market <em>is</em> the tangency portfolio.</p>
+<p>The figure shows a made-up economy with three stocks and three investors.
+Each investor’s stocks come in the same 50/30/20 mix; only the amount
+differs. The cautious investor lends $20, the aggressive investor borrows
+$20, and the moderate investor does neither. Add everyone up and the stocks
+are the market, while the risk-free positions sum to zero.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f90b6067589f1735da5af7aae0b65966dfa06389ad4147ec0e76615324de70d3.png" src="../_images/f90b6067589f1735da5af7aae0b65966dfa06389ad4147ec0e76615324de70d3.png" />
+</div>
+</div>
+<p>Because the risk-free asset is in zero net supply, borrowing and lending
+cancel. Investors as a whole hold none of it, and all wealth sits in the
+market portfolio. That fixes how large the market risk premium has to be:
+large enough that the average investor is willing to hold exactly the
+market, no more and no less.</p>
+<div class="math notranslate nohighlight">
+\[
+E[R_M] - r_f = \bar\gamma \, \sigma_M^2,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar\gamma\)</span> is investors’ average risk aversion. The premium is larger
+when investors are more risk averse or when the market is riskier.</p>
 </section>
-<section id="where-the-data-comes-in">
-<h2>Where the data comes in<a class="headerlink" href="#where-the-data-comes-in" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html"><span class="std std-doc">HW 1 Guide E</span></a>
-tests both claims on the portfolios your HW 1 pipeline builds. It computes the
-tangency portfolio of the factors with the HW 0 formula, finds the alphas the
-CAPM leaves behind, and checks how many of them SMB and HML absorb.</p>
+<section id="step-5-the-capm">
+<h2>Step 5: The CAPM<a class="headerlink" href="#step-5-the-capm" title="Link to this heading">#</a></h2>
+<p><strong>Statement
+(<a class="reference external" href="https://doi.org/10.1111/j.1540-6261.1964.tb02865.x">Sharpe 1964</a>,
+<a class="reference external" href="https://doi.org/10.2307/1924119">Lintner 1965</a>,
+<a class="reference external" href="https://doi.org/10.2307/1910098">Mossin 1966</a>).</strong> Every asset’s expected
+excess return is proportional to its beta with the market:</p>
+<div class="math notranslate nohighlight">
+\[
+E[R_i] - r_f = \beta_i \big(E[R_M] - r_f\big), \qquad
+\beta_i = \frac{\mathrm{Cov}(R_i, R_M)}{\mathrm{Var}(R_M)}.
+\]</div>
+<p><strong>Intuition.</strong> Someone who holds the market cares only about the risk of the
+whole portfolio. An asset adds to that risk through its covariance with the
+market, not through its own variance. The rest of its risk, the
+idiosyncratic part, diversifies away, so it earns no reward. Because the
+market is already optimal, changing any asset’s weight cannot raise the
+Sharpe ratio. That only holds if every asset pays the same reward per unit
+of market risk it adds, and beta is that unit.</p>
+<p><strong>Only systematic risk is priced.</strong> Since <span class="math notranslate nohighlight">\(\beta_i \sigma_M\)</span> is the
+systematic part of the stock’s volatility, the CAPM can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+E[R_i] - r_f =
+  \underbrace{\frac{E[R_M] - r_f}{\sigma_M}}_{\text{market Sharpe ratio}}
+  \times \underbrace{\beta_i \sigma_M}_{\text{systematic volatility}} .
+\]</div>
+<p>Each unit of systematic volatility earns the market’s Sharpe ratio.
+Idiosyncratic volatility earns nothing.</p>
+<p><strong>Intuition.</strong> Anyone can get rid of idiosyncratic risk for free by holding
+a diversified portfolio, and in equilibrium everyone does, because they all
+hold the market. No one has to be paid to bear a risk they can shed for
+free. Systematic risk is different. It is the risk of the market portfolio
+itself, someone has to hold it, and so it has to be paid.</p>
+<p>In the figure, each gray dot is a stock at its total volatility. The arrow
+removes the idiosyncratic risk and moves the stock to its systematic
+volatility <span class="math notranslate nohighlight">\(\beta_i \sigma_M\)</span>, the blue dot. The dashed line runs from the
+risk-free asset through the market, and its slope is the market’s Sharpe
+ratio. The CAPM says that the blue dots lie on that line, not the gray ones:
+a stock’s reward depends on its systematic risk, however much total risk it
+has. Ford and Walmart illustrate this. Ford has twice Walmart’s total
+volatility, yet it earned less.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/52e9648ccbf00a12021d1f57e244ef67f7c2e9c10d2df75fc3c3edeb4cd0dd37.png" src="../_images/52e9648ccbf00a12021d1f57e244ef67f7c2e9c10d2df75fc3c3edeb4cd0dd37.png" />
+</div>
+</div>
+<p>In these data, the blue dots do not land exactly on the line, and Apple and
+Microsoft are far above it. That gap is alpha, the subject of Step 6.
+Volatilities don’t add (only variances do), so an arrow’s length is not the
+idiosyncratic volatility itself. It shows how far the stock moves once that
+risk is gone.</p>
+<p>Plotted against beta, the CAPM is a straight line, the <strong>security market
+line</strong>. It starts at zero (the risk-free asset has a beta of zero) and passes
+through the market at a beta of one. Its slope is the market risk premium.
+It is the figure above with beta, rather than <span class="math notranslate nohighlight">\(\beta_i \sigma_M\)</span>, on the
+horizontal axis.</p>
+</section>
+<section id="step-6-what-the-capm-predicts">
+<h2>Step 6: What the CAPM predicts<a class="headerlink" href="#step-6-what-the-capm-predicts" title="Link to this heading">#</a></h2>
+<p>Regress any portfolio’s excess return on the market’s excess return:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{i,t} - r_{f,t} = \alpha_i + \beta_i (R_{M,t} - r_{f,t}) + \varepsilon_{i,t}.
+\]</div>
+<p>The CAPM says <span class="math notranslate nohighlight">\(\alpha_i = 0\)</span> for every asset: every asset sits on the
+security market line, and its alpha is its vertical distance from the line.
+This is the same statement as “the market is the tangency portfolio.” A
+nonzero alpha means some mix of the market and portfolio <span class="math notranslate nohighlight">\(i\)</span> has a higher
+Sharpe ratio than the market alone
+(<a class="reference external" href="https://doi.org/10.2307/1913625">Gibbons, Ross, and Shanken 1989</a>).</p>
+<p>The figure plots the ten stocks. The blue line is what the CAPM predicts.
+The dashed line is the straight line that fits the stocks best.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/31d0c558e47315a12b79c0580092b35d252da9d0fa12df45205007b596d4a875.png" src="../_images/31d0c558e47315a12b79c0580092b35d252da9d0fa12df45205007b596d4a875.png" />
+</div>
+</div>
+<p>In HW 1 you build the market index. Next week,
+<a class="reference external" href="https://finm-32800.github.io/notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E</a>
+runs the alpha test on the portfolios your pipeline builds, and
+<a class="reference external" href="https://finm-32800.github.io/notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a>
+explains why more than one factor might be needed.</p>
+<div class="note admonition">
+<p class="admonition-title">Discussion</p>
+<p>The CAPM rests on the assumptions in Step 3. Which are hardest to believe,
+and what goes wrong when they fail?</p>
+</div>
+<p>Some answers that could come up:</p>
+<ul class="simple">
+<li><p><strong>The market portfolio cannot be observed
+(<a class="reference external" href="https://doi.org/10.1016/0304-405X(77)90009-5">Roll 1977</a>).</strong> In theory it
+contains every risky asset: stocks, bonds, real estate, private
+businesses, even human capital. The CRSP value-weighted index is a
+stand-in. A test that rejects the CAPM may only show that the stand-in is
+not efficient, which is why Roll argues the theory cannot really be
+tested.</p></li>
+<li><p><strong>Investors disagree.</strong> If beliefs differ, there is no single tangency
+portfolio for everyone to hold.</p></li>
+<li><p><strong>Borrowing is neither free nor unlimited.</strong> Investors who cannot borrow
+get leverage by buying high-beta stocks instead, which pushes up their
+prices and flattens the relationship between beta and return
+(<a class="reference external" href="https://doi.org/10.1086/295472">Black 1972</a>;
+<a class="reference external" href="https://doi.org/10.1016/j.jfineco.2013.10.005">Frazzini and Pedersen 2014</a>).</p></li>
+<li><p><strong>The data agree.</strong> The relationship between average returns and beta is
+flatter than the CAPM predicts (Black, Jensen, and Scholes 1972;
+<a class="reference external" href="https://doi.org/10.1111/j.1540-6261.1992.tb04398.x">Fama and French 1992</a>).
+The dashed line in the figure above is an example.</p></li>
+<li><p><strong>One period.</strong> Real investors also care about what their opportunities
+will look like next year. Dropping this assumption leads to next week’s
+multifactor models.</p></li>
+<li><p><strong>Mean and variance only.</strong> Investors may also care about skewness and
+crash risk, which is the subject of HW 3.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Breeden, Douglas T. “An Intertemporal Asset Pricing Model with Stochastic
-Consumption and Investment Opportunities.” <em>Journal of Financial Economics</em>
-7, no. 3 (1979): 265-296.</p></li>
-<li><p>Fama, Eugene F. “Multifactor Portfolio Efficiency and Multifactor Asset
-Pricing.” <em>Journal of Financial and Quantitative Analysis</em> 31, no. 4 (1996):
-441-465.</p></li>
-<li><p>Fama, Eugene F., and Kenneth R. French. “Common Risk Factors in the Returns on
-Stocks and Bonds.” <em>Journal of Financial Economics</em> 33, no. 1 (1993): 3-56.</p></li>
-<li><p>Fama, Eugene F., and Kenneth R. French. “Multifactor Explanations of Asset
-Pricing Anomalies.” <em>Journal of Finance</em> 51, no. 1 (1996): 55-84.</p></li>
+<li><p>Black, Fischer. “Capital Market Equilibrium with Restricted Borrowing.”
+<em>Journal of Business</em> 45, no. 3 (1972): 444-455.</p></li>
+<li><p>Black, Fischer, Michael C. Jensen, and Myron Scholes. “The Capital Asset
+Pricing Model: Some Empirical Tests.” In <em>Studies in the Theory of
+Capital Markets</em>, edited by Michael C. Jensen, 79-121. New York: Praeger,
+1972.</p></li>
+<li><p>Evans, John L., and Stephen H. Archer. “Diversification and the Reduction
+of Dispersion: An Empirical Analysis.” <em>Journal of Finance</em> 23, no. 5
+(1968): 761-767.</p></li>
+<li><p>Fama, Eugene F., and Kenneth R. French. “The Cross-Section of Expected
+Stock Returns.” <em>Journal of Finance</em> 47, no. 2 (1992): 427-465.</p></li>
+<li><p>Frazzini, Andrea, and Lasse Heje Pedersen. “Betting Against Beta.”
+<em>Journal of Financial Economics</em> 111, no. 1 (2014): 1-25.</p></li>
 <li><p>Gibbons, Michael R., Stephen A. Ross, and Jay Shanken. “A Test of the
-Efficiency of a Given Portfolio.” <em>Econometrica</em> 57, no. 5 (1989): 1121-1152.</p></li>
-<li><p>Lakonishok, Josef, Andrei Shleifer, and Robert W. Vishny. “Contrarian
-Investment, Extrapolation, and Risk.” <em>Journal of Finance</em> 49, no. 5 (1994):
-1541-1578.</p></li>
+Efficiency of a Given Portfolio.” <em>Econometrica</em> 57, no. 5 (1989):
+1121-1152.</p></li>
 <li><p>Lintner, John. “The Valuation of Risk Assets and the Selection of Risky
-Investments in Stock Portfolios and Capital Budgets.” <em>Review of Economics and
-Statistics</em> 47, no. 1 (1965): 13-37.</p></li>
-<li><p>Merton, Robert C. “An Intertemporal Capital Asset Pricing Model.”
-<em>Econometrica</em> 41, no. 5 (1973): 867-887.</p></li>
-<li><p>Mossin, Jan. “Equilibrium in a Capital Asset Market.” <em>Econometrica</em> 34, no. 4
-(1966): 768-783.</p></li>
-<li><p>Ross, Stephen A. “The Arbitrage Theory of Capital Asset Pricing.” <em>Journal of
-Economic Theory</em> 13, no. 3 (1976): 341-360.</p></li>
-<li><p>Sharpe, William F. “Capital Asset Prices: A Theory of Market Equilibrium under
-Conditions of Risk.” <em>Journal of Finance</em> 19, no. 3 (1964): 425-442.</p></li>
+Investments in Stock Portfolios and Capital Budgets.” <em>Review of Economics
+and Statistics</em> 47, no. 1 (1965): 13-37.</p></li>
+<li><p>Merton, Robert C. “An Analytic Derivation of the Efficient Portfolio
+Frontier.” <em>Journal of Financial and Quantitative Analysis</em> 7, no. 4
+(1972): 1851-1872.</p></li>
+<li><p>Mossin, Jan. “Equilibrium in a Capital Asset Market.” <em>Econometrica</em> 34,
+no. 4 (1966): 768-783.</p></li>
+<li><p>Roll, Richard. “A Critique of the Asset Pricing Theory’s Tests Part I: On
+Past and Potential Testability of the Theory.” <em>Journal of Financial
+Economics</em> 4, no. 2 (1977): 129-176.</p></li>
+<li><p>Sharpe, William F. “A Simplified Model for Portfolio Analysis.”
+<em>Management Science</em> 9, no. 2 (1963): 277-293.</p></li>
+<li><p>Sharpe, William F. “Capital Asset Prices: A Theory of Market Equilibrium
+under Conditions of Risk.” <em>Journal of Finance</em> 19, no. 3 (1964): 425-442.</p></li>
 <li><p>Tobin, James. “Liquidity Preference as Behavior Towards Risk.” <em>Review of
 Economic Studies</em> 25, no. 2 (1958): 65-86.</p></li>
 </ul>
@@ -691,11 +869,12 @@ Economic Studies</em> 25, no. 2 (1958): 65-86.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-funds-are-enough">Two funds are enough</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-everyone-holds-it-it-is-the-market-the-capm">If everyone holds it, it is the market: the CAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-one-period-is-not-enough-the-icapm">When one period is not enough: the ICAPM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-icapm-to-fama-french">From the ICAPM to Fama-French</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-data-comes-in">Where the data comes in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-one-investor-holds-the-tangency-portfolio">Step 1: One investor holds the tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-two-kinds-of-risk">Step 2: Two kinds of risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-the-assumptions">Step 3: The assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-supply-equals-demand-so-the-market-is-the-tangency-portfolio">Step 4: Supply equals demand, so the market is the tangency portfolio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-the-capm">Step 5: The CAPM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-what-the-capm-predicts">Step 6: What the CAPM predicts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>

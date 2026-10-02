@@ -5,6 +5,7 @@
 Week3/what_is_a_task_runner.md
 Week3/doit_examples.md
 notebooks/_02_basics_of_SQL_ipynb.ipynb
+notebooks/_08_CAPM_to_multifactor_models_ipynb.ipynb
 Week3/project_structure.md
 Week3/uv_and_pixi.md
 Week3/ftsfr.md
@@ -21,8 +22,8 @@ motivates it is the **Fama-French (1993)** replication that finishes
 
 - **[HW 1](./HW1.md) is due Tuesday, October 20,** but aim to finish it by next
   week, October 13, when [HW 2](./HW2.md) launches. We take questions at the
-  start of class. Parts 3 and 4, the Fama-French factors and the investment
-  sort, are what we cover tonight.
+  start of class. Part D, the Fama-French factors and the investment
+  sort, is what we cover tonight.
 - **Final project list and survey.** The
   [Potential Final Projects](./FinalProject/potential_final_projects.md) list is
   posted, and the preference survey goes out this week. Form your group now:
@@ -67,11 +68,12 @@ motivates it is the **Fama-French (1993)** replication that finishes
    *→ HW 1 Part D:* you complete the `WHERE` clauses of the Compustat and
    CRSP-Compustat link queries in `src/pull_CRSP_Compustat.py`. These are tested
    against a small in-memory database, so you can iterate without WRDS.
-4. **Why the factors exist, before how they are built.** Start from HW 0: if
-   every investor holds the tangency portfolio, it must be the market, and
-   that is the CAPM. If investors also hedge changes in their opportunities,
-   more factors appear. [From Mean-Variance to Factor Models](./Week3/from_mean_variance_to_factor_models.md)
-   tells that story in words. The
+4. **Why the factors exist, before how they are built.** Last week's
+   [From Mean-Variance to the CAPM](notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb)
+   ended with one factor, the market. If investors also hedge changes in their
+   opportunities, more factors appear:
+   [From the CAPM to Multifactor Models](notebooks/_08_CAPM_to_multifactor_models_ipynb.ipynb)
+   covers the ICAPM, the consumption CAPM, and the APT. The
    [HW 1 Guide E](notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb)
    then tests it on portfolios sorted by size, book-to-market, and investment:
    the market alone is not the tangency portfolio, the CAPM leaves alphas

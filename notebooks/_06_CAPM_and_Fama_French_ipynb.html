@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -216,7 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -224,6 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -517,14 +518,14 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-e-testing-the-capm-and-the-three-factor-model">
 <h1>HW 1 Guide E: Testing the CAPM and the Three-Factor Model<a class="headerlink" href="#hw-1-guide-e-testing-the-capm-and-the-three-factor-model" title="Link to this heading">#</a></h1>
-<p>The page
-<a class="reference external" href="https://finm-32800.github.io/Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a>
-tells the theory story in words: if every investor holds the tangency
-portfolio from HW 0, the tangency portfolio is the market, and that is the
-CAPM. If investors also hedge changes in their opportunities (the ICAPM),
-more factors appear, and Fama and French (1993) proposed SMB and HML as those
-factors. This notebook puts both claims to the data, using the portfolios the
-HW 1 pipeline builds:</p>
+<p>Two readings tell the theory story:
+<a class="reference external" href="https://finm-32800.github.io/notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a>
+and
+<a class="reference external" href="https://finm-32800.github.io/notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a>.
+The CAPM says the market is the tangency portfolio from HW 0. Multifactor
+models, such as Fama and French (1993), say the tangency portfolio is a mix
+of the market, SMB, and HML. This notebook puts both claims to the data,
+using the portfolios the HW 1 pipeline builds:</p>
 <ol class="arabic simple">
 <li><p><strong>6 size and book-to-market portfolios</strong> (<code class="docutils literal notranslate"><span class="pre">FF_1993_vwret.parquet</span></code>), the
 2x3 sort from Fama and French (1993).</p></li>
@@ -553,9 +554,9 @@ has no blanks to fill and no tests: it is here to show what the portfolios
 you built in Part D are for.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_CAPM_and_FF3</span>
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">calc_CAPM_and_FF3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 <span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">)</span>
@@ -703,7 +704,7 @@ is a mix of Mkt-RF, SMB, and HML.</p>
 <p>SMB and HML are long-short portfolios, so a “weight” here is the size of the
 position in each factor per dollar in the market.</p>
 <p>The calculation is short enough to show in full:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tangency</span><span class="p">(</span><span class="n">excess</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tangency</span><span class="p">(</span><span class="n">excess</span><span class="p">):</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">excess</span><span class="o">.</span><span class="n">cov</span><span class="p">(),</span> <span class="n">excess</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">w</span> <span class="o">/</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">excess</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">portfolio</span> <span class="o">=</span> <span class="n">excess</span> <span class="o">@</span> <span class="n">w</span>

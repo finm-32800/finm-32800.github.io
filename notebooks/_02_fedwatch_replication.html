@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -216,7 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -224,6 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -635,13 +636,13 @@ is the atom it is built from.</p></li>
 calendar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">fedwatch</span>
-<span class="kn">import</span> <span class="nn">fedwatch_monitor</span>
-<span class="kn">import</span> <span class="nn">pull_effr</span>
-<span class="kn">import</span> <span class="nn">pull_fed_funds_futures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fedwatch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fedwatch_monitor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_effr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_fed_funds_futures</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pull_fed_funds_futures</span><span class="o">.</span><span class="n">load_fed_funds_futures</span><span class="p">()</span>
 <span class="n">effr</span> <span class="o">=</span> <span class="n">pull_effr</span><span class="o">.</span><span class="n">load_effr</span><span class="p">()</span>
@@ -675,29 +676,29 @@ calendar.</p>
   </thead>
   <tbody>
     <tr>
-      <th>11</th>
-      <td>2026-06-16</td>
-      <td>2026-06-17</td>
+      <th>19</th>
+      <td>2027-06-08</td>
+      <td>2027-06-09</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>2026-07-28</td>
-      <td>2026-07-29</td>
+      <th>20</th>
+      <td>2027-07-27</td>
+      <td>2027-07-28</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>2026-09-15</td>
-      <td>2026-09-16</td>
+      <th>21</th>
+      <td>2027-09-14</td>
+      <td>2027-09-15</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>2026-10-27</td>
-      <td>2026-10-28</td>
+      <th>22</th>
+      <td>2027-10-26</td>
+      <td>2027-10-27</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>2026-12-08</td>
-      <td>2026-12-09</td>
+      <th>23</th>
+      <td>2027-12-07</td>
+      <td>2027-12-08</td>
     </tr>
   </tbody>
 </table>
@@ -830,7 +831,7 @@ contract actually prices: the day-weighted average of the expected path.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b0b56b65385280576d7c0d5cbd2f9b9f4906cd7ca39413995ff721c886a5498b.png" src="../_images/b0b56b65385280576d7c0d5cbd2f9b9f4906cd7ca39413995ff721c886a5498b.png" />
+<img alt="../_images/78179dd75e67ac1342471dcba68fe815acc8698ddb7ac0abe995663f42217a35.png" src="../_images/78179dd75e67ac1342471dcba68fe815acc8698ddb7ac0abe995663f42217a35.png" />
 </div>
 </div>
 </section>
@@ -896,7 +897,7 @@ and remember that if you have refreshed the data since this case study
 was written, the numbers will have moved with the market.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fedwatch_chart</span> <span class="kn">import</span> <span class="n">plot_probabilities_matplotlib</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fedwatch_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_probabilities_matplotlib</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_probabilities_matplotlib</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -904,7 +905,7 @@ was written, the numbers will have moved with the market.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/88625e894a85063fe312170bb61fae2d7d48d8bca06d5f17a74081c8898bb92c.png" src="../_images/88625e894a85063fe312170bb61fae2d7d48d8bca06d5f17a74081c8898bb92c.png" />
+<img alt="../_images/d65886516183ed763e74ab78f1473813491cbaf8d44500042f78cf4b8d15a25c.png" src="../_images/d65886516183ed763e74ab78f1473813491cbaf8d44500042f78cf4b8d15a25c.png" />
 </div>
 </div>
 <p><strong>Exercises</strong></p>

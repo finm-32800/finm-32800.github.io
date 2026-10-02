@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -214,7 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -222,6 +222,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -659,7 +660,7 @@ similar outcomes using the <code class="docutils literal notranslate"><span clas
 <h3>Fetching Real-time Data with <code class="docutils literal notranslate"><span class="pre">bdp</span></code><a class="headerlink" href="#fetching-real-time-data-with-bdp" title="Link to this heading">#</a></h3>
 <p>Equivalent to the <code class="docutils literal notranslate"><span class="pre">BDP</span></code> function in Excel, <code class="docutils literal notranslate"><span class="pre">bdp</span></code> in <code class="docutils literal notranslate"><span class="pre">xbbg</span></code> retrieves real-time data for a specified security and field.</p>
 <p><strong>Example</strong>: To get the last trading price of Apple Inc., you would do:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xbbg</span> <span class="kn">import</span> <span class="n">blp</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xbbg</span><span class="w"> </span><span class="kn">import</span> <span class="n">blp</span>
 
 <span class="c1"># Fetching the last trading price of Apple Inc.</span>
 <span class="n">last_price</span> <span class="o">=</span> <span class="n">blp</span><span class="o">.</span><span class="n">bdp</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;AAPL US Equity&#39;</span><span class="p">,</span> <span class="n">flds</span><span class="o">=</span><span class="s1">&#39;px_last&#39;</span><span class="p">)</span>
@@ -671,7 +672,7 @@ similar outcomes using the <code class="docutils literal notranslate"><span clas
 <h3>Fetching Historical Data with <code class="docutils literal notranslate"><span class="pre">bdh</span></code><a class="headerlink" href="#fetching-historical-data-with-bdh" title="Link to this heading">#</a></h3>
 <p>Similar to the <code class="docutils literal notranslate"><span class="pre">BDH</span></code> function in Excel, <code class="docutils literal notranslate"><span class="pre">bdh</span></code> in <code class="docutils literal notranslate"><span class="pre">xbbg</span></code> is used for fetching historical data.</p>
 <p><strong>Example</strong>: To obtain the market capitalization history of Uber Technologies Inc. for the year 2020:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xbbg</span> <span class="kn">import</span> <span class="n">blp</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xbbg</span><span class="w"> </span><span class="kn">import</span> <span class="n">blp</span>
 
 <span class="c1"># Historical market capitalization of Uber Technologies Inc.</span>
 <span class="n">mkt_cap_history</span> <span class="o">=</span> <span class="n">blp</span><span class="o">.</span><span class="n">bdh</span><span class="p">(</span>
@@ -684,9 +685,9 @@ similar outcomes using the <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 <p>Furthermore, here is another example with multiple securities:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xbbg</span> <span class="kn">import</span> <span class="n">blp</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xbbg</span><span class="w"> </span><span class="kn">import</span> <span class="n">blp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 <span class="n">TODAY</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;today&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">START_DATE</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">blp</span><span class="o">.</span><span class="n">bdh</span><span class="p">(</span>
@@ -704,7 +705,7 @@ similar outcomes using the <code class="docutils literal notranslate"><span clas
 <h3>Fetching Bulk Data with <code class="docutils literal notranslate"><span class="pre">bds</span></code><a class="headerlink" href="#fetching-bulk-data-with-bds" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">bds</span></code> function is used for bulk queries, similar to the <code class="docutils literal notranslate"><span class="pre">BDS</span></code> function in Excel.</p>
 <p><strong>Example</strong>: For the payment schedule of an Apple Inc. corporate bond:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xbbg</span> <span class="kn">import</span> <span class="n">blp</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xbbg</span><span class="w"> </span><span class="kn">import</span> <span class="n">blp</span>
 
 <span class="c1"># Payment schedule for an Apple Inc. corporate bond</span>
 <span class="n">payment_schedule</span> <span class="o">=</span> <span class="n">blp</span><span class="o">.</span><span class="n">bds</span><span class="p">(</span>

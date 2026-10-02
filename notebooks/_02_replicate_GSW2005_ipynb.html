@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -216,7 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/from_mean_variance_to_factor_models.html">From Mean-Variance to Factor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
@@ -224,6 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
@@ -594,7 +595,7 @@ where:</p>
 This is exactly what the code computes: <code class="docutils literal notranslate"><span class="pre">cashflows</span> <span class="pre">&#64;</span> <span class="pre">discount_factors</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plot_cashflow_diagram</span> <span class="kn">import</span> <span class="n">plot_cashflow_diagram</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plot_cashflow_diagram</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_cashflow_diagram</span>
 
 <span class="n">plot_cashflow_diagram</span><span class="p">()</span>
 </pre></div>
@@ -678,13 +679,13 @@ y(t) = \beta_1 + \beta_2\left(\frac{1-e^{-t/\tau_1}}{t/\tau_1}\right) + \beta_3\
 <p>This equation shows the zero-coupon yield <span class="math notranslate nohighlight">\(y(t)\)</span> for maturity <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">gsw2006_yield_curve</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_treasury</span>
-<span class="kn">import</span> <span class="nn">pull_yield_curve_data</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gsw2006_yield_curve</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_treasury</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_yield_curve_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 </pre></div>
@@ -813,8 +814,8 @@ high coupon rates made them unattractive to hold for tax-related reasons.</p>
 decay from 1 to 0 over the year ending on January 2, 1996.</p>
 </div></blockquote>
 <p>Let’s examine how we implement these filters using CRSP data. The following is
-from the <code class="docutils literal notranslate"><span class="pre">pull_CRSP_treasury.py</span></code> file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gurkaynak_sack_wright_filters</span><span class="p">(</span><span class="n">dff</span><span class="p">):</span>
+from the <code class="docutils literal notranslate"><span class="pre">gsw2006_yield_curve.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gurkaynak_sack_wright_filters</span><span class="p">(</span><span class="n">dff</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply Treasury security filters based on Gürkaynak, Sack, and Wright (2006).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">dff</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -824,7 +825,7 @@ from the <code class="docutils literal notranslate"><span class="pre">pull_CRSP_
 
     <span class="c1"># Filter 2: Exclude on-the-run and first off-the-run after 1980</span>
     <span class="n">post_1980</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1980-01-01&quot;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">post_1980</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">))]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">post_1980</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">))]</span>
 
     <span class="c1"># Filter 3: Only include notes (2) and bonds (1)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;itype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])]</span>
@@ -1011,24 +1012,24 @@ from the <code class="docutils literal notranslate"><span class="pre">pull_CRSP_
   <tbody>
     <tr>
       <th>count</th>
-      <td>2.120639e+06</td>
-      <td>2.120645e+06</td>
-      <td>2.120645e+06</td>
-      <td>2.120645e+06</td>
+      <td>2.195915e+06</td>
+      <td>2.195921e+06</td>
+      <td>2.195921e+06</td>
+      <td>2.195921e+06</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>1.060708e+02</td>
-      <td>5.240046e+00</td>
-      <td>6.125277e+00</td>
-      <td>1.651092e+03</td>
+      <td>1.059844e+02</td>
+      <td>5.272291e+00</td>
+      <td>6.208978e+00</td>
+      <td>1.667000e+03</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>1.379746e+01</td>
-      <td>3.470534e+00</td>
-      <td>7.224184e+00</td>
-      <td>1.612092e+03</td>
+      <td>1.368486e+01</td>
+      <td>3.491576e+00</td>
+      <td>7.287776e+00</td>
+      <td>1.616172e+03</td>
     </tr>
     <tr>
       <th>min</th>
@@ -1039,31 +1040,31 @@ from the <code class="docutils literal notranslate"><span class="pre">pull_CRSP_
     </tr>
     <tr>
       <th>25%</th>
-      <td>9.976197e+01</td>
+      <td>9.974622e+01</td>
       <td>2.250000e+00</td>
-      <td>1.000000e+00</td>
-      <td>5.223430e+02</td>
+      <td>2.000000e+00</td>
+      <td>5.333015e+02</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>1.025367e+02</td>
+      <td>1.024823e+02</td>
       <td>4.625000e+00</td>
       <td>3.000000e+00</td>
-      <td>1.115093e+03</td>
+      <td>1.129720e+03</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1.087744e+02</td>
+      <td>1.086416e+02</td>
       <td>7.750000e+00</td>
       <td>7.000000e+00</td>
-      <td>2.102661e+03</td>
+      <td>2.132025e+03</td>
     </tr>
     <tr>
       <th>max</th>
       <td>1.827193e+02</td>
       <td>1.625000e+01</td>
-      <td>2.900000e+01</td>
-      <td>8.738464e+03</td>
+      <td>3.000000e+01</td>
+      <td>8.963737e+03</td>
     </tr>
   </tbody>
 </table>
@@ -1316,7 +1317,7 @@ predicted yields on all of the securities.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06eb2bd447a11de2ffa925f4476cb9c2366c36a6f6f784bd3b667cb67b81861f.png" src="../_images/06eb2bd447a11de2ffa925f4476cb9c2366c36a6f6f784bd3b667cb67b81861f.png" />
+<img alt="../_images/ac4f1302cd2f95be8dafbaa582e204433075f7d3a8df5b778b12e52fa5eff64b.png" src="../_images/ac4f1302cd2f95be8dafbaa582e204433075f7d3a8df5b778b12e52fa5eff64b.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Spot Curve&#39;}, xlabel=&#39;Maturity&#39;, ylabel=&#39;Spot Rate&#39;&gt;
 </pre></div>
 </div>
@@ -1383,41 +1384,41 @@ predicted yields on all of the securities.</p>
       <th>912810ET</th>
       <td>104.189560</td>
       <td>103.877734</td>
-      <td>103.934239</td>
-      <td>-0.002451</td>
-      <td>0.000544</td>
+      <td>103.936708</td>
+      <td>-0.002427</td>
+      <td>0.000568</td>
     </tr>
     <tr>
       <th>912810EV</th>
       <td>104.504035</td>
       <td>104.146501</td>
-      <td>104.169835</td>
-      <td>-0.003198</td>
-      <td>0.000224</td>
+      <td>104.172784</td>
+      <td>-0.003170</td>
+      <td>0.000252</td>
     </tr>
     <tr>
       <th>912810EW</th>
       <td>103.835766</td>
       <td>103.539602</td>
-      <td>103.500204</td>
-      <td>-0.003232</td>
-      <td>-0.000381</td>
+      <td>103.502746</td>
+      <td>-0.003207</td>
+      <td>-0.000356</td>
     </tr>
     <tr>
       <th>912810EX</th>
       <td>106.232229</td>
       <td>106.071133</td>
-      <td>105.960397</td>
-      <td>-0.002559</td>
-      <td>-0.001044</td>
+      <td>105.961888</td>
+      <td>-0.002545</td>
+      <td>-0.001030</td>
     </tr>
     <tr>
       <th>912810EY</th>
       <td>105.202785</td>
       <td>104.356538</td>
-      <td>104.209598</td>
-      <td>-0.009441</td>
-      <td>-0.001408</td>
+      <td>104.210287</td>
+      <td>-0.009434</td>
+      <td>-0.001401</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1428,48 +1429,48 @@ predicted yields on all of the securities.</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>91282CJW</th>
-      <td>99.132169</td>
-      <td>99.440209</td>
-      <td>99.129604</td>
-      <td>-0.000026</td>
-      <td>-0.003124</td>
-    </tr>
-    <tr>
-      <th>91282CJX</th>
-      <td>98.413419</td>
-      <td>99.124083</td>
-      <td>98.902013</td>
-      <td>0.004965</td>
-      <td>-0.002240</td>
-    </tr>
-    <tr>
-      <th>91282CKB</th>
-      <td>100.744735</td>
-      <td>100.757545</td>
-      <td>100.712789</td>
-      <td>-0.000317</td>
-      <td>-0.000444</td>
-    </tr>
-    <tr>
-      <th>91282CKD</th>
-      <td>99.929178</td>
-      <td>100.242964</td>
-      <td>99.930621</td>
-      <td>0.000014</td>
-      <td>-0.003116</td>
-    </tr>
-    <tr>
       <th>91282CKC</th>
       <td>100.226053</td>
       <td>100.302116</td>
-      <td>100.083359</td>
-      <td>-0.001424</td>
-      <td>-0.002181</td>
+      <td>100.061667</td>
+      <td>-0.001640</td>
+      <td>-0.002397</td>
+    </tr>
+    <tr>
+      <th>91282CKH</th>
+      <td>100.052510</td>
+      <td>100.145250</td>
+      <td>100.090819</td>
+      <td>0.000383</td>
+      <td>-0.000544</td>
+    </tr>
+    <tr>
+      <th>91282CKE</th>
+      <td>99.759851</td>
+      <td>99.848132</td>
+      <td>99.659425</td>
+      <td>-0.001007</td>
+      <td>-0.001890</td>
+    </tr>
+    <tr>
+      <th>91282CKG</th>
+      <td>98.979124</td>
+      <td>99.332897</td>
+      <td>99.010385</td>
+      <td>0.000316</td>
+      <td>-0.003247</td>
+    </tr>
+    <tr>
+      <th>91282CKF</th>
+      <td>98.479124</td>
+      <td>99.186179</td>
+      <td>98.953483</td>
+      <td>0.004817</td>
+      <td>-0.002346</td>
     </tr>
   </tbody>
 </table>
-<p>292 rows × 5 columns</p>
+<p>298 rows × 5 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1623,7 +1624,7 @@ trading</strong> strategies in fixed income.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analysis date: 2025-12-31
-Number of bonds in sample: 294
+Number of bonds in sample: 300
 </pre></div>
 </div>
 </div>
@@ -1684,9 +1685,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PW</th>
       <td>102.5781</td>
-      <td>101.4973</td>
-      <td>1.0808</td>
-      <td>1.0648</td>
+      <td>101.4479</td>
+      <td>1.1302</td>
+      <td>1.1141</td>
       <td>4.375</td>
       <td>2038-02-15</td>
       <td>30</td>
@@ -1696,9 +1697,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810FT</th>
       <td>104.9492</td>
-      <td>103.8898</td>
-      <td>1.0594</td>
-      <td>1.0197</td>
+      <td>103.8311</td>
+      <td>1.1181</td>
+      <td>1.0768</td>
       <td>4.500</td>
       <td>2036-02-15</td>
       <td>30</td>
@@ -1708,9 +1709,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PU</th>
       <td>107.7096</td>
-      <td>106.6694</td>
-      <td>1.0402</td>
-      <td>0.9751</td>
+      <td>106.6138</td>
+      <td>1.0957</td>
+      <td>1.0278</td>
       <td>5.000</td>
       <td>2037-05-15</td>
       <td>30</td>
@@ -1720,9 +1721,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PX</th>
       <td>102.5054</td>
-      <td>101.4778</td>
-      <td>1.0277</td>
-      <td>1.0127</td>
+      <td>101.4298</td>
+      <td>1.0756</td>
+      <td>1.0604</td>
       <td>4.500</td>
       <td>2038-05-15</td>
       <td>30</td>
@@ -1732,9 +1733,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PT</th>
       <td>106.5801</td>
-      <td>105.6450</td>
-      <td>0.9351</td>
-      <td>0.8851</td>
+      <td>105.5888</td>
+      <td>0.9913</td>
+      <td>0.9388</td>
       <td>4.750</td>
       <td>2037-02-15</td>
       <td>30</td>
@@ -1798,9 +1799,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RE</th>
       <td>87.2383</td>
-      <td>87.9609</td>
-      <td>-0.7226</td>
-      <td>-0.8215</td>
+      <td>87.9707</td>
+      <td>-0.7324</td>
+      <td>-0.8325</td>
       <td>3.625</td>
       <td>2044-02-15</td>
       <td>30</td>
@@ -1810,9 +1811,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RC</th>
       <td>87.7109</td>
-      <td>88.4228</td>
-      <td>-0.7118</td>
-      <td>-0.8050</td>
+      <td>88.4279</td>
+      <td>-0.7170</td>
+      <td>-0.8108</td>
       <td>3.625</td>
       <td>2043-08-15</td>
       <td>30</td>
@@ -1822,9 +1823,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RD</th>
       <td>88.1445</td>
-      <td>88.8442</td>
-      <td>-0.6997</td>
-      <td>-0.7876</td>
+      <td>88.8514</td>
+      <td>-0.7069</td>
+      <td>-0.7956</td>
       <td>3.750</td>
       <td>2043-11-15</td>
       <td>30</td>
@@ -1834,9 +1835,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RG</th>
       <td>82.9914</td>
-      <td>83.6820</td>
-      <td>-0.6907</td>
-      <td>-0.8253</td>
+      <td>83.6948</td>
+      <td>-0.7034</td>
+      <td>-0.8405</td>
       <td>3.375</td>
       <td>2044-05-15</td>
       <td>30</td>
@@ -1846,9 +1847,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RH</th>
       <td>80.3516</td>
-      <td>81.0231</td>
-      <td>-0.6716</td>
-      <td>-0.8288</td>
+      <td>81.0388</td>
+      <td>-0.6872</td>
+      <td>-0.8480</td>
       <td>3.125</td>
       <td>2044-08-15</td>
       <td>30</td>
@@ -1915,9 +1916,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PW</th>
       <td>102.5781</td>
-      <td>101.4973</td>
-      <td>1.0808</td>
-      <td>1.0648</td>
+      <td>101.4479</td>
+      <td>1.1302</td>
+      <td>1.1141</td>
       <td>4.375</td>
       <td>2038-02-15</td>
       <td>30</td>
@@ -1925,23 +1926,11 @@ Number of bonds in sample: 294
       <td>Bond</td>
     </tr>
     <tr>
-      <th>912810SN</th>
-      <td>48.0612</td>
-      <td>47.5639</td>
-      <td>0.4972</td>
-      <td>1.0454</td>
-      <td>1.250</td>
-      <td>2050-05-15</td>
-      <td>30</td>
-      <td>24.4</td>
-      <td>Bond</td>
-    </tr>
-    <tr>
       <th>912810FT</th>
       <td>104.9492</td>
-      <td>103.8898</td>
-      <td>1.0594</td>
-      <td>1.0197</td>
+      <td>103.8311</td>
+      <td>1.1181</td>
+      <td>1.0768</td>
       <td>4.500</td>
       <td>2036-02-15</td>
       <td>30</td>
@@ -1951,9 +1940,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PX</th>
       <td>102.5054</td>
-      <td>101.4778</td>
-      <td>1.0277</td>
-      <td>1.0127</td>
+      <td>101.4298</td>
+      <td>1.0756</td>
+      <td>1.0604</td>
       <td>4.500</td>
       <td>2038-05-15</td>
       <td>30</td>
@@ -1963,13 +1952,25 @@ Number of bonds in sample: 294
     <tr>
       <th>912810PU</th>
       <td>107.7096</td>
-      <td>106.6694</td>
-      <td>1.0402</td>
-      <td>0.9751</td>
+      <td>106.6138</td>
+      <td>1.0957</td>
+      <td>1.0278</td>
       <td>5.000</td>
       <td>2037-05-15</td>
       <td>30</td>
       <td>11.4</td>
+      <td>Bond</td>
+    </tr>
+    <tr>
+      <th>912810SN</th>
+      <td>48.0612</td>
+      <td>47.6139</td>
+      <td>0.4473</td>
+      <td>0.9394</td>
+      <td>1.250</td>
+      <td>2050-05-15</td>
+      <td>30</td>
+      <td>24.4</td>
       <td>Bond</td>
     </tr>
   </tbody>
@@ -2029,9 +2030,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RH</th>
       <td>80.3516</td>
-      <td>81.0231</td>
-      <td>-0.6716</td>
-      <td>-0.8288</td>
+      <td>81.0388</td>
+      <td>-0.6872</td>
+      <td>-0.8480</td>
       <td>3.125</td>
       <td>2044-08-15</td>
       <td>30</td>
@@ -2041,9 +2042,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RG</th>
       <td>82.9914</td>
-      <td>83.6820</td>
-      <td>-0.6907</td>
-      <td>-0.8253</td>
+      <td>83.6948</td>
+      <td>-0.7034</td>
+      <td>-0.8405</td>
       <td>3.375</td>
       <td>2044-05-15</td>
       <td>30</td>
@@ -2053,9 +2054,9 @@ Number of bonds in sample: 294
     <tr>
       <th>912810RE</th>
       <td>87.2383</td>
-      <td>87.9609</td>
-      <td>-0.7226</td>
-      <td>-0.8215</td>
+      <td>87.9707</td>
+      <td>-0.7324</td>
+      <td>-0.8325</td>
       <td>3.625</td>
       <td>2044-02-15</td>
       <td>30</td>
@@ -2063,27 +2064,27 @@ Number of bonds in sample: 294
       <td>Bond</td>
     </tr>
     <tr>
-      <th>912810RC</th>
-      <td>87.7109</td>
-      <td>88.4228</td>
-      <td>-0.7118</td>
-      <td>-0.8050</td>
-      <td>3.625</td>
-      <td>2043-08-15</td>
-      <td>30</td>
-      <td>17.6</td>
-      <td>Bond</td>
-    </tr>
-    <tr>
       <th>912810RJ</th>
       <td>77.7484</td>
-      <td>78.3699</td>
-      <td>-0.6215</td>
-      <td>-0.7930</td>
+      <td>78.3880</td>
+      <td>-0.6396</td>
+      <td>-0.8160</td>
       <td>3.000</td>
       <td>2044-11-15</td>
       <td>30</td>
       <td>18.9</td>
+      <td>Bond</td>
+    </tr>
+    <tr>
+      <th>912810RC</th>
+      <td>87.7109</td>
+      <td>88.4279</td>
+      <td>-0.7170</td>
+      <td>-0.8108</td>
+      <td>3.625</td>
+      <td>2043-08-15</td>
+      <td>30</td>
+      <td>17.6</td>
       <td>Bond</td>
     </tr>
   </tbody>

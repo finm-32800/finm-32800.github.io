@@ -3,52 +3,88 @@
 
 In this project, you'll replicate tables, figures, or data series from a well known finance paper using the principles of reproducible analytical pipelines (RAPs) learned in this class. Your replication must be automated from end-to-end, formatted using the [cookiecutter chartbook template](https://github.com/backofficedev/cookiecutter_chartbook). To create a new project, use [cruft](https://cruft.github.io/cruft/): `cruft create https://github.com/backofficedev/cookiecutter_chartbook`. See [Project Structure: "Chartbook" Template](../Week3/project_structure.md) for more details.
 
-This term, the final project is more than a replication—it is a **product**. On top of replicating a table and a figure from your assigned paper (and reproducing them with updated numbers), you must build something that other people would actually want to use: for example, a cleaned, well-documented dataset and the code that produces it, plus your own new summary table and figure that say something interesting using that data. A central part of the project is making the case for this product: why someone would want to clone your repository and run your code.
+The final project is more than a replication—it is a **product**. You replicate the core exhibits of your assigned paper, bring them up to the present, and then build something on top of them that other people would actually want to use. A central part of the project is making the case for that product: who would clone your repository and run your code, and why.
 
-## The Two Steps
+## How the Project Runs
 
-The final project this term has two steps:
-
-1. **Consultation** — a 1-on-1 meeting you schedule with the instructor, to occur **in weeks 4 through 6**. This is where you get individual feedback on your plan.
-2. **Final presentation** — a scheduled meeting with the instructor in week 10, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/), where your group presents the completed project and **each group member is individually quizzed in an oral defense** (see the rubric below). All groups must present **no later than Friday, December 11**.
+1. **Consultation (weeks 4 through 6).** A 1-on-1 meeting with the instructor, booked at [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/). The consultation is ungraded. It is a low-stakes chance to get feedback on your plan, and you leave it with an agreed extension (see *The Extension Agreement* below).
+2. **Submission (24 hours before your final project presentation).** Before we meet, I will clone your repository, run it on my own machine, and read your report and your project site. **I grade the commit on your `main` branch as it stood 24 hours before your meeting.** Anything pushed after that is not graded. Your project must run from a clean clone by following your README alone. Reproducing your results without your help is the whole point of the course.
+3. **Final project presentation (week 10, no later than Friday, December 11).** A 30-minute meeting with your whole group, booked at the same link. You do not present slides or give a demo: I will already have run your code. The whole meeting is spent questioning each member individually, with questions written from your repository and report (see *The Final Project Presentation* below).
 
 ## Receiving Your Assigned Project
 
-  - You will be assigned a project from the list found [here.](./potential_final_projects.md) 
+  - You will be assigned a project from the list found [here.](./potential_final_projects.md)
   - Your preference will be taken into account when assigning the projects. You can rank your preferred projects using a Google Form: **TBD** (the link will be posted on Canvas). Please, only submit one response per group. **Your group must have exactly 4 people in it.** Students can not choose to work alone, and a group of any other size requires my permission in advance. I will use your responses to assign each group a project.
-  - You must schedule a **consultation** with me at the beginning of the project, in weeks 4 through 6. This meeting is to establish the goals for the project and get individual feedback on your plan. Use the booking link to schedule it: [https://finm-32800.youcanbook.me/](https://finm-32800.youcanbook.me/) (also posted on Canvas).
-  - Come to the consultation ready to say what your paper is about, what data sources it uses, and what product you plan to build and who would use it.
-  - In this consultation meeting, you should come prepared with a list of tasks that each of the four team members will be primarily responsible for. Team members can and should share tasks (e.g., two people can be responsible for the LaTeX writeup whereas everyone should be involved in figuring out how to understand and clean the data). Write this list of tasks in the README.md of the GitHub repo, and make sure every member owns something that produces code.
+
+## The Extension Agreement
+
+Come to the consultation with a one-page pitch that answers five questions:
+
+1. What does the paper claim? Say it in one sentence.
+2. What does the paper *not* do that someone would want?
+3. What will you build?
+4. Who would clone it, and what would they do with it?
+5. How will we know it worked?
+
+Also say what your data validation tests will check (see the rubric below).
+
+We agree on the extension in the meeting. Afterward, add an **Extension** section to your README that records what we agreed. That README section is what your extension is graded against. If your plan changes substantially later, check with me first.
+
+For an example of an extension pitched this way, see [Project Previews](project_previews.md).
+
+## Update Versus Extension
+
+These are graded separately.
+
+**The update** recomputes the paper's exhibits with data through the most recent date available, and says in a sentence or two whether the paper's result held up after publication. Once the pipeline works, the update should be close to mechanical. That is a sign the pipeline is built well, but it is not the extension.
+
+**The extension** adds something the paper does not have. Examples of what can count:
+
+- An out-of-sample or regime test that the paper could not run (did the effect survive decimalization, zero commissions, or the 2022 rate hikes?)
+- A cleaned, documented dataset that others in the field would use, with the code that keeps it current
+- A signal or monitor that updates on fresh data, such as a daily series or a dashboard
+- A head-to-head comparison against a competing measure on the same sample
+- The paper's method applied to a new market, asset class, or frequency
+- A conceptual gap in the paper's reasoning, with a measurement that addresses it
+
+On their own, these do not count: extending the sample (that is the update), restyled versions of the paper's exhibits, or summary statistics of the data you already replicated.
+
+## The Final Project Presentation
+
+Each member of the group is questioned individually, for about seven minutes each. Questions may or may not come from parts of the project you wrote. If your name is on the project, you are expected to understand every part of it, not only the parts you wrote. Expect questions of these kinds:
+
+- **The paper**: what it claims, why it matters, and the economics behind the main result.
+- **The data**: where each source comes from, what each filter does and why it is there, and what would break without it.
+- **Design choices**: why the pipeline is organized the way it is, how you chose your test tolerances, and what you would change.
+- **The extension**: why someone would use it, where it stops being reliable, and what you would build next.
+- **Working with the code**: for example, "If I changed `END_DATE`, what reruns, and how does `doit` know?"
+
+Treat it like a job interview where this project is on your resume. An interviewer won't ask you to recite the paper. They will ask what you built, why you built it that way, and whether you can tell them something useful they didn't already know. Answer like that. [Project Previews](project_previews.md) has example questions for three past projects.
 
 ## Final Project Grading Rubric
 
-The following questions or assertions will be made of your code when you present it at the end of the quarter. Each question will be subjectively prorated on the degree of completion. For example, if you replicate 50% of the numbers from a table, you'll get 50% of the available points. Some adjustments may be made by discretion based on the difficulty of the task.
-For each assertion in the following, I enumerate the points each is worth in **bold** and there are a total of 202 points available in total.
+There are **200 points** in total. Each item is prorated by its degree of completion. For example, if you replicate 50% of the numbers from a table, you'll get 50% of the points for that table. Some adjustments may be made by discretion based on the difficulty of the task.
 
+### Group items (115 points)
 
-- **4/4** You must generate a single LaTeX document that briefly describes the nature of the replication project and contains all the tables and charts that your code produces. You should give a high level overview of how the replication project went. Where did you find success, where were the challenges? Also, explain the data sources that you used? The LaTeX document should not contain code snippets, but only give the tables and charts and a high level discussion of the project.
-- **4/4** Provide at least one jupyter notebook that gives a brief tour of the cleaned data and some of the analysis that is performed in the code. You can think of this as giving the reader a tour of the code that you have written. You can provide code snippets in this notebook. It should look something like one of the HW guides that we used, e.g. [HW 1 Guide D: Constructing the Fama-French Factors](../notebooks/_05_Fama_French_1993_ipynb.ipynb)
-- **20/20** Replicate the series, tables, and/or figures listed for your assigned project. Choose a reasonable tolerance and construct unit tests to ensure that your numbers match the paper's within this tolerance.
-- **20/20** Now, reproduce the series, tables, and/or figures with updated numbers. That is, replicating the numbers from the paper require performing the calculations over the same time period as that of the paper. In this task, you'll recalculate the series, tables, and/or figures using numbers up until the present (or at least the most recently available numbers).
-- **20/20** Outside of the tables, figures, or derived series that you are to replicate, have you also provided a table of your own summary statistics AND charts that gives you and the reader of sufficient understanding of the underlying data. These tables and/or figures must be typeset on LaTeX and you must provide captions on the Tables and Figure that properly describe them and motivate them. That is, you must tell me in the caption what I should learn or take away from each table and figure. You are to choose how many figures and or tables is sufficient for your case, but it will usually be one of each.
-- **4/4** Does the paper generate a tidy data set of the data being used before then using the data for analysis? Specifically, there must be a separate file or set of files whose only purpose is to clean the data and put it into a "tidy" format. The analysis of the data should be kept in separate files.
-- **4/4** Are the statistics in all tables in the LaTeX document automatically generated from the code?
-- **4/4** Is the project automated from end-to-end, using PyDoit?
-- **4/4** Does the repository use unit tests to ensure that code is working properly? Are these unit tests well motivated?
-- **4/4** Does the project use the [cookiecutter chartbook template](https://github.com/backofficedev/cookiecutter_chartbook)? Was the project scaffolded using `cruft create https://github.com/backofficedev/cookiecutter_chartbook`?
-- **4/4** Does each unit test have a purpose? Are there unnecessary or repetitive unit tests?
-- **4/4** Is the GitHub repository and the Git history free of any copyrighted material (e.g., the raw data should not be in the repo).
-- **4/4** Is the GitHub repository and the Git history free of any secrets, such as API keys?
-- **4/4** Does the project use a `.env` file as well as reasonable defaults in the `settings.py` file to manage the configuration of the project (e.g., the data directory, the API keys, but also the `START_DATE` and `END_DATE` of the time period of analysis of the project.) Is the format of the required `.env` file described in an example `.env.example` file?
-- **4/4** The project must not contain a trace of `.env` (it should not be in the Git commit history).
-- **4/4** Does the project contain a `requirements.txt` file that describes the required packages to run the project's code?
-- **4/4** Does the README describe the project and give clear instructions for how to run it end-to-end (e.g., environment setup and `doit`)?
-- **4/4** Has each group member made commits to the Git repo?
-- **4/4** Has each member of your group made and merged a GitHub pull request?
-- **4/4** Does each Python file have a "docstring" at the top that describes what the file does?
-- **4/4** Does each Python function have a reasonably descriptive name and, when appropriate, a function docstring? (No need to overboard, but the code should be reasonably clean.)
-- **50/50** Did I individually accomplish the tasks that were assigned to me by the group and did I contribute a substantial part of the code to the project as evidenced by the commit history?
-- **20/20** Oral defense (graded individually for each group member). At your group's final presentation meeting, each member will be quizzed individually. You must be able to (1) **defend the analysis and design choices** in the project, including the motivation and value of your additional "product" (your new table, figure, and/or cleaned dataset), and (2) **demonstrate that you can actually run and modify the project**—for example, creating and activating the conda environment, running the pipeline end-to-end with `doit`, making a small live edit to the code, and using tooling such as SSH where relevant. Every member is expected to understand the whole project, not only the parts they wrote.
+- **20/20 Replication.** Replicate the series, tables, and/or figures listed for your assigned project. Choose a reasonable tolerance and construct unit tests to ensure that your numbers match the paper's within this tolerance. Fix the tolerance before you see your results, not after.
+- **10/10 Update.** Recompute the same series, tables, and/or figures with data up until the present (or at least the most recently available data), and state whether the paper's result held up.
+- **10/10 Data validation.** Write unit tests that validate the data itself, not just the code: tests that check your data against something you know independently. For example, your series reconciles with a second source (CRSP market cap against the S&P 500 index level, your TAQ volume against CRSP daily volume, or your measure against a series the authors post); an identity the data must satisfy holds (put-call parity, or portfolio weights that sum to one); each filter removes about as many observations as you expect; and coverage through time has no unexplained breaks. These tests run as part of the pipeline. Then build at least one table and one figure of your own that show what those checks found, such as the reconciliation against the second source, the filter-by-filter observation counts, or coverage through time. Each caption says what the check found and what it means for trusting your results.
+- **30/30 Extension.** Did you deliver the extension agreed at the consultation and recorded in your README? Is it useful for a reason you can state? Is it tested and documented?
+- **9/9 Report and published site.**
+  - **(5)** A single LaTeX document that briefly describes the project and contains all the tables and charts your code produces. Give a high-level overview of how the project went: where you found success, where the challenges were, and which data sources you used. It should not contain code snippets. Every table and figure needs a caption that tells me what I should learn or take away from it.
+  - **(4)** A ChartBook site, built by the pipeline and published on GitHub Pages, with the project's dataframes and charts registered in `chartbook.toml` and each dataframe's sources recorded, so a reader can follow the data from the raw pulls to the final tables (see the published site on [Project Previews](project_previews.md)). The site includes at least one Jupyter notebook that gives a brief tour of the cleaned data and of the analysis performed in the code. Code snippets are welcome in the notebook. It should look something like one of the HW guides we used, e.g. [HW 1 Guide D: Constructing the Fama-French Factors](../notebooks/_05_Fama_French_1993_ipynb.ipynb).
+- **36/36 Engineering standards.**
+  - **(8)** The project runs end to end with PyDoit from a clean clone on my machine, following only your README.
+  - **(4)** Data cleaning lives in its own file or files, whose only purpose is to put the data into a tidy format. The analysis is kept in separate files.
+  - **(4)** Every statistic in the LaTeX document is generated automatically by the code.
+  - **(4)** Unit tests are well motivated, each has a purpose, and none are unnecessary or repetitive. A GitHub Actions workflow runs the tests on every push and pull request. Tests that need WRDS or other credentials may be skipped in CI, but the rest must run there, on small samples if needed, and pass.
+  - **(4)** The repository and its entire Git history are free of copyrighted material (e.g., raw data), secrets such as API keys, and any trace of a `.env` file.
+  - **(4)** Configuration uses a `.env` file plus reasonable defaults in `settings.py` (e.g., the data directory, the API keys, and the `START_DATE` and `END_DATE` of the analysis), and the required variables are described in a `.env.example` file.
+  - **(4)** The project was scaffolded from the [cookiecutter chartbook template](https://github.com/backofficedev/cookiecutter_chartbook) with `cruft create https://github.com/backofficedev/cookiecutter_chartbook`, the README describes the project and gives clear instructions for running it end to end (environment setup and `doit`), and a `requirements.txt` file lists the required packages.
+  - **(4)** Each Python file has a docstring at the top that describes what the file does, and each function has a reasonably descriptive name and, when appropriate, a docstring. (No need to go overboard, but the code should be reasonably clean.)
 
- 
- 
+### Individual items (85 points)
+
+- **35/35 Individual contribution.** Did I contribute a substantial part of the code? I look at the commit history and at pull requests: who authored them, who reviewed them, and who merged them. Every pull request must be reviewed by another member of the group before it is merged, and every member must have authored at least one pull request that was merged and reviewed at least one written by a teammate.
+- **50/50 Final project presentation.** Graded individually from your answers in the 30-minute meeting, as described in *The Final Project Presentation* above.
