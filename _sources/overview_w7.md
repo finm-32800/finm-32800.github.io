@@ -42,6 +42,8 @@ rebuild when all of them have landed.
   from an expired credential from a non-idempotent task, and **backfill** after an
   outage.
 - Explain what makes a task idempotent and why a scheduler is unusable without it.
+- Say what containers and Kubernetes add beneath an orchestrator, and how a
+  container image relates to the `uv` and `pixi` lockfiles from week 2.
 
 ## Agenda Item 1: Why Another Scheduler?
 
@@ -93,7 +95,25 @@ Reading about a scheduler teaches you nothing. You run one.
 
 The shared instance stays a projector demo that I run. You run yours locally.
 
-## Agenda Item 4: The Paper
+## Agenda Item 4: Where the Tasks Run --- Containers and Kubernetes
+
+Briefly, because the job postings name these tools and an orchestrator is where
+you meet them.
+
+- **Containers.** A Docker image freezes the whole environment a task runs in,
+  operating system included. That is one level below the conda, `uv`, and
+  `pixi` lockfiles from week 2, and the same image runs on your laptop, a CI
+  runner, or a cluster.
+- **Kubernetes** schedules containers across a fleet of machines. Production
+  Airflow commonly runs each task in its own container on Kubernetes (the
+  `KubernetesExecutor`, or the `KubernetesPodOperator` for a single task), so
+  twenty producer pipelines with conflicting dependencies can share one
+  scheduler.
+- We do not run a cluster. The goal is to recognize the layers when a posting
+  names them: the lockfile pins the packages, the image pins the machine, and
+  the orchestrator decides when and where the image runs.
+
+## Agenda Item 5: The Paper
 
 [Goyal, Welch, and Zafirov (2024)](https://academic.oup.com/rfs/article/37/11/3490/7749383),
 *A Comprehensive 2022 Look at the Empirical Performance of Equity Premium

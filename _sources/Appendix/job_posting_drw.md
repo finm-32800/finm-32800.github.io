@@ -52,7 +52,7 @@ We are seeking a Data Engineer to join our trading team. This role will be respo
 - Experience with **monitoring, observability, and alerting systems for data pipelines**
 - Proven ability to work in an agile, fast-paced environment and handle trading environment demands
 
-The annual base salary range for this position is $150,000 to $200,000 depending on the candidate's experience, qualifications, and relevant skill set. The position is also eligible for an annual discretionary bonus. In addition, DRW offers a comprehensive suite of employee benefits including group medical, pharmacy, dental and vision insurance, 401k (with discretionary employer match), short and long-term disability, life and AD&D insurance, health savings accounts, and flexible spending accounts.
+The annual base salary range for this position is \$150,000 to \$200,000 depending on the candidate's experience, qualifications, and relevant skill set. The position is also eligible for an annual discretionary bonus. In addition, DRW offers a comprehensive suite of employee benefits including group medical, pharmacy, dental and vision insurance, 401k (with discretionary employer match), short and long-term disability, life and AD&D insurance, health savings accounts, and flexible spending accounts.
 
 For more information about DRW's processing activities and our use of job applicants' data, please view our Privacy Notice at https://drw.com/privacy-notice.
 

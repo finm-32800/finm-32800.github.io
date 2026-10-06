@@ -171,6 +171,21 @@ December 1. The lecture schedule follows the ordering of the chapters listed in 
 book found here: https://finm-32800.github.io/. Each week is its own chapter and
 the agenda is listed in the first sub-section of the chapter.
 
+| Week | Date | Topic | Launches | Due |
+| --- | --- | --- | --- | --- |
+| 0 | Preview | [Portfolio selection and a first look at the course](overview_w0.md) | [HW 0](HW0.md) (ungraded) | |
+| 1 | Sep 29 | [Git, GitHub, and virtual environments](overview_w1.md) | [HW 1](HW1.md) | |
+| 2 | Oct 6 | [Task runners, notebooks and ChartBook, SQL; Fama-French (1993)](overview_w2.md) | | |
+| 3 | Oct 13 | [Publishing: GitHub Pages, LaTeX, pull requests](overview_w3.md) | [HW 2](HW2.md) | |
+| 4 | Oct 20 | [Python packaging, Sphinx, the ChartBook catalog, options data](overview_w4.md) | [HW 3](HW3.md) | HW 1 |
+| 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 4](HW4.md) | HW 2 |
+| 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 5](HW5.md) | HW 3 |
+| 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 4 |
+| 8 | Nov 17 | [CI/CD with GitHub Actions; Ruff and pre-commit](overview_w8.md) | | HW 5 |
+| | Nov 24 | No class: Thanksgiving break | | |
+| 9 | Dec 1 | [Exam, then MLOps](overview_w9.md) | | |
+| 10 | Dec 8–11 | Final project presentations | | |
+
 The due dates are in the table under Coursework at a Glance, above, and on
 Canvas. Each assignment's page gives its launch date and its due date.
 

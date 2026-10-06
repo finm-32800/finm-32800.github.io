@@ -40,6 +40,9 @@ model that must rebuild itself every morning whether or not anyone pushed code.
   matrices, caching, and secrets.
 - Explain what the homework autograder has been doing all quarter, and why a
   workflow you cannot read is a workflow you cannot trust.
+- Lint and format code with [Ruff](https://docs.astral.sh/ruff/), run it on
+  every commit with [pre-commit](https://pre-commit.com/), and enforce the same
+  checks in CI.
 - Deploy a site automatically from a workflow rather than by hand, and say why
   that is strictly better than the manual copy you did in HW 2.
 - Schedule recurring work with [cron](./Week9/cron_jobs.md), read a crontab line,
@@ -67,7 +70,21 @@ model that must rebuild itself every morning whether or not anyone pushed code.
   one Python version.
 - **Self-hosted runners,** briefly, and why this course uses one.
 
-## Agenda Item 2: Scheduling, and the Boundary
+## Agenda Item 2: Checks Before the Push --- Ruff and pre-commit
+
+CI catches a problem after you push. The cheapest checks run before that.
+
+- [Ruff](https://docs.astral.sh/ruff/) is a Python linter and formatter.
+  `ruff check` flags unused imports, undefined names, and other mistakes;
+  `ruff format` settles style once, so a code review never argues about it.
+  Both are configured in `pyproject.toml`.
+- [pre-commit](https://pre-commit.com/) runs those checks as a git hook on every
+  commit, from a `.pre-commit-config.yaml` checked into the repository, so every
+  contributor runs the same checks.
+- Then run the same hooks in a workflow, so the check that guards `main` is the
+  one you already ran on your laptop. Add both to your final project.
+
+## Agenda Item 3: Scheduling, and the Boundary
 
 [Cron Jobs](./Week9/cron_jobs.md): the classic Unix scheduler, the five fields, and
 the traps (the environment a cron job inherits is not your shell's, and a job that
@@ -82,7 +99,7 @@ Then draw the boundary explicitly, because you have now used all three:
 | Actions / cron | a push, or a clock | one repository | tests on every change; one job on a schedule |
 | Airflow | a clock, or data landing | many projects, with history | pipelines depend on each other, and you need to know what ran |
 
-## Agenda Item 3: Publishing a Live Site
+## Agenda Item 4: Publishing a Live Site
 
 [GitHub Actions and an Interactive Dashboard](./Week9/github_actions_interactive_dashboard.md):
 Plotly figures exported as self-contained HTML, a `docs/` folder, and a workflow
@@ -90,7 +107,7 @@ that rebuilds and republishes it. The site is interactive in the browser with no
 server anywhere, which is why this is the cheapest way to put a live number in
 front of someone.
 
-## Agenda Item 4: The Case Study --- A Live FedWatch Monitor
+## Agenda Item 5: The Case Study --- A Live FedWatch Monitor
 
 In HW 2 you computed FOMC meeting-outcome probabilities from 30-Day Fed Funds
 futures on one date. A number computed once is an exercise; a number that is right
@@ -100,8 +117,8 @@ is the same math wrapped in a workflow that pulls fresh futures data on a
 schedule, recomputes, rebuilds the site, and republishes, forever, with nobody
 watching:
 
-- [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data.ipynb)
-- [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication.ipynb)
+- [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data_ipynb.ipynb)
+- [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication_ipynb.ipynb)
 
 The things that go wrong here are the interesting part, and they are the same
 failure modes you met in the incident lab last week: the vendor is briefly down,

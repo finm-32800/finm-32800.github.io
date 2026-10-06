@@ -4,8 +4,8 @@
 :maxdepth: 1
 notebooks/_01_CRSP_treasury_overview_ipynb.ipynb
 notebooks/_02_replicate_GSW2005_ipynb.ipynb
-notebooks/_01_fed_funds_futures_data.ipynb
-notebooks/_02_fedwatch_replication.ipynb
+notebooks/_01_fed_funds_futures_data_ipynb.ipynb
+notebooks/_02_fedwatch_replication_ipynb.ipynb
 ```
 
 - **Launched:** week 3. **Due:** Tuesday, October 27, at the start of the

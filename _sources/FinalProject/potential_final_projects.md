@@ -3,7 +3,7 @@
 The project that you are assigned will come from one of the categories below. Each project asks you to do the same thing: take a finance paper, rebuild its dataset from the original sources, reproduce the tables and figures that carry its main result, and then extend the sample to the present.
 If you can't access the papers below, you can find a link to them here: https://drive.google.com/drive/folders/1uaFsV1nn9MeO_XIRcolBnKcbkHKCEHu8?usp=drive_link
 
-Every project here can be built from data the course already has: WRDS (CRSP, Compustat, daily TAQ, OptionMetrics, Mergent FISD, CRSP Treasury, Lipper TASS), Databento's CME Globex feed, Bloomberg in the trading lab, and free public sources such as FRED, SEC EDGAR, and Ken French's library. Where a paper's original vendor is something we do not have, the entry says what to substitute and what coverage you give up.
+Every project here can be built from data the course already has: WRDS (CRSP, Compustat, daily TAQ, OptionMetrics, Mergent FISD, CRSP Treasury, Lipper TASS), Databento's CME Globex feed, Bloomberg in the trading lab, and free public sources such as FRED, SEC EDGAR, and Ken French's library. The two AI projects also need an API key for a commercial language model; the entries say what the authors' own runs cost. Where a paper's original vendor is something we do not have, the entry says what to substitute and what coverage you give up.
 
 Not sure what a finished replication looks like? The [Project Previews](project_previews.md) page walks through three projects that students in this course actually built — one each for the published site, the written report, and the extension — and [Past Final Projects](past_final_projects.md) links the finished repositories from the last four cohorts.
 
@@ -148,9 +148,56 @@ It is the one project on this list that uses both halves of the course's derivat
 - **Citation**: Bollerslev, Tim, and Viktor Todorov. "Tails, Fears, and Risk Premia." The Journal of Finance 66, no. 6 (2011): 2165-2211. https://doi.org/10.1111/j.1540-6261.2011.01695.x
 - **Paper PDF**: [BollerslevTodorov2011TailsFearsRiskPremia.pdf](project_papers/BollerslevTodorov2011TailsFearsRiskPremia.pdf) (working paper version)
 
+## Commodity Futures: Hedging Pressure and the Futures Curve
+
+### 8. [A Tale of Two Premiums: The Role of Hedgers and Speculators in Commodity Futures Markets](https://doi.org/10.1111/jofi.12845)
+
+Keynes's theory of normal backwardation says that hedgers pay speculators a premium for taking the other side of their short positions, and the CFTC's weekly Commitments of Traders report has been the standard test bed for that idea since the 1980s. This paper reads the same report at two horizons and finds two premiums with opposite signs: "short-term position changes are mainly driven by the trading demands of impatient speculators, while long-term variation is primarily driven by the hedging demands from commercial hedgers," so that hedging pressure "reflects both the liquidity demands of speculators and the demand for price insurance of hedgers." Hedgers are paid for providing liquidity week to week, and that income offsets much of the insurance premium they pay over the long run.
+
+The data are two public feeds joined at the Tuesday close: positions by trader category from the CFTC, and front-month futures prices rolled on a fixed calendar rule. The join is the project. Each CFTC market has to be mapped to a futures root and a roll schedule, and the result validated against the paper's summary statistics before any regression runs.
+
+- **Tasks**:
+  - **Build the weekly panel**: Legacy report positions (commercials, non-commercials, non-reportables) for the paper's 26 commodities, plus Tuesday-to-Tuesday front-month excess returns under the paper's roll rule (roll on the 7th calendar day of the maturity month), with Table 1's summary statistics and a coverage figure (this is the data-cleaning deliverable)
+  - **Replicate Figure 1 (hedging pressure for oil, copper, coffee, and wheat)** and **Figure 2 (average excess return against average hedging pressure)**: the cross-sectional slope of 0.50 with a t-statistic of 2.53 is the first checkpoint
+  - **Replicate Table 2 (position changes and contemporaneous and lagged returns)**: the weekly Fama–MacBeth regressions showing that hedgers sell into rising prices while speculators buy
+  - **Replicate Tables 3 and 4 (return predictability following position changes)**, by regression and by portfolio sorts—the crux: commodities that hedgers just bought outperform over the following weeks, which is the liquidity-provision premium
+  - **Replicate Table 6 (returns and hedging pressure)** and **Table 7 (double sorts on smoothed hedging pressure and position changes)**: the separation of the long-horizon hedging-pressure premium from the short-horizon liquidity premium
+  - **Update**: extend through the present with both the Legacy and the Disaggregated reports; the sample now includes the negative oil price of April 2020, the 2022 commodity spike, and the swap-dealer and managed-money categories that the Disaggregated report was created to expose
+- **Data sources**: CFTC Commitments of Traders historical files (free; Legacy futures-only from 1986, Disaggregated from 2006, positions as of Tuesday and released Friday); futures prices from Databento `GLBX.MDP3` for the CME Group contracts from June 2010 (free under the course subscription), from the Datastream futures library on WRDS (`tr_ds_fut`) for the long history of energy, platinum group metals, Kansas wheat, and the ICE softs, and from Bloomberg in the trading lab for the rest; the paper's own vendor was Pinnacle
+- **Notes**:
+  - Table and figure numbers follow the December 2016 working paper linked below, which is the free copy; the published version renumbers them.
+  - Timing is the trap. Positions are measured on Tuesday and published on Friday, so a portfolio formed on week t's positions can only be traded the following week. Build that lag into the data model and test it.
+  - Twenty-six CFTC market codes do not map one-to-one onto futures roots over the sample: wheat trades on three exchanges, the softs moved from NYBOT to ICE, and gasoline changed contract mid-sample. Keep the mapping as a tested table in the repository, not a dictionary buried in a script.
+  - On WRDS, the Datastream continuation series for CBOT grains and CME livestock stop in July 2015, and COMEX gold, silver, and copper are not there at all. Databento covers all of those from June 2010, so the 2010 to 2015 overlap is where you reconcile the two sources.
+  - Checkpoints from Table 1: a mean excess return of 4.0% per year across the 26 commodities, an average volatility of 28.1%, and average hedging pressure of 14%.
+- **Citation**: Kang, Wenjin, K. Geert Rouwenhorst, and Ke Tang. "A Tale of Two Premiums: The Role of Hedgers and Speculators in Commodity Futures Markets." The Journal of Finance 75, no. 1 (2020): 377–417. https://doi.org/10.1111/jofi.12845
+- **Paper PDF**: [KangRouwenhorstTang2020TaleOfTwoPremiums.pdf](project_papers/KangRouwenhorstTang2020TaleOfTwoPremiums.pdf) (December 2016 working paper version)
+
+### 9. [Basis-Momentum](https://doi.org/10.1111/jofi.12738)
+
+The slope of a commodity's futures curve (the basis) and its recent trend (momentum) are the two characteristics every commodity factor model uses. This paper adds a third built from how the curve's shape has changed: basis-momentum, the difference between the past year's return on the first-nearby contract and on the second-nearby contract, which "strongly outperforms benchmark characteristics in predicting commodity spot and term premiums in both the time series and the cross section." The authors read it as "imbalances in the supply and demand of futures contracts that materialize when the market-clearing ability of speculators and intermediaries is impaired."
+
+The work is in the futures-curve data model. Every commodity needs a clean chain of first- through fourth-nearby contracts rolled by the paper's rule (hold the n-th nearby and roll out when it expires in month t+2), monthly excess returns on each leg, and the three characteristics computed from those legs. Databento serves every outstanding contract, so from 2010 the whole curve is observable at no cost, and the twelve years since the paper's sample ended are a clean out-of-sample test of a published predictor.
+
+- **Tasks**:
+  - **Build the curve panel**: monthly settlement prices and excess returns for the first four nearby contracts of each commodity, with basis, momentum, and basis-momentum, an overview table in the style of the paper's Table IA.1 (exchange, sample start, mean nearby and spreading return per commodity), and a coverage figure (this is the data-cleaning deliverable)
+  - **Replicate Table 1 (commodity portfolios sorted on basis-momentum)** and **Figure 1 (cumulative returns on basis-momentum, basis, and momentum strategies)**—the crux
+  - **Replicate Table 2 (pooled regressions of commodity-level returns on lagged characteristics)**: basis-momentum keeps its predictive power with basis and momentum as controls
+  - **Replicate Table 4 (basis-momentum across the futures curve)** and **Table 5 (average spot and roll returns in commodity sorts)**: the evidence that the effect is maturity-specific and comes through roll returns
+  - **Replicate Table 9 (basis-momentum factors versus benchmark commodity factors)**: the spanning tests against the average, basis, and momentum factors of the existing commodity factor models
+  - **Update**: extend through the present on Databento, and report whether the sorts in Table 1 survived publication
+- **Data sources**: Databento `GLBX.MDP3` for every outright contract of the CME Group commodities from June 2010 (free); the Datastream futures library on WRDS (`tr_ds_fut`) for the earlier history, which has first- and second-nearby continuation series and daily contract-level prices (`wrds_fut_contract`) for energy, platinum group metals, Kansas wheat, and the ICE softs through the present, and for CBOT grains and CME livestock through July 2015; Bloomberg in the trading lab for COMEX metals before 2010; the paper's own data came from the Commodity Research Bureau and the Futures Industry Institute, which the course does not have
+- **Notes**:
+  - Table and figure numbers follow the 2017 working paper linked below. The accepted manuscript is open access at the authors' university repository (linked in the citation) and renumbers the exhibits; check against it.
+  - The paper's sample starts in July 1959. Yours cannot: the continuation series on WRDS begin in 1973 and 1979, and much of the cross-section only exists from the 1980s. Start in 1986, which is the subsample the paper itself reports, and say so.
+  - The roll rule is a modeling choice and basis-momentum is sensitive to it. Implement the paper's rule exactly, then show what changes under a GSCI-style roll over the fifth to ninth business day.
+  - The 2010 to 2015 overlap between Datastream and Databento is your data validation: reconcile first-nearby returns from the two sources before trusting either.
+- **Citation**: Boons, Martijn, and Melissa Porras Prado. "Basis-Momentum." The Journal of Finance 74, no. 1 (2019): 239–279. https://doi.org/10.1111/jofi.12738. Accepted manuscript (open access): https://novaresearch.unl.pt/files/14263925/MM_Basis_Momentum_V24.pdf
+- **Paper PDF**: [BoonsPrado2019BasisMomentum.pdf](project_papers/BoonsPrado2019BasisMomentum.pdf) (2017 working paper version, titled "Basis-momentum in the futures curve and volatility risk")
+
 ## Monetary Policy and Return Predictability
 
-### 8. [The Pre-FOMC Announcement Drift](https://doi.org/10.1111/jofi.12196)
+### 10. [The Pre-FOMC Announcement Drift](https://doi.org/10.1111/jofi.12196)
 
 Large average excess returns on U.S. equities are earned in the twenty-four hours *before* scheduled FOMC announcements—before anyone can know what the committee decided. The effect is big enough to account for a substantial share of the equity premium since 1994, it is not explained by the policy surprise itself, and it does not appear before other macroeconomic releases. It is one of the most cited anomalies in monetary-policy finance and one of the most heavily traded.
 
@@ -170,7 +217,7 @@ The daily half of this replication is cheap: a calendar and CRSP. The intraday h
 - **Citation**: Lucca, David O., and Emanuel Moench. "The Pre-FOMC Announcement Drift." The Journal of Finance 70, no. 1 (2015): 329-371. https://doi.org/10.1111/jofi.12196
 - **Paper PDF**: [LuccaMoench2015PreFOMCAnnouncementDrift.pdf](project_papers/LuccaMoench2015PreFOMCAnnouncementDrift.pdf) (New York Fed Staff Report 512)
 
-### 9. [Stock Returns over the FOMC Cycle](https://doi.org/10.1111/jofi.12818)
+### 11. [Stock Returns over the FOMC Cycle](https://doi.org/10.1111/jofi.12818)
 
 The claim is almost absurdly sharp: "since 1994, the equity premium is earned entirely in weeks 0, 2, 4, and 6 in Federal Open Market Committee (FOMC) cycle time, that is, even weeks starting from the last FOMC meeting." Odd weeks earn nothing. The authors trace it to informal communication from the Fed—the even-week pattern lines up with Board of Governors meetings and with the timing of leaks to the financial press.
 
@@ -192,7 +239,7 @@ The data here is nearly free, which shifts the difficulty entirely onto construc
 
 ## Machine Learning and the Cross-Section
 
-### 10. [Empirical Asset Pricing via Machine Learning](https://doi.org/10.1093/rfs/hhaa009)
+### 12. [Empirical Asset Pricing via Machine Learning](https://doi.org/10.1093/rfs/hhaa009)
 
 The paper that moved machine learning from the periphery of asset pricing to its center. It runs a controlled comparison—OLS, penalized linear models, dimension reduction, random forests, boosted trees, and neural networks—on a single problem, measuring risk premia for the U.S. cross-section, using 94 stock characteristics, eight macro predictors, and industry dummies. Trees and neural networks win, most of the gain comes from allowing nonlinear interactions, and the same handful of characteristics (price trends, liquidity, volatility) drives every method.
 
@@ -212,7 +259,7 @@ This is the largest engineering job on the list and the closest to what a system
 - **Citation**: Gu, Shihao, Bryan Kelly, and Dacheng Xiu. "Empirical Asset Pricing via Machine Learning." The Review of Financial Studies 33, no. 5 (2020): 2223-2273. https://doi.org/10.1093/rfs/hhaa009
 - **Paper PDF**: [GuKellyXiu2020EmpiricalAssetPricingML.pdf](project_papers/GuKellyXiu2020EmpiricalAssetPricingML.pdf) (working paper version)
 
-### 11. [Shrinking the Cross-Section](https://doi.org/10.1016/j.jfineco.2019.06.008)
+### 13. [Shrinking the Cross-Section](https://doi.org/10.1016/j.jfineco.2019.06.008)
 
 Given a hundred candidate return predictors, what is the stochastic discount factor? Run an unpenalized regression and you fit noise; drop everything but a handful of factors and you throw away real information. This paper shows that the right answer is economically motivated shrinkage: a prior that says the SDF should not load heavily on low-variance principal components, which turns out to be equivalent to a particular ridge-plus-lasso estimator. The resulting SDF is sparse in PC space rather than in characteristic space, and it holds up out of sample where sparse characteristic models do not.
 
@@ -227,11 +274,11 @@ It is one of the most directly usable pieces of research on this list. The estim
 - **Data sources**: CRSP and Compustat on WRDS; Serhiy Kozak posts the MATLAB code and the supporting portfolio data at https://github.com/serhiykozak/SCS
 - **Notes**:
   - The reference code is MATLAB. Porting it to a tested Python package is a legitimate and valuable part of this project—but the report has to show the ported code reproduces the original numbers, not merely that it runs.
-  - The same portfolio construction feeds project 12 and project 17. If two groups take those, coordinate on the build.
+  - The same portfolio construction feeds project 14 and project 21. If two groups take those, coordinate on the build.
 - **Citation**: Kozak, Serhiy, Stefan Nagel, and Shrihari Santosh. "Shrinking the cross-section." Journal of Financial Economics 135, no. 2 (2020): 271-292. https://doi.org/10.1016/j.jfineco.2019.06.008
 - **Paper PDF**: [KozakNagelSantosh2020ShrinkingTheCrossSection.pdf](project_papers/KozakNagelSantosh2020ShrinkingTheCrossSection.pdf) (working paper version)
 
-### 12. [Factor Timing](https://doi.org/10.1093/rfs/hhaa017)
+### 14. [Factor Timing](https://doi.org/10.1093/rfs/hhaa017)
 
 Timing the market is famously hard. Timing *factors*, this paper argues, is not: "market-neutral equity factors are strongly and robustly predictable, and exploiting this predictability leads to substantial improvement in portfolio performance relative to static factor investing." The predictor is the one every value investor already knows—each factor's own book-to-market ratio—applied to the dominant principal components of a large anomaly cross-section. The implication for the SDF is uncomfortable: its conditional variance moves far more than standard models allow.
 
@@ -242,13 +289,13 @@ Timing the market is famously hard. Timing *factors*, this paper argues, is not:
   - **Replicate Table 6 (performance of various portfolio strategies)**: the economic value of factor timing
   - **Replicate Table 7 and Figure 2 (variance of the SDF)** and **Table 8 (SDF variance and macroeconomic variables)**
   - **Update**: extend through the present, which now includes the 2020-2021 value drawdown and reversal
-- **Data sources**: CRSP and Compustat on WRDS; the anomaly-portfolio code and data that back both this paper and project 11, at https://github.com/serhiykozak/SCS
+- **Data sources**: CRSP and Compustat on WRDS; the anomaly-portfolio code and data that back both this paper and project 13, at https://github.com/serhiykozak/SCS
 - **Notes**:
-  - Shares its portfolio construction with project 11. Building that layer as a tested, installable package that both projects could use is the kind of engineering the rubric rewards.
+  - Shares its portfolio construction with project 13. Building that layer as a tested, installable package that both projects could use is the kind of engineering the rubric rewards.
 - **Citation**: Haddad, Valentin, Serhiy Kozak, and Shrihari Santosh. "Factor Timing." The Review of Financial Studies 33, no. 5 (2020): 1980-2018. https://doi.org/10.1093/rfs/hhaa017
 - **Paper PDF**: [HaddadKozakSantosh2020FactorTiming.pdf](project_papers/HaddadKozakSantosh2020FactorTiming.pdf)
 
-### 13. [Is There a Replication Crisis in Finance?](https://doi.org/10.1111/jofi.13249)
+### 15. [Is There a Replication Crisis in Finance?](https://doi.org/10.1111/jofi.13249)
 
 Hundreds of published return predictors, most of them tested on the same U.S. data, many of them now suspected of being nothing. This paper answers the charge with a Bayesian hierarchical model of factor replication estimated on 153 factors, and finds that most of them do replicate, that they cluster into thirteen economic themes, and that the evidence is *strengthened* rather than weakened by the sheer number of factors, because a hierarchical prior learns from the population of factors rather than testing each in isolation. The out-of-sample test is a new dataset covering 93 countries.
 
@@ -267,9 +314,55 @@ For this course the paper has a special status: the authors publish their full c
   - The reference code is R and SAS. The port is the work.
 - **Citation**: Jensen, Theis Ingerslev, Bryan Kelly, and Lasse Heje Pedersen. "Is There a Replication Crisis in Finance?" The Journal of Finance 78, no. 5 (2023): 2465-2518. https://doi.org/10.1111/jofi.13249 (NBER working paper 28432: https://www.nber.org/papers/w28432)
 
+## AI in Asset Pricing: Embeddings and Language Models
+
+### 16. [Asset and Investor Embeddings](https://ssrn.com/abstract=4507511)
+
+Every factor model represents a firm by a handful of accounting ratios and return characteristics, but "investors use richer information sets." This paper shows that "portfolio holdings contain all relevant information for the cross-section of asset prices, recoverable under empirically realistic conditions," and borrows the machinery of language models to recover it: each investor's portfolio is a sentence, each stock a word, and the models learn "asset embeddings as learned firm representations from portfolio holdings" with recommender systems, Word2Vec, and BERT-style transformers, scored on "three new benchmarks that can be evaluated with a single cross section of data." The same models yield investor embeddings for classifying funds, measuring performance, and spotting crowded trades.
+
+This is a working paper (July 2026 version) by four authors at the center of demand-system asset pricing; an earlier version circulated as an NBER working paper in 2025. It is on the list because the benchmarks are what a data pipeline is for: the heavy work is turning a quarterly holdings panel into a clean corpus and a reproducible scoring harness, after which each model is a few hundred lines.
+
+- **Tasks**:
+  - **Build the holdings corpus**: quarterly fund-level and 13F holdings aggregated to the firm (CRSP `permco`), with the paper's filters (micro and nano caps removed, investors holding at least 20 stocks), the firm characteristics of Jensen, Kelly, and Pedersen (2023), Figure 2 (number of firms, investors, and holdings over time), and a summary table (this is the data-cleaning deliverable)
+  - **Replicate Figures 3 and 4 (variation in holdings explained)**: the factor structure in portfolio holdings, from recommender systems and from observed characteristics and text embeddings
+  - **Replicate Figures 5 and 6 (relative valuation benchmark)**—the crux: a four-dimensional base model explains over 50% of the variation in relative valuations against 15% for four leading characteristics, and a 128-dimensional model over 70%
+  - **Replicate Figure 9 (return comovement benchmark)**, where the hurdle is the Fama–French five-factor characteristics plus momentum
+  - **Replicate Figure 12 (managed portfolio benchmark)** with Word2Vec and a small BERT model trained on masked assets; Figure 13 (dimensions up to 128) is the stretch goal
+  - **Update**: extend the panel to the latest 13F quarter and score embeddings trained through 2022 on the 2023 to 2026 cross-sections, an out-of-sample test the paper could not run
+- **Data sources**: Thomson Reuters mutual fund holdings (`tfn.s12`) and 13F institutional holdings (`tr_13f.s34`) on WRDS in place of the paper's FactSet Ownership data; CRSP and Compustat for returns, valuation ratios, and characteristics (the Jensen–Kelly–Pedersen characteristics are public at https://jkpfactors.com); text embeddings from the OpenAI or Cohere API for the comparison in Figures 4 and 7 (a few thousand short strings, which costs cents); Capital IQ transcripts on WRDS (`ciq_transcripts`) in place of FactSet if you attempt the Section 8 interpretation
+- **Notes**:
+  - The substitution has a documented cost. The authors report that an earlier version built on 13F data alone "performed well on our benchmarks, but not as well as using the fund-level data." Expect to land between the two and say where.
+  - Each benchmark is scored on a single cross-section (the paper uses 2022.Q4), so training is cheap to iterate. Start with PCA and the recommender systems on a laptop; the BERT models are the Midway job.
+  - Deliverables are performance figures, not regression tables. Report every benchmark with the paper's number beside yours, and write the scoring harness as a tested package that the figures call.
+  - Read the WRDS documentation notes on `s34` coverage before trusting the panel after 2013.
+- **Citation**: Gabaix, Xavier, Ralph S. J. Koijen, Robert J. Richmond, and Motohiro Yogo. "Asset and Investor Embeddings." Working paper, July 2026. https://ssrn.com/abstract=4507511. Earlier version: "Asset Embeddings," NBER Working Paper 33651 (2025), https://www.nber.org/papers/w33651
+- **Paper PDF**: [GabaixKoijenRichmondYogo2026AssetAndInvestorEmbeddings.pdf](project_papers/GabaixKoijenRichmondYogo2026AssetAndInvestorEmbeddings.pdf) (July 16, 2026 SSRN version)
+
+### 17. [Assessing the Benefits of Optimized Agentic AI Systems for Asset Pricing](https://ssrn.com/abstract=6474601)
+
+Any backtest of a language model is contaminated twice over: "analyses using historical data suffer from look-ahead bias and markets are reflexive, which may erode the patterns the AI system was trained to exploit." This paper sidesteps both with "a real-time, out-of-sample benchmark" that "measures how well AI systems explain contemporaneous stock returns around earnings announcements using only information available at announcement time." On the Q4 2025 earnings season the earnings surprise alone explains 5% of the cross-section of announcement returns, off-the-shelf models reach 7% to 11%, and after prompt optimization "the best-optimized systems more than double the explained variation in returns relative to standard benchmarks (R2 rising from 8% to close to 20%)."
+
+The benchmark is a pipeline with a clock in it: an earnings calendar with consensus and actuals, the call transcript as soon as it is published, a one-day market-adjusted return on the trading day the news becomes actionable, and a prediction logged before that return is known. Everything the paper used for Q4 2025 is now historical and on WRDS, so that season can be rebuilt as the replication; the Q3 2026 season, which reports from mid-October to early December, is the update, run live. This is a working paper (June 2026 version), also an NBER working paper, and the authors are opening it as a public competition at explainingmarkets.ai.
+
+- **Tasks**:
+  - **Build the Q4 2025 benchmark dataset**: 1,849 announcements across the 12 Fama–French industries and six reporting weeks, with the paper's event-date rule (calls after 4:00 pm ET map to the next trading day), the market-adjusted one-day abnormal return, the surprise as a percent of price, and Table 1's summary statistics by week and industry (this is the data-cleaning deliverable)
+  - **Replicate Table 2 (full transcripts)**: the surprise-only R² of 5.0%, then a cheap model's predictions alone and jointly with the surprise; the result to reproduce is that the two are complementary, not a number
+  - **Replicate Tables 3 and 4 (transcript summaries)**: summaries roughly 28 times shorter than the call preserve the signal at a fraction of the cost
+  - **Replicate Table 5 (early versus late announcers)**, the train and test split that the optimization step depends on
+  - **Replicate Table 6 or Table 7 (GEPA or ACE optimization)**—the crux: optimized prompts or context evaluated out of sample on the late weeks
+  - **Update**: run the frozen pipeline live through the Q3 2026 earnings season, logging each prediction with a timestamp before the return is realized, and report the same tables; register the system with the competition if it has opened
+- **Data sources**: Capital IQ transcripts on WRDS (`ciq_transcripts`, which runs through late September 2026) in place of the paper's real-time feed; I/B/E/S on WRDS (`tr_ibes`) for consensus and actuals, which the paper's appendix shows gives results "not significantly different" from its Benzinga feed; CRSP daily for returns and the market proxy for the historical season, and a free daily price API for the live one, since CRSP lags; Compustat SIC codes for the Fama–French 12 industries; an API key for a commercial language model—the paper's Gemini 2.5 Flash-Lite runs cost "much less than \$10 for an entire earnings season"
+- **Notes**:
+  - Language-model output is stochastic and models are retired within a year. The standard is the ordering of systems and the complementarity with the surprise, inside the paper's 99% bootstrap intervals (Opus 4.5 standalone: 10.9%, interval 8% to 15%), not the point estimates. Log model identifiers, prompts, temperature, and timestamps with every prediction.
+  - Look-ahead bias is the paper's whole point. The Q4 2025 results were produced in real time; by the time you rebuild them, current models may have seen those returns. Treat the replication as a test of the pipeline and the live Q3 2026 run as the test of the models.
+  - Measure how long Capital IQ transcripts take to appear on WRDS before you promise a live pipeline. If the lag is days, the live run needs another transcript source.
+  - Keep the training and evaluation weeks separate exactly as Table 5 does. Optimizing a prompt on the weeks you evaluate is the look-ahead bias you were hired to avoid.
+- **Citation**: Koijen, Ralph S. J., and Bradford Levy. "Assessing the Benefits of Optimized Agentic AI Systems for Asset Pricing." Working paper, June 2026. https://ssrn.com/abstract=6474601. Also NBER Working Paper 35431, https://www.nber.org/papers/w35431, and Becker Friedman Institute Working Paper 2026-100
+- **Paper PDF**: [KoijenLevy2026OptimizedAgenticAISystems.pdf](project_papers/KoijenLevy2026OptimizedAgenticAISystems.pdf) (June 30, 2026 SSRN version)
+
 ## Rates, Funding, and Liquidity
 
-### 14. [Risk-Free Interest Rates](https://doi.org/10.1016/j.jfineco.2021.06.012)
+### 18. [Risk-Free Interest Rates](https://doi.org/10.1016/j.jfineco.2021.06.012)
 
 What is the actual risk-free rate? Treasury yields are contaminated by the convenience yield investors pay for safe, liquid collateral; OIS and repo rates carry their own frictions. This paper reads the risk-free rate out of option prices instead. A box spread on an index—long a call spread, short the matching put spread—has a fixed, known payoff regardless of where the index lands, so its price is a pure discount factor. The authors "estimate risk-free interest rates unaffected by convenience yields on safe assets by inferring them from risky asset prices without relying on any specific model of risk," and find Treasuries carry a convenience yield of roughly 40 basis points, quadrupling in the financial crisis.
 
@@ -289,7 +382,7 @@ The pipeline is an options-data project with a rates payoff: build box spreads f
 - **Citation**: van Binsbergen, Jules H., William F. Diamond, and Marco Grotteria. "Risk-free interest rates." Journal of Financial Economics 143, no. 1 (2022): 1-29. https://doi.org/10.1016/j.jfineco.2021.06.012
 - **Paper PDF**: [vanBinsbergenDiamondGrotteria2022RiskFreeInterestRates.pdf](project_papers/vanBinsbergenDiamondGrotteria2022RiskFreeInterestRates.pdf) (NBER working paper 26138)
 
-### 15. [Bond Risk Premiums with Machine Learning](https://doi.org/10.1093/rfs/hhaa062)
+### 19. [Bond Risk Premiums with Machine Learning](https://doi.org/10.1093/rfs/hhaa062)
 
 Treasury excess returns are predictable in-sample and stubbornly hard to predict out of sample. This paper brings the full machine learning toolkit—penalized regressions, trees, and neural networks—to bear on the problem, with a large macroeconomic panel alongside the yield curve itself, and finds economically meaningful out-of-sample gains concentrated in the periods where a bond investor would most want them.
 
@@ -308,7 +401,7 @@ This project has a feature no other entry on this list has: a **corrigendum**, p
   - Reuse HW 2's yield-curve work rather than rebuilding it. The novelty here is the forecasting layer, and the report should be judged on that.
 - **Citation**: Bianchi, Daniele, Matthias Büchner, and Andrea Tamoni. "Bond Risk Premiums with Machine Learning." The Review of Financial Studies 34, no. 2 (2021): 1046-1089. https://doi.org/10.1093/rfs/hhaa062. Corrigendum: The Review of Financial Studies 34, no. 2 (2021): 1090-1103. https://doi.org/10.1093/rfs/hhaa098
 
-### 16. [Noise as Information for Illiquidity](https://doi.org/10.1111/jofi.12083)
+### 20. [Noise as Information for Illiquidity](https://doi.org/10.1111/jofi.12083)
 
 When arbitrage capital is plentiful, Treasury prices line up along a smooth yield curve because somebody is paid to make them. When capital withdraws, individual bonds drift away from the curve and stay there. This paper turns that observation into a market-wide illiquidity measure: fit a smooth curve to Treasury prices every day, and take the root-mean-squared pricing error as "noise." The series is quiet for years and then explodes in 1998, 2008, and every episode since, and it prices hedge fund and currency-carry returns in the cross-section.
 
@@ -328,7 +421,7 @@ The curve-fitting step is HW 2's machinery pointed at a different question, whic
 
 ## Equity Term Structures
 
-### 17. [Equity Term Structures without Dividend Strips Data](https://ssrn.com/abstract=3533486)
+### 21. [Equity Term Structures without Dividend Strips Data](https://ssrn.com/abstract=3533486)
 
 Traded dividend strips directly reveal the term structure of equity risk premia, but the data only start around 2004 and cover few assets. This paper estimates "a rich affine model of equity prices, dividends, returns, and their dynamics" from a large cross-section of anomaly portfolios and shows that the model "prices dividend strips of the market and equity portfolios without using strips data in the estimation." The result is a synthetic equity term structure extending back to the 1970s.
 
@@ -346,7 +439,7 @@ The data work is a classic cross-sectional asset pricing pipeline: build 102 val
 - **Citation**: Giglio, Stefano, Bryan Kelly, and Serhiy Kozak. "Equity Term Structures without Dividend Strips Data." Journal of Finance 79, no. 6 (2024): 4143–4196. Available at SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3533486
 - **Paper PDF**: [GiglioKellyKozak2024EquityTermStructures.pdf](project_papers/GiglioKellyKozak2024EquityTermStructures.pdf)
 
-### 18. [Equity Duration and Predictability](https://www.sciencedirect.com/science/article/pii/S0304405X25001229)
+### 22. [Equity Duration and Predictability](https://www.sciencedirect.com/science/article/pii/S0304405X25001229)
 
 Why do expected returns—rather than dividend growth—dominate stock price movements in postwar data, when the opposite held for the previous three centuries? This paper's answer is rising equity duration: as firms cut payout ratios after 1945, the market became a longer-duration asset, and "expected returns vary more for payouts further into the future." The authors document this in three datasets: S&P 500 dividend strips (a short-duration version of the market), the aggregate market from 1629 to 2022, and payout-sorted stock portfolios. "Between 1629 and 1945, expected returns explain around 35% of the variation in the dividend-to-price ratio. In the post-1945 period, this increases to 90%."
 
@@ -366,7 +459,7 @@ The method is the same throughout: predictive regressions of returns and dividen
 
 ## Macro-Finance and Fiscal Policy
 
-### 19. [Debt and Deficits: Fiscal Analysis with Stationary Ratios](https://personal.lse.ac.uk/martiniw/Debt%20and%20Deficits%20250806.pdf)
+### 23. [Debt and Deficits: Fiscal Analysis with Stationary Ratios](https://personal.lse.ac.uk/martiniw/Debt%20and%20Deficits%20250806.pdf)
 
 This paper asks how governments ultimately deal with a weak fiscal position: do taxes rise, does spending fall, or do the returns to holders of government debt adjust? The debt-GDP ratio is nonstationary in long historical data, so the authors instead construct a stationary "fiscal position" measure—a loglinear combination of tax revenue, government spending, and the market value of government debt. They find that "fiscal adjustment, particularly through changes in spending, is the empirically relevant channel" for resolving weak fiscal positions.
 
@@ -386,7 +479,7 @@ This project involves assembling long historical time series (US 1841–2022, UK
 
 ## Daily Cash Flow News
 
-### 20. [Cash Flow News and Stock Price Dynamics](https://doi.org/10.1111/jofi.12901)
+### 24. [Cash Flow News and Stock Price Dynamics](https://doi.org/10.1111/jofi.12901)
 
 On any given day, anywhere from zero to more than 100 firms announce dividends, making daily cash flow news extremely lumpy. This paper builds a daily "bottom-up" measure of aggregate dividend growth from firm-level dividend *announcements*—matching each firm's declared dividend to its own announcement in the same fiscal quarter one year earlier—and decomposes it into "a persistent component, jumps, and temporary shocks." The persistent component turns out to be "a highly significant predictor of future growth in dividends and consumption," leading measures of the state of the economy by a substantial margin.
 
@@ -400,7 +493,7 @@ The pipeline: construct the daily dividend growth series from CRSP declaration d
   - **Stretch goal (optional)**: implement the paper's full Gibbs sampler (Internet Appendix Section I) with stochastic volatility and jumps, and replicate the 1973–2016 columns of Table I
 - **Data sources**: CRSP distribution events (`crsp.dsedist`; declaration dates `dclrdt`, ordinary cash dividends are distribution codes below 2000), daily stock file (`crsp.dsf`, for shares outstanding and prices at announcement), and daily index file (`crsp.dsi`, `vwretd`/`vwretx`, for the top-down measure and the dividend-price ratio), all on WRDS; FRED (real GDP); BEA NIPA Table 2.3.5 (nondurables plus services consumption)
 - **Notes**:
-  - CRSP no longer provides declaration dates before 1962 (the paper's footnote 10—its pre-1964 observations come from an older CRSP vintage), so replicate the 1973–2016 sample, which is the paper's main focus. Checkpoints for your Figure 1: on April 24, 2014, roughly $7.1bn of dividends were announced, and the lone June 22, 2014 announcer is Costco ($155.6m versus $135.3m a year before, gross growth 1.15).
+  - CRSP no longer provides declaration dates before 1962 (the paper's footnote 10—its pre-1964 observations come from an older CRSP vintage), so replicate the 1973–2016 sample, which is the paper's main focus. Checkpoints for your Figure 1: on April 24, 2014, roughly \$7.1bn of dividends were announced, and the lone June 22, 2014 announcer is Costco (\$155.6m versus \$135.3m a year before, gross growth 1.15).
   - The dollar dividend is the declared dividend per share times shares outstanding on the announcement day. Follow the paper's filters: share codes 10/11, NYSE/AMEX/NASDAQ, valid price and shares outstanding, one dividend per firm per day (aggregate duplicates).
   - You are not required to implement the paper's full Bayesian model. For the bottom panel of Figure 3, any documented outlier-robust filter is acceptable—for example, Student-t measurement errors in the state-space model, or winsorizing days with few announcing firms before applying the Kalman smoother. For Tables II and IV, the standard for success is matching the sign and statistical significance of the coefficients on the persistent component, not the exact magnitudes, since your extracted series will differ from the paper's.
   - Skip Tables VI through IX (the present value model and same-day return dynamics): their results depend on daily innovations from the full jump model, and Table VIII additionally requires re-estimating the model weekly over 30 years.

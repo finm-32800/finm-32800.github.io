@@ -70,7 +70,7 @@ and start time are on Canvas.
 [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/),
 *An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
 Markets* (OFR Working Paper), is the capstone paper for three reasons: its
-pipelines are the [FTSFR](./Week3/ftsfr.md) datasets you met in week 2, its design
+pipelines are the [FTSFR](./Week3/ftsfr.md) datasets you met in week 4, its design
 holds the data fixed and varies only the method, and it uses no exogenous
 regressors, which leaves an obvious extension open for you.
 

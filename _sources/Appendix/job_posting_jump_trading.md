@@ -53,4 +53,4 @@ Hands-on experience and a high level of proficiency in one or more of the follow
 
 INTERNATIONAL STUDENTS are encouraged to apply. We accept students eligible for CPT/OPT and we sponsor work visas for full-time positions.
 
-The estimated base salary for this role is $250,000 per year.
+The estimated base salary for this role is \$250,000 per year.

@@ -5,6 +5,7 @@
 Week6/python_packaging_with_hatch.md
 Week5/sphinx.md
 Week6/chartbook_catalog.md
+Week3/ftsfr.md
 Week7/databento.md
 notebooks/_01_databento_ipynb.ipynb
 Week7/LSEG_datastream.md
@@ -29,8 +30,8 @@ option prices.
 - **Project consultations start this week** and run through week 6. If your group
   has not booked its [consultation](https://finm-32800.youcanbook.me/), do it
   now.
-- **Databento API keys.** You need one for HW 3 and again for HW 4. Everything
-  we use is on the CME Globex feed (`GLBX.MDP3`) and stays inside the course
+- **Databento API keys.** HW 3 and HW 4 use the key you set up for HW 2.
+  Everything we use is on the CME Globex feed (`GLBX.MDP3`) and stays inside the course
   license. The license covers the full order book (`mbo`, `mbp-10`) only for
   roughly the most recent month; older order-book data is billed, so pull a
   recent date.
@@ -100,7 +101,9 @@ already produces?** Copying pull code duplicates work and drifts.
 - Pipelines vs. catalogs: a catalog is a `chartbook.toml` with a `[pipelines]`
   registry. The [FTSFR organization](https://github.com/orgs/ftsfr/repositories)
   is the production-scale example: about twenty pipeline repos plus one catalog
-  repo.
+  repo. What the project is, and why every dataset in it rebuilds from source
+  with one command, is in
+  [Financial Time Series Forecasting Repository](./Week3/ftsfr.md).
 - **Hands-on:** clone a couple of FTSFR pipeline repos, register them in your
   global catalog (`chartbook catalog add`, or `members` auto-discovery), build
   and browse the combined site, and load another repo's dataframe by name with

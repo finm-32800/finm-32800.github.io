@@ -47,7 +47,7 @@ We are seeking a dedicated and experienced Data Engineer to join our Chicago tea
 
 ### Salary Range
 
-The Base Salary range for the role is $175,000—$225,000 USD. Base salary is only one component of total compensation; all full-time, permanent positions are eligible for a discretionary bonus and benefits, including paid leave and insurance.
+The Base Salary range for the role is \$175,000—\$225,000 USD. Base salary is only one component of total compensation; all full-time, permanent positions are eligible for a discretionary bonus and benefits, including paid leave and insurance.
 
 ### About Us
 

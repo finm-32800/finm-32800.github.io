@@ -67,7 +67,7 @@ As a Senior Software Engineer in Portfolio Implementation, you will operate with
 - Collaborative, thoughtful, and effective working across disciplines and geographies
 - Committed to intellectual integrity, transparency, and openness
 
-The salary range for this role is expected to be [$165,000-$185,000]. This is the range that we in good faith believe is accurate for this role at the time of this posting. We may ultimately pay more or less than the posted range, depending upon factors such as skills, experience, location, or other business and organizational needs. This wage range may also be modified in the future. This job is also eligible for an annual discretionary bonus.
+The salary range for this role is expected to be [\$165,000-\$185,000]. This is the range that we in good faith believe is accurate for this role at the time of this posting. We may ultimately pay more or less than the posted range, depending upon factors such as skills, experience, location, or other business and organizational needs. This wage range may also be modified in the future. This job is also eligible for an annual discretionary bonus.
 
 We offer comprehensive package of benefits including paid time off, medical/dental/vision insurance, 401(k), and any other benefits to eligible employees.
 

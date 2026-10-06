@@ -33,7 +33,7 @@ At the time, this paper was held up as evidence in favor of austerity measures p
 
 These kinds of spreadsheet errors are not limited to academic research. They have real-world consequences in government and finance as well:
 
-- [Financial Times: "The Norwegian sovereign wealth fund's $92mn Excel error"](https://www.ft.com/content/db864323-5b68-402b-8aa5-5c53a309acf1)
+- [Financial Times: "The Norwegian sovereign wealth fund's \$92mn Excel error"](https://www.ft.com/content/db864323-5b68-402b-8aa5-5c53a309acf1)
 - [Washington Post: "Excel spreadsheet error leads Austrian party to announce wrong leader"](https://www.washingtonpost.com/world/2023/06/06/austria-excel-error-election/)
 
 
