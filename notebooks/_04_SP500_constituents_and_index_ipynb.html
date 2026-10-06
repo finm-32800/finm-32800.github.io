@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -531,6 +531,12 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-c-reconstructing-the-s-p-500">
 <h1>HW 1 Guide C: Reconstructing the S&amp;P 500<a class="headerlink" href="#hw-1-guide-c-reconstructing-the-s-p-500" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">In this guide</p>
+<p><strong>What:</strong> Approximate the S&amp;P 500 level and return from CRSP two ways: the sum of constituent market caps, and a portfolio rebalanced to index weights each quarter.</p>
+<p><strong>Key step:</strong> Membership changes. Look up who was in the index on each date and use that set, not today’s list, before summing or weighting.</p>
+<p><strong>Tip:</strong> The free-float adjustment and the divisor are proprietary, so the match will be close, not exact. The tests check correlation, not equality.</p>
+</div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>The <strong>S&amp;P 500 Index</strong> is one of the most well-known benchmarks for the U.S. equity market. It represents the performance of 500 large-cap companies across various industries, serving as a proxy for the overall stock market. Constructing an index of this nature involves aggregation of market data, weighting by market capitalization, and accounting for changes in index membership over time. This lecture introduces the mechanics of the S&amp;P 500 index, provides an overview of its construction, and guides you through a case study on approximating its level and returns using data from CRSP and WRDS. Some of the information needed to perfectly replicate the S&amp;P 500 index is proprietary and not available through WRDS. So, the approximation in the next section will be imperfect. However, it will be close enough. For now, we will use this note to get a better understanding of how the S&amp;P 500 is constructed.</p>
@@ -667,13 +673,13 @@ We will then compare the reconstructed index to the actual S&amp;P 500 index by 
 <p>Let’s explore that data now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">calc_SP500_index</span>
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
-<span class="kn">import</span> <span class="nn">pull_SP500_constituents</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calc_SP500_index</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_stock</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_SP500_constituents</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 </pre></div>

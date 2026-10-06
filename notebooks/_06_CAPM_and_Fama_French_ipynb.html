@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -518,6 +518,12 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-e-testing-the-capm-and-the-three-factor-model">
 <h1>HW 1 Guide E: Testing the CAPM and the Three-Factor Model<a class="headerlink" href="#hw-1-guide-e-testing-the-capm-and-the-three-factor-model" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">In this guide</p>
+<p><strong>What:</strong> Nothing to fill in. Test the CAPM and the three-factor model on the portfolios Part D built, as a tangency-portfolio problem and as a set of alpha regressions.</p>
+<p><strong>Key point:</strong> The two tests are the same test. Zero alphas mean the factors already span the tangency portfolio; a nonzero alpha means adding that portfolio raises the Sharpe ratio.</p>
+<p><strong>Tip:</strong> Adding SMB and HML shrinks the alphas but does not make them zero. Small growth is the standard failure.</p>
+</div>
 <p>Two readings tell the theory story:
 <a class="reference external" href="https://finm-32800.github.io/notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a>
 and
@@ -554,9 +560,9 @@ has no blanks to fill and no tests: it is here to show what the portfolios
 you built in Part D are for.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_CAPM_and_FF3</span>
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">calc_CAPM_and_FF3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 <span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">)</span>
@@ -704,7 +710,7 @@ is a mix of Mkt-RF, SMB, and HML.</p>
 <p>SMB and HML are long-short portfolios, so a “weight” here is the size of the
 position in each factor per dollar in the market.</p>
 <p>The calculation is short enough to show in full:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tangency</span><span class="p">(</span><span class="n">excess</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tangency</span><span class="p">(</span><span class="n">excess</span><span class="p">):</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">excess</span><span class="o">.</span><span class="n">cov</span><span class="p">(),</span> <span class="n">excess</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">w</span> <span class="o">/</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">excess</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">portfolio</span> <span class="o">=</span> <span class="n">excess</span> <span class="o">@</span> <span class="n">w</span>

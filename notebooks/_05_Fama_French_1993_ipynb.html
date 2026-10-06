@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -527,6 +527,12 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-d-constructing-the-fama-french-factors">
 <h1>HW 1 Guide D: Constructing the Fama-French Factors<a class="headerlink" href="#hw-1-guide-d-constructing-the-fama-french-factors" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">In this guide</p>
+<p><strong>What:</strong> Merge CRSP with Compustat through the CCM link, sort stocks on size and book-to-market each June, form six portfolios, and build SMB and HML. Then compare with Ken French’s series.</p>
+<p><strong>Key step:</strong> Timing. Portfolios formed at the end of June of year <em>t</em> use book equity from the fiscal year ending in <em>t−1</em> and market equity from December <em>t−1</em>. The six-month gap ensures the accounting numbers were public when the sort was made, so the factor never uses information investors did not have.</p>
+<p><strong>Tip:</strong> Breakpoints come from NYSE firms only, but every firm is sorted with them. That is why the small portfolios fill up when Nasdaq enters CRSP in the 1970s.</p>
+</div>
 <p><strong>Summary</strong></p>
 <p>The Fama and French (1993) paper, “Common Risk Factors in the Returns on Stocks and Bonds,” revolutionized asset pricing theory by challenging the Capital Asset Pricing Model (CAPM) with a three-factor model that includes market risk, size (market capitalization), and book-to-market value as predictors of stock returns. They demonstrated that the market factor alone does not fully explain stock returns and that small stocks and stocks with high book-to-market ratios yield higher returns than can be explained
 by market beta alone, suggesting that these factors capture additional risks not accounted for by the CAPM. This seminal work has significantly influenced academic research and investment practices by highlighting the importance of size and value factors in asset pricing, thereby laying the groundwork for more sophisticated models and strategies in finance.</p>
@@ -550,13 +556,13 @@ rerun the pipeline. It looks at the raw data to explain each filter, then
 loads what the tasks saved.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">calc_Fama_French_diagnostics</span>
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_Compustat</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calc_Fama_French_diagnostics</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_Compustat</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_stock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 <span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">)</span>

@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
@@ -511,6 +511,12 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="hw-1-guide-b-the-crsp-market-index">
 <h1>HW 1 Guide B: The CRSP Market Index<a class="headerlink" href="#hw-1-guide-b-the-crsp-market-index" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">In this guide</p>
+<p><strong>What:</strong> Rebuild CRSP’s equal- and value-weighted market returns from the monthly stock file and check them against <code class="docutils literal notranslate"><span class="pre">EWRETD</span></code> and <code class="docutils literal notranslate"><span class="pre">VWRETD</span></code>.</p>
+<p><strong>Key step:</strong> Weight each stock by its market cap at the end of the <em>previous</em> month. This month’s cap already contains this month’s return, so weighting with it builds the return into the weight.</p>
+<p><strong>Tip:</strong> Lag within each stock, not down the flat file. A plain <code class="docutils literal notranslate"><span class="pre">shift</span></code> hands one stock’s last month to the next stock’s first.</p>
+</div>
 <p>The CRSP (Center for Research in Security Prices) dataset provides two indices
 for market returns: an equal-weighted index and a value-weighted index (both provided
 in terms of returns with and without dividends). The equal-weighted index
@@ -524,12 +530,12 @@ loads that result, explains the choices behind it, and compares it with
 CRSP’s own series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_CRSP_indices</span>
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">import</span> <span class="nn">misc_tools</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">calc_CRSP_indices</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">misc_tools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_CRSP_stock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">)</span>
 </pre></div>
