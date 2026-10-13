@@ -10,6 +10,7 @@ Week0/clone_and_run.md
 notebooks/_01_markowitz.ipynb
 notebooks/_02_markowitz_derivation.ipynb
 Week0/data_tour.md
+Week0/study_guide.md
 ```
 
 Lecture 0 is a preview. It is meant to feel like a real first lecture, so that

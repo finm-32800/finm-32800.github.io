@@ -19,7 +19,10 @@ notebooks/_06_CAPM_and_Fama_French_ipynb.ipynb
   [hw-finm-32800](https://github.com/hw-finm-32800) organization. The link to
   yours is on Canvas. **Your copy is created from your answer to the GitHub
   username survey on Canvas,** so fill that out first. You can open your copy
-  once you accept the invitation that GitHub emails you.
+  once you accept the invitation to the organization that GitHub emails you.
+  Until then, the link to your copy shows a 404 page. Invitations go out by
+  hand, within a day or two of your survey answer. If none has come by then,
+  or yours expired, email me and I will send another.
 - **Goes with:** weeks 1 and 2
 
 ## Overview

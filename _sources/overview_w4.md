@@ -6,8 +6,6 @@ Week6/python_packaging_with_hatch.md
 Week5/sphinx.md
 Week6/chartbook_catalog.md
 Week3/ftsfr.md
-Week7/databento.md
-notebooks/_01_databento_ipynb.ipynb
 Week7/LSEG_datastream.md
 notebooks/_02_spx_hedging_ipynb.ipynb
 ```

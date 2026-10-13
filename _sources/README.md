@@ -26,16 +26,15 @@ yours).
 - **Class:** One session per week, in person. The day, time, and room are listed
   on Canvas.
 - **Lecturer:** Jeremy Bejarano, jbejarano@uchicago.edu
-- **Instructor Office Hours:** By appointment. Schedule a 1-on-1 consultation
-  using the booking link posted on Canvas.
-- **Teaching Assistant:**
-  - To be announced on Canvas.
+- **Instructor Office Hours:** Thursdays at 3:00 pm CT, in person, in my
+  office, MS 302.
+- **Teaching Assistant:** Jared Szajkowski, jszajkowski@uchicago.edu
   - Note: Students are strongly encouraged to post questions on the discussion
     page of the class GitHub repository (see below) rather than emailing, so that
     the whole class can benefit from the answers.
-
-- **TA Office Hours:**
-  - To be announced. See the Canvas calendar for the schedule.
+- **TA Office Hours:** Mondays at 1:00 pm CT, online on Zoom. The Zoom link is
+  in the office-hours announcement on Canvas and on the Canvas calendar. Both
+  office hours are on the Canvas calendar.
 
 - **Textbook:** The text for the course will be published incrementally here:
   https://finm-32800.github.io/
@@ -113,11 +112,16 @@ of any other size requires the instructor's permission in advance. The project
 has two steps:
 
 1. **Consultation.** Each group schedules a 1-on-1 meeting with the instructor,
-   in weeks 4 through 6, to get individual feedback on their plan: the data
-   sources and the reusable "product" they intend to build.
-2. **Final presentation.** In week 10, each group presents the completed
-   project and each member is individually quizzed in an oral defense of both
-   their analysis and the tools used to build it.
+   in weeks 4 through 6, to get feedback on its plan: the data sources and the
+   reusable "product" it intends to build on top of the replication. The
+   consultation is ungraded. It ends with an agreed extension, which the group
+   records in its README.
+2. **Final project presentation.** The project is due 24 hours before the
+   group's 30-minute meeting with the instructor in week 10. The instructor
+   runs and grades the code before the meeting, so there are no slides and no
+   demo. The meeting is spent questioning each member individually about the
+   paper, the data, the design choices, and the extension. Those answers are
+   graded.
 
 See the [Final Project Instructions and Rubric](FinalProject/final_project_rubric.md)
 for full details.
@@ -150,11 +154,10 @@ Grades will be based on the following components:
   graded not only on how well it accomplishes the assigned data cleaning and
   analysis task, but primarily on whether (1) the steps to reproduce it are fully
   automated and well documented, (2) the code is written in a clean and reusable
-  fashion, and (3) the results are presented clearly and convincingly. At the
-  week-10 presentation, **each group member is individually quizzed in an oral
-  defense**—you will be asked to defend your analysis and design choices and to
-  demonstrate that you can actually run and modify the project (e.g., managing
-  the conda environment, running the pipeline, using SSH).
+  fashion, and (3) the results are presented clearly and convincingly. **Each
+  member is also graded individually**, on their contribution as shown by their
+  commits and pull requests, and on their answers at the week-10 final project
+  presentation.
 - **Participation (5%)** depends on the positive impact you have on the class.
   This includes participating in in-class discussions and/or answering questions
   on the class GitHub page (or on Canvas). Students are in no way penalized for
@@ -175,8 +178,8 @@ the agenda is listed in the first sub-section of the chapter.
 | --- | --- | --- | --- | --- |
 | 0 | Preview | [Portfolio selection and a first look at the course](overview_w0.md) | [HW 0](HW0.md) (ungraded) | |
 | 1 | Sep 29 | [Git, GitHub, and virtual environments](overview_w1.md) | [HW 1](HW1.md) | |
-| 2 | Oct 6 | [Task runners, notebooks and ChartBook, SQL; Fama-French (1993)](overview_w2.md) | | |
-| 3 | Oct 13 | [Publishing: GitHub Pages, LaTeX, pull requests](overview_w3.md) | [HW 2](HW2.md) | |
+| 2 | Oct 6 | [Task runners and SQL; Fama-French (1993)](overview_w2.md) | | |
+| 3 | Oct 13 | [Reports and publishing: notebooks, ChartBook, GitHub Pages, LaTeX, pull requests](overview_w3.md) | [HW 2](HW2.md) | |
 | 4 | Oct 20 | [Python packaging, Sphinx, the ChartBook catalog, options data](overview_w4.md) | [HW 3](HW3.md) | HW 1 |
 | 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 4](HW4.md) | HW 2 |
 | 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 5](HW5.md) | HW 3 |

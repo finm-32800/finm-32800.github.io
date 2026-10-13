@@ -28,11 +28,13 @@ model that must rebuild itself every morning whether or not anyone pushed code.
 - **The exam is December 1,** in the first 75 minutes of class, covering weeks 0
   through 8, tonight included. Practice questions and their answer key are
   handed out tonight; see [Exam Preparation](./exam_prep.md).
-- **Final project work should be underway.** Week 10 is the presentation and the
-  oral defense, and the defense assumes you can run and modify your own project
-  live: manage the environment, run the pipeline, and use SSH.
-- **Final presentation sign-ups.** Book your week 10 slot; all groups present in
-  week 10.
+- **Final project work should be underway.** Your project is due 24 hours
+  before your final project presentation in week 10. I run and grade the code
+  before we meet, so it must run from a clean clone by following your README
+  alone.
+- **Final project presentation sign-ups.** Book your group's 30-minute slot for
+  week 10 at [youcanbook.me](https://finm-32800.youcanbook.me/). The last day
+  is Friday, December 11.
 
 ## Objectives
 

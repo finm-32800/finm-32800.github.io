@@ -28,9 +28,10 @@ supplies the models. Nothing this week is a toy.
   credit. See [Exam Preparation](./exam_prep.md).
 - **Nothing else is due.** All five homeworks are behind you. Tonight's
   forecasting lab is done in class and is not graded.
-- **Final project presentations are next week.** Every group presents in week 10,
-  with an individual oral defense for each member. You will be asked to run and
-  modify your own project live.
+- **Final project presentations are next week.** Your project is due 24 hours
+  before your group's 30-minute meeting with me. There are no slides and no
+  demo, because I will already have run your code. I question each member
+  individually, and those answers are graded.
 - **This is the only exam.** There is no separate final exam.
 
 ## Objectives
@@ -113,7 +114,8 @@ Then the two halves of the lesson:
 
 ## Looking ahead to Week 10
 
-Final project presentations and oral defenses. Each group presents its completed
-pipeline, and each member is individually quizzed on both the analysis and the
-tools used to build it. See the
+Final project presentations. Each group meets with me for 30 minutes. I will
+already have run your pipeline, so there are no slides and no demo, and I
+question each member individually about the paper, the data, the design
+choices, and the extension. Those answers are graded. See the
 [Final Project Instructions and Rubric](./FinalProject/final_project_rubric.md).

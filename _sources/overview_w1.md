@@ -10,6 +10,7 @@ Week2/WRDS_intro_and_web_queries.md
 notebooks/_01_wrds_python_package_ipynb.ipynb
 Week2/env_files.md
 notebooks/_07_mean_variance_to_CAPM_ipynb.ipynb
+Week1/study_guide.md
 ```
 
 The paper this week is Sharpe (1964) and the object is the CAPM's market
@@ -25,9 +26,13 @@ data.
   UChicago contact are in [Getting Set Up](./Week0/getting_set_up.md).
 - **Complete the GitHub username survey on Canvas today.** Your private copy
   of [HW 1](./HW1.md) is created from your answer, so you have no repository
-  to work in until it is in. GitHub then emails you an invitation to the
-  [hw-finm-32800](https://github.com/hw-finm-32800) organization. Accept it
-  within seven days, after which it expires.
+  to work in until it is in. I then invite you to the
+  [hw-finm-32800](https://github.com/hw-finm-32800) organization. The
+  invitations go out by hand, in batches, so expect yours within a day or two
+  and not the moment you submit. GitHub emails it to the address on your
+  GitHub account. Accept it within seven days, after which it expires. If two
+  days pass with no email, or your invitation expired, email me and I will
+  send another.
 - **[HW 0](./HW0.md) is ungraded and due to nobody, but do it now.** It sets up
   your machine and walks the full cycle every later assignment repeats: clone,
   install, run, edit, test, push. HW 1 assumes all of it works.

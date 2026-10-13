@@ -1,4 +1,4 @@
-# Week 2: Task Runners, ChartBook, and SQL, featuring Fama-French 1993
+# Week 2: Task Runners and SQL, featuring Fama-French 1993
 
 ```{toctree}
 :maxdepth: 1
@@ -6,9 +6,7 @@ notebooks/_08_CAPM_to_multifactor_models_ipynb.ipynb
 notebooks/_02_basics_of_SQL_ipynb.ipynb
 Week3/what_is_a_task_runner.md
 Week3/doit_examples.md
-Week4/reports_with_jupyter_notebooks.md
-Week3/project_structure.md
-Week3/uv_and_pixi.md
+Week2/study_guide.md
 ```
 
 Last week you pulled data once, by hand. A replication is not one pull: it is
@@ -48,16 +46,6 @@ motivates it is the **Fama-French (1993)** replication that finishes
   [Build Systems and Task Runners](./Week3/what_is_a_task_runner.md).
 - Write `doit` tasks with correct file dependencies and targets, and read a
   `dodo.py` as a dependency graph: [PyDoit Examples](./Week3/doit_examples.md).
-- Use a notebook for what it is good at, reporting, and keep pipeline logic out
-  of it: [Reports with Jupyter Notebooks](./Week4/reports_with_jupyter_notebooks.md).
-  Execute a notebook from the command line with `nbconvert` and wire it into
-  `doit`.
-- Register a project's notebooks and dataframes in a `chartbook.toml` and build
-  a browsable site from it, as one more `doit` target.
-- Know the layout a data project should have, and why, and start one with
-  `chartbook init`: [the ChartBook project template](./Week3/project_structure.md).
-- Know the alternatives to conda for pinning an environment, and set up a
-  project with one: [`uv` and `pixi`](./Week3/uv_and_pixi.md).
 
 ## Agenda
 
@@ -102,48 +90,10 @@ motivates it is the **Fama-French (1993)** replication that finishes
    Then hands-on with [PyDoit Examples](./Week3/doit_examples.md), using the
    `pydoit/` directory of the
    [in-class examples repo](https://github.com/finm-32800/inclass_examples).
-   Examples 01 and 02: tasks, file dependencies, targets, and why a correct
-   dependency graph is the whole point.
+   Example 01: tasks, file dependencies, targets, and why a correct
+   dependency graph is the whole point. Examples 02 through 04 open week 3.
    *→ HW 1 Part D:* you complete `task_calc_Fama_French_1993` and
    `task_calc_inv_portfolios` in `dodo.py`.
-7. **Notebooks as tasks.** Examples 03 and 04 continue the hands-on.
-   [Reports with Jupyter Notebooks](./Week4/reports_with_jupyter_notebooks.md):
-   why notebooks are for *reporting* and not for pipeline steps, and how
-   `nbconvert` executes one from the command line and exports it to HTML. A
-   notebook is then just another `doit` task, with file dependencies and
-   targets.
-   *→ HW 1:* `task_run_notebooks` in your `dodo.py` does exactly this to the
-   six guide notebooks.
-8. **ChartBook: the site as a build target.**
-   [ChartBook](https://pypi.org/project/chartbook/) catalogs a project's
-   notebooks, dataframes, and charts and generates a browsable static site from
-   them.
-   - **The manifest, `chartbook.toml`.** Each `[notebooks.*]`,
-     `[dataframes.*]`, and `[charts.*]` entry says what an output is, where it
-     comes from, and where it lives. Read HW 1's as the example.
-   - **The CLI and the Python API.** `chartbook build` generates the site;
-     `chartbook ls` lists what is registered; `chartbook data get-path` returns
-     a parquet path; and `data.load(pipeline=..., dataframe=...)` loads it
-     straight into pandas or polars.
-   - **Where it sits in the pipeline.** `chartbook build` is just another
-     `doit` task (`task_generate_pipeline_site` in HW 1), so the site is
-     regenerated whenever the data changes, not assembled by hand. Next week
-     we publish it to GitHub Pages; in week 4, many projects' manifests
-     aggregate into one catalog.
-9. **Starting a project: `chartbook init`.** Your final project starts here,
-   so we start one live.
-   - [The ChartBook project template](./Week3/project_structure.md): the
-     directory layout, and the
-     [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)
-     principles behind it (data is immutable, analysis is a DAG, secrets stay
-     out of version control).
-   - `chartbook init` is a Cookiecutter template. Created with
-     [Cruft](https://cruft.github.io/cruft/) instead, the project can pull in
-     later improvements to the template with `cruft update`.
-   - The template asks which environment manager to use. That is the cue for
-     [`uv` and `pixi`](./Week3/uv_and_pixi.md), the follow-up to last week's
-     conda material: we scaffold one project with each and compare the
-     lockfiles they write.
 
 ## Final Projects: Preview and Pitch
 
@@ -166,8 +116,8 @@ This is the week you meet the final projects.
 ## Looking ahead to Week 3
 
 With a pipeline that rebuilds itself, the next question is where its output
-goes. Week 3 is **publishing**: the ChartBook site on GitHub Pages and the
-PDF from LaTeX, plus the pull-request workflow that real teams use to change
-code. [HW 2](./HW2.md) launches: the Treasury yield curve and the expected path
+goes. Week 3 is **reports and publishing**: notebooks run as `doit` tasks, the
+ChartBook site they feed, GitHub Pages to host it, and the PDF from LaTeX, plus
+the pull-request workflow that real teams use to change code. [HW 2](./HW2.md) launches: the Treasury yield curve and the expected path
 of the policy rate, published as a website and summarized in a one-page PDF
 market brief.

@@ -43,7 +43,7 @@ rebuild when all of them have landed.
   outage.
 - Explain what makes a task idempotent and why a scheduler is unusable without it.
 - Say what containers and Kubernetes add beneath an orchestrator, and how a
-  container image relates to the `uv` and `pixi` lockfiles from week 2.
+  container image relates to the `uv` and `pixi` lockfiles from week 3.
 
 ## Agenda Item 1: Why Another Scheduler?
 
@@ -102,7 +102,7 @@ you meet them.
 
 - **Containers.** A Docker image freezes the whole environment a task runs in,
   operating system included. That is one level below the conda, `uv`, and
-  `pixi` lockfiles from week 2, and the same image runs on your laptop, a CI
+  `pixi` lockfiles from week 3, and the same image runs on your laptop, a CI
   runner, or a cluster.
 - **Kubernetes** schedules containers across a fleet of machines. Production
   Airflow commonly runs each task in its own container on Kubernetes (the
