@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 3: Reports — Notebooks, ChartBook, and LaTeX &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -230,26 +230,27 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -490,7 +491,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</h1>
+    <h1>Week 3: Reports — Notebooks, ChartBook, and LaTeX</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,13 +503,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-notebooks-as-tasks">Agenda Item 1: Notebooks as Tasks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-chartbook-the-site-as-a-build-target">Agenda Item 2: ChartBook, the Site as a Build Target</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-publishing-to-github-pages">Agenda Item 3: Publishing to GitHub Pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-starting-a-project-with-chartbook-init">Agenda Item 4: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-latex-for-pdf-reports">Agenda Item 5: LaTeX for PDF Reports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-issues-and-pull-requests">Agenda Item 6: Issues and Pull Requests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-7-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 7: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-hw-1-questions">Agenda Item 1: HW 1 Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-notebooks-are-for-reporting">Agenda Item 2: Notebooks Are for Reporting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-chartbook-the-site-as-a-build-target">Agenda Item 3: ChartBook, the Site as a Build Target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-latex-for-pdf-reports">Agenda Item 4: LaTeX for PDF Reports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-if-time-publishing-to-github-pages">Agenda Item 6, If Time: Publishing to GitHub Pages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-the-two-steps">Final Project: The Two Steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-4">Looking ahead to Week 4</a></li>
 </ul>
@@ -521,26 +521,23 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-3-reproducible-reports-chartbook-github-pages-and-latex">
-<h1>Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX<a class="headerlink" href="#week-3-reproducible-reports-chartbook-github-pages-and-latex" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-3-reports-notebooks-chartbook-and-latex">
+<h1>Week 3: Reports — Notebooks, ChartBook, and LaTeX<a class="headerlink" href="#week-3-reports-notebooks-chartbook-and-latex" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </div>
 <p>A pipeline’s output has to land somewhere people can see it. Last week <code class="docutils literal notranslate"><span class="pre">doit</span></code>
 learned to run a pipeline’s steps in order. Tonight the last steps are the
-reports: the pipeline executes its own notebooks and builds its own ChartBook
-site, GitHub Pages hosts that site, and LaTeX makes the PDF. The habit to build
+reports: the pipeline executes its own notebooks, ChartBook turns them into a
+website, and LaTeX makes the PDF. The habit to build
 is treating a report not as a document you write once but as a <strong>build target</strong>
 the pipeline regenerates whenever the data changes.</p>
 <section id="announcements">
@@ -559,7 +556,11 @@ This is the week to finish it: ask your questions tonight, because from here
 on the material is HW 2.</p></li>
 <li><p><strong><a class="reference internal" href="HW2.html"><span class="std std-doc">HW 2</span></a> launches today,</strong> due Tuesday, October 27, two weeks from
 tonight: the Treasury yield curve and the policy path, published as a
-ChartBook site on GitHub Pages and summarized in a PDF market brief.</p></li>
+ChartBook site on GitHub Pages and summarized in a PDF market brief. Your
+private copy is created after class tonight.</p></li>
+<li><p><strong>Databento API key.</strong> HW 2 pulls futures data from Databento, and you
+should already have a key. If you do not, email the program administrator,
+Eliza Higbee.</p></li>
 <li><p><strong>Project survey, due next Tuesday.</strong> The preference survey is open, and the
 link is in the Canvas announcement. It closes Tuesday, October 20 at
 11:59 pm. Each group is emailed its assigned paper from the
@@ -579,26 +580,31 @@ Execute a notebook from the command line with <code class="docutils literal notr
 <code class="docutils literal notranslate"><span class="pre">doit</span></code>.</p></li>
 <li><p>Register a project’s notebooks and dataframes in a <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and build
 a browsable site from it, as one more <code class="docutils literal notranslate"><span class="pre">doit</span></code> target.</p></li>
-<li><p>Publish a <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder as a live website:
-<a class="reference internal" href="Week3/github_pages_preview.html"><span class="std std-doc">Publishing to GitHub Pages</span></a>.</p></li>
 <li><p>Write and compile LaTeX, and automate the inclusion of a figure or table so a
 PDF rebuilds itself from the pipeline’s outputs:
 <a class="reference internal" href="Week4/intro_to_LaTeX.html"><span class="std std-doc">Introduction to LaTeX</span></a> and
 <a class="reference internal" href="Week4/latex_essentials.html"><span class="std std-doc">LaTeX Essentials</span></a>.</p></li>
-<li><p>Know the layout a data project should have, and why, and start one with
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code>: <a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">the ChartBook project template</span></a>.</p></li>
-<li><p>Know the alternatives to conda for pinning an environment, and set up a
-project with one: <a class="reference internal" href="Week3/uv_and_pixi.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">uv</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></span></a>.</p></li>
-<li><p>Use the pull-request workflow: branch, PR, review, revise, merge
-(<a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>).</p></li>
 <li><p>Explain how the Nelson-Siegel-Svensson model fits a yield curve to Treasury
 quotes, and how fed funds futures prices imply an expected policy path.</p></li>
 <li><p>Pull market data from a vendor’s API with a key kept in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, and check
 what a query costs before running it: <a class="reference internal" href="Week7/databento.html"><span class="std std-doc">Databento</span></a>.</p></li>
+<li><p>Publish a <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder as a live website, which HW 2 asks you to do:
+<a class="reference internal" href="Week3/github_pages_preview.html"><span class="std std-doc">Publishing to GitHub Pages</span></a>. We start it
+tonight if there is time and finish it next week.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-notebooks-as-tasks">
-<h2>Agenda Item 1: Notebooks as Tasks<a class="headerlink" href="#agenda-item-1-notebooks-as-tasks" title="Link to this heading">#</a></h2>
+<section id="agenda-item-1-hw-1-questions">
+<h2>Agenda Item 1: HW 1 Questions<a class="headerlink" href="#agenda-item-1-hw-1-questions" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="HW1.html"><span class="std std-doc">HW 1</span></a> is due in a week. Bring what is stuck. If your WRDS pull or
+your first push is not working yet, we fix that first.</p>
+</section>
+<section id="agenda-item-2-notebooks-are-for-reporting">
+<h2>Agenda Item 2: Notebooks Are for Reporting<a class="headerlink" href="#agenda-item-2-notebooks-are-for-reporting" title="Link to this heading">#</a></h2>
+<p>Last week ended on a point worth repeating. I do not recommend doing your
+analysis in a notebook. The work belongs in <code class="docutils literal notranslate"><span class="pre">.py</span></code> files that <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs as
+tasks: the pulls, the cleaning, the calculations. A notebook is for reporting.
+It loads what the tasks produced and presents it, to a coauthor, to a reader,
+and most often to yourself, with little or no computation of its own.</p>
 <p>We pick up where week 2 stopped, in the <code class="docutils literal notranslate"><span class="pre">pydoit/</span></code> directory of the
 <a class="reference external" href="https://github.com/finm-32800/inclass_examples">in-class examples repo</a>.
 Example 02 is the same dependency graph on a real project, with a <code class="docutils literal notranslate"><span class="pre">src/</span></code>
@@ -609,9 +615,15 @@ why notebooks are for <em>reporting</em> and not for pipeline steps, and how
 notebook is then just another <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, with file dependencies and targets.
 <em>→ HW 1:</em> <code class="docutils literal notranslate"><span class="pre">task_run_notebooks</span></code> in your <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> does exactly this to the six
 guide notebooks.</p>
+<p>How the notebooks here plug into <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>: each one is stored as a plain
+<code class="docutils literal notranslate"><span class="pre">.py</span></code> file in Jupytext’s percent format, which Git can diff. The task converts
+it to <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>, executes it, and exports HTML, and its file dependencies are
+the modules the notebook imports and the files it loads. Change one of those
+and <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs the notebook again; otherwise it leaves the rendered copy alone.
+<em>→ HW 2:</em> you add two notebooks to <code class="docutils literal notranslate"><span class="pre">notebook_tasks</span></code> this way.</p>
 </section>
-<section id="agenda-item-2-chartbook-the-site-as-a-build-target">
-<h2>Agenda Item 2: ChartBook, the Site as a Build Target<a class="headerlink" href="#agenda-item-2-chartbook-the-site-as-a-build-target" title="Link to this heading">#</a></h2>
+<section id="agenda-item-3-chartbook-the-site-as-a-build-target">
+<h2>Agenda Item 3: ChartBook, the Site as a Build Target<a class="headerlink" href="#agenda-item-3-chartbook-the-site-as-a-build-target" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://pypi.org/project/chartbook/">ChartBook</a> catalogs a project’s
 notebooks, dataframes, and charts and generates a browsable static site from
 them.</p>
@@ -625,44 +637,17 @@ parquet path; and <code class="docutils literal notranslate"><span class="pre">d
 into pandas or polars.</p></li>
 <li><p><strong>Where it sits in the pipeline.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code> is just another <code class="docutils literal notranslate"><span class="pre">doit</span></code>
 task (<code class="docutils literal notranslate"><span class="pre">task_generate_pipeline_site</span></code> in HW 1), so the site is regenerated
-whenever the data changes, not assembled by hand. Publishing it is the next
-item; in week 4, many projects’ manifests aggregate into one catalog.</p></li>
+whenever the data changes, not assembled by hand. Publishing it is the last
+item tonight; in week 4, many projects’ manifests aggregate into one catalog.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-publishing-to-github-pages">
-<h2>Agenda Item 3: Publishing to GitHub Pages<a class="headerlink" href="#agenda-item-3-publishing-to-github-pages" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="Week3/github_pages_preview.html"><span class="std std-doc">Publishing to GitHub Pages</span></a>: how a <code class="docutils literal notranslate"><span class="pre">docs/</span></code>
-folder of static HTML becomes a live website (Settings → Pages → Deploy from a
-branch → <code class="docutils literal notranslate"><span class="pre">main</span></code> / <code class="docutils literal notranslate"><span class="pre">/docs</span></code>), and why your assignment repo must stay private while
-the site is public. The two steps compose: <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code> produces <code class="docutils literal notranslate"><span class="pre">docs/</span></code>,
-Pages serves it. HW 2 Part D is exactly this, into a separate public repo.</p>
-</section>
-<section id="agenda-item-4-starting-a-project-with-chartbook-init">
-<h2>Agenda Item 4: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code><a class="headerlink" href="#agenda-item-4-starting-a-project-with-chartbook-init" title="Link to this heading">#</a></h2>
-<p>Your final project starts here, so we start one live.</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">The ChartBook project template</span></a>: the directory
-layout, and the
-<a class="reference external" href="https://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a>
-principles behind it (data is immutable, analysis is a DAG, secrets stay out
-of version control).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code> is a Cookiecutter template. Created with
-<a class="reference external" href="https://cruft.github.io/cruft/">Cruft</a> instead, the project can pull in later
-improvements to the template with <code class="docutils literal notranslate"><span class="pre">cruft</span> <span class="pre">update</span></code>.</p></li>
-<li><p>The template asks which environment manager to use. That is the cue for
-<a class="reference internal" href="Week3/uv_and_pixi.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">uv</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></span></a>, the follow-up to week 1’s conda
-material: we scaffold one project with each and compare the lockfiles they
-write.</p></li>
-</ul>
-</section>
-<section id="agenda-item-5-latex-for-pdf-reports">
-<h2>Agenda Item 5: LaTeX for PDF Reports<a class="headerlink" href="#agenda-item-5-latex-for-pdf-reports" title="Link to this heading">#</a></h2>
+<section id="agenda-item-4-latex-for-pdf-reports">
+<h2>Agenda Item 4: LaTeX for PDF Reports<a class="headerlink" href="#agenda-item-4-latex-for-pdf-reports" title="Link to this heading">#</a></h2>
 <p>ChartBook is the HTML half of report generation; LaTeX is the PDF half.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="Week4/intro_to_LaTeX.html"><span class="std std-doc">Introduction to LaTeX</span></a> and
-<a class="reference internal" href="Week4/latex_essentials.html"><span class="std std-doc">LaTeX Essentials</span></a>. Compile the report templates
-from the <a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">project template</span></a>, in the project you
-just scaffolded with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code>.</p></li>
+<a class="reference internal" href="Week4/latex_essentials.html"><span class="std std-doc">LaTeX Essentials</span></a>: what a <code class="docutils literal notranslate"><span class="pre">.tex</span></code> file is, how
+it compiles, and the handful of commands a report needs.</p></li>
 <li><p>Work through the
 <a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/latex"><code class="docutils literal notranslate"><span class="pre">latex/</span></code> examples</a>
 in the in-class repo, a progression from a five-line document through figures
@@ -675,26 +660,15 @@ rebuilds itself whenever the data changes. This is the same pattern the class
 report uses in week 6.
 <em>→ HW 2:</em> the same pattern on the yield curve. <code class="docutils literal notranslate"><span class="pre">task_generate_market_brief</span></code>
 writes the charts and tables, and <code class="docutils literal notranslate"><span class="pre">task_compile_market_brief</span></code> runs <code class="docutils literal notranslate"><span class="pre">latexmk</span></code>
-on <code class="docutils literal notranslate"><span class="pre">reports/market_brief.tex</span></code>.</p></li>
+on <code class="docutils literal notranslate"><span class="pre">reports/market_brief.tex</span></code>. You write one of those tables and the task
+that compiles the PDF.</p></li>
+<li><p><strong>A word on Markdown.</strong> It is the third report format, and you have been
+writing it all along: READMEs, the text cells of a notebook, the pages of
+this book. Reach for LaTeX when the result has to be a typeset PDF.</p></li>
 </ul>
 </section>
-<section id="agenda-item-6-issues-and-pull-requests">
-<h2>Agenda Item 6: Issues and Pull Requests<a class="headerlink" href="#agenda-item-6-issues-and-pull-requests" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>: how
-contribution works in the open-source world, and the workflow you will use for
-the collaborative report and for your final project.</p>
-<ul class="simple">
-<li><p>Issues as the coordination layer: claiming work, scoping it, linking fixes with
-<code class="docutils literal notranslate"><span class="pre">fixes</span> <span class="pre">#123</span></code>.</p></li>
-<li><p>The PR loop, demoed live: branch → commit → open a pull request → review
-comments → revise → merge.</p></li>
-<li><p>Why maintainers protect <code class="docutils literal notranslate"><span class="pre">main</span></code> and require review, and how these mechanics let
-strangers collaborate safely on the packages we depend on. This is the “peer
-code review” that shows up in the job postings.</p></li>
-</ul>
-</section>
-<section id="agenda-item-7-launch-hw-2-the-yield-curve-and-the-policy-path">
-<h2>Agenda Item 7: Launch HW 2, the Yield Curve and the Policy Path<a class="headerlink" href="#agenda-item-7-launch-hw-2-the-yield-curve-and-the-policy-path" title="Link to this heading">#</a></h2>
+<section id="agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">
+<h2>Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path<a class="headerlink" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="HW2.html"><span class="std std-doc">HW 2</span></a> is a multi-source pipeline that ends in a published website and
 a PDF.
 You estimate the U.S. Treasury yield curve with the Nelson-Siegel-Svensson
@@ -731,6 +705,16 @@ deliverables are a ChartBook site on GitHub Pages and a two-page market brief
 on the Treasury curve, compiled from LaTeX. We launch it in class; you finish the
 <code class="docutils literal notranslate"><span class="pre">TODO</span></code>s and publish on your own.</p>
 </section>
+<section id="agenda-item-6-if-time-publishing-to-github-pages">
+<h2>Agenda Item 6, If Time: Publishing to GitHub Pages<a class="headerlink" href="#agenda-item-6-if-time-publishing-to-github-pages" title="Link to this heading">#</a></h2>
+<p>If there is time tonight. If not, it opens next week, and either way it comes
+before HW 2 is due.</p>
+<p><a class="reference internal" href="Week3/github_pages_preview.html"><span class="std std-doc">Publishing to GitHub Pages</span></a>: how a <code class="docutils literal notranslate"><span class="pre">docs/</span></code>
+folder of static HTML becomes a live website (Settings → Pages → Deploy from a
+branch → <code class="docutils literal notranslate"><span class="pre">main</span></code> / <code class="docutils literal notranslate"><span class="pre">/docs</span></code>), and why your assignment repo must stay private while
+the site is public. The two steps compose: <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code> produces <code class="docutils literal notranslate"><span class="pre">docs/</span></code>,
+Pages serves it. HW 2 Part D is exactly this, into a separate public repo.</p>
+</section>
 <section id="final-project-the-two-steps">
 <h2>Final Project: The Two Steps<a class="headerlink" href="#final-project-the-two-steps" title="Link to this heading">#</a></h2>
 <p>The full procedure and rubric are in the
@@ -751,8 +735,11 @@ answers are graded.</p></li>
 <section id="looking-ahead-to-week-4">
 <h2>Looking ahead to Week 4<a class="headerlink" href="#looking-ahead-to-week-4" title="Link to this heading">#</a></h2>
 <p>Week 4 turns the code itself into something installable and documented: <strong>Python
-packaging and Sphinx</strong>. <a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> launches, an installable package that
-recovers option-implied crash probabilities from the volatility smile.</p>
+packaging and Sphinx</strong>. It also picks up what moved out of tonight: starting a
+project from the ChartBook template, <code class="docutils literal notranslate"><span class="pre">uv</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, the pull-request
+workflow, and publishing with GitHub Pages. <a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> launches, an
+installable package that recovers option-implied crash probabilities from the
+volatility smile.</p>
 </section>
 </section>
 
@@ -806,13 +793,12 @@ recovers option-implied crash probabilities from the volatility smile.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-notebooks-as-tasks">Agenda Item 1: Notebooks as Tasks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-chartbook-the-site-as-a-build-target">Agenda Item 2: ChartBook, the Site as a Build Target</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-publishing-to-github-pages">Agenda Item 3: Publishing to GitHub Pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-starting-a-project-with-chartbook-init">Agenda Item 4: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-latex-for-pdf-reports">Agenda Item 5: LaTeX for PDF Reports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-issues-and-pull-requests">Agenda Item 6: Issues and Pull Requests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-7-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 7: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-hw-1-questions">Agenda Item 1: HW 1 Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-notebooks-are-for-reporting">Agenda Item 2: Notebooks Are for Reporting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-chartbook-the-site-as-a-build-target">Agenda Item 3: ChartBook, the Site as a Build Target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-latex-for-pdf-reports">Agenda Item 4: LaTeX for PDF Reports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-if-time-publishing-to-github-pages">Agenda Item 6, If Time: Publishing to GitHub Pages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-the-two-steps">Final Project: The Two Steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-4">Looking ahead to Week 4</a></li>
 </ul>

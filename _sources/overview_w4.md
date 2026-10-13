@@ -2,12 +2,16 @@
 
 ```{toctree}
 :maxdepth: 1
+Week3/project_structure.md
+Week3/uv_and_pixi.md
 Week6/python_packaging_with_hatch.md
 Week5/sphinx.md
+Week6/GitHub_pull_requests.md
 Week6/chartbook_catalog.md
 Week3/ftsfr.md
 Week7/LSEG_datastream.md
 notebooks/_02_spx_hedging_ipynb.ipynb
+Week4/study_guide.md
 ```
 
 So far your code has lived in repositories that only you run. A **package** is
@@ -36,6 +40,10 @@ option prices.
 
 ## Objectives
 
+- Know the layout a data project should have, and why, and start one with
+  `chartbook init`: [the ChartBook project template](./Week3/project_structure.md).
+- Know the alternatives to conda for pinning an environment, and set up a
+  project with one: [`uv` and `pixi`](./Week3/uv_and_pixi.md).
 - Explain the anatomy of a published Python package: `pyproject.toml`, a build
   backend, versioning, dependencies, and CLI entry points
   ([Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md)).
@@ -51,7 +59,36 @@ option prices.
 - Know the options data on offer and their quirks: the OptionMetrics volatility
   surface via WRDS, and CME Globex via [Databento](./Week7/databento.md).
 
-## Agenda Item 1: Anatomy of a Package
+## Agenda Item 1: Publishing to GitHub Pages
+
+Carried over from week 3, and the last step of [HW 2](./HW2.md), which is due
+next week.
+
+
+[Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/`
+folder of static HTML becomes a live website (Settings → Pages → Deploy from a
+branch → `main` / `/docs`), and why your assignment repo must stay private while
+the site is public. The two steps compose: `chartbook build` produces `docs/`,
+Pages serves it. HW 2 Part D is exactly this, into a separate public repo.
+
+## Agenda Item 2: Starting a Project with `chartbook init`
+
+Your final project starts here, so we start one live.
+
+- [The ChartBook project template](./Week3/project_structure.md): the directory
+  layout, and the
+  [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)
+  principles behind it (data is immutable, analysis is a DAG, secrets stay out
+  of version control).
+- `chartbook init` is a Cookiecutter template. Created with
+  [Cruft](https://cruft.github.io/cruft/) instead, the project can pull in later
+  improvements to the template with `cruft update`.
+- The template asks which environment manager to use. That is the cue for
+  [`uv` and `pixi`](./Week3/uv_and_pixi.md), the follow-up to week 1's conda
+  material and the natural lead-in to `pyproject.toml`: we scaffold one project with each and compare the lockfiles they
+  write.
+
+## Agenda Item 3: Anatomy of a Package
 
 Work through
 [Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md):
@@ -61,7 +98,7 @@ CLI command. Then the packages you can practice on:
 
 - [`finm`](https://pypi.org/project/finm/) ([docs](https://jeremybejarano.com/finm/))
   is the course's own published package: `finm.fixedincome` (the yield-curve
-  functions you imported in HW 2), `finm.data` (Fama-French, Federal Reserve,
+  functions that HW 2 keeps in its own `src/`), `finm.data` (Fama-French, Federal Reserve,
   He-Kelly-Manela and other loaders), and `finm.analytics`. It is the low-stakes
   place to practice the contribution loop on a package you do not own, crossing
   a repository boundary you do not control.
@@ -76,7 +113,7 @@ CLI command. Then the packages you can practice on:
   as a contract, and why a breaking change in a `0.x` package bumps the minor
   version.
 
-## Agenda Item 2: Documentation with Sphinx
+## Agenda Item 4: Documentation with Sphinx
 
 [Sphinx](./Week5/sphinx.md) is the tool that builds the documentation for pandas,
 and for this textbook. It generates browsable reference pages from your code, so
@@ -89,7 +126,21 @@ the docs sit next to the code and do not fall behind it.
 - Your final project is the natural first candidate for a documented, installable
   package.
 
-## Agenda Item 3: The ChartBook Catalog
+## Agenda Item 5: Issues and Pull Requests
+
+[GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md): how
+contribution works in the open-source world, and the workflow you will use for
+the collaborative report and for your final project.
+
+- Issues as the coordination layer: claiming work, scoping it, linking fixes with
+  `fixes #123`.
+- The PR loop, demoed live: branch → commit → open a pull request → review
+  comments → revise → merge.
+- Why maintainers protect `main` and require review, and how these mechanics let
+  strangers collaborate safely on the packages we depend on. This is the "peer
+  code review" that shows up in the job postings.
+
+## Agenda Item 6: The ChartBook Catalog
 
 The question a package forces on you is the same one the class report will force
 in week 6: **what should your code do when it needs data another repository
@@ -109,7 +160,7 @@ already produces?** Copying pull code duplicates work and drifts.
 - The chapter lists which FTSFR repos run on free public data or WRDS alone. The
   Bloomberg-gated ones are off the menu.
 
-## Agenda Item 4: Options Data and the Options Case Study
+## Agenda Item 7: Options Data and the Options Case Study
 
 Two data vendors, then the options material the homework builds on.
 
@@ -126,7 +177,7 @@ Two data vendors, then the options material the homework builds on.
   is class material, not the assignment; it establishes the vocabulary the
   assignment assumes.
 
-## Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities
+## Agenda Item 8: Launch HW 3, Option-Implied Crash Probabilities
 
 [HW 3](./HW3.md) follows
 [Martin and Shi (2025)](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf),

@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Week 4: Python Packaging and Documentation with Sphinx" href="../overview_w4.html" />
-    <link rel="prev" title="GitHub Issues and Pull Requests: Enhancing Collaborative Development" href="../Week6/GitHub_pull_requests.html" /> 
+    <link rel="prev" title="GitHub Pages and Tearsheets" href="github_pages_preview.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -228,26 +228,27 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -500,9 +501,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-as-reports">Notebooks as Reports</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publishing">Publishing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-a-project">Starting a Project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex">LaTeX</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-and-pull-requests">Issues and Pull Requests</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-yield-curve-and-the-policy-path">The Yield Curve and the Policy Path</a></li>
 </ul>
             </nav>
@@ -547,25 +546,11 @@ run?</p></li>
 <li><p>What is ChartBook, and what does <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code> produce?</p></li>
 </ol>
 </section>
-<section id="starting-a-project">
-<h2>Starting a Project<a class="headerlink" href="#starting-a-project" title="Link to this heading">#</a></h2>
-<p><em>Read: <a class="reference internal" href="project_structure.html"><span class="std std-doc">Project Structure</span></a> and
-<a class="reference internal" href="uv_and_pixi.html"><span class="std std-doc">Modern Environment Tools: uv and pixi</span></a>.</em></p>
-<ol class="arabic simple" start="6">
-<li><p>What does Cookiecutter do? What does Cruft add on top of it?</p></li>
-<li><p>What is a lockfile? What does <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> record that a hand-written
-<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> does not?</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">uv</span></code> installs from PyPI and <code class="docutils literal notranslate"><span class="pre">pixi</span></code> installs from conda-forge. When would
-that difference make you choose <code class="docutils literal notranslate"><span class="pre">pixi</span></code>?</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span></code> both run a command inside the project’s
-environment. What does <code class="docutils literal notranslate"><span class="pre">doit</span></code> do that they do not?</p></li>
-</ol>
-</section>
 <section id="latex">
 <h2>LaTeX<a class="headerlink" href="#latex" title="Link to this heading">#</a></h2>
 <p><em>Read: <a class="reference internal" href="../Week4/intro_to_LaTeX.html"><span class="std std-doc">Introduction to LaTeX</span></a> and
 <a class="reference internal" href="../Week4/latex_essentials.html"><span class="std std-doc">LaTeX Essentials</span></a>.</em></p>
-<ol class="arabic" start="10">
+<ol class="arabic" start="6">
 <li><p>What is LaTeX? How is writing in it different from writing in Word?</p></li>
 <li><p>Why is LaTeX a good fit for a report that a pipeline regenerates?</p></li>
 <li><p>In the document below, where does <code class="docutils literal notranslate"><span class="pre">example_table.tex</span></code> come from, and what
@@ -581,23 +566,11 @@ happens to the PDF when the data changes?</p>
 <li><p>What do <code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> and <code class="docutils literal notranslate"><span class="pre">\input</span></code> each bring into a document?</p></li>
 </ol>
 </section>
-<section id="issues-and-pull-requests">
-<h2>Issues and Pull Requests<a class="headerlink" href="#issues-and-pull-requests" title="Link to this heading">#</a></h2>
-<p><em>Read: <a class="reference internal" href="../Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>.</em></p>
-<ol class="arabic simple" start="15">
-<li><p>What is a pull request? What is the difference between pushing a commit
-to <code class="docutils literal notranslate"><span class="pre">main</span></code> and opening a pull request?</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> and a pull request sound alike. What does each one do?</p></li>
-<li><p>What is a GitHub issue, and what does writing <code class="docutils literal notranslate"><span class="pre">fixes</span> <span class="pre">#123</span></code> in a pull
-request do?</p></li>
-<li><p>Why do maintainers protect <code class="docutils literal notranslate"><span class="pre">main</span></code> and require a review before merging?</p></li>
-</ol>
-</section>
 <section id="the-yield-curve-and-the-policy-path">
 <h2>The Yield Curve and the Policy Path<a class="headerlink" href="#the-yield-curve-and-the-policy-path" title="Link to this heading">#</a></h2>
 <p><em>Read: <a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html"><span class="std std-doc">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</span></a>
 and <a class="reference internal" href="../notebooks/_02_fedwatch_replication_ipynb.html"><span class="std std-doc">Replicating the CME FedWatch Tool</span></a>.</em></p>
-<ol class="arabic simple" start="19">
+<ol class="arabic simple" start="11">
 <li><p>Why does the Treasury yield curve have to be fitted with a model instead
 of read directly off bond prices?</p></li>
 <li><p>Gürkaynak, Sack, and Wright leave some Treasury securities out of the
@@ -625,12 +598,12 @@ computed from?</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Week6/GitHub_pull_requests.html"
+       href="github_pages_preview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">GitHub Issues and Pull Requests: Enhancing Collaborative Development</p>
+        <p class="prev-next-title">GitHub Pages and Tearsheets</p>
       </div>
     </a>
     <a class="right-next"
@@ -660,9 +633,7 @@ computed from?</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-as-reports">Notebooks as Reports</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publishing">Publishing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-a-project">Starting a Project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex">LaTeX</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issues-and-pull-requests">Issues and Pull Requests</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-yield-curve-and-the-policy-path">The Yield Curve and the Policy Path</a></li>
 </ul>
   </nav></div>

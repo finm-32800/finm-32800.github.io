@@ -53,7 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Writing and Publishing Your Own Python Packages" href="Week6/python_packaging_with_hatch.html" />
+    <link rel="next" title="Project Structure: “Chartbook” Template" href="Week3/project_structure.html" />
     <link rel="prev" title="Study Guide: Week 3" href="Week3/study_guide.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -230,26 +230,27 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 4: Python Packaging and Documentation with Sphinx</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -502,11 +503,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-anatomy-of-a-package">Agenda Item 1: Anatomy of a Package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-documentation-with-sphinx">Agenda Item 2: Documentation with Sphinx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-chartbook-catalog">Agenda Item 3: The ChartBook Catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-options-data-and-the-options-case-study">Agenda Item 4: Options Data and the Options Case Study</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-3-option-implied-crash-probabilities">Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-publishing-to-github-pages">Agenda Item 1: Publishing to GitHub Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-starting-a-project-with-chartbook-init">Agenda Item 2: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-anatomy-of-a-package">Agenda Item 3: Anatomy of a Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-documentation-with-sphinx">Agenda Item 4: Documentation with Sphinx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-issues-and-pull-requests">Agenda Item 5: Issues and Pull Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-the-chartbook-catalog">Agenda Item 6: The ChartBook Catalog</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-7-options-data-and-the-options-case-study">Agenda Item 7: Options Data and the Options Case Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-8-launch-hw-3-option-implied-crash-probabilities">Agenda Item 8: Launch HW 3, Option-Implied Crash Probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-5">Looking ahead to Week 5</a></li>
 </ul>
             </nav>
@@ -522,12 +526,16 @@ document.write(`
 <h1>Week 4: Python Packaging and Documentation with Sphinx<a class="headerlink" href="#week-4-python-packaging-and-documentation-with-sphinx" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </div>
 <p>So far your code has lived in repositories that only you run. A <strong>package</strong> is
@@ -558,6 +566,10 @@ recent date.</p></li>
 <section id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
+<li><p>Know the layout a data project should have, and why, and start one with
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code>: <a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">the ChartBook project template</span></a>.</p></li>
+<li><p>Know the alternatives to conda for pinning an environment, and set up a
+project with one: <a class="reference internal" href="Week3/uv_and_pixi.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">uv</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></span></a>.</p></li>
 <li><p>Explain the anatomy of a published Python package: <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, a build
 backend, versioning, dependencies, and CLI entry points
 (<a class="reference internal" href="Week6/python_packaging_with_hatch.html"><span class="std std-doc">Writing and Publishing Your Own Python Packages</span></a>).</p></li>
@@ -574,8 +586,36 @@ play in it.</p></li>
 surface via WRDS, and CME Globex via <a class="reference internal" href="Week7/databento.html"><span class="std std-doc">Databento</span></a>.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-anatomy-of-a-package">
-<h2>Agenda Item 1: Anatomy of a Package<a class="headerlink" href="#agenda-item-1-anatomy-of-a-package" title="Link to this heading">#</a></h2>
+<section id="agenda-item-1-publishing-to-github-pages">
+<h2>Agenda Item 1: Publishing to GitHub Pages<a class="headerlink" href="#agenda-item-1-publishing-to-github-pages" title="Link to this heading">#</a></h2>
+<p>Carried over from week 3, and the last step of <a class="reference internal" href="HW2.html"><span class="std std-doc">HW 2</span></a>, which is due
+next week.</p>
+<p><a class="reference internal" href="Week3/github_pages_preview.html"><span class="std std-doc">Publishing to GitHub Pages</span></a>: how a <code class="docutils literal notranslate"><span class="pre">docs/</span></code>
+folder of static HTML becomes a live website (Settings → Pages → Deploy from a
+branch → <code class="docutils literal notranslate"><span class="pre">main</span></code> / <code class="docutils literal notranslate"><span class="pre">/docs</span></code>), and why your assignment repo must stay private while
+the site is public. The two steps compose: <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code> produces <code class="docutils literal notranslate"><span class="pre">docs/</span></code>,
+Pages serves it. HW 2 Part D is exactly this, into a separate public repo.</p>
+</section>
+<section id="agenda-item-2-starting-a-project-with-chartbook-init">
+<h2>Agenda Item 2: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code><a class="headerlink" href="#agenda-item-2-starting-a-project-with-chartbook-init" title="Link to this heading">#</a></h2>
+<p>Your final project starts here, so we start one live.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">The ChartBook project template</span></a>: the directory
+layout, and the
+<a class="reference external" href="https://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a>
+principles behind it (data is immutable, analysis is a DAG, secrets stay out
+of version control).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code> is a Cookiecutter template. Created with
+<a class="reference external" href="https://cruft.github.io/cruft/">Cruft</a> instead, the project can pull in later
+improvements to the template with <code class="docutils literal notranslate"><span class="pre">cruft</span> <span class="pre">update</span></code>.</p></li>
+<li><p>The template asks which environment manager to use. That is the cue for
+<a class="reference internal" href="Week3/uv_and_pixi.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">uv</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi</span></code></span></a>, the follow-up to week 1’s conda
+material and the natural lead-in to <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>: we scaffold one project with each and compare the lockfiles they
+write.</p></li>
+</ul>
+</section>
+<section id="agenda-item-3-anatomy-of-a-package">
+<h2>Agenda Item 3: Anatomy of a Package<a class="headerlink" href="#agenda-item-3-anatomy-of-a-package" title="Link to this heading">#</a></h2>
 <p>Work through
 <a class="reference internal" href="Week6/python_packaging_with_hatch.html"><span class="std std-doc">Writing and Publishing Your Own Python Packages</span></a>:
 <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> as the single source of truth, the Hatchling build backend,
@@ -584,7 +624,7 @@ CLI command. Then the packages you can practice on:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pypi.org/project/finm/"><code class="docutils literal notranslate"><span class="pre">finm</span></code></a> (<a class="reference external" href="https://jeremybejarano.com/finm/">docs</a>)
 is the course’s own published package: <code class="docutils literal notranslate"><span class="pre">finm.fixedincome</span></code> (the yield-curve
-functions you imported in HW 2), <code class="docutils literal notranslate"><span class="pre">finm.data</span></code> (Fama-French, Federal Reserve,
+functions that HW 2 keeps in its own <code class="docutils literal notranslate"><span class="pre">src/</span></code>), <code class="docutils literal notranslate"><span class="pre">finm.data</span></code> (Fama-French, Federal Reserve,
 He-Kelly-Manela and other loaders), and <code class="docutils literal notranslate"><span class="pre">finm.analytics</span></code>. It is the low-stakes
 place to practice the contribution loop on a package you do not own, crossing
 a repository boundary you do not control.</p></li>
@@ -600,8 +640,8 @@ as a contract, and why a breaking change in a <code class="docutils literal notr
 version.</p></li>
 </ul>
 </section>
-<section id="agenda-item-2-documentation-with-sphinx">
-<h2>Agenda Item 2: Documentation with Sphinx<a class="headerlink" href="#agenda-item-2-documentation-with-sphinx" title="Link to this heading">#</a></h2>
+<section id="agenda-item-4-documentation-with-sphinx">
+<h2>Agenda Item 4: Documentation with Sphinx<a class="headerlink" href="#agenda-item-4-documentation-with-sphinx" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="Week5/sphinx.html"><span class="std std-doc">Sphinx</span></a> is the tool that builds the documentation for pandas,
 and for this textbook. It generates browsable reference pages from your code, so
 the docs sit next to the code and do not fall behind it.</p>
@@ -614,8 +654,23 @@ readable.</p></li>
 package.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-the-chartbook-catalog">
-<h2>Agenda Item 3: The ChartBook Catalog<a class="headerlink" href="#agenda-item-3-the-chartbook-catalog" title="Link to this heading">#</a></h2>
+<section id="agenda-item-5-issues-and-pull-requests">
+<h2>Agenda Item 5: Issues and Pull Requests<a class="headerlink" href="#agenda-item-5-issues-and-pull-requests" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>: how
+contribution works in the open-source world, and the workflow you will use for
+the collaborative report and for your final project.</p>
+<ul class="simple">
+<li><p>Issues as the coordination layer: claiming work, scoping it, linking fixes with
+<code class="docutils literal notranslate"><span class="pre">fixes</span> <span class="pre">#123</span></code>.</p></li>
+<li><p>The PR loop, demoed live: branch → commit → open a pull request → review
+comments → revise → merge.</p></li>
+<li><p>Why maintainers protect <code class="docutils literal notranslate"><span class="pre">main</span></code> and require review, and how these mechanics let
+strangers collaborate safely on the packages we depend on. This is the “peer
+code review” that shows up in the job postings.</p></li>
+</ul>
+</section>
+<section id="agenda-item-6-the-chartbook-catalog">
+<h2>Agenda Item 6: The ChartBook Catalog<a class="headerlink" href="#agenda-item-6-the-chartbook-catalog" title="Link to this heading">#</a></h2>
 <p>The question a package forces on you is the same one the class report will force
 in week 6: <strong>what should your code do when it needs data another repository
 already produces?</strong> Copying pull code duplicates work and drifts.
@@ -635,8 +690,8 @@ and browse the combined site, and load another repo’s dataframe by name with
 Bloomberg-gated ones are off the menu.</p></li>
 </ul>
 </section>
-<section id="agenda-item-4-options-data-and-the-options-case-study">
-<h2>Agenda Item 4: Options Data and the Options Case Study<a class="headerlink" href="#agenda-item-4-options-data-and-the-options-case-study" title="Link to this heading">#</a></h2>
+<section id="agenda-item-7-options-data-and-the-options-case-study">
+<h2>Agenda Item 7: Options Data and the Options Case Study<a class="headerlink" href="#agenda-item-7-options-data-and-the-options-case-study" title="Link to this heading">#</a></h2>
 <p>Two data vendors, then the options material the homework builds on.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="Week7/databento.html"><span class="std std-doc">Databento</span></a> and the hands-on
@@ -653,8 +708,8 @@ is class material, not the assignment; it establishes the vocabulary the
 assignment assumes.</p></li>
 </ul>
 </section>
-<section id="agenda-item-5-launch-hw-3-option-implied-crash-probabilities">
-<h2>Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities<a class="headerlink" href="#agenda-item-5-launch-hw-3-option-implied-crash-probabilities" title="Link to this heading">#</a></h2>
+<section id="agenda-item-8-launch-hw-3-option-implied-crash-probabilities">
+<h2>Agenda Item 8: Launch HW 3, Option-Implied Crash Probabilities<a class="headerlink" href="#agenda-item-8-launch-hw-3-option-implied-crash-probabilities" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> follows
 <a class="reference external" href="https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf">Martin and Shi (2025)</a>,
 <em>Forecasting Crashes with a Smile</em>. You recover the risk-neutral distribution of
@@ -706,11 +761,11 @@ and validating it against the vendor’s own book.</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week6/python_packaging_with_hatch.html"
+       href="Week3/project_structure.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Writing and Publishing Your Own Python Packages</p>
+        <p class="prev-next-title">Project Structure: “Chartbook” Template</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -732,11 +787,14 @@ and validating it against the vendor’s own book.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-anatomy-of-a-package">Agenda Item 1: Anatomy of a Package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-documentation-with-sphinx">Agenda Item 2: Documentation with Sphinx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-chartbook-catalog">Agenda Item 3: The ChartBook Catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-options-data-and-the-options-case-study">Agenda Item 4: Options Data and the Options Case Study</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-3-option-implied-crash-probabilities">Agenda Item 5: Launch HW 3, Option-Implied Crash Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-publishing-to-github-pages">Agenda Item 1: Publishing to GitHub Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-starting-a-project-with-chartbook-init">Agenda Item 2: Starting a Project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-anatomy-of-a-package">Agenda Item 3: Anatomy of a Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-documentation-with-sphinx">Agenda Item 4: Documentation with Sphinx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-issues-and-pull-requests">Agenda Item 5: Issues and Pull Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-the-chartbook-catalog">Agenda Item 6: The ChartBook Catalog</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-7-options-data-and-the-options-case-study">Agenda Item 7: Options Data and the Options Case Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-8-launch-hw-3-option-implied-crash-probabilities">Agenda Item 8: Launch HW 3, Option-Implied Crash Probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-5">Looking ahead to Week 5</a></li>
 </ul>
   </nav></div>

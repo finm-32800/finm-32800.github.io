@@ -5,7 +5,7 @@ the course default: a blank `conda` environment for isolation and Python-version
 control, then `pip install -r requirements.txt` for fast package installs. We also
 previewed two newer tools, `uv` and `pixi`. This chapter is the promised closer look.
 
-Both tools fit naturally into this week's theme. A recurring idea in Week 3 is *running*
+Both tools fit naturally into this week's theme. A recurring idea in this course is *running*
 project steps with a single command (the job of a task runner like `doit`). As we'll see,
 `uv` and `pixi` each ship a `run` subcommand that executes commands inside the project's
 environment---so they blur the line between an environment manager and a lightweight task

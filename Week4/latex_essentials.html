@@ -53,7 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="GitHub Issues and Pull Requests: Enhancing Collaborative Development" href="../Week6/GitHub_pull_requests.html" />
+    <link rel="next" title="Databento" href="../Week7/databento.html" />
     <link rel="prev" title="Introduction to LaTeX" href="intro_to_LaTeX.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -230,26 +230,27 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reproducible Reports — ChartBook, GitHub Pages, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_to_LaTeX.html">Introduction to LaTeX</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">LaTeX Essentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -566,8 +567,8 @@ P(S<span class="nb">_</span>t, t) <span class="nb">&amp;</span>= Ke<span class="
 </pre></div>
 </div>
 <p>produces the following:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-29dba7ba-2d93-4577-9394-dacf73d4d91b">
-<span class="eqno">(1)<a class="headerlink" href="#equation-29dba7ba-2d93-4577-9394-dacf73d4d91b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ff5d0422-b62f-4cca-be6d-5f4407f5e473">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ff5d0422-b62f-4cca-be6d-5f4407f5e473" title="Permalink to this equation">#</a></span>\[\begin{align}
 P(S_t, t) &amp;= Ke^{-r(T - t)} - S_t + C(S_t, t)   \\
           &amp;= N(-d_-) Ke^{-r(T - t)} - N(-d_+) S_t 
 \end{align}\]</div>
@@ -685,11 +686,11 @@ code like this:</p>
       </div>
     </a>
     <a class="right-next"
-       href="../Week6/GitHub_pull_requests.html"
+       href="../Week7/databento.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GitHub Issues and Pull Requests: Enhancing Collaborative Development</p>
+        <p class="prev-next-title">Databento</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -1,23 +1,20 @@
-# Week 3: Reproducible Reports --- ChartBook, GitHub Pages, and LaTeX
+# Week 3: Reports --- Notebooks, ChartBook, and LaTeX
 
 ```{toctree}
 :maxdepth: 1
 Week4/reports_with_jupyter_notebooks.md
+Week4/intro_to_LaTeX.md
+Week4/latex_essentials.md
 Week7/databento.md
 notebooks/_01_databento_ipynb.ipynb
 Week3/github_pages_preview.md
-Week3/project_structure.md
-Week3/uv_and_pixi.md
-Week4/intro_to_LaTeX.md
-Week4/latex_essentials.md
-Week6/GitHub_pull_requests.md
 Week3/study_guide.md
 ```
 
 A pipeline's output has to land somewhere people can see it. Last week `doit`
 learned to run a pipeline's steps in order. Tonight the last steps are the
-reports: the pipeline executes its own notebooks and builds its own ChartBook
-site, GitHub Pages hosts that site, and LaTeX makes the PDF. The habit to build
+reports: the pipeline executes its own notebooks, ChartBook turns them into a
+website, and LaTeX makes the PDF. The habit to build
 is treating a report not as a document you write once but as a **build target**
 the pipeline regenerates whenever the data changes.
 
@@ -38,7 +35,11 @@ the pipeline regenerates whenever the data changes.
   on the material is HW 2.
 - **[HW 2](./HW2.md) launches today,** due Tuesday, October 27, two weeks from
   tonight: the Treasury yield curve and the policy path, published as a
-  ChartBook site on GitHub Pages and summarized in a PDF market brief.
+  ChartBook site on GitHub Pages and summarized in a PDF market brief. Your
+  private copy is created after class tonight.
+- **Databento API key.** HW 2 pulls futures data from Databento, and you
+  should already have a key. If you do not, email the program administrator,
+  Eliza Higbee.
 - **Project survey, due next Tuesday.** The preference survey is open, and the
   link is in the Canvas announcement. It closes Tuesday, October 20 at
   11:59 pm. Each group is emailed its assigned paper from the
@@ -56,24 +57,30 @@ the pipeline regenerates whenever the data changes.
   `doit`.
 - Register a project's notebooks and dataframes in a `chartbook.toml` and build
   a browsable site from it, as one more `doit` target.
-- Publish a `docs/` folder as a live website:
-  [Publishing to GitHub Pages](./Week3/github_pages_preview.md).
 - Write and compile LaTeX, and automate the inclusion of a figure or table so a
   PDF rebuilds itself from the pipeline's outputs:
   [Introduction to LaTeX](./Week4/intro_to_LaTeX.md) and
   [LaTeX Essentials](./Week4/latex_essentials.md).
-- Know the layout a data project should have, and why, and start one with
-  `chartbook init`: [the ChartBook project template](./Week3/project_structure.md).
-- Know the alternatives to conda for pinning an environment, and set up a
-  project with one: [`uv` and `pixi`](./Week3/uv_and_pixi.md).
-- Use the pull-request workflow: branch, PR, review, revise, merge
-  ([GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md)).
 - Explain how the Nelson-Siegel-Svensson model fits a yield curve to Treasury
   quotes, and how fed funds futures prices imply an expected policy path.
 - Pull market data from a vendor's API with a key kept in `.env`, and check
   what a query costs before running it: [Databento](./Week7/databento.md).
+- Publish a `docs/` folder as a live website, which HW 2 asks you to do:
+  [Publishing to GitHub Pages](./Week3/github_pages_preview.md). We start it
+  tonight if there is time and finish it next week.
 
-## Agenda Item 1: Notebooks as Tasks
+## Agenda Item 1: HW 1 Questions
+
+[HW 1](./HW1.md) is due in a week. Bring what is stuck. If your WRDS pull or
+your first push is not working yet, we fix that first.
+
+## Agenda Item 2: Notebooks Are for Reporting
+
+Last week ended on a point worth repeating. I do not recommend doing your
+analysis in a notebook. The work belongs in `.py` files that `doit` runs as
+tasks: the pulls, the cleaning, the calculations. A notebook is for reporting.
+It loads what the tasks produced and presents it, to a coauthor, to a reader,
+and most often to yourself, with little or no computation of its own.
 
 We pick up where week 2 stopped, in the `pydoit/` directory of the
 [in-class examples repo](https://github.com/finm-32800/inclass_examples).
@@ -87,7 +94,14 @@ notebook is then just another `doit` task, with file dependencies and targets.
 *→ HW 1:* `task_run_notebooks` in your `dodo.py` does exactly this to the six
 guide notebooks.
 
-## Agenda Item 2: ChartBook, the Site as a Build Target
+How the notebooks here plug into `dodo.py`: each one is stored as a plain
+`.py` file in Jupytext's percent format, which Git can diff. The task converts
+it to `.ipynb`, executes it, and exports HTML, and its file dependencies are
+the modules the notebook imports and the files it loads. Change one of those
+and `doit` runs the notebook again; otherwise it leaves the rendered copy alone.
+*→ HW 2:* you add two notebooks to `notebook_tasks` this way.
+
+## Agenda Item 3: ChartBook, the Site as a Build Target
 
 [ChartBook](https://pypi.org/project/chartbook/) catalogs a project's
 notebooks, dataframes, and charts and generates a browsable static site from
@@ -102,42 +116,16 @@ them.
   into pandas or polars.
 - **Where it sits in the pipeline.** `chartbook build` is just another `doit`
   task (`task_generate_pipeline_site` in HW 1), so the site is regenerated
-  whenever the data changes, not assembled by hand. Publishing it is the next
-  item; in week 4, many projects' manifests aggregate into one catalog.
+  whenever the data changes, not assembled by hand. Publishing it is the last
+  item tonight; in week 4, many projects' manifests aggregate into one catalog.
 
-## Agenda Item 3: Publishing to GitHub Pages
-
-[Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/`
-folder of static HTML becomes a live website (Settings → Pages → Deploy from a
-branch → `main` / `/docs`), and why your assignment repo must stay private while
-the site is public. The two steps compose: `chartbook build` produces `docs/`,
-Pages serves it. HW 2 Part D is exactly this, into a separate public repo.
-
-## Agenda Item 4: Starting a Project with `chartbook init`
-
-Your final project starts here, so we start one live.
-
-- [The ChartBook project template](./Week3/project_structure.md): the directory
-  layout, and the
-  [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)
-  principles behind it (data is immutable, analysis is a DAG, secrets stay out
-  of version control).
-- `chartbook init` is a Cookiecutter template. Created with
-  [Cruft](https://cruft.github.io/cruft/) instead, the project can pull in later
-  improvements to the template with `cruft update`.
-- The template asks which environment manager to use. That is the cue for
-  [`uv` and `pixi`](./Week3/uv_and_pixi.md), the follow-up to week 1's conda
-  material: we scaffold one project with each and compare the lockfiles they
-  write.
-
-## Agenda Item 5: LaTeX for PDF Reports
+## Agenda Item 4: LaTeX for PDF Reports
 
 ChartBook is the HTML half of report generation; LaTeX is the PDF half.
 
 - [Introduction to LaTeX](./Week4/intro_to_LaTeX.md) and
-  [LaTeX Essentials](./Week4/latex_essentials.md). Compile the report templates
-  from the [project template](./Week3/project_structure.md), in the project you
-  just scaffolded with `chartbook init`.
+  [LaTeX Essentials](./Week4/latex_essentials.md): what a `.tex` file is, how
+  it compiles, and the handful of commands a report needs.
 - Work through the
   [`latex/` examples](https://github.com/finm-32800/inclass_examples/tree/main/latex)
   in the in-class repo, a progression from a five-line document through figures
@@ -150,23 +138,13 @@ ChartBook is the HTML half of report generation; LaTeX is the PDF half.
   report uses in week 6.
   *→ HW 2:* the same pattern on the yield curve. `task_generate_market_brief`
   writes the charts and tables, and `task_compile_market_brief` runs `latexmk`
-  on `reports/market_brief.tex`.
+  on `reports/market_brief.tex`. You write one of those tables and the task
+  that compiles the PDF.
+- **A word on Markdown.** It is the third report format, and you have been
+  writing it all along: READMEs, the text cells of a notebook, the pages of
+  this book. Reach for LaTeX when the result has to be a typeset PDF.
 
-## Agenda Item 6: Issues and Pull Requests
-
-[GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md): how
-contribution works in the open-source world, and the workflow you will use for
-the collaborative report and for your final project.
-
-- Issues as the coordination layer: claiming work, scoping it, linking fixes with
-  `fixes #123`.
-- The PR loop, demoed live: branch → commit → open a pull request → review
-  comments → revise → merge.
-- Why maintainers protect `main` and require review, and how these mechanics let
-  strangers collaborate safely on the packages we depend on. This is the "peer
-  code review" that shows up in the job postings.
-
-## Agenda Item 7: Launch HW 2, the Yield Curve and the Policy Path
+## Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path
 
 [HW 2](./HW2.md) is a multi-source pipeline that ends in a published website and
 a PDF.
@@ -206,6 +184,18 @@ deliverables are a ChartBook site on GitHub Pages and a two-page market brief
 on the Treasury curve, compiled from LaTeX. We launch it in class; you finish the
 `TODO`s and publish on your own.
 
+## Agenda Item 6, If Time: Publishing to GitHub Pages
+
+If there is time tonight. If not, it opens next week, and either way it comes
+before HW 2 is due.
+
+
+[Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/`
+folder of static HTML becomes a live website (Settings → Pages → Deploy from a
+branch → `main` / `/docs`), and why your assignment repo must stay private while
+the site is public. The two steps compose: `chartbook build` produces `docs/`,
+Pages serves it. HW 2 Part D is exactly this, into a separate public repo.
+
 ## Final Project: The Two Steps
 
 The full procedure and rubric are in the
@@ -225,5 +215,8 @@ we walk it in class. Two steps:
 ## Looking ahead to Week 4
 
 Week 4 turns the code itself into something installable and documented: **Python
-packaging and Sphinx**. [HW 3](./HW3.md) launches, an installable package that
-recovers option-implied crash probabilities from the volatility smile.
+packaging and Sphinx**. It also picks up what moved out of tonight: starting a
+project from the ChartBook template, `uv` and `pixi`, the pull-request
+workflow, and publishing with GitHub Pages. [HW 3](./HW3.md) launches, an
+installable package that recovers option-implied crash probabilities from the
+volatility smile.

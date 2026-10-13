@@ -116,8 +116,7 @@ This is the week you meet the final projects.
 ## Looking ahead to Week 3
 
 With a pipeline that rebuilds itself, the next question is where its output
-goes. Week 3 is **reports and publishing**: notebooks run as `doit` tasks, the
-ChartBook site they feed, GitHub Pages to host it, and the PDF from LaTeX, plus
-the pull-request workflow that real teams use to change code. [HW 2](./HW2.md) launches: the Treasury yield curve and the expected path
+goes. Week 3 is **reports**: notebooks run as `doit` tasks, the ChartBook
+site they feed, and the PDF from LaTeX. [HW 2](./HW2.md) launches: the Treasury yield curve and the expected path
 of the policy rate, published as a website and summarized in a one-page PDF
 market brief.

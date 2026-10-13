@@ -13,8 +13,9 @@ notebooks/_02_fedwatch_replication_ipynb.ipynb
   week 5 session, two weeks after it launches. Also posted on Canvas.
 - **Link to Assignment:** a private copy is created for you in the
   [hw-finm-32800](https://github.com/hw-finm-32800) organization, named
-  `hw2-` followed by your GitHub username. If you have accepted the
-  invitation to the organization, your copy simply appears there. If you have
+  `hw2-` followed by your GitHub username. The copies are created after the
+  week 3 session, on the evening of October 13. If you have accepted the
+  invitation to the organization, yours simply appears there. If you have
   not, see [HW 1](./HW1.md) for how the invitations work.
 - **Goes with:** weeks 3 and 4
 
@@ -48,7 +49,8 @@ blanks.
 ## Before you start
 
 - **A Databento API key.** The futures data in Part C comes from Databento's
-  CME Globex feed, and the pull needs a key in your `.env`. See
+  CME Globex feed, and the pull needs a key in your `.env`. You should already
+  have one; if you do not, email the program administrator, Eliza Higbee. See
   [Databento](./Week7/databento.md). The
   [`databento/` examples](https://github.com/finm-32800/inclass_examples/tree/main/databento)
   in the in-class examples repository show the same kind of pull in small
