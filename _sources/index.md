@@ -33,8 +33,8 @@ appendix.md
 overview_w0.md
 overview_w1.md
 overview_w2.md
-subject_to_change_after_this_week.md
 overview_w3.md
+subject_to_change_after_this_week.md
 overview_w4.md
 overview_w5.md
 overview_w6.md
