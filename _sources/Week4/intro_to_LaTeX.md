@@ -1,5 +1,10 @@
 # Introduction to LaTeX
 
+```{admonition} Key idea
+:class: tip
+A LaTeX document is generated and compiled from code, so a professional PDF report can be a reproducible output of the pipeline.
+```
+
 ## What is LaTeX?
 
 LaTeX (pronounced "Lay-tech" or "Lah-tech") is a typesetting system commonly used for the production of scientific and mathematical documents due to its powerful handling of formulas and bibliographies. Unlike typical word processors, LaTeX is not a WYSIWYG (What You See Is What You Get) system. Instead, it is a WYSIWYW (What You See is What You Want) system.
@@ -31,7 +36,17 @@ $$
 
 LaTeX is widely used in academia, especially in fields that require the use of complex formulas and diagrams, such as physics, mathematics, statistics, computer science, engineering, and quantitative finance. The quality and readability of documents produced with LaTeX, particularly the way it handles formulas, tables, and references, are considered to be better than what can be easily achieved with standard word processors.
 
-Furthermore, LaTeX and other programmatically generated documents can be useful for incorporating automatically generated charts and tables into reports. It enables automation in updating charts when underlying data changes, streamlining the report generation process. 
+## LaTeX Is Code
+
+A `.tex` file is plain text that a program compiles. That is why LaTeX fits a fully automated, reproducible reporting pipeline:
+
+1. Python computes the results.
+2. Python writes the figures and tables to files.
+3. The `.tex` file pulls those files in with `\includegraphics` and `\input`.
+4. A build tool, `latexmk`, compiles the PDF.
+5. `doit` tracks the dependencies and rebuilds the report when an input changes.
+
+Nobody copies a number or pastes a chart, so the report cannot drift from the data.
 
 ```{admonition} Discussion
 :class: note 

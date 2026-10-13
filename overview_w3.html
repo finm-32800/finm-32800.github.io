@@ -507,7 +507,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-notebooks-are-for-reporting">Agenda Item 2: Notebooks Are for Reporting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-chartbook-the-site-as-a-build-target">Agenda Item 3: ChartBook, the Site as a Build Target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-latex-for-pdf-reports">Agenda Item 4: LaTeX for PDF Reports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#databento-in-five-minutes">Databento, in Five Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-and-deliverables">Checks and Deliverables</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-if-time-publishing-to-github-pages">Agenda Item 6, If Time: Publishing to GitHub Pages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-the-two-steps">Final Project: The Two Steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-4">Looking ahead to Week 4</a></li>
@@ -615,18 +619,55 @@ why notebooks are for <em>reporting</em> and not for pipeline steps, and how
 notebook is then just another <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, with file dependencies and targets.
 <em>→ HW 1:</em> <code class="docutils literal notranslate"><span class="pre">task_run_notebooks</span></code> in your <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> does exactly this to the six
 guide notebooks.</p>
-<p>How the notebooks here plug into <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>: each one is stored as a plain
-<code class="docutils literal notranslate"><span class="pre">.py</span></code> file in Jupytext’s percent format, which Git can diff. The task converts
-it to <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>, executes it, and exports HTML, and its file dependencies are
-the modules the notebook imports and the files it loads. Change one of those
-and <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs the notebook again; otherwise it leaves the rendered copy alone.
+<p>How the notebooks here plug into <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>. I do not keep a notebook as an
+<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file. The source of truth is a plain <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in Jupytext’s percent
+format, which Git can diff, named so you can tell it is a notebook:
+<code class="docutils literal notranslate"><span class="pre">01_markowitz.ipynb.py</span></code> in HW 0, <code class="docutils literal notranslate"><span class="pre">02_replicate_GSW2005_ipynb.py</span></code> in HW 1 and
+HW 2. VS Code treats each <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">%%</span></code> line in the file as a cell and runs it in the
+Interactive Window, so you still work interactively. The <code class="docutils literal notranslate"><span class="pre">doit</span></code> task does the
+rest:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jupytext</span></code> converts the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file to <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> executes the notebook and exports it to HTML.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and the HTML land in <code class="docutils literal notranslate"><span class="pre">_output/</span></code>. They are build artifacts,
+regenerated from the source and never edited by hand.</p></li>
+</ol>
+<p>The task’s file dependencies are the modules the notebook imports and the
+files it loads. Change one of those and <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs the notebook again;
+otherwise it leaves the rendered copy alone.
 <em>→ HW 2:</em> you add two notebooks to <code class="docutils literal notranslate"><span class="pre">notebook_tasks</span></code> this way.</p>
 </section>
 <section id="agenda-item-3-chartbook-the-site-as-a-build-target">
 <h2>Agenda Item 3: ChartBook, the Site as a Build Target<a class="headerlink" href="#agenda-item-3-chartbook-the-site-as-a-build-target" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://pypi.org/project/chartbook/">ChartBook</a> catalogs a project’s
-notebooks, dataframes, and charts and generates a browsable static site from
-them.</p>
+<p>Say you have several notebooks on Treasury yields, with charts, tables, and
+commentary, and you want colleagues to browse them as one website. On your own
+you would set up notebook conversion, a site generator, navigation, and
+publishing. <a class="reference external" href="https://backofficedev.github.io/chartbook/">ChartBook</a>
+(<a class="reference external" href="https://pypi.org/project/chartbook/">PyPI</a>) is a small Python package I
+wrote to take that setup off your hands: it catalogs a project’s notebooks,
+dataframes, and charts and generates a browsable static site from them.</p>
+<p>The workflow, start to finish:</p>
+<ol class="arabic simple">
+<li><p>Start a project with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code>.</p></li>
+<li><p>Write the computation in Python modules.</p></li>
+<li><p>Write the reports as Jupytext notebooks.</p></li>
+<li><p>Register the outputs worth showing in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>.</p></li>
+<li><p>Generate the static site with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span></code>.</p></li>
+<li><p>Publish the site with GitHub Pages.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">doit</span></code> and ChartBook do different jobs. <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs the pipeline and tracks
+its dependencies. ChartBook does not run your computation: it organizes and
+publishes what the pipeline produced.</p>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">init</span></code> builds the new project from a template.
+<a class="reference external" href="https://cookiecutter.readthedocs.io/">Cookiecutter</a> generates a project from
+a template, as with the Cookiecutter Data Science template you have seen, and
+<a class="reference external" href="https://cruft.github.io/cruft/">Cruft</a> lets a project pull in later updates
+to the template it came from.
+<a class="reference internal" href="Week3/project_structure.html"><span class="std std-doc">The ChartBook project template</span></a> has the
+details, and we use it in week 4.</p>
+<p>ChartBook also shows where next week is going. It is an ordinary Python
+package, installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>, and you can write one like it: next week we
+turn your own code into a reusable, installable package.</p>
 <ul class="simple">
 <li><p><strong>The manifest, <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>.</strong> Each <code class="docutils literal notranslate"><span class="pre">[notebooks.*]</span></code>, <code class="docutils literal notranslate"><span class="pre">[dataframes.*]</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">[charts.*]</span></code> entry says what an output is, where it comes from, and where
@@ -644,6 +685,11 @@ item tonight; in week 4, many projects’ manifests aggregate into one catalog.<
 <section id="agenda-item-4-latex-for-pdf-reports">
 <h2>Agenda Item 4: LaTeX for PDF Reports<a class="headerlink" href="#agenda-item-4-latex-for-pdf-reports" title="Link to this heading">#</a></h2>
 <p>ChartBook is the HTML half of report generation; LaTeX is the PDF half.</p>
+<p><strong>LaTeX is code, so a PDF report can be one more target of the pipeline.</strong>
+Python computes the results and writes the figures and tables to files. The
+<code class="docutils literal notranslate"><span class="pre">.tex</span></code> file pulls them in with <code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> and <code class="docutils literal notranslate"><span class="pre">\input</span></code>. <code class="docutils literal notranslate"><span class="pre">latexmk</span></code>
+compiles the PDF. <code class="docutils literal notranslate"><span class="pre">doit</span></code> tracks the dependencies, so the report rebuilds when
+its inputs change.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="Week4/intro_to_LaTeX.html"><span class="std std-doc">Introduction to LaTeX</span></a> and
 <a class="reference internal" href="Week4/latex_essentials.html"><span class="std std-doc">LaTeX Essentials</span></a>: what a <code class="docutils literal notranslate"><span class="pre">.tex</span></code> file is, how
@@ -662,13 +708,32 @@ report uses in week 6.
 writes the charts and tables, and <code class="docutils literal notranslate"><span class="pre">task_compile_market_brief</span></code> runs <code class="docutils literal notranslate"><span class="pre">latexmk</span></code>
 on <code class="docutils literal notranslate"><span class="pre">reports/market_brief.tex</span></code>. You write one of those tables and the task
 that compiles the PDF.</p></li>
-<li><p><strong>A word on Markdown.</strong> It is the third report format, and you have been
-writing it all along: READMEs, the text cells of a notebook, the pages of
-this book. Reach for LaTeX when the result has to be a typeset PDF.</p></li>
+<li><p><strong>Which format when.</strong> Three formats cover what this course writes:</p>
+<ul>
+<li><p><em>Markdown</em> for documentation, READMEs, and plain technical writing. You
+have been writing it all along: the text cells of a notebook, the pages of
+this book.</p></li>
+<li><p><em>Notebooks, kept as Jupytext <code class="docutils literal notranslate"><span class="pre">.py</span></code> files,</em> for interactive research and
+for reports made of charts, tables, and commentary, published as HTML.</p></li>
+<li><p><em>LaTeX</em> for academic papers, professional PDF reports, heavy math, and
+anything that needs precise control of the page.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">
 <h2>Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path<a class="headerlink" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path" title="Link to this heading">#</a></h2>
+<p>Two live tools to open first:</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://www.federalreserve.gov/data/nominal-yield-curve.htm">The Fed’s nominal yield curve</a>.</strong>
+You replicate it from CRSP Treasury data with the Nelson-Siegel-Svensson
+specification.</p></li>
+<li><p><strong><a class="reference external" href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html">CME FedWatch</a>.</strong>
+You rebuild its market-implied probabilities of the Fed’s policy decisions
+from fed funds futures.</p></li>
+</ul>
+<p>These are real financial tools. The assignment is to reproduce the
+calculations behind them with your own reproducible data pipeline.</p>
 <p><a class="reference internal" href="HW2.html"><span class="std std-doc">HW 2</span></a> is a multi-source pipeline that ends in a published website and
 a PDF.
 You estimate the U.S. Treasury yield curve with the Nelson-Siegel-Svensson
@@ -685,16 +750,35 @@ futures, the way the CME FedWatch tool does:</p>
 <li><p><a class="reference internal" href="notebooks/_01_fed_funds_futures_data_ipynb.html"><span class="std std-doc">30-Day Fed Funds Futures Data from Databento</span></a></p></li>
 <li><p><a class="reference internal" href="notebooks/_02_fedwatch_replication_ipynb.html"><span class="std std-doc">Replicating the CME FedWatch Tool</span></a></p></li>
 </ul>
-<p>The futures come from <a class="reference internal" href="Week7/databento.html"><span class="std std-doc">Databento</span></a>, a market data vendor
-whose CME Globex feed the course subscribes to. It is the pattern you used
-for WRDS in week 1, with a different kind of credential: an API key in
-<code class="docutils literal notranslate"><span class="pre">.env</span></code>, a <code class="docutils literal notranslate"><span class="pre">pull_</span></code> function that calls the vendor, and a <code class="docutils literal notranslate"><span class="pre">load_</span></code> function that
-reads what the pull cached. The
-<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/databento"><code class="docutils literal notranslate"><span class="pre">databento/</span></code> examples</a>
-in the in-class repo take it in small steps, through the Python client, the
-raw HTTP API, and a free call that says what a query costs before you run it.
-<a class="reference internal" href="notebooks/_01_databento_ipynb.html"><span class="std std-doc">Pulling Market Data From Databento</span></a> is
-the same material as a notebook.</p>
+<section id="databento-in-five-minutes">
+<h3>Databento, in Five Minutes<a class="headerlink" href="#databento-in-five-minutes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>The chapter:</strong> <a class="reference internal" href="Week7/databento.html"><span class="std std-doc">Databento</span></a></p></li>
+<li><p><strong>The examples we run:</strong>
+<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/databento"><code class="docutils literal notranslate"><span class="pre">databento/</span></code> in the in-class repo</a></p></li>
+<li><p><strong>The same material as a notebook:</strong>
+<a class="reference internal" href="notebooks/_01_databento_ipynb.html"><span class="std std-doc">Pulling Market Data From Databento</span></a></p></li>
+</ul>
+<p>The futures come from Databento, a market data vendor whose CME Globex feed
+the course subscribes to. Our access is to historical data, not the live
+stream. It is the pattern you used for WRDS in week 1, with a different kind
+of credential: an API key in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, a <code class="docutils literal notranslate"><span class="pre">pull_</span></code> function that calls the vendor,
+and a <code class="docutils literal notranslate"><span class="pre">load_</span></code> function that reads what the pull cached. The examples take it
+in small steps, through the Python client, the raw HTTP API, and a free call
+that says what a query costs before you run it.</p>
+<p>What to take from the demo:</p>
+<ul class="simple">
+<li><p>What Databento provides, and how to pull historical market data with its
+Python SDK.</p></li>
+<li><p>How to keep the API key out of the code, in an environment variable read
+from <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p></li>
+<li><p>How a request is specified: a dataset, a schema, and the symbology that
+names the instrument.</p></li>
+<li><p>How to check what a query costs before you download anything.</p></li>
+</ul>
+</section>
+<section id="checks-and-deliverables">
+<h3>Checks and Deliverables<a class="headerlink" href="#checks-and-deliverables" title="Link to this heading">#</a></h3>
 <p>Both replications are checked against the published numbers. The tests
 compare your fitted yields with the Fed’s at every maturity from 1 to 30
 years, and your FedWatch probability with a recorded reading of the CME tool,
@@ -704,6 +788,7 @@ published GSW series, ZQ futures from Databento, and FRED), and the
 deliverables are a ChartBook site on GitHub Pages and a two-page market brief
 on the Treasury curve, compiled from LaTeX. We launch it in class; you finish the
 <code class="docutils literal notranslate"><span class="pre">TODO</span></code>s and publish on your own.</p>
+</section>
 </section>
 <section id="agenda-item-6-if-time-publishing-to-github-pages">
 <h2>Agenda Item 6, If Time: Publishing to GitHub Pages<a class="headerlink" href="#agenda-item-6-if-time-publishing-to-github-pages" title="Link to this heading">#</a></h2>
@@ -797,7 +882,11 @@ volatility smile.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-notebooks-are-for-reporting">Agenda Item 2: Notebooks Are for Reporting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-chartbook-the-site-as-a-build-target">Agenda Item 3: ChartBook, the Site as a Build Target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-latex-for-pdf-reports">Agenda Item 4: LaTeX for PDF Reports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-2-the-yield-curve-and-the-policy-path">Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#databento-in-five-minutes">Databento, in Five Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-and-deliverables">Checks and Deliverables</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-if-time-publishing-to-github-pages">Agenda Item 6, If Time: Publishing to GitHub Pages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-the-two-steps">Final Project: The Two Steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-4">Looking ahead to Week 4</a></li>

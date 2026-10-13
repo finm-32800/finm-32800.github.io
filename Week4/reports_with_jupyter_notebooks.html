@@ -509,7 +509,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-diffs-of-jupyter-notebooks">Git Diffs of Jupyter Notebooks</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline">My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline">My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-computation-lives-in-modules">Why the Computation Lives in Modules</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -522,6 +525,10 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="reports-with-jupyter-notebooks">
 <h1>Reports with Jupyter Notebooks<a class="headerlink" href="#reports-with-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Key idea</p>
+<p>Keep reusable computation in Python modules, and use notebooks to communicate reproducible results.</p>
+</div>
 <p>In the context of data science and quantitative finance, the use of Jupyter Notebooks for creating reports can be useful.
 These reports often combine code, its output, and rich text elements, like Markdown, enabling a form of literate programming.</p>
 <section id="what-is-literate-programming">
@@ -620,6 +627,7 @@ $$
 </li>
 </ul>
 </div></blockquote>
+<p>Item 5 is out of date: VS Code now edits and runs notebooks directly, with a debugger and a variable viewer. Items 1 and 2 are the ones that matter for a pipeline, and the workflow at the end of this page addresses both.</p>
 <section id="git-diffs-of-jupyter-notebooks">
 <h3>Git Diffs of Jupyter Notebooks<a class="headerlink" href="#git-diffs-of-jupyter-notebooks" title="Link to this heading">#</a></h3>
 <p><img alt="Git Diff of Jupyter Notebook" src="../_images/git_diff_jupyter_notebook.png" /></p>
@@ -628,7 +636,46 @@ $$
 </section>
 <section id="my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline">
 <h2>My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline<a class="headerlink" href="#my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline" title="Link to this heading">#</a></h2>
+<p>I do not keep a notebook as an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file. I keep it as an ordinary Python file in <a class="reference external" href="https://jupytext.readthedocs.io/">Jupytext</a>’s percent format, and I name it so that you can tell it is a notebook: <code class="docutils literal notranslate"><span class="pre">something.ipynb.py</span></code>. (HW 1 and HW 2 spell it <code class="docutils literal notranslate"><span class="pre">something_ipynb.py</span></code>; it is the same idea.)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># %% [markdown]</span>
+<span class="c1"># # Treasury Yield Curve Analysis</span>
+<span class="c1">#</span>
+<span class="c1"># This notebook analyzes Treasury yields.</span>
+
+<span class="c1"># %%</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># %%</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;treasury_yields.parquet&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Working interactively.</strong> VS Code recognizes each <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">%%</span></code> line as a cell and runs it in the Python Interactive Window. You get most of the notebook experience, and the source stays a Python file that Git can diff.</p>
+<p><strong>Building the report.</strong> The pipeline turns that file into the report:</p>
+<ol class="arabic simple">
+<li><p>The Jupytext <code class="docutils literal notranslate"><span class="pre">.py</span></code> file is the source of truth. It is the only version you edit and commit.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jupytext</span></code> converts it to <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> executes the notebook and exports it, to HTML for example.</p></li>
+<li><p>Both steps are actions of one <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, whose file dependencies are the modules the notebook imports and the files it loads.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and the exported report are build artifacts. They are regenerated, not edited.</p></li>
+</ol>
+<section id="why-the-computation-lives-in-modules">
+<h3>Why the Computation Lives in Modules<a class="headerlink" href="#why-the-computation-lives-in-modules" title="Link to this heading">#</a></h3>
+<p>A notebook run this way is reproducible. The reason to keep the pulls, the cleaning, and the calculations in <code class="docutils literal notranslate"><span class="pre">.py</span></code> modules is what a module gives you that a notebook cell does not:</p>
+<ul class="simple">
+<li><p><strong>Reproducibility.</strong> A notebook lets you run cells out of order, which can leave hidden state and dependencies nobody wrote down. A module runs top to bottom every time.</p></li>
+<li><p><strong>Testability.</strong> A function in a module can be imported and tested on its own with <code class="docutils literal notranslate"><span class="pre">pytest</span></code>.</p></li>
+<li><p><strong>Version control.</strong> A <code class="docutils literal notranslate"><span class="pre">.py</span></code> module gives a clean Git diff and a simple merge. An <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file is JSON, with metadata and outputs mixed in.</p></li>
+<li><p><strong>Reusability.</strong> A function in a module can be imported by several notebooks, scripts, and applications.</p></li>
+</ul>
+<p>So the work divides three ways:</p>
+<ul class="simple">
+<li><p><strong>Python modules</strong> hold the reusable computation and data processing.</p></li>
+<li><p><strong>Jupytext notebooks</strong> hold the narrative, the charts and tables, and the reporting logic.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">doit</span></code></strong> runs both in order and tracks what depends on what.</p></li>
+</ul>
 <p>See the <a class="reference external" href="https://github.com/backofficedev/cookiecutter_chartbook/blob/main/example/dodo.py"><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code></a> file in the rendered <code class="docutils literal notranslate"><span class="pre">example/</span></code> project of the course <a class="reference internal" href="../Week3/project_structure.html"><span class="std std-doc">project template</span></a>.</p>
+</section>
 </section>
 </section>
 
@@ -690,7 +737,10 @@ $$
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-diffs-of-jupyter-notebooks">Git Diffs of Jupyter Notebooks</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline">My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-solutions-for-incorporating-jupyter-notebooks-into-git-and-an-automated-pipeline">My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-computation-lives-in-modules">Why the Computation Lives in Modules</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

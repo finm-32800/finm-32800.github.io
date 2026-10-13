@@ -502,6 +502,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-latex">What is LaTeX?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-is-code">LaTeX Is Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-how-to-use-latex">An Overview of How to Use LaTeX</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-a-latex-distribution">Step 1: Install a LaTeX Distribution</a></li>
@@ -528,6 +529,10 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-latex">
 <h1>Introduction to LaTeX<a class="headerlink" href="#introduction-to-latex" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Key idea</p>
+<p>A LaTeX document is generated and compiled from code, so a professional PDF report can be a reproducible output of the pipeline.</p>
+</div>
 <section id="what-is-latex">
 <h2>What is LaTeX?<a class="headerlink" href="#what-is-latex" title="Link to this heading">#</a></h2>
 <p>LaTeX (pronounced “Lay-tech” or “Lah-tech”) is a typesetting system commonly used for the production of scientific and mathematical documents due to its powerful handling of formulas and bibliographies. Unlike typical word processors, LaTeX is not a WYSIWYG (What You See Is What You Get) system. Instead, it is a WYSIWYW (What You See is What You Want) system.
@@ -552,7 +557,18 @@ It will be rendered like this:</p>
 rS\frac{\partial V}{\partial S} - rV = 0
 \]</div>
 <p>LaTeX is widely used in academia, especially in fields that require the use of complex formulas and diagrams, such as physics, mathematics, statistics, computer science, engineering, and quantitative finance. The quality and readability of documents produced with LaTeX, particularly the way it handles formulas, tables, and references, are considered to be better than what can be easily achieved with standard word processors.</p>
-<p>Furthermore, LaTeX and other programmatically generated documents can be useful for incorporating automatically generated charts and tables into reports. It enables automation in updating charts when underlying data changes, streamlining the report generation process.</p>
+</section>
+<section id="latex-is-code">
+<h2>LaTeX Is Code<a class="headerlink" href="#latex-is-code" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">.tex</span></code> file is plain text that a program compiles. That is why LaTeX fits a fully automated, reproducible reporting pipeline:</p>
+<ol class="arabic simple">
+<li><p>Python computes the results.</p></li>
+<li><p>Python writes the figures and tables to files.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.tex</span></code> file pulls those files in with <code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> and <code class="docutils literal notranslate"><span class="pre">\input</span></code>.</p></li>
+<li><p>A build tool, <code class="docutils literal notranslate"><span class="pre">latexmk</span></code>, compiles the PDF.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doit</span></code> tracks the dependencies and rebuilds the report when an input changes.</p></li>
+</ol>
+<p>Nobody copies a number or pastes a chart, so the report cannot drift from the data.</p>
 <div class="note admonition">
 <p class="admonition-title">Discussion</p>
 <p>Where does this step fit in our view of the reproducible analytical pipelines we discussed at the end of the class?</p>
@@ -699,6 +715,7 @@ Hello, World!
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-latex">What is LaTeX?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-is-code">LaTeX Is Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-overview-of-how-to-use-latex">An Overview of How to Use LaTeX</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-a-latex-distribution">Step 1: Install a LaTeX Distribution</a></li>

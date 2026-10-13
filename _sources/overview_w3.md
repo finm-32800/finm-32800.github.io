@@ -94,18 +94,58 @@ notebook is then just another `doit` task, with file dependencies and targets.
 *→ HW 1:* `task_run_notebooks` in your `dodo.py` does exactly this to the six
 guide notebooks.
 
-How the notebooks here plug into `dodo.py`: each one is stored as a plain
-`.py` file in Jupytext's percent format, which Git can diff. The task converts
-it to `.ipynb`, executes it, and exports HTML, and its file dependencies are
-the modules the notebook imports and the files it loads. Change one of those
-and `doit` runs the notebook again; otherwise it leaves the rendered copy alone.
+How the notebooks here plug into `dodo.py`. I do not keep a notebook as an
+`.ipynb` file. The source of truth is a plain `.py` file in Jupytext's percent
+format, which Git can diff, named so you can tell it is a notebook:
+`01_markowitz.ipynb.py` in HW 0, `02_replicate_GSW2005_ipynb.py` in HW 1 and
+HW 2. VS Code treats each `# %%` line in the file as a cell and runs it in the
+Interactive Window, so you still work interactively. The `doit` task does the
+rest:
+
+1. `jupytext` converts the `.py` file to `.ipynb`.
+2. `nbconvert` executes the notebook and exports it to HTML.
+3. The `.ipynb` and the HTML land in `_output/`. They are build artifacts,
+   regenerated from the source and never edited by hand.
+
+The task's file dependencies are the modules the notebook imports and the
+files it loads. Change one of those and `doit` runs the notebook again;
+otherwise it leaves the rendered copy alone.
 *→ HW 2:* you add two notebooks to `notebook_tasks` this way.
 
 ## Agenda Item 3: ChartBook, the Site as a Build Target
 
-[ChartBook](https://pypi.org/project/chartbook/) catalogs a project's
-notebooks, dataframes, and charts and generates a browsable static site from
-them.
+Say you have several notebooks on Treasury yields, with charts, tables, and
+commentary, and you want colleagues to browse them as one website. On your own
+you would set up notebook conversion, a site generator, navigation, and
+publishing. [ChartBook](https://backofficedev.github.io/chartbook/)
+([PyPI](https://pypi.org/project/chartbook/)) is a small Python package I
+wrote to take that setup off your hands: it catalogs a project's notebooks,
+dataframes, and charts and generates a browsable static site from them.
+
+The workflow, start to finish:
+
+1. Start a project with `chartbook init`.
+2. Write the computation in Python modules.
+3. Write the reports as Jupytext notebooks.
+4. Register the outputs worth showing in `chartbook.toml`.
+5. Generate the static site with `chartbook build`.
+6. Publish the site with GitHub Pages.
+
+`doit` and ChartBook do different jobs. `doit` runs the pipeline and tracks
+its dependencies. ChartBook does not run your computation: it organizes and
+publishes what the pipeline produced.
+
+`chartbook init` builds the new project from a template.
+[Cookiecutter](https://cookiecutter.readthedocs.io/) generates a project from
+a template, as with the Cookiecutter Data Science template you have seen, and
+[Cruft](https://cruft.github.io/cruft/) lets a project pull in later updates
+to the template it came from.
+[The ChartBook project template](./Week3/project_structure.md) has the
+details, and we use it in week 4.
+
+ChartBook also shows where next week is going. It is an ordinary Python
+package, installed with `pip`, and you can write one like it: next week we
+turn your own code into a reusable, installable package.
 
 - **The manifest, `chartbook.toml`.** Each `[notebooks.*]`, `[dataframes.*]`,
   and `[charts.*]` entry says what an output is, where it comes from, and where
@@ -122,6 +162,12 @@ them.
 ## Agenda Item 4: LaTeX for PDF Reports
 
 ChartBook is the HTML half of report generation; LaTeX is the PDF half.
+
+**LaTeX is code, so a PDF report can be one more target of the pipeline.**
+Python computes the results and writes the figures and tables to files. The
+`.tex` file pulls them in with `\includegraphics` and `\input`. `latexmk`
+compiles the PDF. `doit` tracks the dependencies, so the report rebuilds when
+its inputs change.
 
 - [Introduction to LaTeX](./Week4/intro_to_LaTeX.md) and
   [LaTeX Essentials](./Week4/latex_essentials.md): what a `.tex` file is, how
@@ -140,11 +186,28 @@ ChartBook is the HTML half of report generation; LaTeX is the PDF half.
   writes the charts and tables, and `task_compile_market_brief` runs `latexmk`
   on `reports/market_brief.tex`. You write one of those tables and the task
   that compiles the PDF.
-- **A word on Markdown.** It is the third report format, and you have been
-  writing it all along: READMEs, the text cells of a notebook, the pages of
-  this book. Reach for LaTeX when the result has to be a typeset PDF.
+- **Which format when.** Three formats cover what this course writes:
+  - *Markdown* for documentation, READMEs, and plain technical writing. You
+    have been writing it all along: the text cells of a notebook, the pages of
+    this book.
+  - *Notebooks, kept as Jupytext `.py` files,* for interactive research and
+    for reports made of charts, tables, and commentary, published as HTML.
+  - *LaTeX* for academic papers, professional PDF reports, heavy math, and
+    anything that needs precise control of the page.
 
 ## Agenda Item 5: Launch HW 2, the Yield Curve and the Policy Path
+
+Two live tools to open first:
+
+- **[The Fed's nominal yield curve](https://www.federalreserve.gov/data/nominal-yield-curve.htm).**
+  You replicate it from CRSP Treasury data with the Nelson-Siegel-Svensson
+  specification.
+- **[CME FedWatch](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html).**
+  You rebuild its market-implied probabilities of the Fed's policy decisions
+  from fed funds futures.
+
+These are real financial tools. The assignment is to reproduce the
+calculations behind them with your own reproducible data pipeline.
 
 [HW 2](./HW2.md) is a multi-source pipeline that ends in a published website and
 a PDF.
@@ -162,16 +225,33 @@ futures, the way the CME FedWatch tool does:
 - [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data_ipynb.ipynb)
 - [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication_ipynb.ipynb)
 
-The futures come from [Databento](./Week7/databento.md), a market data vendor
-whose CME Globex feed the course subscribes to. It is the pattern you used
-for WRDS in week 1, with a different kind of credential: an API key in
-`.env`, a `pull_` function that calls the vendor, and a `load_` function that
-reads what the pull cached. The
-[`databento/` examples](https://github.com/finm-32800/inclass_examples/tree/main/databento)
-in the in-class repo take it in small steps, through the Python client, the
-raw HTTP API, and a free call that says what a query costs before you run it.
-[Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb) is
-the same material as a notebook.
+### Databento, in Five Minutes
+
+- **The chapter:** [Databento](./Week7/databento.md)
+- **The examples we run:**
+  [`databento/` in the in-class repo](https://github.com/finm-32800/inclass_examples/tree/main/databento)
+- **The same material as a notebook:**
+  [Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb)
+
+The futures come from Databento, a market data vendor whose CME Globex feed
+the course subscribes to. Our access is to historical data, not the live
+stream. It is the pattern you used for WRDS in week 1, with a different kind
+of credential: an API key in `.env`, a `pull_` function that calls the vendor,
+and a `load_` function that reads what the pull cached. The examples take it
+in small steps, through the Python client, the raw HTTP API, and a free call
+that says what a query costs before you run it.
+
+What to take from the demo:
+
+- What Databento provides, and how to pull historical market data with its
+  Python SDK.
+- How to keep the API key out of the code, in an environment variable read
+  from `.env`.
+- How a request is specified: a dataset, a schema, and the symbology that
+  names the instrument.
+- How to check what a query costs before you download anything.
+
+### Checks and Deliverables
 
 Both replications are checked against the published numbers. The tests
 compare your fitted yields with the Fed's at every maturity from 1 to 30

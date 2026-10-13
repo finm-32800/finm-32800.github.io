@@ -1,5 +1,10 @@
 # Reports with Jupyter Notebooks
 
+```{admonition} Key idea
+:class: tip
+Keep reusable computation in Python modules, and use notebooks to communicate reproducible results.
+```
+
 In the context of data science and quantitative finance, the use of Jupyter Notebooks for creating reports can be useful.
 These reports often combine code, its output, and rich text elements, like Markdown, enabling a form of literate programming.
 
@@ -80,6 +85,8 @@ Not everyone in the computer science world is fully on-board with Jupyter notebo
 > - One more thing
 >   - It's often important to consider where computations are run. For code that’s easy to put into Docker, deploying to a cloud solution is easy. For notebooks, there are also good options, though you’re more locked into specific solutions.
 
+Item 5 is out of date: VS Code now edits and runs notebooks directly, with a debugger and a variable viewer. Items 1 and 2 are the ones that matter for a pipeline, and the workflow at the end of this page addresses both.
+
 ### Git Diffs of Jupyter Notebooks
 
 ![Git Diff of Jupyter Notebook](./assets/git_diff_jupyter_notebook.png)
@@ -87,5 +94,46 @@ Not everyone in the computer science world is fully on-board with Jupyter notebo
 There are tools like `nbdime` or even VS Code provides some help with this issue, but it adds a lot of extra tooling that can be combersome and difficult for new users.
 
 ## My Solutions for Incorporating Jupyter Notebooks into Git and an Automated Pipeline
+
+I do not keep a notebook as an `.ipynb` file. I keep it as an ordinary Python file in [Jupytext](https://jupytext.readthedocs.io/)'s percent format, and I name it so that you can tell it is a notebook: `something.ipynb.py`. (HW 1 and HW 2 spell it `something_ipynb.py`; it is the same idea.)
+
+```python
+# %% [markdown]
+# # Treasury Yield Curve Analysis
+#
+# This notebook analyzes Treasury yields.
+
+# %%
+import pandas as pd
+
+# %%
+df = pd.read_parquet("treasury_yields.parquet")
+df.head()
+```
+
+**Working interactively.** VS Code recognizes each `# %%` line as a cell and runs it in the Python Interactive Window. You get most of the notebook experience, and the source stays a Python file that Git can diff.
+
+**Building the report.** The pipeline turns that file into the report:
+
+1. The Jupytext `.py` file is the source of truth. It is the only version you edit and commit.
+2. `jupytext` converts it to `.ipynb`.
+3. `nbconvert` executes the notebook and exports it, to HTML for example.
+4. Both steps are actions of one `doit` task, whose file dependencies are the modules the notebook imports and the files it loads.
+5. The `.ipynb` and the exported report are build artifacts. They are regenerated, not edited.
+
+### Why the Computation Lives in Modules
+
+A notebook run this way is reproducible. The reason to keep the pulls, the cleaning, and the calculations in `.py` modules is what a module gives you that a notebook cell does not:
+
+- **Reproducibility.** A notebook lets you run cells out of order, which can leave hidden state and dependencies nobody wrote down. A module runs top to bottom every time.
+- **Testability.** A function in a module can be imported and tested on its own with `pytest`.
+- **Version control.** A `.py` module gives a clean Git diff and a simple merge. An `.ipynb` file is JSON, with metadata and outputs mixed in.
+- **Reusability.** A function in a module can be imported by several notebooks, scripts, and applications.
+
+So the work divides three ways:
+
+- **Python modules** hold the reusable computation and data processing.
+- **Jupytext notebooks** hold the narrative, the charts and tables, and the reporting logic.
+- **`doit`** runs both in order and tracks what depends on what.
 
 See the [`dodo.py`](https://github.com/backofficedev/cookiecutter_chartbook/blob/main/example/dodo.py) file in the rendered `example/` project of the course [project template](../Week3/project_structure.md).
