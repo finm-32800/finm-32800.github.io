@@ -538,7 +538,6 @@ CRSP’s own series.</p>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_CRSP_indices</span>
 <span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">import</span> <span class="nn">misc_tools</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">pull_CRSP_stock</span>
 <span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
@@ -661,24 +660,41 @@ w_{it} = \text{SHROUT}_{it} \times \text{PRC}_{it}.
 </section>
 <section id="lagging-market-cap-correctly">
 <h2>Lagging market cap correctly<a class="headerlink" href="#lagging-market-cap-correctly" title="Link to this heading">#</a></h2>
-<p>Note, a helpful tool to create the lagged time series for market capitalization is provided in <code class="docutils literal notranslate"><span class="pre">misc_tools</span></code>.
-Use the function <code class="docutils literal notranslate"><span class="pre">with_lagged_column</span></code>, which will create a lagged column that accounts for the fact that multiple stocks show up in a flat file. See the following example:</p>
+<p>The weight <span class="math notranslate nohighlight">\(w_{i,t-1}\)</span> is last month’s market cap, so each row needs the value
+its stock had one month earlier. Two things make this easy to get wrong:</p>
+<ul class="simple">
+<li><p>A stock can skip a month. After the gap, its lag should be missing, not the
+value from before the gap.</p></li>
+<li><p>CRSP dates each month by its last trading day (2020-02-28, not 2020-02-29),
+so the day varies from month to month. Only the month should matter.</p></li>
+</ul>
+<p>Matching on the calendar month handles both. Convert each date to a month with
+<code class="docutils literal notranslate"><span class="pre">to_period(&quot;M&quot;)</span></code>, move a copy of the data forward one month, and merge it back
+on the stock and the month. This is how <code class="docutils literal notranslate"><span class="pre">calc_CRSP_value_weighted_index</span></code> builds
+<code class="docutils literal notranslate"><span class="pre">L1_mktcap</span></code>. In this small example, stock 2 has no row in May 1990:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990/1/1&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990/2/1&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990/3/1&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1989/12/1&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990/1/1&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990/2/1&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990/3/1&quot;</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990/4/1&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990/6/1&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
-<span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990-01-31&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990-02-28&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1990-03-30&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1989-12-29&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990-01-31&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990-02-28&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990-03-30&quot;</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990-04-30&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;1990-06-29&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">],</span>
+<span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
-<span class="n">data</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+<span class="n">lag1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">lag1</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lag1</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">lag1</span> <span class="o">=</span> <span class="n">lag1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;L1_value&quot;</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lag1</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="s2">&quot;one_to_one&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -704,187 +720,95 @@ Use the function <code class="docutils literal notranslate"><span class="pre">wi
       <th>id</th>
       <th>date</th>
       <th>value</th>
+      <th>month</th>
+      <th>L1_value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1990-01-01</td>
+      <td>1990-01-31</td>
       <td>1.0</td>
+      <td>1990-01</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>1990-02-01</td>
+      <td>1990-02-28</td>
       <td>2.0</td>
+      <td>1990-02</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
-      <td>1990-03-01</td>
+      <td>1990-03-30</td>
       <td>3.0</td>
+      <td>1990-03</td>
+      <td>2.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
-      <td>1989-12-01</td>
+      <td>1989-12-29</td>
       <td>3.0</td>
+      <td>1989-12</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
       <td>2</td>
-      <td>1990-01-01</td>
+      <td>1990-01-31</td>
+      <td>3.0</td>
+      <td>1990-01</td>
       <td>3.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>2</td>
-      <td>1990-02-01</td>
+      <td>1990-02-28</td>
       <td>4.0</td>
+      <td>1990-02</td>
+      <td>3.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>2</td>
-      <td>1990-03-01</td>
+      <td>1990-03-30</td>
       <td>5.5</td>
+      <td>1990-03</td>
+      <td>4.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>2</td>
-      <td>1990-04-01</td>
+      <td>1990-04-30</td>
       <td>5.0</td>
+      <td>1990-04</td>
+      <td>5.5</td>
     </tr>
     <tr>
       <th>8</th>
       <td>2</td>
-      <td>1990-06-01</td>
+      <td>1990-06-29</td>
       <td>6.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_lag</span> <span class="o">=</span> <span class="n">misc_tools</span><span class="o">.</span><span class="n">with_lagged_columns</span><span class="p">(</span>
-    <span class="n">df</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">column_to_lag</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">id_column</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;MS&quot;</span>
-<span class="p">)</span>
-<span class="n">data_lag</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>date</th>
-      <th>value</th>
-      <th>L1_value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1990-01-01</td>
-      <td>1.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>1990-02-01</td>
-      <td>2.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>1990-03-01</td>
-      <td>3.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>1990-04-01</td>
-      <td>NaN</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>1989-12-01</td>
-      <td>3.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>1990-01-01</td>
-      <td>3.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2</td>
-      <td>1990-02-01</td>
-      <td>4.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2</td>
-      <td>1990-03-01</td>
-      <td>5.5</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2</td>
-      <td>1990-04-01</td>
-      <td>5.0</td>
-      <td>5.5</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2</td>
-      <td>1990-05-01</td>
-      <td>NaN</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2</td>
-      <td>1990-06-01</td>
-      <td>6.0</td>
+      <td>1990-06</td>
       <td>NaN</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>As you can see, naively using <code class="docutils literal notranslate"><span class="pre">shift</span></code> to create our lag would miss the fact that observation <code class="docutils literal notranslate"><span class="pre">1989-12-01</span></code> for stock <code class="docutils literal notranslate"><span class="pre">id=2</span></code> should have a missing lagged <code class="docutils literal notranslate"><span class="pre">value</span></code>. For example, the following would be incorrect:</p>
+<p>Stock 2’s lag in June 1990 is missing, because it has no row in May.
+<code class="docutils literal notranslate"><span class="pre">validate=&quot;one_to_one&quot;</span></code> makes the merge fail if a stock has two rows in the
+same month, instead of quietly duplicating rows.</p>
+<p>Shifting by row, the obvious alternative, gets this wrong. It takes the
+previous row whatever its date, so June 1990 gets April’s value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -892,7 +816,7 @@ Use the function <code class="docutils literal notranslate"><span class="pre">wi
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    NaN
 1    1.0
 2    2.0
-3    3.0
+3    NaN
 4    3.0
 5    3.0
 6    4.0
@@ -903,6 +827,15 @@ Name: value, dtype: float64
 </div>
 </div>
 </div>
+<p>Stocks rarely skip a month in the CRSP monthly file, so there the two
+approaches almost always agree. On data with gaps, shifting by row can be
+wrong in many rows.</p>
+<p>The merge above is a strict lag: the value from exactly one month back, or
+nothing. That is what the index weights need. For data that arrives
+irregularly, such as annual reports, you may instead want the most recent
+earlier value, as long as it isn’t too old. <code class="docutils literal notranslate"><span class="pre">pd.merge_asof</span></code> does this, with
+<code class="docutils literal notranslate"><span class="pre">by=&quot;id&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">allow_exact_matches=False</span></code>, and a <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> that sets how old a
+value may be.</p>
 </section>
 <section id="how-close-the-manual-indices-come">
 <h2>How close the manual indices come<a class="headerlink" href="#how-close-the-manual-indices-come" title="Link to this heading">#</a></h2>
@@ -963,10 +896,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
       <td>0.9996</td>
       <td>0.9995</td>
       <td>0.9990</td>
-      <td>0.8592</td>
-      <td>0.8572</td>
-      <td>0.8593</td>
-      <td>0.8572</td>
+      <td>0.8635</td>
+      <td>0.8607</td>
+      <td>0.8635</td>
+      <td>0.8607</td>
     </tr>
     <tr>
       <th>vwretd_manual</th>
@@ -974,10 +907,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
       <td>1.0000</td>
       <td>0.9991</td>
       <td>0.9995</td>
-      <td>0.8602</td>
-      <td>0.8583</td>
-      <td>0.8602</td>
-      <td>0.8583</td>
+      <td>0.8643</td>
+      <td>0.8616</td>
+      <td>0.8643</td>
+      <td>0.8616</td>
     </tr>
     <tr>
       <th>vwretx</th>
@@ -985,10 +918,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
       <td>0.9991</td>
       <td>1.0000</td>
       <td>0.9996</td>
-      <td>0.8595</td>
-      <td>0.8575</td>
-      <td>0.8597</td>
-      <td>0.8578</td>
+      <td>0.8637</td>
+      <td>0.8609</td>
+      <td>0.8639</td>
+      <td>0.8612</td>
     </tr>
     <tr>
       <th>vwretx_manual</th>
@@ -996,17 +929,17 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
       <td>0.9995</td>
       <td>0.9996</td>
       <td>1.0000</td>
-      <td>0.8605</td>
-      <td>0.8586</td>
-      <td>0.8608</td>
-      <td>0.8589</td>
+      <td>0.8645</td>
+      <td>0.8619</td>
+      <td>0.8648</td>
+      <td>0.8622</td>
     </tr>
     <tr>
       <th>ewretd</th>
-      <td>0.8592</td>
-      <td>0.8602</td>
-      <td>0.8595</td>
-      <td>0.8605</td>
+      <td>0.8635</td>
+      <td>0.8643</td>
+      <td>0.8637</td>
+      <td>0.8645</td>
       <td>1.0000</td>
       <td>0.9991</td>
       <td>0.9999</td>
@@ -1014,10 +947,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
     </tr>
     <tr>
       <th>ewretd_manual</th>
-      <td>0.8572</td>
-      <td>0.8583</td>
-      <td>0.8575</td>
-      <td>0.8586</td>
+      <td>0.8607</td>
+      <td>0.8616</td>
+      <td>0.8609</td>
+      <td>0.8619</td>
       <td>0.9991</td>
       <td>1.0000</td>
       <td>0.9990</td>
@@ -1025,10 +958,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
     </tr>
     <tr>
       <th>ewretx</th>
-      <td>0.8593</td>
-      <td>0.8602</td>
-      <td>0.8597</td>
-      <td>0.8608</td>
+      <td>0.8635</td>
+      <td>0.8643</td>
+      <td>0.8639</td>
+      <td>0.8648</td>
       <td>0.9999</td>
       <td>0.9990</td>
       <td>1.0000</td>
@@ -1036,10 +969,10 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
     </tr>
     <tr>
       <th>ewretx_manual</th>
-      <td>0.8572</td>
-      <td>0.8583</td>
-      <td>0.8578</td>
-      <td>0.8589</td>
+      <td>0.8607</td>
+      <td>0.8616</td>
+      <td>0.8612</td>
+      <td>0.8622</td>
       <td>0.9990</td>
       <td>0.9999</td>
       <td>0.9991</td>
@@ -1052,7 +985,7 @@ which end in <code class="docutils literal notranslate"><span class="pre">_manua
 <p>Growth of one dollar invested at the start tells the same story:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/2f233a6c32760db8eb5d70fe4cc6f301568f3313bfe921f5b08f755c8dfc32d2.png" src="../_images/2f233a6c32760db8eb5d70fe4cc6f301568f3313bfe921f5b08f755c8dfc32d2.png" />
+<img alt="../_images/34564a28f93750b61204dcc602c7d596189376496b5402b1e8e94c60408170e6.png" src="../_images/34564a28f93750b61204dcc602c7d596189376496b5402b1e8e94c60408170e6.png" />
 </div>
 </div>
 <p>Our manually-created return index doesn’t match the CRSP index perfectly but is still very close. In this HW, you’ll be required to construct this index only approximately. A loose match, as seen here, will be fine.</p>
