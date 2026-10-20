@@ -42,4 +42,5 @@ the claims the data cannot support.
 ```{toctree}
 :maxdepth: 1
 notebooks/_job_postings_methods_ipynb.ipynb
+notebooks/_02_spx_hedging_ipynb.ipynb
 ```

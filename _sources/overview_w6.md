@@ -7,6 +7,8 @@ Week8/polars_exercises.md
 Week8/remote_machines_and_hpc.md
 Week8/exercise_jupyter_on_midway.md
 Week8/optional_lab_clean_trace_on_midway.md
+Week6/chartbook_catalog.md
+Week3/ftsfr.md
 Week1/collaborative_report_and_style_guides.md
 ```
 

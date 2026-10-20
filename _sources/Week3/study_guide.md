@@ -29,6 +29,8 @@ Item 2 of the [week 3 chapter](../overview_w3.md) for ChartBook.*
 4. What is GitHub Pages? What kind of site can it host, and what can it not
    run?
 5. What is ChartBook, and what does `chartbook build` produce?
+6. What does Cookiecutter do? What does Cruft add on top of it? (Read:
+   [Project Structure](./project_structure.md).)
 
 ## LaTeX
 

@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modules, Packages, and if __name__ == &#34;__main__&#34; &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_01_modules_and_packages_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sphinx" href="../Week5/sphinx.html" />
+    <link rel="prev" title="Writing and Publishing Your Own Python Packages" href="../Week6/python_packaging_with_hatch.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_01_modules_and_packages_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_01_modules_and_packages_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modules, Packages, and if __name__ == "__main__"</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-module-is-a-file">A module is a file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-package-is-a-folder">A package is a folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-python-looks">Where Python looks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-installable-package">An installable package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-name-main"><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-courses-modules-end-this-way">Why the course’s modules end this way</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-remember">What to remember</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="modules-packages-and-if-name-main">
+<h1>Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code><a class="headerlink" href="#modules-packages-and-if-name-main" title="Link to this heading">#</a></h1>
+<p>Every pipeline in this course is a folder of <code class="docutils literal notranslate"><span class="pre">.py</span></code> files that import one
+another. A guide notebook runs <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pull_fed_funds_futures</span></code> and calls
+<code class="docutils literal notranslate"><span class="pre">load_fed_funds_futures()</span></code>. <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> runs the same file as a script, with
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">./src/pull_fed_funds_futures.py</span></code>. And code that more than one
+repository needs, such as <code class="docutils literal notranslate"><span class="pre">finm</span></code> or <code class="docutils literal notranslate"><span class="pre">chartbook</span></code>, goes one step further: it
+becomes a package that each repository installs.</p>
+<p>This notebook walks through the small examples in the
+<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/python_imports"><code class="docutils literal notranslate"><span class="pre">python_imports/</span></code></a>
+folder of the in-class examples repository, from a single file to an
+installable package. Then it explains the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> block
+at the bottom of nearly every module in this course.</p>
+<p>Each example is a folder you can run yourself: <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it and run
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code>. Here the notebook runs them and prints what they print.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>  <span class="c1"># the python_imports/ folder, where this notebook runs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print one of the example files, with its path as a header.&quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">(</span><span class="n">HERE</span> <span class="o">/</span> <span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">HERE</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run `python &lt;script&gt;` inside `folder` and print its output.</span>
+
+<span class="sd">    Paths in the output are shortened: `~` is your home folder and `&lt;env&gt;` is</span>
+<span class="sd">    the folder of the Python environment the notebook runs in.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="s2">&quot;PYTHONDONTWRITEBYTECODE&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="n">script</span><span class="p">],</span>
+        <span class="n">cwd</span><span class="o">=</span><span class="n">HERE</span> <span class="o">/</span> <span class="n">folder</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$ cd </span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2"> &amp;&amp; python </span><span class="si">{</span><span class="n">script</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;&lt;env&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()),</span> <span class="s2">&quot;~&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-module-is-a-file">
+<h2>A module is a file<a class="headerlink" href="#a-module-is-a-file" title="Link to this heading">#</a></h2>
+<p>Any <code class="docutils literal notranslate"><span class="pre">.py</span></code> file is a <strong>module</strong>. Another file in the same folder can import
+it by its name, without the <code class="docutils literal notranslate"><span class="pre">.py</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;01_simple_module/mypackage.py&quot;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="s2">&quot;01_simple_module/main.py&quot;</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="s2">&quot;main.py&quot;</span><span class="p">,</span> <span class="s2">&quot;01_simple_module&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- python_imports/01_simple_module/mypackage.py ---
+def say_hello():
+    print(&quot;Hello from mypackage!&quot;)
+--- python_imports/01_simple_module/main.py ---
+&quot;&quot;&quot;
+Importing a simple module.
+
+A single .py file in the same directory can be imported by name.
+&quot;&quot;&quot;
+
+import mypackage
+
+mypackage.say_hello()
+$ cd 01_simple_module &amp;&amp; python main.py
+Hello from mypackage!
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is how the files in a course repository’s <code class="docutils literal notranslate"><span class="pre">src/</span></code> folder use one
+another. Every module there starts with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">settings</span> <span class="pre">import</span> <span class="pre">config</span></code>:
+<code class="docutils literal notranslate"><span class="pre">settings.py</span></code> is a module in the same folder.</p>
+</section>
+<section id="a-package-is-a-folder">
+<h2>A package is a folder<a class="headerlink" href="#a-package-is-a-folder" title="Link to this heading">#</a></h2>
+<p>A folder that contains an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file is a <strong>package</strong>. It is
+imported the same way as a module, and the code in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> runs when
+it is. A package can hold many modules, which are then imported as
+<code class="docutils literal notranslate"><span class="pre">mypackage.something</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;02_package_directory/mypackage/__init__.py&quot;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="s2">&quot;02_package_directory/main.py&quot;</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="s2">&quot;main.py&quot;</span><span class="p">,</span> <span class="s2">&quot;02_package_directory&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- python_imports/02_package_directory/mypackage/__init__.py ---
+def say_hello():
+    print(&quot;Hello from mypackage!&quot;)
+--- python_imports/02_package_directory/main.py ---
+&quot;&quot;&quot;
+Importing a package (directory with __init__.py).
+
+A directory becomes a package when it contains an __init__.py file.
+This is the difference between a module (single .py file) and a package (directory).
+&quot;&quot;&quot;
+
+import mypackage
+
+mypackage.say_hello()
+$ cd 02_package_directory &amp;&amp; python main.py
+Hello from mypackage!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="where-python-looks">
+<h2>Where Python looks<a class="headerlink" href="#where-python-looks" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">mypackage</span></code> works because Python searches a list of folders,
+<code class="docutils literal notranslate"><span class="pre">sys.path</span></code>, in order, and the folder of the script you ran comes first.
+That is also how an import goes wrong. A file of your own named <code class="docutils literal notranslate"><span class="pre">numpy.py</span></code>
+hides the real NumPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;03_name_shadowing/main.py&quot;</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="s2">&quot;main.py&quot;</span><span class="p">,</span> <span class="s2">&quot;03_name_shadowing&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- python_imports/03_name_shadowing/main.py ---
+&quot;&quot;&quot;
+Name shadowing: a local file can shadow an installed package.
+
+If you create a file called numpy.py in your working directory,
+`import numpy` will import YOUR file instead of the real numpy.
+This is a common source of confusing errors.
+
+Run this script and look at sys.path to understand why.
+&quot;&quot;&quot;
+
+import sys
+
+print(&quot;sys.path (where Python looks for modules, in order):&quot;)
+for p in sys.path:
+    print(f&quot;  {p}&quot;)
+
+print()
+
+# This imports the LOCAL numpy.py, not the real numpy!
+import numpy
+
+numpy.hello()
+$ cd 03_name_shadowing &amp;&amp; python main.py
+sys.path (where Python looks for modules, in order):
+  ~/GitRepositories/finm32800/inclass_examples/python_imports/03_name_shadowing
+  &lt;env&gt;/lib/python312.zip
+  &lt;env&gt;/lib/python3.12
+  &lt;env&gt;/lib/python3.12/lib-dynload
+  &lt;env&gt;/lib/python3.12/site-packages
+  &lt;env&gt;/lib/python3.12/site-packages/aeosa
+
+Hello from the LOCAL numpy.py, not the real numpy!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two consequences for this course’s repositories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">./src/pull_fed_funds_futures.py</span></code> can <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">settings</span></code>, because
+<code class="docutils literal notranslate"><span class="pre">src/</span></code> is the script’s own folder and so comes first on <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.
+<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> lives one folder up, so it puts <code class="docutils literal notranslate"><span class="pre">src/</span></code> on the path itself: that
+is the <code class="docutils literal notranslate"><span class="pre">sys.path.insert(1,</span> <span class="pre">&quot;./src/&quot;)</span></code> line at its top.</p></li>
+<li><p>Never name a file after a package you use: no <code class="docutils literal notranslate"><span class="pre">pandas.py</span></code>, <code class="docutils literal notranslate"><span class="pre">wrds.py</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">doit.py</span></code> in your project.</p></li>
+</ul>
+</section>
+<section id="an-installable-package">
+<h2>An installable package<a class="headerlink" href="#an-installable-package" title="Link to this heading">#</a></h2>
+<p>Code that more than one project needs should not be copied from one to the
+next. It becomes a package that each project installs. The smallest example
+is in
+<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/project_paths/install_approach"><code class="docutils literal notranslate"><span class="pre">project_paths/install_approach/</span></code></a>:
+a package, <code class="docutils literal notranslate"><span class="pre">src/myproj/</span></code>, and a <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> that says what it is called,
+where its code is, and what it depends on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;../project_paths/install_approach/pyproject.toml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- project_paths/install_approach/pyproject.toml ---
+[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;
+
+[project]
+name = &quot;myproj&quot;
+version = &quot;0.1.0&quot;
+requires-python = &quot;&gt;=3.10&quot;
+dependencies = [
+    &quot;doit&quot;,
+    &quot;jupyter&quot;,
+    &quot;nbconvert&quot;,
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [&quot;src/myproj&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each table in the file has one job. <code class="docutils literal notranslate"><span class="pre">[build-system]</span></code> names the tool that
+turns the source into an installable package, here Hatchling, and <code class="docutils literal notranslate"><span class="pre">pip</span></code>
+reads it to know how to build. <code class="docutils literal notranslate"><span class="pre">[project]</span></code> describes the package itself: its
+name, its version, the Python it needs, and the packages it depends on.
+<code class="docutils literal notranslate"><span class="pre">[tool.hatch.build.targets.wheel]</span></code> is a setting for Hatchling alone: it says
+the package’s code is in <code class="docutils literal notranslate"><span class="pre">src/myproj</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, reads that file and puts
+<code class="docutils literal notranslate"><span class="pre">myproj</span></code> on <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> for good, so <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">myproj</span></code> works from any folder,
+in any script or notebook that uses the same environment. The <code class="docutils literal notranslate"><span class="pre">-e</span></code>, for
+<em>editable</em>, links to the source rather than copying it, so an edit to
+<code class="docutils literal notranslate"><span class="pre">src/myproj/paths.py</span></code> takes effect at the next import.</p>
+<p><code class="docutils literal notranslate"><span class="pre">finm</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span></code>, <code class="docutils literal notranslate"><span class="pre">databento</span></code>, and <code class="docutils literal notranslate"><span class="pre">wrds</span></code> are packages of exactly this
+shape, published to PyPI so that <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> can fetch them by name.
+<a class="reference external" href="https://finm-32800.github.io/Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a>
+takes it from here.</p>
+</section>
+<section id="if-name-main">
+<h2><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code><a class="headerlink" href="#if-name-main" title="Link to this heading">#</a></h2>
+<p>Every module has a variable called <code class="docutils literal notranslate"><span class="pre">__name__</span></code>. When the module is imported,
+<code class="docutils literal notranslate"><span class="pre">__name__</span></code> is the module’s name, <code class="docutils literal notranslate"><span class="pre">&quot;greet&quot;</span></code> for a file called <code class="docutils literal notranslate"><span class="pre">greet.py</span></code>. When
+the file is the one you run, as in <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">greet.py</span></code>, Python sets <code class="docutils literal notranslate"><span class="pre">__name__</span></code>
+to <code class="docutils literal notranslate"><span class="pre">&quot;__main__&quot;</span></code> instead. So a block under <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> runs
+when the file is run as a script, and is skipped when the file is imported.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;04_name_main/greet.py&quot;</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="s2">&quot;greet.py&quot;</span><span class="p">,</span> <span class="s2">&quot;04_name_main&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- python_imports/04_name_main/greet.py ---
+&quot;&quot;&quot;A module that is also a script.
+
+Run it directly (`python greet.py`) and the block at the bottom runs. Import it
+(`import greet`, as main.py does) and the block is skipped.
+&quot;&quot;&quot;
+
+print(f&quot;Loading greet.py; __name__ is {__name__!r}&quot;)
+
+
+def say_hello():
+    print(&quot;Hello from greet!&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    # Runs only when this file is the one you ran: python greet.py
+    say_hello()
+$ cd 04_name_main &amp;&amp; python greet.py
+Loading greet.py; __name__ is &#39;__main__&#39;
+Hello from greet!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;04_name_main/main.py&quot;</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="s2">&quot;main.py&quot;</span><span class="p">,</span> <span class="s2">&quot;04_name_main&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- python_imports/04_name_main/main.py ---
+&quot;&quot;&quot;Import greet.py as a module.
+
+The top-level print in greet.py runs on import. The block under
+`if __name__ == &quot;__main__&quot;:` does not, so main.py calls say_hello() itself.
+&quot;&quot;&quot;
+
+import greet
+
+print(&quot;main.py imported greet, and now calls greet.say_hello():&quot;)
+greet.say_hello()
+$ cd 04_name_main &amp;&amp; python main.py
+Loading greet.py; __name__ is &#39;greet&#39;
+main.py imported greet, and now calls greet.say_hello():
+Hello from greet!
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">print</span></code> at the top of <code class="docutils literal notranslate"><span class="pre">greet.py</span></code> runs both times, because everything
+outside the block runs on import. The block itself runs only when
+<code class="docutils literal notranslate"><span class="pre">greet.py</span></code> is the file you ran.</p>
+<section id="why-the-courses-modules-end-this-way">
+<h3>Why the course’s modules end this way<a class="headerlink" href="#why-the-courses-modules-end-this-way" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">pull_</span></code> module in this course does two jobs. As a script, it pulls data
+from a vendor and saves it, and that is how <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> runs it. As a module,
+it offers a <code class="docutils literal notranslate"><span class="pre">load_</span></code> function that reads what the pull saved, and that is how
+a notebook uses it. Here is the shape of the FedWatch case study’s
+<code class="docutils literal notranslate"><span class="pre">pull_fed_funds_futures.py</span></code>, shortened:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pull_fed_funds_futures</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">START_DATE</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">END_DATE</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull daily ZQ bars from Databento.&quot;&quot;&quot;</span>      <span class="c1"># goes out to the network</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_fed_funds_futures</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the cached ZQ daily bars pulled by this module.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">PARQUET_NAME</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pull_fed_funds_futures</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="n">PARQUET_NAME</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> runs <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">./src/pull_fed_funds_futures.py</span></code>, so <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is
+<code class="docutils literal notranslate"><span class="pre">&quot;__main__&quot;</span></code> and the pull runs. The guide notebook runs
+<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pull_fed_funds_futures</span></code> and calls <code class="docutils literal notranslate"><span class="pre">load_fed_funds_futures()</span></code>, so the
+block is skipped and nothing touches the network. Without the guard, every
+import of the module, by a notebook, a test, or another module, would pull
+the data again.</p>
+<p>The block has a second common use: a quick check of a module by hand.
+<code class="docutils literal notranslate"><span class="pre">paths.py</span></code> in the install example prints the paths it computes when you run
+it, and prints nothing when it is imported:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;src/myproj/paths.py&quot;</span><span class="p">,</span> <span class="s2">&quot;../project_paths/install_approach&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>$ cd ../project_paths/install_approach &amp;&amp; python src/myproj/paths.py
+Project root: ~/GitRepositories/finm32800/inclass_examples/project_paths/install_approach
+Data dir:     ~/GitRepositories/finm32800/inclass_examples/project_paths/install_approach/_data
+Output dir:   ~/GitRepositories/finm32800/inclass_examples/project_paths/install_approach/_output
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-to-remember">
+<h2>What to remember<a class="headerlink" href="#what-to-remember" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A file is a module, and a folder with an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> is a package.
+<code class="docutils literal notranslate"><span class="pre">sys.path</span></code> decides which one an <code class="docutils literal notranslate"><span class="pre">import</span></code> finds.</p></li>
+<li><p>An installed package can be imported from anywhere, which is how code is
+shared between projects.</p></li>
+<li><p>Code under <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> runs when the file is run, not
+when it is imported. In this course, that block is where a <code class="docutils literal notranslate"><span class="pre">pull_</span></code> module
+does its pulling.</p></li>
+</ul>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week6/python_packaging_with_hatch.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Writing and Publishing Your Own Python Packages</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week5/sphinx.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sphinx</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-module-is-a-file">A module is a file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-package-is-a-folder">A package is a folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-python-looks">Where Python looks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-installable-package">An installable package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-name-main"><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-courses-modules-end-this-way">Why the course’s modules end this way</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-remember">What to remember</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

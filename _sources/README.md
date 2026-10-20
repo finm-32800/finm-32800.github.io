@@ -180,7 +180,7 @@ the agenda is listed in the first sub-section of the chapter.
 | 1 | Sep 29 | [Git, GitHub, and virtual environments](overview_w1.md) | [HW 1](HW1.md) | |
 | 2 | Oct 6 | [Task runners and SQL; Fama-French (1993)](overview_w2.md) | | |
 | 3 | Oct 13 | [Reports: notebooks, ChartBook, LaTeX; Databento](overview_w3.md) | [HW 2](HW2.md) | |
-| 4 | Oct 20 | [Python packaging, Sphinx, pull requests, GitHub Pages, the ChartBook catalog, options data](overview_w4.md) | [HW 3](HW3.md) | HW 1 |
+| 4 | Oct 20 | [GitHub Pages, GitHub Actions, Python packaging; options data](overview_w4.md) | [HW 3](HW3.md) | HW 1 |
 | 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 4](HW4.md) | HW 2 |
 | 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 5](HW5.md) | HW 3 |
 | 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 4 |

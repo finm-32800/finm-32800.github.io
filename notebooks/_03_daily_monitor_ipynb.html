@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>03. The Daily Monitor &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_03_daily_monitor_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="04. Crash Bounds for Single Names (Martin and Shi 2025)" href="_04_single_name_crash_bounds_ipynb.html" />
+    <link rel="prev" title="02. Replicating SVIX and the Probability of a Crash" href="_02_svix_and_crash_probability_ipynb.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_03_daily_monitor_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_03_daily_monitor_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>03. The Daily Monitor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-history">The history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-workflow-does">What the workflow does</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-history-is-a-tracked-file">Why the history is a tracked file</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="the-daily-monitor">
+<h1>03. The Daily Monitor<a class="headerlink" href="#the-daily-monitor" title="Link to this heading">#</a></h1>
+<p>Guide 02 computed SVIX and the probability of a crash for one session.
+This page is what happens when a replication is run every day without
+anyone at the keyboard. A GitHub Actions workflow, <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code>,
+wakes up at 14:30 UTC, pulls the previous session’s settlements from
+Databento, computes the row, appends it to a file the repository tracks,
+commits that file, rebuilds this site, and publishes it. The chart below
+is one point longer every morning.</p>
+<p><strong>In this guide</strong></p>
+<ul class="simple">
+<li><p>The history, and the latest row.</p></li>
+<li><p>What the workflow does, step by step, and the two places it can go
+wrong.</p></li>
+<li><p>Why the history is a tracked file.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Image</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.width&quot;</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_columns&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">load_history</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span><span class="si">}</span><span class="s2"> sessions, </span><span class="si">{</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 sessions, 2026-09-14 to 2026-10-16
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-history">
+<h2>The history<a class="headerlink" href="#the-history" title="Link to this heading">#</a></h2>
+<p>One row per session. The columns are documented in <code class="docutils literal notranslate"><span class="pre">src/monitor.py</span></code>; the
+ones the chart uses are the 30-day SVIX (<code class="docutils literal notranslate"><span class="pre">svix_30</span></code>), the VIX close for
+the same day from FRED, and the three probabilities of a 20% drop over
+the expiration closest to one month: risk-neutral (<code class="docutils literal notranslate"><span class="pre">p_star_20</span></code>), the log
+investor’s (<code class="docutils literal notranslate"><span class="pre">p_log_20</span></code>), and the power-utility investor’s with
+<span class="math notranslate nohighlight">\(\gamma = 2\)</span> (<code class="docutils literal notranslate"><span class="pre">p_power_20</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;days_used&quot;</span><span class="p">,</span> <span class="s2">&quot;forward_near&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_power_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_10&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_10&quot;</span><span class="p">]</span>
+<span class="n">history</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">({</span>
+    <span class="s2">&quot;forward_near&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:,.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;p_star_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_power_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_10&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_10&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_f2cd6">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_f2cd6_level0_col0" class="col_heading level0 col0" >days_used</th>
+      <th id="T_f2cd6_level0_col1" class="col_heading level0 col1" >forward_near</th>
+      <th id="T_f2cd6_level0_col2" class="col_heading level0 col2" >svix_30</th>
+      <th id="T_f2cd6_level0_col3" class="col_heading level0 col3" >vix</th>
+      <th id="T_f2cd6_level0_col4" class="col_heading level0 col4" >p_star_20</th>
+      <th id="T_f2cd6_level0_col5" class="col_heading level0 col5" >p_log_20</th>
+      <th id="T_f2cd6_level0_col6" class="col_heading level0 col6" >p_power_20</th>
+      <th id="T_f2cd6_level0_col7" class="col_heading level0 col7" >p_star_10</th>
+      <th id="T_f2cd6_level0_col8" class="col_heading level0 col8" >p_log_10</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >date</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+      <th class="blank col4" >&nbsp;</th>
+      <th class="blank col5" >&nbsp;</th>
+      <th class="blank col6" >&nbsp;</th>
+      <th class="blank col7" >&nbsp;</th>
+      <th class="blank col8" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_f2cd6_level0_row0" class="row_heading level0 row0" >2026-10-05 00:00:00</th>
+      <td id="T_f2cd6_row0_col0" class="data row0 col0" >25</td>
+      <td id="T_f2cd6_row0_col1" class="data row0 col1" >7,826.27</td>
+      <td id="T_f2cd6_row0_col2" class="data row0 col2" >14.61</td>
+      <td id="T_f2cd6_row0_col3" class="data row0 col3" >15.52</td>
+      <td id="T_f2cd6_row0_col4" class="data row0 col4" >0.28%</td>
+      <td id="T_f2cd6_row0_col5" class="data row0 col5" >0.20%</td>
+      <td id="T_f2cd6_row0_col6" class="data row0 col6" >0.14%</td>
+      <td id="T_f2cd6_row0_col7" class="data row0 col7" >1.50%</td>
+      <td id="T_f2cd6_row0_col8" class="data row0 col8" >1.26%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row1" class="row_heading level0 row1" >2026-10-06 00:00:00</th>
+      <td id="T_f2cd6_row1_col0" class="data row1 col0" >24</td>
+      <td id="T_f2cd6_row1_col1" class="data row1 col1" >7,874.01</td>
+      <td id="T_f2cd6_row1_col2" class="data row1 col2" >14.18</td>
+      <td id="T_f2cd6_row1_col3" class="data row1 col3" >15.01</td>
+      <td id="T_f2cd6_row1_col4" class="data row1 col4" >0.20%</td>
+      <td id="T_f2cd6_row1_col5" class="data row1 col5" >0.14%</td>
+      <td id="T_f2cd6_row1_col6" class="data row1 col6" >0.10%</td>
+      <td id="T_f2cd6_row1_col7" class="data row1 col7" >1.06%</td>
+      <td id="T_f2cd6_row1_col8" class="data row1 col8" >0.88%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row2" class="row_heading level0 row2" >2026-10-07 00:00:00</th>
+      <td id="T_f2cd6_row2_col0" class="data row2 col0" >23</td>
+      <td id="T_f2cd6_row2_col1" class="data row2 col1" >7,852.76</td>
+      <td id="T_f2cd6_row2_col2" class="data row2 col2" >14.13</td>
+      <td id="T_f2cd6_row2_col3" class="data row2 col3" >15.08</td>
+      <td id="T_f2cd6_row2_col4" class="data row2 col4" >0.20%</td>
+      <td id="T_f2cd6_row2_col5" class="data row2 col5" >0.14%</td>
+      <td id="T_f2cd6_row2_col6" class="data row2 col6" >0.10%</td>
+      <td id="T_f2cd6_row2_col7" class="data row2 col7" >1.00%</td>
+      <td id="T_f2cd6_row2_col8" class="data row2 col8" >0.84%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row3" class="row_heading level0 row3" >2026-10-08 00:00:00</th>
+      <td id="T_f2cd6_row3_col0" class="data row3 col0" >22</td>
+      <td id="T_f2cd6_row3_col1" class="data row3 col1" >7,816.24</td>
+      <td id="T_f2cd6_row3_col2" class="data row3 col2" >14.50</td>
+      <td id="T_f2cd6_row3_col3" class="data row3 col3" >15.41</td>
+      <td id="T_f2cd6_row3_col4" class="data row3 col4" >0.24%</td>
+      <td id="T_f2cd6_row3_col5" class="data row3 col5" >0.17%</td>
+      <td id="T_f2cd6_row3_col6" class="data row3 col6" >0.13%</td>
+      <td id="T_f2cd6_row3_col7" class="data row3 col7" >1.07%</td>
+      <td id="T_f2cd6_row3_col8" class="data row3 col8" >0.89%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row4" class="row_heading level0 row4" >2026-10-09 00:00:00</th>
+      <td id="T_f2cd6_row4_col0" class="data row4 col0" >21</td>
+      <td id="T_f2cd6_row4_col1" class="data row4 col1" >7,859.75</td>
+      <td id="T_f2cd6_row4_col2" class="data row4 col2" >13.79</td>
+      <td id="T_f2cd6_row4_col3" class="data row4 col3" >14.84</td>
+      <td id="T_f2cd6_row4_col4" class="data row4 col4" >0.15%</td>
+      <td id="T_f2cd6_row4_col5" class="data row4 col5" >0.11%</td>
+      <td id="T_f2cd6_row4_col6" class="data row4 col6" >0.07%</td>
+      <td id="T_f2cd6_row4_col7" class="data row4 col7" >0.76%</td>
+      <td id="T_f2cd6_row4_col8" class="data row4 col8" >0.63%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row5" class="row_heading level0 row5" >2026-10-12 00:00:00</th>
+      <td id="T_f2cd6_row5_col0" class="data row5 col0" >18</td>
+      <td id="T_f2cd6_row5_col1" class="data row5 col1" >7,857.98</td>
+      <td id="T_f2cd6_row5_col2" class="data row5 col2" >14.13</td>
+      <td id="T_f2cd6_row5_col3" class="data row5 col3" >15.21</td>
+      <td id="T_f2cd6_row5_col4" class="data row5 col4" >0.12%</td>
+      <td id="T_f2cd6_row5_col5" class="data row5 col5" >0.08%</td>
+      <td id="T_f2cd6_row5_col6" class="data row5 col6" >0.06%</td>
+      <td id="T_f2cd6_row5_col7" class="data row5 col7" >0.65%</td>
+      <td id="T_f2cd6_row5_col8" class="data row5 col8" >0.54%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row6" class="row_heading level0 row6" >2026-10-13 00:00:00</th>
+      <td id="T_f2cd6_row6_col0" class="data row6 col0" >17</td>
+      <td id="T_f2cd6_row6_col1" class="data row6 col1" >7,855.76</td>
+      <td id="T_f2cd6_row6_col2" class="data row6 col2" >14.18</td>
+      <td id="T_f2cd6_row6_col3" class="data row6 col3" >15.27</td>
+      <td id="T_f2cd6_row6_col4" class="data row6 col4" >0.10%</td>
+      <td id="T_f2cd6_row6_col5" class="data row6 col5" >0.07%</td>
+      <td id="T_f2cd6_row6_col6" class="data row6 col6" >0.05%</td>
+      <td id="T_f2cd6_row6_col7" class="data row6 col7" >0.74%</td>
+      <td id="T_f2cd6_row6_col8" class="data row6 col8" >0.62%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row7" class="row_heading level0 row7" >2026-10-14 00:00:00</th>
+      <td id="T_f2cd6_row7_col0" class="data row7 col0" >16</td>
+      <td id="T_f2cd6_row7_col1" class="data row7 col1" >7,770.24</td>
+      <td id="T_f2cd6_row7_col2" class="data row7 col2" >15.43</td>
+      <td id="T_f2cd6_row7_col3" class="data row7 col3" >16.87</td>
+      <td id="T_f2cd6_row7_col4" class="data row7 col4" >0.20%</td>
+      <td id="T_f2cd6_row7_col5" class="data row7 col5" >0.14%</td>
+      <td id="T_f2cd6_row7_col6" class="data row7 col6" >0.10%</td>
+      <td id="T_f2cd6_row7_col7" class="data row7 col7" >1.00%</td>
+      <td id="T_f2cd6_row7_col8" class="data row7 col8" >0.84%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row8" class="row_heading level0 row8" >2026-10-15 00:00:00</th>
+      <td id="T_f2cd6_row8_col0" class="data row8 col0" >15</td>
+      <td id="T_f2cd6_row8_col1" class="data row8 col1" >7,791.00</td>
+      <td id="T_f2cd6_row8_col2" class="data row8 col2" >15.05</td>
+      <td id="T_f2cd6_row8_col3" class="data row8 col3" >16.46</td>
+      <td id="T_f2cd6_row8_col4" class="data row8 col4" >0.20%</td>
+      <td id="T_f2cd6_row8_col5" class="data row8 col5" >0.14%</td>
+      <td id="T_f2cd6_row8_col6" class="data row8 col6" >0.10%</td>
+      <td id="T_f2cd6_row8_col7" class="data row8 col7" >0.55%</td>
+      <td id="T_f2cd6_row8_col8" class="data row8 col8" >0.44%</td>
+    </tr>
+    <tr>
+      <th id="T_f2cd6_level0_row9" class="row_heading level0 row9" >2026-10-16 00:00:00</th>
+      <td id="T_f2cd6_row9_col0" class="data row9 col0" >45</td>
+      <td id="T_f2cd6_row9_col1" class="data row9 col1" >7,704.24</td>
+      <td id="T_f2cd6_row9_col2" class="data row9 col2" >17.71</td>
+      <td id="T_f2cd6_row9_col3" class="data row9 col3" >19.99</td>
+      <td id="T_f2cd6_row9_col4" class="data row9 col4" >1.21%</td>
+      <td id="T_f2cd6_row9_col5" class="data row9 col5" >0.80%</td>
+      <td id="T_f2cd6_row9_col6" class="data row9 col6" >0.54%</td>
+      <td id="T_f2cd6_row9_col7" class="data row9 col7" >4.02%</td>
+      <td id="T_f2cd6_row9_col8" class="data row9 col8" >3.19%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">&quot;svix_monitor.png&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ef6a3e1629284b0d4cc35e7af1f1f0f51a22d0b33d5e6fc98d8b6f82769dd93d.png" src="../_images/ef6a3e1629284b0d4cc35e7af1f1f0f51a22d0b33d5e6fc98d8b6f82769dd93d.png" />
+</div>
+</div>
+<p>The same chart, interactive, is the site’s chart page, built by
+<code class="docutils literal notranslate"><span class="pre">src/monitor_chart.py</span></code> from this history.</p>
+<p>SVIX sits a little below the VIX. Both are annualized volatilities read
+off the same options, but the VIX weights each strike by <span class="math notranslate nohighlight">\(1/K^2\)</span> and
+SVIX weights them equally, so the VIX leans harder on the put wing; the
+gap is a measure of how steep the smirk is. The probabilities move with
+the smile too, and the risk-neutral one is always the largest: it charges
+for crash states at their marginal utility.</p>
+</section>
+<section id="what-the-workflow-does">
+<h2>What the workflow does<a class="headerlink" href="#what-the-workflow-does" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span> <span class="pre">monitor</span></code> is the whole update. The task re-pulls the trailing
+window (cheap: a session is 19 MB and $0.00), computes the rows for the
+sessions the history does not have yet, appends them, and redraws the
+charts. Run it on your laptop and it does the same thing. The workflow
+adds the parts that make it unattended:</p>
+<ol class="arabic simple">
+<li><p><strong>A schedule.</strong> <code class="docutils literal notranslate"><span class="pre">on:</span> <span class="pre">schedule:</span> <span class="pre">cron:</span> <span class="pre">'30</span> <span class="pre">14</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">*'</span></code>, every day at
+14:30 UTC, after CME’s final settlements of the previous evening have
+reached Databento. GitHub’s cron runs in UTC; the five fields are
+minute, hour, day of month, month, day of week.</p></li>
+<li><p><strong>A secret.</strong> The pull needs your Databento key. It lives in the
+repository’s secret store (Settings → Secrets and variables → Actions)
+and reaches the step as <code class="docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.DATABENTO_API_KEY</span> <span class="pre">}}</span></code>. It is never
+in the file, never in a commit, never in the log.</p></li>
+<li><p><strong>An environment.</strong> <code class="docutils literal notranslate"><span class="pre">astral-sh/setup-uv</span></code> installs <code class="docutils literal notranslate"><span class="pre">uv</span></code>; <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code>
+then installs Python 3.12 and the locked dependencies from <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>,
+the same versions as on your laptop.</p></li>
+<li><p><strong>A commit.</strong> The updated history is committed back to <code class="docutils literal notranslate"><span class="pre">main</span></code> by the
+workflow itself, with <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code> in the message so that the push does
+not start the workflow again.</p></li>
+<li><p><strong>A deploy.</strong> The built <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder is force-pushed as a single
+orphan commit on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, which GitHub Pages serves.</p></li>
+</ol>
+<p>Two places it goes wrong, in our experience. A push to <code class="docutils literal notranslate"><span class="pre">main</span></code> without
+<code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code> retriggers the workflow, which pushes again, forever. And a
+deploy that does not <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-fdx</span></code> first carries <code class="docutils literal notranslate"><span class="pre">_data/</span></code> and <code class="docutils literal notranslate"><span class="pre">.venv/</span></code>
+into the published site.</p>
+</section>
+<section id="why-the-history-is-a-tracked-file">
+<h2>Why the history is a tracked file<a class="headerlink" href="#why-the-history-is-a-tracked-file" title="Link to this heading">#</a></h2>
+<p>Everything else the pipeline produces is regenerated from source: pull
+again, compute again, same answer. The history is different. Each row
+costs a session’s pull, and a year of them would cost a year of pulls, so
+the monitor keeps what it has computed in <code class="docutils literal notranslate"><span class="pre">data_manual/svix_monitor_history.csv</span></code>
+and the workflow commits it. The first rows were computed once, when the
+repository was built, from a pull of the trailing weeks; every row after
+that was added by a morning run. If the pipeline’s engine changes, the
+history can be rebuilt from a longer pull; until then it is the record.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">latest</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">HTML</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;As of &lt;b&gt;</span><span class="si">{</span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">%A, %B %d, %Y</span><span class="si">}</span><span class="s2">&lt;/b&gt;: SVIX </span><span class="si">{</span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;svix_30&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, VIX </span><span class="si">{</span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;vix&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">; &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;the options market prices a 20% drop over the next </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;days_used&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> days at &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;p_star_20&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&lt;/b&gt; risk-neutral, which a log investor who holds the market reads as &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">latest</span><span class="p">[</span><span class="s1">&#39;p_log_20&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&lt;/b&gt;.&lt;/p&gt;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><p>As of <b>Friday, October 16, 2026</b>: SVIX 17.7, VIX 20.0; the options market prices a 20% drop over the next 45 days at <b>1.21%</b> risk-neutral, which a log investor who holds the market reads as <b>0.80%</b>.</p></div></div>
+</div>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_02_svix_and_crash_probability_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">02. Replicating SVIX and the Probability of a Crash</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_04_single_name_crash_bounds_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">04. Crash Bounds for Single Names (Martin and Shi 2025)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-history">The history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-workflow-does">What the workflow does</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-history-is-a-tracked-file">Why the history is a tracked file</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

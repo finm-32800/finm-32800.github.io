@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>01. E-mini S&amp;P 500 Options Data from Databento &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_01_es_options_data_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="02. Replicating SVIX and the Probability of a Crash" href="_02_svix_and_crash_probability_ipynb.html" />
+    <link rel="prev" title="Homework 3: SVIX and the Probability of a Crash" href="../HW3.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_01_es_options_data_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_01_es_options_data_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>01. E-mini S&P 500 Options Data from Databento</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-options-the-e-mini-end-of-month-family">Which options: the E-mini end-of-month family</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-price-the-settlement">Which price: the settlement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-contract-is-which-the-definition-schema">Which contract is which: the <code class="docutils literal notranslate"><span class="pre">definition</span></code> schema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sessions-chain">One session’s chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-smile">The smile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-strikes-stop">Where the strikes stop</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="e-mini-s-p-500-options-data-from-databento">
+<h1>01. E-mini S&amp;P 500 Options Data from Databento<a class="headerlink" href="#e-mini-s-p-500-options-data-from-databento" title="Link to this heading">#</a></h1>
+<p>Everything in this case study starts from one table: the price of every
+listed option on the S&amp;P 500 at the close of one session. This guide is
+about where that table comes from and what is in it.</p>
+<p>In HW 2 you pulled 30-Day Fed Funds futures from Databento’s CME Globex
+feed with four parameters: a dataset, a schema, a symbol, and the kind of
+symbol it was. Options on futures use the same feed, and the pull in
+<code class="docutils literal notranslate"><span class="pre">src/pull_es_options.py</span></code> is written for you this time. What is new is the
+data: options have a strike and an expiration, so one product is
+thousands of contracts, and the price we want is not a trade but a
+<strong>settlement</strong>.</p>
+<p><strong>In this guide</strong></p>
+<ul class="simple">
+<li><p>Which options: the end-of-month E-mini S&amp;P 500 options, and why them.</p></li>
+<li><p>Which price: the exchange’s settlement, from the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> schema,
+and why not daily bars.</p></li>
+<li><p>Which contract is which: the <code class="docutils literal notranslate"><span class="pre">definition</span></code> schema.</p></li>
+<li><p>One session’s chain and its smile.</p></li>
+<li><p>Where the strikes stop, which is the point of the whole exercise.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_es_options</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_fred</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">smile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.width&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_columns&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_options</span><span class="p">()</span>
+<span class="n">futures</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_futures</span><span class="p">()</span>
+<span class="n">fred</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">load_fred</span><span class="p">()</span>
+<span class="n">latest</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> option settlements over </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> sessions, &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14,810 option settlements over 5 sessions, 2026-10-12 to 2026-10-16
+</pre></div>
+</div>
+</div>
+</div>
+<section id="which-options-the-e-mini-end-of-month-family">
+<h2>Which options: the E-mini end-of-month family<a class="headerlink" href="#which-options-the-e-mini-end-of-month-family" title="Link to this heading">#</a></h2>
+<p>The E-mini S&amp;P 500 future (CME root <code class="docutils literal notranslate"><span class="pre">ES</span></code>) is the most traded equity index
+contract in the world, and CME lists several families of options on it.
+The quarterly options expire with the future itself, in the morning, and
+are American-style. The <strong>end-of-month options</strong> (root <code class="docutils literal notranslate"><span class="pre">EW</span></code>) and the
+weekly options (<code class="docutils literal notranslate"><span class="pre">EW1</span></code> to <code class="docutils literal notranslate"><span class="pre">EW4</span></code> for Fridays, others for Monday to Thursday)
+are European-style and settle at 4:00 p.m. ET, in the afternoon, like the
+SPX options the academic literature uses. The end-of-month family alone
+gives an expiration every month about seven months out, and then
+quarterly, which is enough to bracket a 30-day horizon on every session.
+That is what we pull.</p>
+<p>Each option exercises into a future, the nearest quarterly <code class="docutils literal notranslate"><span class="pre">ES</span></code> contract
+that expires after the option does. Databento’s <code class="docutils literal notranslate"><span class="pre">definition</span></code> records say
+which:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">latest_chain</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">]</span>
+<span class="n">expiries</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">latest_chain</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;expiration&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">days_to_expiry</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;days_to_expiry&quot;</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">),</span> <span class="n">contracts</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">),</span>
+         <span class="n">strikes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="s2">&quot;nunique&quot;</span><span class="p">),</span> <span class="n">underlying</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;underlying&quot;</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">),</span>
+         <span class="n">lowest_strike</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">),</span> <span class="n">highest_strike</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">expiries</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>days_to_expiry</th>
+      <th>contracts</th>
+      <th>strikes</th>
+      <th>underlying</th>
+      <th>lowest_strike</th>
+      <th>highest_strike</th>
+    </tr>
+    <tr>
+      <th>expiration</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-10-30</th>
+      <td>14</td>
+      <td>606</td>
+      <td>303</td>
+      <td>ESZ6</td>
+      <td>100.0</td>
+      <td>10800.0</td>
+    </tr>
+    <tr>
+      <th>2026-11-30</th>
+      <td>45</td>
+      <td>330</td>
+      <td>165</td>
+      <td>ESZ6</td>
+      <td>100.0</td>
+      <td>10800.0</td>
+    </tr>
+    <tr>
+      <th>2026-12-31</th>
+      <td>76</td>
+      <td>356</td>
+      <td>178</td>
+      <td>ESH7</td>
+      <td>100.0</td>
+      <td>11200.0</td>
+    </tr>
+    <tr>
+      <th>2027-01-29</th>
+      <td>105</td>
+      <td>228</td>
+      <td>114</td>
+      <td>ESH7</td>
+      <td>1600.0</td>
+      <td>11200.0</td>
+    </tr>
+    <tr>
+      <th>2027-02-26</th>
+      <td>133</td>
+      <td>222</td>
+      <td>111</td>
+      <td>ESH7</td>
+      <td>1600.0</td>
+      <td>11200.0</td>
+    </tr>
+    <tr>
+      <th>2027-03-31</th>
+      <td>166</td>
+      <td>250</td>
+      <td>125</td>
+      <td>ESM7</td>
+      <td>1400.0</td>
+      <td>11200.0</td>
+    </tr>
+    <tr>
+      <th>2027-06-30</th>
+      <td>257</td>
+      <td>252</td>
+      <td>126</td>
+      <td>ESU7</td>
+      <td>1400.0</td>
+      <td>11400.0</td>
+    </tr>
+    <tr>
+      <th>2027-09-30</th>
+      <td>349</td>
+      <td>254</td>
+      <td>127</td>
+      <td>ESZ7</td>
+      <td>1400.0</td>
+      <td>11400.0</td>
+    </tr>
+    <tr>
+      <th>2027-12-31</th>
+      <td>441</td>
+      <td>236</td>
+      <td>118</td>
+      <td>ESH8</td>
+      <td>1600.0</td>
+      <td>11600.0</td>
+    </tr>
+    <tr>
+      <th>2028-03-31</th>
+      <td>532</td>
+      <td>228</td>
+      <td>114</td>
+      <td>ESM8</td>
+      <td>1800.0</td>
+      <td>11600.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="which-price-the-settlement">
+<h2>Which price: the settlement<a class="headerlink" href="#which-price-the-settlement" title="Link to this heading">#</a></h2>
+<p>A daily bar (<code class="docutils literal notranslate"><span class="pre">ohlcv-1d</span></code>, the schema HW 2 used) exists for a contract only
+on a day it traded, and most listed strikes do not trade on most days.
+What exists for every listed contract every day is the exchange’s
+<strong>settlement price</strong>: the value CME assigns at the close to mark
+positions, from the quotes near the money and a model in the wings. It is
+published in the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> schema, as one record type among several
+(<code class="docutils literal notranslate"><span class="pre">stat_type</span></code> 3; the schema also carries the open interest, the session
+high and low, and others), twice a day, a preliminary and a final; the
+pull keeps the final.</p>
+<p>The four parameters of the pull, then, are the dataset and symbology you
+know from HW 2, a different parent symbol, and a different schema:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pull_es_options</span><span class="o">.</span><span class="n">build_queries</span><span class="p">(</span><span class="s2">&quot;2026-10-15&quot;</span><span class="p">,</span> <span class="s2">&quot;2026-10-16&quot;</span><span class="p">)[</span><span class="s2">&quot;option_statistics&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;dataset&#39;: &#39;GLBX.MDP3&#39;,
+ &#39;symbols&#39;: [&#39;EW.OPT&#39;],
+ &#39;stype_in&#39;: &#39;parent&#39;,
+ &#39;start&#39;: &#39;2026-10-15&#39;,
+ &#39;end&#39;: &#39;2026-10-16&#39;,
+ &#39;schema&#39;: &#39;statistics&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="which-contract-is-which-the-definition-schema">
+<h2>Which contract is which: the <code class="docutils literal notranslate"><span class="pre">definition</span></code> schema<a class="headerlink" href="#which-contract-is-which-the-definition-schema" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">statistics</span></code> record names its contract by <code class="docutils literal notranslate"><span class="pre">instrument_id</span></code> and by symbol,
+and the symbol, <code class="docutils literal notranslate"><span class="pre">EWV6</span> <span class="pre">P7850</span></code> say, reads: root <code class="docutils literal notranslate"><span class="pre">EW</span></code>, month code <code class="docutils literal notranslate"><span class="pre">V</span></code>
+(October), year digit <code class="docutils literal notranslate"><span class="pre">6</span></code>, a put, strike 7850. It does not carry the
+expiration date. The exchange’s <code class="docutils literal notranslate"><span class="pre">definition</span></code> records do, along with the
+strike, the right, and the underlying future, and they are republished
+every day for every listed contract, so the pull takes the same day’s
+definitions and joins them on <code class="docutils literal notranslate"><span class="pre">instrument_id</span></code>. Parent-symbol queries also
+return user-defined spreads, multi-leg strategies that market
+participants register intraday; their <code class="docutils literal notranslate"><span class="pre">instrument_class</span></code> is not C or P and
+they are dropped.</p>
+<p>The result, one row per settled contract per session:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">latest_chain</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;expiration&quot;</span><span class="p">,</span> <span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="s2">&quot;cp_flag&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>symbol</th>
+      <th>instrument_id</th>
+      <th>expiration</th>
+      <th>days_to_expiry</th>
+      <th>strike</th>
+      <th>cp_flag</th>
+      <th>settle</th>
+      <th>underlying</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11848</th>
+      <td>2026-10-16</td>
+      <td>EWV6 C100</td>
+      <td>42716737</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>100.0</td>
+      <td>C</td>
+      <td>7593.00</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11849</th>
+      <td>2026-10-16</td>
+      <td>EWV6 P100</td>
+      <td>42477367</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>100.0</td>
+      <td>P</td>
+      <td>0.05</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11850</th>
+      <td>2026-10-16</td>
+      <td>EWV6 C1600</td>
+      <td>43001763</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>1600.0</td>
+      <td>C</td>
+      <td>6095.25</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11851</th>
+      <td>2026-10-16</td>
+      <td>EWV6 P1600</td>
+      <td>42931720</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>1600.0</td>
+      <td>P</td>
+      <td>0.05</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11852</th>
+      <td>2026-10-16</td>
+      <td>EWV6 C1800</td>
+      <td>43003134</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>1800.0</td>
+      <td>C</td>
+      <td>5895.50</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11853</th>
+      <td>2026-10-16</td>
+      <td>EWV6 P1800</td>
+      <td>43001769</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>1800.0</td>
+      <td>P</td>
+      <td>0.05</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11854</th>
+      <td>2026-10-16</td>
+      <td>EWV6 C2000</td>
+      <td>42913647</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>2000.0</td>
+      <td>C</td>
+      <td>5695.75</td>
+      <td>ESZ6</td>
+    </tr>
+    <tr>
+      <th>11855</th>
+      <td>2026-10-16</td>
+      <td>EWV6 P2000</td>
+      <td>43003733</td>
+      <td>2026-10-30</td>
+      <td>14</td>
+      <td>2000.0</td>
+      <td>P</td>
+      <td>0.05</td>
+      <td>ESZ6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="one-sessions-chain">
+<h2>One session’s chain<a class="headerlink" href="#one-sessions-chain" title="Link to this heading">#</a></h2>
+<p>Take the expiration that brackets 30 days from the near side, and look at
+the settlements across strikes. Calls fall in the strike and puts rise,
+and at the strike where the two cross, put-call parity gives the price of
+the underlying future: <span class="math notranslate nohighlight">\(F = K + e^{r\tau}(C - P)\)</span>. The pull keeps the
+future’s own settlement too, so the parity-implied forward can be checked
+against it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">near</span><span class="p">,</span> <span class="n">far</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">bracketing_expiries</span><span class="p">(</span><span class="n">latest_chain</span><span class="p">)</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">rate_on</span><span class="p">(</span><span class="n">fred</span><span class="p">,</span> <span class="n">latest</span><span class="p">)</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">latest_chain</span><span class="p">[</span><span class="n">latest_chain</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">near</span><span class="p">]</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">chain</span><span class="p">[</span><span class="s2">&quot;days_to_expiry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">365</span>
+<span class="n">forward</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">parity_forward</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+<span class="n">es_settle</span> <span class="o">=</span> <span class="n">futures</span><span class="p">[(</span><span class="n">futures</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">futures</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">chain</span><span class="p">[</span><span class="s2">&quot;underlying&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])][</span><span class="s2">&quot;settle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Session </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">, expiration </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">near</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">chain</span><span class="p">[</span><span class="s1">&#39;days_to_expiry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> days), &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;risk-free rate </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parity-implied forward: </span><span class="si">{</span><span class="n">forward</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">; the </span><span class="si">{</span><span class="n">chain</span><span class="p">[</span><span class="s1">&#39;underlying&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> future settled at </span><span class="si">{</span><span class="n">es_settle</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">wide</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;cp_flag&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;settle&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wide</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">wide</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call settlement&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wide</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">wide</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put settlement&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">forward</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Parity forward&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">forward</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">forward</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">forward</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Strike&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Settlement price, index points&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;E-mini S&amp;P 500 options expiring </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">near</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">, settlements on </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-16, expiration 2026-10-30 (14 days), risk-free rate 4.12%
+Parity-implied forward: 7,704.24; the ESZ6 future settled at 7,704.25
+</pre></div>
+</div>
+<img alt="../_images/8ae81c18644fefd5b1f6a913a5ecaaf4518827e480569dafbe378103700ea7d0.png" src="../_images/8ae81c18644fefd5b1f6a913a5ecaaf4518827e480569dafbe378103700ea7d0.png" />
+</div>
+</div>
+</section>
+<section id="the-smile">
+<h2>The smile<a class="headerlink" href="#the-smile" title="Link to this heading">#</a></h2>
+<p>A price is hard to compare across strikes; an implied volatility is not.
+<code class="docutils literal notranslate"><span class="pre">smile.surface_from_chain</span></code> inverts each out-of-the-money settlement, puts
+below the forward and calls above it, to the volatility that makes the
+Black-76 formula return it, with the discounted forward <span class="math notranslate nohighlight">\(F e^{-r\tau}\)</span>
+standing in for the spot (the <code class="docutils literal notranslate"><span class="pre">black_scholes</span></code> module explains why that
+identity is exact for options on a future). The strike becomes moneyness,
+<span class="math notranslate nohighlight">\(k = K / S^*\)</span>, so that a strike and a gross-return level are the same
+number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surface</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">surface_from_chain</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">flag</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">,</span> <span class="s2">&quot;Puts (out of the money)&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="s2">&quot;Calls (out of the money)&quot;</span><span class="p">)]:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">surface</span><span class="p">[</span><span class="n">surface</span><span class="p">[</span><span class="s2">&quot;cp_flag&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">flag</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;moneyness&quot;</span><span class="p">],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;implied_vol&quot;</span><span class="p">],</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s2">&quot; a 20</span><span class="si">% d</span><span class="s2">rop&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Moneyness, K / S&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Implied volatility, %&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The smile, from settlement prices&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">surface</span><span class="p">)</span><span class="si">}</span><span class="s2"> usable strikes, moneyness from </span><span class="si">{</span><span class="n">surface</span><span class="p">[</span><span class="s1">&#39;moneyness&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">surface</span><span class="p">[</span><span class="s1">&#39;moneyness&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/89ab01858fa1a04051b7ce022d590c48669d979d1cbc951814bc978645a2336a.png" src="../_images/89ab01858fa1a04051b7ce022d590c48669d979d1cbc951814bc978645a2336a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>269 usable strikes, moneyness from 0.47 to 1.12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two things to notice. The smile is a smirk: out-of-the-money puts are
+dearer, in volatility terms, than out-of-the-money calls, because a market
+fall is what people insure against. And the strikes go deep: the lowest
+usable put is far below the 20% drop that the next guide prices.</p>
+<p>Not every settlement is usable. CME’s smallest premium tick is 0.05 index
+points, and a deep out-of-the-money option whose settlement sits at that
+tick is marked at a floor, not priced; the inversion treats it as if it
+were a price and returns an absurd volatility. The pull keeps those rows
+(they are what the exchange published), and <code class="docutils literal notranslate"><span class="pre">surface_from_chain</span></code> drops
+them before inverting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">at_floor</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[</span><span class="n">chain</span><span class="p">[</span><span class="s2">&quot;settle&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">smile</span><span class="o">.</span><span class="n">MIN_SETTLE</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">at_floor</span><span class="p">)</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span><span class="si">}</span><span class="s2"> contracts settled at or below the minimum tick of </span><span class="si">{</span><span class="n">smile</span><span class="o">.</span><span class="n">MIN_SETTLE</span><span class="si">}</span><span class="s2">; &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;strikes </span><span class="si">{</span><span class="n">at_floor</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">at_floor</span><span class="p">[</span><span class="s1">&#39;strike&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34 of 606 contracts settled at or below the minimum tick of 0.05; strikes 100 to 10,800
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="where-the-strikes-stop">
+<h2>Where the strikes stop<a class="headerlink" href="#where-the-strikes-stop" title="Link to this heading">#</a></h2>
+<p>This is the reason the case study uses the exchange’s prices rather than a
+vendor’s fitted surface. OptionMetrics’ standardized surface, the data of
+guide 04, stops at the 10-delta put, which at 30 days sits around 92% of
+the spot; a 20% drop lies beyond it, in a region the vendor fills by
+extrapolation. The exchange lists, and settles, strikes far past it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">session</span> <span class="ow">in</span> <span class="n">options</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">near_d</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">bracketing_expiries</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">surface_from_chain</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">near_d</span><span class="p">],</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">rate_on</span><span class="p">(</span><span class="n">fred</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        <span class="n">puts</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;cp_flag&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">]</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="s2">&quot;days&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;days_to_maturity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                     <span class="s2">&quot;deepest usable put (K/S)&quot;</span><span class="p">:</span> <span class="n">puts</span><span class="p">[</span><span class="s2">&quot;moneyness&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+                     <span class="s2">&quot;puts below K/S = 0.80&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">puts</span><span class="p">[</span><span class="s2">&quot;moneyness&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.80</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())})</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">continue</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>days</th>
+      <th>deepest usable put (K/S)</th>
+      <th>puts below K/S = 0.80</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2026-10-12</th>
+      <td>18</td>
+      <td>0.535579</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>2026-10-13</th>
+      <td>17</td>
+      <td>0.535661</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>2026-10-14</th>
+      <td>16</td>
+      <td>0.489927</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>2026-10-15</th>
+      <td>15</td>
+      <td>0.488579</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>2026-10-16</th>
+      <td>14</td>
+      <td>0.468014</td>
+      <td>37</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Every session has a dozen or more quoted puts below the crash threshold.
+The density the next guide builds in that region comes from prices, not
+from a convention.</p>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../HW3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 3: SVIX and the Probability of a Crash</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_02_svix_and_crash_probability_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">02. Replicating SVIX and the Probability of a Crash</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-options-the-e-mini-end-of-month-family">Which options: the E-mini end-of-month family</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-price-the-settlement">Which price: the settlement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-contract-is-which-the-definition-schema">Which contract is which: the <code class="docutils literal notranslate"><span class="pre">definition</span></code> schema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sessions-chain">One session’s chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-smile">The smile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-strikes-stop">Where the strikes stop</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

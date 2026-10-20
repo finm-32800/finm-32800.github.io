@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>02. Replicating SVIX and the Probability of a Crash &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_02_svix_and_crash_probability_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="03. The Daily Monitor" href="_03_daily_monitor_ipynb.html" />
+    <link rel="prev" title="01. E-mini S&amp;P 500 Options Data from Databento" href="_01_es_options_data_ipynb.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_02_svix_and_crash_probability_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_02_svix_and_crash_probability_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>02. Replicating SVIX and the Probability of a Crash</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-smile-to-a-priced-grid">1. From the smile to a priced grid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-the-integral-of-option-prices-across-strikes">2. SVIX²: the integral of option prices across strikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve">3. The risk-neutral distribution: the slope of the call curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-risk-neutral-to-real-the-log-investors-crash-probability">4. From risk-neutral to real: the log investor’s crash probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series-and-cmes">5. Martin’s published series, and CME’s</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-homework">The homework</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="replicating-svix-and-the-probability-of-a-crash">
+<h1>02. Replicating SVIX and the Probability of a Crash<a class="headerlink" href="#replicating-svix-and-the-probability-of-a-crash" title="Link to this heading">#</a></h1>
+<p>Ian Martin’s <a class="reference external" href="https://academic.oup.com/qje/article/132/1/367/2724543"><em>What is the Expected Return on the Market?</em></a>
+(QJE 2017) builds two numbers from index option prices and publishes both
+on <a class="reference external" href="https://personal.lse.ac.uk/martiniw/">his website</a>: <strong>SVIX</strong>, a
+volatility index that measures the variance the market expects for the
+S&amp;P 500, and the <strong>probability of a 20% decline</strong> in the index over the
+coming month. CME now computes the SVIX construction every day for its
+major contracts as the <a class="reference external" href="https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html">CVOL</a>
+family of volatility indexes, from the same settlement prices guide 01
+pulled.</p>
+<p>This guide rebuilds both numbers for one session, step by step, and
+checks them against what CME and Cboe publish. The three formulas it
+derives are the three functions the homework asks you to complete:
+<code class="docutils literal notranslate"><span class="pre">svix.svix_squared</span></code>, the Breeden-Litzenberger step in
+<code class="docutils literal notranslate"><span class="pre">rnd.risk_neutral_cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">crash_prob.crash_probability</span></code>.</p>
+<p><strong>In this guide</strong></p>
+<ol class="arabic simple">
+<li><p>From the smile to a priced grid.</p></li>
+<li><p>SVIX²: the integral of option prices across strikes.</p></li>
+<li><p>The risk-neutral distribution: the slope of the call curve.</p></li>
+<li><p>From risk-neutral to real: the log investor’s crash probability.</p></li>
+<li><p>Martin’s published series, and CME’s.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">crash_prob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_es_options</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_fred</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rnd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">smile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">svix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">))</span>
+<span class="n">MANUAL_DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;MANUAL_DATA_DIR&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.width&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_options</span><span class="p">()</span>
+<span class="n">fred</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">load_fred</span><span class="p">()</span>
+<span class="n">latest</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">]</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">rate_on</span><span class="p">(</span><span class="n">fred</span><span class="p">,</span> <span class="n">latest</span><span class="p">)</span>
+<span class="n">near</span><span class="p">,</span> <span class="n">far</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">bracketing_expiries</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Session </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">; expirations </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">near</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">far</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> bracket 30 days; &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;one-month Treasury yield </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-16; expirations 2026-10-30 and 2026-11-30 bracket 30 days; one-month Treasury yield 4.12%
+</pre></div>
+</div>
+</div>
+</div>
+<section id="from-the-smile-to-a-priced-grid">
+<h2>1. From the smile to a priced grid<a class="headerlink" href="#from-the-smile-to-a-priced-grid" title="Link to this heading">#</a></h2>
+<p>Guide 01 ended with the smile for one expiration: an implied volatility
+at each out-of-the-money strike, with the strike expressed as moneyness
+<span class="math notranslate nohighlight">\(k = K / S\)</span>. Both numbers this guide computes are integrals across
+strikes, and the exchange’s strikes are a discrete, uneven grid. So the
+engine (<code class="docutils literal notranslate"><span class="pre">rnd.priced_grid</span></code>) interpolates the smile onto a fine grid of
+2,000 points on <span class="math notranslate nohighlight">\(k \in [1/3, 3]\)</span>, linearly between observed strikes and
+flat beyond them, and prices a call at every point with the
+Black-Scholes formula. The spot is normalized to 1, so a call price is a
+fraction of the spot, the forward is <span class="math notranslate nohighlight">\(R_f = e^{r\tau}\)</span>, and put prices
+follow from put-call parity, <span class="math notranslate nohighlight">\(p(k) = c(k) - 1 + k / R_f\)</span>.</p>
+<p>This is the convention of Martin and Shi’s Appendix D, and it is the
+convention of every formula below: a strike and a gross-return level are
+the same number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surface_near</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">smile_for</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">latest</span><span class="p">,</span> <span class="n">near</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
+<span class="n">surface_far</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">smile_for</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">latest</span><span class="p">,</span> <span class="n">far</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
+<span class="n">cdf_near</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">risk_neutral_cdf</span><span class="p">(</span><span class="n">surface_near</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
+<span class="n">cdf_far</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">risk_neutral_cdf</span><span class="p">(</span><span class="n">surface_far</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_near</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">call_grid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call price c(k)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_near</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">put_grid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put price p(k), by parity&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cdf_near</span><span class="o">.</span><span class="n">forward</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Forward, $R_f$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Moneyness k = K / S&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Price, as a fraction of the spot&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Option prices on the fine grid, expiration </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">near</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">surface_near</span><span class="p">[</span><span class="s1">&#39;days_to_maturity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> days)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6a5b6ff7cd7938204b169ef7a416c446e04d33be2277cf9284d3eee60ccb3234.png" src="../_images/6a5b6ff7cd7938204b169ef7a416c446e04d33be2277cf9284d3eee60ccb3234.png" />
+</div>
+</div>
+</section>
+<section id="svix2-the-integral-of-option-prices-across-strikes">
+<h2>2. SVIX²: the integral of option prices across strikes<a class="headerlink" href="#svix2-the-integral-of-option-prices-across-strikes" title="Link to this heading">#</a></h2>
+<p>Martin defines SVIX² as the risk-neutral variance of the market’s gross
+return <span class="math notranslate nohighlight">\(R_T\)</span>, normalized by the risk-free rate and annualized:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{SVIX}^2_t = \frac{1}{\tau}\,\mathrm{var}^*_t\!\left(\frac{R_T}{R_f}\right).\]</div>
+<p>The reason it can be computed is a fact about option prices. Any smooth
+payoff <span class="math notranslate nohighlight">\(g(R_T)\)</span> can be replicated by a bond, a forward, and a portfolio
+of out-of-the-money puts and calls, with weight <span class="math notranslate nohighlight">\(g''(K)\)</span> on the option
+struck at <span class="math notranslate nohighlight">\(K\)</span> (Breeden and Litzenberger 1978, Carr and Madan 1998). For
+<span class="math notranslate nohighlight">\(g(R) = R^2\)</span> the weights are all equal to 2, and the price of the
+squared return is <span class="math notranslate nohighlight">\(2\)</span> times the integral of option prices across strikes.
+Subtracting the squared mean, which is <span class="math notranslate nohighlight">\(R_f^2\)</span>, gives Martin’s
+equation (12). With the spot normalized to 1:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{SVIX}^2 = \frac{2}{\tau\, R_f}\left[\int_0^{R_f} p(k)\,dk + \int_{R_f}^{\infty} c(k)\,dk\right].\]</div>
+<p>Puts below the forward, calls above it, <strong>every strike weighted
+equally</strong>. The VIX, by contrast, prices the log contract, whose weights
+are <span class="math notranslate nohighlight">\(1/K^2\)</span>; it leans harder on the put wing, which is why the VIX is
+above SVIX when the smirk is steep. CME’s CVOL uses Martin’s weights.</p>
+<p>The integrand, out-of-the-money prices across the grid:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">grid</span>
+<span class="n">otm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grid</span> <span class="o">&lt;=</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">forward</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">put_grid</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">call_grid</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">otm</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9ecae1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">otm</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cdf_near</span><span class="o">.</span><span class="n">forward</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Moneyness k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Out-of-the-money price&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The area under this curve, times $2 / (</span><span class="se">\\</span><span class="s2">tau R_f)$, is SVIX$^2$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">month_expiry</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">closest_expiry</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>  <span class="c1"># the expiration closest to 30 days</span>
+<span class="n">cdf_month</span> <span class="o">=</span> <span class="p">{</span><span class="n">near</span><span class="p">:</span> <span class="n">cdf_near</span><span class="p">,</span> <span class="n">far</span><span class="p">:</span> <span class="n">cdf_far</span><span class="p">}[</span><span class="n">month_expiry</span><span class="p">]</span>
+<span class="n">svix2_near</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">svix_squared</span><span class="p">(</span><span class="n">cdf_near</span><span class="p">)</span>
+<span class="n">svix2_far</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">svix_squared</span><span class="p">(</span><span class="n">cdf_far</span><span class="p">)</span>
+<span class="n">svix2_30</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">interpolate_variance</span><span class="p">(</span><span class="n">svix2_near</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">maturity_years</span><span class="p">,</span> <span class="n">svix2_far</span><span class="p">,</span> <span class="n">cdf_far</span><span class="o">.</span><span class="n">maturity_years</span><span class="p">)</span>
+<span class="n">vix_today</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fred</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SVIX² at </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">surface_near</span><span class="p">[</span><span class="s1">&#39;days_to_maturity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> days: </span><span class="si">{</span><span class="n">svix2_near</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_near</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SVIX² at </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">surface_far</span><span class="p">[</span><span class="s1">&#39;days_to_maturity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> days: </span><span class="si">{</span><span class="n">svix2_far</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_far</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interpolated to 30 days: SVIX² </span><span class="si">{</span><span class="n">svix2_30</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_30</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The VIX closed at </span><span class="si">{</span><span class="n">vix_today</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9c772d021912e8320c059e24976cb407c5a471098ba7ef9c0028c37c0bd0d867.png" src="../_images/9c772d021912e8320c059e24976cb407c5a471098ba7ef9c0028c37c0bd0d867.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVIX² at 14 days: 0.03407  -&gt;  SVIX 18.46
+SVIX² at 45 days: 0.03058  -&gt;  SVIX 17.49
+Interpolated to 30 days: SVIX² 0.03136  -&gt;  SVIX 17.71
+The VIX closed at 19.99 on 2026-10-16
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two expirations rarely sit exactly 30 days out, so the two SVIX² values
+are combined the way the VIX combines its two expirations: total variance
+(SVIX² times <span class="math notranslate nohighlight">\(\tau\)</span>) is linear in time to expiry, so interpolate it to 30
+days and divide. In VIX units, 100 times the square root, SVIX lands
+below the VIX, as it should.</p>
+<p><strong>A check against a closed form.</strong> Under a flat smile the return is
+lognormal, <span class="math notranslate nohighlight">\(\mathrm{var}^*(R/R_f) = e^{\sigma^2\tau} - 1\)</span>, and the
+integral must give <span class="math notranslate nohighlight">\((e^{\sigma^2\tau} - 1)/\tau\)</span>, a touch above
+<span class="math notranslate nohighlight">\(\sigma^2\)</span>. That is the first test of <code class="docutils literal notranslate"><span class="pre">svix_squared</span></code>.</p>
+</section>
+<section id="the-risk-neutral-distribution-the-slope-of-the-call-curve">
+<h2>3. The risk-neutral distribution: the slope of the call curve<a class="headerlink" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve" title="Link to this heading">#</a></h2>
+<p>A call struck at <span class="math notranslate nohighlight">\(k\)</span> pays <span class="math notranslate nohighlight">\((R_T - k)^+\)</span>, so its discounted price is
+<span class="math notranslate nohighlight">\(c(k) = E^*[(R_T - k)^+] / R_f\)</span>. Differentiate in the strike: the
+derivative of the payoff is <span class="math notranslate nohighlight">\(-1\)</span> where the option finishes in the money
+and zero elsewhere, so</p>
+<div class="math notranslate nohighlight">
+\[\frac{dc}{dk} = -\frac{P^*(R_T &gt; k)}{R_f}
+\qquad\Longrightarrow\qquad
+Q(k) \equiv P^*(R_T \le k) = 1 + R_f\,\frac{dc}{dk}.\]</div>
+<p>This is Breeden and Litzenberger’s result: the risk-neutral CDF of the
+return is read off the slope of the call curve, and the density off its
+curvature. On the fine grid the slope is a numerical gradient. The raw
+result is not quite a CDF, because the interpolated smile is piecewise
+linear and the call curve’s slope has kinks; an isotonic regression, the
+closest non-decreasing function, fixes that, and a clip to <span class="math notranslate nohighlight">\([0, 1]\)</span>
+finishes the job. From here on the horizon is one month, so the
+distribution is read off the expiration closest to 30 days. Here is
+both, with the density:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">grid</span>
+<span class="n">R_f</span> <span class="o">=</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">forward</span>
+<span class="n">q_raw</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">R_f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">cdf_month</span><span class="o">.</span><span class="n">call_grid</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">q_raw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#bbbbbb&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Raw: $1 + R_f</span><span class="se">\\</span><span class="s2">, dc/dk$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Isotonic fit, clipped to [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gross return k&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Q(k) = P*(R ≤ k)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The risk-neutral CDF, expiration </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">month_expiry</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">cdf_month</span><span class="o">.</span><span class="n">maturity_years</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">365</span><span class="p">))</span><span class="si">}</span><span class="s2"> days)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">cdf_month</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gross return k&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The risk-neutral density&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">p_star_20</span> <span class="o">=</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">risk_neutral_crash_prob</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">)</span>
+<span class="n">p_star_10</span> <span class="o">=</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">risk_neutral_crash_prob</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Risk-neutral probability of a 20% drop by </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">month_expiry</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p_star_20</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%; of a 10% drop: </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p_star_10</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1576e7491d543a58e5f690021d7423a7d0afc080da15fb3b50c174092d370904.png" src="../_images/1576e7491d543a58e5f690021d7423a7d0afc080da15fb3b50c174092d370904.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk-neutral probability of a 20% drop by 2026-11-30: 1.21%; of a 10% drop: 4.02%
+</pre></div>
+</div>
+</div>
+</div>
+<p>The density has the shape every index option trader knows: a heavy left
+tail, bought with the put smirk. <span class="math notranslate nohighlight">\(Q(0.8)\)</span> is the risk-neutral probability
+of a 20% drop, and it is the number the options market charges for, not
+the number it expects.</p>
+<p><strong>Why the isotonic step is there.</strong> Try the same derivative on the raw
+settlement prices, strike by strike, without the smile and the fine grid:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surface_month</span> <span class="o">=</span> <span class="p">{</span><span class="n">near</span><span class="p">:</span> <span class="n">surface_near</span><span class="p">,</span> <span class="n">far</span><span class="p">:</span> <span class="n">surface_far</span><span class="p">}[</span><span class="n">month_expiry</span><span class="p">]</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">session</span><span class="p">[(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">month_expiry</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;cp_flag&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;settle&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">smile</span><span class="o">.</span><span class="n">MIN_SETTLE</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;strike&quot;</span><span class="p">)</span>
+<span class="n">spot</span> <span class="o">=</span> <span class="n">surface_month</span><span class="p">[</span><span class="s2">&quot;spot_price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">k_raw</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;strike&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">/</span> <span class="n">spot</span>
+<span class="n">c_raw</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;settle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">/</span> <span class="n">spot</span>
+<span class="n">q_from_prices</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">R_f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">c_raw</span><span class="p">,</span> <span class="n">k_raw</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_raw</span><span class="p">,</span> <span class="n">q_from_prices</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;From the settlement prices directly&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;From the smile, on the fine grid, isotonic&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gross return k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Q(k)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;A CDF has to be monotone; raw price differences are not&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1eb5b26634f096e5f8fdf28d9d1c9103be32db19e720247c071f3399978dfd11.png" src="../_images/1eb5b26634f096e5f8fdf28d9d1c9103be32db19e720247c071f3399978dfd11.png" />
+</div>
+</div>
+<p>Settlement prices are marked strike by strike, to the tick, and their
+differences are noisy; the “CDF” they give goes up and down. OptionMetrics’
+smoothed surface hides this from you, because the vendor has already
+fitted a smile. Working from the exchange’s prices, you see the problem
+and the cure.</p>
+<p><strong>The test</strong> of <code class="docutils literal notranslate"><span class="pre">risk_neutral_cdf</span></code> is the same flat-smile check: under a
+constant volatility the CDF must be the lognormal’s, in closed form.</p>
+</section>
+<section id="from-risk-neutral-to-real-the-log-investors-crash-probability">
+<h2>4. From risk-neutral to real: the log investor’s crash probability<a class="headerlink" href="#from-risk-neutral-to-real-the-log-investors-crash-probability" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(Q(0.8)\)</span> overstates the probability of a crash, because a dollar in a
+crash state is worth more than a dollar in a boom, and option prices
+weight states by that marginal utility. Martin’s way out is to take the
+perspective of an investor with log utility whose whole portfolio is the
+market. Such an investor’s marginal utility is <span class="math notranslate nohighlight">\(1/R_T\)</span>, so for any
+payoff <span class="math notranslate nohighlight">\(X_T\)</span> her expectation and the risk-neutral one are related by</p>
+<div class="math notranslate nohighlight">
+\[E_t[X_T] = \frac{1}{R_f}\,E^*_t[X_T\, R_T],\]</div>
+<p>the formula on the slide of his talk: what a log investor would have to
+believe to be happy holding the market. Apply it to the indicator of a
+crash, <span class="math notranslate nohighlight">\(X_T = 1\{R_T \le \alpha\}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P_t(R_T \le \alpha) = \frac{E^*_t[R_T\, 1\{R_T \le \alpha\}]}{R_f}.\]</div>
+<p>And the numerator is one more Breeden-Litzenberger expression. A put
+struck at <span class="math notranslate nohighlight">\(\alpha\)</span> pays <span class="math notranslate nohighlight">\((\alpha - R_T)^+ = \alpha\,1\{R_T \le \alpha\} - R_T\,1\{R_T \le \alpha\}\)</span>,
+so its price is <span class="math notranslate nohighlight">\(p(\alpha) = [\alpha\, Q(\alpha) - E^*(R_T 1\{R_T \le \alpha\})] / R_f\)</span>,
+which rearranges to</p>
+<div class="math notranslate nohighlight">
+\[E^*_t[R_T\, 1\{R_T \le \alpha\}] = \alpha\, Q(\alpha) - R_f\, p(\alpha),
+\qquad\text{so}\qquad
+P_t(R_T \le \alpha) = \frac{\alpha\, Q(\alpha)}{R_f} - p(\alpha).\]</div>
+<p>Everything on the right is on the grid: <span class="math notranslate nohighlight">\(Q(\alpha)\)</span> from step 3, <span class="math notranslate nohighlight">\(p(\alpha)\)</span>
+the put price from step 1. The risk-neutral probability, shrunk by the
+put’s own price. Martin and Shi (2025) generalize the investor to power
+utility with risk aversion <span class="math notranslate nohighlight">\(\gamma\)</span>, their equation (7),
+<span class="math notranslate nohighlight">\(P = E^*[R^\gamma 1\{R \le \alpha\}] / E^*[R^\gamma]\)</span>, calibrate
+<span class="math notranslate nohighlight">\(\gamma = 2\)</span>, and compute the moments from option prices by their
+Result 5 (<code class="docutils literal notranslate"><span class="pre">utility_correction.py</span></code>); <span class="math notranslate nohighlight">\(\gamma = 1\)</span> recovers Martin’s
+formula. The three numbers for this session:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;20</span><span class="si">% d</span><span class="s2">rop&quot;</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;10</span><span class="si">% d</span><span class="s2">rop&quot;</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">)]:</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">month_expiry</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;risk-neutral, P*&quot;</span><span class="p">:</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">risk_neutral_crash_prob</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span>
+        <span class="s2">&quot;log investor (Martin 2017)&quot;</span><span class="p">:</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">crash_probability</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span>
+        <span class="s2">&quot;power utility, gamma = 2 (Martin and Shi 2025)&quot;</span><span class="p">:</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">crash_probability_power</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span>
+    <span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;event&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_2fa8d">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_2fa8d_level0_col0" class="col_heading level0 col0" >risk-neutral, P*</th>
+      <th id="T_2fa8d_level0_col1" class="col_heading level0 col1" >log investor (Martin 2017)</th>
+      <th id="T_2fa8d_level0_col2" class="col_heading level0 col2" >power utility, gamma = 2 (Martin and Shi 2025)</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >event</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_2fa8d_level0_row0" class="row_heading level0 row0" >20% drop by 2026-11-30</th>
+      <td id="T_2fa8d_row0_col0" class="data row0 col0" >1.21%</td>
+      <td id="T_2fa8d_row0_col1" class="data row0 col1" >0.80%</td>
+      <td id="T_2fa8d_row0_col2" class="data row0 col2" >0.54%</td>
+    </tr>
+    <tr>
+      <th id="T_2fa8d_level0_row1" class="row_heading level0 row1" >10% drop by 2026-11-30</th>
+      <td id="T_2fa8d_row1_col0" class="data row1 col0" >4.02%</td>
+      <td id="T_2fa8d_row1_col1" class="data row1 col1" >3.19%</td>
+      <td id="T_2fa8d_row1_col2" class="data row1 col2" >2.58%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The ordering is the content: the more risk-averse the investor, the more
+of the option price is marginal utility rather than probability, and the
+smaller the real-world probability she reads out of it.</p>
+<p><strong>The test</strong> of <code class="docutils literal notranslate"><span class="pre">crash_probability</span></code>: under a flat smile the log investor’s
+probability has a closed form too, <span class="math notranslate nohighlight">\(N\!\left((\ln a - s^2/2)/s\right)\)</span> with
+<span class="math notranslate nohighlight">\(a = \alpha / R_f\)</span> and <span class="math notranslate nohighlight">\(s = \sigma\sqrt{\tau}\)</span>.</p>
+</section>
+<section id="martins-published-series-and-cmes">
+<h2>5. Martin’s published series, and CME’s<a class="headerlink" href="#martins-published-series-and-cmes" title="Link to this heading">#</a></h2>
+<p>Martin publishes SVIX² and the crash probability from January 1996 to
+January 2012, computed from S&amp;P 500 index options. Here is his SVIX next
+to the VIX, and his monthly probability of a 20% drop at one month:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">martin_svix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">MANUAL_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;martin_2017&quot;</span> <span class="o">/</span> <span class="s2">&quot;svix2.csv&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">martin_crash</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">MANUAL_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;martin_2017&quot;</span> <span class="o">/</span> <span class="s2">&quot;crashprob.csv&quot;</span><span class="p">)</span>
+<span class="n">martin_crash</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">martin_crash</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">vix</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vix&quot;</span><span class="p">])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">martin_svix</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">martin_svix</span><span class="p">[</span><span class="s2">&quot;m1&quot;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SVIX, one month (Martin 2017, as published)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">vix</span><span class="p">[(</span><span class="n">vix</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">martin_svix</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vix</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">martin_svix</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())]</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;vix&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VIX (Cboe, from FRED)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#7f7f7f&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Annualized volatility, %&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Martin&#39;s series, 1996 to 2012&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">martin_crash</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">martin_crash</span><span class="p">[</span><span class="s2">&quot;m1&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability of a 20</span><span class="si">% d</span><span class="s2">rop</span><span class="se">\n</span><span class="s2">within a month, %&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fcc8cc13a920cf0be2b1246ea985f116adb00df4779b76dd2ec9d6ad0980b237.png" src="../_images/fcc8cc13a920cf0be2b1246ea985f116adb00df4779b76dd2ec9d6ad0980b237.png" />
+</div>
+</div>
+<p>The daily monitor of guide 03 continues the first chart from today
+forward, and guide 04 reproduces the second one from the OptionMetrics
+surface and checks it against these numbers.</p>
+<p><strong>Does it match CME?</strong> CME’s E-mini S&amp;P 500 CVOL index is the same
+construction on the same settlement prices, so the two should agree to
+within the differences of strike grid and interpolation, about a vol
+point. CME does not give the history away, so readings are recorded by
+hand in <code class="docutils literal notranslate"><span class="pre">data_manual/cme_cvol_snapshots.csv</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">test_svix_matches_cvol_snapshot</span></code> compares each one with our 30-day SVIX
+for the same session:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">snapshots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">MANUAL_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;cme_cvol_snapshots.csv&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">snapshots</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No CVOL reading recorded yet. Capture the index at cmegroup.com/cvol and add a row.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">load_history</span><span class="p">()</span>
+    <span class="n">compare</span> <span class="o">=</span> <span class="n">snapshots</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">history</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">compare</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="s2">&quot;cvol_index&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No CVOL reading recorded yet. Capture the index at cmegroup.com/cvol and add a row.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-homework">
+<h2>The homework<a class="headerlink" href="#the-homework" title="Link to this heading">#</a></h2>
+<p>Part B asks for the three formulas derived here, in <code class="docutils literal notranslate"><span class="pre">src/svix.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">src/rnd.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">src/crash_prob.py</span></code>. Each function’s docstring repeats
+its formula, and <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">pytest</span> <span class="pre">src/test_svix.py</span> <span class="pre">src/test_rnd.py</span> <span class="pre">src/test_crash_prob.py</span></code>
+checks them offline against the closed forms. With the three in place,
+<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> computes this session, and every session in the pull, into
+the monitor’s history, which is guide 03.</p>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_01_es_options_data_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">01. E-mini S&amp;P 500 Options Data from Databento</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_03_daily_monitor_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">03. The Daily Monitor</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-smile-to-a-priced-grid">1. From the smile to a priced grid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-the-integral-of-option-prices-across-strikes">2. SVIX²: the integral of option prices across strikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve">3. The risk-neutral distribution: the slope of the call curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-risk-neutral-to-real-the-log-investors-crash-probability">4. From risk-neutral to real: the log investor’s crash probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series-and-cmes">5. Martin’s published series, and CME’s</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-homework">The homework</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

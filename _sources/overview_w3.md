@@ -7,7 +7,9 @@ Week4/intro_to_LaTeX.md
 Week4/latex_essentials.md
 Week7/databento.md
 notebooks/_01_databento_ipynb.ipynb
+Week7/LSEG_datastream.md
 Week3/github_pages_preview.md
+Week3/project_structure.md
 Week3/study_guide.md
 ```
 
@@ -294,9 +296,8 @@ we walk it in class. Two steps:
 
 ## Looking ahead to Week 4
 
-Week 4 turns the code itself into something installable and documented: **Python
-packaging and Sphinx**. It also picks up what moved out of tonight: starting a
-project from the ChartBook template, `uv` and `pixi`, the pull-request
-workflow, and publishing with GitHub Pages. [HW 3](./HW3.md) launches, an
-installable package that recovers option-implied crash probabilities from the
-volatility smile.
+Week 4 picks up what moved out of tonight, FedWatch and publishing with
+GitHub Pages, and then makes the site rebuild itself: **CI/CD with GitHub
+Actions**, with a word on how Python packages are built and released.
+[HW 3](./HW3.md) launches, a daily monitor of the S&P 500's option-implied
+crash probability, deployed with a workflow you write.

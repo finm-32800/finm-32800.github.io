@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Homework 3: Option-Implied Crash Probabilities &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Homework 3: SVIX and the Probability of a Crash &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
@@ -47,11 +47,13 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'HW3';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Homework 4: Order Book Validation and Flow Toxicity" href="HW4.html" />
+    <link rel="next" title="01. E-mini S&amp;P 500 Options Data from Databento" href="notebooks/_01_es_options_data_ipynb.html" />
     <link rel="prev" title="02. Replicating the CME FedWatch Tool" href="notebooks/_02_fedwatch_replication_ipynb.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -190,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 </ul>
 </details></li>
 </ul>
@@ -233,24 +236,22 @@
 <li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Python Packaging and Documentation with Sphinx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
@@ -263,6 +264,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 </ul>
 </details></li>
@@ -293,7 +296,13 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homework 3: Option-Implied Crash Probabilities</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Homework 3: SVIX and the Probability of a Crash</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5: The Class Report</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -489,7 +498,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Homework 3: Option-Implied Crash Probabilities</h1>
+    <h1>Homework 3: SVIX and the Probability of a Crash</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -499,7 +508,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-determined">To be determined</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">Before you start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-graded-2-pts-github-skills">Part A (graded, 2 pts): GitHub Skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-graded-5-pts-svix-and-the-probability-of-a-crash">Part B (graded, 5 pts): SVIX and the probability of a crash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-c-graded-8-pts-the-daily-monitor">Part C (graded, 8 pts): the daily monitor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-d-graded-4-pts-single-names-from-the-optionmetrics-surface">Part D (graded, 4 pts): single names, from the OptionMetrics surface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
 </ul>
             </nav>
         </div>
@@ -510,19 +525,199 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="homework-3-option-implied-crash-probabilities">
-<h1>Homework 3: Option-Implied Crash Probabilities<a class="headerlink" href="#homework-3-option-implied-crash-probabilities" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="homework-3-svix-and-the-probability-of-a-crash">
+<h1>Homework 3: SVIX and the Probability of a Crash<a class="headerlink" href="#homework-3-svix-and-the-probability-of-a-crash" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</div>
 <ul class="simple">
 <li><p><strong>Launched:</strong> week 4. <strong>Due:</strong> Tuesday, November 3, at the start of the
-week 6 session. Also posted on Canvas.</p></li>
-<li><p><strong>Link to Assignment:</strong> posted at launch</p></li>
-<li><p><strong>Goes with:</strong> week 4</p></li>
+week 6 session, two weeks after it launches. Also posted on Canvas.</p></li>
+<li><p><strong>Link to Assignment:</strong> a private copy is created for you in the
+<a class="reference external" href="https://github.com/hw-finm-32800">hw-finm-32800</a> organization, named
+<code class="docutils literal notranslate"><span class="pre">hw3-</span></code> followed by your GitHub username. The copies are created later in
+the week of October 20, by Friday, October 23. If you have accepted the
+invitation to the organization, yours simply appears there.</p></li>
+<li><p><strong>Goes with:</strong> weeks 4 and 5</p></li>
 </ul>
-<section id="to-be-determined">
-<h2>To be determined<a class="headerlink" href="#to-be-determined" title="Link to this heading">#</a></h2>
-<p>The write-up for this assignment is posted when it launches in week 4: the
-tasks, the point breakdown, the data sources, and the link to your repository.
-The title above is the topic as currently planned and may change before launch.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Two replications and one deployment.</p>
+<p>Ian Martin’s SVIX index measures the variance the options market expects
+for the S&amp;P 500, the way the VIX does but weighting every strike equally,
+and the same option prices give the probability that the market falls 20%
+within a month. Martin publishes both series on
+<a class="reference external" href="https://personal.lse.ac.uk/martiniw/">his website</a>, and CME reports the
+SVIX construction across asset classes as its
+<a class="reference external" href="https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html">CVOL</a>
+family of volatility indexes. The first replication rebuilds both numbers
+from the settlement prices of E-mini S&amp;P 500 options on CME Globex, pulled
+from Databento, and checks them against CME’s and Cboe’s.</p>
+<p>The deployment is the point of the assignment. The CME FedWatch tool you
+rebuilt in HW 2 updates itself every day; your replication did not. This
+time it will: a GitHub Actions workflow runs your pipeline every morning,
+pulls the previous session, appends it to a history, and republishes your
+ChartBook site to GitHub Pages, with your Databento key stored as a secret.
+That is continuous deployment, and the autograder that has scored your
+pushes since HW 1 is the same machinery.</p>
+<p>The second replication is offline. Martin and Shi (2025) extend the crash
+probability to single stocks, with bounds on the probability that Apple or
+AIG falls 20%, built from the OptionMetrics volatility surface on WRDS. You
+complete the query that pulls the surface and run their chain.</p>
+<p>As in HW 1 and HW 2, everything runs as a pipeline and the unit tests are
+the specification. New this time: the pipeline is run with
+<a class="reference external" href="https://docs.astral.sh/uv/"><code class="docutils literal notranslate"><span class="pre">uv</span></code></a>. <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> installs Python 3.12 and
+the locked dependencies into <code class="docutils literal notranslate"><span class="pre">.venv/</span></code> the first time and runs the pipeline;
+there is no environment to create or activate. The same command runs on
+the GitHub Actions runner. Run <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">pytest</span></code>, read the first failing
+test, and write the code that passes it. Do not edit the test files.</p>
+<p>The assignment has four parts, A to D, worth 19 points in total, one per
+test. Every push to your private copy runs the suite on the course runner
+and posts your score to the repository’s Actions tab. Search the repository
+for <code class="docutils literal notranslate"><span class="pre">TODO</span></code> to find the blanks.</p>
+<p><strong>Budget your time.</strong> Parts A, B, and D are a few hours together. Part C is
+where the hours go, because every run of the workflow takes five minutes
+and the first ones fail. Finish Part B and run <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> locally until
+it is green before you touch Part C.</p>
+</section>
+<section id="before-you-start">
+<h2>Before you start<a class="headerlink" href="#before-you-start" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">uv</span></code>.</strong> Install it once from
+<a class="reference external" href="https://docs.astral.sh/uv/getting-started/installation/">docs.astral.sh/uv</a>
+(one command on macOS, Linux, or Windows). Then, in the repository,
+<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code>. In VS Code, select the interpreter in <code class="docutils literal notranslate"><span class="pre">.venv/</span></code>. If you
+would rather keep working in the <code class="docutils literal notranslate"><span class="pre">finm</span></code> conda environment,
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> is exported from the lockfile and
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code> gives the same versions.</p></li>
+<li><p><strong>Your Databento API key</strong> in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, as in HW 2, and later as a GitHub
+secret. Everything this assignment pulls is on the CME Globex feed and
+free under the course license; the pull checks the cost before
+downloading anything.</p></li>
+<li><p><strong>Your WRDS username</strong> in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, for Part D. The OptionMetrics pull is
+about a minute.</p></li>
+<li><p><strong>A public repository in your own GitHub account</strong>, for Part C. The
+workflow needs free Actions minutes and GitHub Pages, which private
+repositories in the course organization do not have. The README explains
+how to push the same code to both.</p></li>
+</ul>
+</section>
+<section id="part-a-graded-2-pts-github-skills">
+<h2>Part A (graded, 2 pts): GitHub Skills<a class="headerlink" href="#part-a-graded-2-pts-github-skills" title="Link to this heading">#</a></h2>
+<p>Complete two tutorials from the <a class="reference external" href="https://skills.github.com/">GitHub Skills</a>
+page, using <strong>public repositories</strong> in your own GitHub account, and record
+the links in <code class="docutils literal notranslate"><span class="pre">src/github_skills.py</span></code> as in HW 1 and HW 2.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/skills/hello-github-actions">Hello GitHub Actions</a>:
+write and run your first workflow. Part C asks you to write a real one.</p></li>
+<li><p><a class="reference external" href="https://github.com/skills/introduction-to-secret-scanning">Introduction to secret scanning</a>:
+what GitHub does when a key reaches a public repository anyway. In Part
+C your Databento key goes into a public repository’s secret store, and
+it must never go anywhere else.</p></li>
+</ul>
+</section>
+<section id="part-b-graded-5-pts-svix-and-the-probability-of-a-crash">
+<h2>Part B (graded, 5 pts): SVIX and the probability of a crash<a class="headerlink" href="#part-b-graded-5-pts-svix-and-the-probability-of-a-crash" title="Link to this heading">#</a></h2>
+<p>From one session’s settlement prices for the two end-of-month expirations
+that bracket 30 days. The pull, the parity forward, the implied
+volatilities, and the smile on a fine grid are written for you. Three
+formulas are not:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="notebooks/_01_es_options_data_ipynb.html"><span class="std std-doc">E-mini S&amp;P 500 Options Data from Databento</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/_02_svix_and_crash_probability_ipynb.html"><span class="std std-doc">Replicating SVIX and the Probability of a Crash</span></a></p></li>
+</ul>
+<p>The blanks, each a formula the second guide derives:</p>
+<ul class="simple">
+<li><p><strong>SVIX²</strong> (<code class="docutils literal notranslate"><span class="pre">src/svix.py</span></code>). The simple variance swap rate is an integral
+of out-of-the-money option prices across strikes, Martin’s equation (12).
+Two tests: a flat smile, where the answer has a closed form, and a
+reading of CME’s E-mini S&amp;P 500 CVOL index recorded in <code class="docutils literal notranslate"><span class="pre">data_manual/</span></code>.</p></li>
+<li><p><strong>The risk-neutral distribution</strong> (<code class="docutils literal notranslate"><span class="pre">src/rnd.py</span></code>). The slope of the call
+curve in the strike is the risk-neutral CDF of the return, Breeden and
+Litzenberger’s result. The isotonic fix that follows it is given. Two
+tests: the result is a valid CDF, and a flat smile gives the lognormal.</p></li>
+<li><p><strong>The log investor’s crash probability</strong> (<code class="docutils literal notranslate"><span class="pre">src/crash_prob.py</span></code>). Martin
+turns the risk-neutral probability of a 20% drop into the belief of an
+investor who holds the market, with one more integral of the same
+distribution. One test against the closed form.</p></li>
+</ul>
+<p>All five tests run offline on synthetic smiles, so this part needs no data.</p>
+<p><strong>Does the replication match?</strong> Your 30-day SVIX is checked against a
+reading of CME’s CVOL index for the same session, which CME computes from
+the same settlement prices, and the second guide shows it next to the VIX.</p>
+</section>
+<section id="part-c-graded-8-pts-the-daily-monitor">
+<h2>Part C (graded, 8 pts): the daily monitor<a class="headerlink" href="#part-c-graded-8-pts-the-daily-monitor" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="notebooks/_03_daily_monitor_ipynb.html"><span class="std std-doc">The Daily Monitor</span></a></p></li>
+</ul>
+<p>Four things to complete, then one to do.</p>
+<ul class="simple">
+<li><p><strong>The monitor task</strong> (<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, 1 pt). <code class="docutils literal notranslate"><span class="pre">task_monitor</span></code> re-pulls the
+trailing window, appends the sessions the history does not have to
+<code class="docutils literal notranslate"><span class="pre">data_manual/svix_monitor_history.csv</span></code>, and redraws the chart. Unlike
+every other task it must run every time it is invoked.</p></li>
+<li><p><strong>The ChartBook manifest</strong> (<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>, 1 pt). Register the monitor
+notebook and the history dataframe.</p></li>
+<li><p><strong>The workflow</strong> (<code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code>, 5 pts). The file
+is given as a skeleton with five blanks: the schedule, the secret, the
+permission the job needs to push, the step that runs the pipeline, and
+the branch the site is deployed to. The tests read the YAML. The step
+that commits the history back to the repository is written for you; read
+its comment, because a workflow that pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code> on every run is a
+workflow that triggers itself. See
+<a class="reference internal" href="Week9/github_actions_interactive_dashboard.html"><span class="std std-doc">GitHub Actions and an Interactive Dashboard</span></a>,
+<a class="reference internal" href="Week9/cron_jobs.html"><span class="std std-doc">cron</span></a>, and the
+<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/github_actions"><code class="docutils literal notranslate"><span class="pre">github_actions/</span></code> examples</a>
+in the in-class repository, which deploy a daily pipeline with a
+Databento secret the same way.</p></li>
+<li><p><strong>The live site</strong> (<code class="docutils literal notranslate"><span class="pre">src/published_site.py</span></code>, 1 pt). Push the completed
+repository to a <strong>public</strong> repository in your own account, add your
+Databento key as a repository secret, run the workflow once from the
+Actions tab, turn on GitHub Pages from the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, and record
+the address of the site and of the repository. The steps are in the
+README. Your private copy in the course organization keeps getting your
+pushes for grading; the workflow does not run there.</p></li>
+</ul>
+<p>When it works, the chart on your site gains one point every morning.</p>
+</section>
+<section id="part-d-graded-4-pts-single-names-from-the-optionmetrics-surface">
+<h2>Part D (graded, 4 pts): single names, from the OptionMetrics surface<a class="headerlink" href="#part-d-graded-4-pts-single-names-from-the-optionmetrics-surface" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="notebooks/_04_single_name_crash_bounds_ipynb.html"><span class="std std-doc">Crash Bounds for Single Names (Martin and Shi 2025)</span></a></p></li>
+</ul>
+<p>Martin and Shi (2025) bound the probability that a single stock crashes
+using the risk-neutral distributions of the stock and of the market. Their
+code, from two of last summer’s students, is given; so are the pulls of
+prices and rates. The blank:</p>
+<ul class="simple">
+<li><p><strong>The surface query</strong> (<code class="docutils literal notranslate"><span class="pre">src/pull_optionmetrics.py</span></code>). Complete the
+<code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause that selects the S&amp;P 500, Apple, and AIG at the 30- and
+91-day maturities over the sample window from the OptionMetrics surface
+table. Two tests run the query against a small in-memory database with
+the WRDS layout, as HW 1 tested its queries.</p></li>
+</ul>
+<p>Then <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span> <span class="pre">single_names</span></code> pulls the surface and runs the chain, with
+your Breeden-Litzenberger step from Part B inside it. The third test checks
+that the chain ran across the sample, and the fourth runs the index
+probability from the surface against the monthly series Martin publishes,
+on the 1996 to 2012 overlap.</p>
+<p><strong>Does the replication match?</strong> The fourth guide shows Apple’s and AIG’s
+bounds next to the paper’s Figure 1, and our index probability next to
+Martin’s series.</p>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">#</a></h2>
+<p>The engine that recovers the risk-neutral distribution and computes the
+bounds is the work of Riley Haas and Marija Jovicic, from their Summer 2026
+replication of Martin and Shi, used with their permission. The SVIX
+integral follows Andrew Heekin and Chandler Bird’s Summer 2026 replication
+of Martin (2017).</p>
 </section>
 </section>
 
@@ -550,11 +745,11 @@ The title above is the topic as currently planned and may change before launch.<
       </div>
     </a>
     <a class="right-next"
-       href="HW4.html"
+       href="notebooks/_01_es_options_data_ipynb.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 4: Order Book Validation and Flow Toxicity</p>
+        <p class="prev-next-title">01. E-mini S&amp;P 500 Options Data from Databento</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -574,7 +769,13 @@ The title above is the topic as currently planned and may change before launch.<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-determined">To be determined</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">Before you start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-graded-2-pts-github-skills">Part A (graded, 2 pts): GitHub Skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-graded-5-pts-svix-and-the-probability-of-a-crash">Part B (graded, 5 pts): SVIX and the probability of a crash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-c-graded-8-pts-the-daily-monitor">Part C (graded, 8 pts): the daily monitor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-d-graded-4-pts-single-names-from-the-optionmetrics-surface">Part D (graded, 4 pts): single names, from the OptionMetrics surface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
 </ul>
   </nav></div>
 
