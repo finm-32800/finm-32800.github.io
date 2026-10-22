@@ -39,8 +39,8 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
   account, over SSH) and Midway3 (RCC). If either fails, we fix it in class.
 - **The exam is Tuesday, December 1,** in week 9, covering weeks 0 through 8.
   See [Exam Preparation](./exam_prep.md).
-- **Project consultations end this week.** If your group has not had one, book
-  it today: [youcanbook.me](https://finm-32800.youcanbook.me/).
+- **Project consultations end next week.** If your group has not had one, book
+  it today: [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).
 
 ## Objectives
 

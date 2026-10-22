@@ -48,8 +48,8 @@ the pipeline regenerates whenever the data changes.
   [Potential Final Projects](./FinalProject/potential_final_projects.md) list
   on Wednesday morning, October 21.
 - **Book your project consultation.** Each group meets with me once, in weeks 4
-  through 6, for feedback on its plan:
-  [youcanbook.me](https://finm-32800.youcanbook.me/).
+  through 7, for feedback on its plan:
+  [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).
 
 ## Objectives
 
@@ -285,8 +285,8 @@ The full procedure and rubric are in the
 we walk it in class. Two steps:
 
 1. **Consultation.** One-on-one with me,
-   [booked via youcanbook.me](https://finm-32800.youcanbook.me/), in weeks 4
-   through 6. Come ready to say what the paper is about, your data sources, and
+   [booked via Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile), in weeks 4
+   through 7. Come ready to say what the paper is about, your data sources, and
    the product you will build: the new table or figure, and who would use it.
    The consultation is ungraded.
 2. **Final project presentation**, week 10. Your project is due 24 hours before

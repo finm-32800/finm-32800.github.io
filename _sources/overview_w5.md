@@ -28,7 +28,7 @@ exact, which is rebuilding an order book and diffing it against the vendor's own
   order book validation and flow toxicity. It is the last of the four coding
   assignments. The graded work runs on your laptop; next week's lab takes it to
   a cluster.
-- **Project consultations continue** through next week. Every group needs one.
+- **Project consultations continue** through week 7. Every group needs one.
 - **Databento keys again.** HW 4 pulls `mbo` and `mbp-10` for the E-mini, both on
   the free CME Globex feed. Reconstruction runs on one day locally before
   anything scales.

@@ -24,6 +24,8 @@ rebuild when all of them have landed.
   runs on the report's pipelines. It is done in class and is not graded.
 - **Tonight's material is on the exam,** Tuesday, December 1. See
   [Exam Preparation](./exam_prep.md).
+- **Project consultations end this week,** on Friday, November 13. If your
+  group has not had one, book it today: [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).
 
 ## Objectives
 

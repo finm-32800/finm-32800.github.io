@@ -31,8 +31,8 @@ option-implied crash probability, deployed with a workflow you write.
   Your private copy is created later this week, by Friday, October 23.
 - **Project assignments go out Wednesday morning.** The preference survey
   closes tonight at 11:59 pm. **Consultations start this week** and run
-  through week 6; if your group has not booked its
-  [consultation](https://finm-32800.youcanbook.me/), do it now.
+  through week 7; if your group has not booked its
+  [consultation](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile), do it now.
 - **Databento API keys.** HW 3 uses the key you set up for HW 2, and asks you
   to store it as a GitHub Actions secret. Everything we pull is on the CME
   Globex feed (`GLBX.MDP3`) and free under the course license.
@@ -216,7 +216,7 @@ Your blank there is the query.
 ## Final Projects
 
 Assignments go out Wednesday morning. Each group books one
-[consultation](https://finm-32800.youcanbook.me/) in weeks 4 through 6.
+[consultation](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile) in weeks 4 through 7.
 The rubric requires every pull request to be reviewed by a teammate; the
 pull-request workflow is demoed next week.
 

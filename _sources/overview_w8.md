@@ -33,7 +33,7 @@ model that must rebuild itself every morning whether or not anyone pushed code.
   before we meet, so it must run from a clean clone by following your README
   alone.
 - **Final project presentation sign-ups.** Book your group's 30-minute slot for
-  week 10 at [youcanbook.me](https://finm-32800.youcanbook.me/). The last day
+  week 10 at [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile). The last day
   is Friday, December 11.
 
 ## Objectives
