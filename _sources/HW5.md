@@ -1,7 +1,8 @@
 # Homework 5: The Class Report
 
-- **Launched:** week 6. **Due:** Tuesday, November 17, at the start of the
-  week 8 session. Also posted on Canvas.
+- **Launched:** week 7. **Due:** Tuesday, November 24, at 9:30 am Chicago
+  time. There is no class that day (Thanksgiving week). Also posted on
+  Canvas.
 - **Link to Assignment:** posted at launch
 - **Goes with:** week 6
 

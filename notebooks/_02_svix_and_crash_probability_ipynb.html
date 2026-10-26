@@ -509,10 +509,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-smile-to-a-priced-grid">1. From the smile to a priced grid</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-the-integral-of-option-prices-across-strikes">2. SVIX²: the integral of option prices across strikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-add-up-the-option-prices">2. SVIX²: add up the option prices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve">3. The risk-neutral distribution: the slope of the call curve</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-risk-neutral-to-real-the-log-investors-crash-probability">4. From risk-neutral to real: the log investor’s crash probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series-and-cmes">5. Martin’s published series, and CME’s</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series">5. Martin’s published series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-homework">The homework</a></li>
 </ul>
             </nav>
@@ -527,23 +527,26 @@ document.write(`
                    <section class="tex2jax_ignore mathjax_ignore" id="replicating-svix-and-the-probability-of-a-crash">
 <h1>02. Replicating SVIX and the Probability of a Crash<a class="headerlink" href="#replicating-svix-and-the-probability-of-a-crash" title="Link to this heading">#</a></h1>
 <p>Ian Martin’s <a class="reference external" href="https://academic.oup.com/qje/article/132/1/367/2724543"><em>What is the Expected Return on the Market?</em></a>
-(QJE 2017) builds two numbers from index option prices and publishes both
-on <a class="reference external" href="https://personal.lse.ac.uk/martiniw/">his website</a>: <strong>SVIX</strong>, a
-volatility index that measures the variance the market expects for the
-S&amp;P 500, and the <strong>probability of a 20% decline</strong> in the index over the
-coming month. CME now computes the SVIX construction every day for its
-major contracts as the <a class="reference external" href="https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html">CVOL</a>
-family of volatility indexes, from the same settlement prices guide 01
-pulled.</p>
-<p>This guide rebuilds both numbers for one session, step by step, and
-checks them against what CME and Cboe publish. The three formulas it
-derives are the three functions the homework asks you to complete:
-<code class="docutils literal notranslate"><span class="pre">svix.svix_squared</span></code>, the Breeden-Litzenberger step in
-<code class="docutils literal notranslate"><span class="pre">rnd.risk_neutral_cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">crash_prob.crash_probability</span></code>.</p>
+(QJE 2017; the paper is in <code class="docutils literal notranslate"><span class="pre">papers/</span></code>) builds two numbers from index
+option prices and publishes both on <a class="reference external" href="https://personal.lse.ac.uk/martiniw/">his website</a>:
+<strong>SVIX</strong>, a volatility index like the VIX but with different weights on
+the strikes, and the <strong>probability of a 20% decline</strong> in the S&amp;P 500
+over the coming month. CME computes the same construction every day as
+its <a class="reference external" href="https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html">CVOL</a>
+family of volatility indexes, for options on its interest-rate, currency,
+energy, metals, and agricultural futures. It publishes none for the
+S&amp;P 500, so Martin’s own series is the benchmark here.</p>
+<p>This guide rebuilds both numbers for one session and sets SVIX next to the
+Cboe VIX. Guide 04 checks the SVIX integral against Martin’s published
+series over 1996 to 2012. There are three formulas, and they are the
+three functions the homework asks you to complete: <code class="docutils literal notranslate"><span class="pre">svix.svix_squared</span></code>,
+the Breeden-Litzenberger step in <code class="docutils literal notranslate"><span class="pre">rnd.risk_neutral_cdf</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">crash_prob.crash_probability</span></code>. Each gets a one-line derivation and a
+picture. The pictures are the part to remember.</p>
 <p><strong>In this guide</strong></p>
 <ol class="arabic simple">
 <li><p>From the smile to a priced grid.</p></li>
-<li><p>SVIX²: the integral of option prices across strikes.</p></li>
+<li><p>SVIX²: add up the option prices.</p></li>
 <li><p>The risk-neutral distribution: the slope of the call curve.</p></li>
 <li><p>From risk-neutral to real: the log investor’s crash probability.</p></li>
 <li><p>Martin’s published series, and CME’s.</p></li>
@@ -557,6 +560,7 @@ derives are the three functions the homework asks you to complete:
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">crash_prob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pull_es_options</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pull_fred</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">rnd</span>
@@ -570,7 +574,10 @@ derives are the three functions the homework asks you to complete:
 
 <span class="n">options</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_options</span><span class="p">()</span>
 <span class="n">fred</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">load_fred</span><span class="p">()</span>
-<span class="n">latest</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="c1"># The newest session the monitor computed a row for (a session it had to</span>
+<span class="c1"># skip, a rare chain with too few usable strikes, is not shown here either).</span>
+<span class="n">computed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">monitor</span><span class="o">.</span><span class="n">load_history</span><span class="p">()[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">latest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">computed</span><span class="p">)</span> <span class="k">if</span> <span class="n">computed</span> <span class="k">else</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">session</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">]</span>
 <span class="n">rate</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">rate_on</span><span class="p">(</span><span class="n">fred</span><span class="p">,</span> <span class="n">latest</span><span class="p">)</span>
 <span class="n">near</span><span class="p">,</span> <span class="n">far</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">bracketing_expiries</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
@@ -580,7 +587,7 @@ derives are the three functions the homework asks you to complete:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-16; expirations 2026-10-30 and 2026-11-30 bracket 30 days; one-month Treasury yield 4.12%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-23; expirations 2026-10-30 and 2026-11-30 bracket 30 days; one-month Treasury yield 4.11%
 </pre></div>
 </div>
 </div>
@@ -588,18 +595,17 @@ derives are the three functions the homework asks you to complete:
 <section id="from-the-smile-to-a-priced-grid">
 <h2>1. From the smile to a priced grid<a class="headerlink" href="#from-the-smile-to-a-priced-grid" title="Link to this heading">#</a></h2>
 <p>Guide 01 ended with the smile for one expiration: an implied volatility
-at each out-of-the-money strike, with the strike expressed as moneyness
-<span class="math notranslate nohighlight">\(k = K / S\)</span>. Both numbers this guide computes are integrals across
-strikes, and the exchange’s strikes are a discrete, uneven grid. So the
-engine (<code class="docutils literal notranslate"><span class="pre">rnd.priced_grid</span></code>) interpolates the smile onto a fine grid of
-2,000 points on <span class="math notranslate nohighlight">\(k \in [1/3, 3]\)</span>, linearly between observed strikes and
-flat beyond them, and prices a call at every point with the
-Black-Scholes formula. The spot is normalized to 1, so a call price is a
-fraction of the spot, the forward is <span class="math notranslate nohighlight">\(R_f = e^{r\tau}\)</span>, and put prices
-follow from put-call parity, <span class="math notranslate nohighlight">\(p(k) = c(k) - 1 + k / R_f\)</span>.</p>
-<p>This is the convention of Martin and Shi’s Appendix D, and it is the
-convention of every formula below: a strike and a gross-return level are
-the same number.</p>
+at each out-of-the-money strike, with the strike written as moneyness
+<span class="math notranslate nohighlight">\(k = K / S\)</span>. Both numbers below are integrals across strikes, and the
+exchange’s strikes are a discrete, uneven grid. So the engine
+(<code class="docutils literal notranslate"><span class="pre">rnd.priced_grid</span></code>) interpolates the smile onto a fine grid of 2,000
+points on <span class="math notranslate nohighlight">\(k \in [1/3, 3]\)</span>, linearly between observed strikes and flat
+beyond them, and prices a call at every point with the Black-Scholes
+formula. This is the recipe of Martin and Shi’s Appendix D.</p>
+<p>Units, once and for all. The spot is normalized to 1, so a strike and a
+gross-return level are the same number <span class="math notranslate nohighlight">\(k\)</span>, an option price is a
+fraction of the spot, the forward is <span class="math notranslate nohighlight">\(R_f = e^{r\tau}\)</span>, and the put at
+<span class="math notranslate nohighlight">\(k\)</span> follows from put-call parity, <span class="math notranslate nohighlight">\(p(k) = c(k) - 1 + k / R_f\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surface_near</span> <span class="o">=</span> <span class="n">smile</span><span class="o">.</span><span class="n">smile_for</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">latest</span><span class="p">,</span> <span class="n">near</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
@@ -623,31 +629,44 @@ the same number.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6a5b6ff7cd7938204b169ef7a416c446e04d33be2277cf9284d3eee60ccb3234.png" src="../_images/6a5b6ff7cd7938204b169ef7a416c446e04d33be2277cf9284d3eee60ccb3234.png" />
+<img alt="../_images/7fb1826bdd1814f5086725716be8dbe728e95cdb64a0a4a0135e0f2b6d6995c6.png" src="../_images/7fb1826bdd1814f5086725716be8dbe728e95cdb64a0a4a0135e0f2b6d6995c6.png" />
 </div>
 </div>
 </section>
-<section id="svix2-the-integral-of-option-prices-across-strikes">
-<h2>2. SVIX²: the integral of option prices across strikes<a class="headerlink" href="#svix2-the-integral-of-option-prices-across-strikes" title="Link to this heading">#</a></h2>
+<section id="svix2-add-up-the-option-prices">
+<h2>2. SVIX²: add up the option prices<a class="headerlink" href="#svix2-add-up-the-option-prices" title="Link to this heading">#</a></h2>
+<p><strong>Risk-neutral probabilities.</strong> Option prices do not reveal the market’s
+forecast of the return directly. They reveal the <em>risk-neutral</em>
+probabilities, written <span class="math notranslate nohighlight">\(P^*\)</span> and <span class="math notranslate nohighlight">\(E^*\)</span> below: the probabilities under
+which every asset’s price is its discounted expected payoff, so that a
+call struck at <span class="math notranslate nohighlight">\(k\)</span> costs <span class="math notranslate nohighlight">\(c(k) = E^*[(R_T - k)^+] / R_f\)</span>. They differ
+from the real-world probabilities because a dollar is worth more in a
+crash than in a boom, and a price weights each state by that marginal
+utility as well as by its likelihood. Section 4 undoes that weighting.</p>
 <p>Martin defines SVIX² as the risk-neutral variance of the market’s gross
-return <span class="math notranslate nohighlight">\(R_T\)</span>, normalized by the risk-free rate and annualized:</p>
+return <span class="math notranslate nohighlight">\(R_T\)</span>, scaled by the risk-free rate and annualized (his equation
+13):</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{SVIX}^2_t = \frac{1}{\tau}\,\mathrm{var}^*_t\!\left(\frac{R_T}{R_f}\right).\]</div>
-<p>The reason it can be computed is a fact about option prices. Any smooth
-payoff <span class="math notranslate nohighlight">\(g(R_T)\)</span> can be replicated by a bond, a forward, and a portfolio
-of out-of-the-money puts and calls, with weight <span class="math notranslate nohighlight">\(g''(K)\)</span> on the option
-struck at <span class="math notranslate nohighlight">\(K\)</span> (Breeden and Litzenberger 1978, Carr and Madan 1998). For
-<span class="math notranslate nohighlight">\(g(R) = R^2\)</span> the weights are all equal to 2, and the price of the
-squared return is <span class="math notranslate nohighlight">\(2\)</span> times the integral of option prices across strikes.
-Subtracting the squared mean, which is <span class="math notranslate nohighlight">\(R_f^2\)</span>, gives Martin’s
-equation (12). With the spot normalized to 1:</p>
+<p>The point is that this variance is a sum of option prices. Two things to
+remember:</p>
+<ul class="simple">
+<li><p>The price of any smooth payoff <span class="math notranslate nohighlight">\(g(R_T)\)</span> can be built from a bond, a
+forward, and a strip of out-of-the-money options, where the option
+struck at <span class="math notranslate nohighlight">\(K\)</span> gets weight <span class="math notranslate nohighlight">\(g''(K)\)</span>, the payoff’s curvature there
+(Breeden and Litzenberger 1978, Carr and Madan 1998).</p></li>
+<li><p>The squared return has curvature 2 at every strike, so <strong>every strike
+gets the same weight</strong>. The VIX prices the log contract instead, whose
+curvature is <span class="math notranslate nohighlight">\(1/K^2\)</span>, so it overweights cheap, low strikes.</p></li>
+</ul>
+<p>Applied to <span class="math notranslate nohighlight">\(g(R) = R^2\)</span>: <span class="math notranslate nohighlight">\(E^*[R_T^2]\)</span> is <span class="math notranslate nohighlight">\(R_f^2\)</span> plus <span class="math notranslate nohighlight">\(2 R_f\)</span> times the
+area under the out-of-the-money prices. Subtract the squared mean
+<span class="math notranslate nohighlight">\(R_f^2\)</span>, divide by <span class="math notranslate nohighlight">\(R_f^2\)</span> and by <span class="math notranslate nohighlight">\(\tau\)</span>, and the result is Martin’s
+equation (12), with the spot normalized to 1:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{SVIX}^2 = \frac{2}{\tau\, R_f}\left[\int_0^{R_f} p(k)\,dk + \int_{R_f}^{\infty} c(k)\,dk\right].\]</div>
-<p>Puts below the forward, calls above it, <strong>every strike weighted
-equally</strong>. The VIX, by contrast, prices the log contract, whose weights
-are <span class="math notranslate nohighlight">\(1/K^2\)</span>; it leans harder on the put wing, which is why the VIX is
-above SVIX when the smirk is steep. CME’s CVOL uses Martin’s weights.</p>
-<p>The integrand, out-of-the-money prices across the grid:</p>
+<p>Puts below the forward, calls above it, equal weights. CME’s CVOL indexes
+use the same construction for other markets. The integrand:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">grid</span>
@@ -668,29 +687,35 @@ above SVIX when the smirk is steep. CME’s CVOL uses Martin’s weights.</p>
 <span class="n">svix2_near</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">svix_squared</span><span class="p">(</span><span class="n">cdf_near</span><span class="p">)</span>
 <span class="n">svix2_far</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">svix_squared</span><span class="p">(</span><span class="n">cdf_far</span><span class="p">)</span>
 <span class="n">svix2_30</span> <span class="o">=</span> <span class="n">svix</span><span class="o">.</span><span class="n">interpolate_variance</span><span class="p">(</span><span class="n">svix2_near</span><span class="p">,</span> <span class="n">cdf_near</span><span class="o">.</span><span class="n">maturity_years</span><span class="p">,</span> <span class="n">svix2_far</span><span class="p">,</span> <span class="n">cdf_far</span><span class="o">.</span><span class="n">maturity_years</span><span class="p">)</span>
-<span class="n">vix_today</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fred</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">latest</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># FRED publishes the VIX close a day later, so take the latest close on or before the session.</span>
+<span class="n">vix_obs</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vix&quot;</span><span class="p">])</span>
+<span class="n">vix_obs</span> <span class="o">=</span> <span class="n">vix_obs</span><span class="p">[</span><span class="n">vix_obs</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">latest</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SVIX² at </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">surface_near</span><span class="p">[</span><span class="s1">&#39;days_to_maturity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> days: </span><span class="si">{</span><span class="n">svix2_near</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_near</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SVIX² at </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">surface_far</span><span class="p">[</span><span class="s1">&#39;days_to_maturity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> days: </span><span class="si">{</span><span class="n">svix2_far</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_far</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interpolated to 30 days: SVIX² </span><span class="si">{</span><span class="n">svix2_30</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  -&gt;  SVIX </span><span class="si">{</span><span class="n">svix</span><span class="o">.</span><span class="n">svix_index</span><span class="p">(</span><span class="n">svix2_30</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The VIX closed at </span><span class="si">{</span><span class="n">vix_today</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The VIX closed at </span><span class="si">{</span><span class="n">vix_obs</span><span class="p">[</span><span class="s1">&#39;vix&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">vix_obs</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9c772d021912e8320c059e24976cb407c5a471098ba7ef9c0028c37c0bd0d867.png" src="../_images/9c772d021912e8320c059e24976cb407c5a471098ba7ef9c0028c37c0bd0d867.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVIX² at 14 days: 0.03407  -&gt;  SVIX 18.46
-SVIX² at 45 days: 0.03058  -&gt;  SVIX 17.49
-Interpolated to 30 days: SVIX² 0.03136  -&gt;  SVIX 17.71
-The VIX closed at 19.99 on 2026-10-16
+<img alt="../_images/5446b4b90e93e91b059b33175bf7ffd3f0a674484931a9a7ade2d8793aba501c.png" src="../_images/5446b4b90e93e91b059b33175bf7ffd3f0a674484931a9a7ade2d8793aba501c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVIX² at 7 days: 0.03340  -&gt;  SVIX 18.28
+SVIX² at 38 days: 0.03172  -&gt;  SVIX 17.81
+Interpolated to 30 days: SVIX² 0.03182  -&gt;  SVIX 17.84
+The VIX closed at 19.45 on 2026-10-23
 </pre></div>
 </div>
 </div>
 </div>
 <p>Two expirations rarely sit exactly 30 days out, so the two SVIX² values
-are combined the way the VIX combines its two expirations: total variance
-(SVIX² times <span class="math notranslate nohighlight">\(\tau\)</span>) is linear in time to expiry, so interpolate it to 30
-days and divide. In VIX units, 100 times the square root, SVIX lands
-below the VIX, as it should.</p>
+are combined the way the VIX combines its two expirations: total
+variance, SVIX² times <span class="math notranslate nohighlight">\(\tau\)</span>, is interpolated linearly to 30 days and
+divided by 30 days. In VIX units, 100 times the square root, SVIX lands
+below the VIX. Martin found the same in every year of his sample, and it
+says something: if returns were lognormal, SVIX would sit slightly
+<em>above</em> the VIX at a one-month horizon, so a VIX above SVIX is the
+option market pricing a fat left tail, which the <span class="math notranslate nohighlight">\(1/K^2\)</span> weights pick
+up and the equal weights do not.</p>
 <p><strong>A check against a closed form.</strong> Under a flat smile the return is
 lognormal, <span class="math notranslate nohighlight">\(\mathrm{var}^*(R/R_f) = e^{\sigma^2\tau} - 1\)</span>, and the
 integral must give <span class="math notranslate nohighlight">\((e^{\sigma^2\tau} - 1)/\tau\)</span>, a touch above
@@ -698,23 +723,22 @@ integral must give <span class="math notranslate nohighlight">\((e^{\sigma^2\tau
 </section>
 <section id="the-risk-neutral-distribution-the-slope-of-the-call-curve">
 <h2>3. The risk-neutral distribution: the slope of the call curve<a class="headerlink" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve" title="Link to this heading">#</a></h2>
-<p>A call struck at <span class="math notranslate nohighlight">\(k\)</span> pays <span class="math notranslate nohighlight">\((R_T - k)^+\)</span>, so its discounted price is
-<span class="math notranslate nohighlight">\(c(k) = E^*[(R_T - k)^+] / R_f\)</span>. Differentiate in the strike: the
-derivative of the payoff is <span class="math notranslate nohighlight">\(-1\)</span> where the option finishes in the money
-and zero elsewhere, so</p>
+<p>A call struck at <span class="math notranslate nohighlight">\(k\)</span> pays <span class="math notranslate nohighlight">\((R_T - k)^+\)</span>. Raise the strike by a little
+and the payoff falls by that little in every state where the option
+finishes in the money, and not at all elsewhere, so</p>
 <div class="math notranslate nohighlight">
 \[\frac{dc}{dk} = -\frac{P^*(R_T &gt; k)}{R_f}
 \qquad\Longrightarrow\qquad
 Q(k) \equiv P^*(R_T \le k) = 1 + R_f\,\frac{dc}{dk}.\]</div>
-<p>This is Breeden and Litzenberger’s result: the risk-neutral CDF of the
-return is read off the slope of the call curve, and the density off its
-curvature. On the fine grid the slope is a numerical gradient. The raw
-result is not quite a CDF, because the interpolated smile is piecewise
-linear and the call curve’s slope has kinks; an isotonic regression, the
-closest non-decreasing function, fixes that, and a clip to <span class="math notranslate nohighlight">\([0, 1]\)</span>
-finishes the job. From here on the horizon is one month, so the
-distribution is read off the expiration closest to 30 days. Here is
-both, with the density:</p>
+<p>This is Breeden and Litzenberger’s result: the risk-neutral CDF is the
+slope of the call curve, and the density is its curvature. On the fine
+grid the slope is a numerical gradient. The raw result is not quite a
+CDF: the interpolated smile has kinks at the observed strikes, so the
+slope of the call curve jumps there, and where it jumps down the raw
+<span class="math notranslate nohighlight">\(Q\)</span> falls. An isotonic regression, the closest non-decreasing function,
+fixes that, and a clip to <span class="math notranslate nohighlight">\([0, 1]\)</span> finishes the job. From here on the
+horizon is one month, so the distribution is read off the expiration
+closest to 30 days. Here are both, with the density:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">grid</span>
@@ -745,16 +769,16 @@ both, with the density:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1576e7491d543a58e5f690021d7423a7d0afc080da15fb3b50c174092d370904.png" src="../_images/1576e7491d543a58e5f690021d7423a7d0afc080da15fb3b50c174092d370904.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk-neutral probability of a 20% drop by 2026-11-30: 1.21%; of a 10% drop: 4.02%
+<img alt="../_images/788cd2dfe71c0cb0096777ddf951cc11c239821afc36956850171ff541d200cb.png" src="../_images/788cd2dfe71c0cb0096777ddf951cc11c239821afc36956850171ff541d200cb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk-neutral probability of a 20% drop by 2026-11-30: 0.98%; of a 10% drop: 4.09%
 </pre></div>
 </div>
 </div>
 </div>
 <p>The density has the shape every index option trader knows: a heavy left
-tail, bought with the put smirk. <span class="math notranslate nohighlight">\(Q(0.8)\)</span> is the risk-neutral probability
-of a 20% drop, and it is the number the options market charges for, not
-the number it expects.</p>
+tail, bought with the put smirk. <span class="math notranslate nohighlight">\(Q(0.8)\)</span> is the risk-neutral
+probability of a 20% drop: the number the options market charges for,
+not the number it expects.</p>
 <p><strong>Why the isotonic step is there.</strong> Try the same derivative on the raw
 settlement prices, strike by strike, without the smile and the fine grid:</p>
 <div class="cell docutils container">
@@ -780,48 +804,77 @@ settlement prices, strike by strike, without the smile and the fine grid:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1eb5b26634f096e5f8fdf28d9d1c9103be32db19e720247c071f3399978dfd11.png" src="../_images/1eb5b26634f096e5f8fdf28d9d1c9103be32db19e720247c071f3399978dfd11.png" />
+<img alt="../_images/8af48025505aa8908fa5e64d5fdef81ec7f200713bb591f9eec0f1a864351727.png" src="../_images/8af48025505aa8908fa5e64d5fdef81ec7f200713bb591f9eec0f1a864351727.png" />
 </div>
 </div>
 <p>Settlement prices are marked strike by strike, to the tick, and their
-differences are noisy; the “CDF” they give goes up and down. OptionMetrics’
-smoothed surface hides this from you, because the vendor has already
-fitted a smile. Working from the exchange’s prices, you see the problem
-and the cure.</p>
+differences are noisy; the “CDF” they give goes up and down.
+OptionMetrics’ smoothed surface hides this from you, because the vendor
+has already fitted a smile. Working from the exchange’s prices, you see
+the problem and the cure.</p>
 <p><strong>The test</strong> of <code class="docutils literal notranslate"><span class="pre">risk_neutral_cdf</span></code> is the same flat-smile check: under a
 constant volatility the CDF must be the lognormal’s, in closed form.</p>
 </section>
 <section id="from-risk-neutral-to-real-the-log-investors-crash-probability">
 <h2>4. From risk-neutral to real: the log investor’s crash probability<a class="headerlink" href="#from-risk-neutral-to-real-the-log-investors-crash-probability" title="Link to this heading">#</a></h2>
-<p><span class="math notranslate nohighlight">\(Q(0.8)\)</span> overstates the probability of a crash, because a dollar in a
-crash state is worth more than a dollar in a boom, and option prices
-weight states by that marginal utility. Martin’s way out is to take the
-perspective of an investor with log utility whose whole portfolio is the
-market. Such an investor’s marginal utility is <span class="math notranslate nohighlight">\(1/R_T\)</span>, so for any
-payoff <span class="math notranslate nohighlight">\(X_T\)</span> her expectation and the risk-neutral one are related by</p>
+<p><span class="math notranslate nohighlight">\(Q(0.8)\)</span> overstates the chance of a crash, because a dollar in a crash
+state is worth more than a dollar in a boom, and option prices weight
+states by that marginal utility. Martin’s way out (his Result 1) is to
+take the perspective of an investor with log utility whose whole
+portfolio is the market. Their marginal utility is <span class="math notranslate nohighlight">\(1/R_T\)</span>, so their
+expectation of any payoff <span class="math notranslate nohighlight">\(X_T\)</span> is the risk-neutral expectation of
+<span class="math notranslate nohighlight">\(X_T R_T\)</span>, discounted:</p>
 <div class="math notranslate nohighlight">
-\[E_t[X_T] = \frac{1}{R_f}\,E^*_t[X_T\, R_T],\]</div>
-<p>the formula on the slide of his talk: what a log investor would have to
-believe to be happy holding the market. Apply it to the indicator of a
-crash, <span class="math notranslate nohighlight">\(X_T = 1\{R_T \le \alpha\}\)</span>:</p>
+\[E_t[X_T] = \frac{1}{R_f}\,E^*_t[X_T\, R_T].\]</div>
+<p>Read it as: what a log investor would have to believe to be happy
+holding the market. For the indicator of a crash,
+<span class="math notranslate nohighlight">\(X_T = 1\{R_T \le \alpha\}\)</span>, the payoff <span class="math notranslate nohighlight">\(R_T\,1\{R_T \le \alpha\}\)</span> is a
+digital option minus a put, <span class="math notranslate nohighlight">\(\alpha\,1\{R_T \le \alpha\} - (\alpha - R_T)^+\)</span>,
+and both pieces have prices on the grid: the digital costs
+<span class="math notranslate nohighlight">\(Q(\alpha)/R_f\)</span> and the put costs <span class="math notranslate nohighlight">\(p(\alpha)\)</span>. So (Martin’s Result 2,
+equation 23)</p>
 <div class="math notranslate nohighlight">
-\[P_t(R_T \le \alpha) = \frac{E^*_t[R_T\, 1\{R_T \le \alpha\}]}{R_f}.\]</div>
-<p>And the numerator is one more Breeden-Litzenberger expression. A put
-struck at <span class="math notranslate nohighlight">\(\alpha\)</span> pays <span class="math notranslate nohighlight">\((\alpha - R_T)^+ = \alpha\,1\{R_T \le \alpha\} - R_T\,1\{R_T \le \alpha\}\)</span>,
-so its price is <span class="math notranslate nohighlight">\(p(\alpha) = [\alpha\, Q(\alpha) - E^*(R_T 1\{R_T \le \alpha\})] / R_f\)</span>,
-which rearranges to</p>
-<div class="math notranslate nohighlight">
-\[E^*_t[R_T\, 1\{R_T \le \alpha\}] = \alpha\, Q(\alpha) - R_f\, p(\alpha),
-\qquad\text{so}\qquad
-P_t(R_T \le \alpha) = \frac{\alpha\, Q(\alpha)}{R_f} - p(\alpha).\]</div>
-<p>Everything on the right is on the grid: <span class="math notranslate nohighlight">\(Q(\alpha)\)</span> from step 3, <span class="math notranslate nohighlight">\(p(\alpha)\)</span>
-the put price from step 1. The risk-neutral probability, shrunk by the
-put’s own price. Martin and Shi (2025) generalize the investor to power
-utility with risk aversion <span class="math notranslate nohighlight">\(\gamma\)</span>, their equation (7),
-<span class="math notranslate nohighlight">\(P = E^*[R^\gamma 1\{R \le \alpha\}] / E^*[R^\gamma]\)</span>, calibrate
-<span class="math notranslate nohighlight">\(\gamma = 2\)</span>, and compute the moments from option prices by their
-Result 5 (<code class="docutils literal notranslate"><span class="pre">utility_correction.py</span></code>); <span class="math notranslate nohighlight">\(\gamma = 1\)</span> recovers Martin’s
-formula. The three numbers for this session:</p>
+\[P_t(R_T \le \alpha) = \frac{\alpha\, Q(\alpha)}{R_f} - p(\alpha),\]</div>
+<p>the risk-neutral probability, shrunk by the put’s own price. Martin’s
+Figure VIII says the same thing as a picture: draw the tangent to the
+put price curve at the crash strike, and it cuts the vertical axis at
+<span class="math notranslate nohighlight">\(-P\)</span>. The crash probability is the convexity of the put curve at and
+below <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.80</span>
+<span class="n">P_log</span> <span class="o">=</span> <span class="n">crash_prob</span><span class="o">.</span><span class="n">crash_probability</span><span class="p">(</span><span class="n">cdf_month</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">k_show</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">put_show</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">k_show</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">put_grid</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">tangent</span> <span class="o">=</span> <span class="n">cdf_month</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cdf_month</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> <span class="n">R_f</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">k_show</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_show</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">put_show</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put price p(k)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_show</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">tangent</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Tangent at k = </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span> <span class="o">*</span> <span class="n">P_log</span><span class="p">],</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;intercept = −P = −</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P_log</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span> <span class="o">*</span> <span class="n">P_log</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span> <span class="o">*</span> <span class="n">P_log</span><span class="p">),</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">220</span> <span class="o">*</span> <span class="n">P_log</span><span class="p">,</span> <span class="mi">115</span> <span class="o">*</span> <span class="n">put_show</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gross return k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Price, </span><span class="si">% o</span><span class="s2">f spot&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The tangent to the put curve at k = 0.8 cuts the axis at minus the crash probability&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6f248ee42608e88a33070d7212b9433e457e0c70de866c3d11a40964a00ac2dd.png" src="../_images/6f248ee42608e88a33070d7212b9433e457e0c70de866c3d11a40964a00ac2dd.png" />
+</div>
+</div>
+<p>Martin and Shi (2025) do the same for an investor with power utility and
+risk aversion <span class="math notranslate nohighlight">\(\gamma\)</span>: weight by <span class="math notranslate nohighlight">\(R_T^\gamma\)</span> instead of <span class="math notranslate nohighlight">\(R_T\)</span> and
+normalize, their equation (7),
+<span class="math notranslate nohighlight">\(P = E^*[R_T^\gamma 1\{R_T \le \alpha\}] / E^*[R_T^\gamma]\)</span>. At
+<span class="math notranslate nohighlight">\(\gamma = 1\)</span> it is Martin’s formula; they calibrate <span class="math notranslate nohighlight">\(\gamma = 2\)</span>. The
+three numbers for this session:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
@@ -839,13 +892,13 @@ formula. The three numbers for this session:</p>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_2fa8d">
+<table id="T_2ad18">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_2fa8d_level0_col0" class="col_heading level0 col0" >risk-neutral, P*</th>
-      <th id="T_2fa8d_level0_col1" class="col_heading level0 col1" >log investor (Martin 2017)</th>
-      <th id="T_2fa8d_level0_col2" class="col_heading level0 col2" >power utility, gamma = 2 (Martin and Shi 2025)</th>
+      <th id="T_2ad18_level0_col0" class="col_heading level0 col0" >risk-neutral, P*</th>
+      <th id="T_2ad18_level0_col1" class="col_heading level0 col1" >log investor (Martin 2017)</th>
+      <th id="T_2ad18_level0_col2" class="col_heading level0 col2" >power utility, gamma = 2 (Martin and Shi 2025)</th>
     </tr>
     <tr>
       <th class="index_name level0" >event</th>
@@ -856,16 +909,16 @@ formula. The three numbers for this session:</p>
   </thead>
   <tbody>
     <tr>
-      <th id="T_2fa8d_level0_row0" class="row_heading level0 row0" >20% drop by 2026-11-30</th>
-      <td id="T_2fa8d_row0_col0" class="data row0 col0" >1.21%</td>
-      <td id="T_2fa8d_row0_col1" class="data row0 col1" >0.80%</td>
-      <td id="T_2fa8d_row0_col2" class="data row0 col2" >0.54%</td>
+      <th id="T_2ad18_level0_row0" class="row_heading level0 row0" >20% drop by 2026-11-30</th>
+      <td id="T_2ad18_row0_col0" class="data row0 col0" >0.98%</td>
+      <td id="T_2ad18_row0_col1" class="data row0 col1" >0.66%</td>
+      <td id="T_2ad18_row0_col2" class="data row0 col2" >0.45%</td>
     </tr>
     <tr>
-      <th id="T_2fa8d_level0_row1" class="row_heading level0 row1" >10% drop by 2026-11-30</th>
-      <td id="T_2fa8d_row1_col0" class="data row1 col0" >4.02%</td>
-      <td id="T_2fa8d_row1_col1" class="data row1 col1" >3.19%</td>
-      <td id="T_2fa8d_row1_col2" class="data row1 col2" >2.58%</td>
+      <th id="T_2ad18_level0_row1" class="row_heading level0 row1" >10% drop by 2026-11-30</th>
+      <td id="T_2ad18_row1_col0" class="data row1 col0" >4.09%</td>
+      <td id="T_2ad18_row1_col1" class="data row1 col1" >3.34%</td>
+      <td id="T_2ad18_row1_col2" class="data row1 col2" >2.76%</td>
     </tr>
   </tbody>
 </table>
@@ -873,13 +926,14 @@ formula. The three numbers for this session:</p>
 </div>
 <p>The ordering is the content: the more risk-averse the investor, the more
 of the option price is marginal utility rather than probability, and the
-smaller the real-world probability she reads out of it.</p>
-<p><strong>The test</strong> of <code class="docutils literal notranslate"><span class="pre">crash_probability</span></code>: under a flat smile the log investor’s
-probability has a closed form too, <span class="math notranslate nohighlight">\(N\!\left((\ln a - s^2/2)/s\right)\)</span> with
-<span class="math notranslate nohighlight">\(a = \alpha / R_f\)</span> and <span class="math notranslate nohighlight">\(s = \sigma\sqrt{\tau}\)</span>.</p>
+smaller the real-world probability they read out of it.</p>
+<p><strong>The test</strong> of <code class="docutils literal notranslate"><span class="pre">crash_probability</span></code>: under a flat smile the log
+investor’s probability has a closed form too,
+<span class="math notranslate nohighlight">\(N\!\left((\ln a - s^2/2)/s\right)\)</span> with <span class="math notranslate nohighlight">\(a = \alpha / R_f\)</span> and
+<span class="math notranslate nohighlight">\(s = \sigma\sqrt{\tau}\)</span>.</p>
 </section>
-<section id="martins-published-series-and-cmes">
-<h2>5. Martin’s published series, and CME’s<a class="headerlink" href="#martins-published-series-and-cmes" title="Link to this heading">#</a></h2>
+<section id="martins-published-series">
+<h2>5. Martin’s published series<a class="headerlink" href="#martins-published-series" title="Link to this heading">#</a></h2>
 <p>Martin publishes SVIX² and the crash probability from January 1996 to
 January 2012, computed from S&amp;P 500 index options. Here is his SVIX next
 to the VIX, and his monthly probability of a 20% drop at one month:</p>
@@ -908,34 +962,10 @@ to the VIX, and his monthly probability of a 20% drop at one month:</p>
 </div>
 </div>
 <p>The daily monitor of guide 03 continues the first chart from today
-forward, and guide 04 reproduces the second one from the OptionMetrics
-surface and checks it against these numbers.</p>
-<p><strong>Does it match CME?</strong> CME’s E-mini S&amp;P 500 CVOL index is the same
-construction on the same settlement prices, so the two should agree to
-within the differences of strike grid and interpolation, about a vol
-point. CME does not give the history away, so readings are recorded by
-hand in <code class="docutils literal notranslate"><span class="pre">data_manual/cme_cvol_snapshots.csv</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">test_svix_matches_cvol_snapshot</span></code> compares each one with our 30-day SVIX
-for the same session:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">snapshots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">MANUAL_DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;cme_cvol_snapshots.csv&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
-<span class="k">if</span> <span class="n">snapshots</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No CVOL reading recorded yet. Capture the index at cmegroup.com/cvol and add a row.&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
-    <span class="n">history</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">load_history</span><span class="p">()</span>
-    <span class="n">compare</span> <span class="o">=</span> <span class="n">snapshots</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">history</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">compare</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="s2">&quot;cvol_index&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No CVOL reading recorded yet. Capture the index at cmegroup.com/cvol and add a row.
-</pre></div>
-</div>
-</div>
-</div>
+forward. Guide 04 recomputes both series from the OptionMetrics surface,
+with the same <code class="docutils literal notranslate"><span class="pre">svix_squared</span></code> and <code class="docutils literal notranslate"><span class="pre">crash_probability</span></code> as here, and checks
+them against these numbers: that is how the replication is tested, since
+no exchange publishes an SVIX for the S&amp;P 500.</p>
 </section>
 <section id="the-homework">
 <h2>The homework<a class="headerlink" href="#the-homework" title="Link to this heading">#</a></h2>
@@ -997,10 +1027,10 @@ the monitor’s history, which is guide 03.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-smile-to-a-priced-grid">1. From the smile to a priced grid</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-the-integral-of-option-prices-across-strikes">2. SVIX²: the integral of option prices across strikes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix2-add-up-the-option-prices">2. SVIX²: add up the option prices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-risk-neutral-distribution-the-slope-of-the-call-curve">3. The risk-neutral distribution: the slope of the call curve</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-risk-neutral-to-real-the-log-investors-crash-probability">4. From risk-neutral to real: the log investor’s crash probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series-and-cmes">5. Martin’s published series, and CME’s</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#martins-published-series">5. Martin’s published series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-homework">The homework</a></li>
 </ul>
   </nav></div>

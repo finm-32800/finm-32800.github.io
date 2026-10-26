@@ -23,10 +23,12 @@ exact, which is rebuilding an order book and diffing it against the vendor's own
 ## Announcements
 
 - **[HW 2](./HW2.md) is due tonight,** at the start of class.
-- **[HW 3](./HW3.md) is due next week,** Tuesday, November 3.
-- **[HW 4](./HW4.md) launches today,** due Tuesday, November 10, in week 7:
-  order book validation and flow toxicity. It is the last of the four coding
-  assignments. The graded work runs on your laptop; next week's lab takes it to
+- **[HW 3](./HW3.md) launches today,** due Tuesday, November 10, in week 7:
+  a daily monitor of the S&P 500's option-implied crash probability, deployed
+  with a workflow you write. Your private copy is created this week.
+- **[HW 4](./HW4.md) launches next week,** due Tuesday, November 17, in week
+  8: order book validation and flow toxicity. It is the last of the four
+  coding assignments. The graded work runs on your laptop; a lab takes it to
   a cluster.
 - **Project consultations continue** through week 7. Every group needs one.
 - **Databento keys again.** HW 4 pulls `mbo` and `mbp-10` for the E-mini, both on

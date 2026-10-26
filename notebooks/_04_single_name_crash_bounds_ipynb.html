@@ -511,6 +511,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-the-optionmetrics-volatility-surface">The data: the OptionMetrics volatility surface</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-papers-figure-1-apple-and-aig">The paper’s Figure 1: Apple and AIG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-index-on-its-own-against-martins-published-series">The index on its own, against Martin’s published series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix-against-martins-published-series">SVIX against Martin’s published series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-leaves-the-homework">Where this leaves the homework</a></li>
 </ul>
             </nav>
@@ -531,14 +532,15 @@ stock</strong>, Apple or AIG, falls 20% in the next month?</p>
 <p>Options on the stock give its risk-neutral distribution, exactly as index
 options gave the market’s in guide 02. But a risk-neutral probability
 “cries wolf”: it prices crash states at their marginal utility, not their
-frequency, and the correction that worked for the index, dividing by the
-investor’s marginal utility, needs the <em>joint</em> distribution of the stock
-and the market, which no option price reveals. Martin and Shi’s answer is
-to bound it. Given the two marginal distributions, the Fréchet-Hoeffding
-theorem says how far apart the probability can be across every possible
-dependence structure, and the lower bound, which is attained when the
-stock and the market crash together, turns out to forecast crashes out of
-sample with no parameter to estimate.</p>
+frequency. The correction that worked for the index, weighting each
+state by the investor’s return, now needs to know how the stock and the
+market move <em>together</em> in a crash, and no option price reveals that.
+Martin and Shi’s answer is to bound it. Two marginal distributions pin
+the joint one down only so far (the Fréchet-Hoeffding theorem), and the
+two extremes, the stock crashing exactly when the market does and
+crashing exactly when it does not, give a lower and an upper bound. The
+lower bound turns out to forecast crashes out of sample with nothing
+estimated on the stocks.</p>
 <p><strong>In this guide</strong></p>
 <ul class="simple">
 <li><p>The data: the OptionMetrics volatility surface, and what it does not
@@ -547,11 +549,13 @@ cover.</p></li>
 extended to the latest surface.</p></li>
 <li><p>The index on its own: the crash probability from the surface, checked
 against the monthly series Martin (2017) publishes.</p></li>
+<li><p>SVIX from the surface, checked against Martin’s published daily SVIX.</p></li>
 </ul>
 <p>The code is Riley Haas and Marija Jovicic’s, from their Summer 2026
 replication of the paper (<code class="docutils literal notranslate"><span class="pre">forecasting_crashes_smile</span></code>), used with their
 permission. The computation runs in <code class="docutils literal notranslate"><span class="pre">src/single_name_bounds.py</span></code> as the
-<code class="docutils literal notranslate"><span class="pre">single_names</span></code> task; this notebook loads its output.</p>
+<code class="docutils literal notranslate"><span class="pre">single_names</span></code> task, and the SVIX check in <code class="docutils literal notranslate"><span class="pre">src/calc_svix_vs_martin.py</span></code>;
+this notebook loads their output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -572,6 +576,7 @@ permission. The computation runs in <code class="docutils literal notranslate"><
 <span class="n">HAVE_RESULTS</span> <span class="o">=</span> <span class="p">(</span><span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">&quot;single_name_bounds.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span>
     <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">&quot;index_crash_probabilities.parquet&quot;</span>
 <span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="n">HAVE_SVIX</span> <span class="o">=</span> <span class="p">(</span><span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">&quot;svix_vs_martin.parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">HAVE_RESULTS</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;The single-name results are not built. They need the OptionMetrics pull</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -819,7 +824,13 @@ it in mind when reading the one-month numbers.</p>
 <h2>The paper’s Figure 1: Apple and AIG<a class="headerlink" href="#the-papers-figure-1-apple-and-aig" title="Link to this heading">#</a></h2>
 <p>For each month-end, each name, and each maturity, <code class="docutils literal notranslate"><span class="pre">single_name_bounds.py</span></code>
 builds the risk-neutral CDF of the name and of the index (the engine of
-guide 02, <code class="docutils literal notranslate"><span class="pre">rnd.risk_neutral_cdf</span></code>), and applies Result 3 of the paper:</p>
+guide 02, <code class="docutils literal notranslate"><span class="pre">rnd.risk_neutral_cdf</span></code>) and applies Result 3 of the paper. In
+words: read off the stock’s risk-neutral crash probability
+<span class="math notranslate nohighlight">\(p^* = Q_i(q)\)</span>; find the market return <span class="math notranslate nohighlight">\(q_l\)</span> that is exactly as unlikely,
+<span class="math notranslate nohighlight">\(Q_m(q_l) = p^*\)</span>; then the lower bound is the market’s own probability
+of falling to <span class="math notranslate nohighlight">\(q_l\)</span>, corrected for risk aversion as in guide 02. The
+upper bound is the same construction in the market’s right tail. In
+symbols:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{E^*[R_m^\gamma\, 1\{R_m \le q_l\}]}{E^*[R_m^\gamma]}
@@ -827,10 +838,11 @@ guide 02, <code class="docutils literal notranslate"><span class="pre">rnd.risk_
 \frac{E^*[R_m^\gamma\, 1\{R_m \ge q_u\}]}{E^*[R_m^\gamma]},
 \qquad q_l = Q_m^{-1}(Q_i(q)),\; q_u = Q_m^{-1}(1 - Q_i(q)),
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\gamma = 2\)</span>. The lower bound is attained when the stock and the
-market crash together; the upper bound when they move against each other.
-The risk-neutral probability <span class="math notranslate nohighlight">\(Q_i(q)\)</span> always lies between them. Here is
-the paper’s Figure 1, the bounds on a 20% drop within a month, over the
+<p>with <span class="math notranslate nohighlight">\(\gamma = 2\)</span>, calibrated once on the market (the paper’s Appendix
+C). The lower bound is attained when the stock and the market crash
+together; the upper bound when they move against each other. The
+risk-neutral probability <span class="math notranslate nohighlight">\(Q_i(q)\)</span> always lies between them. Here is the
+paper’s Figure 1, the bounds on a 20% drop within a month, over the
 paper’s 1996 to 2022 sample:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1184,6 +1196,58 @@ comes out small. Martin works from the raw option quotes, which reach
 further. The exchange’s settlement prices in guides 01 and 02 are the
 cure.</p>
 </section>
+<section id="svix-against-martins-published-series">
+<h2>SVIX against Martin’s published series<a class="headerlink" href="#svix-against-martins-published-series" title="Link to this heading">#</a></h2>
+<p>The same surface gives SVIX, with the integral of guide 02. Martin
+publishes his one-month SVIX², daily from January 1996 to January 2012
+(<code class="docutils literal notranslate"><span class="pre">data_manual/martin_2017/svix2.csv</span></code>), computed from S&amp;P 500 index
+options. No exchange publishes an SVIX for the S&amp;P 500: CME’s CVOL indexes
+use the same construction, but only for options on its interest-rate,
+currency, energy, metals, and agricultural futures. So Martin’s series is
+the check on <code class="docutils literal notranslate"><span class="pre">svix_squared</span></code>. Both are shown in VIX units, 100 times the
+square root of SVIX²:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">HAVE_SVIX</span><span class="p">:</span>
+    <span class="n">sv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">&quot;svix_vs_martin.parquet&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Days in the overlap: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation with Martin&#39;s series: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;svix&#39;</span><span class="p">],</span><span class="w"> </span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;svix_martin&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median absolute gap: </span><span class="si">{</span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;gap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> vol points; mean gap: </span><span class="si">{</span><span class="n">sv</span><span class="p">[</span><span class="s1">&#39;gap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height_ratios&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sv</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">sv</span><span class="p">[</span><span class="s2">&quot;svix_martin&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Martin (2017), as published&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sv</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">sv</span><span class="p">[</span><span class="s2">&quot;svix&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;This pipeline, from the OptionMetrics surface&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;One-month SVIX, %&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;SVIX, January 1996 to January 2012&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sv</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">sv</span><span class="p">[</span><span class="s2">&quot;gap&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#7f7f7f&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Ours minus</span><span class="se">\n</span><span class="s2">Martin, vol pts&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The SVIX check is not built: run `uv run doit single_names`.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Days in the overlap: 4,038 (1996-01-04 to 2012-01-31)
+Correlation with Martin&#39;s series: 0.9975
+Median absolute gap: 0.29 vol points; mean gap: +0.14
+</pre></div>
+</div>
+<img alt="../_images/cfbdbb3bca6d623a0c2c87f53fd45c1a1152e109dc0fe16af8d17b042fb1646a.png" src="../_images/cfbdbb3bca6d623a0c2c87f53fd45c1a1152e109dc0fe16af8d17b042fb1646a.png" />
+</div>
+</div>
+<p>The two lines are hard to tell apart. What gap there is comes from the
+same seam as before: the surface’s strikes stop near the 10-delta put, and
+holding the volatility flat beyond them puts a little more or a little
+less area under the out-of-the-money price curve than Martin’s raw quotes
+do. One of the homework’s tests runs your <code class="docutils literal notranslate"><span class="pre">svix_squared</span></code> on this surface
+at every month-end in the sample and requires it to stay within a
+fraction of a vol point of Martin’s series.</p>
+</section>
 <section id="where-this-leaves-the-homework">
 <h2>Where this leaves the homework<a class="headerlink" href="#where-this-leaves-the-homework" title="Link to this heading">#</a></h2>
 <p>Part D asks for one thing: the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause of the surface query in
@@ -1192,7 +1256,8 @@ maturities, and the sample window from the vendor’s yearly tables. Two
 tests run it against a small in-memory database with the WRDS layout, as
 HW 1 tested its queries. Then <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span> <span class="pre">single_names</span></code> pulls the
 surface and runs the chain that made every chart on this page, and the
-last test checks the index probability against Martin’s series as above.</p>
+last test checks the index probability against Martin’s series as above.
+The same pull feeds Part B’s check of <code class="docutils literal notranslate"><span class="pre">svix_squared</span></code> against Martin’s SVIX.</p>
 </section>
 </section>
 
@@ -1247,6 +1312,7 @@ last test checks the index probability against Martin’s series as above.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-the-optionmetrics-volatility-surface">The data: the OptionMetrics volatility surface</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-papers-figure-1-apple-and-aig">The paper’s Figure 1: Apple and AIG</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-index-on-its-own-against-martins-published-series">The index on its own, against Martin’s published series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svix-against-martins-published-series">SVIX against Martin’s published series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-leaves-the-homework">Where this leaves the homework</a></li>
 </ul>
   </nav></div>

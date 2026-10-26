@@ -21,8 +21,11 @@ model that must rebuild itself every morning whether or not anyone pushed code.
 
 ## Announcements
 
-- **[HW 5](./HW5.md) is due tonight,** at the start of class. It is the last
-  homework.
+- **[HW 4](./HW4.md) is due tonight,** at the start of class. It is the last
+  of the four coding assignments.
+- **[HW 5](./HW5.md) is due Tuesday, November 24, at 9:30 am.** There is no
+  class that day. Your pull request should be open by now, so your two
+  reviewers have time.
 - **No class next week.** November 24 falls in Thanksgiving break. Week 9 meets
   on December 1.
 - **The exam is December 1,** in the first 75 minutes of class, covering weeks 0

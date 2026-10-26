@@ -50,7 +50,8 @@ blanks.
 
 - **A Databento API key.** The futures data in Part C comes from Databento's
   CME Globex feed, and the pull needs a key in your `.env`. You should already
-  have one; if you do not, email the program administrator, Eliza Higbee. See
+  have one; if you do not, email the program administrator, Hope Kennedy, at
+  hkennedy1@uchicago.edu. See
   [Databento](./Week7/databento.md). The
   [`databento/` examples](https://github.com/finm-32800/inclass_examples/tree/main/databento)
   in the in-class examples repository show the same kind of pull in small

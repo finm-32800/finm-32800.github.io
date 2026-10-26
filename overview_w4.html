@@ -548,16 +548,16 @@ scored your pushes since HW 1 is the same machinery. Where else does CI/CD
 live? In every Python package you have installed this quarter, which is the
 cue for a short tour: what a package is, starting from a single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file,
 and how one is built, tested, and released.
-<a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> then launches: a daily monitor of the S&amp;P 500’s
-option-implied crash probability, deployed with a workflow you write.</p>
+<a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a>, which launches next week, is a daily monitor of the S&amp;P
+500’s option-implied crash probability, deployed with a workflow you write.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="HW1.html"><span class="std std-doc">HW 1</span></a> is due tonight,</strong> at the start of class.</p></li>
 <li><p><strong><a class="reference internal" href="HW2.html"><span class="std std-doc">HW 2</span></a> is due next Tuesday, October 27.</strong> Questions at the start
 of class, and the FedWatch half is tonight’s first item.</p></li>
-<li><p><strong><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> launches tonight,</strong> due Tuesday, November 3, in week 6.
-Your private copy is created later this week, by Friday, October 23.</p></li>
+<li><p><strong><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> launches next week,</strong> due Tuesday, November 10, in week
+7. Tonight introduces it; your private copy is created the week it launches.</p></li>
 <li><p><strong>Project assignments go out Wednesday morning.</strong> The preference survey
 closes tonight at 11:59 pm. <strong>Consultations start this week</strong> and run
 through week 7; if your group has not booked its
@@ -725,7 +725,9 @@ his option-implied volatility index, and the probability of a 20% drop in
 the S&amp;P 500, published from 1996 to 2012.</p></li>
 <li><p><strong><a class="reference external" href="https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html">CME’s CVOL indexes</a>.</strong>
 The same simple-variance construction, computed by the exchange every day
-from the settlement prices we pull.</p></li>
+for options on its interest-rate, currency, energy, metals, and
+agricultural futures. There is none for the S&amp;P 500, which is why
+Martin’s own series is the benchmark for our replication.</p></li>
 </ul>
 <p><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> rebuilds both numbers from E-mini S&amp;P 500 option
 settlements on Databento, and then does what HW 2 did not: deploys the

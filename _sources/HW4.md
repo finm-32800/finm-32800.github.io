@@ -1,7 +1,7 @@
 # Homework 4: Order Book Validation and Flow Toxicity
 
-- **Launched:** week 5. **Due:** Tuesday, November 10, at the start of the
-  week 7 session. Also posted on Canvas.
+- **Launched:** week 6. **Due:** Tuesday, November 17, at the start of the
+  week 8 session. Also posted on Canvas.
 - **Link to Assignment:** posted at launch
 - **Goes with:** weeks 5 and 6
 

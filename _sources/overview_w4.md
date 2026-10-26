@@ -19,16 +19,16 @@ scored your pushes since HW 1 is the same machinery. Where else does CI/CD
 live? In every Python package you have installed this quarter, which is the
 cue for a short tour: what a package is, starting from a single `.py` file,
 and how one is built, tested, and released.
-[HW 3](./HW3.md) then launches: a daily monitor of the S&P 500's
-option-implied crash probability, deployed with a workflow you write.
+[HW 3](./HW3.md), which launches next week, is a daily monitor of the S&P
+500's option-implied crash probability, deployed with a workflow you write.
 
 ## Announcements
 
 - **[HW 1](./HW1.md) is due tonight,** at the start of class.
 - **[HW 2](./HW2.md) is due next Tuesday, October 27.** Questions at the start
   of class, and the FedWatch half is tonight's first item.
-- **[HW 3](./HW3.md) launches tonight,** due Tuesday, November 3, in week 6.
-  Your private copy is created later this week, by Friday, October 23.
+- **[HW 3](./HW3.md) launches next week,** due Tuesday, November 10, in week
+  7. Tonight introduces it; your private copy is created the week it launches.
 - **Project assignments go out Wednesday morning.** The preference survey
   closes tonight at 11:59 pm. **Consultations start this week** and run
   through week 7; if your group has not booked its
@@ -192,7 +192,9 @@ Two live pages to open first:
   the S&P 500, published from 1996 to 2012.
 - **[CME's CVOL indexes](https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html).**
   The same simple-variance construction, computed by the exchange every day
-  from the settlement prices we pull.
+  for options on its interest-rate, currency, energy, metals, and
+  agricultural futures. There is none for the S&P 500, which is why
+  Martin's own series is the benchmark for our replication.
 
 [HW 3](./HW3.md) rebuilds both numbers from E-mini S&P 500 option
 settlements on Databento, and then does what HW 2 did not: deploys the

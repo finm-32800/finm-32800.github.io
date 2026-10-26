@@ -41,7 +41,7 @@ the pipeline regenerates whenever the data changes.
   private copy is created after class tonight.
 - **Databento API key.** HW 2 pulls futures data from Databento, and you
   should already have a key. If you do not, email the program administrator,
-  Eliza Higbee.
+  Hope Kennedy, at hkennedy1@uchicago.edu.
 - **Project survey, due next Tuesday.** The preference survey is open, and the
   link is in the Canvas announcement. It closes Tuesday, October 20 at
   11:59 pm. Each group is emailed its assigned paper from the

@@ -62,10 +62,9 @@ From week 4 on, one homework or exam is due each week, and never two.
 | --- | --- | --- |
 | 4 | Tuesday, October 20 | [HW 1](HW1.md): CRSP, the CAPM, and Fama-French |
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
-| 6 | Tuesday, November 3 | [HW 3](HW3.md): option-implied crash probabilities |
-| 7 | Tuesday, November 10 | [HW 4](HW4.md): order book validation and flow toxicity |
-| 8 | Tuesday, November 17 | [HW 5](HW5.md): your figure for the class report |
-| | Tuesday, November 24 | No class: Thanksgiving break |
+| 7 | Tuesday, November 10 | [HW 3](HW3.md): option-implied crash probabilities |
+| 8 | Tuesday, November 17 | [HW 4](HW4.md): order book validation and flow toxicity |
+| | Tuesday, November 24 | [HW 5](HW5.md): your figure for the class report, 9:30 am (no class: Thanksgiving break) |
 | 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
 
@@ -180,12 +179,12 @@ the agenda is listed in the first sub-section of the chapter.
 | 1 | Sep 29 | [Git, GitHub, and virtual environments](overview_w1.md) | [HW 1](HW1.md) | |
 | 2 | Oct 6 | [Task runners and SQL; Fama-French (1993)](overview_w2.md) | | |
 | 3 | Oct 13 | [Reports: notebooks, ChartBook, LaTeX; Databento](overview_w3.md) | [HW 2](HW2.md) | |
-| 4 | Oct 20 | [GitHub Pages, GitHub Actions, Python packaging; options data](overview_w4.md) | [HW 3](HW3.md) | HW 1 |
-| 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 4](HW4.md) | HW 2 |
-| 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 5](HW5.md) | HW 3 |
-| 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 4 |
-| 8 | Nov 17 | [CI/CD with GitHub Actions; Ruff and pre-commit](overview_w8.md) | | HW 5 |
-| | Nov 24 | No class: Thanksgiving break | | |
+| 4 | Oct 20 | [GitHub Pages, GitHub Actions, Python packaging; options data](overview_w4.md) | | HW 1 |
+| 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 3](HW3.md) | HW 2 |
+| 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 4](HW4.md) | |
+| 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | [HW 5](HW5.md) | HW 3 |
+| 8 | Nov 17 | [CI/CD with GitHub Actions; Ruff and pre-commit](overview_w8.md) | | HW 4 |
+| | Nov 24 | No class: Thanksgiving break | | HW 5 (9:30 am) |
 | 9 | Dec 1 | [Exam, then MLOps](overview_w9.md) | | |
 | 10 | Dec 8–11 | Final project presentations | | |
 

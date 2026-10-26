@@ -25,12 +25,13 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 
 ## Announcements
 
-- **[HW 3](./HW3.md) is due tonight,** at the start of class.
-- **[HW 4](./HW4.md) is due next week,** Tuesday, November 10. Tonight's lab takes
-  it to a cluster, so bring your working single-day reconstruction to class.
-- **[HW 5](./HW5.md) launches today,** due Tuesday, November 17: one figure and
-  one paragraph for the class report. It is the last homework, and the smallest.
-  Open your pull request by next week.
+- **[HW 3](./HW3.md) is due next week,** Tuesday, November 10.
+- **[HW 4](./HW4.md) launches today,** due Tuesday, November 17, in week 8:
+  order book validation and flow toxicity, the last of the four coding
+  assignments. Tonight's lab takes the reconstruction to a cluster.
+- **[HW 5](./HW5.md) launches next week,** due Tuesday, November 24: one
+  figure and one paragraph for the class report. It is the last homework,
+  and the smallest.
 - **Accept your invite to the report repo.** Every student gets a GitHub
   collaborator invite to the private report repository. Check your email or
   [github.com/notifications](https://github.com/notifications) and confirm tonight

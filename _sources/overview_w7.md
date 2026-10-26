@@ -17,11 +17,14 @@ rebuild when all of them have landed.
 
 ## Announcements
 
-- **[HW 4](./HW4.md) is due tonight,** at the start of class. It is the last of
-  the four coding assignments.
-- **[HW 5](./HW5.md) is due next week,** Tuesday, November 17. Your pull request
-  should be open by now, so your two reviewers have time. Tonight's Airflow lab
-  runs on the report's pipelines. It is done in class and is not graded.
+- **[HW 3](./HW3.md) is due tonight,** at the start of class.
+- **[HW 4](./HW4.md) is due next week,** Tuesday, November 17. It is the last
+  of the four coding assignments.
+- **[HW 5](./HW5.md) launches today,** due Tuesday, November 24, at 9:30 am;
+  there is no class that day. One figure and one paragraph for the class
+  report. Open your pull request by next week, so your two reviewers have
+  time. Tonight's Airflow lab runs on the report's pipelines. It is done in
+  class and is not graded.
 - **Tonight's material is on the exam,** Tuesday, December 1. See
   [Exam Preparation](./exam_prep.md).
 - **Project consultations end this week,** on Friday, November 13. If your

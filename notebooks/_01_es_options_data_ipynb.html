@@ -553,6 +553,7 @@ and why not daily bars.</p></li>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pull_es_options</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pull_fred</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">smile</span>
@@ -565,14 +566,17 @@ and why not daily bars.</p></li>
 <span class="n">options</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_options</span><span class="p">()</span>
 <span class="n">futures</span> <span class="o">=</span> <span class="n">pull_es_options</span><span class="o">.</span><span class="n">load_es_futures</span><span class="p">()</span>
 <span class="n">fred</span> <span class="o">=</span> <span class="n">pull_fred</span><span class="o">.</span><span class="n">load_fred</span><span class="p">()</span>
-<span class="n">latest</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="c1"># The newest session the monitor computed a row for (a session it had to</span>
+<span class="c1"># skip, a rare chain with too few usable strikes, is not shown here either).</span>
+<span class="n">computed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">monitor</span><span class="o">.</span><span class="n">load_history</span><span class="p">()[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">latest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">computed</span><span class="p">)</span> <span class="k">if</span> <span class="n">computed</span> <span class="k">else</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> option settlements over </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> sessions, &quot;</span>
       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">latest</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14,810 option settlements over 5 sessions, 2026-10-12 to 2026-10-16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15,412 option settlements over 5 sessions, 2026-10-19 to 2026-10-23
 </pre></div>
 </div>
 </div>
@@ -644,16 +648,16 @@ which:</p>
   <tbody>
     <tr>
       <th>2026-10-30</th>
-      <td>14</td>
-      <td>606</td>
-      <td>303</td>
+      <td>7</td>
+      <td>808</td>
+      <td>404</td>
       <td>ESZ6</td>
       <td>100.0</td>
       <td>10800.0</td>
     </tr>
     <tr>
       <th>2026-11-30</th>
-      <td>45</td>
+      <td>38</td>
       <td>330</td>
       <td>165</td>
       <td>ESZ6</td>
@@ -662,16 +666,16 @@ which:</p>
     </tr>
     <tr>
       <th>2026-12-31</th>
-      <td>76</td>
-      <td>356</td>
-      <td>178</td>
+      <td>69</td>
+      <td>358</td>
+      <td>179</td>
       <td>ESH7</td>
       <td>100.0</td>
       <td>11200.0</td>
     </tr>
     <tr>
       <th>2027-01-29</th>
-      <td>105</td>
+      <td>98</td>
       <td>228</td>
       <td>114</td>
       <td>ESH7</td>
@@ -680,7 +684,7 @@ which:</p>
     </tr>
     <tr>
       <th>2027-02-26</th>
-      <td>133</td>
+      <td>126</td>
       <td>222</td>
       <td>111</td>
       <td>ESH7</td>
@@ -689,7 +693,7 @@ which:</p>
     </tr>
     <tr>
       <th>2027-03-31</th>
-      <td>166</td>
+      <td>159</td>
       <td>250</td>
       <td>125</td>
       <td>ESM7</td>
@@ -698,7 +702,7 @@ which:</p>
     </tr>
     <tr>
       <th>2027-06-30</th>
-      <td>257</td>
+      <td>250</td>
       <td>252</td>
       <td>126</td>
       <td>ESU7</td>
@@ -707,7 +711,7 @@ which:</p>
     </tr>
     <tr>
       <th>2027-09-30</th>
-      <td>349</td>
+      <td>342</td>
       <td>254</td>
       <td>127</td>
       <td>ESZ7</td>
@@ -716,7 +720,7 @@ which:</p>
     </tr>
     <tr>
       <th>2027-12-31</th>
-      <td>441</td>
+      <td>434</td>
       <td>236</td>
       <td>118</td>
       <td>ESH8</td>
@@ -725,9 +729,9 @@ which:</p>
     </tr>
     <tr>
       <th>2028-03-31</th>
-      <td>532</td>
-      <td>228</td>
-      <td>114</td>
+      <td>525</td>
+      <td>230</td>
+      <td>115</td>
       <td>ESM8</td>
       <td>1800.0</td>
       <td>11600.0</td>
@@ -819,96 +823,96 @@ they are dropped.</p>
   </thead>
   <tbody>
     <tr>
-      <th>11848</th>
-      <td>2026-10-16</td>
+      <th>12244</th>
+      <td>2026-10-23</td>
       <td>EWV6 C100</td>
       <td>42716737</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>100.0</td>
       <td>C</td>
-      <td>7593.00</td>
+      <td>7553.75</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11849</th>
-      <td>2026-10-16</td>
+      <th>12245</th>
+      <td>2026-10-23</td>
       <td>EWV6 P100</td>
       <td>42477367</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>100.0</td>
       <td>P</td>
       <td>0.05</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11850</th>
-      <td>2026-10-16</td>
+      <th>12246</th>
+      <td>2026-10-23</td>
       <td>EWV6 C1600</td>
       <td>43001763</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>1600.0</td>
       <td>C</td>
-      <td>6095.25</td>
+      <td>6055.00</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11851</th>
-      <td>2026-10-16</td>
+      <th>12247</th>
+      <td>2026-10-23</td>
       <td>EWV6 P1600</td>
       <td>42931720</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>1600.0</td>
       <td>P</td>
       <td>0.05</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11852</th>
-      <td>2026-10-16</td>
+      <th>12248</th>
+      <td>2026-10-23</td>
       <td>EWV6 C1800</td>
       <td>43003134</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>1800.0</td>
       <td>C</td>
-      <td>5895.50</td>
+      <td>5855.25</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11853</th>
-      <td>2026-10-16</td>
+      <th>12249</th>
+      <td>2026-10-23</td>
       <td>EWV6 P1800</td>
       <td>43001769</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>1800.0</td>
       <td>P</td>
       <td>0.05</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11854</th>
-      <td>2026-10-16</td>
+      <th>12250</th>
+      <td>2026-10-23</td>
       <td>EWV6 C2000</td>
       <td>42913647</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>2000.0</td>
       <td>C</td>
-      <td>5695.75</td>
+      <td>5655.25</td>
       <td>ESZ6</td>
     </tr>
     <tr>
-      <th>11855</th>
-      <td>2026-10-16</td>
+      <th>12251</th>
+      <td>2026-10-23</td>
       <td>EWV6 P2000</td>
       <td>43003733</td>
       <td>2026-10-30</td>
-      <td>14</td>
+      <td>7</td>
       <td>2000.0</td>
       <td>P</td>
       <td>0.05</td>
@@ -956,11 +960,11 @@ against it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-16, expiration 2026-10-30 (14 days), risk-free rate 4.12%
-Parity-implied forward: 7,704.24; the ESZ6 future settled at 7,704.25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session 2026-10-23, expiration 2026-10-30 (7 days), risk-free rate 4.11%
+Parity-implied forward: 7,659.75; the ESZ6 future settled at 7,659.75
 </pre></div>
 </div>
-<img alt="../_images/8ae81c18644fefd5b1f6a913a5ecaaf4518827e480569dafbe378103700ea7d0.png" src="../_images/8ae81c18644fefd5b1f6a913a5ecaaf4518827e480569dafbe378103700ea7d0.png" />
+<img alt="../_images/ed41b4fe47ac1c0d3e44b810d4a36df9b9b97a88e7cd777a0c32f8e60518192e.png" src="../_images/ed41b4fe47ac1c0d3e44b810d4a36df9b9b97a88e7cd777a0c32f8e60518192e.png" />
 </div>
 </div>
 </section>
@@ -994,8 +998,8 @@ number.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/89ab01858fa1a04051b7ce022d590c48669d979d1cbc951814bc978645a2336a.png" src="../_images/89ab01858fa1a04051b7ce022d590c48669d979d1cbc951814bc978645a2336a.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>269 usable strikes, moneyness from 0.47 to 1.12
+<img alt="../_images/48df400eb01eaabf542d7ba570cc1d336781fdd08bf0716675cf6b61596e7706.png" src="../_images/48df400eb01eaabf542d7ba570cc1d336781fdd08bf0716675cf6b61596e7706.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>347 usable strikes, moneyness from 0.63 to 1.08
 </pre></div>
 </div>
 </div>
@@ -1019,7 +1023,7 @@ them before inverting:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34 of 606 contracts settled at or below the minimum tick of 0.05; strikes 100 to 10,800
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57 of 808 contracts settled at or below the minimum tick of 0.05; strikes 100 to 10,800
 </pre></div>
 </div>
 </div>
@@ -1081,34 +1085,34 @@ extrapolation. The exchange lists, and settles, strikes far past it:</p>
   </thead>
   <tbody>
     <tr>
-      <th>2026-10-12</th>
-      <td>18</td>
-      <td>0.535579</td>
-      <td>38</td>
+      <th>2026-10-19</th>
+      <td>11</td>
+      <td>0.517804</td>
+      <td>36</td>
     </tr>
     <tr>
-      <th>2026-10-13</th>
-      <td>17</td>
-      <td>0.535661</td>
-      <td>38</td>
+      <th>2026-10-20</th>
+      <td>10</td>
+      <td>0.567995</td>
+      <td>34</td>
     </tr>
     <tr>
-      <th>2026-10-14</th>
-      <td>16</td>
-      <td>0.489927</td>
-      <td>38</td>
+      <th>2026-10-21</th>
+      <td>9</td>
+      <td>0.660901</td>
+      <td>28</td>
     </tr>
     <tr>
-      <th>2026-10-15</th>
-      <td>15</td>
-      <td>0.488579</td>
-      <td>38</td>
+      <th>2026-10-22</th>
+      <td>8</td>
+      <td>0.623574</td>
+      <td>29</td>
     </tr>
     <tr>
-      <th>2026-10-16</th>
-      <td>14</td>
-      <td>0.468014</td>
-      <td>37</td>
+      <th>2026-10-23</th>
+      <td>7</td>
+      <td>0.627146</td>
+      <td>27</td>
     </tr>
   </tbody>
 </table>

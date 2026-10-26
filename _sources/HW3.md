@@ -8,13 +8,13 @@ notebooks/_03_daily_monitor_ipynb.ipynb
 notebooks/_04_single_name_crash_bounds_ipynb.ipynb
 ```
 
-- **Launched:** week 4. **Due:** Tuesday, November 3, at the start of the
-  week 6 session, two weeks after it launches. Also posted on Canvas.
+- **Launched:** week 5. **Due:** Tuesday, November 10, at the start of the
+  week 7 session, two weeks after it launches. Also posted on Canvas.
 - **Link to Assignment:** a private copy is created for you in the
   [hw-finm-32800](https://github.com/hw-finm-32800) organization, named
-  `hw3-` followed by your GitHub username. The copies are created later in
-  the week of October 20, by Friday, October 23. If you have accepted the
-  invitation to the organization, yours simply appears there.
+  `hw3-` followed by your GitHub username. The copies are created in the
+  week of October 27. If you have accepted the invitation to the
+  organization, yours simply appears there.
 - **Goes with:** weeks 4 and 5
 
 ## Overview
@@ -25,18 +25,21 @@ Ian Martin's SVIX index measures the variance the options market expects
 for the S&P 500, the way the VIX does but weighting every strike equally,
 and the same option prices give the probability that the market falls 20%
 within a month. Martin publishes both series on
-[his website](https://personal.lse.ac.uk/martiniw/), and CME reports the
-SVIX construction across asset classes as its
+[his website](https://personal.lse.ac.uk/martiniw/), and CME computes the
+same construction as its
 [CVOL](https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html)
-family of volatility indexes. The first replication rebuilds both numbers
-from the settlement prices of E-mini S&P 500 options on CME Globex, pulled
-from Databento, and checks them against CME's and Cboe's.
+family of volatility indexes for its interest-rate, currency, energy,
+metals, and agricultural options. The first replication rebuilds both
+numbers from the settlement prices of E-mini S&P 500 options on CME Globex,
+pulled from Databento, sets SVIX next to the Cboe VIX, and checks the SVIX
+integral against Martin's own published series.
 
 The deployment is the point of the assignment. The CME FedWatch tool you
 rebuilt in HW 2 updates itself every day; your replication did not. This
 time it will: a GitHub Actions workflow runs your pipeline every morning,
-pulls the previous session, appends it to a history, and republishes your
-ChartBook site to GitHub Pages, with your Databento key stored as a secret.
+pulls the previous session, adds it to a history kept on a branch of its
+own, and republishes your ChartBook site to GitHub Pages, with your
+Databento key stored as a secret.
 That is continuous deployment, and the autograder that has scored your
 pushes since HW 1 is the same machinery.
 
@@ -59,8 +62,8 @@ and posts your score to the repository's Actions tab. Search the repository
 for `TODO` to find the blanks.
 
 **Budget your time.** Parts A, B, and D are a few hours together. Part C is
-where the hours go, because every run of the workflow takes five minutes
-and the first ones fail. Finish Part B and run `uv run doit` locally until
+where the hours go, because every run of the workflow takes about ten
+minutes and the first ones fail. Finish Part B and run `uv run doit` locally until
 it is green before you touch Part C.
 
 ## Before you start
@@ -110,8 +113,8 @@ The blanks, each a formula the second guide derives:
 
 - **SVIX²** (`src/svix.py`). The simple variance swap rate is an integral
   of out-of-the-money option prices across strikes, Martin's equation (12).
-  Two tests: a flat smile, where the answer has a closed form, and a
-  reading of CME's E-mini S&P 500 CVOL index recorded in `data_manual/`.
+  Two tests: a flat smile, where the answer has a closed form, and
+  Martin's published SVIX, below.
 - **The risk-neutral distribution** (`src/rnd.py`). The slope of the call
   curve in the strike is the risk-neutral CDF of the return, Breeden and
   Litzenberger's result. The isotonic fix that follows it is given. Two
@@ -121,11 +124,16 @@ The blanks, each a formula the second guide derives:
   investor who holds the market, with one more integral of the same
   distribution. One test against the closed form.
 
-All five tests run offline on synthetic smiles, so this part needs no data.
+Four of the five tests run offline on synthetic smiles and need no data.
 
-**Does the replication match?** Your 30-day SVIX is checked against a
-reading of CME's CVOL index for the same session, which CME computes from
-the same settlement prices, and the second guide shows it next to the VIX.
+**Does the replication match?** Martin publishes his one-month SVIX for
+1996 to 2012. The fifth test runs your SVIX formula on the OptionMetrics
+S&P 500 surface at every month-end in that period and requires it to stay
+within a fraction of a vol point of his series, so it needs the
+OptionMetrics pull from Part D. No exchange publishes an SVIX for the
+S&P 500: CME's CVOL indexes use the same construction, but not for equity
+options. The fourth guide shows the comparison day by day, and the second
+guide sets SVIX next to the VIX.
 
 ## Part C (graded, 8 pts): the daily monitor
 
@@ -133,19 +141,25 @@ the same settlement prices, and the second guide shows it next to the VIX.
 
 Four things to complete, then one to do.
 
-- **The monitor task** (`dodo.py`, 1 pt). `task_monitor` re-pulls the
-  trailing window, appends the sessions the history does not have to
-  `data_manual/svix_monitor_history.csv`, and redraws the chart. Unlike
-  every other task it must run every time it is invoked.
+- **The monitor task** (`dodo.py`, 1 pt). `task_monitor` pulls the latest
+  session, adds its row to `_output/svix_monitor_history.csv` if the
+  history does not have it, and redraws the chart. Unlike every other task
+  it must run every time it is invoked. `task_backfill`, written for you,
+  does the same over a range of dates; that is how the history behind the
+  chart is filled in, once.
 - **The ChartBook manifest** (`chartbook.toml`, 1 pt). Register the monitor
   notebook and the history dataframe.
 - **The workflow** (`.github/workflows/deploy_pages.yml`, 5 pts). The file
   is given as a skeleton with five blanks: the schedule, the secret, the
   permission the job needs to push, the step that runs the pipeline, and
-  the branch the site is deployed to. The tests read the YAML. The step
-  that commits the history back to the repository is written for you; read
-  its comment, because a workflow that pushes to `main` on every run is a
-  workflow that triggers itself. See
+  the branch the site is deployed to. The tests read the YAML. The other
+  steps are written for you; read their comments. One restores the history
+  from the `monitor-history` branch and another records the day's row
+  there, so no output ever lands on `main`; a workflow that pushed to
+  `main` on every run would be a workflow that triggers itself. Another
+  tells a data-source outage from a bug: if Databento or FRED is still down
+  after the pull's retries, the run ends with a warning and yesterday's
+  site stays up. See
   [GitHub Actions and an Interactive Dashboard](./Week9/github_actions_interactive_dashboard.md),
   [cron](./Week9/cron_jobs.md), and the
   [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions)
@@ -153,9 +167,11 @@ Four things to complete, then one to do.
   Databento secret the same way.
 - **The live site** (`src/published_site.py`, 1 pt). Push the completed
   repository to a **public** repository in your own account, add your
-  Databento key as a repository secret, run the workflow once from the
-  Actions tab, turn on GitHub Pages from the `gh-pages` branch, and record
-  the address of the site and of the repository. The steps are in the
+  Databento key as a repository secret, run the deploy workflow once from
+  the Actions tab, run the backfill workflow once with a start date so the
+  chart has a history behind it, turn on GitHub Pages from the `gh-pages`
+  branch, and record the address of the site and of the repository. The
+  steps are in the
   README. Your private copy in the course organization keeps getting your
   pushes for grading; the workflow does not run there.
 
