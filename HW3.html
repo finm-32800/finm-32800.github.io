@@ -666,12 +666,13 @@ guide sets SVIX next to the VIX.</p>
 </ul>
 <p>Four things to complete, then one to do.</p>
 <ul class="simple">
-<li><p><strong>The monitor task</strong> (<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, 1 pt). <code class="docutils literal notranslate"><span class="pre">task_monitor</span></code> pulls the latest
+<li><p><strong>The daily update</strong> (<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, 1 pt). <code class="docutils literal notranslate"><span class="pre">task_latest</span></code> pulls the latest
 session, adds its row to <code class="docutils literal notranslate"><span class="pre">_output/svix_monitor_history.csv</span></code> if the
 history does not have it, and redraws the chart. Unlike every other task
-it must run every time it is invoked. <code class="docutils literal notranslate"><span class="pre">task_backfill</span></code>, written for you,
-does the same over a range of dates; that is how the history behind the
-chart is filled in, once.</p></li>
+it must run every time it is invoked. Plain <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> is the
+backfill: it pulls every session in the window in the settings, the
+trailing week unless you set <code class="docutils literal notranslate"><span class="pre">START_DATE</span></code> earlier, and adds the ones the
+history does not have.</p></li>
 <li><p><strong>The ChartBook manifest</strong> (<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>, 1 pt). Register the monitor
 notebook and the history dataframe.</p></li>
 <li><p><strong>The workflow</strong> (<code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code>, 5 pts). The file

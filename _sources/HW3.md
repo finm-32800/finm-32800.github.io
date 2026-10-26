@@ -141,12 +141,13 @@ guide sets SVIX next to the VIX.
 
 Four things to complete, then one to do.
 
-- **The monitor task** (`dodo.py`, 1 pt). `task_monitor` pulls the latest
+- **The daily update** (`dodo.py`, 1 pt). `task_latest` pulls the latest
   session, adds its row to `_output/svix_monitor_history.csv` if the
   history does not have it, and redraws the chart. Unlike every other task
-  it must run every time it is invoked. `task_backfill`, written for you,
-  does the same over a range of dates; that is how the history behind the
-  chart is filled in, once.
+  it must run every time it is invoked. Plain `uv run doit` is the
+  backfill: it pulls every session in the window in the settings, the
+  trailing week unless you set `START_DATE` earlier, and adds the ones the
+  history does not have.
 - **The ChartBook manifest** (`chartbook.toml`, 1 pt). Register the monitor
   notebook and the history dataframe.
 - **The workflow** (`.github/workflows/deploy_pages.yml`, 5 pts). The file

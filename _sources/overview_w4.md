@@ -120,8 +120,8 @@ And the moment we push it, it is stale.
 
 ## Agenda Item 4: Modules, Packages, and `if __name__ == "__main__"`
 
-The workflow you just read runs `uv run doit monitor`, and that task runs
-`python ./src/pull_es_options.py` as a script. The guide notebook imports the
+The workflow you just read runs `uv run doit latest`, and that task runs
+`python ./src/pull_es_options.py --latest` as a script. The guide notebook imports the
 same file and calls `load_es_options()`, and nothing is pulled. How can one
 file be both a script and a library? And what turns a folder of such files
 into a package that someone else can install?
