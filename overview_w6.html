@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 6: SQL at Scale, Remote Machines, and Job Schedulers &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
@@ -47,12 +47,14 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview_w6';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Strategies for Medium-Sized Data" href="Week8/medium_sized_data_strategies.html" />
-    <link rel="prev" title="Cleaning TRACE Corporate Bond Data: A Walkthrough" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html" /> 
+    <link rel="next" title="Unit Tests" href="Week5/unit_tests.html" />
+    <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -191,6 +193,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -232,31 +235,31 @@
 <li class="toctree-l2"><a class="reference internal" href="Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/latex_essentials.html">LaTeX Essentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week3/study_guide.html">Study Guide: Week 3</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: GitHub Pages, GitHub Actions, and Python Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w4.html">Week 4: Data APIs, Static Sites, and GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week4/study_guide.html">Study Guide: Week 4</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Live Monitors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/live_monitor.html">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/study_guide.html">Study Guide: Week 5</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w5.html">Week 5: Unit Tests and Data Validation with pytest</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 6: SQL at Scale, Remote Machines, and Job Schedulers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
@@ -267,10 +270,15 @@
 <li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: CI/CD with GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
@@ -301,8 +309,8 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4: Order Book Validation and Flow Toxicity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW4.html">Homework 4: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HW5.html">Homework 5</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
@@ -496,7 +504,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 6: SQL at Scale, Remote Machines, and Job Schedulers</h1>
+    <h1>Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -508,11 +516,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-medium-data-polars-and-parquet">Agenda Item 1: Medium Data, Polars, and Parquet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-remote-machines-and-two-schedulers">Agenda Item 2: Remote Machines and Two Schedulers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud">Agenda Item 3: NYSE TAQ on the WRDS Cloud</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-lab-hw-4-on-a-cluster">Agenda Item 4: Lab, HW 4 on a Cluster</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-5-the-collaborative-report">Agenda Item 5: Launch HW 5, the Collaborative Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-tests-and-data-checks">Agenda Item 1: Tests and Data Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-no-ground-truth-cleaning-finra-trace">Agenda Item 2: No Ground Truth — Cleaning FINRA TRACE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-a-ground-truth-the-order-book">Agenda Item 3: A Ground Truth — The Order Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-medium-data-polars-and-parquet">Agenda Item 4: Medium Data, Polars, and Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-remote-machines-and-two-schedulers">Agenda Item 5: Remote Machines and Two Schedulers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-nyse-taq-on-the-wrds-cloud">Agenda Item 6: NYSE TAQ on the WRDS Cloud</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-7">Looking ahead to Week 7</a></li>
 </ul>
             </nav>
@@ -524,10 +533,13 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-6-sql-at-scale-remote-machines-and-job-schedulers">
-<h1>Week 6: SQL at Scale, Remote Machines, and Job Schedulers<a class="headerlink" href="#week-6-sql-at-scale-remote-machines-and-job-schedulers" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-6-data-validation-sql-at-scale-remote-machines-and-job-schedulers">
+<h1>Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers<a class="headerlink" href="#week-6-data-validation-sql-at-scale-remote-machines-and-job-schedulers" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
@@ -551,17 +563,13 @@ the point: what you are learning is batch scheduling, not one vendor’s command
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="HW3.html"><span class="std std-doc">HW 3</span></a> is due next week,</strong> Tuesday, November 10.</p></li>
-<li><p><strong><a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a> launches today,</strong> due Tuesday, November 17, in week 8:
-order book validation and flow toxicity, the last of the four coding
-assignments. Tonight’s lab takes the reconstruction to a cluster.</p></li>
-<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> launches next week,</strong> due Tuesday, November 24: one
-figure and one paragraph for the class report. It is the last homework,
-and the smallest.</p></li>
+<li><p><strong><a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a> and <a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a>:</strong> dates to be announced on
+Canvas.</p></li>
 <li><p><strong>Accept your invite to the report repo.</strong> Every student gets a GitHub
 collaborator invite to the private report repository. Check your email or
-<a class="reference external" href="https://github.com/notifications">github.com/notifications</a> and confirm tonight
-that you can open it.</p></li>
-<li><p><strong>Confirm your cluster access tonight.</strong> You need the WRDS Cloud (the same WRDS
+<a class="reference external" href="https://github.com/notifications">github.com/notifications</a> and confirm in
+class that you can open it.</p></li>
+<li><p><strong>Confirm your cluster access in class today.</strong> You need the WRDS Cloud (the same WRDS
 account, over SSH) and Midway3 (RCC). If either fails, we fix it in class.</p></li>
 <li><p><strong>The exam is Tuesday, December 1,</strong> in week 9, covering weeks 0 through 8.
 See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
@@ -572,6 +580,19 @@ it today: <a class="reference external" href="https://bookings.cloud.microsoft/b
 <section id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
+<li><p>Say what makes a good unit test, and write tests that are the
+<em>specification</em> for a function rather than an afterthought:
+<a class="reference internal" href="Week5/unit_tests.html"><span class="std std-doc">Unit Tests</span></a>.</p></li>
+<li><p>Distinguish a unit test from a data-validation check, and wire both into a
+pipeline so a run refuses to publish bad data.</p></li>
+<li><p>Test code that talks to the network without talking to the network:
+fixtures, small in-memory databases, and cached samples.</p></li>
+<li><p>Explain the major decisions in cleaning FINRA TRACE and why reasonable
+people produce different “clean” datasets: the
+<a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html"><span class="std std-doc">data sources overview</span></a> and
+the <a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html"><span class="std std-doc">Clean TRACE walkthrough</span></a>.</p></li>
+<li><p>Explain what a limit order book is, what a market-by-order feed contains,
+and how a reconstruction can be validated exactly against a reference book.</p></li>
 <li><p>Choose sensible strategies for data between 1 GB and 100 GB:
 <a class="reference internal" href="Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a>.</p></li>
 <li><p>Use Polars and explain lazy evaluation, predicate pushdown, streaming, and Hive
@@ -588,9 +609,72 @@ under Grid Engine on the WRDS Cloud.</p></li>
 <li><p>Explain how liquidity is measured from intraday trades and quotes, and why the
 choice of data source changes the answer.</p></li>
 </ul>
+<p>Carried over from week 5, which made room for live monitors and the math
+of HW 3:</p>
 </section>
-<section id="agenda-item-1-medium-data-polars-and-parquet">
-<h2>Agenda Item 1: Medium Data, Polars, and Parquet<a class="headerlink" href="#agenda-item-1-medium-data-polars-and-parquet" title="Link to this heading">#</a></h2>
+<section id="agenda-item-1-tests-and-data-checks">
+<h2>Agenda Item 1: Tests and Data Checks<a class="headerlink" href="#agenda-item-1-tests-and-data-checks" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="Week5/unit_tests.html"><span class="std std-doc">Unit Tests</span></a>, with the monitor you deployed last week
+as the example.</p>
+<ul class="simple">
+<li><p><strong>Tests as a specification.</strong> The reason every homework says “read the
+failing test”: a docstring says what a function should do, a test says it
+in a form the machine can check.</p></li>
+<li><p><strong>Testing code that pulls data, without pulling it.</strong> The monitor’s tests
+run with no API key: they hand the parser FRED’s “.” for a missing day and
+check it becomes a missing value. HW 1 tested its SQL against a small
+in-memory database the same way.</p></li>
+<li><p><strong>A unit test is not a data check.</strong> A unit test asks whether your
+function is right; a data check asks whether today’s data are sane:
+duplicate dates, values out of range, stale timestamps. The monitor runs
+its checks before it publishes, and a failure leaves yesterday’s page up.
+The next two items are the two kinds of data check: conventions you must
+defend, and an exact diff against a reference.</p></li>
+</ul>
+</section>
+<section id="agenda-item-2-no-ground-truth-cleaning-finra-trace">
+<h2>Agenda Item 2: No Ground Truth — Cleaning FINRA TRACE<a class="headerlink" href="#agenda-item-2-no-ground-truth-cleaning-finra-trace" title="Link to this heading">#</a></h2>
+<p>Corporate bond transactions are reported to FINRA, and the raw feed contains
+cancellations, corrections, reversals, agency double-counts, and prices that
+cannot be right. Cleaning it is a sequence of judgment calls, each defensible and
+each consequential.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html"><span class="std std-doc">Data sources overview</span></a>: what
+TRACE is, who provides what, and what the enhanced file adds.</p></li>
+<li><p><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html"><span class="std std-doc">Clean TRACE walkthrough</span></a>:
+the Dick-Nielsen filters, step by step, with the count of records each one
+removes.</p></li>
+<li><p>Why this matters beyond bonds: Dickerson, Robotti, and Rossetti show that
+corporate bond factor results move materially with these choices. When “clean”
+is a convention, the only defense is that your convention is documented, tested,
+and rerunnable. That is the whole argument of this course, in one dataset.</p></li>
+</ul>
+</section>
+<section id="agenda-item-3-a-ground-truth-the-order-book">
+<h2>Agenda Item 3: A Ground Truth — The Order Book<a class="headerlink" href="#agenda-item-3-a-ground-truth-the-order-book" title="Link to this heading">#</a></h2>
+<p>Now the opposite situation. A limit order book is the state of a market at an
+instant. Databento’s CME Globex feed gives you both the raw messages (<code class="docutils literal notranslate"><span class="pre">mbo</span></code>,
+market by order) and the vendor’s own reconstruction of the top ten levels
+(<code class="docutils literal notranslate"><span class="pre">mbp-10</span></code>). So you can rebuild the book from the messages and <strong>diff your answer
+against theirs</strong>. Every discrepancy is a located bug, which makes this the
+cleanest validation exercise in the course.</p>
+<ul class="simple">
+<li><p>Message types and what each does to the book: add, cancel, modify, trade, fill.</p></li>
+<li><p>Replaying messages in order, and what “in order” means when timestamps tie.</p></li>
+<li><p>Writing the diff as a test, not as a notebook you eyeball.</p></li>
+<li><p>Trade classification with no ground truth: bulk volume classification against
+the tick rule, and checking them against each other.</p></li>
+<li><p><strong>Flow toxicity.</strong>
+<a class="reference external" href="https://doi.org/10.1093/rfs/hhs053">Easley, López de Prado, and O’Hara (2012)</a>
+define VPIN, a measure of order-flow imbalance computed in <em>volume time</em> rather
+than clock time, and show it rising in the hours before the May 2010 flash
+crash as liquidity providers withdrew. They built it on the E-mini S&amp;P 500
+contract, which is the contract you will use. This is what the Chicago options
+market makers who hire from this program do all day.</p></li>
+</ul>
+</section>
+<section id="agenda-item-4-medium-data-polars-and-parquet">
+<h2>Agenda Item 4: Medium Data, Polars, and Parquet<a class="headerlink" href="#agenda-item-4-medium-data-polars-and-parquet" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a> and
 <a class="reference internal" href="Week8/polars_exercises.html"><span class="std std-doc">Polars Exercises</span></a>.</p>
 <ul class="simple">
@@ -607,8 +691,8 @@ is not reproducible and is not polite to the vendor. The pull is one task with a
 cached target; everything downstream reads the cache.</p></li>
 </ul>
 </section>
-<section id="agenda-item-2-remote-machines-and-two-schedulers">
-<h2>Agenda Item 2: Remote Machines and Two Schedulers<a class="headerlink" href="#agenda-item-2-remote-machines-and-two-schedulers" title="Link to this heading">#</a></h2>
+<section id="agenda-item-5-remote-machines-and-two-schedulers">
+<h2>Agenda Item 5: Remote Machines and Two Schedulers<a class="headerlink" href="#agenda-item-5-remote-machines-and-two-schedulers" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a>, then the comparison.</p>
 <ul class="simple">
 <li><p>SSH keys, config files, and <code class="docutils literal notranslate"><span class="pre">rsync</span></code>. Getting results <em>back</em> is half the job.</p></li>
@@ -627,8 +711,8 @@ queue, kill a job, request memory, request an array. Once you can translate,
 the next scheduler you meet costs you an afternoon, not a week.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-nyse-taq-on-the-wrds-cloud">
-<h2>Agenda Item 3: NYSE TAQ on the WRDS Cloud<a class="headerlink" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud" title="Link to this heading">#</a></h2>
+<section id="agenda-item-6-nyse-taq-on-the-wrds-cloud">
+<h2>Agenda Item 6: NYSE TAQ on the WRDS Cloud<a class="headerlink" href="#agenda-item-6-nyse-taq-on-the-wrds-cloud" title="Link to this heading">#</a></h2>
 <p>The in-class case study is
 <a class="reference external" href="https://doi.org/10.1111/jofi.12127">Holden and Jacobsen (2014)</a>,
 <em>Liquidity Measurement Problems in Fast, Competitive Markets</em>. They show that
@@ -643,47 +727,9 @@ NBBO, and produces the standard liquidity measures. We run it there.</p></li>
 one ticker-day, then brings the output back and analyzes it in Python. You are
 driving someone else’s production code as a black box through a scheduler,
 which is an ordinary and useful thing to be able to do.</p></li>
-<li><p>Contrast with HW 4: TAQ is equities on the WRDS Cloud; the E-mini order book is
-futures on Midway. Two datasets, two schedulers, one skill.</p></li>
-</ul>
-</section>
-<section id="agenda-item-4-lab-hw-4-on-a-cluster">
-<h2>Agenda Item 4: Lab, HW 4 on a Cluster<a class="headerlink" href="#agenda-item-4-lab-hw-4-on-a-cluster" title="Link to this heading">#</a></h2>
-<p>Bring your single-day reconstruction from last week. Tonight it becomes a job
-array over a quarter of trading days: a submit script, one array task per day,
-results written to scratch, aggregated, and <code class="docutils literal notranslate"><span class="pre">rsync</span></code>’d back. This lab is done in
-class and is not graded. The graded part of HW 4 is the single-day path on your
-laptop, so keep it working.</p>
-<p>An optional practice run on Midway with a different pipeline, cleaning TRACE, is
-in <a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html"><span class="std std-doc">Optional Lab: Clean TRACE on Midway</span></a>.
-It is not graded and it is a good rehearsal.</p>
-</section>
-<section id="agenda-item-5-launch-hw-5-the-collaborative-report">
-<h2>Agenda Item 5: Launch HW 5, the Collaborative Report<a class="headerlink" href="#agenda-item-5-launch-hw-5-the-collaborative-report" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is the class’s one shared artifact. The whole class produces a
-single publication-style PDF on the state of the equity premium predictors, and
-the topics are the predictors of
-<a class="reference external" href="https://academic.oup.com/rfs/article/37/11/3490/7749383">Goyal, Welch, and Zafirov (2024)</a>.
-There are more predictors in that paper than there are students, so everyone gets
-their own.</p>
-<ul class="simple">
-<li><p><strong>Read the instructions:</strong> what you contribute, the workflow, and the rubric
-are posted with the assignment when it launches.</p></li>
-<li><p><strong>Style guides.</strong>
-<a class="reference internal" href="Week1/collaborative_report_and_style_guides.html"><span class="std std-doc">The Collaborative Report and Style Guides</span></a>:
-organizations that publish reports keep a style guide so that many contributors
-produce one coherent document. We look at a few real ones and write ours.</p></li>
-<li><p><strong>Claim an issue.</strong> Each open issue is one predictor. Assign it to yourself, one
-student per issue. Claim early.</p></li>
-<li><p><strong>Build it reproducibly.</strong> Your exhibit is its own file in <code class="docutils literal notranslate"><span class="pre">src/</span></code>, wired into
-<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, pulling through FRED, the OFR API, or the
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook catalog</span></a>. It ships with a test that the
-shared repo’s CI runs on every contribution.</p></li>
-<li><p><strong>Open a draft PR early.</strong> You need two classmate reviews, and you owe two
-reviews to others. An early draft PR gets you comments while there is still time
-to act on them. The workflow is the one from
-<a class="reference internal" href="Week6/GitHub_pull_requests.html"><span class="std std-doc">GitHub Issues and Pull Requests</span></a>.</p></li>
-<li><p><strong>Live walkthrough</strong> of the repo skeleton, then review an open PR together.</p></li>
+<li><p>Contrast with the order book earlier today: TAQ is equities on the WRDS
+Cloud, and the E-mini order book is futures from Databento. Two datasets, one
+skill.</p></li>
 </ul>
 </section>
 <section id="looking-ahead-to-week-7">
@@ -710,20 +756,20 @@ consumer, which is exactly the structure Airflow exists for.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html"
+       href="subject_to_change_after_this_week.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Cleaning TRACE Corporate Bond Data: A Walkthrough</p>
+        <p class="prev-next-title">WARNING: Notes subject to change after this week</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week8/medium_sized_data_strategies.html"
+       href="Week5/unit_tests.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Strategies for Medium-Sized Data</p>
+        <p class="prev-next-title">Unit Tests</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -745,11 +791,12 @@ consumer, which is exactly the structure Airflow exists for.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-medium-data-polars-and-parquet">Agenda Item 1: Medium Data, Polars, and Parquet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-remote-machines-and-two-schedulers">Agenda Item 2: Remote Machines and Two Schedulers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-nyse-taq-on-the-wrds-cloud">Agenda Item 3: NYSE TAQ on the WRDS Cloud</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-lab-hw-4-on-a-cluster">Agenda Item 4: Lab, HW 4 on a Cluster</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-launch-hw-5-the-collaborative-report">Agenda Item 5: Launch HW 5, the Collaborative Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-tests-and-data-checks">Agenda Item 1: Tests and Data Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-no-ground-truth-cleaning-finra-trace">Agenda Item 2: No Ground Truth — Cleaning FINRA TRACE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-a-ground-truth-the-order-book">Agenda Item 3: A Ground Truth — The Order Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-medium-data-polars-and-parquet">Agenda Item 4: Medium Data, Polars, and Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-remote-machines-and-two-schedulers">Agenda Item 5: Remote Machines and Two Schedulers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-6-nyse-taq-on-the-wrds-cloud">Agenda Item 6: NYSE TAQ on the WRDS Cloud</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-7">Looking ahead to Week 7</a></li>
 </ul>
   </nav></div>

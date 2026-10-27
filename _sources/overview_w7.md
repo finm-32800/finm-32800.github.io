@@ -1,5 +1,11 @@
 # Week 7: Orchestration Across Projects with Apache Airflow
 
+```{toctree}
+:maxdepth: 1
+Week6/GitHub_pull_requests.md
+Week7/study_guide.md
+```
+
 ```{note}
 The Airflow chapter for this week is posted before class. Until then, this page
 is the agenda.
@@ -17,15 +23,12 @@ rebuild when all of them have landed.
 
 ## Announcements
 
-- **[HW 3](./HW3.md) is due tonight,** at the start of class.
-- **[HW 4](./HW4.md) is due next week,** Tuesday, November 17. It is the last
-  of the four coding assignments.
-- **[HW 5](./HW5.md) launches today,** due Tuesday, November 24, at 9:30 am;
-  there is no class that day. One figure and one paragraph for the class
-  report. Open your pull request by next week, so your two reviewers have
-  time. Tonight's Airflow lab runs on the report's pipelines. It is done in
+- **[HW 3](./HW3.md) is due today at 9:30 am,** the start of class.
+- **[HW 4](./HW4.md) and [HW 5](./HW5.md):** dates to be announced on
+  Canvas.
+- **Today's Airflow lab** runs on the class report's pipelines. It is done in
   class and is not graded.
-- **Tonight's material is on the exam,** Tuesday, December 1. See
+- **Today's material is on the exam,** Tuesday, December 1. See
   [Exam Preparation](./exam_prep.md).
 - **Project consultations end this week,** on Friday, November 13. If your
   group has not had one, book it today: [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).
@@ -118,7 +121,21 @@ you meet them.
   names them: the lockfile pins the packages, the image pins the machine, and
   the orchestrator decides when and where the image runs.
 
-## Agenda Item 5: The Paper
+## Agenda Item 5: Issues and Pull Requests
+
+[GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md). The
+final project's rubric requires every pull request to be reviewed by a
+teammate.
+
+- **An issue** records a task or a bug. **A pull request** proposes a
+  change, and writing `fixes #12` in it closes issue 12 when the change
+  merges.
+- **`git pull` and a pull request** sound alike: the first updates your own
+  copy, the second asks someone else to pull your branch.
+- **Why `main` is protected,** and a review is required before anything
+  merges.
+
+## Agenda Item 6: The Paper
 
 [Goyal, Welch, and Zafirov (2024)](https://academic.oup.com/rfs/article/37/11/3490/7749383),
 *A Comprehensive 2022 Look at the Empirical Performance of Equity Premium
@@ -132,10 +149,8 @@ fits models to it.
 
 ## Looking ahead to Week 8
 
-Week 8 is **CI/CD with GitHub Actions**, and the contrast with what you ran
-tonight is the point of the week.
-Both are automation triggered by an event; one
-is triggered by a push and one by a clock or a dataset. The case study is a live
-FedWatch monitor that rebuilds itself every morning, computing the policy
-surprises of Bernanke and Kuttner (2005) from the futures data you already pulled
-in HW 2.
+Week 8 is **packaging, CI, and code quality**: how the packages you install
+are built, tested across Python versions, documented, and released by a
+workflow, and the checks that run before a push. The paper is Bernanke and
+Kuttner (2005), whose policy surprises come from the same fed funds futures
+as the FedWatch replication.

@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>A day in the life of a live monitor</title>
+  <desc>Every day a fresh GitHub Actions runner checks out main, restores the history from the monitor-history branch, runs the tests, runs doit latest with the FRED API key from the repository's secrets, commits the updated history to monitor-history, and force-pushes the built page to gh-pages, which GitHub Pages serves.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+    <marker id="chev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7d97b8"/>
+    </marker>
+    <style>
+      .title { font-size: 22px; font-weight: 700; fill: #1b1f24; }
+      .sub { font-size: 14px; fill: #5b6470; }
+      .step-title { font-size: 13px; font-weight: 700; fill: #1b1f24; }
+      .step-text { font-size: 11px; fill: #4b5563; }
+      .mono { font-family: SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #1f4e8c; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; }
+      .lane-name { font-family: SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; font-weight: 700; }
+      .lane-text { font-size: 13px; fill: #4b5563; }
+      .small { font-size: 12px; fill: #5b6470; }
+      .halo { stroke: #ffffff; stroke-width: 9; fill: none; }
+      .arrow { stroke: #374151; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="640" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="40" class="title">A day in the life of a live monitor</text>
+  <text x="40" y="63" class="sub">Every day at 22:00 UTC, on a runner that starts empty</text>
+
+  <!-- Inputs from outside the repository -->
+  <rect x="604" y="72" width="165" height="40" rx="7" fill="#fff4e5" stroke="#d9912b" stroke-width="1.5"/>
+  <text x="686.5" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#8a5a12">FRED API · DGS10, DGS2</text>
+  <rect x="800" y="72" width="190" height="40" rx="7" fill="#f4effa" stroke="#7b4fa0" stroke-width="1.5"/>
+  <text x="895" y="97" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#5b3a80">secret: FRED_API_KEY</text>
+
+  <!-- The runner -->
+  <rect x="40" y="126" width="1120" height="136" rx="12" fill="#eef4fb" stroke="#9db7d5" stroke-width="1.5"/>
+  <text x="56" y="146" font-size="12" font-weight="700" fill="#4f6a8c">GITHUB ACTIONS RUNNER</text>
+  <text x="1144" y="146" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4f6a8c">cron: '0 22 * * *'</text>
+
+  <!-- Step boxes: x = 55, 238, 421, 604, 787, 970; width 165 -->
+  <g>
+    <rect x="55" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#9db7d5"/>
+    <circle cx="73" cy="176" r="11" fill="#1f4e8c"/><text x="73" y="180" text-anchor="middle" class="num">1</text>
+    <text x="67" y="207" class="step-title">Check out main</text>
+    <text x="67" y="225" class="step-text">the code, nothing else</text>
+    <text x="67" y="241" class="mono">actions/checkout</text>
+  </g>
+  <g>
+    <rect x="238" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#9db7d5"/>
+    <circle cx="256" cy="176" r="11" fill="#1f4e8c"/><text x="256" y="180" text-anchor="middle" class="num">2</text>
+    <text x="250" y="207" class="step-title">Restore the history</text>
+    <text x="250" y="225" class="step-text">read yesterday's CSV</text>
+    <text x="250" y="241" class="mono">git show</text>
+  </g>
+  <g>
+    <rect x="421" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#9db7d5"/>
+    <circle cx="439" cy="176" r="11" fill="#1f4e8c"/><text x="439" y="180" text-anchor="middle" class="num">3</text>
+    <text x="433" y="207" class="step-title">Run the tests</text>
+    <text x="433" y="225" class="step-text">a failure stops the run</text>
+    <text x="433" y="241" class="mono">uv run pytest</text>
+  </g>
+  <g>
+    <rect x="604" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#d9912b" stroke-width="1.8"/>
+    <circle cx="622" cy="176" r="11" fill="#1f4e8c"/><text x="622" y="180" text-anchor="middle" class="num">4</text>
+    <text x="616" y="207" class="step-title">Update</text>
+    <text x="616" y="225" class="step-text">pull, add, build the page</text>
+    <text x="616" y="241" class="mono">uv run doit latest</text>
+  </g>
+  <g>
+    <rect x="787" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#9db7d5"/>
+    <circle cx="805" cy="176" r="11" fill="#1f4e8c"/><text x="805" y="180" text-anchor="middle" class="num">5</text>
+    <text x="799" y="207" class="step-title">Record the history</text>
+    <text x="799" y="225" class="step-text">commit today's CSV</text>
+    <text x="799" y="241" class="mono">git worktree</text>
+  </g>
+  <g>
+    <rect x="970" y="158" width="165" height="90" rx="8" fill="#ffffff" stroke="#9db7d5"/>
+    <circle cx="988" cy="176" r="11" fill="#1f4e8c"/><text x="988" y="180" text-anchor="middle" class="num">6</text>
+    <text x="982" y="207" class="step-title">Publish the page</text>
+    <text x="982" y="225" class="step-text">one orphan commit</text>
+    <text x="982" y="241" class="mono">git push --force</text>
+  </g>
+  <!-- chevrons between steps -->
+  <line x1="221" y1="203" x2="236" y2="203" stroke="#7d97b8" stroke-width="2" marker-end="url(#chev)"/>
+  <line x1="404" y1="203" x2="419" y2="203" stroke="#7d97b8" stroke-width="2" marker-end="url(#chev)"/>
+  <line x1="587" y1="203" x2="602" y2="203" stroke="#7d97b8" stroke-width="2" marker-end="url(#chev)"/>
+  <line x1="770" y1="203" x2="785" y2="203" stroke="#7d97b8" stroke-width="2" marker-end="url(#chev)"/>
+  <line x1="953" y1="203" x2="968" y2="203" stroke="#7d97b8" stroke-width="2" marker-end="url(#chev)"/>
+
+  <!-- Branch lanes -->
+  <!-- main -->
+  <text x="160" y="318" class="lane-name" fill="#4b5563">main</text>
+  <text x="206" y="318" class="lane-text">the code. Changes only when you push.</text>
+  <line x1="60" y1="330" x2="1100" y2="330" stroke="#9ca3af" stroke-width="3"/>
+  <circle cx="72" cy="330" r="6" fill="#6b7280"/>
+  <circle cx="104" cy="330" r="6" fill="#6b7280"/>
+  <circle cx="137" cy="330" r="7" fill="#6b7280" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- monitor-history -->
+  <text x="160" y="418" class="lane-name" fill="#2e8b57">monitor-history</text>
+  <text x="300" y="418" class="lane-text">one file, spread_history.csv. One small commit a day.</text>
+  <line x1="60" y1="430" x2="1100" y2="430" stroke="#9fd3b4" stroke-width="3"/>
+  <g fill="#2e8b57">
+    <circle cx="160" cy="430" r="4.5"/><circle cx="190" cy="430" r="4.5"/><circle cx="220" cy="430" r="4.5"/>
+    <circle cx="250" cy="430" r="4.5"/><circle cx="280" cy="430" r="4.5"/><circle cx="310" cy="430" r="4.5"/>
+    <circle cx="340" cy="430" r="4.5"/><circle cx="370" cy="430" r="4.5"/><circle cx="400" cy="430" r="4.5"/>
+    <circle cx="430" cy="430" r="4.5"/><circle cx="460" cy="430" r="4.5"/><circle cx="490" cy="430" r="4.5"/>
+    <circle cx="520" cy="430" r="4.5"/><circle cx="550" cy="430" r="4.5"/><circle cx="580" cy="430" r="4.5"/>
+    <circle cx="610" cy="430" r="4.5"/><circle cx="640" cy="430" r="4.5"/><circle cx="670" cy="430" r="4.5"/>
+    <circle cx="700" cy="430" r="4.5"/><circle cx="730" cy="430" r="4.5"/><circle cx="760" cy="430" r="4.5"/>
+    <circle cx="790" cy="430" r="4.5"/>
+    <circle cx="820" cy="430" r="6.5"/>
+  </g>
+  <text x="820" y="456" text-anchor="middle" class="small">yesterday</text>
+  <circle cx="869" cy="430" r="9" fill="#2e8b57" stroke="#ffffff" stroke-width="2.5"/>
+  <text x="869" y="456" text-anchor="middle" font-size="12" font-weight="700" fill="#2e8b57">today</text>
+
+  <!-- gh-pages -->
+  <text x="160" y="518" class="lane-name" fill="#1f4e8c">gh-pages</text>
+  <text x="246" y="518" class="lane-text">the built page. One commit, replaced by every run.</text>
+  <line x1="60" y1="530" x2="1100" y2="530" stroke="#a9c1e0" stroke-width="3"/>
+  <g fill="#ffffff" stroke="#1f4e8c" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.45">
+    <circle cx="902" cy="530" r="6"/><circle cx="952" cy="530" r="6"/><circle cx="1002" cy="530" r="6"/>
+  </g>
+  <text x="952" y="556" text-anchor="middle" class="small">replaced</text>
+  <circle cx="1052" cy="530" r="9" fill="#1f4e8c" stroke="#ffffff" stroke-width="2.5"/>
+
+  <!-- Arrows: halos first, so each arrow bridges the lanes it crosses -->
+  <path class="halo" d="M686.5,113 V154"/>
+  <path class="arrow" d="M686.5,113 V154"/>
+  <path class="halo" d="M895,113 V134 H745 V154"/>
+  <path class="arrow" d="M895,113 V134 H745 V154"/>
+
+  <path class="halo" d="M137,322 V252"/>
+  <path class="arrow" d="M137,322 V252"/>
+
+  <path class="halo" d="M820,423 V292 H320 V252"/>
+  <path class="arrow" d="M820,423 V292 H320 V252"/>
+
+  <path class="halo" d="M869,249 V419"/>
+  <path class="arrow" d="M869,249 V419"/>
+
+  <path class="halo" d="M1052,249 V519"/>
+  <path class="arrow" d="M1052,249 V519"/>
+
+  <!-- GitHub Pages -->
+  <path class="arrow" d="M1052,540 V566"/>
+  <rect x="930" y="570" width="230" height="50" rx="8" fill="#eef4fb" stroke="#1f4e8c" stroke-width="1.5"/>
+  <text x="1045" y="591" text-anchor="middle" font-size="13" font-weight="700" fill="#1f4e8c">GitHub Pages serves gh-pages</text>
+  <text x="1045" y="609" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1f4e8c">you.github.io/repository/</text>
+
+  <!-- Key -->
+  <text x="60" y="600" class="small">Each dot is a commit; time runs left to right, and the run shown is today's.</text>
+  <text x="60" y="618" class="small">Nothing the run produces is ever committed to main.</text>
+</svg>

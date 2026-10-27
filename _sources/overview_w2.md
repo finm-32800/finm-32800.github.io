@@ -32,8 +32,8 @@ motivates it is the **Fama-French (1993)** replication that finishes
   recommended HW 1 finish is a week before its deadline.
 - **Get a Databento API key before October 13.** HW 2 pulls 30-Day Fed Funds
   futures from Databento's CME Globex feed, which the program's subscription
-  covers, and the pipeline does not run without a key in your `.env`. HW 3 and
-  HW 4 use the same key. See [Databento](./Week7/databento.md).
+  covers, and the pipeline does not run without a key in your `.env`. HW 3 uses
+  the same key. See [Databento](./Week7/databento.md).
 
 ## Objectives
 

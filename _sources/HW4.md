@@ -1,12 +1,12 @@
-# Homework 4: Order Book Validation and Flow Toxicity
+# Homework 4: The Class Report
 
-- **Launched:** week 6. **Due:** Tuesday, November 17, at the start of the
-  week 8 session. Also posted on Canvas.
+- **Launched:** to be announced. **Due:** to be announced. Dates are posted
+  here and on Canvas.
 - **Link to Assignment:** posted at launch
-- **Goes with:** weeks 5 and 6
 
 ## To be determined
 
-The write-up for this assignment is posted when it launches in week 5: the
-tasks, the point breakdown, the data sources, and the link to your repository.
-The title above is the topic as currently planned and may change before launch.
+HW 4 builds the class's collaborative report: one report assembled from many
+repositories, each depending on data that others produce, with
+[ChartBook](./Week6/chartbook_catalog.md) keeping track of what feeds what.
+The tasks, the points, and the dates are posted when it launches.

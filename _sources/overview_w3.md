@@ -5,10 +5,6 @@
 Week4/reports_with_jupyter_notebooks.md
 Week4/intro_to_LaTeX.md
 Week4/latex_essentials.md
-Week7/databento.md
-notebooks/_01_databento_ipynb.ipynb
-Week7/LSEG_datastream.md
-Week3/github_pages_preview.md
 Week3/project_structure.md
 Week3/study_guide.md
 ```
@@ -67,9 +63,10 @@ the pipeline regenerates whenever the data changes.
   quotes, and how fed funds futures prices imply an expected policy path.
 - Pull market data from a vendor's API with a key kept in `.env`, and check
   what a query costs before running it: [Databento](./Week7/databento.md).
+  Taught in [week 4](./overview_w4.md).
 - Publish a `docs/` folder as a live website, which HW 2 asks you to do:
-  [Publishing to GitHub Pages](./Week3/github_pages_preview.md). We start it
-  tonight if there is time and finish it next week.
+  [Publishing to GitHub Pages](./Week3/github_pages_preview.md). Taught in
+  [week 4](./overview_w4.md).
 
 ## Agenda Item 1: HW 1 Questions
 
@@ -229,6 +226,8 @@ futures, the way the CME FedWatch tool does:
 
 ### Databento, in Five Minutes
 
+*Taught in [week 4](./overview_w4.md).*
+
 - **The chapter:** [Databento](./Week7/databento.md)
 - **The examples we run:**
   [`databento/` in the in-class repo](https://github.com/finm-32800/inclass_examples/tree/main/databento)
@@ -268,8 +267,7 @@ on the Treasury curve, compiled from LaTeX. We launch it in class; you finish th
 
 ## Agenda Item 6, If Time: Publishing to GitHub Pages
 
-If there is time tonight. If not, it opens next week, and either way it comes
-before HW 2 is due.
+*Taught in [week 4](./overview_w4.md).*
 
 
 [Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/`

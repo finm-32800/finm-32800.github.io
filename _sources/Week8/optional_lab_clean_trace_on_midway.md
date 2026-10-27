@@ -4,8 +4,7 @@ This lab is optional and ungraded. It walks through running the Clean TRACE
 corporate bond pipeline on UChicago's RCC Midway3 cluster as a SLURM batch job:
 connecting over SSH, setting up an environment on a shared cluster, copying
 pre-pulled data with `rsync`, submitting the job, and reaching a remote VS Code
-session through an SSH tunnel. The graded cluster work this quarter is in
-[Homework 4](../HW4.md); this page is the practice run.
+session through an SSH tunnel.
 
 ## Learning Outcomes
 

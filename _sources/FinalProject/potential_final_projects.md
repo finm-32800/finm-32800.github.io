@@ -41,7 +41,7 @@ The pipeline: build daily microstructure features from TAQ (order imbalance, vol
   - **Replicate the estimation of ITI**: the training design, the cross-validation, and the reported model performance
   - **Replicate the event evidence**: ITI in the days before earnings announcements, M&A announcements, and news
   - **Replicate the asset-pricing results**: the return-reversal evidence and the cross-sectional pricing tests
-  - **Benchmark against VPIN and PIN** on the same sample—a direct extension of HW 4, and the natural place for your own exhibit
+  - **Benchmark against VPIN and PIN** on the same sample—a direct extension of the order book material in week 6, and the natural place for your own exhibit
   - **Validate against the authors' series**: the fitted stock-day ITI measure for 1993-2024 is posted at https://bogousslavsky.github.io/data/, which gives you a true benchmark rather than a published table
   - **Update**: extend the measure past the posted series
 - **Data sources**: daily TAQ and CRSP (WRDS); SEC EDGAR Schedule 13D filings (free); IBES or Compustat announcement dates; the paper's news source is RavenPack, which we do not have—substitute EDGAR 8-K filing timestamps

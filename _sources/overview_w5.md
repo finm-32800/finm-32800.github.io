@@ -1,127 +1,163 @@
-# Week 5: Unit Tests and Data Validation with pytest
+# Week 5: Live Monitors
 
 ```{toctree}
 :maxdepth: 1
-Week5/unit_tests.md
-notebooks/_01_data_sources_overview_ipynb.ipynb
-notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb
+notebooks/_01_modules_and_packages_ipynb.ipynb
+Week3/uv_and_pixi.md
+Week5/live_monitor.md
+Week5/study_guide.md
 ```
 
-You have been running `pytest` since HW 1, mostly to find out whether you were
-done. This week the tests become the subject. For a data pipeline, a test answers
-questions like *did every date parse? are there duplicate identifiers? do the
-weights sum to one? is this price physically possible?* This is what the postings
-call "data checks," "data validation," and "data quality control," and it is the
-difference between you noticing bad data and a customer noticing it for you.
-
-The week is organized around a distinction. Sometimes there is **no ground
-truth** and every filter is a convention you must defend, which is the cleaning
-of FINRA TRACE. Sometimes there **is** a ground truth and validation becomes
-exact, which is rebuilding an order book and diffing it against the vendor's own.
-[HW 4](./HW4.md) is the second kind.
+Last week ended before three things it promised: how Python finds and runs
+your modules, a pipeline that runs on its own, and the math of HW 3. This
+week does all three. We deploy a live monitor
+together, each in your own GitHub account: a job that wakes up every day,
+pulls fresh data with a secret API key, remembers what it computed
+yesterday, checks itself, and republishes a web page. It is the same
+machinery as HW 3's SVIX monitor, on a pipeline simple enough that nothing
+gets in the way, and like HW 3 it runs with `uv`, which we finally take up
+properly. Then we walk through HW 3's guides, one interactive figure at a
+time.
 
 ## Announcements
 
-- **[HW 2](./HW2.md) is due tonight,** at the start of class.
-- **[HW 3](./HW3.md) launches today,** due Tuesday, November 10, in week 7:
-  a daily monitor of the S&P 500's option-implied crash probability, deployed
-  with a workflow you write. Your private copy is created this week.
-- **[HW 4](./HW4.md) launches next week,** due Tuesday, November 17, in week
-  8: order book validation and flow toxicity. It is the last of the four
-  coding assignments. The graded work runs on your laptop; a lab takes it to
-  a cluster.
+- **[HW 2](./HW2.md) is due today at 9:30 am,** the start of class.
+- **[HW 3](./HW3.md) launches today,** due Tuesday, November 10, at the
+  start of the week 7 session. Your private copy is created this week.
+- **Bring a FRED API key to class.** It is free and takes about two minutes:
+  make an account at
+  [fredaccount.stlouisfed.org](https://fredaccount.stlouisfed.org/apikeys)
+  and request a key. The monitor we deploy together needs one.
+- **[HW 4](./HW4.md) and [HW 5](./HW5.md):** dates to be announced on
+  Canvas.
 - **Project consultations continue** through week 7. Every group needs one.
-- **Databento keys again.** HW 4 pulls `mbo` and `mbp-10` for the E-mini, both on
-  the free CME Globex feed. Reconstruction runs on one day locally before
-  anything scales.
 
 ## Objectives
 
-- Say what makes a good unit test, and write tests that are the *specification*
-  for a function rather than an afterthought: [Unit Tests](./Week5/unit_tests.md).
-- Distinguish a unit test from a data-validation check, and wire both into a
-  `doit` pipeline so a rebuild refuses to publish bad data.
-- Test code that talks to the network without talking to the network: fixtures,
-  small in-memory databases, and cached samples.
-- Explain the major decisions in cleaning FINRA TRACE and why reasonable people
-  produce different "clean" datasets:
-  [data sources overview](notebooks/_01_data_sources_overview_ipynb.ipynb) and the
-  [Clean TRACE walkthrough](notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb).
-- Explain what a limit order book is, what a market-by-order feed contains, and
-  how a reconstruction can be validated exactly against a reference book.
-- Explain what order-flow toxicity means and what VPIN measures.
+- Explain what a module and a package are, how `sys.path` decides what an
+  `import` finds, and what `if __name__ == "__main__":` does in a module
+  that is also a script:
+  [Modules, Packages, and `if __name__ == "__main__"`](notebooks/_01_modules_and_packages_ipynb.ipynb).
+- Run a project with `uv run`, say what a lockfile records that a
+  hand-written `requirements.txt` does not, and why that matters on a machine
+  that starts empty: [uv and pixi](./Week3/uv_and_pixi.md).
+- Deploy a live monitor that pulls data with a secret key on a schedule,
+  keeps its state on a branch of its own, and publishes to GitHub Pages:
+  [Building a Live Monitor with GitHub Actions](./Week5/live_monitor.md).
+- Explain where a pipeline's state can live between runs, and when a
+  pipeline needs state at all.
+- Read a row of futures-option settlement data, and say why a crash
+  probability needs the deep strikes the exchange settles:
+  [E-mini S&P 500 Options Data from Databento](notebooks/_01_es_options_data_ipynb.ipynb).
+- Read option prices as a probability distribution: Breeden and
+  Litzenberger, SVIX against the VIX, and the probability of a crash under
+  three sets of beliefs:
+  [Replicating SVIX and the Probability of a Crash](notebooks/_02_svix_and_crash_probability_ipynb.ipynb).
 
-## Agenda Item 1: What Makes a Good Test
+## Agenda Item 1: Catching Up --- Modules, Packages, and `if __name__ == "__main__"`
 
-[Unit Tests](./Week5/unit_tests.md), with the `pytest` examples in the
-[in-class repo](https://github.com/finm-32800/inclass_examples).
+Last week did not reach this. HW 3's daily workflow runs `uv run doit latest`,
+and that task runs `python ./src/pull_es_options.py --latest` as a script.
+The guide notebooks import the same file and call `load_es_options()`, and
+nothing is pulled. How can one file be both a script and a library? And what
+turns a folder of such files into a package that someone else can install?
 
-- Tests as a specification: the reason every homework says "read the failing
-  test." A docstring says what a function should do; a test says it in a form the
-  machine can check.
-- Fixtures, parametrization, and floating-point comparison. Why
-  `assert a == b` is usually wrong on returns.
-- **Testing code that pulls data.** You cannot hit WRDS in a test suite that must
-  run in seconds on a fresh machine. HW 1 already showed the pattern: the SQL
-  `WHERE` clauses are tested against a small in-memory database with no
-  connection at all. Generalize it.
-- **Validation checks are different from unit tests.** A unit test asks whether
-  your function is correct; a validation check asks whether today's data is
-  sane. Both belong in the pipeline, and the second one runs on every rebuild.
-  Gaps, duplicates, schema drift, unit changes, and stale timestamps.
+[Modules, Packages, and `if __name__ == "__main__"`](notebooks/_01_modules_and_packages_ipynb.ipynb)
+answers both with the small examples in
+[`python_imports/`](https://github.com/finm-32800/inclass_examples/tree/main/python_imports)
+in the in-class repo. We run them live:
 
-## Agenda Item 2: No Ground Truth --- Cleaning FINRA TRACE
+- **A module is a file, and a package is a folder.** `01_simple_module` and
+  `02_package_directory`: the same `import mypackage`, two layouts.
+- **Where Python looks.** `03_name_shadowing`: `sys.path` puts the script's
+  own folder first. That is why a module in `src/` can `import settings`, why
+  `dodo.py` inserts `src/` into the path, and why a file of yours named
+  `numpy.py` breaks NumPy.
+- **An installable package.** `project_paths/install_approach`: a
+  `pyproject.toml` and `pip install -e .`, and `import myproj` works from any
+  folder. `finm` and `chartbook` have the same shape.
+- **`if __name__ == "__main__"`.** `04_name_main`: run `python greet.py`, then
+  `python main.py`, and the block runs the first time and not the second. In
+  the course's `pull_` modules that block is the pull. `doit` runs the file,
+  so the pull runs; a notebook imports it, so nothing touches the network.
 
-Corporate bond transactions are reported to FINRA, and the raw feed contains
-cancellations, corrections, reversals, agency double-counts, and prices that
-cannot be right. Cleaning it is a sequence of judgment calls, each defensible and
-each consequential.
+## Agenda Item 2: uv, and Why the Homework Uses It
 
-- [Data sources overview](notebooks/_01_data_sources_overview_ipynb.ipynb): what
-  TRACE is, who provides what, and what the enhanced file adds.
-- [Clean TRACE walkthrough](notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb):
-  the Dick-Nielsen filters, step by step, with the count of records each one
-  removes.
-- Why this matters beyond bonds: Dickerson, Robotti, and Rossetti show that
-  corporate bond factor results move materially with these choices. When "clean"
-  is a convention, the only defense is that your convention is documented, tested,
-  and rerunnable. That is the whole argument of this course, in one dataset.
+[Modern Environment Tools: uv and pixi](./Week3/uv_and_pixi.md). Every
+repository this week, HW 3 and the monitor alike, runs with `uv run doit`.
 
-## Agenda Item 3: A Ground Truth --- The Order Book
+- **One command on an empty machine.** What `uv run` does the first time:
+  Python, `.venv/`, the locked packages, then the command.
+- **The lockfile.** Open the monitor's `uv.lock` next to its
+  `pyproject.toml`: what it pins that a hand-written `requirements.txt`
+  leaves floating.
+- **Why the runner cares.** It starts empty every morning, so the whole
+  environment is two steps of YAML, rebuilt in seconds.
+- **The way back.** `uv export` writes the `requirements.txt` the `finm`
+  conda environment reads, and `pixi` brings the same idea to the conda
+  world.
 
-Now the opposite situation. A limit order book is the state of a market at an
-instant. Databento's CME Globex feed gives you both the raw messages (`mbo`,
-market by order) and the vendor's own reconstruction of the top ten levels
-(`mbp-10`). So you can rebuild the book from the messages and **diff your answer
-against theirs**. Every discrepancy is a located bug, which makes this the
-cleanest validation exercise in the course.
+## Agenda Item 3: Lab --- Deploy a Live Monitor
 
-- Message types and what each does to the book: add, cancel, modify, trade, fill.
-- Replaying messages in order, and what "in order" means when timestamps tie.
-- Writing the diff as a test, not as a notebook you eyeball.
-- Trade classification with no ground truth: bulk volume classification against
-  the tick rule, and checking them against each other.
-- **Flow toxicity.**
-  [Easley, López de Prado, and O'Hara (2012)](https://doi.org/10.1093/rfs/hhs053)
-  define VPIN, a measure of order-flow imbalance computed in *volume time* rather
-  than clock time, and show it rising in the hours before the May 2010 flash
-  crash as liquidity providers withdrew. They built it on the E-mini S&P 500
-  contract, which is the contract you will use. This is what the Chicago options
-  market makers who hire from this program do all day.
+We deploy the
+[Yield Spread Monitor](https://github.com/finm-32800/yield_spread_monitor)
+together, a copy in each of your accounts, following
+[Building a Live Monitor with GitHub Actions](./Week5/live_monitor.md). It
+publishes the 10-year minus 2-year Treasury spread every day; the finance
+is one subtraction, so all the attention goes to the machinery. While the
+runs go:
 
-## Agenda Item 4: Launch HW 4
+- **A day in the life.** Six steps on a runner that starts empty: check
+  out, restore the history, test, update, record, publish.
+- **Where the state lives.** The runner forgets everything overnight, so the
+  history lives on a branch of its own, one small commit a day. Why not on
+  `main`, on `gh-pages`, or in the Actions cache.
+- **Does a monitor need state at all?** FRED can rebuild this one's history
+  in a second; Databento cannot rebuild HW 3's in less than hours. Keep
+  state when recomputing is expensive or impossible.
+- **`doit` and `doit latest`.** The backfill and the daily update.
+- **Secrets.** Where the key lives, and what a run without it looks like.
+- **Copyright, terms of use, and licenses.** Why the monitor stores the
+  spread it computes and never the yields it pulls.
 
-[HW 4](./HW4.md) starts local and small: one trading day, `mbo` and `mbp-10` for
-the E-mini, rebuild the book, validate it, classify the trades, compute VPIN.
-That is the graded work, and it is due in week 7. Next week's lab scales it to a
-quarter of trading days on a cluster, because the days are independent and that
-is what a job array is for. The lab is done in class and is not graded. The
-optional extension aimed at options desks asks whether options market makers
-widen their quoted spreads when the underlying's flow turns toxic.
+Last week you kept a `gh-pages` branch by hand: rebase onto `main`,
+rebuild, amend, force-push. Today the workflow does it, and more simply:
+each run publishes one fresh orphan commit, so there is no history to
+rebase at all.
+
+By the end your monitor is live at `https://<your-username>.github.io/<repository>/`,
+and tomorrow its history has one more line. HW 3's Part C is the same steps
+on a harder pipeline.
+
+## Agenda Item 4: HW 3 --- the Guides, Interactive
+
+[HW 3](./HW3.md) launches today: SVIX and the probability of a crash, from
+the settlement prices of E-mini S&P 500 options. We walk through its
+guides, one interactive figure at a time:
+
+- **The data**
+  ([guide 01](notebooks/_01_es_options_data_ipynb.ipynb)): how to read a
+  futures option's symbol and its settlement, the smirk, the volatility
+  surface, and how far the exchange's strikes reach.
+- **Option prices are a distribution**
+  ([guide 02](notebooks/_02_svix_and_crash_probability_ipynb.ipynb)): the
+  slope of the call curve is the risk-neutral CDF; SVIX against the VIX;
+  three beliefs about a crash, and what risk aversion does to them.
+- **If time allows: thirty years, and single names**
+  ([guide 04](notebooks/_04_single_name_crash_bounds_ipynb.ipynb),
+  optional reading): the history of crash fear since 1996, and the bounds
+  for Apple and AIG.
+
+[The Daily Monitor](notebooks/_03_daily_monitor_ipynb.ipynb), guide 03,
+walks through Part C: the machinery of today's lab, on HW 3's pipeline.
+
+A suggested order: Part D's query first, because the last test of Part B
+needs the OptionMetrics pull it makes; then Part B; then Part C, which is
+today's lab again.
 
 ## Looking ahead to Week 6
 
-Week 6 is the machinery that makes a full run of HW 4 possible: **Polars and
-Parquet, remote machines over SSH, and two batch schedulers** (Grid Engine on the
-WRDS Cloud, SLURM on Midway), with NYSE TAQ and Holden-Jacobsen (2014) as the
-in-class case study. [HW 5](./HW5.md), the class report, also launches.
+Next week picks up the topics this week made room for: unit tests and data
+checks, using the monitor you deployed today; cleaning FINRA TRACE, where there is no ground truth and every filter is a convention you
+must defend, and rebuilding a limit order book, where there is a ground
+truth and validation becomes exact.

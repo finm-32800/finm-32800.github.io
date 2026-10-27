@@ -143,12 +143,12 @@ change.
 | 0 | `requirements.txt`; clone and run | Markowitz (1952), portfolio selection | CRSP extract |
 | 1 | Git, GitHub, virtual environments | Sharpe (1964), the CAPM: build the market portfolio and the S&P 500 | CRSP |
 | 2 | Task runners (PyDoit) | Fama and French (1993), the three-factor model | CRSP, Compustat |
-| 3 | Reproducible reports: notebooks, GitHub Pages, LaTeX | Gürkaynak, Sack, and Wright (2006), the Treasury yield curve, together with the expected path of the policy rate read from fed funds futures (the CME FedWatch method) | CRSP Treasuries, CME fed funds futures, FRED |
-| 4 | Python packaging and documentation | Martin and Shi (2025), forecasting crashes with a smile: option-implied crash probabilities from the volatility surface | OptionMetrics, CME Globex |
-| 5 | Unit tests and data validation | Easley, López de Prado, and O'Hara (2012), flow toxicity and liquidity: rebuilding the order book and measuring toxicity in E-mini futures | CME Globex order book (Databento) |
-| 6 | SQL at scale, remote machines, and job schedulers: the WRDS Cloud and Midway | Holden and Jacobsen (2014), measuring liquidity from intraday trades and quotes | NYSE TAQ |
+| 3 | Reproducible reports: notebooks, ChartBook, LaTeX | Gürkaynak, Sack, and Wright (2006), the Treasury yield curve, together with the expected path of the policy rate read from fed funds futures (the CME FedWatch method) | CRSP Treasuries, CME fed funds futures, FRED |
+| 4 | Data APIs, static sites, and GitHub Actions | The CME FedWatch method, finished: the probability of a rate move from fed funds futures | CME fed funds futures (Databento) |
+| 5 | Live monitors, uv, and the math of HW 3 | Martin (2017) and Martin and Shi (2025): SVIX and option-implied crash probabilities, deployed as a daily monitor | CME Globex E-mini options (Databento), OptionMetrics |
+| 6 | Data validation; SQL at scale, remote machines, and job schedulers | Cleaning FINRA TRACE; rebuilding the E-mini order book; Holden and Jacobsen (2014), measuring liquidity from intraday trades and quotes | FINRA TRACE, CME Globex order book, NYSE TAQ |
 | 7 | Orchestration across projects: Apache Airflow | Goyal, Welch, and Zafirov (2024), the equity premium predictors | FRED and other public data; the FTSFR pipelines |
-| 8 | CI/CD with GitHub Actions | Bernanke and Kuttner (2005), monetary policy surprises from fed funds futures | CME fed funds futures |
+| 8 | Packaging, CI, and code quality | Bernanke and Kuttner (2005), monetary policy surprises from fed funds futures | CME fed funds futures |
 | 9 | Basic MLOps: experiment tracking and monitoring models | Bejarano et al. (2026), an open benchmark for forecasting across financial markets | The FTSFR datasets |
 
 The arc on the finance side runs from equities (weeks 0 to 2), to interest

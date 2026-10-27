@@ -63,22 +63,21 @@ From week 4 on, one homework or exam is due each week, and never two.
 | 4 | Tuesday, October 20 | [HW 1](HW1.md): CRSP, the CAPM, and Fama-French |
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
 | 7 | Tuesday, November 10 | [HW 3](HW3.md): option-implied crash probabilities |
-| 8 | Tuesday, November 17 | [HW 4](HW4.md): order book validation and flow toxicity |
-| | Tuesday, November 24 | [HW 5](HW5.md): your figure for the class report, 9:30 am (no class: Thanksgiving break) |
+| | To be announced | [HW 4](HW4.md), the class report, and [HW 5](HW5.md) |
+| | Tuesday, November 24 | No class: Thanksgiving break |
 | 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
 
-The homework comes early on purpose. All of it is finished before
-Thanksgiving. What remains after the break is the exam and your project.
+The homework comes early on purpose. The dates for HW 4 and HW 5 are
+announced on Canvas.
 
 ### Homework
 
-- There are five homework assignments: four coding assignments, and your
-  contribution to the class report, which is one figure and one paragraph.
+- There are five homework assignments, one of which builds the class report.
   [HW 0](HW0.md) is ungraded setup; please complete it as soon as possible.
 - Homework is distributed and collected through GitHub, and it is due at the
-  start of class. The assignments launch in class in weeks 1, 3, 4, 5, and 6,
-  each in the week its material is taught, and the lectures keep teaching the
+  start of class. The assignments launch in class, each in the week
+  its material is taught, and the lectures keep teaching the
   pieces of an open assignment after it launches.
 - Assignments are automatically graded by an autograder that runs on GitHub
   Actions, and solutions will be released shortly after. This means that the due date is
@@ -140,9 +139,8 @@ Grades will be based on the following components:
   GitHub's automated testing tools (the autograder runs as a CI/CD workflow on
   GitHub Actions). Because you can re-run the autograder until your code passes,
   the assignments are best thought of as teaching vehicles—the grade primarily
-  reflects whether you did the work to complete them. One assignment is your
-  contribution to the collaborative class report: one figure and one paragraph,
-  submitted as a pull request and reviewed by two classmates.
+  reflects whether you did the work to complete them. One assignment builds
+  the class's collaborative report.
 - **Exam (25%)** is in-person, closed-book, and multiple choice, with
   one or more correct options per question and no partial credit. It tests the
   tools, the data sets, and the papers covered in the notes and the homework
@@ -178,13 +176,13 @@ the agenda is listed in the first sub-section of the chapter.
 | 0 | Preview | [Portfolio selection and a first look at the course](overview_w0.md) | [HW 0](HW0.md) (ungraded) | |
 | 1 | Sep 29 | [Git, GitHub, and virtual environments](overview_w1.md) | [HW 1](HW1.md) | |
 | 2 | Oct 6 | [Task runners and SQL; Fama-French (1993)](overview_w2.md) | | |
-| 3 | Oct 13 | [Reports: notebooks, ChartBook, LaTeX; Databento](overview_w3.md) | [HW 2](HW2.md) | |
-| 4 | Oct 20 | [GitHub Pages, GitHub Actions, Python packaging; options data](overview_w4.md) | | HW 1 |
-| 5 | Oct 27 | [Unit tests and data validation](overview_w5.md) | [HW 3](HW3.md) | HW 2 |
-| 6 | Nov 3 | [SQL at scale, remote machines, and job schedulers](overview_w6.md) | [HW 4](HW4.md) | |
-| 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | [HW 5](HW5.md) | HW 3 |
-| 8 | Nov 17 | [CI/CD with GitHub Actions; Ruff and pre-commit](overview_w8.md) | | HW 4 |
-| | Nov 24 | No class: Thanksgiving break | | HW 5 (9:30 am) |
+| 3 | Oct 13 | [Reports: notebooks, ChartBook, and LaTeX](overview_w3.md) | [HW 2](HW2.md) | |
+| 4 | Oct 20 | [Data APIs, static sites, and GitHub Actions](overview_w4.md) | | HW 1 |
+| 5 | Oct 27 | [Live monitors, uv, and the math of HW 3](overview_w5.md) | [HW 3](HW3.md) | HW 2 |
+| 6 | Nov 3 | [Data validation; SQL at scale, remote machines, and job schedulers](overview_w6.md) | | |
+| 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 3 |
+| 8 | Nov 17 | [Packaging, CI, and code quality](overview_w8.md) | | |
+| | Nov 24 | No class: Thanksgiving break | | |
 | 9 | Dec 1 | [Exam, then MLOps](overview_w9.md) | | |
 | 10 | Dec 8–11 | Final project presentations | | |
 

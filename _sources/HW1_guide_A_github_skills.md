@@ -35,4 +35,4 @@ and worth one point.
 The Week 1 session covers cloning, committing, and pushing with
 [HW 0](./HW0.md). Later homeworks each add a few more GitHub Skills
 tutorials: reviewing pull requests and resolving merge conflicts in HW 2, and
-GitHub Actions in HW 4.
+GitHub Actions in HW 3.

@@ -1,13 +1,9 @@
-# Homework 5: The Class Report
+# Homework 5
 
-- **Launched:** week 7. **Due:** Tuesday, November 24, at 9:30 am Chicago
-  time. There is no class that day (Thanksgiving week). Also posted on
-  Canvas.
+- **Launched:** to be announced. **Due:** to be announced. Dates are posted
+  here and on Canvas.
 - **Link to Assignment:** posted at launch
-- **Goes with:** week 6
 
 ## To be determined
 
-The write-up for this assignment is posted when it launches in week 6: the
-tasks, the point breakdown, and the link to the shared repository. The title
-above is the topic as currently planned and may change before launch.
+The topic, the tasks, and the dates are posted when it launches.

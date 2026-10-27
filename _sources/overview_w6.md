@@ -1,7 +1,10 @@
-# Week 6: SQL at Scale, Remote Machines, and Job Schedulers
+# Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers
 
 ```{toctree}
 :maxdepth: 1
+Week5/unit_tests.md
+notebooks/_01_data_sources_overview_ipynb.ipynb
+notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb
 Week8/medium_sized_data_strategies.md
 Week8/polars_exercises.md
 Week8/remote_machines_and_hpc.md
@@ -26,17 +29,13 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 ## Announcements
 
 - **[HW 3](./HW3.md) is due next week,** Tuesday, November 10.
-- **[HW 4](./HW4.md) launches today,** due Tuesday, November 17, in week 8:
-  order book validation and flow toxicity, the last of the four coding
-  assignments. Tonight's lab takes the reconstruction to a cluster.
-- **[HW 5](./HW5.md) launches next week,** due Tuesday, November 24: one
-  figure and one paragraph for the class report. It is the last homework,
-  and the smallest.
+- **[HW 4](./HW4.md) and [HW 5](./HW5.md):** dates to be announced on
+  Canvas.
 - **Accept your invite to the report repo.** Every student gets a GitHub
   collaborator invite to the private report repository. Check your email or
-  [github.com/notifications](https://github.com/notifications) and confirm tonight
-  that you can open it.
-- **Confirm your cluster access tonight.** You need the WRDS Cloud (the same WRDS
+  [github.com/notifications](https://github.com/notifications) and confirm in
+  class that you can open it.
+- **Confirm your cluster access in class today.** You need the WRDS Cloud (the same WRDS
   account, over SSH) and Midway3 (RCC). If either fails, we fix it in class.
 - **The exam is Tuesday, December 1,** in week 9, covering weeks 0 through 8.
   See [Exam Preparation](./exam_prep.md).
@@ -45,6 +44,19 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 
 ## Objectives
 
+- Say what makes a good unit test, and write tests that are the
+  *specification* for a function rather than an afterthought:
+  [Unit Tests](./Week5/unit_tests.md).
+- Distinguish a unit test from a data-validation check, and wire both into a
+  pipeline so a run refuses to publish bad data.
+- Test code that talks to the network without talking to the network:
+  fixtures, small in-memory databases, and cached samples.
+- Explain the major decisions in cleaning FINRA TRACE and why reasonable
+  people produce different "clean" datasets: the
+  [data sources overview](notebooks/_01_data_sources_overview_ipynb.ipynb) and
+  the [Clean TRACE walkthrough](notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb).
+- Explain what a limit order book is, what a market-by-order feed contains,
+  and how a reconstruction can be validated exactly against a reference book.
 - Choose sensible strategies for data between 1 GB and 100 GB:
   [Medium-Sized Data Strategies](./Week8/medium_sized_data_strategies.md).
 - Use Polars and explain lazy evaluation, predicate pushdown, streaming, and Hive
@@ -61,7 +73,68 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
 - Explain how liquidity is measured from intraday trades and quotes, and why the
   choice of data source changes the answer.
 
-## Agenda Item 1: Medium Data, Polars, and Parquet
+Carried over from week 5, which made room for live monitors and the math
+of HW 3:
+
+## Agenda Item 1: Tests and Data Checks
+
+[Unit Tests](./Week5/unit_tests.md), with the monitor you deployed last week
+as the example.
+
+- **Tests as a specification.** The reason every homework says "read the
+  failing test": a docstring says what a function should do, a test says it
+  in a form the machine can check.
+- **Testing code that pulls data, without pulling it.** The monitor's tests
+  run with no API key: they hand the parser FRED's "." for a missing day and
+  check it becomes a missing value. HW 1 tested its SQL against a small
+  in-memory database the same way.
+- **A unit test is not a data check.** A unit test asks whether your
+  function is right; a data check asks whether today's data are sane:
+  duplicate dates, values out of range, stale timestamps. The monitor runs
+  its checks before it publishes, and a failure leaves yesterday's page up.
+  The next two items are the two kinds of data check: conventions you must
+  defend, and an exact diff against a reference.
+
+## Agenda Item 2: No Ground Truth --- Cleaning FINRA TRACE
+
+Corporate bond transactions are reported to FINRA, and the raw feed contains
+cancellations, corrections, reversals, agency double-counts, and prices that
+cannot be right. Cleaning it is a sequence of judgment calls, each defensible and
+each consequential.
+
+- [Data sources overview](notebooks/_01_data_sources_overview_ipynb.ipynb): what
+  TRACE is, who provides what, and what the enhanced file adds.
+- [Clean TRACE walkthrough](notebooks/_02_trace_cleaning_walkthrough_ipynb.ipynb):
+  the Dick-Nielsen filters, step by step, with the count of records each one
+  removes.
+- Why this matters beyond bonds: Dickerson, Robotti, and Rossetti show that
+  corporate bond factor results move materially with these choices. When "clean"
+  is a convention, the only defense is that your convention is documented, tested,
+  and rerunnable. That is the whole argument of this course, in one dataset.
+
+## Agenda Item 3: A Ground Truth --- The Order Book
+
+Now the opposite situation. A limit order book is the state of a market at an
+instant. Databento's CME Globex feed gives you both the raw messages (`mbo`,
+market by order) and the vendor's own reconstruction of the top ten levels
+(`mbp-10`). So you can rebuild the book from the messages and **diff your answer
+against theirs**. Every discrepancy is a located bug, which makes this the
+cleanest validation exercise in the course.
+
+- Message types and what each does to the book: add, cancel, modify, trade, fill.
+- Replaying messages in order, and what "in order" means when timestamps tie.
+- Writing the diff as a test, not as a notebook you eyeball.
+- Trade classification with no ground truth: bulk volume classification against
+  the tick rule, and checking them against each other.
+- **Flow toxicity.**
+  [Easley, López de Prado, and O'Hara (2012)](https://doi.org/10.1093/rfs/hhs053)
+  define VPIN, a measure of order-flow imbalance computed in *volume time* rather
+  than clock time, and show it rising in the hours before the May 2010 flash
+  crash as liquidity providers withdrew. They built it on the E-mini S&P 500
+  contract, which is the contract you will use. This is what the Chicago options
+  market makers who hire from this program do all day.
+
+## Agenda Item 4: Medium Data, Polars, and Parquet
 
 [Medium-Sized Data Strategies](./Week8/medium_sized_data_strategies.md) and
 [Polars Exercises](./Week8/polars_exercises.md).
@@ -78,7 +151,7 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
   is not reproducible and is not polite to the vendor. The pull is one task with a
   cached target; everything downstream reads the cache.
 
-## Agenda Item 2: Remote Machines and Two Schedulers
+## Agenda Item 5: Remote Machines and Two Schedulers
 
 [Remote Machines and HPC](./Week8/remote_machines_and_hpc.md), then the comparison.
 
@@ -97,7 +170,7 @@ the point: what you are learning is batch scheduling, not one vendor's commands.
   queue, kill a job, request memory, request an array. Once you can translate,
   the next scheduler you meet costs you an afternoon, not a week.
 
-## Agenda Item 3: NYSE TAQ on the WRDS Cloud
+## Agenda Item 6: NYSE TAQ on the WRDS Cloud
 
 The in-class case study is
 [Holden and Jacobsen (2014)](https://doi.org/10.1111/jofi.12127),
@@ -113,47 +186,9 @@ data source is part of the result.
   one ticker-day, then brings the output back and analyzes it in Python. You are
   driving someone else's production code as a black box through a scheduler,
   which is an ordinary and useful thing to be able to do.
-- Contrast with HW 4: TAQ is equities on the WRDS Cloud; the E-mini order book is
-  futures on Midway. Two datasets, two schedulers, one skill.
-
-## Agenda Item 4: Lab, HW 4 on a Cluster
-
-Bring your single-day reconstruction from last week. Tonight it becomes a job
-array over a quarter of trading days: a submit script, one array task per day,
-results written to scratch, aggregated, and `rsync`'d back. This lab is done in
-class and is not graded. The graded part of HW 4 is the single-day path on your
-laptop, so keep it working.
-
-An optional practice run on Midway with a different pipeline, cleaning TRACE, is
-in [Optional Lab: Clean TRACE on Midway](./Week8/optional_lab_clean_trace_on_midway.md).
-It is not graded and it is a good rehearsal.
-
-## Agenda Item 5: Launch HW 5, the Collaborative Report
-
-[HW 5](./HW5.md) is the class's one shared artifact. The whole class produces a
-single publication-style PDF on the state of the equity premium predictors, and
-the topics are the predictors of
-[Goyal, Welch, and Zafirov (2024)](https://academic.oup.com/rfs/article/37/11/3490/7749383).
-There are more predictors in that paper than there are students, so everyone gets
-their own.
-
-- **Read the instructions:** what you contribute, the workflow, and the rubric
-  are posted with the assignment when it launches.
-- **Style guides.**
-  [The Collaborative Report and Style Guides](./Week1/collaborative_report_and_style_guides.md):
-  organizations that publish reports keep a style guide so that many contributors
-  produce one coherent document. We look at a few real ones and write ours.
-- **Claim an issue.** Each open issue is one predictor. Assign it to yourself, one
-  student per issue. Claim early.
-- **Build it reproducibly.** Your exhibit is its own file in `src/`, wired into
-  `dodo.py`, pulling through FRED, the OFR API, or the
-  [ChartBook catalog](./Week6/chartbook_catalog.md). It ships with a test that the
-  shared repo's CI runs on every contribution.
-- **Open a draft PR early.** You need two classmate reviews, and you owe two
-  reviews to others. An early draft PR gets you comments while there is still time
-  to act on them. The workflow is the one from
-  [GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md).
-- **Live walkthrough** of the repo skeleton, then review an open PR together.
+- Contrast with the order book earlier today: TAQ is equities on the WRDS
+  Cloud, and the E-mini order book is futures from Databento. Two datasets, one
+  skill.
 
 ## Looking ahead to Week 7
 

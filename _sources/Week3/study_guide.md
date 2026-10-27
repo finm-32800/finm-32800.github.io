@@ -21,15 +21,12 @@ and examples 03 and 04 of the
 3. Why are `.ipynb` files hard to track in Git? What does storing a notebook
    as a `.py` file with Jupytext fix?
 
-## Publishing
+## ChartBook and Project Templates
 
-*Read: [GitHub Pages and Tearsheets](./github_pages_preview.md), and Agenda
-Item 2 of the [week 3 chapter](../overview_w3.md) for ChartBook.*
+*Read: Agenda Item 2 of the [week 3 chapter](../overview_w3.md) for ChartBook.*
 
-4. What is GitHub Pages? What kind of site can it host, and what can it not
-   run?
-5. What is ChartBook, and what does `chartbook build` produce?
-6. What does Cookiecutter do? What does Cruft add on top of it? (Read:
+4. What is ChartBook, and what does `chartbook build` produce?
+5. What does Cookiecutter do? What does Cruft add on top of it? (Read:
    [Project Structure](./project_structure.md).)
 
 ## LaTeX

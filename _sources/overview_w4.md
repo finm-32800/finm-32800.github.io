@@ -1,26 +1,25 @@
-# Week 4: GitHub Pages, GitHub Actions, and Python Packaging
+# Week 4: Data APIs, Static Sites, and GitHub Actions
 
 ```{toctree}
 :maxdepth: 1
-Week3/uv_and_pixi.md
-Week6/python_packaging_with_hatch.md
-notebooks/_01_modules_and_packages_ipynb.ipynb
-Week5/sphinx.md
-Week6/GitHub_pull_requests.md
+Week7/databento.md
+notebooks/_01_databento_ipynb.ipynb
+Week7/LSEG_datastream.md
+Week3/github_pages_preview.md
+Week9/cron_jobs.md
 Week4/study_guide.md
 ```
 
-Last week ended with a replication of the CME FedWatch tool that nobody but
-you can see, and that was stale the moment you ran it. Tonight is about
-fixing both. A `docs/` folder becomes a website with GitHub Pages, and a
-workflow on GitHub Actions rebuilds that website every morning, with no one
-at the keyboard. That is continuous deployment, and the autograder that has
-scored your pushes since HW 1 is the same machinery. Where else does CI/CD
-live? In every Python package you have installed this quarter, which is the
-cue for a short tour: what a package is, starting from a single `.py` file,
-and how one is built, tested, and released.
-[HW 3](./HW3.md), which launches next week, is a daily monitor of the S&P
-500's option-implied crash probability, deployed with a workflow you write.
+Week 3 left two pieces of HW 2 unfinished: the vendor its futures come from,
+and the website its results go to. This week takes both, and then the
+machinery that will run them without you. Databento first, as a modern data
+API: a key per project, a cost you can check before you pay it, and the same
+request made from a Python SDK or as a raw HTTP call. Then the math behind
+CME's FedWatch tool. Then the web itself: what a static HTML page is, how
+GitHub Pages serves a folder of them, and why the folder `doit` builds stays
+out of `main`. We keep it out by hand, with a `gh-pages` branch, and the
+chore of doing that is the case for GitHub Actions, which we read through
+the workflow that has graded every push since HW 1.
 
 ## Announcements
 
@@ -39,193 +38,141 @@ and how one is built, tested, and released.
 
 ## Objectives
 
-- Explain how fed funds futures prices imply the probability of a rate
-  move, and complete the FedWatch half of HW 2.
-- Publish a `docs/` folder as a live website with GitHub Pages:
-  [Publishing to GitHub Pages](./Week3/github_pages_preview.md).
-- Read and write a GitHub Actions workflow: triggers, jobs, steps, a
-  schedule, a secret, and a deploy to Pages:
-  [GitHub Actions and an Interactive Dashboard](./Week9/github_actions_interactive_dashboard.md)
-  and [cron](./Week9/cron_jobs.md).
-- Say what the homework autograder has been doing all quarter, and why a
-  workflow you cannot read is a workflow you cannot trust.
-- Run a project with `uv run`, and say what a lockfile records that a
-  hand-written `requirements.txt` does not:
-  [`uv` and `pixi`](./Week3/uv_and_pixi.md).
-- Explain what a module and a package are, how `sys.path` decides what an
-  `import` finds, and what `if __name__ == "__main__":` does in a module that
-  is also a script:
-  [Modules, Packages, and `if __name__ == "__main__"`](notebooks/_01_modules_and_packages_ipynb.ipynb).
-- Explain the anatomy of a published Python package, `pyproject.toml`, a
-  build backend, versioning, a test matrix in CI, and a release
-  ([Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md)).
-- Know the options data on offer and their quirks: the OptionMetrics
-  volatility surface via WRDS, and E-mini options on CME Globex via
-  [Databento](./Week7/databento.md).
-- Explain what SVIX measures and how option prices give the probability of
-  a crash.
+- Pull data from a vendor's API with a key kept in `.env`, say why a key per
+  project helps with access and metering, and check what a query costs
+  before running it: [Databento](./Week7/databento.md) and
+  [Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb).
+- Say what an SDK adds on top of a raw HTTP API, and make the same request
+  both ways.
+- Explain how fed funds futures prices imply the probability of a rate move
+  at the next FOMC meeting.
+- Explain what a static website is, and publish a folder of HTML with GitHub
+  Pages: [Publishing to GitHub Pages](./Week3/github_pages_preview.md).
+- Say why a pipeline's built output stays out of `main`, and keep a
+  `gh-pages` branch by hand.
+- Read a GitHub Actions workflow: its triggers, including a `cron`
+  schedule, its permissions, its jobs and their conditions, its runners, its
+  steps, and its secrets: [Cron Jobs](./Week9/cron_jobs.md).
 
-## Agenda Item 1: HW 2 Questions, then FedWatch
+## Agenda Item 1: Databento, a Modern Data API
 
-[HW 2](./HW2.md) is due in a week. Bring what is stuck.
+[Databento](./Week7/databento.md), with the
+[`databento/` examples](https://github.com/finm-32800/inclass_examples/tree/main/databento)
+in the in-class repository, which are also a notebook:
+[Pulling Market Data From Databento](notebooks/_01_databento_ipynb.ipynb).
 
-Then the half of HW 2 that week 3 did not reach. Open the
+- **A key per project.** WRDS authenticates you with a password kept in
+  `.pgpass`. Databento issues API keys, as many as you like: one per
+  project, so each can be revoked on its own and each project's usage can be
+  metered separately. The key lives in `.env`, never in the code.
+- **A subscription, or pay as you go.** The course's subscription covers
+  CME Globex history with no download limit, but no live feed. A personal
+  account pays by the gigabyte instead. `metadata.get_cost` prices any query
+  for free before you run it, which makes a cost guard possible: stop unless
+  the estimate is zero.
+- **Schemas.** One parameter decides whether a request returns trades,
+  daily bars, the exchange's settlement statistics, or the full order book.
+- **An SDK, and the raw API under it.** The Python client wraps an HTTP API.
+  The same request made with `curl` on the command line, or with
+  `requests.post` in Python, returns the same data, which is what lets any
+  language talk to the service.
+- **An aside: [LSEG Datastream](./Week7/LSEG_datastream.md)** on WRDS, for
+  continuous futures series, the decision of how to roll from one contract
+  to the next, and the tools for finding a series' code.
+
+## Agenda Item 2: FedWatch
+
+[HW 2](./HW2.md) is due in a week. Then the half of it that week 3 did not
+reach. Open the
 [CME FedWatch tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html).
 A 30-Day Fed Funds futures contract settles at 100 minus the month's average
-fed funds rate, so its price is the market's forecast of that average; from
-the contract for the month of the next FOMC meeting you back out the rate
-the market expects after the meeting, and from that the probability of a
-move.
+effective fed funds rate, so its price is the market's forecast of that
+average. Split the month at the FOMC meeting: the days before it sit at
+today's rate, and the days after it at either today's rate or a new one.
+With two outcomes on the table, stay or move by 25 basis points, the price
+pins down the probability of the move.
 
-- [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data_ipynb.ipynb):
-  the contract, and the four parameters of the query you set in Part C.
-- [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication_ipynb.ipynb):
-  the three functions you complete, and the "does it match CME?" check.
+- [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data_ipynb.ipynb)
+- [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication_ipynb.ipynb)
 
-## Agenda Item 2: Publishing with GitHub Pages
+## Agenda Item 3: Static Sites and GitHub Pages
 
-We built the tool. Nobody can see it. [Publishing to GitHub Pages](./Week3/github_pages_preview.md):
-how a `docs/` folder of static HTML becomes a live website (Settings →
-Pages → Deploy from a branch), and why your assignment repo must stay
-private while the site is public. `chartbook build` produces `docs/`, Pages
-serves it. HW 2 Part D is exactly this, done live, into a separate public
-repo.
+[Publishing to GitHub Pages](./Week3/github_pages_preview.md).
 
-And the moment we push it, it is stale.
+- **What an HTML page is.** A text file with a head and a body: headers,
+  paragraphs, lists, and links. Pages that link to each other by relative
+  paths are a website, and nothing about them needs a server: open one from
+  your disk and the browser renders it. A dynamic site runs code on a server
+  for every visitor; a static one does not.
+- **Publishing a folder.** `chartbook build` writes every page of a
+  project's site into `docs/`. Any host that serves files can publish it.
+  GitHub Pages serves a branch's root or its `docs/` folder. Done live: a new
+  public repository with the HW 2 site copied in, and Pages turned on.
+- **`.nojekyll`.** Pages was built for Jekyll sites, and an empty
+  `.nojekyll` file says this one is plain HTML.
 
-## Agenda Item 3: CI/CD with GitHub Actions
+## Agenda Item 4: Keeping Output Out of `main`
 
-- **Start with the autograder.** Open the workflow that has been grading
-  your homework since HW 1: `.github/workflows/tests.yml`. It checks out
-  your code, builds the environment, runs `pytest`, and posts a score.
-  Nothing magic, and now you can read it: `on`, `jobs`, `runs-on`,
-  `steps`, and where the YAML lives.
-- **A pipeline on a schedule.** The
-  [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions)
-  in the in-class repo: `01_fred_chartbook` runs a `doit` pipeline every
-  morning on a [cron](./Week9/cron_jobs.md) schedule and publishes the
-  ChartBook site to Pages from a single orphan commit on `gh-pages`;
-  `02_databento_secret` adds the one thing most real pipelines need, an API
-  key that works locally from `.env` and in CI from the secret store
-  without ever being committed.
-- **The FedWatch monitor.** The FedWatch case study deploys itself the same
-  way every morning:
-  [finm-32800.github.io/case_study_fedwatch](https://finm-32800.github.io/case_study_fedwatch/).
-  Its workflow is the model for the one you write in HW 3.
-- **`uv run doit` as the step.** The new homework is run with
-  [`uv`](./Week3/uv_and_pixi.md): one `pyproject.toml`, one `uv.lock`, and
-  `uv run doit` installs Python and the locked dependencies and runs the
-  pipeline, on your laptop and on the runner alike. Ten minutes on what the
-  lockfile records that `requirements.txt` does not, and where `pixi` fits.
+Serving `docs/` from `main` fails, because `docs/` is in `.gitignore`, and it
+should be. `main` is for source code. A rebuilt site is hundreds of files
+nobody reads, many of them change on every rebuild even when nothing
+meaningful did, and committing them each time bloats the history.
 
-## Agenda Item 4: Modules, Packages, and `if __name__ == "__main__"`
+- **A `gh-pages` branch, by hand.** Branch from `main`, remove `docs/` from
+  that branch's `.gitignore`, commit the site, push the branch, and point
+  Pages at it.
+- **Keeping it current.** After each change to `main`, rebase `gh-pages`
+  onto it, rebuild, amend the site's commit, and force-push. The branch stays
+  two commits ahead of `main` and never accumulates history. A force-push
+  overwrites the remote, which is safe only on a branch no one else works on.
+- **Every one of those steps is manual,** which is the case for automating
+  them. In [week 5](./overview_w5.md) a workflow does it, and HW 3 hands you
+  that workflow.
 
-The workflow you just read runs `uv run doit latest`, and that task runs
-`python ./src/pull_es_options.py --latest` as a script. The guide notebook imports the
-same file and calls `load_es_options()`, and nothing is pulled. How can one
-file be both a script and a library? And what turns a folder of such files
-into a package that someone else can install?
+## Agenda Item 5: GitHub Actions, Read from the Autograder
 
-[Modules, Packages, and `if __name__ == "__main__"`](notebooks/_01_modules_and_packages_ipynb.ipynb)
-answers both with the small examples in
-[`python_imports/`](https://github.com/finm-32800/inclass_examples/tree/main/python_imports)
-in the in-class repo. We run them live:
+Open `.github/workflows/tests.yml` in your HW repository, the workflow that
+has graded every push since HW 1. Turning on Pages added a second workflow,
+*pages build and deployment*, which GitHub wrote for you.
 
-- **A module is a file, and a package is a folder.** `01_simple_module` and
-  `02_package_directory`: the same `import mypackage`, two layouts.
-- **Where Python looks.** `03_name_shadowing`: `sys.path` puts the script's
-  own folder first. That is why a module in `src/` can `import settings`, why
-  `dodo.py` inserts `src/` into the path, and why a file of yours named
-  `numpy.py` breaks NumPy.
-- **An installable package.** `project_paths/install_approach`: a
-  `pyproject.toml` and `pip install -e .`, and `import myproj` works from any
-  folder. `finm` and `chartbook` have the same shape.
-- **`if __name__ == "__main__"`.** `04_name_main`: run `python greet.py`, then
-  `python main.py`, and the block runs the first time and not the second. In
-  the course's `pull_` modules that block is the pull. `doit` runs the file,
-  so the pull runs; a notebook imports it, so nothing touches the network.
+- **`on`:** what starts a workflow. Every push, the *Run workflow* button
+  (`workflow_dispatch`), or a schedule written in
+  [cron](./Week9/cron_jobs.md) syntax, always in UTC.
+- **`permissions`, `jobs`, and `if`:** what the workflow may change, the
+  jobs it runs, themselves a small DAG, and when a job is skipped. The
+  grader skips the instructor's pushes and the first commit of a new copy.
+- **`runs-on`:** where a job runs. GitHub's hosted runners are small virtual
+  machines, created and destroyed for every run, with free minutes for
+  public repositories. The grader runs on a self-hosted runner instead: a
+  Mac mini that keeps the course's cached data.
+- **`steps`:** each one `uses` a published action, such as
+  `actions/checkout`, or `run`s commands in a shell. The grader's steps build
+  the environment, find the cached data, run `pytest`, and turn the results
+  into a score.
+- **Secrets:** a repository secret (*Settings* > *Secrets and variables* >
+  *Actions*) reaches a step through `env:` and `${{ secrets.NAME }}`, and the
+  pipeline reads it from the environment just as it reads `.env` locally.
+  Databento's key works this way. WRDS's `.pgpass` would not, on a runner
+  rebuilt for every run.
 
-## Agenda Item 5: Where Else CI/CD Lives: Python Packages
+## Agenda Item 6: Where CI/CD Lives
 
-Every package you have installed this quarter was built, tested, and
-released by a workflow.
-[Writing and Publishing Your Own Python Packages](./Week6/python_packaging_with_hatch.md):
-`pyproject.toml` as the single source of truth, a build backend, dynamic
-versioning, semantic versioning as a contract.
-
-The demo is [`chartbook`](https://pypi.org/project/chartbook/), the package
-you have been running all quarter: its `pyproject.toml`, `hatch build`
-producing the wheel, `hatch test` running the suite across a matrix of
-Python versions in GitHub Actions, and a release cut from the
-[changelog](https://backofficedev.github.io/chartbook/changelog.html).
-You will not build a package in this course. You will see how one is built,
-because this is what "software packaging" means in the postings, and
-because HW 3 itself grew out of a package two of last summer's students
-wrote for their final project, `crashbounds`, which is credited in the
-assignment.
-
-Reading, not covered tonight: [Sphinx](./Week5/sphinx.md), which builds the
-documentation for pandas and for this book, and
-[GitHub Issues and Pull Requests](./Week6/GitHub_pull_requests.md), which
-your final project requires and which we demo next week.
-
-## Agenda Item 6: Options Data on Databento
-
-- [Databento](./Week7/databento.md) for options on futures: the E-mini
-  S&P 500 end-of-month options (root `EW`), the `definition` schema that
-  says what each contract is, the `statistics` schema that carries the
-  exchange's settlement price for every listed strike, and the user-defined
-  spreads to drop.
-- The options case study,
-  [finm-32800/case_study_options](https://github.com/finm-32800/case_study_options),
-  through [SPX Hedging](notebooks/_02_spx_hedging_ipynb.ipynb), five minutes
-  for the vocabulary: strikes, expirations, implied volatility, the smile.
-- [LSEG Datastream](./Week7/LSEG_datastream.md), as a reading, for the
-  vendor landscape.
-
-## Agenda Item 7: Launch HW 3, SVIX and the Probability of a Crash
-
-Two live pages to open first:
-
-- **[Ian Martin's data page](https://personal.lse.ac.uk/martiniw/).** SVIX,
-  his option-implied volatility index, and the probability of a 20% drop in
-  the S&P 500, published from 1996 to 2012.
-- **[CME's CVOL indexes](https://www.cmegroup.com/market-data/cme-group-benchmark-administration/cme-group-volatility-indexes.html).**
-  The same simple-variance construction, computed by the exchange every day
-  for options on its interest-rate, currency, energy, metals, and
-  agricultural futures. There is none for the S&P 500, which is why
-  Martin's own series is the benchmark for our replication.
-
-[HW 3](./HW3.md) rebuilds both numbers from E-mini S&P 500 option
-settlements on Databento, and then does what HW 2 did not: deploys the
-replication as a daily monitor on GitHub Actions, with your Databento key as
-a secret, publishing to GitHub Pages every morning.
-
-- [E-mini S&P 500 Options Data from Databento](notebooks/_01_es_options_data_ipynb.ipynb)
-- [Replicating SVIX and the Probability of a Crash](notebooks/_02_svix_and_crash_probability_ipynb.ipynb):
-  the simple variance swap, the risk-neutral distribution by
-  Breeden-Litzenberger, and Martin's crash probability.
-- [The Daily Monitor](notebooks/_03_daily_monitor_ipynb.ipynb)
-
-The offline half follows
-[Martin and Shi (2025)](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf),
-*Forecasting Crashes with a Smile*: bounds on the probability that a single
-stock crashes, for Apple and AIG, from the OptionMetrics surface on WRDS.
-Your blank there is the query.
-
-- [Crash Bounds for Single Names](notebooks/_04_single_name_crash_bounds_ipynb.ipynb)
+Every open-source package runs workflows like these. Open
+[pandas' Actions tab](https://github.com/pandas-dev/pandas/actions): tests on
+every pull request, so nothing regresses, and builds published
+continuously, nightly ones included. That is continuous integration and
+continuous deployment. Packaging and its CI come back in
+[week 8](./overview_w8.md).
 
 ## Final Projects
 
 Assignments go out Wednesday morning. Each group books one
 [consultation](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile) in weeks 4 through 7.
 The rubric requires every pull request to be reviewed by a teammate; the
-pull-request workflow is demoed next week.
+pull-request workflow is covered in [week 7](./overview_w7.md).
 
 ## Looking ahead to Week 5
 
-Week 5 is **unit tests and data validation**: how a pipeline checks its own
-data before it publishes anything. The opening example is the cleaning of
-FINRA TRACE, where every filter is a convention, and [HW 4](./HW4.md) then
-moves to a case with a ground truth: rebuilding the E-mini order book from
-the raw message feed and validating it against the vendor's own book.
+Week 5 automates what this week did by hand: a live monitor that a workflow
+updates every day, deployed in class, then the math of HW 3. It also catches
+up on what this week did not reach: modules and packages, and `uv`.

@@ -161,7 +161,7 @@ Four things to complete, then one to do.
   tells a data-source outage from a bug: if Databento or FRED is still down
   after the pull's retries, the run ends with a warning and yesterday's
   site stays up. See
-  [GitHub Actions and an Interactive Dashboard](./Week9/github_actions_interactive_dashboard.md),
+  [Building a Live Monitor with GitHub Actions](./Week5/live_monitor.md),
   [cron](./Week9/cron_jobs.md), and the
   [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions)
   in the in-class repository, which deploy a daily pipeline with a
@@ -181,6 +181,9 @@ When it works, the chart on your site gains one point every morning.
 ## Part D (graded, 4 pts): single names, from the OptionMetrics surface
 
 - [Crash Bounds for Single Names (Martin and Shi 2025)](notebooks/_04_single_name_crash_bounds_ipynb.ipynb)
+  (optional reading). Part D needs two of its sections: *The data*, which
+  describes the surface query, and *SVIX against Martin's published
+  series*, the check of Part B's fifth test.
 
 Martin and Shi (2025) bound the probability that a single stock crashes
 using the risk-neutral distributions of the stock and of the market. Their

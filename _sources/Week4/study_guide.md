@@ -6,23 +6,56 @@ question can be answered in a few sentences from the pages listed under its
 heading. The exam's format is described in
 [Exam Preparation](../exam_prep.md).
 
-## Publishing with GitHub Pages
+## Databento and Data APIs
+
+*Read: [Databento](../Week7/databento.md),
+[Pulling Market Data From Databento](../notebooks/_01_databento_ipynb.ipynb),
+and Agenda Item 1 of the [week 4 chapter](../overview_w4.md).*
+
+1. WRDS authenticates you with a password kept in `.pgpass`. Databento
+   issues API keys instead. Why create a separate key for each project?
+2. What does Databento's `metadata.get_cost` return, and how can a pull use
+   it to make sure it never spends money?
+3. A Databento request names a dataset, a schema, and the symbols. What does
+   the schema choose?
+4. What does Databento's Python SDK add on top of its raw HTTP API, and why
+   does it matter that the raw API exists?
+5. What is a continuous futures series, and what decision does building one
+   require? (Read: [LSEG Datastream](../Week7/LSEG_datastream.md).)
+
+
+## Static Sites and GitHub Pages
 
 *Read: [GitHub Pages and Tearsheets](../Week3/github_pages_preview.md) and the
 "Key Concepts" in the
 [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions).*
 
-1. What does an empty `.nojekyll` file at the root of a GitHub Pages site do?
+6. What is a static website? Why can you open one from your laptop with no
+   server running?
+7. What is GitHub Pages? What kind of site can it host, and what can it not
+   run?
+8. What does an empty `.nojekyll` file at the root of a GitHub Pages site do?
    What can go wrong without it?
+
+
+## Keeping Output Out of `main`
+
+*Read: Agenda Item 4 of the [week 4 chapter](../overview_w4.md).*
+
+9. The course's `.gitignore` lists `docs/`, the folder `chartbook build`
+   writes. Give two reasons not to commit a rebuilt site to `main`.
+10. A `gh-pages` branch is kept two commits ahead of `main` by rebasing it
+   and force-pushing. What does a force-push do, and when is it safe?
+
 
 ## CI/CD with GitHub Actions
 
 *Read: the [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions)
 in the in-class repository,
-[The Daily Monitor](../notebooks/_03_daily_monitor_ipynb.ipynb), and
+Agenda Item 5 of the [week 4 chapter](../overview_w4.md), and
 [Scheduling Recurring Tasks with Cron](../Week9/cron_jobs.md).*
 
-2. What happens, step by step, when you push a commit to a repository that
+11. What happens, step by step, when you push a commit to a repository that
    has the workflow below?
 
    ```yaml
@@ -36,7 +69,7 @@ in the in-class repository,
          - run: pytest
    ```
 
-3. A workflow file begins with the lines below. Name the three events that
+12. A workflow file begins with the lines below. Name the three events that
    start the workflow, and say when each one happens.
 
    ```yaml
@@ -48,120 +81,8 @@ in the in-class repository,
      workflow_dispatch: {}
    ```
 
-4. A pipeline that runs on GitHub Actions needs an API key. Where should the
+13. A pipeline that runs on GitHub Actions needs an API key. Where should the
    key be stored, and why not in the workflow file or in a committed `.env`
    file?
-
-## Environments with uv and pixi
-
-*Read: [Modern Environment Tools: uv and pixi](../Week3/uv_and_pixi.md).*
-
-5. `uv run doit` works in a fresh clone with no environment created or
-   activated. What does `uv run` do before it runs `doit`, and what two
-   files does it read?
-6. What is a lockfile? What does `uv.lock` record that a hand-written
-   `requirements.txt` does not?
-7. `uv` installs from PyPI and `pixi` installs from conda-forge. When would
-   that difference make you choose `pixi`?
-8. `uv run` and `pixi run` both run a command inside the project's
-   environment. What does `doit` do that they do not?
-
-## Modules, Packages, and `if __name__ == "__main__"`
-
-*Read: [Modules, Packages, and `if __name__ == "__main__"`](../notebooks/_01_modules_and_packages_ipynb.ipynb)
-and the [`python_imports/` examples](https://github.com/finm-32800/inclass_examples/tree/main/python_imports)
-in the in-class repository.*
-
-9. What is the difference between a Python module and a Python package?
-10. What does `python greet.py` print? What does a different script print
-    when it runs `import greet`?
-
-    ```python
-    # greet.py
-    print(f"__name__ is {__name__!r}")
-
-
-    def say_hello():
-        print("Hello!")
-
-
-    if __name__ == "__main__":
-        say_hello()
-    ```
-
-11. A module has a function that downloads data from a vendor, a function
-    that reads the saved copy, and an `if __name__ == "__main__":` block that
-    runs the download and saves the result. Why is the download under that
-    block rather than at the top level of the file?
-
-## Python Packages and CI
-
-*Read: [Writing and Publishing Your Own Python Packages](../Week6/python_packaging_with_hatch.md),
-the installable example in
-[Modules, Packages, and `if __name__ == "__main__"`](../notebooks/_01_modules_and_packages_ipynb.ipynb),
-and [Semantic Versioning](https://semver.org/).*
-
-12. What does each of the two tables in this `pyproject.toml` declare?
-
-    ```toml
-    [build-system]
-    requires = ["hatchling"]
-    build-backend = "hatchling.build"
-
-    [project]
-    name = "myproj"
-    version = "0.1.0"
-    dependencies = ["pandas"]
-    ```
-
-13. Under semantic versioning, what does a change in each of the three parts
-    of a version number such as `2.4.1` tell the package's users?
-14. What is TestPyPI, and why rehearse a release there before publishing to
-    PyPI?
-15. A package's test workflow contains the lines below. What does GitHub
-    Actions do with them, and what kind of bug do they catch?
-
-    ```yaml
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
-    ```
-
-## Issues and Pull Requests
-
-*Read: [GitHub Issues and Pull Requests](../Week6/GitHub_pull_requests.md).*
-
-16. What is a pull request? What is the difference between pushing a commit
-    to `main` and opening a pull request?
-17. `git pull` and a pull request sound alike. What does each one do?
-18. What is a GitHub issue, and what does writing `fixes #123` in a pull
-    request do?
-19. Why do maintainers protect `main` and require a review before merging?
-
-## Options Data on Databento
-
-*Read: [E-mini S&P 500 Options Data from Databento](../notebooks/_01_es_options_data_ipynb.ipynb)
-and [Databento](../Week7/databento.md).*
-
-20. Why does a pipeline that needs an option price at every listed strike
-    use the exchange's settlement prices rather than daily trade bars?
-
-## SVIX and the Probability of a Crash
-
-*Read: [Replicating SVIX and the Probability of a Crash](../notebooks/_02_svix_and_crash_probability_ipynb.ipynb),
-[Crash Bounds for Single Names](../notebooks/_04_single_name_crash_bounds_ipynb.ipynb),
-and [Martin and Shi (2025)](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf).*
-
-21. SVIX and the VIX are both built from the prices of out-of-the-money
-    options across strikes. How do they weight the strikes differently?
-22. Option prices across strikes reveal the market's risk-neutral
-    distribution of the return. What feature of the call price curve gives
-    the probability that the return ends below a given strike?
-23. Why is the risk-neutral probability of a crash larger than the
-    probability that an investor who holds the market assigns to it?
-24. Option prices on a single stock give the risk-neutral distribution of its
-    return. Why do Martin and Shi bound the stock's crash probability instead
-    of computing a single number?
-25. A vendor's volatility surface has no strikes below about 92% of the spot
-    at a one-month maturity. What does a one-month probability of a 20% drop,
-    computed from that surface, depend on?
+14. What is the difference between a GitHub-hosted runner and a self-hosted
+   one? Why does the course's autograder run on a self-hosted runner?

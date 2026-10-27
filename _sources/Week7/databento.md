@@ -59,11 +59,11 @@ is essential when working with futures, which have expiring contracts:
 |----------------|---------|-------------|
 | `raw_symbol` | `ESU4` | One specific contract (ES = E-mini S&P, U = Sep, 4 = 2024) |
 | `parent` | `ES.FUT` | All active expirations of a product |
-| `parent` (options) | `EW.OPT` | All listed series of an options-on-futures product (here: E-mini S&P 500 end-of-month options — used in HW 4) |
+| `parent` (options) | `EW.OPT` | All listed series of an options-on-futures product (here: E-mini S&P 500 end-of-month options — used in HW 3) |
 | `continuous` | `ES.c.0` | Rolling front-month contract |
 | `instrument_id` | `3403` | Numeric exchange-assigned ID |
 
-Two options-on-futures quirks worth knowing before HW 4: an option's raw
+Two options-on-futures quirks worth knowing before HW 3: an option's raw
 symbol (e.g. `EW1N3 C4580`) names the series, right, and strike but **not the
 expiration date** — that comes from the exchange's listing rule or its
 `definition` records — and parent-symbol queries also return **user-defined

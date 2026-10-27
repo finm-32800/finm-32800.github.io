@@ -43,4 +43,5 @@ the claims the data cannot support.
 :maxdepth: 1
 notebooks/_job_postings_methods_ipynb.ipynb
 notebooks/_02_spx_hedging_ipynb.ipynb
+Week9/github_actions_interactive_dashboard.md
 ```

@@ -173,8 +173,8 @@ a wizard for scheduling a new recurring task.
 ```
 
 ```{tip}
-For most tasks in this course, **GitHub Actions** (covered in the
-[previous section](./github_actions_interactive_dashboard.md)) is the
+For most tasks in this course, **GitHub Actions** (see
+[Building a Live Monitor with GitHub Actions](../Week5/live_monitor.md)) is the
 recommended way to schedule recurring jobs, since it runs in the cloud and does
 not depend on your local machine being powered on. However, understanding `cron`
 and Task Scheduler is valuable for local automation and for reading the cron

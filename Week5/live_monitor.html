@@ -1,0 +1,985 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Building a Live Monitor with GitHub Actions &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week5/live_monitor';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Study Guide: Week 5" href="study_guide.html" />
+    <link rel="prev" title="Modern Environment Tools: uv and pixi" href="../Week3/uv_and_pixi.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Data APIs, Static Sites, and GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Live Monitors</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 5</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek5/live_monitor.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week5/live_monitor.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Building a Live Monitor with GitHub Actions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-repository">The repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-day-in-the-life">A day in the life</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-state-lives">Where the state lives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-a-monitor-need-state-at-all">Does a monitor need state at all?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-commands-doit-and-doit-latest">Two commands: <code class="docutils literal notranslate"><span class="pre">doit</span></code> and <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">latest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secrets">Secrets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-before-anything-publishes">Checks before anything publishes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traps">Traps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-copyright-and-terms-of-use">Data, copyright, and terms of use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-your-own-copy">Deploy your own copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-here-to-hw-3">From here to HW 3</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="building-a-live-monitor-with-github-actions">
+<h1>Building a Live Monitor with GitHub Actions<a class="headerlink" href="#building-a-live-monitor-with-github-actions" title="Link to this heading">#</a></h1>
+<p>Your HW 2 replication answers a question about one day. A monitor answers it
+every day, by itself: a job wakes up on a schedule, pulls the newest data,
+adds it to what it has already computed, and republishes the result. This
+page walks through the smallest monitor that does everything the SVIX
+monitor in <a class="reference internal" href="../HW3.html"><span class="std std-doc">HW 3</span></a> does, so that in HW 3 your hours go to the
+math and not to the machinery.</p>
+<p>The example is the <a class="reference external" href="https://github.com/finm-32800/yield_spread_monitor">Yield Spread Monitor</a>:
+the 10-year Treasury yield minus the 2-year, every business day since 1976.
+The finance is one subtraction, which is the point. Everything else on this
+page is about how a pipeline runs on its own.</p>
+<p><img alt="The Yield Spread Monitor's page: the latest reading, an interactive chart of the spread since 1976 with inverted stretches shaded, and a caption." src="../_images/yield_spread_monitor_page.png" /></p>
+<p><em>The page the monitor publishes. It is rebuilt every day by GitHub Actions
+and served by GitHub Pages; no server, no laptop left on.</em></p>
+<section id="the-repository">
+<h2>The repository<a class="headerlink" href="#the-repository" title="Link to this heading">#</a></h2>
+<p>Five short files do the work, and two workflows run them.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src/pull_yields.py</span></code></p></td>
+<td><p>Pulls the 10-year and 2-year yields (FRED series DGS10 and DGS2) from the FRED API. With <code class="docutils literal notranslate"><span class="pre">--latest</span></code>, only the last ten days.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src/update_history.py</span></code></p></td>
+<td><p>Computes the spread, adds the new days to the history, and checks the history before anything publishes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src/build_page.py</span></code></p></td>
+<td><p>Builds <code class="docutils literal notranslate"><span class="pre">docs/index.html</span></code> from the history alone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src/settings.py</span></code></p></td>
+<td><p>Reads the API key and the dates from <code class="docutils literal notranslate"><span class="pre">.env</span></code> or the environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code></p></td>
+<td><p>The tasks: <code class="docutils literal notranslate"><span class="pre">doit</span></code> (the backfill) and <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">latest</span></code> (the daily update).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code></p></td>
+<td><p>The daily job.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/backfill.yml</span></code></p></td>
+<td><p>The backfill, run by hand with a start date.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="a-day-in-the-life">
+<h2>A day in the life<a class="headerlink" href="#a-day-in-the-life" title="Link to this heading">#</a></h2>
+<p><img alt="A day in the life of a live monitor: six steps on a fresh runner, reading from and writing to three branches." src="../_images/live_monitor_day.svg" /></p>
+<p>Every day at 22:00 UTC, GitHub starts a fresh virtual machine, the
+<strong>runner</strong>, and works through six steps. The runner starts empty every
+time: whatever the job computed yesterday is gone. Everything interesting
+about this design follows from that one fact.</p>
+<ol class="arabic">
+<li><p><strong>Check out <code class="docutils literal notranslate"><span class="pre">main</span></code>.</strong> The code, and nothing else.</p></li>
+<li><p><strong>Restore the history.</strong> The one thing carried over from yesterday is a
+CSV of dates and spreads, kept on a branch of its own. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code> reads a
+file from a branch without checking the branch out:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>monitor-history:monitor-history
+git<span class="w"> </span>show<span class="w"> </span>monitor-history:spread_history.csv<span class="w"> </span>&gt;<span class="w"> </span>_output/spread_history.csv
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run the tests.</strong> If they fail, the job stops and nothing publishes.</p></li>
+<li><p><strong>Update.</strong> <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span> <span class="pre">latest</span></code> pulls the last ten days from FRED, adds
+the days the history does not have, checks it, and rebuilds the page.
+The API key comes from the repository’s secret store (below).</p></li>
+<li><p><strong>Record the history.</strong> A second working directory on the history branch
+(<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code>), a copy of the new file, one commit, one push. A weekend
+run adds no days and makes no commit.</p></li>
+<li><p><strong>Publish the page.</strong> The built page goes on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch as a
+single commit with no parents (an <em>orphan</em> commit), force-pushed, so the
+branch never grows. GitHub Pages serves it. Last week’s <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch
+was kept by hand, rebased onto <code class="docutils literal notranslate"><span class="pre">main</span></code> and force-pushed after every
+rebuild; an orphan commit needs none of that, because there is no history
+to keep.</p></li>
+</ol>
+<p>The schedule is set by the source, not by habit. FRED posts the H.15 yields
+for the previous business day at about 3:15 pm Chicago time, so the job runs
+after that. HW 3’s job runs at 14:30 UTC instead, when CME’s settlement
+prices from the night before have reached Databento.</p>
+</section>
+<section id="where-the-state-lives">
+<h2>Where the state lives<a class="headerlink" href="#where-the-state-lives" title="Link to this heading">#</a></h2>
+<p>A monitor needs <strong>state</strong>: something it remembers from one run to the next.
+Here the state is the history. Because the runner forgets everything, the
+history has to live somewhere outside it. The candidates:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Where</p></th>
+<th class="head"><p>Survives to tomorrow?</p></th>
+<th class="head"><p>The catch</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>The runner’s disk</p></td>
+<td><p>No</p></td>
+<td><p>Wiped after every run.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Commits on <code class="docutils literal notranslate"><span class="pre">main</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Output mixed into the source, a commit a day forever, and a workflow that pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code> triggers itself unless every push says <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gh-pages</span></code></p></td>
+<td><p>Until the next deploy</p></td>
+<td><p>Replaced on every run.</p></td>
+</tr>
+<tr class="row-odd"><td><p>The Actions cache</p></td>
+<td><p>Not reliably</p></td>
+<td><p>Evicted after seven days unused; a cache, not a record.</p></td>
+</tr>
+<tr class="row-even"><td><p>Workflow artifacts</p></td>
+<td><p>Ninety days</p></td>
+<td><p>They expire.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A branch of its own</strong></p></td>
+<td><p><strong>Yes</strong></p></td>
+<td><p><strong>One file, one small commit a day.</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The monitor uses the last row. Three branches, one job each:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">main</span></code></strong> holds the code. The workflow never writes to it, and nothing a
+run produces is ever committed there.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">monitor-history</span></code></strong> holds one file, <code class="docutils literal notranslate"><span class="pre">spread_history.csv</span></code>. Its log is the
+ledger of the series: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span> <span class="pre">monitor-history</span></code> shows the chart being
+built, one line a day.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">gh-pages</span></code></strong> holds the built page, one commit, replaced by every run.</p></li>
+</ul>
+<section id="does-a-monitor-need-state-at-all">
+<h3>Does a monitor need state at all?<a class="headerlink" href="#does-a-monitor-need-state-at-all" title="Link to this heading">#</a></h3>
+<p>Not always. FRED returns the entire 50-year history of both yields in two
+requests and about a second, so this monitor could rebuild its history every
+morning and keep no state at all. It keeps the history branch anyway, because
+that is the mechanism HW 3 needs, and HW 3 needs it for a real reason: each
+session of E-mini option settlements is 19 MB and one to two minutes to pull
+from Databento. Rebuilding a year of SVIX every morning would mean hours of
+pulling a day.</p>
+<p>The rule: <strong>keep state when recomputing it is expensive or impossible;
+otherwise recompute.</strong> State is a liability. It can drift, it has to be
+backed up, and a bug that corrupts it does not fix itself on the next run.</p>
+</section>
+</section>
+<section id="two-commands-doit-and-doit-latest">
+<h2>Two commands: <code class="docutils literal notranslate"><span class="pre">doit</span></code> and <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">latest</span></code><a class="headerlink" href="#two-commands-doit-and-doit-latest" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>doit<span class="w">                        </span><span class="c1"># the backfill: pull START_DATE..END_DATE, build the history and the page</span>
+uv<span class="w"> </span>run<span class="w"> </span>doit<span class="w"> </span>latest<span class="w">                 </span><span class="c1"># the daily update: pull the last ten days</span>
+<span class="nv">START_DATE</span><span class="o">=</span><span class="m">2020</span>-01-01<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>doit<span class="w">  </span><span class="c1"># backfill from a date</span>
+</pre></div>
+</div>
+<p>Plain <code class="docutils literal notranslate"><span class="pre">doit</span></code> is the backfill. It pulls everything in the window from the
+settings, all the way back to 1976 by default, and fills the history. The
+pull runs again whenever that window changes, because the task declares the
+window as a dependency:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;uptodate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">config_changed</span><span class="p">({</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">START_DATE</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">END_DATE</span><span class="p">})],</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">latest</span></code> is the daily update. It has <code class="docutils literal notranslate"><span class="pre">&quot;uptodate&quot;:</span> <span class="pre">[False]</span></code>, so it runs
+every time it is asked: a daily update’s job is to check again. On GitHub,
+<code class="docutils literal notranslate"><span class="pre">backfill.yml</span></code> runs the backfill from the Actions tab with a start date you
+type in, once, when the monitor starts.</p>
+</section>
+<section id="secrets">
+<h2>Secrets<a class="headerlink" href="#secrets" title="Link to this heading">#</a></h2>
+<p>The pull needs a FRED API key. Locally the key lives in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, which is
+gitignored. On GitHub it lives in the repository’s secret store
+(<em>Settings</em> &gt; <em>Secrets and variables</em> &gt; <em>Actions</em>), and the one step that
+needs it reads it from there:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update the monitor (pull the last ten days, add them to the history)</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">FRED_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.FRED_API_KEY }}</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run doit latest</span>
+</pre></div>
+</div>
+<p>The key is never in a file, never in a commit, and never in the log: GitHub
+masks it. If the secret is missing, the step fails with the pipeline’s own
+message. This is the log of the example’s very first run, pushed before any
+key existed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FRED_API_KEY is not set. Locally: copy .env.example to .env and add your key.
+On GitHub: Settings &gt; Secrets and variables &gt; Actions &gt; New repository secret.
+TaskFailed - taskid:latest
+Command failed: &#39;python src/pull_yields.py --latest&#39; returned 1
+Error: Process completed with exit code 1.
+</pre></div>
+</div>
+<p>The tests ran and passed first; the record and publish steps never ran, so
+there was nothing half-published to clean up. FRED’s terms also require each
+user to have their own key, which is the other reason it is a secret and not
+a line in the code.</p>
+</section>
+<section id="checks-before-anything-publishes">
+<h2>Checks before anything publishes<a class="headerlink" href="#checks-before-anything-publishes" title="Link to this heading">#</a></h2>
+<p>An unattended job has no one watching it, so it checks itself twice.</p>
+<ul class="simple">
+<li><p><strong>Unit tests</strong> (<code class="docutils literal notranslate"><span class="pre">src/test_monitor.py</span></code>) check the code: that FRED’s “.” for a
+missing day becomes a missing value, that the spread is computed only on
+days with both yields, that merging keeps one row per date, and that the
+workflows read the key from the secret store. They run offline, with no
+key, in under a second, as the job’s third step.</p></li>
+<li><p><strong>Data checks</strong> (<code class="docutils literal notranslate"><span class="pre">check_history</span></code> in <code class="docutils literal notranslate"><span class="pre">src/update_history.py</span></code>) check today’s
+data: no duplicate dates, nothing out of order, no spread beyond six
+percentage points, and a newest reading no more than ten days old. If any
+check fails, the update step fails, the job stops, and <strong>yesterday’s page
+stays up</strong>.</p></li>
+</ul>
+<p>A unit test asks whether your function is right. A data check asks whether
+today’s data are sane. A live pipeline needs both.</p>
+</section>
+<section id="traps">
+<h2>Traps<a class="headerlink" href="#traps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>A workflow that pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code> runs itself.</strong> A push to <code class="docutils literal notranslate"><span class="pre">main</span></code> is a
+trigger, so a job that commits its output there starts again, forever,
+unless every push says <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code>. Keeping output off <code class="docutils literal notranslate"><span class="pre">main</span></code> removes the
+problem.</p></li>
+<li><p><strong>A copy made from a template runs once, immediately,</strong> on its “Initial
+commit”, before you have added the secret. The workflow skips that run
+(<code class="docutils literal notranslate"><span class="pre">if:</span> <span class="pre">github.event.head_commit.message</span> <span class="pre">!=</span> <span class="pre">'Initial</span> <span class="pre">commit'</span></code>).</p></li>
+<li><p><strong>Pages has to be switched on.</strong> <em>Settings</em> &gt; <em>Pages</em> &gt; <em>Deploy from a
+branch</em> &gt; <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> / <code class="docutils literal notranslate"><span class="pre">/</span> <span class="pre">(root)</span></code>. The page also needs an empty <code class="docutils literal notranslate"><span class="pre">.nojekyll</span></code>
+file, or GitHub runs Jekyll on it.</p></li>
+<li><p><strong>Free minutes and Pages need a public repository</strong> in your own account.</p></li>
+<li><p><strong>Cron is in UTC,</strong> and GitHub may start a scheduled run several minutes
+late when it is busy. It also turns off the schedule in a public
+repository that sees no activity for sixty days.</p></li>
+<li><p><strong>Two runs at once</strong> would push over each other. Both workflows share a
+<code class="docutils literal notranslate"><span class="pre">concurrency</span></code> group, so the second waits for the first.</p></li>
+</ul>
+</section>
+<section id="data-copyright-and-terms-of-use">
+<h2>Data, copyright, and terms of use<a class="headerlink" href="#data-copyright-and-terms-of-use" title="Link to this heading">#</a></h2>
+<p>Three different things, often confused:</p>
+<ul class="simple">
+<li><p><strong>Copyright</strong> belongs to whoever created a work. The 10-year and 2-year
+yields come from the Federal Reserve Board’s H.15 release, a work of the
+U.S. government, and are in the <strong>public domain</strong>. FRED’s own spread
+series, T10Y2Y, is tagged as copyrighted, which is one reason the monitor
+computes the spread itself.</p></li>
+<li><p><strong>Terms of use</strong> are a contract with the service you pull from. FRED’s
+allow public-domain series to be displayed with a citation, require the
+notice “This product uses the FRED® API but is not endorsed or certified by
+the Federal Reserve Bank of St. Louis,” and restrict storing and archiving
+FRED content. So the history branch stores only the spread the monitor
+computes, never the yields, and the yields live in <code class="docutils literal notranslate"><span class="pre">_data/</span></code>, which is
+gitignored and discarded after every run.</p></li>
+<li><p><strong>Licenses</strong> cover data you pay for. The Databento and WRDS data in HW 3
+come under the course’s licenses, which is why the published charts there
+show derived quantities and not the raw quotes.</p></li>
+</ul>
+</section>
+<section id="deploy-your-own-copy">
+<h2>Deploy your own copy<a class="headerlink" href="#deploy-your-own-copy" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Get a FRED API key.</strong> Make a free account at
+<a class="reference external" href="https://fredaccount.stlouisfed.org/apikeys">fredaccount.stlouisfed.org</a>
+and request a key: 32 lowercase letters and digits.</p></li>
+<li><p><strong>Copy the repository.</strong> On the
+<a class="reference external" href="https://github.com/finm-32800/yield_spread_monitor">repository page</a>,
+<em>Use this template</em> &gt; <em>Create a new repository</em>, in your own account,
+<strong>public</strong>.</p></li>
+<li><p><strong>Add the key as a secret.</strong> In your copy: <em>Settings</em> &gt; <em>Secrets and
+variables</em> &gt; <em>Actions</em> &gt; <em>New repository secret</em>. Name <code class="docutils literal notranslate"><span class="pre">FRED_API_KEY</span></code>,
+value your key.</p></li>
+<li><p><strong>Backfill.</strong> <em>Actions</em> &gt; <em>Backfill the Yield Spread History</em> &gt; <em>Run
+workflow</em>, with the default start date. About a minute; it creates the
+<code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch.</p></li>
+<li><p><strong>Publish.</strong> <em>Actions</em> &gt; <em>Build and Deploy the Yield Spread Monitor</em> &gt;
+<em>Run workflow</em>. About a minute; it creates <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
+<li><p><strong>Turn on Pages.</strong> <em>Settings</em> &gt; <em>Pages</em> &gt; <em>Deploy from a branch</em> &gt;
+<code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> / <code class="docutils literal notranslate"><span class="pre">/</span> <span class="pre">(root)</span></code>. A minute later the page is at
+<code class="docutils literal notranslate"><span class="pre">https://&lt;your-username&gt;.github.io/&lt;repository&gt;/</span></code>.</p></li>
+</ol>
+<p>Tomorrow, look at the <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch: one more commit, one more line.</p>
+</section>
+<section id="from-here-to-hw-3">
+<h2>From here to HW 3<a class="headerlink" href="#from-here-to-hw-3" title="Link to this heading">#</a></h2>
+<p>The SVIX monitor in HW 3 is this same job with a harder middle.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Yield Spread Monitor</p></th>
+<th class="head"><p>HW 3’s SVIX monitor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Data</p></td>
+<td><p>FRED API, public domain</p></td>
+<td><p>Databento CME Globex, the course license</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secret</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FRED_API_KEY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DATABENTO_API_KEY</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Daily pull</p></td>
+<td><p>Ten days, two requests, a second</p></td>
+<td><p>The latest session, one to two minutes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backfill</p></td>
+<td><p>The whole series in a second</p></td>
+<td><p>One to two minutes per session</p></td>
+</tr>
+<tr class="row-even"><td><p>History</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spread_history.csv</span></code> on <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">svix_monitor_history.csv</span></code> on <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Page</p></td>
+<td><p>One HTML page with a Plotly chart</p></td>
+<td><p>Four notebooks and a ChartBook site</p></td>
+</tr>
+<tr class="row-even"><td><p>Schedule</p></td>
+<td><p>22:00 UTC, after FRED posts</p></td>
+<td><p>14:30 UTC, after CME’s settlements reach Databento</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>HW 3 adds three things this example does not need. A data source that is
+down is not a bug: its pulls retry for about eight minutes, and if the
+source is still down the run ends with a warning instead of a failure.
+Its site build is the default <code class="docutils literal notranslate"><span class="pre">doit</span></code>, which would otherwise pull the whole
+trailing week again, so the workflow marks the morning’s pull as done with
+<code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">reset-dep</span></code>. And two of its tests need WRDS, which the runner does not
+have, so the workflow skips the test task and the course runner grades it.</p>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week3/uv_and_pixi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modern Environment Tools: uv and pixi</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="study_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Study Guide: Week 5</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-repository">The repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-day-in-the-life">A day in the life</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-state-lives">Where the state lives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-a-monitor-need-state-at-all">Does a monitor need state at all?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-commands-doit-and-doit-latest">Two commands: <code class="docutils literal notranslate"><span class="pre">doit</span></code> and <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">latest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secrets">Secrets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-before-anything-publishes">Checks before anything publishes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traps">Traps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-copyright-and-terms-of-use">Data, copyright, and terms of use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-your-own-copy">Deploy your own copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-here-to-hw-3">From here to HW 3</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

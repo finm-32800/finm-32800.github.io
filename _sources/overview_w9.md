@@ -15,19 +15,18 @@ or the model's behavior drifts. Every tool in this course now points at that
 problem, and this week assembles them.
 
 The data is the one you built. The class's predictor dataset from
-[HW 5](./HW5.md) is the input, the Airflow DAGs from week 7 are the scheduler, and
+the class report, [HW 4](./HW4.md), is the input, the Airflow DAGs from week 7 are the scheduler, and
 the benchmark of [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/)
 supplies the models. Nothing this week is a toy.
 
 ## Announcements
 
-- **The exam is tonight,** in the first 75 minutes of class. In person,
+- **The exam is today, 9:30 to 10:45 am,** the first 75 minutes of class. In person,
   closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
   through 8. Each question has four options, **one or more may be correct**, and a
   question earns its point only if every bubble is right. There is no partial
   credit. See [Exam Preparation](./exam_prep.md).
-- **Nothing else is due.** All five homeworks are behind you. Tonight's
-  forecasting lab is done in class and is not graded.
+- **Today's forecasting lab** is done in class and is not graded.
 - **Final project presentations are next week.** Your project is due 24 hours
   before your group's 30-minute meeting with me. There are no slides and no
   demo, because I will already have run your code. I question each member
