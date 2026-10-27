@@ -38,8 +38,8 @@ The deployment is the point of the assignment. The CME FedWatch tool you
 rebuilt in HW 2 updates itself every day; your replication did not. This
 time it will: a GitHub Actions workflow runs your pipeline every morning,
 pulls the previous session, adds it to a history kept on a branch of its
-own, and republishes your ChartBook site to GitHub Pages, with your
-Databento key stored as a secret.
+own, and republishes the monitor's page, a chart of the whole history, to
+GitHub Pages, with your Databento key stored as a secret.
 That is continuous deployment, and the autograder that has scored your
 pushes since HW 1 is the same machinery.
 
@@ -143,7 +143,8 @@ Four things to complete, then one to do.
 
 - **The daily update** (`dodo.py`, 1 pt). `task_latest` pulls the latest
   session, adds its row to `_output/svix_monitor_history.csv` if the
-  history does not have it, and redraws the chart. Unlike every other task
+  history does not have it, and rebuilds the monitor's page, one HTML file
+  with the chart (`src/build_page.py`, written for you). Unlike every other task
   it must run every time it is invoked. Plain `uv run doit` is the
   backfill: it pulls every session in the window in the settings, the
   trailing week unless you set `START_DATE` earlier, and adds the ones the
@@ -152,31 +153,31 @@ Four things to complete, then one to do.
   notebook and the history dataframe.
 - **The workflow** (`.github/workflows/deploy_pages.yml`, 5 pts). The file
   is given as a skeleton with five blanks: the schedule, the secret, the
-  permission the job needs to push, the step that runs the pipeline, and
-  the branch the site is deployed to. The tests read the YAML. The other
+  permission the job needs to push, the step that runs the daily update,
+  and the branch the page is deployed to. The tests read the YAML. The other
   steps are written for you; read their comments. One restores the history
   from the `monitor-history` branch and another records the day's row
   there, so no output ever lands on `main`; a workflow that pushed to
   `main` on every run would be a workflow that triggers itself. Another
   tells a data-source outage from a bug: if Databento or FRED is still down
   after the pull's retries, the run ends with a warning and yesterday's
-  site stays up. See
+  page stays up. See
   [Building a Live Monitor with GitHub Actions](./Week5/live_monitor.md),
   [cron](./Week9/cron_jobs.md), and the
   [`github_actions/` examples](https://github.com/finm-32800/inclass_examples/tree/main/github_actions)
   in the in-class repository, which deploy a daily pipeline with a
   Databento secret the same way.
-- **The live site** (`src/published_site.py`, 1 pt). Push the completed
+- **The live page** (`src/published_site.py`, 1 pt). Push the completed
   repository to a **public** repository in your own account, add your
   Databento key as a repository secret, run the deploy workflow once from
   the Actions tab, run the backfill workflow once with a start date so the
   chart has a history behind it, turn on GitHub Pages from the `gh-pages`
-  branch, and record the address of the site and of the repository. The
+  branch, and record the address of the page and of the repository. The
   steps are in the
   README. Your private copy in the course organization keeps getting your
   pushes for grading; the workflow does not run there.
 
-When it works, the chart on your site gains one point every morning.
+When it works, the chart on your page gains one point every morning.
 
 ## Part D (graded, 4 pts): single names, from the OptionMetrics surface
 

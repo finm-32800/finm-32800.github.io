@@ -538,15 +538,16 @@ deploy.</p>
 is rebuilt from source; the history would cost a pull per day to rebuild,
 so it lives on a branch of its own, one small commit a day.</p>
 <p><strong>An outage is not a bug.</strong> A data source that is down ends the run with a
-warning and leaves yesterday’s site up; any other failure fails the run.</p>
+warning and leaves yesterday’s page up; any other failure fails the run.</p>
 </div>
 <p>Guide 02 computed SVIX and the probability of a crash for one session.
 This page is what happens when a replication is run every day without
 anyone at the keyboard. A GitHub Actions workflow, <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code>,
 wakes up at 14:30 UTC, pulls the previous session’s settlements from
 Databento, computes the row, appends it to the history, records the
-history on a branch of its own, rebuilds this site, and publishes it. The
-chart below is one point longer every morning.</p>
+history on a branch of its own, rebuilds the monitor’s page, and publishes
+it. The chart below, the one on that page, is one point longer every
+morning.</p>
 <p><strong>Sections</strong></p>
 <ul class="simple">
 <li><p>The history, and the latest row.</p></li>
@@ -587,9 +588,9 @@ investor’s (<code class="docutils literal notranslate"><span class="pre">p_log
 <span class="math notranslate nohighlight">\(\gamma = 2\)</span> (<code class="docutils literal notranslate"><span class="pre">p_power_20</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;days_used&quot;</span><span class="p">,</span> <span class="s2">&quot;forward_near&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_power_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_10&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_10&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;days_used&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_power_20&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_10&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_10&quot;</span><span class="p">]</span>
 <span class="n">history</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">({</span>
-    <span class="s2">&quot;forward_near&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:,.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;svix_30&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;svix_30&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="s2">&quot;p_star_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_power_20&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_star_10&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;p_log_10&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2%}</span><span class="s2">&quot;</span><span class="p">,</span>
 <span class="p">})</span>
 </pre></div>
@@ -598,19 +599,18 @@ investor’s (<code class="docutils literal notranslate"><span class="pre">p_log
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_30dee">
+<table id="T_a3164">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_30dee_level0_col0" class="col_heading level0 col0" >days_used</th>
-      <th id="T_30dee_level0_col1" class="col_heading level0 col1" >forward_near</th>
-      <th id="T_30dee_level0_col2" class="col_heading level0 col2" >svix_30</th>
-      <th id="T_30dee_level0_col3" class="col_heading level0 col3" >vix</th>
-      <th id="T_30dee_level0_col4" class="col_heading level0 col4" >p_star_20</th>
-      <th id="T_30dee_level0_col5" class="col_heading level0 col5" >p_log_20</th>
-      <th id="T_30dee_level0_col6" class="col_heading level0 col6" >p_power_20</th>
-      <th id="T_30dee_level0_col7" class="col_heading level0 col7" >p_star_10</th>
-      <th id="T_30dee_level0_col8" class="col_heading level0 col8" >p_log_10</th>
+      <th id="T_a3164_level0_col0" class="col_heading level0 col0" >days_used</th>
+      <th id="T_a3164_level0_col1" class="col_heading level0 col1" >svix_30</th>
+      <th id="T_a3164_level0_col2" class="col_heading level0 col2" >vix</th>
+      <th id="T_a3164_level0_col3" class="col_heading level0 col3" >p_star_20</th>
+      <th id="T_a3164_level0_col4" class="col_heading level0 col4" >p_log_20</th>
+      <th id="T_a3164_level0_col5" class="col_heading level0 col5" >p_power_20</th>
+      <th id="T_a3164_level0_col6" class="col_heading level0 col6" >p_star_10</th>
+      <th id="T_a3164_level0_col7" class="col_heading level0 col7" >p_log_10</th>
     </tr>
     <tr>
       <th class="index_name level0" >date</th>
@@ -622,129 +622,118 @@ investor’s (<code class="docutils literal notranslate"><span class="pre">p_log
       <th class="blank col5" >&nbsp;</th>
       <th class="blank col6" >&nbsp;</th>
       <th class="blank col7" >&nbsp;</th>
-      <th class="blank col8" >&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_30dee_level0_row0" class="row_heading level0 row0" >2026-10-12 00:00:00</th>
-      <td id="T_30dee_row0_col0" class="data row0 col0" >18</td>
-      <td id="T_30dee_row0_col1" class="data row0 col1" >7,857.98</td>
-      <td id="T_30dee_row0_col2" class="data row0 col2" >14.13</td>
-      <td id="T_30dee_row0_col3" class="data row0 col3" >15.21</td>
-      <td id="T_30dee_row0_col4" class="data row0 col4" >0.12%</td>
-      <td id="T_30dee_row0_col5" class="data row0 col5" >0.08%</td>
-      <td id="T_30dee_row0_col6" class="data row0 col6" >0.06%</td>
-      <td id="T_30dee_row0_col7" class="data row0 col7" >0.65%</td>
-      <td id="T_30dee_row0_col8" class="data row0 col8" >0.54%</td>
+      <th id="T_a3164_level0_row0" class="row_heading level0 row0" >2026-10-12 00:00:00</th>
+      <td id="T_a3164_row0_col0" class="data row0 col0" >18</td>
+      <td id="T_a3164_row0_col1" class="data row0 col1" >14.13</td>
+      <td id="T_a3164_row0_col2" class="data row0 col2" >15.21</td>
+      <td id="T_a3164_row0_col3" class="data row0 col3" >0.12%</td>
+      <td id="T_a3164_row0_col4" class="data row0 col4" >0.08%</td>
+      <td id="T_a3164_row0_col5" class="data row0 col5" >0.06%</td>
+      <td id="T_a3164_row0_col6" class="data row0 col6" >0.65%</td>
+      <td id="T_a3164_row0_col7" class="data row0 col7" >0.54%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row1" class="row_heading level0 row1" >2026-10-13 00:00:00</th>
-      <td id="T_30dee_row1_col0" class="data row1 col0" >17</td>
-      <td id="T_30dee_row1_col1" class="data row1 col1" >7,855.76</td>
-      <td id="T_30dee_row1_col2" class="data row1 col2" >14.18</td>
-      <td id="T_30dee_row1_col3" class="data row1 col3" >15.27</td>
-      <td id="T_30dee_row1_col4" class="data row1 col4" >0.10%</td>
-      <td id="T_30dee_row1_col5" class="data row1 col5" >0.07%</td>
-      <td id="T_30dee_row1_col6" class="data row1 col6" >0.05%</td>
-      <td id="T_30dee_row1_col7" class="data row1 col7" >0.74%</td>
-      <td id="T_30dee_row1_col8" class="data row1 col8" >0.62%</td>
+      <th id="T_a3164_level0_row1" class="row_heading level0 row1" >2026-10-13 00:00:00</th>
+      <td id="T_a3164_row1_col0" class="data row1 col0" >17</td>
+      <td id="T_a3164_row1_col1" class="data row1 col1" >14.18</td>
+      <td id="T_a3164_row1_col2" class="data row1 col2" >15.27</td>
+      <td id="T_a3164_row1_col3" class="data row1 col3" >0.10%</td>
+      <td id="T_a3164_row1_col4" class="data row1 col4" >0.07%</td>
+      <td id="T_a3164_row1_col5" class="data row1 col5" >0.05%</td>
+      <td id="T_a3164_row1_col6" class="data row1 col6" >0.74%</td>
+      <td id="T_a3164_row1_col7" class="data row1 col7" >0.62%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row2" class="row_heading level0 row2" >2026-10-14 00:00:00</th>
-      <td id="T_30dee_row2_col0" class="data row2 col0" >16</td>
-      <td id="T_30dee_row2_col1" class="data row2 col1" >7,770.24</td>
-      <td id="T_30dee_row2_col2" class="data row2 col2" >15.43</td>
-      <td id="T_30dee_row2_col3" class="data row2 col3" >16.87</td>
-      <td id="T_30dee_row2_col4" class="data row2 col4" >0.20%</td>
-      <td id="T_30dee_row2_col5" class="data row2 col5" >0.14%</td>
-      <td id="T_30dee_row2_col6" class="data row2 col6" >0.10%</td>
-      <td id="T_30dee_row2_col7" class="data row2 col7" >1.00%</td>
-      <td id="T_30dee_row2_col8" class="data row2 col8" >0.84%</td>
+      <th id="T_a3164_level0_row2" class="row_heading level0 row2" >2026-10-14 00:00:00</th>
+      <td id="T_a3164_row2_col0" class="data row2 col0" >16</td>
+      <td id="T_a3164_row2_col1" class="data row2 col1" >15.43</td>
+      <td id="T_a3164_row2_col2" class="data row2 col2" >16.87</td>
+      <td id="T_a3164_row2_col3" class="data row2 col3" >0.20%</td>
+      <td id="T_a3164_row2_col4" class="data row2 col4" >0.14%</td>
+      <td id="T_a3164_row2_col5" class="data row2 col5" >0.10%</td>
+      <td id="T_a3164_row2_col6" class="data row2 col6" >1.00%</td>
+      <td id="T_a3164_row2_col7" class="data row2 col7" >0.84%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row3" class="row_heading level0 row3" >2026-10-15 00:00:00</th>
-      <td id="T_30dee_row3_col0" class="data row3 col0" >15</td>
-      <td id="T_30dee_row3_col1" class="data row3 col1" >7,791.00</td>
-      <td id="T_30dee_row3_col2" class="data row3 col2" >15.05</td>
-      <td id="T_30dee_row3_col3" class="data row3 col3" >16.46</td>
-      <td id="T_30dee_row3_col4" class="data row3 col4" >0.20%</td>
-      <td id="T_30dee_row3_col5" class="data row3 col5" >0.14%</td>
-      <td id="T_30dee_row3_col6" class="data row3 col6" >0.10%</td>
-      <td id="T_30dee_row3_col7" class="data row3 col7" >0.55%</td>
-      <td id="T_30dee_row3_col8" class="data row3 col8" >0.44%</td>
+      <th id="T_a3164_level0_row3" class="row_heading level0 row3" >2026-10-15 00:00:00</th>
+      <td id="T_a3164_row3_col0" class="data row3 col0" >15</td>
+      <td id="T_a3164_row3_col1" class="data row3 col1" >15.05</td>
+      <td id="T_a3164_row3_col2" class="data row3 col2" >16.46</td>
+      <td id="T_a3164_row3_col3" class="data row3 col3" >0.20%</td>
+      <td id="T_a3164_row3_col4" class="data row3 col4" >0.14%</td>
+      <td id="T_a3164_row3_col5" class="data row3 col5" >0.10%</td>
+      <td id="T_a3164_row3_col6" class="data row3 col6" >0.55%</td>
+      <td id="T_a3164_row3_col7" class="data row3 col7" >0.44%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row4" class="row_heading level0 row4" >2026-10-16 00:00:00</th>
-      <td id="T_30dee_row4_col0" class="data row4 col0" >45</td>
-      <td id="T_30dee_row4_col1" class="data row4 col1" >7,704.24</td>
-      <td id="T_30dee_row4_col2" class="data row4 col2" >17.71</td>
-      <td id="T_30dee_row4_col3" class="data row4 col3" >19.99</td>
-      <td id="T_30dee_row4_col4" class="data row4 col4" >1.21%</td>
-      <td id="T_30dee_row4_col5" class="data row4 col5" >0.80%</td>
-      <td id="T_30dee_row4_col6" class="data row4 col6" >0.54%</td>
-      <td id="T_30dee_row4_col7" class="data row4 col7" >4.02%</td>
-      <td id="T_30dee_row4_col8" class="data row4 col8" >3.19%</td>
+      <th id="T_a3164_level0_row4" class="row_heading level0 row4" >2026-10-16 00:00:00</th>
+      <td id="T_a3164_row4_col0" class="data row4 col0" >45</td>
+      <td id="T_a3164_row4_col1" class="data row4 col1" >17.71</td>
+      <td id="T_a3164_row4_col2" class="data row4 col2" >19.99</td>
+      <td id="T_a3164_row4_col3" class="data row4 col3" >1.21%</td>
+      <td id="T_a3164_row4_col4" class="data row4 col4" >0.80%</td>
+      <td id="T_a3164_row4_col5" class="data row4 col5" >0.54%</td>
+      <td id="T_a3164_row4_col6" class="data row4 col6" >4.02%</td>
+      <td id="T_a3164_row4_col7" class="data row4 col7" >3.19%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row5" class="row_heading level0 row5" >2026-10-19 00:00:00</th>
-      <td id="T_30dee_row5_col0" class="data row5 col0" >42</td>
-      <td id="T_30dee_row5_col1" class="data row5 col1" >7,734.51</td>
-      <td id="T_30dee_row5_col2" class="data row5 col2" >16.64</td>
-      <td id="T_30dee_row5_col3" class="data row5 col3" >18.44</td>
-      <td id="T_30dee_row5_col4" class="data row5 col4" >1.01%</td>
-      <td id="T_30dee_row5_col5" class="data row5 col5" >0.68%</td>
-      <td id="T_30dee_row5_col6" class="data row5 col6" >0.47%</td>
-      <td id="T_30dee_row5_col7" class="data row5 col7" >3.70%</td>
-      <td id="T_30dee_row5_col8" class="data row5 col8" >2.99%</td>
+      <th id="T_a3164_level0_row5" class="row_heading level0 row5" >2026-10-19 00:00:00</th>
+      <td id="T_a3164_row5_col0" class="data row5 col0" >42</td>
+      <td id="T_a3164_row5_col1" class="data row5 col1" >16.64</td>
+      <td id="T_a3164_row5_col2" class="data row5 col2" >18.44</td>
+      <td id="T_a3164_row5_col3" class="data row5 col3" >1.01%</td>
+      <td id="T_a3164_row5_col4" class="data row5 col4" >0.68%</td>
+      <td id="T_a3164_row5_col5" class="data row5 col5" >0.47%</td>
+      <td id="T_a3164_row5_col6" class="data row5 col6" >3.70%</td>
+      <td id="T_a3164_row5_col7" class="data row5 col7" >2.99%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row6" class="row_heading level0 row6" >2026-10-20 00:00:00</th>
-      <td id="T_30dee_row6_col0" class="data row6 col0" >41</td>
-      <td id="T_30dee_row6_col1" class="data row6 col1" >7,755.26</td>
-      <td id="T_30dee_row6_col2" class="data row6 col2" >15.89</td>
-      <td id="T_30dee_row6_col3" class="data row6 col3" >17.31</td>
-      <td id="T_30dee_row6_col4" class="data row6 col4" >0.80%</td>
-      <td id="T_30dee_row6_col5" class="data row6 col5" >0.54%</td>
-      <td id="T_30dee_row6_col6" class="data row6 col6" >0.37%</td>
-      <td id="T_30dee_row6_col7" class="data row6 col7" >3.31%</td>
-      <td id="T_30dee_row6_col8" class="data row6 col8" >2.70%</td>
+      <th id="T_a3164_level0_row6" class="row_heading level0 row6" >2026-10-20 00:00:00</th>
+      <td id="T_a3164_row6_col0" class="data row6 col0" >41</td>
+      <td id="T_a3164_row6_col1" class="data row6 col1" >15.89</td>
+      <td id="T_a3164_row6_col2" class="data row6 col2" >17.31</td>
+      <td id="T_a3164_row6_col3" class="data row6 col3" >0.80%</td>
+      <td id="T_a3164_row6_col4" class="data row6 col4" >0.54%</td>
+      <td id="T_a3164_row6_col5" class="data row6 col5" >0.37%</td>
+      <td id="T_a3164_row6_col6" class="data row6 col6" >3.31%</td>
+      <td id="T_a3164_row6_col7" class="data row6 col7" >2.70%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row7" class="row_heading level0 row7" >2026-10-21 00:00:00</th>
-      <td id="T_30dee_row7_col0" class="data row7 col0" >40</td>
-      <td id="T_30dee_row7_col1" class="data row7 col1" >7,800.25</td>
-      <td id="T_30dee_row7_col2" class="data row7 col2" >15.37</td>
-      <td id="T_30dee_row7_col3" class="data row7 col3" >16.68</td>
-      <td id="T_30dee_row7_col4" class="data row7 col4" >0.67%</td>
-      <td id="T_30dee_row7_col5" class="data row7 col5" >0.45%</td>
-      <td id="T_30dee_row7_col6" class="data row7 col6" >0.31%</td>
-      <td id="T_30dee_row7_col7" class="data row7 col7" >3.19%</td>
-      <td id="T_30dee_row7_col8" class="data row7 col8" >2.63%</td>
+      <th id="T_a3164_level0_row7" class="row_heading level0 row7" >2026-10-21 00:00:00</th>
+      <td id="T_a3164_row7_col0" class="data row7 col0" >40</td>
+      <td id="T_a3164_row7_col1" class="data row7 col1" >15.37</td>
+      <td id="T_a3164_row7_col2" class="data row7 col2" >16.68</td>
+      <td id="T_a3164_row7_col3" class="data row7 col3" >0.67%</td>
+      <td id="T_a3164_row7_col4" class="data row7 col4" >0.45%</td>
+      <td id="T_a3164_row7_col5" class="data row7 col5" >0.31%</td>
+      <td id="T_a3164_row7_col6" class="data row7 col6" >3.19%</td>
+      <td id="T_a3164_row7_col7" class="data row7 col7" >2.63%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row8" class="row_heading level0 row8" >2026-10-22 00:00:00</th>
-      <td id="T_30dee_row8_col0" class="data row8 col0" >39</td>
-      <td id="T_30dee_row8_col1" class="data row8 col1" >7,704.50</td>
-      <td id="T_30dee_row8_col2" class="data row8 col2" >17.29</td>
-      <td id="T_30dee_row8_col3" class="data row8 col3" >19.03</td>
-      <td id="T_30dee_row8_col4" class="data row8 col4" >1.00%</td>
-      <td id="T_30dee_row8_col5" class="data row8 col5" >0.68%</td>
-      <td id="T_30dee_row8_col6" class="data row8 col6" >0.47%</td>
-      <td id="T_30dee_row8_col7" class="data row8 col7" >3.73%</td>
-      <td id="T_30dee_row8_col8" class="data row8 col8" >3.03%</td>
+      <th id="T_a3164_level0_row8" class="row_heading level0 row8" >2026-10-22 00:00:00</th>
+      <td id="T_a3164_row8_col0" class="data row8 col0" >39</td>
+      <td id="T_a3164_row8_col1" class="data row8 col1" >17.29</td>
+      <td id="T_a3164_row8_col2" class="data row8 col2" >19.03</td>
+      <td id="T_a3164_row8_col3" class="data row8 col3" >1.00%</td>
+      <td id="T_a3164_row8_col4" class="data row8 col4" >0.68%</td>
+      <td id="T_a3164_row8_col5" class="data row8 col5" >0.47%</td>
+      <td id="T_a3164_row8_col6" class="data row8 col6" >3.73%</td>
+      <td id="T_a3164_row8_col7" class="data row8 col7" >3.03%</td>
     </tr>
     <tr>
-      <th id="T_30dee_level0_row9" class="row_heading level0 row9" >2026-10-23 00:00:00</th>
-      <td id="T_30dee_row9_col0" class="data row9 col0" >38</td>
-      <td id="T_30dee_row9_col1" class="data row9 col1" >7,659.75</td>
-      <td id="T_30dee_row9_col2" class="data row9 col2" >17.84</td>
-      <td id="T_30dee_row9_col3" class="data row9 col3" >19.45</td>
-      <td id="T_30dee_row9_col4" class="data row9 col4" >0.98%</td>
-      <td id="T_30dee_row9_col5" class="data row9 col5" >0.66%</td>
-      <td id="T_30dee_row9_col6" class="data row9 col6" >0.45%</td>
-      <td id="T_30dee_row9_col7" class="data row9 col7" >4.09%</td>
-      <td id="T_30dee_row9_col8" class="data row9 col8" >3.34%</td>
+      <th id="T_a3164_level0_row9" class="row_heading level0 row9" >2026-10-23 00:00:00</th>
+      <td id="T_a3164_row9_col0" class="data row9 col0" >38</td>
+      <td id="T_a3164_row9_col1" class="data row9 col1" >17.84</td>
+      <td id="T_a3164_row9_col2" class="data row9 col2" >19.45</td>
+      <td id="T_a3164_row9_col3" class="data row9 col3" >0.98%</td>
+      <td id="T_a3164_row9_col4" class="data row9 col4" >0.66%</td>
+      <td id="T_a3164_row9_col5" class="data row9 col5" >0.45%</td>
+      <td id="T_a3164_row9_col6" class="data row9 col6" >4.09%</td>
+      <td id="T_a3164_row9_col7" class="data row9 col7" >3.34%</td>
     </tr>
   </tbody>
 </table>
@@ -763,9 +752,9 @@ investor’s (<code class="docutils literal notranslate"><span class="pre">p_log
         </script>
         <script type="module">import "https://cdn.plot.ly/plotly-4.1.1.min"</script>
         </div><div class="output text_html"><div style="height:650px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="4b1d8272-175c-4752-ad33-daf8fb12830e" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("4b1d8272-175c-4752-ad33-daf8fb12830e")) {                    Plotly.newPlot(                        "4b1d8272-175c-4752-ad33-daf8fb12830e",                        [{"mode":"lines","name":"SVIX (30-day)","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"hpM0f0xDMEDHLebnhqIwQGghAaPLyzBA56ij42okLkC\u002fgcmNIkMtQIVBmUaTay1Ak8X9R6aTLEAIjzaOWPstQH3KMVncRy5A3q6XpgjwLEA2O1J9588uQDUk7rH0yS5A9kNssHBqL0CgU5CfjUwvQN\u002f+XDRkRC1AOh+eJcg4LUDKbJBJRl4sQEXURJ+PQixAQKa1aWz\u002fLECxogbTMJQrQKZ9c3\u002f1QCxAejVAaahZLEAAjj17LtsuQGQ9tfrqGi5ALSP1nsq1MUC9jc2OVKMwQLg6AOKuxi9AlsyxvKu+LkBK0F\u002foEUsxQJXYtb3d1jFA"},"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"gray","width":1},"mode":"lines","name":"VIX","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"mpmZmZkZMUAzMzMzMzMxQPYoXI\u002fCtTFA4XoUrkfhLkAfhetRuJ4tQD0K16NwvS1A7FG4HoVrLEBcj8L1KFwuQNejcD0KVy9APQrXo3C9LUBSuB6F6xEwQArXo3A9CjBA16NwPQpXMECkcD0K12MwQB+F61G4ni5ACtejcD0KL0CF61G4HgUuQClcj8L1KC5AUrgehevRLkCuR+F6FK4tQOxRuB6Fay5ACtejcD2KLkAfhetRuN4wQPYoXI\u002fCdTBAPQrXo3D9M0BxPQrXo3AyQI\u002fC9ShcTzFArkfhehSuMEBI4XoUrgczQDMzMzMzczNA"},"type":"scatter","xaxis":"x","yaxis":"y"},{"mode":"lines","name":"Risk-neutral P*","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"PF\u002f96VAX0D8qjn928q\u002fJPwnq7wCqE\u002fA\u002fUWfNE\u002fi46T+McoKZY7fpPwyB8UbF4+E\u002fe6IM0fgQ4D\u002f4xDpVvkfjPwuuXuqMFOE\u002flfcvGHUQ4D\u002fGX2JFcNDcP0pL\u002foqpstk\u002fBQRrg7Bm3z+kmv6RjhfeP9Pt045uxtU\u002f7\u002fcXg3\u002f40T8cJTMH1qvJP3I3BJ7mqsk\u002fLtRQWQPKzj+OoKXpu3TDP1UHSE0ew74\u002fqwt4mWGjuT84NMBgkqXJPylYBHsjpck\u002fdl4ZCo5h8z8RsodRaxXwPy5DNYiDwuk\u002fCN9mt7dX5T8vX6gNmBHwP8\u002fJ3pTqae8\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"},{"mode":"lines","name":"Log investor (Martin 2017)","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"PTp9VvzTxj\u002fsjGtTp8nBP3XIzXAD\u002fuU\u002fQKVKlL3F4T\u002fVNBi4dgHiP\u002fWEgNfCh9g\u002fsRRNkKY01j9FbOobHNXaP+n5DfL+aNc\u002f6GAmH\u002fV21j806NcYbNHTPypFwFv\u002fstE\u002fK68qNVoS1j8uAqWZ1VjVPxO9zn6La84\u002f2HrpmocbyT9b87qw+6\u002fBP1AFmtcqJMI\u002fdPyjse4Gxj9KGf70G\u002f26P5py1L2NTrU\u002fEwSX4DeysT85yX8WhTzCPwbWUO5nxsE\u002fbMwMlyx56T8arJOOzanlP+k0wSYhR+E\u002fF4\u002f\u002fwCSu3D+sVqLDrtPlPx96OYmUCOU\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"},{"mode":"lines","name":"Power utility, gamma=2","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"+xzlgURqwD\u002fonFvFO\u002fC4P3a\u002fp8Uivt4\u002fGwWxAUsN2T+etJFnbrDZP+p4L2sgJdE\u002fzeZYeytUzz\u002fyJ6biMQnTP4gQmeqwX9A\u002fduDeLXcD0D\u002fFZniaac7LP9MoLAoe08g\u002fC76Cl42Mzz9FAORC7dDOPwh2HSbxpMU\u002fD\u002fqpXG7RwT+j0+GLcL+4P44gtnAwBro\u002fQoydESEFwD\u002fYsEZA\u002fDGzP3qt84vsLK4\u002f2tbfqpwKqT8nGkG2bnu6P4sn+v0UJ7k\u002fCU\u002fo9SdR4T9e0GMQL\u002frdP7w6jdVix9c\u002fVvM9n9i10z\u002fJ+1moDE7eP9Yaa\u002fsu19w\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"matches":"x2","showticklabels":false},"yaxis":{"anchor":"x","domain":[0.54,1.0],"title":{"text":"Annualized vol, %"}},"xaxis2":{"anchor":"y2","domain":[0.0,1.0]},"yaxis2":{"anchor":"x2","domain":[0.0,0.46],"title":{"text":"Probability, %"}},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Volatility indexes","x":0.5,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Probability of a 20% drop within a month","x":0.5,"xanchor":"center","xref":"paper","y":0.46,"yanchor":"bottom","yref":"paper"}],"legend":{"orientation":"h","y":-0.12},"title":{"text":"SVIX and the probability of a crash, as of 2026-10-23"},"height":650},                        {"responsive": true}                    ).then(function(){
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="c5e1b492-326f-4c78-a3a3-7197d465564c" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c5e1b492-326f-4c78-a3a3-7197d465564c")) {                    Plotly.newPlot(                        "c5e1b492-326f-4c78-a3a3-7197d465564c",                        [{"mode":"lines","name":"SVIX (30-day)","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"hpM0f0xDMEDHLebnhqIwQGghAaPLyzBA56ij42okLkC\u002fgcmNIkMtQIVBmUaTay1Ak8X9R6aTLEAIjzaOWPstQH3KMVncRy5A3q6XpgjwLEA2O1J9588uQDUk7rH0yS5A9kNssHBqL0CgU5CfjUwvQN\u002f+XDRkRC1AOh+eJcg4LUDKbJBJRl4sQEXURJ+PQixAQKa1aWz\u002fLECxogbTMJQrQKZ9c3\u002f1QCxAejVAaahZLEAAjj17LtsuQGQ9tfrqGi5ALSP1nsq1MUC9jc2OVKMwQLg6AOKuxi9AlsyxvKu+LkBK0F\u002foEUsxQJXYtb3d1jFA"},"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"gray","width":1},"mode":"lines","name":"VIX","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"mpmZmZkZMUAzMzMzMzMxQPYoXI\u002fCtTFA4XoUrkfhLkAfhetRuJ4tQD0K16NwvS1A7FG4HoVrLEBcj8L1KFwuQNejcD0KVy9APQrXo3C9LUBSuB6F6xEwQArXo3A9CjBA16NwPQpXMECkcD0K12MwQB+F61G4ni5ACtejcD0KL0CF61G4HgUuQClcj8L1KC5AUrgehevRLkCuR+F6FK4tQOxRuB6Fay5ACtejcD2KLkAfhetRuN4wQPYoXI\u002fCdTBAPQrXo3D9M0BxPQrXo3AyQI\u002fC9ShcTzFArkfhehSuMEBI4XoUrgczQDMzMzMzczNA"},"type":"scatter","xaxis":"x","yaxis":"y"},{"mode":"lines","name":"Risk-neutral P*","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"PF\u002f96VAX0D8qjn928q\u002fJPwnq7wCqE\u002fA\u002fUWfNE\u002fi46T+McoKZY7fpPwyB8UbF4+E\u002fe6IM0fgQ4D\u002f4xDpVvkfjPwuuXuqMFOE\u002flfcvGHUQ4D\u002fGX2JFcNDcP0pL\u002foqpstk\u002fBQRrg7Bm3z+kmv6RjhfeP9Pt045uxtU\u002f7\u002fcXg3\u002f40T8cJTMH1qvJP3I3BJ7mqsk\u002fLtRQWQPKzj+OoKXpu3TDP1UHSE0ew74\u002fqwt4mWGjuT84NMBgkqXJPylYBHsjpck\u002fdl4ZCo5h8z8RsodRaxXwPy5DNYiDwuk\u002fCN9mt7dX5T8vX6gNmBHwP8\u002fJ3pTqae8\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"},{"mode":"lines","name":"Log investor (Martin 2017)","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"PTp9VvzTxj\u002fsjGtTp8nBP3XIzXAD\u002fuU\u002fQKVKlL3F4T\u002fVNBi4dgHiP\u002fWEgNfCh9g\u002fsRRNkKY01j9FbOobHNXaP+n5DfL+aNc\u002f6GAmH\u002fV21j806NcYbNHTPypFwFv\u002fstE\u002fK68qNVoS1j8uAqWZ1VjVPxO9zn6La84\u002f2HrpmocbyT9b87qw+6\u002fBP1AFmtcqJMI\u002fdPyjse4Gxj9KGf70G\u002f26P5py1L2NTrU\u002fEwSX4DeysT85yX8WhTzCPwbWUO5nxsE\u002fbMwMlyx56T8arJOOzanlP+k0wSYhR+E\u002fF4\u002f\u002fwCSu3D+sVqLDrtPlPx96OYmUCOU\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"},{"mode":"lines","name":"Power utility, gamma=2","x":["2026-09-14T00:00:00.000000000","2026-09-15T00:00:00.000000000","2026-09-16T00:00:00.000000000","2026-09-17T00:00:00.000000000","2026-09-18T00:00:00.000000000","2026-09-21T00:00:00.000000000","2026-09-22T00:00:00.000000000","2026-09-23T00:00:00.000000000","2026-09-24T00:00:00.000000000","2026-09-25T00:00:00.000000000","2026-09-28T00:00:00.000000000","2026-09-29T00:00:00.000000000","2026-09-30T00:00:00.000000000","2026-10-01T00:00:00.000000000","2026-10-02T00:00:00.000000000","2026-10-05T00:00:00.000000000","2026-10-06T00:00:00.000000000","2026-10-07T00:00:00.000000000","2026-10-08T00:00:00.000000000","2026-10-09T00:00:00.000000000","2026-10-12T00:00:00.000000000","2026-10-13T00:00:00.000000000","2026-10-14T00:00:00.000000000","2026-10-15T00:00:00.000000000","2026-10-16T00:00:00.000000000","2026-10-19T00:00:00.000000000","2026-10-20T00:00:00.000000000","2026-10-21T00:00:00.000000000","2026-10-22T00:00:00.000000000","2026-10-23T00:00:00.000000000"],"y":{"dtype":"f8","bdata":"+xzlgURqwD\u002fonFvFO\u002fC4P3a\u002fp8Uivt4\u002fGwWxAUsN2T+etJFnbrDZP+p4L2sgJdE\u002fzeZYeytUzz\u002fyJ6biMQnTP4gQmeqwX9A\u002fduDeLXcD0D\u002fFZniaac7LP9MoLAoe08g\u002fC76Cl42Mzz9FAORC7dDOPwh2HSbxpMU\u002fD\u002fqpXG7RwT+j0+GLcL+4P44gtnAwBro\u002fQoydESEFwD\u002fYsEZA\u002fDGzP3qt84vsLK4\u002f2tbfqpwKqT8nGkG2bnu6P4sn+v0UJ7k\u002fCU\u002fo9SdR4T9e0GMQL\u002frdP7w6jdVix9c\u002fVvM9n9i10z\u002fJ+1moDE7eP9Yaa\u002fsu19w\u002f"},"type":"scatter","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"matches":"x2","showticklabels":false},"yaxis":{"anchor":"x","domain":[0.54,1.0],"title":{"text":"Annualized vol, %"}},"xaxis2":{"anchor":"y2","domain":[0.0,1.0]},"yaxis2":{"anchor":"x2","domain":[0.0,0.46],"title":{"text":"Probability, %"}},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Volatility indexes","x":0.5,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Probability of a 20% drop within a month","x":0.5,"xanchor":"center","xref":"paper","y":0.46,"yanchor":"bottom","yref":"paper"}],"legend":{"orientation":"h","y":-0.12},"title":{"text":"SVIX and the probability of a crash, as of 2026-10-23"},"height":650},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('4b1d8272-175c-4752-ad33-daf8fb12830e');
+var gd = document.getElementById('c5e1b492-326f-4c78-a3a3-7197d465564c');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -789,8 +778,10 @@ if (outputEl) {{
 
                         })                };            </script>        </div></div></div>
 </div>
-<p>This is the chart the site publishes, built by <code class="docutils literal notranslate"><span class="pre">src/monitor_chart.py</span></code>
-from the history. Hover for any day’s values.</p>
+<p>This is the chart the monitor publishes, drawn by <code class="docutils literal notranslate"><span class="pre">src/monitor_chart.py</span></code>
+from the history. <code class="docutils literal notranslate"><span class="pre">src/build_page.py</span></code> puts it on a single HTML page, with
+the latest reading and the last ten sessions, and that page is the whole
+published site. Hover for any day’s values.</p>
 <p><strong>Takeaway.</strong> Both panels move with the smile of guide 01, and the
 risk-neutral probability is always the largest of the three. SVIX sits a
 little below the VIX. Both are annualized volatilities read
@@ -804,8 +795,9 @@ for crash states at their marginal utility.</p>
 <h2>What the workflow does<a class="headerlink" href="#what-the-workflow-does" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span> <span class="pre">latest</span></code> is the whole update. The task pulls the latest
 session (cheap: 19 MB, $0.00, a minute or two), computes its row if the
-history does not have it, appends it, and redraws the charts. Run it on
-your laptop and it does the same thing. Plain <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> is the same
+history does not have it, appends it, and rebuilds the page from the
+history, <code class="docutils literal notranslate"><span class="pre">_output/monitor_page/index.html</span></code>. Run it on your laptop and it
+does the same thing; open the page in a browser to see it. Plain <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> is the same
 computation over the window in the settings, the trailing week unless you
 set START_DATE earlier, so it is also the backfill that gives the chart a
 history behind it; on Actions a second workflow does that, started from
@@ -827,18 +819,19 @@ the same versions as on your laptop.</p></li>
 branch from a second working directory (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code>): one small
 commit a day, the day’s row. A push to that branch does not start the
 workflow, which listens to pushes on <code class="docutils literal notranslate"><span class="pre">main</span></code> only.</p></li>
-<li><p><strong>A deploy.</strong> The built <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder is force-pushed as a single
-orphan commit on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, which GitHub Pages serves.</p></li>
+<li><p><strong>A deploy.</strong> The page is force-pushed as a single orphan commit on the
+<code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, which GitHub Pages serves. Only the page: the
+notebooks and the ChartBook site stay on your laptop.</p></li>
 </ol>
 <p>Three places it goes wrong, in our experience. A workflow that commits
 its output to <code class="docutils literal notranslate"><span class="pre">main</span></code> retriggers itself on every run, forever, unless each
 push says <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code>; keeping output off <code class="docutils literal notranslate"><span class="pre">main</span></code> removes the problem. A
 deploy that does not <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-fdx</span></code> first carries <code class="docutils literal notranslate"><span class="pre">_data/</span></code> and <code class="docutils literal notranslate"><span class="pre">.venv/</span></code>
-into the published site. And a data source can be down: Databento and FRED
+into the published branch. And a data source can be down: Databento and FRED
 both time out now and then. The pulls retry server and network errors,
 waiting longer each time, for about eight minutes. If a source is still
 down after that, the step after the pull sees the marker the pull left
-and ends the run with a warning, not a failure: yesterday’s site stays
+and ends the run with a warning, not a failure: yesterday’s page stays
 up, and the next morning’s pull, which covers the last four calendar days,
 fills the gap.
 Any other failure is a bug and fails the run.</p>
@@ -861,7 +854,7 @@ keeps the one file, <code class="docutils literal notranslate"><span class="pre"
 <code class="docutils literal notranslate"><span class="pre">_output/</span></code>, appends the new sessions, and commits the result back as one
 small commit, so the branch is the ledger of the series, one line a day,
 and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code> on it shows the chart being built point by point. The
-site itself sits on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> as a single commit that each run replaces.
+page itself sits on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> as a single commit that each run replaces.
 The daily run adds one session. The history behind it comes from a
 backfill, the same computation over a range of dates, run once by hand;
 if the engine ever changes, the same backfill rebuilds the history.</p>
@@ -890,7 +883,7 @@ cache?</p>
 <p class="admonition-title">Notes on the discussion questions</p>
 <p><strong>Three days without Databento.</strong> Each of those mornings the pull retries
 for about eight minutes, leaves the <code class="docutils literal notranslate"><span class="pre">SOURCE_UNAVAILABLE</span></code> marker, and the
-run ends with a warning: no row is recorded and the site is not
+run ends with a warning: no row is recorded and the page is not
 redeployed, so the published chart stays as it was, short of the latest
 sessions. On the fourth morning the daily pull covers the last four
 calendar days, so on weekdays it picks up all three missed sessions and the

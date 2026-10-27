@@ -848,7 +848,7 @@ workflow</em>, with the default start date. About a minute; it creates the
 </tr>
 <tr class="row-odd"><td><p>Page</p></td>
 <td><p>One HTML page with a Plotly chart</p></td>
-<td><p>Four notebooks and a ChartBook site</p></td>
+<td><p>One HTML page with a Plotly chart</p></td>
 </tr>
 <tr class="row-even"><td><p>Schedule</p></td>
 <td><p>22:00 UTC, after FRED posts</p></td>
@@ -857,13 +857,11 @@ workflow</em>, with the default start date. About a minute; it creates the
 </tbody>
 </table>
 </div>
-<p>HW 3 adds three things this example does not need. A data source that is
-down is not a bug: its pulls retry for about eight minutes, and if the
-source is still down the run ends with a warning instead of a failure.
-Its site build is the default <code class="docutils literal notranslate"><span class="pre">doit</span></code>, which would otherwise pull the whole
-trailing week again, so the workflow marks the morning’s pull as done with
-<code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">reset-dep</span></code>. And two of its tests need WRDS, which the runner does not
-have, so the workflow skips the test task and the course runner grades it.</p>
+<p>HW 3 differs in two ways. A data source that is down is not a bug: its
+pulls retry for about eight minutes, and if the source is still down the
+run ends with a warning instead of a failure. And its workflow runs no
+tests: two of them need WRDS, which the runner does not have, so the course
+runner grades the suite instead.</p>
 </section>
 </section>
 

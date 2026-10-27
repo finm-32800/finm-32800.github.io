@@ -570,8 +570,8 @@ integral against Martin’s own published series.</p>
 rebuilt in HW 2 updates itself every day; your replication did not. This
 time it will: a GitHub Actions workflow runs your pipeline every morning,
 pulls the previous session, adds it to a history kept on a branch of its
-own, and republishes your ChartBook site to GitHub Pages, with your
-Databento key stored as a secret.
+own, and republishes the monitor’s page, a chart of the whole history, to
+GitHub Pages, with your Databento key stored as a secret.
 That is continuous deployment, and the autograder that has scored your
 pushes since HW 1 is the same machinery.</p>
 <p>The second replication is offline. Martin and Shi (2025) extend the crash
@@ -674,7 +674,8 @@ guide sets SVIX next to the VIX.</p>
 <ul class="simple">
 <li><p><strong>The daily update</strong> (<code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, 1 pt). <code class="docutils literal notranslate"><span class="pre">task_latest</span></code> pulls the latest
 session, adds its row to <code class="docutils literal notranslate"><span class="pre">_output/svix_monitor_history.csv</span></code> if the
-history does not have it, and redraws the chart. Unlike every other task
+history does not have it, and rebuilds the monitor’s page, one HTML file
+with the chart (<code class="docutils literal notranslate"><span class="pre">src/build_page.py</span></code>, written for you). Unlike every other task
 it must run every time it is invoked. Plain <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> is the
 backfill: it pulls every session in the window in the settings, the
 trailing week unless you set <code class="docutils literal notranslate"><span class="pre">START_DATE</span></code> earlier, and adds the ones the
@@ -683,31 +684,31 @@ history does not have.</p></li>
 notebook and the history dataframe.</p></li>
 <li><p><strong>The workflow</strong> (<code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy_pages.yml</span></code>, 5 pts). The file
 is given as a skeleton with five blanks: the schedule, the secret, the
-permission the job needs to push, the step that runs the pipeline, and
-the branch the site is deployed to. The tests read the YAML. The other
+permission the job needs to push, the step that runs the daily update,
+and the branch the page is deployed to. The tests read the YAML. The other
 steps are written for you; read their comments. One restores the history
 from the <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch and another records the day’s row
 there, so no output ever lands on <code class="docutils literal notranslate"><span class="pre">main</span></code>; a workflow that pushed to
 <code class="docutils literal notranslate"><span class="pre">main</span></code> on every run would be a workflow that triggers itself. Another
 tells a data-source outage from a bug: if Databento or FRED is still down
 after the pull’s retries, the run ends with a warning and yesterday’s
-site stays up. See
+page stays up. See
 <a class="reference internal" href="Week5/live_monitor.html"><span class="std std-doc">Building a Live Monitor with GitHub Actions</span></a>,
 <a class="reference internal" href="Week9/cron_jobs.html"><span class="std std-doc">cron</span></a>, and the
 <a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/github_actions"><code class="docutils literal notranslate"><span class="pre">github_actions/</span></code> examples</a>
 in the in-class repository, which deploy a daily pipeline with a
 Databento secret the same way.</p></li>
-<li><p><strong>The live site</strong> (<code class="docutils literal notranslate"><span class="pre">src/published_site.py</span></code>, 1 pt). Push the completed
+<li><p><strong>The live page</strong> (<code class="docutils literal notranslate"><span class="pre">src/published_site.py</span></code>, 1 pt). Push the completed
 repository to a <strong>public</strong> repository in your own account, add your
 Databento key as a repository secret, run the deploy workflow once from
 the Actions tab, run the backfill workflow once with a start date so the
 chart has a history behind it, turn on GitHub Pages from the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>
-branch, and record the address of the site and of the repository. The
+branch, and record the address of the page and of the repository. The
 steps are in the
 README. Your private copy in the course organization keeps getting your
 pushes for grading; the workflow does not run there.</p></li>
 </ul>
-<p>When it works, the chart on your site gains one point every morning.</p>
+<p>When it works, the chart on your page gains one point every morning.</p>
 </section>
 <section id="part-d-graded-4-pts-single-names-from-the-optionmetrics-surface">
 <h2>Part D (graded, 4 pts): single names, from the OptionMetrics surface<a class="headerlink" href="#part-d-graded-4-pts-single-names-from-the-optionmetrics-surface" title="Link to this heading">#</a></h2>

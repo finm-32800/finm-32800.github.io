@@ -252,13 +252,11 @@ The SVIX monitor in HW 3 is this same job with a harder middle.
 | Daily pull | Ten days, two requests, a second | The latest session, one to two minutes |
 | Backfill | The whole series in a second | One to two minutes per session |
 | History | `spread_history.csv` on `monitor-history` | `svix_monitor_history.csv` on `monitor-history` |
-| Page | One HTML page with a Plotly chart | Four notebooks and a ChartBook site |
+| Page | One HTML page with a Plotly chart | One HTML page with a Plotly chart |
 | Schedule | 22:00 UTC, after FRED posts | 14:30 UTC, after CME's settlements reach Databento |
 
-HW 3 adds three things this example does not need. A data source that is
-down is not a bug: its pulls retry for about eight minutes, and if the
-source is still down the run ends with a warning instead of a failure.
-Its site build is the default `doit`, which would otherwise pull the whole
-trailing week again, so the workflow marks the morning's pull as done with
-`doit reset-dep`. And two of its tests need WRDS, which the runner does not
-have, so the workflow skips the test task and the course runner grades it.
+HW 3 differs in two ways. A data source that is down is not a bug: its
+pulls retry for about eight minutes, and if the source is still down the
+run ends with a warning instead of a failure. And its workflow runs no
+tests: two of them need WRDS, which the runner does not have, so the course
+runner grades the suite instead.
