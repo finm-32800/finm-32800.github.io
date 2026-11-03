@@ -124,15 +124,15 @@ cd he_kelly_manela
 chartbook run --snapshot
 cd ..
 
-chartbook catalog init --title "FTSFR"
+chartbook catalog init                  # asks for a title; Enter takes the default
 chartbook catalog build
 chartbook catalog open
 ```
 
 No store is set up by hand: the first `chartbook run --snapshot` creates
-`~/.chartbook/store`, the default, and `chartbook store info` shows it. The
-catalog site is the one thing that wants a line of setup, `chartbook catalog
-init`, which writes `~/.chartbook/catalog.toml` naming that store.
+`~/.chartbook/store`, the default, and `chartbook store info` shows it.
+`chartbook catalog init` writes `~/.chartbook/catalog.toml`, which names that
+store and titles the site; the catalog commands read it.
 
 One environment serves all three, because `fed_yield_curve`'s requirements
 include everything the other two need. Python 3.12, because the pipelines pin

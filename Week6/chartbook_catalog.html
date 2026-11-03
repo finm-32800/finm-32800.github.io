@@ -671,14 +671,15 @@ all three. They take a few minutes, most of it downloading packages.</p>
 <span class="go">chartbook run --snapshot</span>
 <span class="go">cd ..</span>
 
-<span class="go">chartbook catalog init --title &quot;FTSFR&quot;</span>
+<span class="go">chartbook catalog init                  # asks for a title; Enter takes the default</span>
 <span class="go">chartbook catalog build</span>
 <span class="go">chartbook catalog open</span>
 </pre></div>
 </div>
 <p>No store is set up by hand: the first <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> creates
-<code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> shows it. The
-catalog site is the one thing that wants a line of setup, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">init</span></code>, which writes <code class="docutils literal notranslate"><span class="pre">~/.chartbook/catalog.toml</span></code> naming that store.</p>
+<code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> shows it.
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">init</span></code> writes <code class="docutils literal notranslate"><span class="pre">~/.chartbook/catalog.toml</span></code>, which names that
+store and titles the site; the catalog commands read it.</p>
 <p>One environment serves all three, because <code class="docutils literal notranslate"><span class="pre">fed_yield_curve</span></code>’s requirements
 include everything the other two need. Python 3.12, because the pipelines pin
 NumPy 1.26.4, which has no wheels for later Pythons. <code class="docutils literal notranslate"><span class="pre">&quot;pyarrow&lt;26&quot;</span></code>, because
