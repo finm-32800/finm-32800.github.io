@@ -127,7 +127,7 @@ The workflow, start to finish:
 2. Write the computation in Python modules.
 3. Write the reports as Jupytext notebooks.
 4. Register the outputs worth showing in `chartbook.toml`.
-5. Generate the static site with `chartbook build`.
+5. Generate the static site with `chartbook docs build`.
 6. Publish the site with GitHub Pages.
 
 `doit` and ChartBook do different jobs. `doit` runs the pipeline and tracks
@@ -149,11 +149,11 @@ turn your own code into a reusable, installable package.
 - **The manifest, `chartbook.toml`.** Each `[notebooks.*]`, `[dataframes.*]`,
   and `[charts.*]` entry says what an output is, where it comes from, and where
   it lives. Read HW 1's as the example.
-- **The CLI and the Python API.** `chartbook build` generates the site;
+- **The CLI and the Python API.** `chartbook docs build` generates the site;
   `chartbook ls` lists what is registered; `chartbook data get-path` returns a
   parquet path; and `data.load(pipeline=..., dataframe=...)` loads it straight
   into pandas or polars.
-- **Where it sits in the pipeline.** `chartbook build` is just another `doit`
+- **Where it sits in the pipeline.** `chartbook docs build` is just another `doit`
   task (`task_generate_pipeline_site` in HW 1), so the site is regenerated
   whenever the data changes, not assembled by hand. Publishing it is the last
   item tonight; in week 4, many projects' manifests aggregate into one catalog.
@@ -273,7 +273,7 @@ on the Treasury curve, compiled from LaTeX. We launch it in class; you finish th
 [Publishing to GitHub Pages](./Week3/github_pages_preview.md): how a `docs/`
 folder of static HTML becomes a live website (Settings → Pages → Deploy from a
 branch → `main` / `/docs`), and why your assignment repo must stay private while
-the site is public. The two steps compose: `chartbook build` produces `docs/`,
+the site is public. The two steps compose: `chartbook docs build` produces `docs/`,
 Pages serves it. HW 2 Part D is exactly this, into a separate public repo.
 
 ## Final Project: The Two Steps

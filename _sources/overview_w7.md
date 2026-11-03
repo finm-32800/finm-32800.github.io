@@ -18,14 +18,16 @@ projects*: it runs each pipeline on a schedule or when the data it depends on
 lands, retries what fails, records every run, and can backfill a gap after an
 outage. **Apache Airflow** is the most widely used of these tools, and the class
 report is the right thing to point it at, because the report is not one pipeline.
-It is twenty-odd small producer pipelines with a single consumer that should
-rebuild when all of them have landed.
+It is one consumer of many upstream pipelines, each of which publishes new
+snapshots on its own schedule, and it should rebuild when they have landed.
 
 ## Announcements
 
 - **[HW 3](./HW3.md) is due today at 9:30 am,** the start of class.
-- **[HW 4](./HW4.md) and [HW 5](./HW5.md):** dates to be announced on
-  Canvas.
+- **[HW 4](./HW4.md), the class report, is due next week,** Friday,
+  November 20, at 11:59 pm. Open your pull request by Thursday, November 12,
+  so your two reviewers have time, and review two classmates' pull requests.
+- **[HW 5](./HW5.md):** dates to be announced on Canvas.
 - **Today's Airflow lab** runs on the class report's pipelines. It is done in
   class and is not graded.
 - **Today's material is on the exam,** Tuesday, December 1. See
@@ -43,7 +45,7 @@ rebuild when all of them have landed.
   imposes on an out-of-sample forecast, enforced by the scheduler instead of by
   hand.
 - **Generate** DAGs from a manifest rather than writing them by hand, so that
-  twenty contributions do not mean twenty hand-maintained files.
+  dozens of upstreams do not mean dozens of hand-maintained files.
 - Schedule a consumer on upstream **assets**, so the report DAG fires when its
   inputs have all updated, with AND semantics across many producers.
 - Diagnose a failure from the scheduler's UI and its logs, distinguish a code bug
@@ -76,12 +78,12 @@ to use it.
   fourteen runs.
 - **Assets** (datasets): scheduling a DAG on the *arrival of data* rather than on a
   clock, and AND semantics when a consumer depends on many producers.
-- **Generated DAGs.** Every contribution already declares its outputs in a
+- **Generated DAGs.** Every upstream already declares its outputs in a
   `chartbook.toml` manifest. So its DAG is *generated* from the manifest, one
-  producer DAG per contribution, each running that project's `doit` and then its
-  `doit test`. Nobody hand-writes Airflow wiring, and a new contribution appears
+  producer DAG per upstream, each running that project's `doit` and then its
+  `doit test`. Nobody hand-writes Airflow wiring, and a new upstream appears
   in the graph by virtue of having a manifest.
-- **The report DAG** is then `schedule=[Asset(...), ...]` over the contributions'
+- **The report DAG** is then `schedule=[Asset(...), ...]` over the upstreams'
   outputs: it rebuilds when they have all landed. The report becomes a document
   that regenerates itself whenever any input updates, which is the thesis of this
   course in one artifact.
@@ -144,8 +146,7 @@ whether any of them beats the historical mean out of sample. The answer is
 sobering, and the discipline behind it is the reason this paper belongs in the
 orchestration week: a forecast made at date *t* may use only what was known at
 *t*. Doing that by hand is error-prone. A scheduler with correct data intervals
-makes it structural. Week 9 takes the dataset you are all building and actually
-fits models to it.
+makes it structural.
 
 ## Looking ahead to Week 8
 

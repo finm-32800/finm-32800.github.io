@@ -47,12 +47,14 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week3/ftsfr';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The Collaborative Report and Style Guides" href="../Week1/collaborative_report_and_style_guides.html" />
-    <link rel="prev" title="The ChartBook Catalog: Data Dependencies Across Repositories" href="../Week6/chartbook_catalog.html" /> 
+    <link rel="next" title="ChartBook: Pipelines, Stores, and Lineage" href="../Week6/chartbook_catalog.html" />
+    <link rel="prev" title="Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report" href="../overview_w6.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -250,24 +252,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/live_monitor.html">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/data_validation.html">Data Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/study_guide.html">Study Guide: Week 5</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Validation; SQL at Scale, Remote Machines, and Job Schedulers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">The ChartBook Catalog: Data Dependencies Across Repositories</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
@@ -276,6 +275,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -512,26 +517,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-project-matters">Why This Project Matters</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-current-research">The Problem with Current Research</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-finance-specific-benchmarks-matter">Why Finance-Specific Benchmarks Matter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-the-replication-crisis">Addressing the Replication Crisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-finance-specific-benchmark">Why a finance-specific benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-in-it">What is in it</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-not-data">Code, not data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-datasets-are-included">What Datasets Are Included</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-data-11-datasets">Returns Data (11 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-spread-data-5-datasets">Basis Spread Data (5 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-financial-data-9-datasets">Other Financial Data (9 datasets)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-codebase-is-useful">Why the Codebase is Useful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-world-example-of-task-runner-automation">A Real-World Example of Task Runner Automation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducible-research-infrastructure">Reproducible Research Infrastructure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-complex-dependencies">Managing Complex Dependencies</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings-from-baseline-forecasting">Key Findings from Baseline Forecasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-course-material">Connection to Course Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-forecasts-are-evaluated">How the forecasts are evaluated</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-paper-finds">What the paper finds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-changes-the-leaderboard">Cleaning changes the leaderboard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-codebase">The codebase</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftsfr-and-hw-4">FTSFR and HW 4</a></li>
 </ul>
             </nav>
         </div>
@@ -544,126 +539,237 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="financial-time-series-forecasting-repository-ftsfr">
 <h1>Financial Time Series Forecasting Repository (FTSFR)<a class="headerlink" href="#financial-time-series-forecasting-repository-ftsfr" title="Link to this heading">#</a></h1>
-<p>The Financial Time Series Forecasting Repository (FTSFR) is an open-source benchmark designed to enable standardized, “apples-to-apples” comparisons of time series forecasting methods on financial data. The project addresses a critical gap in quantitative finance research: until now, no comprehensive forecasting benchmark existed specifically for financial markets.</p>
-<p><strong>Resources:</strong></p>
+<p>The Financial Time Series Forecasting Repository (FTSFR) is an open benchmark
+for comparing time series forecasting methods on financial data. It assembles
+25 financial datasets, each cleaned the way the canonical paper for that market
+cleans it, and holds those data fixed while a dozen forecasting methods are run
+on them. It is also a working example of everything this course builds: dozens
+of data pulls from licensed and public sources, cleaning that must be
+documented and rerunnable, and many pipelines feeding one result.</p>
+<p><strong>The paper.</strong> Jeremiah Bejarano, Viren Desai, Kausthub Keshava, Arsh Kumar,
+Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu, “An Open Benchmark for
+Evaluating Time Series Forecasting Methods across Financial Markets,” Office of
+Financial Research Working Paper 26-05, August 25, 2026.
+<a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Paper page</a>,
+<a class="reference external" href="https://www.financialresearch.gov/working-papers/files/OFRwp26-05_time-series-forecasting-methods-financial-markets.pdf">PDF</a>.
+The OFR blog post
+“<a class="reference external" href="https://www.financialresearch.gov/the-ofr-blog/2026/08/25/deep-learning-methods-improve-financial-forecasts/">Do Deep Learning Methods Improve Financial Forecasts?</a>”
+(August 25, 2026) summarizes it. The six co-authors did most of this work as
+students in the Financial Mathematics program at the University of Chicago.</p>
+<p><strong>The code.</strong></p>
 <ul class="simple">
-<li><p>GitHub Repository: <a class="github reference external" href="https://github.com/jmbejara/ftsfr">jmbejara/ftsfr</a></p></li>
-<li><p>Documentation: <a class="reference external" href="https://jeremybejarano.com/ftsfr/">https://jeremybejarano.com/ftsfr/</a></p></li>
-<li><p>Simplified, separated repositories: <a class="github reference external" href="https://github.com/ftsfr">ftsfr</a></p></li>
+<li><p>The research repository, with the forecasting runs and the paper:
+<a class="reference external" href="https://github.com/jmbejara/ftsfr">github.com/jmbejara/ftsfr</a>, documented at
+<a class="reference external" href="https://jeremybejarano.com/ftsfr/">jeremybejarano.com/ftsfr</a>.</p></li>
+<li><p>One ChartBook pipeline per data source:
+<a class="reference external" href="https://github.com/ftsfr">github.com/ftsfr</a>.</p></li>
 </ul>
-<section id="why-this-project-matters">
-<h2>Why This Project Matters<a class="headerlink" href="#why-this-project-matters" title="Link to this heading">#</a></h2>
-<section id="the-problem-with-current-research">
-<h3>The Problem with Current Research<a class="headerlink" href="#the-problem-with-current-research" title="Link to this heading">#</a></h3>
-<p>The time-series forecasting community increasingly recognizes the need for standardized evaluation frameworks. The absence of standardized benchmark datasets has meant that most studies evaluate their methods on limited, arbitrarily selected time series, making meaningful comparisons across methods virtually impossible. This lack of standardization has resulted in poor quality evaluations and irreproducible comparisons across forecasting studies.</p>
-<p>While several benchmark repositories have emerged (such as the Monash Time Series Forecasting Repository), they remain limited in their coverage of financial markets. The FRED-MD database provides macroeconomic series but focuses on real economic indicators rather than financial market data. Other benchmarks like UCR and UEA archives do not include coverage of time series from the financial domain at all.</p>
+<section id="why-a-finance-specific-benchmark">
+<h2>Why a finance-specific benchmark<a class="headerlink" href="#why-a-finance-specific-benchmark" title="Link to this heading">#</a></h2>
+<p>No forecasting method wins everywhere. The M3 re-evaluation favored classical
+statistical models, the M4 competition was won by a hybrid of a neural network
+and exponential smoothing, and M5 was swept by machine learning. The
+No Free Lunch theorem says to expect this: no algorithm is best for every data
+generating process. So the only way to learn whether a new method improves
+financial forecasts is to test it on financial data.</p>
+<p>General benchmarks such as the Monash Time Series Forecasting Repository and
+FRED-MD cover little of finance. And when new methods are tested on financial
+data, each study builds its own version of the data. Two papers that both use
+“TRACE corporate bonds” or “CRSP equities” can apply different filters, sample
+windows, and portfolio rules, so a comparison across them mixes the skill of
+the method with the choices made in cleaning. FTSFR fixes the data so that only
+the method varies.</p>
 </section>
-<section id="why-finance-specific-benchmarks-matter">
-<h3>Why Finance-Specific Benchmarks Matter<a class="headerlink" href="#why-finance-specific-benchmarks-matter" title="Link to this heading">#</a></h3>
-<p>According to the “No Free Lunch” Theorem, there is no single forecasting method that performs best for all time series. To improve financial forecasting, we need to evaluate methods on datasets from the financial domain that reflect how data commonly appears in the relevant finance literature. This means using:</p>
-<ul class="simple">
-<li><p>The same data sources as canonical papers</p></li>
-<li><p>The same domain-specific cleaning and normalization procedures established in the literature</p></li>
+<section id="what-is-in-it">
+<h2>What is in it<a class="headerlink" href="#what-is-in-it" title="Link to this heading">#</a></h2>
+<p>Table 1 of the paper lists 25 datasets in three groups.</p>
+<p><strong>Returns (12):</strong> CDS contracts and CDS portfolios; commodity futures;
+corporate bonds and corporate bond portfolios; CRSP stocks, with and without
+dividends; the Fama-French 25 size and book-to-market portfolios; foreign
+exchange; SPX option portfolios; Treasury bonds and Treasury bond portfolios.</p>
+<p><strong>Basis spreads (5):</strong> CDS-bond, covered interest parity, TIPS-Treasury,
+Treasury spot-futures, and Treasury-swap. These are arbitrage spreads that
+widen when intermediaries are constrained, which is why the financial stability
+literature watches them.</p>
+<p><strong>Other financial data (8):</strong> bank and bank holding company cash liquidity and
+leverage from Call Reports (four datasets); the He, Kelly, and Manela
+intermediary factors, daily, monthly, and the full factor file (three); and the
+Treasury zero-coupon yield curve.</p>
+<p>Each dataset follows a named paper (Fama and French for equities, Gürkaynak,
+Sack, and Wright for Treasuries, Constantinides, Jackwerth, and Savov for
+options, Dickerson, Robotti, and Rossetti for corporate bonds, Siriwardane,
+Sunderam, and Wallen for the basis spreads, and so on), and each replication is
+checked against published figures or summary statistics from that paper.</p>
+<p><img alt="The FTSFR corporate bond portfolio returns against the series He, Kelly, and Manela (2017) published" src="../_images/ftsfr_corporate_returns_compare.png" /></p>
+<p><em>One such check: the FTSFR corporate bond portfolio returns against the
+series He, Kelly, and Manela (2017) published.</em></p>
+<section id="code-not-data">
+<h3>Code, not data<a class="headerlink" href="#code-not-data" title="Link to this heading">#</a></h3>
+<p>Most of these data are licensed (CRSP, Compustat, OptionMetrics, S&amp;P Global
+CDS, Bloomberg) and cannot be redistributed. So FTSFR publishes the pipeline
+that downloads, cleans, and formats each series instead of the series
+themselves. Anyone with the same subscriptions can rebuild every dataset. This
+is the same rule you follow in this course: share the code and derived results,
+never the raw licensed data.</p>
+</section>
+</section>
+<section id="how-the-forecasts-are-evaluated">
+<h2>How the forecasts are evaluated<a class="headerlink" href="#how-the-forecasts-are-evaluated" title="Link to this heading">#</a></h2>
+<p><strong>Twelve methods.</strong> The Historical Average benchmark; classical statistical
+models (ARIMA, simple exponential smoothing, Theta); hybrid linear models
+(DLinear, NLinear); and deep learning models (DeepAR, N-BEATS, N-HiTS, a
+vanilla Transformer, TiDE, and KAN). The paper runs them through Nixtla’s
+<code class="docutils literal notranslate"><span class="pre">statsforecast</span></code> and <code class="docutils literal notranslate"><span class="pre">neuralforecast</span></code> packages, with the neural models’ automatic
+hyperparameter search. The aim is reasonable baselines, not each model’s best
+possible tuning.</p>
+<p><strong>Univariate, with no exogenous regressors.</strong> Every method forecasts each series
+from its own history. The models are <em>global</em>, meaning one model is trained
+across all the series in a panel, but no series sees another’s values and no
+macro covariates enter. Every conclusion below holds within that class of
+models; adding covariates or multivariate models is left to future work.</p>
+<p><strong>Rolling-origin cross-validation.</strong> Each model forecasts one horizon ahead (a
+month for monthly data, a quarter for quarterly, about a calendar month for
+daily),
+the origin then rolls forward by one horizon, and the forecast is repeated, for
+up to six windows. Every model sees the same windows and the same filtered
+panel.</p>
+<p><strong>Two metrics.</strong></p>
+<ul>
+<li><p><strong>MASE</strong> (mean absolute scaled error) divides the forecast’s mean absolute
+error by that of a naive forecast on the training window. Below 1 beats the
+naive forecast.</p></li>
+<li><p><strong>Out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span></strong>, pooled across every series and test date in a
+dataset, compares squared errors with those of each series’ own training
+mean:</p>
+<div class="math notranslate nohighlight">
+\[
+  R^2_{\text{oos}} = 1 - \frac{\sum_{s}\sum_{t} (y_{s,t}-\hat y_{s,t})^2}{\sum_{s}\sum_{t} (y_{s,t}-\bar{y}_{\text{train},s})^2}.
+  \]</div>
+<p>Positive means the model beats the historical average. This is the standard
+measure in the return-predictability literature.</p>
+</li>
 </ul>
 </section>
-<section id="addressing-the-replication-crisis">
-<h3>Addressing the Replication Crisis<a class="headerlink" href="#addressing-the-replication-crisis" title="Link to this heading">#</a></h3>
-<p>Finance faces an active debate about a potential “replication crisis.” Studies find that predictors’ average strength is only 54% of the original strength outside the original sample, with 32% becoming insignificant. While much of this involves data snooping, some involves coding bugs and lack of standardization. Standardized, open-source data infrastructure helps prevent simple errors from invalidating years of research.</p>
-</section>
-</section>
-<section id="what-datasets-are-included">
-<h2>What Datasets Are Included<a class="headerlink" href="#what-datasets-are-included" title="Link to this heading">#</a></h2>
-<p>The repository provides <strong>25 datasets</strong> organized into three main categories:</p>
-<section id="returns-data-11-datasets">
-<h3>Returns Data (11 datasets)<a class="headerlink" href="#returns-data-11-datasets" title="Link to this heading">#</a></h3>
-<p>Asset return series spanning multiple asset classes:</p>
-<ul class="simple">
-<li><p><strong>Equities</strong>: CRSP stock returns, Fama-French 25 portfolios (size and book-to-market)</p></li>
-<li><p><strong>Fixed Income</strong>: Treasury bonds and portfolios, corporate bonds and portfolios</p></li>
-<li><p><strong>Credit</strong>: CDS contracts and portfolios</p></li>
-<li><p><strong>Other</strong>: Commodity futures, foreign exchange, SPX options portfolios</p></li>
-</ul>
-</section>
-<section id="basis-spread-data-5-datasets">
-<h3>Basis Spread Data (5 datasets)<a class="headerlink" href="#basis-spread-data-5-datasets" title="Link to this heading">#</a></h3>
-<p>Arbitrage basis spreads that serve as critical early warning indicators of stress in the financial system:</p>
-<ul class="simple">
-<li><p>CDS-bond basis</p></li>
-<li><p>Covered interest parity (CIP) deviations</p></li>
-<li><p>TIPS-Treasury spreads</p></li>
-<li><p>Treasury spot-futures basis</p></li>
-<li><p>Treasury-swap spreads</p></li>
-</ul>
-</section>
-<section id="other-financial-data-9-datasets">
-<h3>Other Financial Data (9 datasets)<a class="headerlink" href="#other-financial-data-9-datasets" title="Link to this heading">#</a></h3>
-<p>Specialized datasets critical for financial stability monitoring:</p>
-<ul class="simple">
-<li><p>Bank and bank holding company (BHC) cash liquidity and leverage from Call Reports</p></li>
-<li><p>HKM intermediary risk factors (daily and monthly)</p></li>
-<li><p>Treasury yield curves (Nelson-Siegel-Svensson zero-coupon yields)</p></li>
-</ul>
-</section>
-</section>
-<section id="why-the-codebase-is-useful">
-<h2>Why the Codebase is Useful<a class="headerlink" href="#why-the-codebase-is-useful" title="Link to this heading">#</a></h2>
-<section id="a-real-world-example-of-task-runner-automation">
-<h3>A Real-World Example of Task Runner Automation<a class="headerlink" href="#a-real-world-example-of-task-runner-automation" title="Link to this heading">#</a></h3>
-<p>The FTSFR codebase demonstrates exactly the kind of complex, multi-stage data science workflow that task runners like PyDoit are designed to manage. The project uses PyDoit to automate:</p>
+<section id="what-the-paper-finds">
+<h2>What the paper finds<a class="headerlink" href="#what-the-paper-finds" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Data Collection</strong>: Pulling data from multiple sources (WRDS, Bloomberg, FRED, OptionMetrics)</p></li>
-<li><p><strong>Data Cleaning</strong>: Applying canonical cleaning procedures from seminal finance papers</p></li>
-<li><p><strong>Data Transformation</strong>: Converting raw data into analysis-ready formats</p></li>
-<li><p><strong>Validation</strong>: Replicating key tables and figures from original papers to verify correctness</p></li>
-<li><p><strong>Forecasting</strong>: Running baseline forecasting models across all datasets</p></li>
+<li><p><strong>Asset returns stay close to unforecastable.</strong> Across equities, corporate
+bonds, Treasuries, FX, options, and CDS, every method’s out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span>
+sits near zero, the deep models included. Within this class of models, the
+historical average is about as good as it gets, which matches decades of
+asset pricing evidence.</p></li>
+<li><p><strong>Basis spreads are where the newer models earn their keep.</strong> NLinear,
+N-BEATS, TiDE, and N-HiTS post median out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span> of about 0.63,
+ahead of Theta (0.59) and ARIMA (0.57). The spreads have seasonal
+quarter-end funding patterns that the global deep and hybrid models pick up.</p></li>
+<li><p><strong>On bank and intermediary indicators the families are close.</strong> The hybrid
+linear models hold a modest edge in out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span> (medians of 0.10 to
+0.16 for KAN, TiDE, NLinear, and DLinear, against 0.03 for Theta and ARIMA),
+and the classical methods stay competitive and remain a reasonable default.</p></li>
 </ol>
+<p>The best forecaster depends on the task.</p>
+<p><img alt="Mean absolute scaled error by dataset and method" src="../_images/ftsfr_mase_heatmap.png" /></p>
+<p><em>Mean absolute scaled error by dataset and method; lower is better. The
+first column, the historical average, is the benchmark the others are
+measured against.</em></p>
+<p><img alt="Out-of-sample R-squared by dataset and method" src="../_images/ftsfr_r2oos_heatmap.png" /></p>
+<p><em>Out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span> against each series’ training mean. The returns rows
+sit near zero for every method.</em></p>
 </section>
-<section id="reproducible-research-infrastructure">
-<h3>Reproducible Research Infrastructure<a class="headerlink" href="#reproducible-research-infrastructure" title="Link to this heading">#</a></h3>
-<p>The repository provides:</p>
+<section id="cleaning-changes-the-leaderboard">
+<h2>Cleaning changes the leaderboard<a class="headerlink" href="#cleaning-changes-the-leaderboard" title="Link to this heading">#</a></h2>
+<p>Section 6 of the paper tests the premise behind the whole project: that which
+method looks best depends on how the data were cleaned. Each experiment holds
+the data source, the universe, and the realized returns fixed and changes one
+cleaning choice.</p>
+<p><strong>The TRACE case study.</strong> Bid-ask averaged TRACE prices carry market
+microstructure noise, and Dickerson, Robotti, and Rossetti propose a
+correction. The paper builds two panels of ten credit-spread decile portfolios,
+one sorted on the noisy signal and one on the corrected signal. The two signals
+have a rank correlation of 0.98, and the portfolio returns are 98 to 99 percent
+correlated within each decile. Yet the long-short spread doubles, from 2.8
+percent a year under the noisy signal to 5.6 percent under the corrected one.
+Run the twelve models on both panels and the classical baselines barely move
+(their out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span> changes by at most 0.005), while three deep models
+swing by an order of magnitude more: N-HiTS goes from <span class="math notranslate nohighlight">\(-0.32\)</span> to <span class="math notranslate nohighlight">\(+0.01\)</span>,
+NLinear from <span class="math notranslate nohighlight">\(-0.14\)</span> to <span class="math notranslate nohighlight">\(+0.15\)</span>, and KAN from <span class="math notranslate nohighlight">\(+0.11\)</span> to <span class="math notranslate nohighlight">\(-0.17\)</span>. Some
+architectures gain from the cleaner data and some lose.</p>
+<p><strong>Three more contrasts</strong> show the same pattern:</p>
 <ul class="simple">
-<li><p><strong>Automated ETL pipeline</strong> that streamlines data retrieval from multiple sources</p></li>
-<li><p><strong>Validated implementations</strong> of canonical data cleaning procedures from seminal papers</p></li>
-<li><p><strong>Virtual environments</strong> ensuring perfect reproducibility across different computing environments</p></li>
-<li><p><strong>Open-source scripts</strong> that automate the download, cleaning, and assembly of datasets</p></li>
+<li><p><strong>SPX options:</strong> the full three-level filter stack of Constantinides,
+Jackwerth, and Savov against the first level only. MASE rises for every model
+under the full filters, the best model by MASE changes from DLinear to TiDE,
+and three models cross zero <span class="math notranslate nohighlight">\(R^2_{\text{oos}}\)</span>.</p></li>
+<li><p><strong>Fama-French 25:</strong> NYSE breakpoints (the canonical choice) against all-CRSP
+breakpoints. Every <span class="math notranslate nohighlight">\(R^2_{\text{oos}}\)</span> is negative on both, but deep models
+swing by up to 0.31 while the classical models move by at most 0.10.</p></li>
+<li><p><strong>Treasury portfolios:</strong> the Gürkaynak, Sack, and Wright filters (no callable
+bonds, no on-the-run or first off-the-run issues) against a permissive universe. The two are more than
+99 percent correlated, yet the top model changes from the Transformer to
+N-BEATS, and four models cross zero <span class="math notranslate nohighlight">\(R^2_{\text{oos}}\)</span>.</p></li>
 </ul>
+<p>The lesson for this course: a forecasting comparison means something only when
+the data are held fixed, and holding data fixed across studies takes a cleaning
+pipeline that anyone can read and rerun.</p>
 </section>
-<section id="managing-complex-dependencies">
-<h3>Managing Complex Dependencies<a class="headerlink" href="#managing-complex-dependencies" title="Link to this heading">#</a></h3>
-<p>Financial data requires specialized treatment reflecting market microstructure, regulatory requirements, and established academic conventions. The task runner manages dependencies between:</p>
-<ul class="simple">
-<li><p>Raw data downloads</p></li>
-<li><p>Cleaning scripts specific to each asset class</p></li>
-<li><p>Portfolio construction</p></li>
-<li><p>Validation against published results</p></li>
-<li><p>Forecasting experiments</p></li>
-</ul>
-<p>This is precisely the kind of complex dependency management that makes task runners essential for research workflows.</p>
-</section>
-</section>
-<section id="key-findings-from-baseline-forecasting">
-<h2>Key Findings from Baseline Forecasting<a class="headerlink" href="#key-findings-from-baseline-forecasting" title="Link to this heading">#</a></h2>
-<p>The repository includes baseline forecasting results using 12 methods ranging from classical statistical models (ARIMA, ETS, Theta) to modern deep learning architectures (Transformer variants, N-BEATS, TimesFM). Key findings include:</p>
-<ul class="simple">
-<li><p><strong>Model effectiveness varies by asset class</strong>: The answer to “which model works best?” depends on the task</p></li>
-<li><p><strong>Returns remain difficult to forecast</strong>: Even the best models achieve out-of-sample R-squared values near zero for asset returns, consistent with decades of empirical finance</p></li>
-<li><p><strong>ML-based global models show gains for non-return series</strong>: Machine learning approaches yield meaningful accuracy improvements for basis spreads, liquidity metrics, and other supervisory indicators where classical baselines fall short</p></li>
-</ul>
-</section>
-<section id="connection-to-course-material">
-<h2>Connection to Course Material<a class="headerlink" href="#connection-to-course-material" title="Link to this heading">#</a></h2>
-<p>The FTSFR project exemplifies why task runners matter for data science research:</p>
-<ol class="arabic simple">
-<li><p><strong>Workflow Management</strong>: The <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file documents the entire pipeline from raw data to forecasting results</p></li>
-<li><p><strong>Reproducibility</strong>: Anyone with access to the data sources can reproduce the exact datasets and results</p></li>
-<li><p><strong>Data Integrity</strong>: Changes to cleaning procedures automatically trigger re-runs of dependent tasks</p></li>
-<li><p><strong>Collaboration</strong>: The standardized workflow enables researchers worldwide to contribute and validate results</p></li>
-</ol>
-<p>When you examine the FTSFR codebase, pay attention to how the <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file structures the dependencies between data collection, cleaning, and analysis tasks. This is exactly the pattern we discussed in the task runners section of this course.</p>
+<section id="the-codebase">
+<h2>The codebase<a class="headerlink" href="#the-codebase" title="Link to this heading">#</a></h2>
+<p>The research repository splits its <code class="docutils literal notranslate"><span class="pre">doit</span></code> work across several task files, one
+per stage, so that each stage can run where its inputs are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Stage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dodo_00_pull_bloomberg.py</span></code></p></td>
+<td><p>Bloomberg pulls, run only on a machine with a Terminal</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dodo_01_pull.py</span></code></p></td>
+<td><p>All other pulls, formatting, and documentation; <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> imports it, so plain <code class="docutils literal notranslate"><span class="pre">doit</span></code> runs this stage</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dodo_02_forecasting.py</span></code></p></td>
+<td><p>Generates the forecasting jobs and runs them; for the paper they ran on a SLURM cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dodo_03_sensitivity.py</span></code></p></td>
+<td><p>The alternate-cleaning panels and tables of Section 6</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dodo_04_paper.py</span></code></p></td>
+<td><p>Assembles the results and compiles the paper</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Run a stage with <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">-f</span> <span class="pre">dodo_02_forecasting.py</span></code>. Which subscriptions a
+machine has is a setting (<code class="docutils literal notranslate"><span class="pre">subscriptions.toml</span></code>), so a pull that needs one a
+machine lacks is not run.</p>
+<p>The <a class="reference external" href="https://github.com/ftsfr">ftsfr organization</a> takes the data side further.
+Each data source is its own small repository and ChartBook pipeline
+(<code class="docutils literal notranslate"><span class="pre">fed_yield_curve</span></code>, <code class="docutils literal notranslate"><span class="pre">crsp_treasury</span></code>, <code class="docutils literal notranslate"><span class="pre">cds_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code>, and so on), with
+its own <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, its own notebooks, and its datasets declared in
+<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>. Each pipeline can be built, tested, and snapshotted alone,
+and a catalog site shows every snapshot in a store together. That
+split is what the <a class="reference internal" href="../Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook chapter</span></a> describes.</p>
 <div class="tip admonition">
 <p class="admonition-title">Discussion</p>
-<p>Let’s open up the FTSFR repository and take a look at the structure of the <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> file. Then, let’s open up a simpler version of one of it’s modules. For example, let’s open up</p>
+<p>Open the research repository and read <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> and <code class="docutils literal notranslate"><span class="pre">dodo_01_pull.py</span></code>: how is
+the work divided into tasks, and what does each task depend on? Then open one
+of the small pipelines, for example
+<a class="reference external" href="https://github.com/ftsfr/fed_yield_curve">ftsfr/fed_yield_curve</a>, and compare
+its <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> and <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>. What does the split into one repository per
+source buy, and what does it cost? Which of the cleaning choices in Section 6
+would you want to see recorded in a pipeline’s documentation?</p>
 </div>
+</section>
+<section id="ftsfr-and-hw-4">
+<h2>FTSFR and HW 4<a class="headerlink" href="#ftsfr-and-hw-4" title="Link to this heading">#</a></h2>
+<p>Several of these pipelines (the Fed yield curve, the Ken French portfolios, the
+He, Kelly, and Manela factors, corporate bond returns, and option portfolio
+returns) have snapshots in the class store. They are upstreams of the class
+report: in <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> your contribution depends on one of them by name,
+pins it, and builds on it, as the
+<a class="reference internal" href="../Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook chapter</span></a> describes.</p>
 </section>
 </section>
 
@@ -682,20 +788,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Week6/chartbook_catalog.html"
+       href="../overview_w6.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">The ChartBook Catalog: Data Dependencies Across Repositories</p>
+        <p class="prev-next-title">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</p>
       </div>
     </a>
     <a class="right-next"
-       href="../Week1/collaborative_report_and_style_guides.html"
+       href="../Week6/chartbook_catalog.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Collaborative Report and Style Guides</p>
+        <p class="prev-next-title">ChartBook: Pipelines, Stores, and Lineage</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -715,26 +821,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-project-matters">Why This Project Matters</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-with-current-research">The Problem with Current Research</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-finance-specific-benchmarks-matter">Why Finance-Specific Benchmarks Matter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-the-replication-crisis">Addressing the Replication Crisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-finance-specific-benchmark">Why a finance-specific benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-in-it">What is in it</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-not-data">Code, not data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-datasets-are-included">What Datasets Are Included</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-data-11-datasets">Returns Data (11 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-spread-data-5-datasets">Basis Spread Data (5 datasets)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-financial-data-9-datasets">Other Financial Data (9 datasets)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-codebase-is-useful">Why the Codebase is Useful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-world-example-of-task-runner-automation">A Real-World Example of Task Runner Automation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducible-research-infrastructure">Reproducible Research Infrastructure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-complex-dependencies">Managing Complex Dependencies</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings-from-baseline-forecasting">Key Findings from Baseline Forecasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-course-material">Connection to Course Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-forecasts-are-evaluated">How the forecasts are evaluated</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-paper-finds">What the paper finds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-changes-the-leaderboard">Cleaning changes the leaderboard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-codebase">The codebase</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftsfr-and-hw-4">FTSFR and HW 4</a></li>
 </ul>
   </nav></div>
 

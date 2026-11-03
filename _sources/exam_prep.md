@@ -88,7 +88,7 @@ exam. More are added here as the quarter progresses.
 
 - Goyal, A., Welch, I., & Zafirov, A. (2024). A comprehensive 2022 look at the
   empirical performance of equity premium prediction. *Review of Financial
-  Studies*, 37(11), 3490--3557. The predictors of the class report, the
+  Studies*, 37(11), 3490--3557. The equity premium predictors, the
   historical-mean benchmark, and why a forecast at date *t* may use only what
   was known at *t*.
 - Bernanke, B. S., & Kuttner, K. N. (2005). What explains the stock market's

@@ -42,7 +42,7 @@ and Agenda Item 1 of the [week 4 chapter](../overview_w4.md).*
 
 *Read: Agenda Item 4 of the [week 4 chapter](../overview_w4.md).*
 
-9. The course's `.gitignore` lists `docs/`, the folder `chartbook build`
+9. The course's `.gitignore` lists `docs/`, the folder `chartbook docs build`
    writes. Give two reasons not to commit a rebuilt site to `main`.
 10. A `gh-pages` branch is kept two commits ahead of `main` by rebasing it
    and force-pushing. What does a force-push do, and when is it safe?

@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Walkthrough: From a Working Folder to a Pin &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week6/pins_walkthrough';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Collaborative Report and Style Guides" href="../Week1/collaborative_report_and_style_guides.html" />
+    <link rel="prev" title="ChartBook: Pipelines, Stores, and Lineage" href="chartbook_catalog.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Data APIs, Static Sites, and GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Live Monitors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/live_monitor.html">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/data_validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/study_guide.html">Study Guide: Week 5</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Walkthrough: From a Working Folder to a Pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek6/pins_walkthrough.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week6/pins_walkthrough.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Walkthrough: From a Working Folder to a Pin</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-summer-edition-a-working-folder">A. The summer edition: a working folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-new-main-a-pin-that-names-its-bytes">B. The new main: a pin that names its bytes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-the-hashes-by-hand">C. The hashes, by hand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-a-live-git-dependency">D. A live git dependency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e-rebuild-versus-read">E. Rebuild versus read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-when-do-pins-move">F. When do pins move</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="walkthrough-from-a-working-folder-to-a-pin">
+<h1>Walkthrough: From a Working Folder to a Pin<a class="headerlink" href="#walkthrough-from-a-working-folder-to-a-pin" title="Link to this heading">#</a></h1>
+<p>This page is the week 6 demo, written down so that you can redo it after
+class. It uses the class report, the repository you work in for
+<a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a>, and one of its upstreams, <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code>. Every
+command runs from a clone of the report, and every block of output is cut
+down from a real run on November 2. Your hashes and commits will differ
+where the report or the upstream has moved since.</p>
+<p>The words are the ones
+<a class="reference internal" href="chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a> defines:
+pipeline, store, snapshot, lockfile, pin, reference, lineage. Read that page
+first; this one shows each word on the screen.</p>
+<p><strong>What you need.</strong> About an hour, and:</p>
+<ul class="simple">
+<li><p>A clone of the report with its environment installed (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code> in the
+clone). Activate it once, <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">.venv/bin/activate</span></code>, so that the
+commands below are typed as written; or put <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span></code> in front of each.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> printing <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code> or newer.</p></li>
+<li><p>A store of your own, holding the snapshots <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins, each
+built by you (step E shows how, for one of them). <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code>
+passes when this is set up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jq</span></code>, for reading the lockfile (<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">jq</span></code>, or your package
+manager).</p></li>
+</ul>
+<section id="a-the-summer-edition-a-working-folder">
+<h2>A. The summer edition: a working folder<a class="headerlink" href="#a-the-summer-edition-a-working-folder" title="Link to this heading">#</a></h2>
+<p>What you are about to see: the Summer 2026 edition of the report, on the
+<code class="docutils literal notranslate"><span class="pre">summer</span></code> branch. It was built with ChartBook 0.1, which had no snapshots and
+no pins.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git switch summer</span>
+<span class="go">ls chartbook.lock</span>
+<span class="go">grep -n -A3 &quot;data.load&quot; src/chart_yield_curve.py</span>
+<span class="go">sed -n 140,152p README.md</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ls: chartbook.lock: No such file or directory
+34:    long = data.load(
+35-        pipeline=&quot;ftsfr/fed_yield_curve&quot;,
+36-        dataframe=&quot;ftsfr_treas_yield_curve_zero_coupon&quot;,
+37-        format=&quot;pandas&quot;,
+   chartbook catalog add &lt;the folder where you cloned the ftsfr repositories&gt;/* -y
+</pre></div>
+</div>
+<p>There is no lockfile. The exhibit reads by name, which is good, but the name
+resolved through a catalog of working folders on one machine: the README
+tells you to clone every upstream, run <code class="docutils literal notranslate"><span class="pre">doit</span></code> in each, and register the
+folders. Whatever those folders held on the day of the build is what the
+August PDF shows.</p>
+<p>The point: which yield curve did the August report read? Git has the code.
+Nothing has the data. The folder it read from has been rebuilt since, so
+August’s bytes are gone, and no one can answer. Do not build <code class="docutils literal notranslate"><span class="pre">summer</span></code> with
+ChartBook 0.5 (it needs 0.1.1); switch back.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git switch main</span>
+</pre></div>
+</div>
+</section>
+<section id="b-the-new-main-a-pin-that-names-its-bytes">
+<h2>B. The new main: a pin that names its bytes<a class="headerlink" href="#b-the-new-main-a-pin-that-names-its-bytes" title="Link to this heading">#</a></h2>
+<p>What you are about to see: the same exhibit, now reading through a pin.
+First, where ChartBook will look.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook store info</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Store mine: /Users/you/.chartbook/store (writable)
+  ftsfr/fed_yield_curve: 1 snapshot(s)
+  ... (8 pipelines)
+  Newest: 2026-11-02T22:28:14.877522Z
+</pre></div>
+</div>
+<p>Your own store comes first, because ChartBook writes to the first store in
+the catalog. The report declares its upstreams in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sed -n &#39;/^\[dependencies\]/,$p&#39; chartbook.toml</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[dependencies]
+&quot;ftsfr/fed_yield_curve&quot; = {}
+&quot;ftsfr/ken_french_data_library&quot; = {}
+&quot;ftsfr/he_kelly_manela&quot; = {}
+&quot;ftsfr/corp_bond_returns&quot; = {}
+&quot;ftsfr/options&quot; = {}
+&quot;ftsfr/nyu_call_report&quot; = {}
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;ftsfr/fed_yield_curve&quot;</span> <span class="pre">=</span> <span class="pre">{}</span></code> means: a pipeline named by its ID, found by
+that ID in a store, with no folder of it on this machine. (<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">ftsfr/fed_yield_curve</span></code> is how such a line gets written: it adds the line and
+pins the newest snapshot in your stores.) What the report got for it is in
+<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>. Two records matter for one dependency: the dependency’s
+entry, and the record of each asset pinned from it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jq &#39;.records[0].dependencies[] | select(.id==&quot;ftsfr/fed_yield_curve&quot;)&#39; chartbook.lock</span>
+<span class="go">jq &#39;.records[] | select(.id==&quot;ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;)&#39; chartbook.lock</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  &quot;id&quot;: &quot;ftsfr/fed_yield_curve&quot;,
+  &quot;via&quot;: &quot;store&quot;,
+  &quot;location&quot;: { &quot;kind&quot;: &quot;store&quot;, &quot;commit&quot;: &quot;3904ad653ea0bfa8af753ad57f34c6917747fdc0&quot;,
+                &quot;repository&quot;: &quot;https://github.com/ftsfr/fed_yield_curve&quot;, ... },
+  &quot;snapshot&quot;: &quot;2026-11-02T05:22:19.659609Z&quot;,
+  &quot;pinned_hash&quot;: &quot;sha256:aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8&quot;
+
+  &quot;id&quot;: &quot;ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;,
+  &quot;location&quot;: { &quot;kind&quot;: &quot;file&quot;, &quot;path&quot;: &quot;./_data/ftsfr_treas_yield_curve_zero_coupon.parquet&quot; },
+  &quot;content_hash&quot;: &quot;sha256:b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b&quot;,
+  &quot;size_bytes&quot;: 5352937
+</pre></div>
+</div>
+<p>Four fields to know by name:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Says</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">commit</span></code></p></td>
+<td><p>Which code built it: the upstream’s commit, <code class="docutils literal notranslate"><span class="pre">3904ad6</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snapshot</span></code></p></td>
+<td><p>When the snapshot was made. This is the snapshot’s name, not when you pinned it; the lockfile records no time of its own</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code></p></td>
+<td><p>One hash for the whole dependency: a hash over every asset pinned from it (step C)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">content_hash</span></code></p></td>
+<td><p>One hash per file: the SHA-256 of its bytes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Now the walk up from the lockfile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook lineage</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finm-32800/finm_midterm_report (this folder)
+├── ftsfr/fed_yield_curve: ftsfr/fed_yield_curve 3904ad6, made 2026-11-02 05:22:19 UTC, pins checked
+│   ... (8 lines)
+8 snapshot(s) upstream; no gaps.
+</pre></div>
+</div>
+<p>Each line is a snapshot in a store, checked: it is there, it holds what was
+pinned from it at those hashes, and its own pins cover its own dependencies.
+Then read the data, and ask where it came from:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -c &#39;from chartbook import data</span>
+<span class="go">df = data.load(&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;, format=&quot;pandas&quot;)</span>
+<span class="go">print(df.shape, df.ds.max())</span>
+<span class="go">print(data.path(&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;))&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(382232, 3) 2026-10-02 00:00:00
+&lt;store&gt;/pipelines/ftsfr+fed_yield_curve/2026-11-02T052219Z_3904ad653ea0/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
+</pre></div>
+</div>
+<p>The path is in the store, under the snapshot’s name (its time and commit),
+and the report’s code never wrote it down: <code class="docutils literal notranslate"><span class="pre">data.load</span></code> resolved the
+reference through <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>. Both spellings of the reference work,
+<code class="docutils literal notranslate"><span class="pre">fed_yield_curve:...</span></code> and <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve:...</span></code>; the exhibits use the
+long one. <code class="docutils literal notranslate"><span class="pre">doit</span></code> watches that same file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">doit info exhibit:yield_curve</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file_dep   :
+ - ./src/settings.py
+ - &lt;store&gt;/pipelines/ftsfr+fed_yield_curve/2026-11-02T052219Z_3904ad653ea0/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
+ - ./src/chart_style.py
+ - ./src/exhibits/yield_curve.py
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code> builds that list with <code class="docutils literal notranslate"><span class="pre">data.path(...)</span></code> for every reference in the
+exhibit’s <code class="docutils literal notranslate"><span class="pre">UPSTREAM</span></code>. Build it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uv run doit</span>
+<span class="go">doit forget exhibit:yield_curve &amp;&amp; doit</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.  exhibit:yield_curve
+yield_curve: Latest (Oct 2, 2026): 2y 4.80%, 10y 5.28%, 30y 5.66%
+</pre></div>
+</div>
+<p>A full build from clean takes about a minute; a second <code class="docutils literal notranslate"><span class="pre">doit</span></code> does nothing.
+After <code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">forget</span></code>, only that exhibit reruns, and nothing after it: the PNG
+came out byte-identical, and <code class="docutils literal notranslate"><span class="pre">doit</span></code> compares inputs by hash. Open
+<code class="docutils literal notranslate"><span class="pre">reports/class_report.pdf</span></code> at the yield curve page: those are the numbers.</p>
+<p>The point: the report names data, never a path. The path comes from the
+pin, <code class="docutils literal notranslate"><span class="pre">doit</span></code> watches the pinned file, and the exhibit reruns when, and only
+when, the pin moves. Data validation would catch bad data; the pin catches
+<em>different</em> data.</p>
+</section>
+<section id="c-the-hashes-by-hand">
+<h2>C. The hashes, by hand<a class="headerlink" href="#c-the-hashes-by-hand" title="Link to this heading">#</a></h2>
+<p>What you are about to see: every hash in the lockfile can be recomputed
+with <code class="docutils literal notranslate"><span class="pre">shasum</span></code> and <code class="docutils literal notranslate"><span class="pre">jq</span></code>. First the file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">shasum -a 256 &quot;$(python -c &#39;from chartbook import data; print(data.path(&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;))&#39;)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b  &lt;store&gt;/.../ftsfr_treas_yield_curve_zero_coupon.parquet
+</pre></div>
+</div>
+<p>That is the <code class="docutils literal notranslate"><span class="pre">content_hash</span></code> from step B. Then the dependency’s hash, which is
+a hash over a listing, one line per pinned asset, <code class="docutils literal notranslate"><span class="pre">&lt;hex&gt;</span>&#160; <span class="pre">&lt;ID&gt;</span></code>, sorted by
+ID. Write the listing first, then hash it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jq -r &#39;.records[]</span>
+<span class="go">    | select(.pipeline == &quot;ftsfr/fed_yield_curve&quot; and .content_hash)</span>
+<span class="go">    | &quot;\(.content_hash | ltrimstr(&quot;sha256:&quot;))  \(.id)&quot;&#39; chartbook.lock \</span>
+<span class="go">    | LC_ALL=C sort -k2</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>47cbb658b68625c2738d0290cf3af12c7fa235933f9c7b1609cf7a52461840f2  ftsfr/fed_yield_curve:chart/yield_curve_replication
+b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b  ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
+357c9890e7ba7d62f7a4e4b63f1aa58eba9e3ab1b545085f0edc425a811d1e0a  ftsfr/fed_yield_curve:notebook/gsw_crsp_replication_ipynb
+e7510339af9f776c67e151c5f38a487cdb0b731ca50802c6a873352dd1577ec8  ftsfr/fed_yield_curve:notebook/summary_fed_yield_curve_ipynb
+</pre></div>
+</div>
+<p>Four assets: a chart, the dataframe, two notebooks. Pipe the same listing
+into <code class="docutils literal notranslate"><span class="pre">shasum</span></code>, and read the lockfile’s answer next to it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jq -r &#39;.records[]</span>
+<span class="go">    | select(.pipeline == &quot;ftsfr/fed_yield_curve&quot; and .content_hash)</span>
+<span class="go">    | &quot;\(.content_hash | ltrimstr(&quot;sha256:&quot;))  \(.id)&quot;&#39; chartbook.lock \</span>
+<span class="go">    | LC_ALL=C sort -k2 | shasum -a 256</span>
+<span class="go">jq -r &#39;.records[0].dependencies[] | select(.id == &quot;ftsfr/fed_yield_curve&quot;) | .pinned_hash&#39; chartbook.lock</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8  -
+sha256:aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8
+</pre></div>
+</div>
+<p>The same hash. (The recipe matches for all eight dependencies in the
+report’s lockfile.) Change one byte of one file upstream and the file’s
+<code class="docutils literal notranslate"><span class="pre">content_hash</span></code> changes, so the listing changes, so the <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code>
+changes: one line of a diff says something moved.</p>
+<p>Now git, for contrast. A commit is a hash over its tree and its parent; a
+tree is a hash over the names and hashes of what is inside it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git cat-file -p HEAD</span>
+<span class="go">git cat-file -p &#39;HEAD^{tree}&#39; | head -12</span>
+<span class="go">git rev-parse HEAD:chartbook.lock</span>
+<span class="go">printf &#39;blob %s\0&#39; $(wc -c &lt; chartbook.lock | tr -d &#39; &#39;) | cat - chartbook.lock | shasum -a 1</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tree abaab10b20954a50d8e94f7a9997077f3d3cf412
+parent d3bea64dcfe3e0fd1cdae165d4e2e9c676f7ca36
+author Jeremy Bejarano &lt;...&gt; 1793682399 -0600
+...
+100644 blob 0fd4837aa8f0f4990fafbc08ae9bebcb467232c4	chartbook.lock
+100644 blob 1fab0741e4ce1b046127e998b4378e8ff0d6586e	chartbook.toml
+040000 tree ab75f65e5b03acf8a83ac63997dd3b7ed29690f5	data_manual
+0fd4837aa8f0f4990fafbc08ae9bebcb467232c4
+0fd4837aa8f0f4990fafbc08ae9bebcb467232c4  -
+</pre></div>
+</div>
+<p>The last two lines are git’s hash of <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> and the same hash made
+by hand: SHA-1 of <code class="docutils literal notranslate"><span class="pre">blob</span> <span class="pre">&lt;size&gt;\0</span></code> followed by the file. The lockfile’s own
+hash sits in the tree, the tree’s in the commit, the commit’s in its child.</p>
+<p>The point: git’s one commit hash covers every file and all of history, a
+full Merkle tree. ChartBook stops a level short: a <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> covers one
+dependency’s files, and a snapshot is named by its time and commit, not by a
+root hash. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> checks the graph edge by edge instead.
+(<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code> also reads every byte again; in ChartBook
+0.5.0 it reports every object as a gap when more than one store is
+registered, so until a release fixes that, run it with one store named:
+<code class="docutils literal notranslate"><span class="pre">CHARTBOOK_STORE=&quot;&lt;the</span> <span class="pre">store's</span> <span class="pre">path&gt;&quot;</span> <span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code>.
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">verify</span></code> rehashes a store and is not affected.)</p>
+</section>
+<section id="d-a-live-git-dependency">
+<h2>D. A live git dependency<a class="headerlink" href="#d-a-live-git-dependency" title="Link to this heading">#</a></h2>
+<p>What you are about to see: a public branch that grows by a row a day
+becomes a pinned upstream, with no snapshot made by its owner. The example
+is the
+<a class="reference external" href="https://github.com/finm-32800/yield_spread_monitor">Yield Spread Monitor</a>
+from <a class="reference internal" href="../Week5/live_monitor.html"><span class="std std-doc">week 5</span></a>, whose <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch
+holds <code class="docutils literal notranslate"><span class="pre">spread_history.csv</span></code>. For HW 4, your version of this step is your own
+HW 3 monitor; <em>Make Your Homework an Upstream</em> on the <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> page
+has the exact files for it.</p>
+<p>In class, the instructor added three files to that branch, through
+GitHub’s web interface (switch to <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code>, then <strong>Add file</strong>,
+committing to that branch and not a new one). The daily workflow writes
+only <code class="docutils literal notranslate"><span class="pre">spread_history.csv</span></code> there, so the files stay. <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Yield Spread Monitor (history)&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;The 10-year minus 2-year Treasury yield spread, one row per business day since June 1976, recorded by the monitor&#39;s daily workflow.&quot;</span>
+<span class="n">maintainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Jeremiah Bejarano&quot;</span>
+<span class="n">contributors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Jeremiah Bejarano&quot;</span><span class="p">]</span>
+<span class="n">repo_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/finm-32800/yield_spread_monitor&quot;</span>
+<span class="n">os_compatibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Windows&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Linux&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;macOS&quot;</span><span class="p">]</span>
+
+<span class="k">[dataframes.spread_history]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10-Year Minus 2-Year Treasury Spread&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Daily 10-year minus 2-year Treasury yield spread, in percentage points, from FRED&#39;s DGS10 and DGS2.&quot;</span>
+<span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;FRED&quot;</span><span class="p">]</span>
+<span class="n">providers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Federal Reserve Bank of St. Louis&quot;</span><span class="p">]</span>
+<span class="n">provider_links</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://fred.stlouisfed.org/&quot;</span><span class="p">]</span>
+<span class="n">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Rates&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Treasury&quot;</span><span class="p">]</span>
+<span class="n">pull_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;FRED API, src/pull_yields.py on main, run daily by GitHub Actions&quot;</span>
+<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;spread_history.csv&quot;</span>
+<span class="n">date_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;date&quot;</span>
+<span class="n">docs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Two columns: date, and spread (DGS10 minus DGS2, in percentage points). The daily workflow on main appends one row each business day; nothing else writes this branch.&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code>, one line, so that git on Windows does not rewrite the
+CSV’s line endings on checkout (which would change its bytes, and its hash):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>* -text
+</pre></div>
+</div>
+<p>And <code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Yield Spread Monitor: history</span>
+
+The state the daily workflow carries from one day to the next, declared as a ChartBook dataframe. The code is on <span class="sb">`main`</span>.
+</pre></div>
+</div>
+<p>There is no <code class="docutils literal notranslate"><span class="pre">[scripts]</span> <span class="pre">build</span></code>: this branch builds nothing. Now, in the
+report, on a branch of your own, add the dependency and pin it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git switch -c demo/yield-spread</span>
+<span class="go">echo &#39;&quot;finm-32800/yield_spread_monitor&quot; = { git = &quot;https://github.com/finm-32800/yield_spread_monitor&quot;, rev = &quot;monitor-history&quot; }&#39; &gt;&gt; chartbook.toml</span>
+<span class="go">chartbook pin</span>
+<span class="go">git diff chartbook.lock</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finm-32800/yield_spread_monitor: fetched https://github.com/finm-32800/yield_spread_monitor at 45cdd22 (monitor-history)
+finm-32800/yield_spread_monitor: 1 pinned
+... 8 lines &quot;already pinned&quot;
+Wrote chartbook.lock.
++          &quot;id&quot;: &quot;finm-32800/yield_spread_monitor&quot;,
++          &quot;via&quot;: &quot;rev&quot;,
++          &quot;location&quot;: { &quot;kind&quot;: &quot;git&quot;, &quot;url&quot;: &quot;...&quot;, &quot;rev&quot;: &quot;monitor-history&quot;,
++            &quot;commit&quot;: &quot;45cdd221ceafc350b042b5683c017eaeee8b354f&quot; },
++          &quot;pinned_hash&quot;: &quot;sha256:8a6781a8c78c...&quot;
++      &quot;id&quot;: &quot;finm-32800/yield_spread_monitor:spread_history&quot;,
++      &quot;location&quot;: { &quot;kind&quot;: &quot;file&quot;, &quot;path&quot;: &quot;spread_history.csv&quot; },
++      &quot;content_hash&quot;: &quot;sha256:c1c698b40345...&quot;, &quot;size_bytes&quot;: 202461
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> cloned the repository, read the files the branch’s
+<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> declares, copied them into your own store (the first one,
+which is why it must be writable), and recorded the commit and the hash.
+The eight other dependencies say <code class="docutils literal notranslate"><span class="pre">already</span> <span class="pre">pinned</span></code>: nothing else moved,
+which is what a reviewer of your pull request checks. The key on the left
+of <code class="docutils literal notranslate"><span class="pre">=</span></code> is your name for the dependency, and references use it; use the ID
+ChartBook derives from the URL, the owner as it is and the repository name
+with <code class="docutils literal notranslate"><span class="pre">-</span></code> written <code class="docutils literal notranslate"><span class="pre">_</span></code>, so that the two agree. Read it, and commit:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -c &#39;from chartbook import data</span>
+<span class="go">df = data.load(&quot;yield_spread_monitor:spread_history&quot;, format=&quot;pandas&quot;); print(df.tail(3), len(df))&#39;</span>
+<span class="go">git commit -qam &quot;Depend on the yield spread monitor history&quot;</span>
+<span class="go">chartbook lineage | grep spread</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>             date  spread
+12598  2026-10-28    0.38
+12599  2026-10-29    0.37
+12600  2026-10-30    0.38 12601
+├── finm-32800/yield_spread_monitor: pinned from its git clone at 45cdd22; not walked further
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">date</span></code> comes back as strings, because the file is a CSV; an exhibit calls
+<code class="docutils literal notranslate"><span class="pre">pd.to_datetime</span></code>. Lineage stops at a git dependency: there is no snapshot
+to walk into.</p>
+<p><strong>Then the branch moves.</strong> The daily run adds a row at 22:00 UTC. (In
+class, the instructor moved the branch by editing its README instead, so
+that the commit changed and the data did not.) <code class="docutils literal notranslate"><span class="pre">pin</span></code> and <code class="docutils literal notranslate"><span class="pre">update</span></code> do
+different things:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook pin | grep spread</span>
+<span class="go">chartbook update yield_spread_monitor</span>
+<span class="go">git diff chartbook.lock</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finm-32800/yield_spread_monitor: 1 already pinned
+chartbook.lock is unchanged.
+
+finm-32800/yield_spread_monitor: fetched ... at 5cb9263 (monitor-history)
+-            &quot;commit&quot;: &quot;0b7bda88508803cfbe434bff0c45094230ce1faa&quot;
++            &quot;commit&quot;: &quot;5cb9263b136ecc7ddec21ed8ccac915677b709b0&quot;
+             &quot;pinned_hash&quot;: &quot;sha256:2dec4d060b3b...&quot;      (unchanged)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pin</span></code> moved nothing. <code class="docutils literal notranslate"><span class="pre">update</span></code> fetched again, followed the branch to its new
+commit, and the diff shows exactly that: the commit line moved and no hash
+did, because the data did not change. <code class="docutils literal notranslate"><span class="pre">data.path</span></code> still points at the same
+stored file, so <code class="docutils literal notranslate"><span class="pre">doit</span></code> rebuilds nothing. After a day with a new row, the
+same two commands give a diff with a moved hash:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finm-32800/yield_spread_monitor: 1 moved
+  finm-32800/yield_spread_monitor:spread_history
+    sha256:c1c698b40345… -&gt; sha256:b3f5123ca830…
+-            &quot;commit&quot;: &quot;45cdd221ceafc350b042b5683c017eaeee8b354f&quot;
++            &quot;commit&quot;: &quot;0b7bda88508803cfbe434bff0c45094230ce1faa&quot;
+-          &quot;pinned_hash&quot;: &quot;sha256:8a6781a8c78c...&quot;
++          &quot;pinned_hash&quot;: &quot;sha256:2dec4d060b3b...&quot;
+-      &quot;size_bytes&quot;: 202461
++      &quot;size_bytes&quot;: 202477
+</pre></div>
+</div>
+<p>Sixteen more bytes: one row. The point: a pin never moves by itself. When it
+moves, the lockfile diff says what moved, and that diff is what you commit
+and what your reviewers read.</p>
+<p>One thing to know about ChartBook 0.5.0: a classmate who clones your branch
+and runs <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> sees <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">put</span> <span class="pre">back</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">store</span></code>, after which <code class="docutils literal notranslate"><span class="pre">pin</span> <span class="pre">--frozen</span></code> and <code class="docutils literal notranslate"><span class="pre">data.load</span></code> say the store does not have the pinned bytes;
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">yield_spread_monitor</span></code> puts them right, and if the branch
+has moved since you pinned, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">chartbook.lock</span></code> shows it and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">chartbook.lock</span></code> undoes it. A later release restores a git
+dependency’s files correctly, and this step goes away.</p>
+</section>
+<section id="e-rebuild-versus-read">
+<h2>E. Rebuild versus read<a class="headerlink" href="#e-rebuild-versus-read" title="Link to this heading">#</a></h2>
+<p>What you are about to see: the same code, run at a later point in time,
+gives a different hash, and the hash tells you so. Step B read a snapshot
+from a store. Now build the upstream yourself, at the commit the lockfile
+names. In a second terminal, so that the report’s environment stays active
+in the first:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
+<span class="go">cd fed_yield_curve</span>
+<span class="go">git switch --detach 3904ad6</span>
+<span class="go">python -m venv .venv &amp;&amp; source .venv/bin/activate</span>
+<span class="go">pip install -r requirements.txt &quot;pyarrow==20.0.0&quot; jupytext</span>
+<span class="go">chartbook trust</span>
+<span class="go">chartbook run --snapshot</span>
+</pre></div>
+</div>
+<p>(<code class="docutils literal notranslate"><span class="pre">3904ad6</span></code> is the <code class="docutils literal notranslate"><span class="pre">commit</span></code> from step B; read it from the lockfile with
+<code class="docutils literal notranslate"><span class="pre">jq</span> <span class="pre">-r</span> <span class="pre">'.records[0].dependencies[]</span> <span class="pre">|</span> <span class="pre">select(.id==&quot;ftsfr/fed_yield_curve&quot;)</span> <span class="pre">|</span> <span class="pre">.location.commit'</span> <span class="pre">chartbook.lock</span></code>
+in the report. The two extra packages: the pipeline’s <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>
+pins <code class="docutils literal notranslate"><span class="pre">numpy==1.26.4</span></code>, which the newest pyarrow refuses, and its notebooks
+need <code class="docutils literal notranslate"><span class="pre">jupytext</span></code>; <code class="docutils literal notranslate"><span class="pre">pyarrow==20.0.0</span></code> is also what wrote the pinned file,
+which matters at the end of this step.) <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> says this folder’s
+build script may run on your machine. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> checks that
+everything is committed, builds (about a minute: it pulls the Fed’s yield
+curve file, formats it, runs the tests and two notebooks, and draws the
+chart), and copies what it built into your store:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve: build
+...
+ftsfr/fed_yield_curve at 3904ad6: 4 asset(s) in the store
+Snapshot made. A pipeline that depends on this one gets it with `chartbook update`.
+Stores: mine
+</pre></div>
+</div>
+<p>Compare what you built with what the report pinned:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">shasum -a 256 _data/ftsfr_treas_yield_curve_zero_coupon.parquet</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>bc106bbafd76e3ac33ee0b60bc0c8a1ccf96b09153d0773529853427766ec005  _data/ftsfr_treas_yield_curve_zero_coupon.parquet
+</pre></div>
+</div>
+<p>Pinned <code class="docutils literal notranslate"><span class="pre">b63da040...</span></code>, rebuilt <code class="docutils literal notranslate"><span class="pre">bc106bba...</span></code>. Same commit, different bytes.
+The rebuild runs through October 23 (382,652 rows); the pin ends October 2
+(382,232 rows). The rows they share agree exactly: the Fed published three
+more weeks and revised nothing. Back in the report, ChartBook sees the newer
+snapshot in your store and says so, without moving anything:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook pin | grep -A5 fed_yield</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve: 4 changed upstream since it was pinned
+  changed upstream: ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
+  ... (chart, two notebooks)
+4 pinned asset(s) have changed upstream. `chartbook update` moves the pins.
+</pre></div>
+</div>
+<p>To see what moving the pin does, move it, build, and undo:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook update ftsfr/fed_yield_curve &amp;&amp; git diff chartbook.lock | head -30</span>
+<span class="go">doit</span>
+<span class="go">git restore chartbook.lock &amp;&amp; doit</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve: 4 moved
+  ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
+    sha256:b63da0404cf9… -&gt; sha256:bc106bbafd76…
+  From its snapshot at 3904ad6, made 2026-11-02 22:51 UTC, in store mine.
+-          &quot;snapshot&quot;: &quot;2026-11-02T05:22:19.659609Z&quot;,
++          &quot;snapshot&quot;: &quot;2026-11-02T22:51:43.146901Z&quot;,
+-          &quot;pinned_hash&quot;: &quot;sha256:aff4ea7deb55...&quot;
++          &quot;pinned_hash&quot;: &quot;sha256:1b172b12d4c4...&quot;
+-- exhibit:factor_returns  -- exhibit:gdp_growth  -- exhibit:size_value_returns
+.  exhibit:yield_curve
+.  compile_report  .  compile_style_guides  .  build_chartbook_site  .  run_pytest
+yield_curve: Latest (Oct 23, 2026): 2y 4.64%, 10y 4.99%, 30y 5.36%
+</pre></div>
+</div>
+<p>The commit line did not move; the snapshot’s time and every hash did.
+Exactly the one exhibit that reads this pipeline rebuilt, and the PDF after
+it. Do not commit this in the shared report: the snapshot exists in your
+store only, so every classmate’s build, your reviewers’ included, would
+fail at <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code>. The HW 4 rule is that the pins in
+<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> are shared; if your exhibit needs the newer data, run
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">&lt;name&gt;</span></code> and say so in your pull request, where the
+lockfile diff shows what moved.</p>
+<p>Finally, does the rebuild reproduce the pin if you cut it at the pinned
+date? Save this as <code class="docutils literal notranslate"><span class="pre">trim_and_hash.py</span></code> and run it in the clone, with the
+clone’s environment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Cut a rebuilt yield-curve file at the pinned date and hash what remains.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyarrow</span>
+
+<span class="n">src</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>            <span class="c1"># the rebuilt file</span>
+<span class="n">cutoff</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>               <span class="c1"># the last date the pin holds</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;trimmed.parquet&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ds&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">cutoff</span><span class="p">]</span>        <span class="c1"># keep the index: the pipeline wrote it</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+<span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rows </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">, through </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m-%d</span><span class="si">}</span><span class="s2">, &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;pyarrow </span><span class="si">{</span><span class="n">pyarrow</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">, pandas </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sha256:</span><span class="si">{</span><span class="n">digest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python trim_and_hash.py _data/ftsfr_treas_yield_curve_zero_coupon.parquet 2026-10-02</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rows 382,232, through 2026-10-02, pyarrow 20.0.0, pandas 2.2.3
+sha256:b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b
+</pre></div>
+</div>
+<p>Byte for byte the pin. The same rows written by pyarrow 26.0.0 hash to
+<code class="docutils literal notranslate"><span class="pre">62a8f97f5b01...</span></code>, and by pyarrow 26.0.0 with pandas 3.1.0 to
+<code class="docutils literal notranslate"><span class="pre">5bb9af54f6d1...</span></code>: same rows, three writers, three hashes.</p>
+<p>The point: the hash pins the bytes, not the numbers. A rebuild reproduces a
+pin only with the same code, the same inputs, and the same environment,
+which is what <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> is for. When the hashes differ, the snapshot’s
+record says which commit made it and when, and that is where you start
+looking.</p>
+</section>
+<section id="f-when-do-pins-move">
+<h2>F. When do pins move<a class="headerlink" href="#f-when-do-pins-move" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Pins</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">&lt;ID&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code></p></td>
+<td><p>Create a pin for a dependency that has none. Never move one; say <code class="docutils literal notranslate"><span class="pre">changed</span> <span class="pre">upstream</span></code> when a newer snapshot exists</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> (and <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">doit</span></code> in the report)</p></td>
+<td><p>Never move one. The build reads the pinned snapshot. <code class="docutils literal notranslate"><span class="pre">run</span></code> also pins what has no pin yet, and builds a git dependency once</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">[&lt;name&gt;]</span></code></p></td>
+<td><p>Move: to the newest snapshot, or to what a branch means now. The lockfile diff is the record; commit it on its own</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--frozen</span></code></p></td>
+<td><p>Write nothing. Refuse if any pin is missing or not in a store. What CI runs</p></td>
+</tr>
+<tr class="row-even"><td><p>A git dependency with <code class="docutils literal notranslate"><span class="pre">rev</span> <span class="pre">=</span> <span class="pre">&quot;&lt;commit&gt;&quot;</span></code></p></td>
+<td><p>Cannot move: <code class="docutils literal notranslate"><span class="pre">update</span></code> fetches again and the commit means the same thing. A tag likewise; a branch moves</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">gc</span></code></p></td>
+<td><p>Keeps every snapshot a lockfile pins, the newest of each pipeline, and anything from the last seven days; removes the rest, after asking</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For HW 4: <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> after you add a line to <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code>, read the
+diff, commit <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>, and leave the other pins where they are.</p>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chartbook_catalog.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ChartBook: Pipelines, Stores, and Lineage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week1/collaborative_report_and_style_guides.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Collaborative Report and Style Guides</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-summer-edition-a-working-folder">A. The summer edition: a working folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-new-main-a-pin-that-names-its-bytes">B. The new main: a pin that names its bytes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-the-hashes-by-hand">C. The hashes, by hand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-a-live-git-dependency">D. A live git dependency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#e-rebuild-versus-read">E. Rebuild versus read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-when-do-pins-move">F. When do pins move</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

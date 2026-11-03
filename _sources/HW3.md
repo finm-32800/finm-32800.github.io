@@ -146,9 +146,10 @@ Four things to complete, then one to do.
   history does not have it, and rebuilds the monitor's page, one HTML file
   with the chart (`src/build_page.py`, written for you). Unlike every other task
   it must run every time it is invoked. Plain `uv run doit` is the
-  backfill: it pulls every session in the window in the settings, the
-  trailing week unless you set `START_DATE` earlier, and adds the ones the
-  history does not have.
+  backfill: it pulls every session in the window committed in
+  `src/settings.py` (`START_DATE` to `END_DATE`; to backfill further, move
+  `START_DATE` earlier and commit, never set it in `.env`) and adds the
+  ones the history does not have.
 - **The ChartBook manifest** (`chartbook.toml`, 1 pt). Register the monitor
   notebook and the history dataframe.
 - **The workflow** (`.github/workflows/deploy_pages.yml`, 5 pts). The file
@@ -170,8 +171,9 @@ Four things to complete, then one to do.
 - **The live page** (`src/published_site.py`, 1 pt). Push the completed
   repository to a **public** repository in your own account, add your
   Databento key as a repository secret, run the deploy workflow once from
-  the Actions tab, run the backfill workflow once with a start date so the
-  chart has a history behind it, turn on GitHub Pages from the `gh-pages`
+  the Actions tab, move `START_DATE` in `src/settings.py` back a few weeks
+  and commit, run the backfill workflow once so the chart has a history
+  behind it, turn on GitHub Pages from the `gh-pages`
   branch, and record the address of the page and of the repository. The
   steps are in the
   README. Your private copy in the course organization keeps getting your

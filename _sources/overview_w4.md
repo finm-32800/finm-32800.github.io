@@ -104,7 +104,7 @@ pins down the probability of the move.
   paths are a website, and nothing about them needs a server: open one from
   your disk and the browser renders it. A dynamic site runs code on a server
   for every visitor; a static one does not.
-- **Publishing a folder.** `chartbook build` writes every page of a
+- **Publishing a folder.** `chartbook docs build` writes every page of a
   project's site into `docs/`. Any host that serves files can publish it.
   GitHub Pages serves a branch's root or its `docs/` folder. Done live: a new
   public repository with the HW 2 site copied in, and Pages turned on.

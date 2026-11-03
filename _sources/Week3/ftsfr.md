@@ -1,107 +1,235 @@
 # Financial Time Series Forecasting Repository (FTSFR)
 
-The Financial Time Series Forecasting Repository (FTSFR) is an open-source benchmark designed to enable standardized, "apples-to-apples" comparisons of time series forecasting methods on financial data. The project addresses a critical gap in quantitative finance research: until now, no comprehensive forecasting benchmark existed specifically for financial markets.
+The Financial Time Series Forecasting Repository (FTSFR) is an open benchmark
+for comparing time series forecasting methods on financial data. It assembles
+25 financial datasets, each cleaned the way the canonical paper for that market
+cleans it, and holds those data fixed while a dozen forecasting methods are run
+on them. It is also a working example of everything this course builds: dozens
+of data pulls from licensed and public sources, cleaning that must be
+documented and rerunnable, and many pipelines feeding one result.
 
-**Resources:**
-- GitHub Repository: [https://github.com/jmbejara/ftsfr](https://github.com/jmbejara/ftsfr)
-- Documentation: [https://jeremybejarano.com/ftsfr/](https://jeremybejarano.com/ftsfr/)
-- Simplified, separated repositories: https://github.com/ftsfr
+**The paper.** Jeremiah Bejarano, Viren Desai, Kausthub Keshava, Arsh Kumar,
+Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu, "An Open Benchmark for
+Evaluating Time Series Forecasting Methods across Financial Markets," Office of
+Financial Research Working Paper 26-05, August 25, 2026.
+[Paper page](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/),
+[PDF](https://www.financialresearch.gov/working-papers/files/OFRwp26-05_time-series-forecasting-methods-financial-markets.pdf).
+The OFR blog post
+"[Do Deep Learning Methods Improve Financial Forecasts?](https://www.financialresearch.gov/the-ofr-blog/2026/08/25/deep-learning-methods-improve-financial-forecasts/)"
+(August 25, 2026) summarizes it. The six co-authors did most of this work as
+students in the Financial Mathematics program at the University of Chicago.
 
-## Why This Project Matters
+**The code.**
 
-### The Problem with Current Research
+- The research repository, with the forecasting runs and the paper:
+  [github.com/jmbejara/ftsfr](https://github.com/jmbejara/ftsfr), documented at
+  [jeremybejarano.com/ftsfr](https://jeremybejarano.com/ftsfr/).
+- One ChartBook pipeline per data source:
+  [github.com/ftsfr](https://github.com/ftsfr).
 
-The time-series forecasting community increasingly recognizes the need for standardized evaluation frameworks. The absence of standardized benchmark datasets has meant that most studies evaluate their methods on limited, arbitrarily selected time series, making meaningful comparisons across methods virtually impossible. This lack of standardization has resulted in poor quality evaluations and irreproducible comparisons across forecasting studies.
+## Why a finance-specific benchmark
 
-While several benchmark repositories have emerged (such as the Monash Time Series Forecasting Repository), they remain limited in their coverage of financial markets. The FRED-MD database provides macroeconomic series but focuses on real economic indicators rather than financial market data. Other benchmarks like UCR and UEA archives do not include coverage of time series from the financial domain at all.
+No forecasting method wins everywhere. The M3 re-evaluation favored classical
+statistical models, the M4 competition was won by a hybrid of a neural network
+and exponential smoothing, and M5 was swept by machine learning. The
+No Free Lunch theorem says to expect this: no algorithm is best for every data
+generating process. So the only way to learn whether a new method improves
+financial forecasts is to test it on financial data.
 
-### Why Finance-Specific Benchmarks Matter
+General benchmarks such as the Monash Time Series Forecasting Repository and
+FRED-MD cover little of finance. And when new methods are tested on financial
+data, each study builds its own version of the data. Two papers that both use
+"TRACE corporate bonds" or "CRSP equities" can apply different filters, sample
+windows, and portfolio rules, so a comparison across them mixes the skill of
+the method with the choices made in cleaning. FTSFR fixes the data so that only
+the method varies.
 
-According to the "No Free Lunch" Theorem, there is no single forecasting method that performs best for all time series. To improve financial forecasting, we need to evaluate methods on datasets from the financial domain that reflect how data commonly appears in the relevant finance literature. This means using:
-- The same data sources as canonical papers
-- The same domain-specific cleaning and normalization procedures established in the literature
+## What is in it
 
-### Addressing the Replication Crisis
+Table 1 of the paper lists 25 datasets in three groups.
 
-Finance faces an active debate about a potential "replication crisis." Studies find that predictors' average strength is only 54% of the original strength outside the original sample, with 32% becoming insignificant. While much of this involves data snooping, some involves coding bugs and lack of standardization. Standardized, open-source data infrastructure helps prevent simple errors from invalidating years of research.
+**Returns (12):** CDS contracts and CDS portfolios; commodity futures;
+corporate bonds and corporate bond portfolios; CRSP stocks, with and without
+dividends; the Fama-French 25 size and book-to-market portfolios; foreign
+exchange; SPX option portfolios; Treasury bonds and Treasury bond portfolios.
 
-## What Datasets Are Included
+**Basis spreads (5):** CDS-bond, covered interest parity, TIPS-Treasury,
+Treasury spot-futures, and Treasury-swap. These are arbitrage spreads that
+widen when intermediaries are constrained, which is why the financial stability
+literature watches them.
 
-The repository provides **25 datasets** organized into three main categories:
+**Other financial data (8):** bank and bank holding company cash liquidity and
+leverage from Call Reports (four datasets); the He, Kelly, and Manela
+intermediary factors, daily, monthly, and the full factor file (three); and the
+Treasury zero-coupon yield curve.
 
-### Returns Data (11 datasets)
-Asset return series spanning multiple asset classes:
-- **Equities**: CRSP stock returns, Fama-French 25 portfolios (size and book-to-market)
-- **Fixed Income**: Treasury bonds and portfolios, corporate bonds and portfolios
-- **Credit**: CDS contracts and portfolios
-- **Other**: Commodity futures, foreign exchange, SPX options portfolios
+Each dataset follows a named paper (Fama and French for equities, Gürkaynak,
+Sack, and Wright for Treasuries, Constantinides, Jackwerth, and Savov for
+options, Dickerson, Robotti, and Rossetti for corporate bonds, Siriwardane,
+Sunderam, and Wallen for the basis spreads, and so on), and each replication is
+checked against published figures or summary statistics from that paper.
 
-### Basis Spread Data (5 datasets)
-Arbitrage basis spreads that serve as critical early warning indicators of stress in the financial system:
-- CDS-bond basis
-- Covered interest parity (CIP) deviations
-- TIPS-Treasury spreads
-- Treasury spot-futures basis
-- Treasury-swap spreads
+![The FTSFR corporate bond portfolio returns against the series He, Kelly, and Manela (2017) published](../Week6/assets/ftsfr_corporate_returns_compare.png)
 
-### Other Financial Data (9 datasets)
-Specialized datasets critical for financial stability monitoring:
-- Bank and bank holding company (BHC) cash liquidity and leverage from Call Reports
-- HKM intermediary risk factors (daily and monthly)
-- Treasury yield curves (Nelson-Siegel-Svensson zero-coupon yields)
+*One such check: the FTSFR corporate bond portfolio returns against the
+series He, Kelly, and Manela (2017) published.*
 
-## Why the Codebase is Useful
+### Code, not data
 
-### A Real-World Example of Task Runner Automation
+Most of these data are licensed (CRSP, Compustat, OptionMetrics, S&P Global
+CDS, Bloomberg) and cannot be redistributed. So FTSFR publishes the pipeline
+that downloads, cleans, and formats each series instead of the series
+themselves. Anyone with the same subscriptions can rebuild every dataset. This
+is the same rule you follow in this course: share the code and derived results,
+never the raw licensed data.
 
-The FTSFR codebase demonstrates exactly the kind of complex, multi-stage data science workflow that task runners like PyDoit are designed to manage. The project uses PyDoit to automate:
+## How the forecasts are evaluated
 
-1. **Data Collection**: Pulling data from multiple sources (WRDS, Bloomberg, FRED, OptionMetrics)
-2. **Data Cleaning**: Applying canonical cleaning procedures from seminal finance papers
-3. **Data Transformation**: Converting raw data into analysis-ready formats
-4. **Validation**: Replicating key tables and figures from original papers to verify correctness
-5. **Forecasting**: Running baseline forecasting models across all datasets
+**Twelve methods.** The Historical Average benchmark; classical statistical
+models (ARIMA, simple exponential smoothing, Theta); hybrid linear models
+(DLinear, NLinear); and deep learning models (DeepAR, N-BEATS, N-HiTS, a
+vanilla Transformer, TiDE, and KAN). The paper runs them through Nixtla's
+`statsforecast` and `neuralforecast` packages, with the neural models' automatic
+hyperparameter search. The aim is reasonable baselines, not each model's best
+possible tuning.
 
-### Reproducible Research Infrastructure
+**Univariate, with no exogenous regressors.** Every method forecasts each series
+from its own history. The models are *global*, meaning one model is trained
+across all the series in a panel, but no series sees another's values and no
+macro covariates enter. Every conclusion below holds within that class of
+models; adding covariates or multivariate models is left to future work.
 
-The repository provides:
-- **Automated ETL pipeline** that streamlines data retrieval from multiple sources
-- **Validated implementations** of canonical data cleaning procedures from seminal papers
-- **Virtual environments** ensuring perfect reproducibility across different computing environments
-- **Open-source scripts** that automate the download, cleaning, and assembly of datasets
+**Rolling-origin cross-validation.** Each model forecasts one horizon ahead (a
+month for monthly data, a quarter for quarterly, about a calendar month for
+daily),
+the origin then rolls forward by one horizon, and the forecast is repeated, for
+up to six windows. Every model sees the same windows and the same filtered
+panel.
 
-### Managing Complex Dependencies
+**Two metrics.**
 
-Financial data requires specialized treatment reflecting market microstructure, regulatory requirements, and established academic conventions. The task runner manages dependencies between:
-- Raw data downloads
-- Cleaning scripts specific to each asset class
-- Portfolio construction
-- Validation against published results
-- Forecasting experiments
+- **MASE** (mean absolute scaled error) divides the forecast's mean absolute
+  error by that of a naive forecast on the training window. Below 1 beats the
+  naive forecast.
+- **Out-of-sample $R^2$**, pooled across every series and test date in a
+  dataset, compares squared errors with those of each series' own training
+  mean:
 
-This is precisely the kind of complex dependency management that makes task runners essential for research workflows.
+  $$
+  R^2_{\text{oos}} = 1 - \frac{\sum_{s}\sum_{t} (y_{s,t}-\hat y_{s,t})^2}{\sum_{s}\sum_{t} (y_{s,t}-\bar{y}_{\text{train},s})^2}.
+  $$
 
-## Key Findings from Baseline Forecasting
+  Positive means the model beats the historical average. This is the standard
+  measure in the return-predictability literature.
 
-The repository includes baseline forecasting results using 12 methods ranging from classical statistical models (ARIMA, ETS, Theta) to modern deep learning architectures (Transformer variants, N-BEATS, TimesFM). Key findings include:
+## What the paper finds
 
-- **Model effectiveness varies by asset class**: The answer to "which model works best?" depends on the task
-- **Returns remain difficult to forecast**: Even the best models achieve out-of-sample R-squared values near zero for asset returns, consistent with decades of empirical finance
-- **ML-based global models show gains for non-return series**: Machine learning approaches yield meaningful accuracy improvements for basis spreads, liquidity metrics, and other supervisory indicators where classical baselines fall short
+1. **Asset returns stay close to unforecastable.** Across equities, corporate
+   bonds, Treasuries, FX, options, and CDS, every method's out-of-sample $R^2$
+   sits near zero, the deep models included. Within this class of models, the
+   historical average is about as good as it gets, which matches decades of
+   asset pricing evidence.
+2. **Basis spreads are where the newer models earn their keep.** NLinear,
+   N-BEATS, TiDE, and N-HiTS post median out-of-sample $R^2$ of about 0.63,
+   ahead of Theta (0.59) and ARIMA (0.57). The spreads have seasonal
+   quarter-end funding patterns that the global deep and hybrid models pick up.
+3. **On bank and intermediary indicators the families are close.** The hybrid
+   linear models hold a modest edge in out-of-sample $R^2$ (medians of 0.10 to
+   0.16 for KAN, TiDE, NLinear, and DLinear, against 0.03 for Theta and ARIMA),
+   and the classical methods stay competitive and remain a reasonable default.
 
-## Connection to Course Material
+The best forecaster depends on the task.
 
-The FTSFR project exemplifies why task runners matter for data science research:
+![Mean absolute scaled error by dataset and method](../Week6/assets/ftsfr_mase_heatmap.png)
 
-1. **Workflow Management**: The `dodo.py` file documents the entire pipeline from raw data to forecasting results
-2. **Reproducibility**: Anyone with access to the data sources can reproduce the exact datasets and results
-3. **Data Integrity**: Changes to cleaning procedures automatically trigger re-runs of dependent tasks
-4. **Collaboration**: The standardized workflow enables researchers worldwide to contribute and validate results
+*Mean absolute scaled error by dataset and method; lower is better. The
+first column, the historical average, is the benchmark the others are
+measured against.*
 
-When you examine the FTSFR codebase, pay attention to how the `dodo.py` file structures the dependencies between data collection, cleaning, and analysis tasks. This is exactly the pattern we discussed in the task runners section of this course.
+![Out-of-sample R-squared by dataset and method](../Week6/assets/ftsfr_r2oos_heatmap.png)
 
+*Out-of-sample $R^2$ against each series' training mean. The returns rows
+sit near zero for every method.*
+
+## Cleaning changes the leaderboard
+
+Section 6 of the paper tests the premise behind the whole project: that which
+method looks best depends on how the data were cleaned. Each experiment holds
+the data source, the universe, and the realized returns fixed and changes one
+cleaning choice.
+
+**The TRACE case study.** Bid-ask averaged TRACE prices carry market
+microstructure noise, and Dickerson, Robotti, and Rossetti propose a
+correction. The paper builds two panels of ten credit-spread decile portfolios,
+one sorted on the noisy signal and one on the corrected signal. The two signals
+have a rank correlation of 0.98, and the portfolio returns are 98 to 99 percent
+correlated within each decile. Yet the long-short spread doubles, from 2.8
+percent a year under the noisy signal to 5.6 percent under the corrected one.
+Run the twelve models on both panels and the classical baselines barely move
+(their out-of-sample $R^2$ changes by at most 0.005), while three deep models
+swing by an order of magnitude more: N-HiTS goes from $-0.32$ to $+0.01$,
+NLinear from $-0.14$ to $+0.15$, and KAN from $+0.11$ to $-0.17$. Some
+architectures gain from the cleaner data and some lose.
+
+**Three more contrasts** show the same pattern:
+
+- **SPX options:** the full three-level filter stack of Constantinides,
+  Jackwerth, and Savov against the first level only. MASE rises for every model
+  under the full filters, the best model by MASE changes from DLinear to TiDE,
+  and three models cross zero $R^2_{\text{oos}}$.
+- **Fama-French 25:** NYSE breakpoints (the canonical choice) against all-CRSP
+  breakpoints. Every $R^2_{\text{oos}}$ is negative on both, but deep models
+  swing by up to 0.31 while the classical models move by at most 0.10.
+- **Treasury portfolios:** the Gürkaynak, Sack, and Wright filters (no callable
+  bonds, no on-the-run or first off-the-run issues) against a permissive universe. The two are more than
+  99 percent correlated, yet the top model changes from the Transformer to
+  N-BEATS, and four models cross zero $R^2_{\text{oos}}$.
+
+The lesson for this course: a forecasting comparison means something only when
+the data are held fixed, and holding data fixed across studies takes a cleaning
+pipeline that anyone can read and rerun.
+
+## The codebase
+
+The research repository splits its `doit` work across several task files, one
+per stage, so that each stage can run where its inputs are:
+
+| File | Stage |
+|---|---|
+| `dodo_00_pull_bloomberg.py` | Bloomberg pulls, run only on a machine with a Terminal |
+| `dodo_01_pull.py` | All other pulls, formatting, and documentation; `dodo.py` imports it, so plain `doit` runs this stage |
+| `dodo_02_forecasting.py` | Generates the forecasting jobs and runs them; for the paper they ran on a SLURM cluster |
+| `dodo_03_sensitivity.py` | The alternate-cleaning panels and tables of Section 6 |
+| `dodo_04_paper.py` | Assembles the results and compiles the paper |
+
+Run a stage with `doit -f dodo_02_forecasting.py`. Which subscriptions a
+machine has is a setting (`subscriptions.toml`), so a pull that needs one a
+machine lacks is not run.
+
+The [ftsfr organization](https://github.com/ftsfr) takes the data side further.
+Each data source is its own small repository and ChartBook pipeline
+(`fed_yield_curve`, `crsp_treasury`, `cds_returns`, `options`, and so on), with
+its own `dodo.py`, its own notebooks, and its datasets declared in
+`chartbook.toml`. Each pipeline can be built, tested, and snapshotted alone,
+and a catalog site shows every snapshot in a store together. That
+split is what the [ChartBook chapter](../Week6/chartbook_catalog.md) describes.
 
 ```{admonition} Discussion
-:class: tip 
-Let's open up the FTSFR repository and take a look at the structure of the `dodo.py` file. Then, let's open up a simpler version of one of it's modules. For example, let's open up 
+:class: tip
+Open the research repository and read `dodo.py` and `dodo_01_pull.py`: how is
+the work divided into tasks, and what does each task depend on? Then open one
+of the small pipelines, for example
+[ftsfr/fed_yield_curve](https://github.com/ftsfr/fed_yield_curve), and compare
+its `dodo.py` and `chartbook.toml`. What does the split into one repository per
+source buy, and what does it cost? Which of the cleaning choices in Section 6
+would you want to see recorded in a pipeline's documentation?
 ```
+
+## FTSFR and HW 4
+
+Several of these pipelines (the Fed yield curve, the Ken French portfolios, the
+He, Kelly, and Manela factors, corporate bond returns, and option portfolio
+returns) have snapshots in the class store. They are upstreams of the class
+report: in [HW 4](../HW4.md) your contribution depends on one of them by name,
+pins it, and builds on it, as the
+[ChartBook chapter](../Week6/chartbook_catalog.md) describes.

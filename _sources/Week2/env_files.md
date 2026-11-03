@@ -63,6 +63,7 @@ Recapping **Best Practices**
 - **Keep it Secure**: Never commit `.env` files to version control. Always use `.gitignore` or equivalent in other version control systems to exclude this file.  
 - **Documentation**: Provide documentation or an example `.env` file to guide setting up the necessary environment variables.
 - **Validation and Defaults**: Implement validation for environment variables in your application and set sensible defaults where appropriate.
+- **What does not belong in `.env`**: anything that changes what is computed. A pipeline's data window (`START_DATE`, `END_DATE`, any cutoff or as-of date) is a committed constant in `settings.py`, not a `.env` entry. Two people with different `.env` files who build the same commit must get the same bytes. `.env` holds secrets and machine facts (API keys, `WRDS_USERNAME`, `DATA_DIR`); anything that changes what is computed lives in a committed file. The course's pipelines make `config("END_DATE")` raise for this reason: the window is imported from `settings.py`, and moving it is a commit.
 
 ## Examples and Demos
 

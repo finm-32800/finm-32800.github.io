@@ -63,13 +63,14 @@ From week 4 on, one homework or exam is due each week, and never two.
 | 4 | Tuesday, October 20 | [HW 1](HW1.md): CRSP, the CAPM, and Fama-French |
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
 | 7 | Tuesday, November 10 | [HW 3](HW3.md): option-implied crash probabilities |
-| | To be announced | [HW 4](HW4.md), the class report, and [HW 5](HW5.md) |
+| 8 | Friday, November 20 | [HW 4](HW4.md): the class report |
+| | To be announced | [HW 5](HW5.md) |
 | | Tuesday, November 24 | No class: Thanksgiving break |
 | 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
 
-The homework comes early on purpose. The dates for HW 4 and HW 5 are
-announced on Canvas.
+The homework comes early on purpose. The dates for HW 5 are announced on
+Canvas.
 
 ### Homework
 
@@ -179,9 +180,9 @@ the agenda is listed in the first sub-section of the chapter.
 | 3 | Oct 13 | [Reports: notebooks, ChartBook, and LaTeX](overview_w3.md) | [HW 2](HW2.md) | |
 | 4 | Oct 20 | [Data APIs, static sites, and GitHub Actions](overview_w4.md) | | HW 1 |
 | 5 | Oct 27 | [Live monitors, uv, and the math of HW 3](overview_w5.md) | [HW 3](HW3.md) | HW 2 |
-| 6 | Nov 3 | [Data validation; SQL at scale, remote machines, and job schedulers](overview_w6.md) | | |
+| 6 | Nov 3 | [Data across repositories: snapshots, lineage, and the class report](overview_w6.md) | [HW 4](HW4.md) | |
 | 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 3 |
-| 8 | Nov 17 | [Packaging, CI, and code quality](overview_w8.md) | | |
+| 8 | Nov 17 | [Packaging, CI, and code quality](overview_w8.md) | | HW 4 |
 | | Nov 24 | No class: Thanksgiving break | | |
 | 9 | Dec 1 | [Exam, then MLOps](overview_w9.md) | | |
 | 10 | Dec 8–11 | Final project presentations | | |

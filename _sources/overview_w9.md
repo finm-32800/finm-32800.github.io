@@ -14,8 +14,8 @@ the model recomputes its outputs, and someone has to notice when the data goes b
 or the model's behavior drifts. Every tool in this course now points at that
 problem, and this week assembles them.
 
-The data is the one you built. The class's predictor dataset from
-the class report, [HW 4](./HW4.md), is the input, the Airflow DAGs from week 7 are the scheduler, and
+The data is the data you pinned. The FTSFR pipelines behind the class report,
+[HW 4](./HW4.md), are the input, the Airflow DAGs from week 7 are the scheduler, and
 the benchmark of [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/)
 supplies the models. Nothing this week is a toy.
 
@@ -85,7 +85,7 @@ regressors, which leaves an obvious extension open for you.
 
 Take a handful of the benchmark's baseline methods, a historical mean, an ARIMA,
 a Theta method, and one neural method, and run them as a **scheduled DAG** over the
-class's predictor dataset and a few FTSFR series. Log every run to MLflow: the
+FTSFR series the class report depends on. Log every run to MLflow: the
 method, the data interval, and the out-of-sample error against the historical mean.
 
 Then the two halves of the lesson:
@@ -94,8 +94,8 @@ Then the two halves of the lesson:
    should be retired. The instability of predictor performance over time, which is
    a table in the paper, becomes something you experience as an operations problem.
 2. **The extension.** The benchmark deliberately uses no exogenous regressors, and
-   the class report has just assembled forty-odd predictors. Add them as exogenous
-   regressors to the equity-premium series and see whether anything survives out of
+   the class report has just assembled dozens of indicators. Add a few of them as
+   exogenous regressors to a return series and see whether anything survives out of
    sample. Goyal, Welch, and Zafirov would tell you to expect very little, which is
    exactly why doing it honestly, with the point-in-time discipline the scheduler
    enforces, is the right last exercise of the quarter.

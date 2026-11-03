@@ -26,10 +26,10 @@ Five short files do the work, and two workflows run them.
 | `src/pull_yields.py` | Pulls the 10-year and 2-year yields (FRED series DGS10 and DGS2) from the FRED API. With `--latest`, only the last ten days. |
 | `src/update_history.py` | Computes the spread, adds the new days to the history, and checks the history before anything publishes. |
 | `src/build_page.py` | Builds `docs/index.html` from the history alone. |
-| `src/settings.py` | Reads the API key and the dates from `.env` or the environment. |
+| `src/settings.py` | Reads the API key from `.env` or the environment; the window, `START_DATE` to `END_DATE`, is a committed constant. |
 | `dodo.py` | The tasks: `doit` (the backfill) and `doit latest` (the daily update). |
 | `.github/workflows/deploy_pages.yml` | The daily job. |
-| `.github/workflows/backfill.yml` | The backfill, run by hand with a start date. |
+| `.github/workflows/backfill.yml` | The backfill, run by hand, over the committed window. |
 
 ## A day in the life
 
@@ -112,22 +112,27 @@ backed up, and a bug that corrupts it does not fix itself on the next run.
 ```bash
 uv run doit                        # the backfill: pull START_DATE..END_DATE, build the history and the page
 uv run doit latest                 # the daily update: pull the last ten days
-START_DATE=2020-01-01 uv run doit  # backfill from a date
 ```
 
 Plain `doit` is the backfill. It pulls everything in the window from the
-settings, all the way back to 1976 by default, and fills the history. The
-pull runs again whenever that window changes, because the task declares the
-window as a dependency:
+settings, `START_DATE` to `END_DATE`, all the way back to 1976, and fills
+the history. The window is a committed constant in `src/settings.py`, not
+a `.env` entry: two people with different `.env` files who build the same
+commit must get the same bytes. `.env` holds secrets and machine facts (API
+keys, `WRDS_USERNAME`, `DATA_DIR`); anything that changes what is computed
+lives in a committed file. To backfill from another date, move
+`START_DATE` and commit. The pull runs again whenever that window changes,
+because the task declares the window as a dependency:
 
 ```python
 "uptodate": [config_changed({"start": settings.START_DATE, "end": settings.END_DATE})],
 ```
 
 `doit latest` is the daily update. It has `"uptodate": [False]`, so it runs
-every time it is asked: a daily update's job is to check again. On GitHub,
-`backfill.yml` runs the backfill from the Actions tab with a start date you
-type in, once, when the monitor starts.
+every time it is asked: a daily update's job is to check again, and it is
+the one path in the project that reads today's date. On GitHub,
+`backfill.yml` runs the backfill from the Actions tab, once, when the
+monitor starts, over the committed window.
 
 ## Secrets
 
@@ -170,14 +175,16 @@ An unattended job has no one watching it, so it checks itself twice.
   days with both yields, that merging keeps one row per date, and that the
   workflows read the key from the secret store. They run offline, with no
   key, in under a second, as the job's third step.
-- **Data checks** (`check_history` in `src/update_history.py`) check today's
-  data: no duplicate dates, nothing out of order, no spread beyond six
-  percentage points, and a newest reading no more than ten days old. If any
-  check fails, the update step fails, the job stops, and **yesterday's page
-  stays up**.
+- **Plausibility checks** (`check_history` in `src/update_history.py`)
+  check today's data: no duplicate dates, nothing out of order, no spread
+  beyond six percentage points, and a newest reading no more than ten days
+  old. If any check fails, the update step fails, the job stops, and
+  **yesterday's page stays up**.
 
-A unit test asks whether your function is right. A data check asks whether
-today's data are sane. A live pipeline needs both.
+A unit test asks whether your function is right. A plausibility check asks
+whether today's data are possible. A live pipeline needs both, and neither
+asks whether the spread is the right number. That is
+[data validation](data_validation.md).
 
 ## Traps
 
@@ -231,8 +238,8 @@ Three different things, often confused:
    variables* > *Actions* > *New repository secret*. Name `FRED_API_KEY`,
    value your key.
 4. **Backfill.** *Actions* > *Backfill the Yield Spread History* > *Run
-   workflow*, with the default start date. About a minute; it creates the
-   `monitor-history` branch.
+   workflow*. It pulls the window committed in `src/settings.py`. About a
+   minute; it creates the `monitor-history` branch.
 5. **Publish.** *Actions* > *Build and Deploy the Yield Spread Monitor* >
    *Run workflow*. About a minute; it creates `gh-pages`.
 6. **Turn on Pages.** *Settings* > *Pages* > *Deploy from a branch* >

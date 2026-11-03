@@ -5,6 +5,8 @@
 notebooks/_01_modules_and_packages_ipynb.ipynb
 Week3/uv_and_pixi.md
 Week5/live_monitor.md
+Week5/unit_tests.md
+Week5/data_validation.md
 Week5/study_guide.md
 ```
 
@@ -28,8 +30,9 @@ time.
   make an account at
   [fredaccount.stlouisfed.org](https://fredaccount.stlouisfed.org/apikeys)
   and request a key. The monitor we deploy together needs one.
-- **[HW 4](./HW4.md) and [HW 5](./HW5.md):** dates to be announced on
-  Canvas.
+- **[HW 4](./HW4.md), the class report,** launches next week, Tuesday,
+  November 3, and is due Friday, November 20, at 11:59 pm.
+  **[HW 5](./HW5.md):** dates to be announced on Canvas.
 - **Project consultations continue** through week 7. Every group needs one.
 
 ## Objectives
@@ -157,7 +160,7 @@ today's lab again.
 
 ## Looking ahead to Week 6
 
-Next week picks up the topics this week made room for: unit tests and data
-checks, using the monitor you deployed today; cleaning FINRA TRACE, where there is no ground truth and every filter is a convention you
-must defend, and rebuilding a limit order book, where there is a ground
-truth and validation becomes exact.
+Next week picks up unit tests and data validation, using the monitor you
+deployed today, then turns to data that crosses repositories: snapshots,
+pins, and lineage with ChartBook, and the FTSFR paper on why a forecasting
+result is only as fixed as its data. HW 4, the class report, launches.
