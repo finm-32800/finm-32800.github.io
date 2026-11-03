@@ -16,9 +16,9 @@ Official documentation:
    say how far the Merkle-tree analogy goes.
 5. Explain what a snapshot records, how a store stays small and immutable, and
    how ChartBook compares with Delta Lake, Iceberg, git, and DVC.
-6. Do the [HW 4](../HW4.md) workflow: make a store of your own, build an
-   FTSFR pipeline and snapshot it, depend on it, pin it, read it by name, and
-   commit the lockfile.
+6. Do the [HW 4](../HW4.md) workflow: build an FTSFR pipeline and snapshot
+   it into your store, depend on it, pin it, read it by name, and commit the
+   lockfile.
 
 ## Upgrade to ChartBook 0.5
 
@@ -97,8 +97,8 @@ than your ChartBook, so rerun the install after each upgrade.
 Three FTSFR pipelines build from public data and need no credentials: the
 Fed's fitted Treasury yield curve, the Ken French Data Library, and the He,
 Kelly, and Manela intermediary factors. These commands clone the three, build
-each one, snapshot it into a store of your own, and render a catalog site that
-lists all three. They take a few minutes, most of it downloading packages.
+each one, snapshot it into your store, and render a catalog site that lists
+all three. They take a few minutes, most of it downloading packages.
 
 ```console
 mkdir ftsfr && cd ftsfr
@@ -110,24 +110,35 @@ uv venv --python 3.12
 source .venv/bin/activate           # Windows: .venv\Scripts\activate
 uv pip install -r fed_yield_curve/requirements.txt "pyarrow<26"
 
-mkdir -p ~/.chartbook/store
-chartbook store add mine "~/.chartbook/store"
 chartbook trust                     # trusts every pipeline in this folder
 
-for repo in fed_yield_curve ken_french_data_library he_kelly_manela; do
-  (cd $repo && chartbook run --snapshot)
-done
+cd fed_yield_curve
+chartbook run --snapshot            # builds it (doit), then snapshots it into your store
+cd ..
 
+cd ken_french_data_library
+chartbook run --snapshot
+cd ..
+
+cd he_kelly_manela
+chartbook run --snapshot
+cd ..
+
+chartbook catalog init --title "FTSFR"
 chartbook catalog build
 chartbook catalog open
 ```
+
+No store is set up by hand: the first `chartbook run --snapshot` creates
+`~/.chartbook/store`, the default, and `chartbook store info` shows it. The
+catalog site is the one thing that wants a line of setup, `chartbook catalog
+init`, which writes `~/.chartbook/catalog.toml` naming that store.
 
 One environment serves all three, because `fed_yield_curve`'s requirements
 include everything the other two need. Python 3.12, because the pipelines pin
 NumPy 1.26.4, which has no wheels for later Pythons. `"pyarrow<26"`, because
 the requirements leave pyarrow unpinned and pyarrow 26 needs NumPy 2: without
-the cap, each build stops at its first Parquet write. In PowerShell, run
-`chartbook run --snapshot` in each of the three folders instead of the loop.
+the cap, each build stops at its first Parquet write.
 
 Then read the data by name, from any folder:
 
@@ -138,7 +149,7 @@ curve = data.load("fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon")   # a p
 ```
 
 `chartbook ls dataframes` lists the seven dataframes the three pipelines
-declare. The store you just made is step 1 of [the HW 4 workflow](#the-hw-4-workflow);
+declare. The snapshots are step 1 of [the HW 4 workflow](#the-hw-4-workflow);
 the rest of this page explains what each command did.
 
 ## The problem: data that other repositories made
@@ -407,23 +418,16 @@ and the [Polars exercises](../Week8/polars_exercises.md) go further.
 The class report is many pipelines and one report. Each pipeline the report
 reads is a public repository you can clone and run: the FTSFR pipelines.
 You build each, snapshot it
-into a store of your own, and the report pins that snapshot. The store is
-yours and stays on your machine. Its job is to hold what you built, as you
+into your store, and the report pins that snapshot. The store is yours and
+stays on your machine. Its job is to hold what you built, as you
 built it, so that the report reads those bytes while the upstream's working
 folder goes on changing under your edits and rebuilds.
 
-### 1. A store of your own
+### 1. Build an upstream and snapshot it
 
-```console
-mkdir -p ~/.chartbook/store
-chartbook store add mine "~/.chartbook/store"
-chartbook store info
-```
-
-ChartBook writes to the first store in the catalog, so this one comes first.
-`chartbook store info` lists it as `mine` (writable).
-
-### 1b. Build an upstream and snapshot it
+Nothing to set up first: snapshots go to `~/.chartbook/store`, the default,
+which ChartBook creates when the first one is made. `chartbook store info`
+shows it.
 
 ```console
 git clone https://github.com/ftsfr/fed_yield_curve
@@ -431,7 +435,7 @@ cd fed_yield_curve
 git switch --detach 3904ad6          # the commit the report's lockfile names
 uv venv --python 3.12 && source .venv/bin/activate && uv pip install -r requirements.txt "pyarrow<26"
 chartbook trust                      # once per folder: this build script may run
-chartbook run --snapshot             # builds (doit), then snapshots into `mine`
+chartbook run --snapshot             # builds (doit), then snapshots into your store
 ```
 
 `chartbook run --snapshot` refuses if the working tree has uncommitted

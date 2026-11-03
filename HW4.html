@@ -602,7 +602,7 @@ style guide.</p></li>
 </section>
 <section id="before-you-start">
 <h2>Before You Start<a class="headerlink" href="#before-you-start" title="Link to this heading">#</a></h2>
-<ul>
+<ul class="simple">
 <li><p><strong>Accept your invite</strong> to
 <a class="reference external" href="https://github.com/finm-32800/finm_midterm_report">finm-32800/finm_midterm_report</a>
 and clone it.</p></li>
@@ -619,18 +619,12 @@ puts it in the current repository instead, to commit with it.</p></li>
 locked environment the first time and builds the report.</p></li>
 <li><p><strong>LaTeX.</strong> The PDF is compiled with XeLaTeX. <em>Set up once</em> in the
 repository’s README lists the packages it needs.</p></li>
-<li><p><strong>A store of your own.</strong> The report reads each upstream’s snapshot from a
-store on your machine, never from the upstream’s working folder, so an
-upstream you are also editing cannot change beneath the report. ChartBook
-writes snapshots to the first store in your catalog, so register one
-before anything else:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir -p ~/.chartbook/store</span>
-<span class="go">chartbook store add mine &quot;~/.chartbook/store&quot;</span>
-<span class="go">chartbook store info</span>
-</pre></div>
-</div>
-<p>Every upstream you build lands there.</p>
-</li>
+<li><p><strong>Your store.</strong> The report reads each upstream’s snapshot from a store
+on your machine, never from the upstream’s working folder, so an upstream
+you are also editing cannot change beneath the report. There is nothing
+to set up: snapshots go to <code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, which ChartBook creates
+when you make the first one, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> shows it. Every
+upstream you build lands there.</p></li>
 </ul>
 </section>
 <section id="the-data-rule">

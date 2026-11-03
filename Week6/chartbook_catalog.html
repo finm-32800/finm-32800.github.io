@@ -537,8 +537,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hw-4-workflow">The HW 4 workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-store-of-your-own">1. A store of your own</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-build-an-upstream-and-snapshot-it">1b. Build an upstream and snapshot it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-upstream-and-snapshot-it">1. Build an upstream and snapshot it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declare-a-dependency-and-pin-it">2. Declare a dependency and pin it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-by-name">3. Read by name</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-and-move-forward-on-purpose">4. Check, and move forward on purpose</a></li>
@@ -574,9 +573,9 @@ came from).</p></li>
 say how far the Merkle-tree analogy goes.</p></li>
 <li><p>Explain what a snapshot records, how a store stays small and immutable, and
 how ChartBook compares with Delta Lake, Iceberg, git, and DVC.</p></li>
-<li><p>Do the <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> workflow: make a store of your own, build an
-FTSFR pipeline and snapshot it, depend on it, pin it, read it by name, and
-commit the lockfile.</p></li>
+<li><p>Do the <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> workflow: build an FTSFR pipeline and snapshot
+it into your store, depend on it, pin it, read it by name, and commit the
+lockfile.</p></li>
 </ol>
 <section id="upgrade-to-chartbook-0-5">
 <h2>Upgrade to ChartBook 0.5<a class="headerlink" href="#upgrade-to-chartbook-0-5" title="Link to this heading">#</a></h2>
@@ -647,8 +646,8 @@ than your ChartBook, so rerun the install after each upgrade.</p>
 <p>Three FTSFR pipelines build from public data and need no credentials: the
 Fed’s fitted Treasury yield curve, the Ken French Data Library, and the He,
 Kelly, and Manela intermediary factors. These commands clone the three, build
-each one, snapshot it into a store of your own, and render a catalog site that
-lists all three. They take a few minutes, most of it downloading packages.</p>
+each one, snapshot it into your store, and render a catalog site that lists
+all three. They take a few minutes, most of it downloading packages.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir ftsfr &amp;&amp; cd ftsfr</span>
 <span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
 <span class="go">git clone https://github.com/ftsfr/ken_french_data_library</span>
@@ -658,24 +657,33 @@ lists all three. They take a few minutes, most of it downloading packages.</p>
 <span class="go">source .venv/bin/activate           # Windows: .venv\Scripts\activate</span>
 <span class="go">uv pip install -r fed_yield_curve/requirements.txt &quot;pyarrow&lt;26&quot;</span>
 
-<span class="go">mkdir -p ~/.chartbook/store</span>
-<span class="go">chartbook store add mine &quot;~/.chartbook/store&quot;</span>
 <span class="go">chartbook trust                     # trusts every pipeline in this folder</span>
 
-<span class="go">for repo in fed_yield_curve ken_french_data_library he_kelly_manela; do</span>
-<span class="go">  (cd $repo &amp;&amp; chartbook run --snapshot)</span>
-<span class="go">done</span>
+<span class="go">cd fed_yield_curve</span>
+<span class="go">chartbook run --snapshot            # builds it (doit), then snapshots it into your store</span>
+<span class="go">cd ..</span>
 
+<span class="go">cd ken_french_data_library</span>
+<span class="go">chartbook run --snapshot</span>
+<span class="go">cd ..</span>
+
+<span class="go">cd he_kelly_manela</span>
+<span class="go">chartbook run --snapshot</span>
+<span class="go">cd ..</span>
+
+<span class="go">chartbook catalog init --title &quot;FTSFR&quot;</span>
 <span class="go">chartbook catalog build</span>
 <span class="go">chartbook catalog open</span>
 </pre></div>
 </div>
+<p>No store is set up by hand: the first <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> creates
+<code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> shows it. The
+catalog site is the one thing that wants a line of setup, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">init</span></code>, which writes <code class="docutils literal notranslate"><span class="pre">~/.chartbook/catalog.toml</span></code> naming that store.</p>
 <p>One environment serves all three, because <code class="docutils literal notranslate"><span class="pre">fed_yield_curve</span></code>’s requirements
 include everything the other two need. Python 3.12, because the pipelines pin
 NumPy 1.26.4, which has no wheels for later Pythons. <code class="docutils literal notranslate"><span class="pre">&quot;pyarrow&lt;26&quot;</span></code>, because
 the requirements leave pyarrow unpinned and pyarrow 26 needs NumPy 2: without
-the cap, each build stops at its first Parquet write. In PowerShell, run
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> in each of the three folders instead of the loop.</p>
+the cap, each build stops at its first Parquet write.</p>
 <p>Then read the data by name, from any folder:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
 
@@ -683,7 +691,7 @@ the cap, each build stops at its first Parquet write. In PowerShell, run
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span> <span class="pre">dataframes</span></code> lists the seven dataframes the three pipelines
-declare. The store you just made is step 1 of <a class="reference internal" href="#the-hw-4-workflow">the HW 4 workflow</a>;
+declare. The snapshots are step 1 of <a class="reference internal" href="#the-hw-4-workflow">the HW 4 workflow</a>;
 the rest of this page explains what each command did.</p>
 </section>
 <section id="the-problem-data-that-other-repositories-made">
@@ -1006,28 +1014,21 @@ and the <a class="reference internal" href="../Week8/polars_exercises.html"><spa
 <p>The class report is many pipelines and one report. Each pipeline the report
 reads is a public repository you can clone and run: the FTSFR pipelines.
 You build each, snapshot it
-into a store of your own, and the report pins that snapshot. The store is
-yours and stays on your machine. Its job is to hold what you built, as you
+into your store, and the report pins that snapshot. The store is yours and
+stays on your machine. Its job is to hold what you built, as you
 built it, so that the report reads those bytes while the upstream’s working
 folder goes on changing under your edits and rebuilds.</p>
-<section id="a-store-of-your-own">
-<h3>1. A store of your own<a class="headerlink" href="#a-store-of-your-own" title="Link to this heading">#</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir -p ~/.chartbook/store</span>
-<span class="go">chartbook store add mine &quot;~/.chartbook/store&quot;</span>
-<span class="go">chartbook store info</span>
-</pre></div>
-</div>
-<p>ChartBook writes to the first store in the catalog, so this one comes first.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> lists it as <code class="docutils literal notranslate"><span class="pre">mine</span></code> (writable).</p>
-</section>
-<section id="b-build-an-upstream-and-snapshot-it">
-<h3>1b. Build an upstream and snapshot it<a class="headerlink" href="#b-build-an-upstream-and-snapshot-it" title="Link to this heading">#</a></h3>
+<section id="build-an-upstream-and-snapshot-it">
+<h3>1. Build an upstream and snapshot it<a class="headerlink" href="#build-an-upstream-and-snapshot-it" title="Link to this heading">#</a></h3>
+<p>Nothing to set up first: snapshots go to <code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default,
+which ChartBook creates when the first one is made. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code>
+shows it.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
 <span class="go">cd fed_yield_curve</span>
 <span class="go">git switch --detach 3904ad6          # the commit the report&#39;s lockfile names</span>
 <span class="go">uv venv --python 3.12 &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install -r requirements.txt &quot;pyarrow&lt;26&quot;</span>
 <span class="go">chartbook trust                      # once per folder: this build script may run</span>
-<span class="go">chartbook run --snapshot             # builds (doit), then snapshots into `mine`</span>
+<span class="go">chartbook run --snapshot             # builds (doit), then snapshots into your store</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> refuses if the working tree has uncommitted
@@ -1253,8 +1254,7 @@ they borrow from.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hw-4-workflow">The HW 4 workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-store-of-your-own">1. A store of your own</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-build-an-upstream-and-snapshot-it">1b. Build an upstream and snapshot it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-upstream-and-snapshot-it">1. Build an upstream and snapshot it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declare-a-dependency-and-pin-it">2. Declare a dependency and pin it</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-by-name">3. Read by name</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-and-move-forward-on-purpose">4. Check, and move forward on purpose</a></li>

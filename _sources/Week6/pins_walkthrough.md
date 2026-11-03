@@ -18,9 +18,9 @@ first; this one shows each word on the screen.
   clone). Activate it once, `source .venv/bin/activate`, so that the
   commands below are typed as written; or put `uv run` in front of each.
 - `chartbook --version` printing `0.5.0` or newer.
-- A store of your own, holding the snapshots `chartbook.lock` pins, each
-  built by you (step E shows how, for one of them). `chartbook pin --frozen`
-  passes when this is set up.
+- The snapshots `chartbook.lock` pins, in your store, each built by you
+  (step E shows how, for one of them). `chartbook pin --frozen` passes when
+  this is set up.
 - `jq`, for reading the lockfile (`brew install jq`, or your package
   manager).
 
@@ -71,14 +71,14 @@ chartbook store info
 ```
 
 ```text
-Store mine: /Users/you/.chartbook/store (writable)
+Store default: /Users/you/.chartbook/store (writable)
   ftsfr/fed_yield_curve: 1 snapshot(s)
   ... (8 pipelines)
   Newest: 2026-11-02T22:28:14.877522Z
 ```
 
-Your own store comes first, because ChartBook writes to the first store in
-the catalog. The report declares its upstreams in `chartbook.toml`:
+This is the default store, made when your first snapshot was. The report
+declares its upstreams in `chartbook.toml`:
 
 ```console
 sed -n '/^\[dependencies\]/,$p' chartbook.toml

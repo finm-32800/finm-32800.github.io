@@ -549,9 +549,9 @@ first; this one shows each word on the screen.</p>
 clone). Activate it once, <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">.venv/bin/activate</span></code>, so that the
 commands below are typed as written; or put <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span></code> in front of each.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> printing <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code> or newer.</p></li>
-<li><p>A store of your own, holding the snapshots <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins, each
-built by you (step E shows how, for one of them). <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code>
-passes when this is set up.</p></li>
+<li><p>The snapshots <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins, in your store, each built by you
+(step E shows how, for one of them). <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code> passes when
+this is set up.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jq</span></code>, for reading the lockfile (<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">jq</span></code>, or your package
 manager).</p></li>
 </ul>
@@ -594,14 +594,14 @@ First, where ChartBook will look.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook store info</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Store mine: /Users/you/.chartbook/store (writable)
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Store default: /Users/you/.chartbook/store (writable)
   ftsfr/fed_yield_curve: 1 snapshot(s)
   ... (8 pipelines)
   Newest: 2026-11-02T22:28:14.877522Z
 </pre></div>
 </div>
-<p>Your own store comes first, because ChartBook writes to the first store in
-the catalog. The report declares its upstreams in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>:</p>
+<p>This is the default store, made when your first snapshot was. The report
+declares its upstreams in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sed -n &#39;/^\[dependencies\]/,$p&#39; chartbook.toml</span>
 </pre></div>
 </div>

@@ -84,19 +84,12 @@ so the reviews can happen before the deadline.
   locked environment the first time and builds the report.
 - **LaTeX.** The PDF is compiled with XeLaTeX. *Set up once* in the
   repository's README lists the packages it needs.
-- **A store of your own.** The report reads each upstream's snapshot from a
-  store on your machine, never from the upstream's working folder, so an
-  upstream you are also editing cannot change beneath the report. ChartBook
-  writes snapshots to the first store in your catalog, so register one
-  before anything else:
-
-  ```console
-  mkdir -p ~/.chartbook/store
-  chartbook store add mine "~/.chartbook/store"
-  chartbook store info
-  ```
-
-  Every upstream you build lands there.
+- **Your store.** The report reads each upstream's snapshot from a store
+  on your machine, never from the upstream's working folder, so an upstream
+  you are also editing cannot change beneath the report. There is nothing
+  to set up: snapshots go to `~/.chartbook/store`, which ChartBook creates
+  when you make the first one, and `chartbook store info` shows it. Every
+  upstream you build lands there.
 
 ## The Data Rule
 
