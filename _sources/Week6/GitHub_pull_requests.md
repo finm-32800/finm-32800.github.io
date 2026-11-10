@@ -135,7 +135,7 @@ cd ..
 git clone https://github.com/ftsfr/fed_yield_curve
 cd fed_yield_curve
 git checkout <commit>      # the commit chartbook.lock names for this pipeline
-python -m venv .venv && source .venv/bin/activate
+python3.12 -m venv ../.venv && source ../.venv/bin/activate   # beside the clone: a .venv inside it would count as uncommitted files
 pip install -r requirements.txt
 chartbook trust
 chartbook run --snapshot   # builds it and puts the snapshot in your store
