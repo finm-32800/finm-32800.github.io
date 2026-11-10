@@ -224,18 +224,20 @@ the dependency:
 mkdir my_report && cd my_report
 git init
 printf '[project]\nname = "My Report"\n' > chartbook.toml
-chartbook add ftsfr/fed_yield_curve
+chartbook add https://github.com/ftsfr/fed_yield_curve
 ```
 
 ```text
-Added to [dependencies] in my_report/chartbook.toml: "ftsfr/fed_yield_curve" = {}
+Added to [dependencies] in my_report/chartbook.toml: "ftsfr/fed_yield_curve" = { repository = "https://github.com/ftsfr/fed_yield_curve" }
 ftsfr/fed_yield_curve: 4 pinned
   From its snapshot at 5bb7217, made 2026-11-04 05:41 UTC, which says it was made in https://github.com/ftsfr/fed_yield_curve, in store default.
 Wrote chartbook.lock.
 ```
 
 `chartbook add` wrote one line under `[dependencies]` in `chartbook.toml`
-and a `chartbook.lock` that names the snapshot and the hash of each of its
+(given the repository's address, it records the address too, so the manifest
+says where the pipeline's code lives; `chartbook add ftsfr/fed_yield_curve`
+pins the same snapshot and writes `= {}`) and a `chartbook.lock` that names the snapshot and the hash of each of its
 four assets. Your code reads the data by name, and the lockfile says which
 bytes that name means:
 
@@ -322,7 +324,7 @@ made, and an index records what a site shows. The split between
 | Question | Tool | Where its record lives |
 |---|---|---|
 | What is stale and must rerun? | `doit` | `.doit.db`: for each task, the MD5 of each `file_dep` when the task last ran. One machine, not committed |
-| When does it run, and what happens if it fails? | An orchestrator: Apache Airflow, in [week 7](../overview_w7.md) | The orchestrator's database of runs, retries, and schedules |
+| When does it run, and what happens if it fails? | An orchestrator: Apache Airflow, in [week 9](../overview_w9.md) | The orchestrator's database of runs, retries, and schedules |
 | What is this data, where did it come from, and who uses it? | ChartBook | `chartbook.lock` in git, a record you commit and share; the snapshots it names, in a store on your machine |
 
 `doit` keeps its state on one machine on purpose. Deleting `.doit.db`, or

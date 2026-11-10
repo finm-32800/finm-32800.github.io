@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -754,17 +754,19 @@ the dependency:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir my_report &amp;&amp; cd my_report</span>
 <span class="go">git init</span>
 <span class="go">printf &#39;[project]\nname = &quot;My Report&quot;\n&#39; &gt; chartbook.toml</span>
-<span class="go">chartbook add ftsfr/fed_yield_curve</span>
+<span class="go">chartbook add https://github.com/ftsfr/fed_yield_curve</span>
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Added to [dependencies] in my_report/chartbook.toml: &quot;ftsfr/fed_yield_curve&quot; = {}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Added to [dependencies] in my_report/chartbook.toml: &quot;ftsfr/fed_yield_curve&quot; = { repository = &quot;https://github.com/ftsfr/fed_yield_curve&quot; }
 ftsfr/fed_yield_curve: 4 pinned
   From its snapshot at 5bb7217, made 2026-11-04 05:41 UTC, which says it was made in https://github.com/ftsfr/fed_yield_curve, in store default.
 Wrote chartbook.lock.
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span></code> wrote one line under <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>
-and a <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> that names the snapshot and the hash of each of its
+(given the repository’s address, it records the address too, so the manifest
+says where the pipeline’s code lives; <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">ftsfr/fed_yield_curve</span></code>
+pins the same snapshot and writes <code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">{}</span></code>) and a <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> that names the snapshot and the hash of each of its
 four assets. Your code reads the data by name, and the lockfile says which
 bytes that name means:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
@@ -888,7 +890,7 @@ made, and an index records what a site shows. The split between
 <td><p><code class="docutils literal notranslate"><span class="pre">.doit.db</span></code>: for each task, the MD5 of each <code class="docutils literal notranslate"><span class="pre">file_dep</span></code> when the task last ran. One machine, not committed</p></td>
 </tr>
 <tr class="row-odd"><td><p>When does it run, and what happens if it fails?</p></td>
-<td><p>An orchestrator: Apache Airflow, in <a class="reference internal" href="../overview_w7.html"><span class="std std-doc">week 7</span></a></p></td>
+<td><p>An orchestrator: Apache Airflow, in <a class="reference internal" href="../overview_w9.html"><span class="std std-doc">week 9</span></a></p></td>
 <td><p>The orchestrator’s database of runs, retries, and schedules</p></td>
 </tr>
 <tr class="row-even"><td><p>What is this data, where did it come from, and who uses it?</p></td>

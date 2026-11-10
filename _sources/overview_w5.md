@@ -31,8 +31,8 @@ time.
   [fredaccount.stlouisfed.org](https://fredaccount.stlouisfed.org/apikeys)
   and request a key. The monitor we deploy together needs one.
 - **[HW 4](./HW4.md), the class report,** launches next week, Tuesday,
-  November 3, and is due Friday, November 20, at 11:59 pm.
-  **[HW 5](./HW5.md):** dates to be announced on Canvas.
+  November 3, and is due Tuesday, November 24, at 9:30 am.
+  **[HW 5](./HW5.md):** TBD.
 - **Project consultations continue** through week 7. Every group needs one.
 
 ## Objectives

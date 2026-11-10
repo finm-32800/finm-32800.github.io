@@ -1,7 +1,7 @@
 # Homework 4: The Class Report
 
 - **Launched:** Tuesday, November 3, 2026, in the week 6 session.
-  **Due:** Friday, November 20, 2026, at 11:59 pm Chicago time. Also posted
+  **Due:** Tuesday, November 24, 2026, at 9:30 am Chicago time. Also posted
   on Canvas.
 - **Link to Assignment:** the private repository
   [finm-32800/finm_midterm_report](https://github.com/finm-32800/finm_midterm_report).
@@ -52,8 +52,10 @@ and finding the upstream that carries its data, takes the most thought. It
 takes the most work when the upstream is your own homework, which is the
 point of the bonus. The review runs on other people's calendars: two
 classmates must read, build, and approve your pull request, and you must
-answer their comments. **Open your pull request by Thursday, November 12,**
-so the reviews can happen before the deadline.
+answer their comments. **Open your pull request by Tuesday, November 17,**
+the week 8 session, so the reviews and your revisions can happen before the
+deadline. If your invite to the report repository came late, start now:
+claim your issue and open a draft pull request as soon as the branch exists.
 
 ## Learning Outcomes
 
@@ -298,4 +300,4 @@ encouraged, not graded.
 | **Bonus** | The exhibit's upstream is your own homework or final-project pipeline, as a public git dependency. | +2 | Instructor |
 
 Credit requires each step to happen before the deadline. A pull request that
-is unmerged at 11:59 pm on Friday, November 20, earns nothing, whatever its quality.
+is unmerged at 9:30 am on Tuesday, November 24, earns nothing, whatever its quality.

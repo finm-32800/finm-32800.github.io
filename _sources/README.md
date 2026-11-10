@@ -56,21 +56,19 @@ page here: https://github.com/orgs/finm-32800/discussions
 ### Coursework at a Glance
 
 The graded work has three parts: homework, one exam, and a group project.
-From week 4 on, one homework or exam is due each week, and never two.
+From week 4 on, the due dates are spaced so that no two fall in the same week.
 
 | Week | Date | Due |
 | --- | --- | --- |
 | 4 | Tuesday, October 20 | [HW 1](HW1.md): CRSP, the CAPM, and Fama-French |
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
 | 7 | Tuesday, November 10 | [HW 3](HW3.md): option-implied crash probabilities |
-| 8 | Friday, November 20 | [HW 4](HW4.md): the class report |
-| | To be announced | [HW 5](HW5.md) |
-| | Tuesday, November 24 | No class: Thanksgiving break |
+| | Tuesday, November 24 | [HW 4](HW4.md): the class report (no class: Thanksgiving break) |
+| | TBD | [HW 5](HW5.md) |
 | 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
 
-The homework comes early on purpose. The dates for HW 5 are announced on
-Canvas.
+The homework comes early on purpose. HW 5 is TBD.
 
 ### Homework
 

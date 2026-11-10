@@ -53,7 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Polars Exercises: Code Snippets" href="../Week8/polars_exercises.html" />
+    <link rel="next" title="Strategies for Medium-Sized Data" href="../Week8/medium_sized_data_strategies.html" />
     <link rel="prev" title="Data Sources Overview" href="_01_data_sources_overview_ipynb.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -261,30 +261,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -1897,7 +1897,7 @@ High-yield bonds (BB and below) tend to have shorter duration.</p>
 <span class="n">data_valid</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data_valid</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">order_valid</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data_valid</span><span class="p">,</span> <span class="n">tick_labels</span><span class="o">=</span><span class="n">order_valid</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">box_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#4c72b0&quot;</span><span class="p">,</span> <span class="s2">&quot;#55a868&quot;</span><span class="p">,</span> <span class="s2">&quot;#c44e52&quot;</span><span class="p">,</span> <span class="s2">&quot;#8172b2&quot;</span><span class="p">,</span> <span class="s2">&quot;#ccb974&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">patch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]):</span>
     <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">box_colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">box_colors</span><span class="p">)])</span>
@@ -1911,10 +1911,6 @@ High-yield bonds (BB and below) tend to have shorter duration.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/l3/tj6vb0ld2ys1h939jz0qrfrh0000gn/T/ipykernel_90126/3343011909.py:41: MatplotlibDeprecationWarning: The &#39;labels&#39; parameter of boxplot() has been renamed &#39;tick_labels&#39; since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp = ax.boxplot(data_valid, labels=order_valid, patch_artist=True, showfliers=False)
-</pre></div>
-</div>
 <img alt="../_images/6fb772c40b645c46f3f6ab774fa59db959406aa7957ae1e65fb9d1e3b3defba8.png" src="../_images/6fb772c40b645c46f3f6ab774fa59db959406aa7957ae1e65fb9d1e3b3defba8.png" />
 </div>
 </div>
@@ -2031,11 +2027,11 @@ Factor Replication Crisis.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="../Week8/polars_exercises.html"
+       href="../Week8/medium_sized_data_strategies.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Polars Exercises: Code Snippets</p>
+        <p class="prev-next-title">Strategies for Medium-Sized Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

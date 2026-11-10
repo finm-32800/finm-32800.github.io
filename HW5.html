@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="current nav bd-sidenav">
@@ -492,9 +492,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -510,14 +508,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-determined">To be determined</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -528,15 +518,7 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="homework-5">
 <h1>Homework 5<a class="headerlink" href="#homework-5" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p><strong>Launched:</strong> to be announced. <strong>Due:</strong> to be announced. Dates are posted
-here and on Canvas.</p></li>
-<li><p><strong>Link to Assignment:</strong> posted at launch</p></li>
-</ul>
-<section id="to-be-determined">
-<h2>To be determined<a class="headerlink" href="#to-be-determined" title="Link to this heading">#</a></h2>
-<p>The topic, the tasks, and the dates are posted when it launches.</p>
-</section>
+<p>TBD.</p>
 </section>
 
 <div class="section ablog__blog_comments">
@@ -577,21 +559,6 @@ here and on Canvas.</p></li>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-determined">To be determined</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

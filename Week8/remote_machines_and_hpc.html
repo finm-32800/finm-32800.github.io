@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -520,6 +520,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ssh">What is SSH?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-midway3">Connecting to Midway3</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-config-file">SSH Config File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-duo-prompt-many-connections">One Duo Prompt, Many Connections</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uchicagos-midway3-cluster">UChicago’s Midway3 Cluster</a><ul class="nav section-nav flex-column">
@@ -530,9 +531,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-the-job-scheduler">SLURM: The Job Scheduler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-asks-for-it">Who Asks for It?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-job-scheduler">Why a Job Scheduler?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions">Partitions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-jobs-with-sbatch">Batch Jobs with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#job-arrays">Job Arrays</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-internet-access-problem">The Internet Access Problem</a><ul class="nav section-nav flex-column">
@@ -550,6 +553,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-tunneling">The Solution: SSH Tunneling</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-remote-machine">VS Code on a Remote Machine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wrds-cloud-same-idea-different-scheduler">The WRDS Cloud: Same Idea, Different Scheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
 </ul>
             </nav>
@@ -627,6 +632,23 @@ your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config<
 </pre></div>
 </div>
 </section>
+<section id="one-duo-prompt-many-connections">
+<h3>One Duo Prompt, Many Connections<a class="headerlink" href="#one-duo-prompt-many-connections" title="Link to this heading">#</a></h3>
+<p>Midway3 asks for your password and Duo on every new connection, and so does
+every <code class="docutils literal notranslate"><span class="pre">scp</span></code>, <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, and tunnel. SSH can reuse one authenticated connection
+for all of them. Add three lines to the same <code class="docutils literal notranslate"><span class="pre">Host</span></code> block:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Host midway3
+    HostName midway3.rcc.uchicago.edu
+    User &lt;your-cnetid&gt;
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPersist 8h
+</pre></div>
+</div>
+<p>The first <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">midway3</span></code> of the day asks for Duo. For the next eight hours,
+every <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">midway3</span></code>, <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">...</span> <span class="pre">midway3:...</span></code>, and <code class="docutils literal notranslate"><span class="pre">scp</span></code> rides on that
+connection without asking again. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-O</span> <span class="pre">exit</span> <span class="pre">midway3</span></code> closes it.</p>
+</section>
 </section>
 <section id="uchicagos-midway3-cluster">
 <h2>UChicago’s Midway3 Cluster<a class="headerlink" href="#uchicagos-midway3-cluster" title="Link to this heading">#</a></h2>
@@ -677,7 +699,7 @@ SLURM job scheduler. Most compute partitions have <strong>no internet access</st
 <td><p>Config files, small scripts</p></td>
 </tr>
 <tr class="row-odd"><td><p>Project</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/project/finm32900</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/project/finm32800</span></code></p></td>
 <td><p>Large (shared)</p></td>
 <td><p>Yes</p></td>
 <td><p>Shared course data and code</p></td>
@@ -720,6 +742,19 @@ module<span class="w"> </span>unload<span class="w"> </span>python/3.11.9
 </section>
 <section id="slurm-the-job-scheduler">
 <h2>SLURM: The Job Scheduler<a class="headerlink" href="#slurm-the-job-scheduler" title="Link to this heading">#</a></h2>
+<section id="who-asks-for-it">
+<h3>Who Asks for It?<a class="headerlink" href="#who-asks-for-it" title="Link to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../Week0/course_map.html"><span class="std std-doc">job postings</span></a> this course tracks show where
+SLURM matters. It is rare across all technical postings: 43 of about 9,200.
+But it shows up at 13 of the 63 firms, and those firms are concentrated
+where students of this program go. It appears at 3 of 8 proprietary
+trading firms (Jump, Tower, DRW), 3 of 10 market makers (IMC, Citadel
+Securities, Virtu), and 4 of 16 systematic funds (Voleon, Squarepoint,
+WorldQuant, Qube). It appears at none of the 12 asset managers. At a firm
+that runs its own cluster, the scheduler is assumed knowledge. The command
+line under it is assumed almost everywhere: Bash or shell scripting
+appears at 45 of the 63 firms.</p>
+</section>
 <section id="why-a-job-scheduler">
 <h3>Why a Job Scheduler?<a class="headerlink" href="#why-a-job-scheduler" title="Link to this heading">#</a></h3>
 <p>A cluster is shared by hundreds of users. Without coordination, everyone would
@@ -798,14 +833,14 @@ For exploratory work, use `sinteractive` to get a shell on a compute node:
 
 ```bash
 # Basic interactive session (2 hours, default partition)
-sinteractive --account=finm32900
+sinteractive --account=finm32800
 
 # Request more resources
-sinteractive --account=finm32900 --partition=caslake \
+sinteractive --account=finm32800 --partition=caslake \
     --time=04:00:00 --cpus-per-task=4 --mem=32G
 
 # Quick debugging (free, 15 minutes, up to 4 cores)
-sinteractive --account=finm32900 --qos=debug --time=00:15:00
+sinteractive --account=finm32800 --qos=debug --time=00:15:00
 </pre></div>
 </div>
 <p>After running <code class="docutils literal notranslate"><span class="pre">sinteractive</span></code>, you wait in the queue until a node is available.
@@ -826,14 +861,14 @@ Here is a real example from our TRACE data pipeline:</p>
 <span class="c1">#SBATCH --mem-per-cpu=8000</span>
 <span class="c1">#SBATCH --partition=build</span>
 <span class="c1">#SBATCH --time=6:00:00</span>
-<span class="c1">#SBATCH --account=finm32900</span>
+<span class="c1">#SBATCH --account=finm32800</span>
 
 <span class="c1"># Change to the project directory</span>
 <span class="nb">cd</span><span class="w"> </span>/home/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/trace-data-pipeline
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Changed to trace-data-pipeline directory&quot;</span>
 
 <span class="c1"># Activate Python virtual environment</span>
-<span class="nb">source</span><span class="w"> </span>/project/finm32900/tdp-venv-p3119/bin/activate
+<span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/envs/clean_trace/bin/activate
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Activated virtual environment&quot;</span>
 
 <span class="c1"># Run the pipeline</span>
@@ -887,6 +922,39 @@ squeue<span class="w"> </span>--user<span class="o">=</span><span class="nv">$US
 scancel<span class="w"> </span>&lt;job_id&gt;
 </pre></div>
 </div>
+</section>
+<section id="job-arrays">
+<h3>Job Arrays<a class="headerlink" href="#job-arrays" title="Link to this heading">#</a></h3>
+<p>Much of the work on a cluster is the same script run on many independent
+pieces: one task per year of TRACE, per ticker, per parameter setting. A
+<strong>job array</strong> submits all of them at once. SLURM gives each copy its own
+<code class="docutils literal notranslate"><span class="pre">SLURM_ARRAY_TASK_ID</span></code>, and the script uses it to choose its piece:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=hello-array</span>
+<span class="c1">#SBATCH --account=finm32800</span>
+<span class="c1">#SBATCH --partition=caslake</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH --array=1-5</span>
+<span class="c1">#SBATCH --output=%x_%A_%a.out</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Task </span><span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span><span class="s2"> of job </span><span class="si">${</span><span class="nv">SLURM_ARRAY_JOB_ID</span><span class="si">}</span><span class="s2"> on </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">%A</span></code> is the array’s job ID and <code class="docutils literal notranslate"><span class="pre">%a</span></code> the task’s index, so each task writes its
+own output file. <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">--user=$USER</span></code> lists the tasks as <code class="docutils literal notranslate"><span class="pre">&lt;jobid&gt;_1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&lt;jobid&gt;_2</span></code>, and so on, and <code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;jobid&gt;</span></code> cancels all of them. The real
+version looks like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --array=2015-2024</span>
+python<span class="w"> </span>src/process_year.py<span class="w"> </span>--year<span class="w"> </span><span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>The tasks must not depend on one another. If year 2020 needs the output of
+year 2019, it is not an array; it is a pipeline, and <code class="docutils literal notranslate"><span class="pre">doit</span></code> or an
+orchestrator orders it.</p>
+<p>After a job finishes, <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-j</span> <span class="pre">&lt;jobid&gt;</span></code> reports how long it ran and how much
+memory it used. Read it before the next submission: asking for far more
+memory or time than you use makes you wait longer in the queue.</p>
 <div class="note admonition">
 <p class="admonition-title">Discussion</p>
 <p>Notice that the sbatch script above uses <code class="docutils literal notranslate"><span class="pre">--partition=build</span></code>. Why? Because the
@@ -968,7 +1036,7 @@ scp<span class="w"> </span>my_script.py<span class="w"> </span>&lt;cnetid&gt;@mi
 scp<span class="w"> </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu:/scratch/midway3/&lt;cnetid&gt;/results.parquet<span class="w"> </span>./
 
 <span class="c1"># Copy an entire directory</span>
-scp<span class="w"> </span>-r<span class="w"> </span>my_project/<span class="w"> </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu:/project/finm32900/&lt;cnetid&gt;/
+scp<span class="w"> </span>-r<span class="w"> </span>my_project/<span class="w"> </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu:/project/finm32800/&lt;cnetid&gt;/
 </pre></div>
 </div>
 </section>
@@ -978,7 +1046,7 @@ scp<span class="w"> </span>-r<span class="w"> </span>my_project/<span class="w">
 making it much faster for repeated syncs:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sync a local project directory to Midway</span>
 rsync<span class="w"> </span>-avzhe<span class="w"> </span>ssh<span class="w"> </span>./my_project/<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu:/project/finm32900/&lt;cnetid&gt;/my_project/
+<span class="w">    </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu:/project/finm32800/&lt;cnetid&gt;/my_project/
 
 <span class="c1"># Sync results from Midway back to your laptop</span>
 rsync<span class="w"> </span>-avzhe<span class="w"> </span>ssh<span class="w"> </span><span class="se">\</span>
@@ -1086,6 +1154,95 @@ through Midway’s login node.</p>
 </div>
 </section>
 </section>
+<section id="vs-code-on-a-remote-machine">
+<h2>VS Code on a Remote Machine<a class="headerlink" href="#vs-code-on-a-remote-machine" title="Link to this heading">#</a></h2>
+<p>You can edit files on the cluster with <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, but most people want
+their editor. There are three ways to get VS Code onto a remote machine,
+and where the server runs is what separates them.</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scode</span></code> on Midway3.</strong> RCC’s <code class="docutils literal notranslate"><span class="pre">scode</span></code> submits a SLURM job that starts VS
+Code on a <strong>compute node</strong> and prints the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span></code> command that tunnels it
+to your browser. This is the supported way on Midway3. Follow
+<a class="reference external" href="https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/">RCC’s instructions</a>,
+which are the source of truth, with <code class="docutils literal notranslate"><span class="pre">--account</span> <span class="pre">finm32800</span></code>. The session is
+an ordinary SLURM job: it gets the CPUs and memory you ask for, and it ends
+when its time runs out or when you <code class="docutils literal notranslate"><span class="pre">scancel</span></code> it.</p></li>
+<li><p><strong>Remote-SSH.</strong> The VS Code extension of that name opens a folder over
+SSH, and it starts its server on whatever machine you SSH into. On a
+machine of your own that is the right tool. On Midway3 you land on a
+<strong>login node</strong>, which is for editing and submitting jobs, not for a
+long-running server or computation, so prefer <code class="docutils literal notranslate"><span class="pre">scode</span></code> there.</p></li>
+<li><p><strong>A VS Code tunnel.</strong> <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">tunnel</span></code> on a remote machine connects <em>out</em> to
+Microsoft’s relay and registers the machine under your GitHub account. You
+then open it from <a class="reference external" href="https://vscode.dev">vscode.dev</a> or the Remote - Tunnels
+extension, from anywhere, with no SSH and no open port. Because it needs
+outbound internet for as long as it runs, it does not work on Midway3’s
+compute nodes, which have none. It is the tool for a machine you control:
+a workstation at the office, a cloud VM, or a Mac mini in a closet.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>tunnel<span class="w"> </span>--name<span class="w"> </span>my-workstation<span class="w">   </span><span class="c1"># first run: log in with GitHub</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="the-wrds-cloud-same-idea-different-scheduler">
+<h2>The WRDS Cloud: Same Idea, Different Scheduler<a class="headerlink" href="#the-wrds-cloud-same-idea-different-scheduler" title="Link to this heading">#</a></h2>
+<p>WRDS runs its own cluster, the
+<a class="reference external" href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/">WRDS Cloud</a>,
+next to the data. A query that pulls a year of TAQ to your laptop can
+instead run where TAQ lives and send back only the result. You reach it with
+your WRDS account and Duo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>&lt;wrds-username&gt;@wrds-cloud.wharton.upenn.edu
+</pre></div>
+</div>
+<p>Its scheduler is <strong>Grid Engine</strong>, not SLURM. The concepts are the same, and
+the commands map one to one:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>SLURM (Midway3)</p></th>
+<th class="head"><p>Grid Engine (WRDS Cloud)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Interactive shell on a compute node</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sinteractive</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">qrsh</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Submit a batch script</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">job.sh</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">job.sh</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Directives inside the script</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">...</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">...</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>List your jobs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">--user=$USER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">qstat</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Cancel a job</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;id&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">qdel</span> <span class="pre">&lt;id&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Job array</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--array=1-10</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">1-10</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>This task’s index</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$SLURM_ARRAY_TASK_ID</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$SGE_TASK_ID</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The WRDS Cloud is tighter than Midway3. A user gets about ten concurrent
+batch jobs and three interactive sessions, a one-week limit per job, a 10 GB
+home directory, and scratch space purged after seven days. Pull what you
+need, reduce it there, and <code class="docutils literal notranslate"><span class="pre">rsync</span></code> the result home.</p>
+<p>Once you can translate between two schedulers, a third one, such as the one
+at your employer, takes an afternoon to learn.</p>
+</section>
 <section id="further-reading">
 <h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -1152,6 +1309,7 @@ through Midway’s login node.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ssh">What is SSH?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-midway3">Connecting to Midway3</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-config-file">SSH Config File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-duo-prompt-many-connections">One Duo Prompt, Many Connections</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uchicagos-midway3-cluster">UChicago’s Midway3 Cluster</a><ul class="nav section-nav flex-column">
@@ -1162,9 +1320,11 @@ through Midway’s login node.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-the-job-scheduler">SLURM: The Job Scheduler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-asks-for-it">Who Asks for It?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-job-scheduler">Why a Job Scheduler?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions">Partitions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-jobs-with-sbatch">Batch Jobs with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#job-arrays">Job Arrays</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-internet-access-problem">The Internet Access Problem</a><ul class="nav section-nav flex-column">
@@ -1182,6 +1342,8 @@ through Midway’s login node.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-tunneling">The Solution: SSH Tunneling</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-remote-machine">VS Code on a Remote Machine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wrds-cloud-same-idea-different-scheduler">The WRDS Cloud: Same Idea, Different Scheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
 </ul>
   </nav></div>

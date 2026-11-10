@@ -147,16 +147,16 @@ change.
 | 4 | Data APIs, static sites, and GitHub Actions | The CME FedWatch method, finished: the probability of a rate move from fed funds futures | CME fed funds futures (Databento) |
 | 5 | Live monitors, uv, and the math of HW 3 | Martin (2017) and Martin and Shi (2025): SVIX and option-implied crash probabilities, deployed as a daily monitor | CME Globex E-mini options (Databento), OptionMetrics |
 | 6 | Data across repositories: snapshots, lineage, and the class report | Bejarano et al. (2026), the open forecasting benchmark, read for its pipelines and for how much cleaning choices move the results | The FTSFR pipelines and your own homework, as upstreams of the class report |
-| 7 | Orchestration across projects: Apache Airflow | Goyal, Welch, and Zafirov (2024), the equity premium predictors | FRED and other public data; the FTSFR pipelines |
+| 7 | Data too big for a laptop: Polars and Parquet, SSH, and the SLURM scheduler | Dickerson, Robotti, and Rossetti (2026), the corporate bond factor replication crisis, read for how much the cleaning of TRACE moves the results | FINRA TRACE (WRDS), on Midway3 |
 | 8 | Packaging, CI, and code quality | Bernanke and Kuttner (2005), monetary policy surprises from fed funds futures | CME fed funds futures |
-| 9 | Basic MLOps: experiment tracking and monitoring models | Bejarano et al. (2026), an open benchmark for forecasting across financial markets | The FTSFR datasets |
+| 9 | The exam; orchestration across projects with Apache Airflow; a short look at experiment tracking | Goyal, Welch, and Zafirov (2024), the equity premium predictors, and Bejarano et al. (2026), an open benchmark for forecasting across financial markets | The FTSFR pipelines behind the class report |
 
 The arc on the finance side runs from equities (weeks 0 to 2), to interest
 rates and options (weeks 3 to 5), to many datasets at once in the class report
-(week 6), and ends with return prediction (weeks 7 to 9), which draws on
-everything before it. Corporate bonds, the cleaning of FINRA TRACE, the order
-book, and intraday trades and quotes come later in the quarter, with the
-material on data at scale.
+(week 6), to corporate bonds and the cleaning of FINRA TRACE (week 7), and
+ends with return prediction (week 9), which draws on everything before it.
+The order book and intraday trades and quotes come later in the quarter, with
+the rest of the material on data at scale.
 
 ## The final project
 
@@ -206,7 +206,7 @@ archived posting.
 - "Perform data reconciliations, validations, and quality checks" ([Hudson River Trading](../Appendix/job_posting_hudson_river_trading.md))
 - "Build automated data validation test suites that ensure that data is processed and published in accordance with well-defined Service Level Agreements (SLA's) pertaining to data quality, data availability and data correctness" ([Akuna Capital](../Appendix/job_posting_akuna_capital.md))
 
-**Later in the quarter: SQL at scale, remote machines, and job schedulers**
+**Week 7: Data at scale, remote machines, and job schedulers**
 
 - "Proficient with SQL or DataFrame libraries like pandas or Polars" ([Jane Street](../Appendix/job_posting_jane_street.md))
 - "Experienced in at least one SQL dialect (PostgreSQL, MSSQL, MYSQL) and able to use others as needed" ([Hudson River Trading](../Appendix/job_posting_hudson_river_trading.md))
@@ -214,19 +214,16 @@ archived posting.
 - "Unix scripting experience (bash, python, etc.)" ([IMC Trading](../Appendix/job_posting_imc.md))
 - "Data Build Tool (DBT)" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
 
-**Week 7: Orchestration across projects (Apache Airflow)**
-
-- "Strong coding skills: proficiency in Python, SQL DBs, Cloud, schedulers, containers, CI/CD, software packaging" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
-- "Translate high-level market research concepts into scalable processes that further transform the data" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
-
 **Week 8: CI/CD with GitHub Actions**
 
 - "Demonstrated experience working on an Agile team employing software engineering best practices, such as GitOps and CI/CD, to deliver complex software projects" ([Akuna Capital](../Appendix/job_posting_akuna_capital.md))
 - "Ability to work with a team in a fast-paced environment, deploying new software daily" ([Jump Trading](../Appendix/job_posting_jump_trading.md))
 - "Build, deploy, and monitor our data processing pipelines (Java, Python, Spark, Flink)" ([IMC Trading](../Appendix/job_posting_imc.md))
 
-**Week 9: Basic MLOps: experiment tracking and monitoring models**
+**Week 9: Orchestration across projects (Apache Airflow) and basic MLOps**
 
+- "Strong coding skills: proficiency in Python, SQL DBs, Cloud, schedulers, containers, CI/CD, software packaging" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
+- "Translate high-level market research concepts into scalable processes that further transform the data" ([Citadel Securities](../Appendix/job_posting_citadel_securities.md))
 - "they engineer data, build and deploy models, and monitor them in production" ([JPMorganChase](../Appendix/job_posting_jpmorganchase.md))
 - "Experience with monitoring, observability, and alerting systems for data pipelines" ([DRW](../Appendix/job_posting_drw.md))
 
@@ -279,9 +276,9 @@ the full text.
 - **Week 2.** Fama, Eugene F., and Kenneth R. French. ["Common Risk Factors in the Returns on Stocks and Bonds."](https://doi.org/10.1016/0304-405X(93)90023-5) *Journal of Financial Economics* 33, no. 1 (1993): 3-56.
 - **Week 3.** Gürkaynak, Refet S., Brian Sack, and Jonathan H. Wright. ["The U.S. Treasury Yield Curve: 1961 to the Present."](https://doi.org/10.1016/j.jmoneco.2007.06.029) *Journal of Monetary Economics* 54, no. 8 (2007): 2291-2304. First circulated in 2006 as Finance and Economics Discussion Series paper 2006-28, which is [free from the Federal Reserve Board](https://www.federalreserve.gov/pubs/feds/2006/200628/200628abs.html). The same week reads the expected path of the policy rate from 30-Day Fed Funds futures, following the [CME FedWatch methodology](https://www.cmegroup.com/education/demos-and-tutorials/fed-funds-futures-probability-tree-calculator.html).
 - **Week 4.** Martin, Ian W. R., and Ran Shi. ["Forecasting Crashes with a Smile."](https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf) Working paper, 2025. Also circulated as [CEPR Discussion Paper 18524](https://cepr.org/publications/dp18524) and Financial Markets Group Discussion Paper 936.
-- **Later in the quarter.** Easley, David, Marcos M. López de Prado, and Maureen O'Hara. ["Flow Toxicity and Liquidity in a High-Frequency World."](https://doi.org/10.1093/rfs/hhs053) *The Review of Financial Studies* 25, no. 5 (2012): 1457-1493. A [free version](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1695596) is on SSRN.
-- **Later in the quarter.** Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. ["The Corporate Bond Factor Replication Crisis."](https://arxiv.org/abs/2604.07880) Working paper, 2026. Also on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966). An earlier version circulated as "Common Pitfalls in the Evaluation of Corporate Bond Strategies." The data and code are at [Open Source Bond Asset Pricing](https://openbondassetpricing.com/).
-- **Later in the quarter.** Holden, Craig W., and Stacey Jacobsen. ["Liquidity Measurement Problems in Fast, Competitive Markets: Expensive and Cheap Solutions."](https://doi.org/10.1111/jofi.12127) *The Journal of Finance* 69, no. 4 (2014): 1747-1785. A [free copy](https://host.kelley.iu.edu/cholden/Holden%20and%20Jacobsen%20(2014).pdf) is on Craig Holden's website.
-- **Week 7.** Goyal, Amit, Ivo Welch, and Athanasse Zafirov. ["A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction."](https://academic.oup.com/rfs/article/37/11/3490/7749383) *The Review of Financial Studies* 37, no. 11 (2024): 3490-3557. A [free version](https://dx.doi.org/10.2139/ssrn.3929119) is on SSRN. It updates Welch and Goyal, ["A Comprehensive Look at the Empirical Performance of Equity Premium Prediction,"](https://doi.org/10.1093/rfs/hhm014) *The Review of Financial Studies* 21, no. 4 (2008): 1455-1508.
+- **Week 7.** Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. ["The Corporate Bond Factor Replication Crisis."](https://arxiv.org/abs/2604.07880) Working paper, 2026. Also on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966). An earlier version circulated as "Common Pitfalls in the Evaluation of Corporate Bond Strategies." The data and code are at [Open Source Bond Asset Pricing](https://openbondassetpricing.com/).
 - **Week 8.** Bernanke, Ben S., and Kenneth N. Kuttner. ["What Explains the Stock Market's Reaction to Federal Reserve Policy?"](https://doi.org/10.1111/j.1540-6261.2005.00760.x) *The Journal of Finance* 60, no. 3 (2005): 1221-1257. A free version is [NBER Working Paper 10402](https://www.nber.org/papers/w10402).
+- **Week 9.** Goyal, Amit, Ivo Welch, and Athanasse Zafirov. ["A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction."](https://academic.oup.com/rfs/article/37/11/3490/7749383) *The Review of Financial Studies* 37, no. 11 (2024): 3490-3557. A [free version](https://dx.doi.org/10.2139/ssrn.3929119) is on SSRN. It updates Welch and Goyal, ["A Comprehensive Look at the Empirical Performance of Equity Premium Prediction,"](https://doi.org/10.1093/rfs/hhm014) *The Review of Financial Studies* 21, no. 4 (2008): 1455-1508.
 - **Weeks 6 and 9.** Bejarano, Jeremy, Viren Desai, Kausthub Keshava, Arsh Kumar, Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu. ["An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial Markets."](https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/) Office of Financial Research Working Paper 26-05, August 2026. The data and code are the [Financial Time Series Forecasting Repository](https://github.com/jmbejara/ftsfr).
+- **Later in the quarter.** Easley, David, Marcos M. López de Prado, and Maureen O'Hara. ["Flow Toxicity and Liquidity in a High-Frequency World."](https://doi.org/10.1093/rfs/hhs053) *The Review of Financial Studies* 25, no. 5 (2012): 1457-1493. A [free version](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1695596) is on SSRN.
+- **Later in the quarter.** Holden, Craig W., and Stacey Jacobsen. ["Liquidity Measurement Problems in Fast, Competitive Markets: Expensive and Cheap Solutions."](https://doi.org/10.1111/jofi.12127) *The Journal of Finance* 69, no. 4 (2014): 1747-1785. A [free copy](https://host.kelley.iu.edu/cholden/Holden%20and%20Jacobsen%20(2014).pdf) is on Craig Holden's website.

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -505,7 +505,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</h1>
+    <h1>Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -518,10 +518,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-exam">Agenda Item 1: The Exam</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-experiment-tracking-with-mlflow">Agenda Item 2: Experiment Tracking with MLflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-benchmark">Agenda Item 3: The Benchmark</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-exercise">Agenda Item 4: The Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-drift-and-closing-the-loop">Agenda Item 5: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-apache-airflow">Agenda Item 2: Apache Airflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-experiment-tracking-with-mlflow">Agenda Item 3: Experiment Tracking with MLflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
             </nav>
@@ -533,24 +531,24 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-exam-and-basic-mlops-experiment-tracking-and-monitoring-models">
-<h1>Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models<a class="headerlink" href="#week-9-exam-and-basic-mlops-experiment-tracking-and-monitoring-models" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-9-exam-orchestration-with-apache-airflow-and-experiment-tracking">
+<h1>Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking<a class="headerlink" href="#week-9-exam-orchestration-with-apache-airflow-and-experiment-tracking" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The MLflow chapter for this week is posted before class. Until then, this page is
-the agenda.</p>
+<p>The Airflow chapter for this week is posted before class. Until then, this page
+is the agenda.</p>
 </div>
-<p>Two things happen this week. The <strong>exam</strong> takes the first 75 minutes. Then
-MLOps.</p>
-<p>MLOps is the discipline of keeping a model healthy <em>after</em> it ships. A model in
-production is a pipeline that never stops running: new data arrives on a schedule,
-the model recomputes its outputs, and someone has to notice when the data goes bad
-or the model’s behavior drifts. Every tool in this course now points at that
-problem, and this week assembles them.</p>
-<p>The data is the data you pinned. The FTSFR pipelines behind the class report,
-<a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a>, are the input, the Airflow DAGs from week 7 are the scheduler, and
-the benchmark of <a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>
-supplies the models. Nothing this week is a toy.</p>
+<p>The <strong>exam</strong> takes the first 75 minutes. After it, two short topics close the
+quarter.</p>
+<p>The first is orchestration. <code class="docutils literal notranslate"><span class="pre">doit</span></code> orders the steps inside one project. An
+orchestrator such as <strong>Apache Airflow</strong> orders many projects: it runs each
+pipeline on a schedule or when the data it depends on lands, retries what
+fails, records every run, and can backfill a gap after an outage. The class
+report is the right thing to point it at, because it reads many upstream
+pipelines, and each publishes new snapshots on its own schedule.</p>
+<p>The second is experiment tracking with <strong>MLflow</strong>: recording which data, code,
+and settings produced a number, so that you can still answer that question
+months later.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -558,8 +556,8 @@ supplies the models. Nothing this week is a toy.</p>
 closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
 through 8. Each question has four options, <strong>one or more may be correct</strong>, and a
 question earns its point only if every bubble is right. There is no partial
-credit. See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
-<li><p><strong>Today’s forecasting lab</strong> is done in class and is not graded.</p></li>
+credit. See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>. Today’s Airflow and MLflow
+material comes after the exam and is not on it.</p></li>
 <li><p><strong>Final project presentations are next week.</strong> Your project is due 24 hours
 before your group’s 30-minute meeting with me. There are no slides and no
 demo, because I will already have run your code. I question each member
@@ -570,19 +568,16 @@ individually, and those answers are graded.</p></li>
 <section id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Say what experiment tracking is for, and why “which run produced this number?”
-is a question you must be able to answer months later.</p></li>
-<li><p>Instrument a training run with MLflow: parameters, metrics, artifacts, and the
-code version, and compare runs.</p></li>
-<li><p>Fit the benchmark’s univariate forecasting methods to a panel of series and
-evaluate them out of sample against the historical mean.</p></li>
-<li><p>Explain why the historical mean is the benchmark that matters in this literature,
-and what it means for a method to lose to it.</p></li>
-<li><p>Add <strong>drift checks</strong> to a pipeline, so it refuses quietly corrupted inputs rather
-than publishing them, and distinguish data drift from model decay.</p></li>
-<li><p>Decide, with evidence, when a deployed model should be retired.</p></li>
-<li><p>Close the loop: a scheduled retrain that publishes itself, using the machinery
-from weeks 7 and 8.</p></li>
+<li><p>Say what a workflow orchestrator does that a task runner and a CI service
+do not, and when reaching for one is justified.</p></li>
+<li><p>Read an Airflow DAG: tasks, dependencies, the schedule, and the data
+interval.</p></li>
+<li><p>Explain why a run for interval <em>t</em> may use only what was known at <em>t</em>, and
+how a scheduler enforces it.</p></li>
+<li><p>Explain what makes a task idempotent, and why retries and backfills depend
+on it.</p></li>
+<li><p>Say what experiment tracking records, and why a comparison of methods is
+only meaningful when the data is held fixed.</p></li>
 </ul>
 </section>
 <section id="agenda-item-1-the-exam">
@@ -590,66 +585,45 @@ from weeks 7 and 8.</p></li>
 <p>First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
 and start time are on Canvas.</p>
 </section>
-<section id="agenda-item-2-experiment-tracking-with-mlflow">
-<h2>Agenda Item 2: Experiment Tracking with MLflow<a class="headerlink" href="#agenda-item-2-experiment-tracking-with-mlflow" title="Link to this heading">#</a></h2>
+<section id="agenda-item-2-apache-airflow">
+<h2>Agenda Item 2: Apache Airflow<a class="headerlink" href="#agenda-item-2-apache-airflow" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The problem: a notebook that reports 0.043 and a directory of seventeen slightly
-different scripts is not a result. What you need recorded is the parameters, the
-data version, the code version, the metric, and the artifact.</p></li>
-<li><p>MLflow’s pieces: runs, experiments, parameters, metrics, artifacts, and the
-tracking UI. Logging from inside a <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, so tracking is part of the
-pipeline and not a thing you remember to do.</p></li>
-<li><p>Comparing runs, and why the comparison is only meaningful if the data was held
-fixed. This is the discipline the benchmark paper is built on.</p></li>
+<li><p><strong>Why another scheduler.</strong> <code class="docutils literal notranslate"><span class="pre">doit</span></code> knows one project’s graph and runs it
+now. <code class="docutils literal notranslate"><span class="pre">cron</span></code> and GitHub Actions run a job on a clock or a push. None of them
+knows that project B’s input is project A’s output, and none keeps a run
+history across projects. An orchestrator adds that, plus retries and
+backfill, at the cost of a scheduler, a database, and a webserver to keep
+running.</p></li>
+<li><p><strong>The concepts.</strong> DAGs, tasks, and operators; the logical date versus the
+wall clock; the data interval; <code class="docutils literal notranslate"><span class="pre">catchup</span></code>, and what it means for a scheduler
+to decide it owes you fourteen runs.</p></li>
+<li><p><strong>Data-aware scheduling.</strong> A DAG can run when its inputs land rather than
+at a time. The class report is one consumer of many producers: it should
+rebuild when its upstreams have all published.</p></li>
+<li><p><strong>A demo</strong> on the class report’s pipelines: a task that fails, a task that
+never ran because its upstream failed, a retry, and a backfill.</p></li>
+<li><p><strong>Point-in-time discipline.</strong>
+<a class="reference external" href="https://academic.oup.com/rfs/article/37/11/3490/7749383">Goyal, Welch, and Zafirov (2024)</a>
+ask whether any of 46 predictors beats the historical mean of the equity
+premium out of sample. A forecast made at date <em>t</em> may use only what was
+known at <em>t</em>. Doing that by hand is error-prone; a scheduler with correct
+data intervals makes it structural.</p></li>
 </ul>
 </section>
-<section id="agenda-item-3-the-benchmark">
-<h2>Agenda Item 3: The Benchmark<a class="headerlink" href="#agenda-item-3-the-benchmark" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>,
-<em>An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial
-Markets</em> (OFR Working Paper), is the capstone paper for three reasons: its
-pipelines are the <a class="reference internal" href="Week3/ftsfr.html"><span class="std std-doc">FTSFR</span></a> datasets you met in week 4, its design
-holds the data fixed and varies only the method, and it uses no exogenous
-regressors, which leaves an obvious extension open for you.</p>
+<section id="agenda-item-3-experiment-tracking-with-mlflow">
+<h2>Agenda Item 3: Experiment Tracking with MLflow<a class="headerlink" href="#agenda-item-3-experiment-tracking-with-mlflow" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The design: a fixed panel of financial series, a dozen univariate methods, one
-evaluation protocol. Why that is an experiment-tracking problem by construction.</p></li>
-<li><p>The finding worth sitting with: across financial series, most of these methods
-struggle to beat simple baselines. That is not a failure of the software.</p></li>
-<li><p>Former students of this course are coauthors, and the reason the paper was
-possible is that every dataset in it rebuilds from source with one command.</p></li>
-</ul>
-</section>
-<section id="agenda-item-4-the-exercise">
-<h2>Agenda Item 4: The Exercise<a class="headerlink" href="#agenda-item-4-the-exercise" title="Link to this heading">#</a></h2>
-<p>Take a handful of the benchmark’s baseline methods, a historical mean, an ARIMA,
-a Theta method, and one neural method, and run them as a <strong>scheduled DAG</strong> over the
-FTSFR series the class report depends on. Log every run to MLflow: the
-method, the data interval, and the out-of-sample error against the historical mean.</p>
-<p>Then the two halves of the lesson:</p>
-<ol class="arabic simple">
-<li><p><strong>Monitoring.</strong> Watch forecast error as new intervals land. Decide when a model
-should be retired. The instability of predictor performance over time, which is
-a table in the paper, becomes something you experience as an operations problem.</p></li>
-<li><p><strong>The extension.</strong> The benchmark deliberately uses no exogenous regressors, and
-the class report has just assembled dozens of indicators. Add a few of them as
-exogenous regressors to a return series and see whether anything survives out of
-sample. Goyal, Welch, and Zafirov would tell you to expect very little, which is
-exactly why doing it honestly, with the point-in-time discipline the scheduler
-enforces, is the right last exercise of the quarter.</p></li>
-</ol>
-</section>
-<section id="agenda-item-5-drift-and-closing-the-loop">
-<h2>Agenda Item 5: Drift, and Closing the Loop<a class="headerlink" href="#agenda-item-5-drift-and-closing-the-loop" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Input drift</strong> versus <strong>model decay</strong>: a schema change, a unit change, a vendor
-backfill, and a regime change all look different in the logs, and you should be
-able to tell them apart.</p></li>
-<li><p>Validation checks from week 5, now running on every scheduled arrival, with a
-threshold that fails the DAG rather than publishing a corrupted forecast.</p></li>
-<li><p>Retrain, publish, and alert with no human in the loop, using Airflow from week 7
-and Actions from week 8. This is the whole course in one diagram: extract, clean,
-validate, transform, model, track, publish, monitor, and rerun.</p></li>
+<li><p>The problem: a notebook that reports 0.043 and a directory of seventeen
+slightly different scripts is not a result. What you need recorded is the
+parameters, the data version, the code version, the metric, and the
+artifact.</p></li>
+<li><p>MLflow’s pieces: runs, experiments, parameters, metrics, and artifacts, and
+logging from inside a <code class="docutils literal notranslate"><span class="pre">doit</span></code> task, so tracking is part of the pipeline.</p></li>
+<li><p>The benchmark of
+<a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">Bejarano et al. (2026)</a>
+holds the <a class="reference internal" href="Week3/ftsfr.html"><span class="std std-doc">FTSFR</span></a> data fixed and varies only the method.
+That design is an experiment-tracking problem by construction, and it is
+why the class report’s pins matter.</p></li>
 </ul>
 </section>
 <section id="looking-ahead-to-week-10">
@@ -713,10 +687,8 @@ choices, and the extension. Those answers are graded. See the
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-the-exam">Agenda Item 1: The Exam</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-experiment-tracking-with-mlflow">Agenda Item 2: Experiment Tracking with MLflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-the-benchmark">Agenda Item 3: The Benchmark</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-the-exercise">Agenda Item 4: The Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-drift-and-closing-the-loop">Agenda Item 5: Drift, and Closing the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-apache-airflow">Agenda Item 2: Apache Airflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-experiment-tracking-with-mlflow">Agenda Item 3: Experiment Tracking with MLflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-10">Looking ahead to Week 10</a></li>
 </ul>
   </nav></div>

@@ -2,16 +2,16 @@
 
 This lab is optional and ungraded. It walks through running the Clean TRACE
 corporate bond pipeline on UChicago's RCC Midway3 cluster as a SLURM batch job:
-connecting over SSH, setting up an environment on a shared cluster, copying
-pre-pulled data with `rsync`, submitting the job, and reaching a remote VS Code
-session through an SSH tunnel.
+connecting over SSH, setting up an environment on a shared cluster, reading
+data that was pulled once for the whole class, submitting the job, and
+reaching a remote VS Code session through an SSH tunnel.
 
 ## Learning Outcomes
 
 - Connect to UChicago's Midway3 HPC cluster via SSH
-- Set up a working directory and conda environment on a shared cluster
+- Set up a working directory and a Python environment on a shared cluster
 - Run a real corporate bond data pipeline (Clean TRACE) using SLURM batch jobs
-- Use `rsync` to copy pre-pulled data from the instructor's project directory
+- Read a shared, read-only copy of the data instead of pulling your own
 - Use `scode` to launch a remote VS Code instance on a compute node
 - Use SSH port forwarding to access remote services from your laptop
 
@@ -54,14 +54,14 @@ more storage but a limited file count quota. Use each for what it's best at:
 
 | Location | Path | Quota | Backed Up | Purpose |
 |----------|------|-------|-----------|---------|
-| Home | `/home/<cnetid>` | 30 GB | Yes | Config files, small scripts, conda environments |
-| Project | `/project/finm32900` | Large (shared) | Yes | Shared course data and code |
+| Home | `/home/<cnetid>` | 30 GB | Yes | Config files, small scripts, Python environments |
+| Project | `/project/finm32800` | Large (shared) | Yes | Shared course data and code |
 | Scratch | `/scratch/midway3/<cnetid>` | Large | **No** | Temporary large files, intermediate results |
 
 Create a personal directory in the project space:
 
 ```bash
-mkdir -p /project/finm32900/${USER}
+mkdir -p /project/finm32800/${USER}
 ```
 
 ### Step 3: Clone the Clean TRACE repository
@@ -69,206 +69,145 @@ mkdir -p /project/finm32900/${USER}
 Clone the case study repository into your project directory:
 
 ```bash
-cd /project/finm32900/${USER}
+cd /project/finm32800/${USER}
 git clone https://github.com/finm-32800/case_study_clean_trace case_study_clean_trace
 cd case_study_clean_trace
 ```
 
 ```{tip}
-Store your code and data in `/project/finm32900/${USER}/` for this course.
-Store conda environments in your home directory (`$HOME/envs/`) to avoid
+Store your code and data in `/project/finm32800/${USER}/` for this course.
+Store Python environments in your home directory (`$HOME/envs/`) to avoid
 hitting the file count limit on the shared project directory.
 ```
 
 ---
 
-## Part 2: Set Up the Conda Environment
+## Part 2: Set Up the Environment
 
-### Step 1: Load the Anaconda module
+You set up on the **login node**, which has internet access. Installing
+packages is one of the things a login node is for. Running the pipeline is
+not; that goes to a compute node in Part 3.
 
-Midway uses a **module system** to manage software. Load the Anaconda module:
-
-```bash
-module load python/anaconda-2024.10
-```
-
-You can see all available modules with:
+### Step 1: Install `uv` (once)
 
 ```bash
-module avail
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-```{admonition} Important
-:class: warning
+Log out and back in so that `uv` is on your `PATH`, then check with
+`uv --version`.
 
-Do **not** run `conda init` on RCC. It modifies your shell profile in ways
-that conflict with the module system. Always use `source activate` instead
-of `conda activate`.
-```
+### Step 2: Create the environment in your home directory
 
-### Step 2: Switch conda to the classic solver
-
-The default `libmamba` solver is incompatible with Midway3's system libraries.
-Switch to the classic solver (you only need to do this once):
+From inside `case_study_clean_trace`:
 
 ```bash
-conda config --set solver classic
+uv venv $HOME/envs/clean_trace --python 3.12
+uv pip install --python $HOME/envs/clean_trace/bin/python -r requirements.txt
 ```
 
-```{note}
-You will see an error message like `Error while loading conda entry point:
-conda-libmamba-solver ...` every time you run a conda command. **This is
-harmless.** Conda still tries to load the libmamba plugin at startup, but
-since the solver is set to `classic`, it doesn't need it. The commands will
-complete successfully despite the error message.
-```
-
-### Step 3: Create a conda environment in your home directory
-
-Create an isolated conda environment in your home directory (not in
-`/project/`, to avoid hitting the shared file count limit):
+The environment lives in your home directory, not in `/project/`, because
+it is thousands of small files and the project space limits the file
+count. To use it in a later session:
 
 ```bash
-conda create --prefix=$HOME/envs/clean_trace python=3.11 -y
+source $HOME/envs/clean_trace/bin/activate
 ```
 
-Activate the environment and install dependencies:
-
-```bash
-source activate $HOME/envs/clean_trace
-pip install -r requirements.txt
-```
-
-To reactivate this environment in future sessions:
-
-```bash
-module load python/anaconda-2024.10
-source activate $HOME/envs/clean_trace
-```
-
-### Step 4: Configure the environment file
+### Step 3: Create the `.env` file
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` and set your WRDS username. Use the default small sample date
-range (January--February 2024) to keep the run quick:
-
-```
-WRDS_USERNAME="your_wrds_username"
-```
-
-```{tip}
-By default, the pipeline processes only a 2-month sample (January--February
-2024). This is intentional---it lets you run end-to-end quickly without
-processing 20+ years of data. Do **not** uncomment `START_DATE` or `END_DATE`
-unless you want a much longer run.
-```
-
-### Step 5: Configure WRDS `.pgpass`
-
-If you haven't already set up passwordless WRDS authentication, run the
-following on the **login node** (which has internet access):
-
-```bash
-python -c "import wrds; db = wrds.Connection(); db.close()"
-```
-
-This will prompt for your WRDS username and password and create the `~/.pgpass`
-file.
+Leave it as it is. You do not connect to WRDS in this lab, and the date range
+stays at the default, a 2-month sample (January--February 2024).
 
 ---
 
 ## Part 3: Run the Clean TRACE Pipeline
 
-### Understanding the workflow
+### The data is already pulled
 
-Worker nodes on Midway3 do **not** have internet access, so data pulls (WRDS,
-Fama-French, etc.) cannot run inside a batch job. Instead, the instructor has
-already pulled the data once on the head node. The sbatch script will `rsync`
-this pre-pulled data into your project directory and then run the processing
-pipeline.
-
-The instructor's pre-pulled data is located at:
+Compute nodes on Midway3 have no internet access, so a batch job cannot pull
+from WRDS. The pull ran once for the whole class, and its output sits in a
+shared folder:
 
 ```
-/project/finm32900/case_study_clean_trace/_data/pulled/
+/project/finm32800/shared/case_study_clean_trace/_data/pulled/
 ```
+
+**Treat this folder as read-only.** It is the single copy everyone reads. You
+do not copy it into your own directory, because 80 copies of the same data
+would fill the course's storage. Your `_data/pulled` becomes a symbolic link
+to it, and everything the pipeline *builds* from it lands in your own
+`_data/`.
+
+This is the "pull once, process anywhere" pattern from
+[Remote Machines and HPC](./remote_machines_and_hpc.md), with one more
+step: the pull is shared by everyone who needs it.
 
 ### The sbatch script
 
-The repository includes a `run-pipeline.sbatch` script that automates
-everything. Here is the script with annotations:
+Copy the class's batch script into your clone:
+
+```bash
+cd /project/finm32800/${USER}/case_study_clean_trace
+cp /project/finm32800/shared/run-pipeline.sbatch .
+```
+
+It reads:
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=clean-trace-pipeline
-#SBATCH --output=%j_clean-trace-pipeline.out
-#SBATCH --error=%j_clean-trace-pipeline.err
+#SBATCH --job-name=clean-trace
+#SBATCH --account=finm32800
+#SBATCH --partition=caslake
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem-per-cpu=8000
-#SBATCH --time=8:00:00
-#SBATCH --account=finm32900
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16G
+#SBATCH --time=01:00:00
+#SBATCH --output=%x_%j.out
 
 set -euo pipefail
 
-# --- Configuration ---
-PROJECT_BASE="/project/finm32900"
-WORK_DIR="${PROJECT_BASE}/${USER}/case_study_clean_trace"
-INSTRUCTOR_DATA="${PROJECT_BASE}/case_study_clean_trace/_data/pulled"
-STUDENT_DATA="${WORK_DIR}/_data/pulled"
+# Compute nodes have en_US.UTF-8 but not C.UTF-8, which a Mac often sends.
+export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
-# --- Change to working directory ---
-cd "${WORK_DIR}"
-echo "[$(date)] Working directory: ${WORK_DIR}"
+SHARED_PULLED=/project/finm32800/shared/case_study_clean_trace/_data/pulled
 
-# --- Activate conda environment ---
-module load python/anaconda-2024.10
-source activate "$HOME/envs/clean_trace"
-echo "[$(date)] Activated conda environment"
+cd /project/finm32800/${USER}/case_study_clean_trace
+source $HOME/envs/clean_trace/bin/activate
 
-# --- Install/update dependencies ---
-pip install --quiet -r requirements.txt
-echo "[$(date)] Dependencies up to date"
+mkdir -p _data
+[ -e _data/pulled ] || ln -s "${SHARED_PULLED}" _data/pulled
 
-# --- Rsync pulled data from instructor's project directory ---
-echo "[$(date)] Syncing pulled data from instructor directory..."
-mkdir -p "${STUDENT_DATA}"
-rsync -a --info=progress2 "${INSTRUCTOR_DATA}/" "${STUDENT_DATA}/"
-echo "[$(date)] Data sync complete"
-
-# --- Tell doit to skip all pull tasks (data already synced) ---
-echo "[$(date)] Marking pull tasks as ignored..."
 doit ignore pull:fama_french pull:fisd pull:liu_wu pull:osbap \
     pull:trace_144a pull:trace_enhanced pull:trace_standard
-echo "[$(date)] Pull tasks ignored"
 
-# --- Run the full pipeline ---
-echo "[$(date)] Starting pipeline..."
 doit
-echo "[$(date)] Pipeline complete"
+echo "Pipeline complete $(date)"
 ```
-
-Key details about this script:
 
 | Directive | Value | Meaning |
 |-----------|-------|---------|
-| `--job-name` | `clean-trace-pipeline` | Human-readable name for your job |
-| `--output` / `--error` | `%j_clean-trace-pipeline.out/.err` | Stdout/stderr files (`%j` = job ID) |
-| `--nodes` | `1` | Use a single compute node |
-| `--cpus-per-task` | `16` | Request 16 CPU cores |
-| `--mem-per-cpu` | `8000` | 8 GB per CPU (128 GB total) |
-| `--time` | `8:00:00` | Maximum wall time of 8 hours |
-| `--account` | `finm32900` | Course billing account |
+| `--job-name` | `clean-trace` | Name shown in the queue; `%x` in the output file name |
+| `--account` | `finm32800` | The course's allocation, which is billed for the job |
+| `--partition` | `caslake` | The general-purpose compute nodes |
+| `--cpus-per-task` | `8` | Eight CPU cores |
+| `--mem` | `16G` | Memory for the whole job (the sample run peaks near 7 GB) |
+| `--time` | `01:00:00` | Wall-clock limit; the job is killed if it runs longer |
+| `--output` | `%x_%j.out` | Output file: job name and job ID |
 
-The script does the following:
+The script does three things:
 
-1. **Rsync** the instructor's pre-pulled data into your `_data/pulled/` directory
-2. **Mark pull tasks as ignored** so that `doit` does not attempt to download data (compute nodes have no internet)
-3. **Run the full pipeline** with `doit`, which builds the FISD universe, filters TRACE, runs Stage 0 (Dick-Nielsen cleaning), and runs Stage 1 (bond analytics)
+1. **Links** `_data/pulled` to the shared folder, if the link is not already
+   there.
+2. **Marks the pull tasks as ignored,** so `doit` never tries to reach WRDS
+   from a compute node.
+3. **Runs the rest of the pipeline** with `doit`: the FISD universe, the
+   TRACE filters, Stage 0 (the Dick-Nielsen cleaning), and Stage 1 (bond
+   analytics).
 
 ### Submit the batch job
 
@@ -296,137 +235,43 @@ sinfo
 # Check your account balance (compute allocation)
 accounts balance
 
-# Follow the job's stdout in real time
-tail -f <jobid>_clean-trace-pipeline.out
+# Follow the job's output in real time
+tail -f clean-trace_<jobid>.out
 
-# Follow stderr
-tail -f <jobid>_clean-trace-pipeline.err
+# After it finishes: how long it ran and how much memory it used
+sacct -j <jobid> --format=JobID,Elapsed,MaxRSS,State
 
 # Cancel a job if needed
 scancel <jobid>
 ```
 
-The pipeline processes 20+ years of TRACE corporate bond data through multiple
-stages. Depending on queue wait times and system load, the full run can take
-several hours.
+On the 2-month sample the run takes about 10 to 15 minutes once the job
+starts. The full history, July 2002 to the present, takes several hours on
+the same script with a longer `--time`.
 
 ---
 
 ## Part 4: Launch VS Code on Midway with `scode`
 
-RCC provides a tool called `scode` that launches a VS Code web server on a
-compute node, which you can then connect to from your laptop's browser via
-SSH port forwarding.
+RCC's `scode` starts VS Code on a compute node as a SLURM job and tells you
+the SSH tunnel to open from your laptop. It is the tunnel you built by hand
+in [Exercise: Jupyter on Midway](./exercise_jupyter_on_midway.md), scripted.
 
-### Step 1: Load the required modules
+**Follow RCC's instructions, which are the source of truth:**
+[SCode: VS Code on Midway](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/).
+RCC updates the tool, and its page is kept current with it. Two things to
+supply from this course:
 
-On the Midway3 **login node**, load `scode` and the Anaconda module:
-
-```bash
-module load scode python/anaconda-2024.10
-```
-
-### Step 2: Launch the VS Code server
-
-```bash
-scode serve-web -- --account finm32900 --time 05:00:00 --mem 16G
-```
-
-This submits a SLURM job that starts a VS Code web server on a compute node.
-You should see output similar to:
-
-```
-Removing existing symlink: /home/jbejarano/.vscode/cli/serve-web/072586267e68ece9a47aa43f8c108e0dcbf44622.
-Linked /home/jbejarano/.scode/versions/stable/1.109.5/vscode-server-linux-x64-web to /home/jbejarano/.vscode/cli/serve-web/072586267e68ece9a47aa43f8c108e0dcbf44622
-Submitting SBATCH to serve VSCode environment.
-
-Submitted batch job 45863567
-
-sbatch: Verify job submission ...
-sbatch: Using a shared partition ...
-sbatch: Partition: caslake
-sbatch: QOS-Flag: caslake
-sbatch: Account: finm32900
-sbatch: Verification: ***PASSED***
-
-SBATCH job /home/jbejarano/.scode/sbatches/scode-web_20260223_105124.sbatch submitted successfully.
-Output will be directed to /home/jbejarano/.scode/logs/scode-web_45863567.out.
-Errors will be directed to /home/jbejarano/.scode/logs/scode-web_45863567.err.
-
-VSCode server is starting with Slurm Job ID 45863567.
-Use `scode jobs status 45863567` to get server status and connection info.
-Use `scancel 45863567` to cancel the server job.
-
-VSCode job 45863567 is running on 1 nodes: midway3-0067
-Primary node: 10.50.250.67
-Environment: /home/jbejarano/.scode/envs/stable/default
-
-To connect to the VSCode Web GUI you need to create an SSH tunnel from your
-local machine to the primary node above. This can be done with the following
-command to be run on your local machine (e.g., PowerShell in Windows):
-
-    ssh -L 8000:10.50.250.67:58992 jbejarano@midway3.rcc.uchicago.edu
-
-Once the tunnel is created, you may access the VSCode Web GUI by entering
-the following address in your browser:
-
-    http://localhost:8000/?tkn=SOME_LONG_TOKEN
-
-Server outputs are being written to /home/jbejarano/.scode/logs/scode-web_45863567.out.
-Server errors are being written to /home/jbejarano/.scode/logs/scode-web_45863567.err.
-Use `squeue -j 45863567` to check the status of the job.
-Use `scancel 45863567` to cancel the job.
-```
-
-### Step 3: Set up SSH port forwarding
-
-On your **local machine** (your laptop), run the SSH tunnel command shown in
-the `scode` output. Add the `-N` flag so that SSH only does port forwarding
-and does not open a remote shell:
-
-```bash
-ssh -N -L 8000:<compute_node_ip>:<remote_port> <your-cnetid>@midway3.rcc.uchicago.edu
-```
-
-For example, using the output above:
-
-```bash
-ssh -N -L 8000:10.50.250.67:58992 jbejarano@midway3.rcc.uchicago.edu
-```
-
-You can optionally add the `-f` flag to run the tunnel in the background.
-
-### Step 4: Connect via your browser
-
-Open a browser and navigate to the URL shown in the `scode` output:
-
-```
-http://localhost:8000/?tkn=SOME_LONG_TOKEN
-```
-
-You should see the VS Code editor running in your browser, connected to the
-Midway3 compute node. You can edit files, open terminals, and work as if you
-were using VS Code locally --- but all computation happens on the cluster.
-
-### Step 5: Managing the scode session
-
-```bash
-# Check the status of your scode server
-scode jobs status <jobid>
-
-# Check the job in the SLURM queue
-squeue -j <jobid>
-
-# Cancel the session when you're done
-scancel <jobid>
-```
+- **The account:** `--account finm32800`, after the lone `--` in the
+  `scode serve-web` command.
+- **If the browser shows "Connection refused":** see the
+  {ref}`fix in the exercise <option-2-scode>`.
 
 ```{admonition} Always clean up
 :class: warning
 
-When you are done working, cancel the `scode` job with `scancel`. Idle jobs
-still consume your account's compute allocation. Don't leave sessions running
-overnight.
+When you are done, cancel the `scode` job with `scancel <jobid>`. An idle
+session still bills the course's allocation until its time runs out.
 ```
 
 ---
@@ -436,7 +281,7 @@ overnight.
 Submit the following screenshots to demonstrate that you completed the assignment:
 
 1. **Pipeline completion**: A screenshot showing that the pipeline ran
-   successfully in your own directory at `/project/finm32900/$USER/case_study_clean_trace/`.
+   successfully in your own directory at `/project/finm32800/$USER/case_study_clean_trace/`.
    This could be the final lines of your job's `.out` file showing
    `"Pipeline complete"`, or a listing of the output files in `_data/stage1/`.
 
@@ -446,9 +291,9 @@ Submit the following screenshots to demonstrate that you completed the assignmen
 ```{tip}
 You can use `tail` to show the end of your job output file:
 
-    tail -20 <jobid>_clean-trace-pipeline.out
+    tail -20 clean-trace_<jobid>.out
 
 Or list the pipeline outputs:
 
-    ls -lh /project/finm32900/${USER}/case_study_clean_trace/_data/stage1/
+    ls -lh /project/finm32800/${USER}/case_study_clean_trace/_data/stage1/
 ```

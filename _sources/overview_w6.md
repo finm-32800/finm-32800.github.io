@@ -5,8 +5,6 @@
 Week3/ftsfr.md
 Week6/chartbook_catalog.md
 Week6/pins_walkthrough.md
-Week1/collaborative_report_and_style_guides.md
-Week8/medium_sized_data_strategies.md
 Week6/study_guide.md
 ```
 
@@ -37,8 +35,8 @@ and the best upstreams are your own homework.
 
 - **[HW 3](./HW3.md) is due next week,** Tuesday, November 10, at 9:30 am.
 - **[HW 4](./HW4.md), the class report, launches today.** It is due
-  Friday, November 20, at 11:59 pm. Open your pull
-  request by Thursday, November 12, so your reviewers have time.
+  Tuesday, November 24, at 9:30 am. Open your pull
+  request by Tuesday, November 17, so your reviewers have time.
 - **Accept your invite to the report repo.** Every student gets a GitHub
   collaborator invite to the private report repository. Check your email or
   [github.com/notifications](https://github.com/notifications) and confirm in
@@ -52,7 +50,7 @@ and the best upstreams are your own homework.
   and the report's `chartbook.lock` pins their new commits. If you built an
   upstream before then, pull the report's `main`, check out the commit its
   lockfile names now, and rebuild.
-- **[HW 5](./HW5.md):** dates to be announced on Canvas.
+- **[HW 5](./HW5.md):** TBD.
 - **The exam is Tuesday, December 1,** in week 9, covering weeks 0 through 8.
   See [Exam Preparation](./exam_prep.md).
 - **Project consultations end next week.** If your group has not had one, book
@@ -93,5 +91,5 @@ and the best upstreams are your own homework.
    homework; claim, branch, pin, pull request, two reviews; a look at the
    repository.
 
-**Next week:** Apache Airflow, which decides *when* a pipeline runs, where
-ChartBook records *what* it made.
+**Next week:** data too big for a laptop. TRACE, Polars and Parquet, and
+running a pipeline on Midway3 over SSH under the SLURM scheduler.

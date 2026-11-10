@@ -71,6 +71,25 @@ After this, you can connect with just:
 ssh midway3
 ```
 
+### One Duo Prompt, Many Connections
+
+Midway3 asks for your password and Duo on every new connection, and so does
+every `scp`, `rsync`, and tunnel. SSH can reuse one authenticated connection
+for all of them. Add three lines to the same `Host` block:
+
+```text
+Host midway3
+    HostName midway3.rcc.uchicago.edu
+    User <your-cnetid>
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPersist 8h
+```
+
+The first `ssh midway3` of the day asks for Duo. For the next eight hours,
+every `ssh midway3`, `rsync ... midway3:...`, and `scp` rides on that
+connection without asking again. `ssh -O exit midway3` closes it.
+
 
 ## UChicago's Midway3 Cluster
 
@@ -107,7 +126,7 @@ The cluster consists of:
 | Location | Path | Quota | Backed Up | Purpose |
 |----------|------|-------|-----------|---------|
 | Home | `/home/<cnetid>` | 30 GB | Yes | Config files, small scripts |
-| Project | `/project/finm32900` | Large (shared) | Yes | Shared course data and code |
+| Project | `/project/finm32800` | Large (shared) | Yes | Shared course data and code |
 | Scratch | `/scratch/midway3/<cnetid>` | Large | **No** | Temporary large files, intermediate results |
 
 ```{tip}
@@ -138,6 +157,19 @@ module unload python/3.11.9
 
 
 ## SLURM: The Job Scheduler
+
+### Who Asks for It?
+
+The [job postings](../Week0/course_map.md) this course tracks show where
+SLURM matters. It is rare across all technical postings: 43 of about 9,200.
+But it shows up at 13 of the 63 firms, and those firms are concentrated
+where students of this program go. It appears at 3 of 8 proprietary
+trading firms (Jump, Tower, DRW), 3 of 10 market makers (IMC, Citadel
+Securities, Virtu), and 4 of 16 systematic funds (Voleon, Squarepoint,
+WorldQuant, Qube). It appears at none of the 12 asset managers. At a firm
+that runs its own cluster, the scheduler is assumed knowledge. The command
+line under it is assumed almost everywhere: Bash or shell scripting
+appears at 45 of the 63 firms.
 
 ### Why a Job Scheduler?
 
@@ -180,14 +212,14 @@ For exploratory work, use `sinteractive` to get a shell on a compute node:
 
 ```bash
 # Basic interactive session (2 hours, default partition)
-sinteractive --account=finm32900
+sinteractive --account=finm32800
 
 # Request more resources
-sinteractive --account=finm32900 --partition=caslake \
+sinteractive --account=finm32800 --partition=caslake \
     --time=04:00:00 --cpus-per-task=4 --mem=32G
 
 # Quick debugging (free, 15 minutes, up to 4 cores)
-sinteractive --account=finm32900 --qos=debug --time=00:15:00
+sinteractive --account=finm32800 --qos=debug --time=00:15:00
 ```
 
 After running `sinteractive`, you wait in the queue until a node is available.
@@ -210,14 +242,14 @@ Here is a real example from our TRACE data pipeline:
 #SBATCH --mem-per-cpu=8000
 #SBATCH --partition=build
 #SBATCH --time=6:00:00
-#SBATCH --account=finm32900
+#SBATCH --account=finm32800
 
 # Change to the project directory
 cd /home/${USER}/trace-data-pipeline
 echo "Changed to trace-data-pipeline directory"
 
 # Activate Python virtual environment
-source /project/finm32900/tdp-venv-p3119/bin/activate
+source $HOME/envs/clean_trace/bin/activate
 echo "Activated virtual environment"
 
 # Run the pipeline
@@ -250,6 +282,44 @@ squeue --user=$USER
 # Cancel a job
 scancel <job_id>
 ```
+
+### Job Arrays
+
+Much of the work on a cluster is the same script run on many independent
+pieces: one task per year of TRACE, per ticker, per parameter setting. A
+**job array** submits all of them at once. SLURM gives each copy its own
+`SLURM_ARRAY_TASK_ID`, and the script uses it to choose its piece:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=hello-array
+#SBATCH --account=finm32800
+#SBATCH --partition=caslake
+#SBATCH --time=00:02:00
+#SBATCH --mem=1G
+#SBATCH --array=1-5
+#SBATCH --output=%x_%A_%a.out
+
+echo "Task ${SLURM_ARRAY_TASK_ID} of job ${SLURM_ARRAY_JOB_ID} on $(hostname)"
+```
+
+`%A` is the array's job ID and `%a` the task's index, so each task writes its
+own output file. `squeue --user=$USER` lists the tasks as `<jobid>_1`,
+`<jobid>_2`, and so on, and `scancel <jobid>` cancels all of them. The real
+version looks like this:
+
+```bash
+#SBATCH --array=2015-2024
+python src/process_year.py --year ${SLURM_ARRAY_TASK_ID}
+```
+
+The tasks must not depend on one another. If year 2020 needs the output of
+year 2019, it is not an array; it is a pipeline, and `doit` or an
+orchestrator orders it.
+
+After a job finishes, `sacct -j <jobid>` reports how long it ran and how much
+memory it used. Read it before the next submission: asking for far more
+memory or time than you use makes you wait longer in the queue.
 
 ```{admonition} Discussion
 :class: note
@@ -340,7 +410,7 @@ scp my_script.py <cnetid>@midway3.rcc.uchicago.edu:/home/<cnetid>/
 scp <cnetid>@midway3.rcc.uchicago.edu:/scratch/midway3/<cnetid>/results.parquet ./
 
 # Copy an entire directory
-scp -r my_project/ <cnetid>@midway3.rcc.uchicago.edu:/project/finm32900/<cnetid>/
+scp -r my_project/ <cnetid>@midway3.rcc.uchicago.edu:/project/finm32800/<cnetid>/
 ```
 
 ### `rsync`: Smart Synchronization
@@ -351,7 +421,7 @@ making it much faster for repeated syncs:
 ```bash
 # Sync a local project directory to Midway
 rsync -avzhe ssh ./my_project/ \
-    <cnetid>@midway3.rcc.uchicago.edu:/project/finm32900/<cnetid>/my_project/
+    <cnetid>@midway3.rcc.uchicago.edu:/project/finm32800/<cnetid>/my_project/
 
 # Sync results from Midway back to your laptop
 rsync -avzhe ssh \
@@ -434,6 +504,71 @@ through Midway's login node.
 We walk through this entire process step-by-step in the
 [in-class exercise](./exercise_jupyter_on_midway.md).
 ```
+
+
+## VS Code on a Remote Machine
+
+You can edit files on the cluster with `nano` or `vim`, but most people want
+their editor. There are three ways to get VS Code onto a remote machine,
+and where the server runs is what separates them.
+
+- **`scode` on Midway3.** RCC's `scode` submits a SLURM job that starts VS
+  Code on a **compute node** and prints the `ssh -L` command that tunnels it
+  to your browser. This is the supported way on Midway3. Follow
+  [RCC's instructions](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/),
+  which are the source of truth, with `--account finm32800`. The session is
+  an ordinary SLURM job: it gets the CPUs and memory you ask for, and it ends
+  when its time runs out or when you `scancel` it.
+- **Remote-SSH.** The VS Code extension of that name opens a folder over
+  SSH, and it starts its server on whatever machine you SSH into. On a
+  machine of your own that is the right tool. On Midway3 you land on a
+  **login node**, which is for editing and submitting jobs, not for a
+  long-running server or computation, so prefer `scode` there.
+- **A VS Code tunnel.** `code tunnel` on a remote machine connects *out* to
+  Microsoft's relay and registers the machine under your GitHub account. You
+  then open it from [vscode.dev](https://vscode.dev) or the Remote - Tunnels
+  extension, from anywhere, with no SSH and no open port. Because it needs
+  outbound internet for as long as it runs, it does not work on Midway3's
+  compute nodes, which have none. It is the tool for a machine you control:
+  a workstation at the office, a cloud VM, or a Mac mini in a closet.
+
+  ```bash
+  code tunnel --name my-workstation   # first run: log in with GitHub
+  ```
+
+
+## The WRDS Cloud: Same Idea, Different Scheduler
+
+WRDS runs its own cluster, the
+[WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/),
+next to the data. A query that pulls a year of TAQ to your laptop can
+instead run where TAQ lives and send back only the result. You reach it with
+your WRDS account and Duo:
+
+```bash
+ssh <wrds-username>@wrds-cloud.wharton.upenn.edu
+```
+
+Its scheduler is **Grid Engine**, not SLURM. The concepts are the same, and
+the commands map one to one:
+
+| Task | SLURM (Midway3) | Grid Engine (WRDS Cloud) |
+|---|---|---|
+| Interactive shell on a compute node | `sinteractive` | `qrsh` |
+| Submit a batch script | `sbatch job.sh` | `qsub job.sh` |
+| Directives inside the script | `#SBATCH ...` | `#$ ...` |
+| List your jobs | `squeue --user=$USER` | `qstat` |
+| Cancel a job | `scancel <id>` | `qdel <id>` |
+| Job array | `--array=1-10` | `-t 1-10` |
+| This task's index | `$SLURM_ARRAY_TASK_ID` | `$SGE_TASK_ID` |
+
+The WRDS Cloud is tighter than Midway3. A user gets about ten concurrent
+batch jobs and three interactive sessions, a one-week limit per job, a 10 GB
+home directory, and scratch space purged after seven days. Pull what you
+need, reduce it there, and `rsync` the result home.
+
+Once you can translate between two schedulers, a third one, such as the one
+at your employer, takes an afternoon to learn.
 
 
 ## Further Reading

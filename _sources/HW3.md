@@ -104,12 +104,13 @@ the links in `src/github_skills.py` as in HW 1 and HW 2.
 From one session's settlement prices for the two end-of-month expirations
 that bracket 30 days. The pull, the parity forward, the implied
 volatilities, and the smile on a fine grid are written for you. Three
-formulas are not:
+formulas are not; they are the blanks listed below. Two guides go with this
+part:
 
 - [E-mini S&P 500 Options Data from Databento](notebooks/_01_es_options_data_ipynb.ipynb)
 - [Replicating SVIX and the Probability of a Crash](notebooks/_02_svix_and_crash_probability_ipynb.ipynb)
 
-The blanks, each a formula the second guide derives:
+The three blanks, each a formula the second guide derives:
 
 - **SVIX²** (`src/svix.py`). The simple variance swap rate is an integral
   of out-of-the-money option prices across strikes, Martin's equation (12).

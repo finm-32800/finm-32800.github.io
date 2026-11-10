@@ -30,8 +30,9 @@ Questions test three things in roughly equal measure:
 The exam is held in class in **week 9**, on Tuesday, December 1, in the first
 75 minutes, and covers the material through week 8: all lecture notes,
 in-class discussions, the notebooks linked from the weekly chapters, and
-Homework 1 through 5. That includes Apache Airflow (week 7) and GitHub
-Actions (week 8). The room is posted on Canvas. There is no separate final
+Homework 1 through 5. That includes remote machines and SLURM (week 7) and
+packaging and CI (week 8). The Airflow session in week 9 comes after the exam
+and is not on it. The room is posted on Canvas. There is no separate final
 exam.
 
 ## Practice Questions

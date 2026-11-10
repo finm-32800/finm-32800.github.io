@@ -60,12 +60,12 @@ data transfer.
 Use `sinteractive` to request a dedicated compute node:
 
 ```bash
-sinteractive --account=finm32900 --partition=caslake \
+sinteractive --account=finm32800 --partition=caslake \
     --time=02:00:00 --cpus-per-task=4 --mem=16G
 ```
 
 This requests:
-- **Account**: `finm32900` (our course allocation)
+- **Account**: `finm32800` (our course allocation)
 - **Partition**: `caslake` (the default Midway3 partition)
 - **Time**: 2 hours
 - **CPUs**: 4 cores
@@ -83,11 +83,11 @@ You are now on a **compute node** with dedicated resources.
 
 ## Step 3: Set Up the Python Environment
 
-Load the Python module and activate the course virtual environment:
+Activate the course's shared environment, which has Python 3.12, Jupyter,
+Polars, and pandas:
 
 ```bash
-module load python/3.11.9
-source /project/finm32900/tdp-venv-p3119/bin/activate
+source /project/finm32800/shared/envs/jupyter/bin/activate
 ```
 
 Verify that Jupyter is available:
@@ -97,9 +97,9 @@ which jupyter-notebook
 ```
 
 ```{tip}
-If you want to use your own conda environment instead, create one in
-your home directory (e.g., `$HOME/envs/`) to avoid hitting the file count
-limit on the shared project directory.
+The shared environment is read-only. To install packages of your own, make
+an environment in your home directory (e.g., `$HOME/envs/`), not in
+`/project/`, to stay under the project space's file count limit.
 ```
 
 
@@ -290,15 +290,16 @@ jupyter-notebook --no-browser --ip=$HOST_IP --port=$PORT_NUM
 
 ### Jupyter exits immediately
 
-- Check that you loaded the Python module (`module load python/3.11.9`) and
-  activated the virtual environment before starting Jupyter.
+- Check that you activated the shared environment
+  (`source /project/finm32800/shared/envs/jupyter/bin/activate`) before
+  starting Jupyter.
 - Run `which jupyter-notebook` to confirm it's available.
 
 ### Queue wait is too long
 
 - Try the `debug` QoS for a quick 15-minute session:
   ```bash
-  sinteractive --account=finm32900 --qos=debug --time=00:15:00
+  sinteractive --account=finm32800 --qos=debug --time=00:15:00
   ```
 - Check the queue: `squeue --partition=caslake` to see how busy the partition is.
 
@@ -317,17 +318,10 @@ source of truth, since RCC updates the tool from time to time:
 
 > [SCode: VS Code on Midway (RCC documentation)](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/)
 
-In short, after SSHing into a login node, you launch a server with something
-like:
-
-```bash
-scode serve-web -- --account finm32900 --time 01:00:00 --mem 16G
-```
-
-and `scode` prints an `ssh -L ...` tunnel command to run on your laptop and a
-`http://localhost:8000/?tkn=...` URL to open in your browser. Note that this
-is exactly the workflow from Steps 4--6 above---`scode` just scripts it for
-you. Each launch generates a fresh port and token, so always copy the tunnel
+Use `--account finm32800` where RCC's page shows the account. `scode` prints
+an `ssh -L ...` tunnel command to run on your laptop and a
+`http://localhost:8000/?tkn=...` URL to open in your browser. This is exactly
+the workflow from Steps 4--6 above---`scode` just scripts it for you. Each launch generates a fresh port and token, so always copy the tunnel
 command and URL from the most recent output.
 
 ### Quick fix: "channel N: open failed: connect failed: Connection refused"

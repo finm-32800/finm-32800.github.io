@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -599,13 +599,13 @@ data transfer.</p>
 <section id="step-2-request-an-interactive-compute-node">
 <h2>Step 2: Request an Interactive Compute Node<a class="headerlink" href="#step-2-request-an-interactive-compute-node" title="Link to this heading">#</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">sinteractive</span></code> to request a dedicated compute node:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sinteractive<span class="w"> </span>--account<span class="o">=</span>finm32900<span class="w"> </span>--partition<span class="o">=</span>caslake<span class="w"> </span><span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sinteractive<span class="w"> </span>--account<span class="o">=</span>finm32800<span class="w"> </span>--partition<span class="o">=</span>caslake<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--time<span class="o">=</span><span class="m">02</span>:00:00<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>--mem<span class="o">=</span>16G
 </pre></div>
 </div>
 <p>This requests:</p>
 <ul class="simple">
-<li><p><strong>Account</strong>: <code class="docutils literal notranslate"><span class="pre">finm32900</span></code> (our course allocation)</p></li>
+<li><p><strong>Account</strong>: <code class="docutils literal notranslate"><span class="pre">finm32800</span></code> (our course allocation)</p></li>
 <li><p><strong>Partition</strong>: <code class="docutils literal notranslate"><span class="pre">caslake</span></code> (the default Midway3 partition)</p></li>
 <li><p><strong>Time</strong>: 2 hours</p></li>
 <li><p><strong>CPUs</strong>: 4 cores</p></li>
@@ -620,9 +620,9 @@ changes to show the compute node name:</p>
 </section>
 <section id="step-3-set-up-the-python-environment">
 <h2>Step 3: Set Up the Python Environment<a class="headerlink" href="#step-3-set-up-the-python-environment" title="Link to this heading">#</a></h2>
-<p>Load the Python module and activate the course virtual environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>python/3.11.9
-<span class="nb">source</span><span class="w"> </span>/project/finm32900/tdp-venv-p3119/bin/activate
+<p>Activate the course’s shared environment, which has Python 3.12, Jupyter,
+Polars, and pandas:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/project/finm32800/shared/envs/jupyter/bin/activate
 </pre></div>
 </div>
 <p>Verify that Jupyter is available:</p>
@@ -631,9 +631,9 @@ changes to show the compute node name:</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you want to use your own conda environment instead, create one in
-your home directory (e.g., <code class="docutils literal notranslate"><span class="pre">$HOME/envs/</span></code>) to avoid hitting the file count
-limit on the shared project directory.</p>
+<p>The shared environment is read-only. To install packages of your own, make
+an environment in your home directory (e.g., <code class="docutils literal notranslate"><span class="pre">$HOME/envs/</span></code>), not in
+<code class="docutils literal notranslate"><span class="pre">/project/</span></code>, to stay under the project space’s file count limit.</p>
 </div>
 </section>
 <section id="step-4-get-the-host-ip-and-start-jupyter">
@@ -803,8 +803,9 @@ tunnel command, and browser URL.</p></li>
 <section id="jupyter-exits-immediately">
 <h3>Jupyter exits immediately<a class="headerlink" href="#jupyter-exits-immediately" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Check that you loaded the Python module (<code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">python/3.11.9</span></code>) and
-activated the virtual environment before starting Jupyter.</p></li>
+<li><p>Check that you activated the shared environment
+(<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/project/finm32800/shared/envs/jupyter/bin/activate</span></code>) before
+starting Jupyter.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">jupyter-notebook</span></code> to confirm it’s available.</p></li>
 </ul>
 </section>
@@ -812,7 +813,7 @@ activated the virtual environment before starting Jupyter.</p></li>
 <h3>Queue wait is too long<a class="headerlink" href="#queue-wait-is-too-long" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>Try the <code class="docutils literal notranslate"><span class="pre">debug</span></code> QoS for a quick 15-minute session:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sinteractive<span class="w"> </span>--account<span class="o">=</span>finm32900<span class="w"> </span>--qos<span class="o">=</span>debug<span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:15:00
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sinteractive<span class="w"> </span>--account<span class="o">=</span>finm32800<span class="w"> </span>--qos<span class="o">=</span>debug<span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:15:00
 </pre></div>
 </div>
 </li>
@@ -832,15 +833,10 @@ source of truth, since RCC updates the tool from time to time:</p>
 <blockquote>
 <div><p><a class="reference external" href="https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/">SCode: VS Code on Midway (RCC documentation)</a></p>
 </div></blockquote>
-<p>In short, after SSHing into a login node, you launch a server with something
-like:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scode<span class="w"> </span>serve-web<span class="w"> </span>--<span class="w"> </span>--account<span class="w"> </span>finm32900<span class="w"> </span>--time<span class="w"> </span><span class="m">01</span>:00:00<span class="w"> </span>--mem<span class="w"> </span>16G
-</pre></div>
-</div>
-<p>and <code class="docutils literal notranslate"><span class="pre">scode</span></code> prints an <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">...</span></code> tunnel command to run on your laptop and a
-<code class="docutils literal notranslate"><span class="pre">http://localhost:8000/?tkn=...</span></code> URL to open in your browser. Note that this
-is exactly the workflow from Steps 4–6 above—<code class="docutils literal notranslate"><span class="pre">scode</span></code> just scripts it for
-you. Each launch generates a fresh port and token, so always copy the tunnel
+<p>Use <code class="docutils literal notranslate"><span class="pre">--account</span> <span class="pre">finm32800</span></code> where RCC’s page shows the account. <code class="docutils literal notranslate"><span class="pre">scode</span></code> prints
+an <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">...</span></code> tunnel command to run on your laptop and a
+<code class="docutils literal notranslate"><span class="pre">http://localhost:8000/?tkn=...</span></code> URL to open in your browser. This is exactly
+the workflow from Steps 4–6 above—<code class="docutils literal notranslate"><span class="pre">scode</span></code> just scripts it for you. Each launch generates a fresh port and token, so always copy the tunnel
 command and URL from the most recent output.</p>
 <section id="quick-fix-channel-n-open-failed-connect-failed-connection-refused">
 <h3>Quick fix: “channel N: open failed: connect failed: Connection refused”<a class="headerlink" href="#quick-fix-channel-n-open-failed-connect-failed-connection-refused" title="Link to this heading">#</a></h3>

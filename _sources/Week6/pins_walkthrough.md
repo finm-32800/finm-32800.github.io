@@ -4,10 +4,10 @@ This page is the week 6 demo, written down so that you can redo it after
 class. It uses the class report, the repository you work in for
 [HW 4](../HW4.md), and one of its upstreams, `ftsfr/fed_yield_curve`. Every
 command runs from a clone of the report, and every block of output is cut
-down from a real run on November 2. The report's pins moved on November 3
-(the upstreams' requirements were fixed and the report re-pinned), so the
-commits and hashes below are from before the move; the commands are
-unchanged, and step B shows how to read the current ones from the lockfile.
+down from a real run. Steps A to D were run on November 10, against the
+pins the report has had since November 3. Step E's output is from
+November 2, against the pin of that day, because it shows a day when the
+Fed had published new data since the pin.
 
 The words are the ones
 [ChartBook: Know Where Every Number Came From](./chartbook_catalog.md) defines:
@@ -45,7 +45,7 @@ ls: chartbook.lock: No such file or directory
 35-        pipeline="ftsfr/fed_yield_curve",
 36-        dataframe="ftsfr_treas_yield_curve_zero_coupon",
 37-        format="pandas",
-   chartbook catalog add <the folder where you cloned the ftsfr repositories>/* -y
+   chartbook catalog add ~/GitRepositories/ftsfr_repos/* -y
 ```
 
 There is no lockfile. The exhibit reads by name, which is good, but the name
@@ -75,11 +75,12 @@ chartbook store info
 ```text
 Store default: /Users/you/.chartbook/store (writable)
   ftsfr/fed_yield_curve: 1 snapshot(s)
-  ... (8 pipelines)
-  Newest: 2026-11-02T22:28:14.877522Z
+  ... (6 pipelines)
+  Newest: 2026-11-04T06:04:56.031930Z
 ```
 
-This is the default store, made when your first snapshot was. The report
+This is the default store, made when your first snapshot was. (Before
+`chartbook catalog init`, the same command prints the folder alone.) The report
 declares its upstreams in `chartbook.toml`:
 
 ```console
@@ -88,17 +89,21 @@ sed -n '/^\[dependencies\]/,$p' chartbook.toml
 
 ```text
 [dependencies]
-"ftsfr/fed_yield_curve" = {}
-"ftsfr/ken_french_data_library" = {}
-"ftsfr/he_kelly_manela" = {}
-"ftsfr/corp_bond_returns" = {}
-"ftsfr/options" = {}
-"ftsfr/nyu_call_report" = {}
+"ftsfr/fed_yield_curve" = { repository = "https://github.com/ftsfr/fed_yield_curve" }
+"ftsfr/ken_french_data_library" = { repository = "https://github.com/ftsfr/ken_french_data_library" }
+"ftsfr/he_kelly_manela" = { repository = "https://github.com/ftsfr/he_kelly_manela" }
+"ftsfr/corp_bond_returns" = { repository = "https://github.com/ftsfr/corp_bond_returns" }
+"ftsfr/options" = { repository = "https://github.com/ftsfr/options" }
+"ftsfr/nyu_call_report" = { repository = "https://github.com/ftsfr/nyu_call_report" }
 ```
 
-`"ftsfr/fed_yield_curve" = {}` means: a pipeline named by its ID, found by
-that ID in a store, with no folder of it on this machine. (`chartbook add
-ftsfr/fed_yield_curve` is how such a line gets written: it adds the line and
+Each line names a pipeline by its ID, found by that ID in a store, with no
+folder of it on this machine. `repository` says where that pipeline's code
+lives, so that a reader of this file knows what to clone and build; a pin
+then also keeps to snapshots made in that repository, should two ever claim
+the same ID. `"ftsfr/fed_yield_curve" = {}` pins the same snapshot, but
+write the address. (`chartbook add https://github.com/ftsfr/fed_yield_curve`
+is how such a line gets written: it adds the line, address included, and
 pins the newest snapshot in your stores.) What the report got for it is in
 `chartbook.lock`. Two records matter for one dependency: the dependency's
 entry, and the record of each asset pinned from it.
@@ -111,22 +116,22 @@ jq '.records[] | select(.id=="ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero
 ```text
   "id": "ftsfr/fed_yield_curve",
   "via": "store",
-  "location": { "kind": "store", "commit": "3904ad653ea0bfa8af753ad57f34c6917747fdc0",
+  "location": { "kind": "store", "commit": "5bb7217c30f422bab5c9b87e3fc3410461ea4391",
                 "repository": "https://github.com/ftsfr/fed_yield_curve", ... },
-  "snapshot": "2026-11-02T05:22:19.659609Z",
-  "pinned_hash": "sha256:aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8"
+  "snapshot": "2026-11-04T05:46:01.793770Z",
+  "pinned_hash": "sha256:29b80f24a77d83736a5bd0343abae385097bd47340c76b493530686d7e636280"
 
   "id": "ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon",
   "location": { "kind": "file", "path": "./_data/ftsfr_treas_yield_curve_zero_coupon.parquet" },
-  "content_hash": "sha256:b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b",
-  "size_bytes": 5352937
+  "content_hash": "sha256:4c04214626a01006a131ff11fa391453a52c6f1dc15d5daede2d7704642a2506",
+  "size_bytes": 5376252
 ```
 
 Four fields to know by name:
 
 | Field | Says |
 |---|---|
-| `commit` | Which code built it: the upstream's commit, `3904ad6` |
+| `commit` | Which code built it: the upstream's commit, `5bb7217` |
 | `snapshot` | When the snapshot was made. This is the snapshot's name, not when you pinned it; the lockfile records no time of its own |
 | `pinned_hash` | One hash for the whole dependency: a hash over every asset pinned from it (step C) |
 | `content_hash` | One hash per file: the SHA-256 of its bytes |
@@ -139,9 +144,9 @@ chartbook lineage
 
 ```text
 finm-32800/finm_midterm_report (this folder)
-├── ftsfr/fed_yield_curve: ftsfr/fed_yield_curve 3904ad6, made 2026-11-02 05:22:19 UTC, pins checked
-│   ... (8 lines)
-8 snapshot(s) upstream; no gaps.
+├── ftsfr/fed_yield_curve: ftsfr/fed_yield_curve 5bb7217, made 2026-11-04 05:46:01 UTC, pins checked
+│   ... (6 lines)
+6 snapshot(s) upstream; no gaps.
 ```
 
 Each line is a snapshot in a store, checked: it is there, it holds what was
@@ -156,8 +161,8 @@ print(data.path("fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon"))'
 ```
 
 ```text
-(382232, 3) 2026-10-02 00:00:00
-<store>/pipelines/ftsfr+fed_yield_curve/2026-11-02T052219Z_3904ad653ea0/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
+(382802, 3) 2026-10-30 00:00:00
+<store>/pipelines/ftsfr+fed_yield_curve/2026-11-04T054601Z_5bb7217c30f4/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
 ```
 
 The path is in the store, under the snapshot's name (its time and commit),
@@ -173,7 +178,7 @@ doit info exhibit:yield_curve
 ```text
 file_dep   :
  - ./src/settings.py
- - <store>/pipelines/ftsfr+fed_yield_curve/2026-11-02T052219Z_3904ad653ea0/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
+ - <store>/pipelines/ftsfr+fed_yield_curve/2026-11-04T054601Z_5bb7217c30f4/_data/ftsfr_treas_yield_curve_zero_coupon.parquet
  - ./src/chart_style.py
  - ./src/exhibits/yield_curve.py
 ```
@@ -188,7 +193,6 @@ doit forget exhibit:yield_curve && doit
 
 ```text
 .  exhibit:yield_curve
-yield_curve: Latest (Oct 2, 2026): 2y 4.80%, 10y 5.28%, 30y 5.66%
 ```
 
 A full build from clean takes about a minute; a second `doit` does nothing.
@@ -212,7 +216,7 @@ shasum -a 256 "$(python -c 'from chartbook import data; print(data.path("fed_yie
 ```
 
 ```text
-b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b  <store>/.../ftsfr_treas_yield_curve_zero_coupon.parquet
+4c04214626a01006a131ff11fa391453a52c6f1dc15d5daede2d7704642a2506  <store>/.../ftsfr_treas_yield_curve_zero_coupon.parquet
 ```
 
 That is the `content_hash` from step B. Then the dependency's hash, which is
@@ -227,10 +231,10 @@ jq -r '.records[]
 ```
 
 ```text
-47cbb658b68625c2738d0290cf3af12c7fa235933f9c7b1609cf7a52461840f2  ftsfr/fed_yield_curve:chart/yield_curve_replication
-b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b  ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
-357c9890e7ba7d62f7a4e4b63f1aa58eba9e3ab1b545085f0edc425a811d1e0a  ftsfr/fed_yield_curve:notebook/gsw_crsp_replication_ipynb
-e7510339af9f776c67e151c5f38a487cdb0b731ca50802c6a873352dd1577ec8  ftsfr/fed_yield_curve:notebook/summary_fed_yield_curve_ipynb
+a2eb227eec63003141a823dddac484f27a320749a2061140c5a42f7532abadb7  ftsfr/fed_yield_curve:chart/yield_curve_replication
+4c04214626a01006a131ff11fa391453a52c6f1dc15d5daede2d7704642a2506  ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
+103efb4b65d78515b9c4434fc6f75aca17e20298db6d5db7d7bb4d382959e53a  ftsfr/fed_yield_curve:notebook/gsw_crsp_replication_ipynb
+cf4e6b4f98afa7705141ca6b8e13bfa56ef0514cda5b48c08e8a2e5004d70a45  ftsfr/fed_yield_curve:notebook/summary_fed_yield_curve_ipynb
 ```
 
 Four assets: a chart, the dataframe, two notebooks. Pipe the same listing
@@ -245,11 +249,11 @@ jq -r '.records[0].dependencies[] | select(.id == "ftsfr/fed_yield_curve") | .pi
 ```
 
 ```text
-aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8  -
-sha256:aff4ea7deb55d7db86c0bf5852be82496a1dfd743bf9c831960908a7497598d8
+29b80f24a77d83736a5bd0343abae385097bd47340c76b493530686d7e636280  -
+sha256:29b80f24a77d83736a5bd0343abae385097bd47340c76b493530686d7e636280
 ```
 
-The same hash. (The recipe matches for all eight dependencies in the
+The same hash. (The recipe matches for all six dependencies in the
 report's lockfile.) Change one byte of one file upstream and the file's
 `content_hash` changes, so the listing changes, so the `pinned_hash`
 changes: one line of a diff says something moved.
@@ -265,15 +269,15 @@ printf 'blob %s\0' $(wc -c < chartbook.lock | tr -d ' ') | cat - chartbook.lock 
 ```
 
 ```text
-tree abaab10b20954a50d8e94f7a9997077f3d3cf412
-parent d3bea64dcfe3e0fd1cdae165d4e2e9c676f7ca36
-author Jeremy Bejarano <...> 1793682399 -0600
+tree df84ef48f8d89245a81da7b13581f98ae4c7b4b5
+parent c914aea725d756022dbb129bce564a1e6c2f8afc
+author Jeremy Bejarano <...> 1794324214 -0600
 ...
-100644 blob 0fd4837aa8f0f4990fafbc08ae9bebcb467232c4	chartbook.lock
-100644 blob 1fab0741e4ce1b046127e998b4378e8ff0d6586e	chartbook.toml
+100644 blob dff2c50609d63181fc80dba80e5f685a78b4aea3	chartbook.lock
+100644 blob 712f4033781c74ec6d75cf412b6e9b2b47344f9d	chartbook.toml
 040000 tree ab75f65e5b03acf8a83ac63997dd3b7ed29690f5	data_manual
-0fd4837aa8f0f4990fafbc08ae9bebcb467232c4
-0fd4837aa8f0f4990fafbc08ae9bebcb467232c4  -
+dff2c50609d63181fc80dba80e5f685a78b4aea3
+dff2c50609d63181fc80dba80e5f685a78b4aea3  -
 ```
 
 The last two lines are git's hash of `chartbook.lock` and the same hash made
@@ -298,9 +302,10 @@ holds `spread_history.csv`. For HW 4, your version of this step is your own
 HW 3 monitor; *Make Your Homework an Upstream* on the [HW 4](../HW4.md) page
 has the exact files for it.
 
-In class, the instructor added three files to that branch, through
-GitHub's web interface (switch to `monitor-history`, then **Add file**,
-committing to that branch and not a new one). The daily workflow writes
+That branch carries three small files beside the CSV, and they are what
+make it a ChartBook pipeline. (To add such files to a branch of your own,
+use GitHub's web interface: switch to the branch, then **Add file**,
+committing to that branch and not a new one.) The daily workflow writes
 only `spread_history.csv` there, so the files stay. `chartbook.toml`:
 
 ```toml
@@ -338,6 +343,8 @@ And `README.md`:
 # Yield Spread Monitor: history
 
 The state the daily workflow carries from one day to the next, declared as a ChartBook dataframe. The code is on `main`.
+
+To read it from another ChartBook pipeline, add this line to `[dependencies]` in its `chartbook.toml`, then run `chartbook pin`: ...
 ```
 
 There is no `[scripts] build`: this branch builds nothing. Now, in the
@@ -351,24 +358,24 @@ git diff chartbook.lock
 ```
 
 ```text
-finm-32800/yield_spread_monitor: fetched https://github.com/finm-32800/yield_spread_monitor at 45cdd22 (monitor-history)
+finm-32800/yield_spread_monitor: fetched https://github.com/finm-32800/yield_spread_monitor at aff8f6d (monitor-history)
 finm-32800/yield_spread_monitor: 1 pinned
-... 8 lines "already pinned"
+... 6 lines "already pinned"
 Wrote chartbook.lock.
 +          "id": "finm-32800/yield_spread_monitor",
 +          "via": "rev",
 +          "location": { "kind": "git", "url": "...", "rev": "monitor-history",
-+            "commit": "45cdd221ceafc350b042b5683c017eaeee8b354f" },
-+          "pinned_hash": "sha256:8a6781a8c78c..."
++            "commit": "aff8f6d5e6f2afa885ea6b431442702d2337fab9" },
++          "pinned_hash": "sha256:4385c35b8571..."
 +      "id": "finm-32800/yield_spread_monitor:spread_history",
 +      "location": { "kind": "file", "path": "spread_history.csv" },
-+      "content_hash": "sha256:c1c698b40345...", "size_bytes": 202461
++      "content_hash": "sha256:40a4699920c6...", "size_bytes": 202541
 ```
 
 `chartbook pin` cloned the repository, read the files the branch's
 `chartbook.toml` declares, copied them into your own store (the first one,
 which is why it must be writable), and recorded the commit and the hash.
-The eight other dependencies say `already pinned`: nothing else moved,
+The six other dependencies say `already pinned`: nothing else moved,
 which is what a reviewer of your pull request checks. The key on the left
 of `=` is your name for the dependency, and references use it; use the ID
 ChartBook derives from the URL, the owner as it is and the repository name
@@ -383,19 +390,19 @@ chartbook lineage | grep spread
 
 ```text
              date  spread
-12598  2026-10-28    0.38
-12599  2026-10-29    0.37
-12600  2026-10-30    0.38 12601
-├── finm-32800/yield_spread_monitor: pinned from its git clone at 45cdd22; not walked further
+12603  2026-11-04    0.32
+12604  2026-11-05    0.38
+12605  2026-11-06    0.35 12606
+├── finm-32800/yield_spread_monitor: pinned from its git clone at aff8f6d; not walked further
 ```
 
 `date` comes back as strings, because the file is a CSV; an exhibit calls
 `pd.to_datetime`. Lineage stops at a git dependency: there is no snapshot
 to walk into.
 
-**Then the branch moves.** The daily run adds a row at 22:00 UTC. (In
-class, the instructor moved the branch by editing its README instead, so
-that the commit changed and the data did not.) `pin` and `update` do
+**Then the branch moves.** The daily run adds a row at 22:00 UTC. (For
+this page, the branch was moved by editing its README instead, so that the
+commit changed and the data did not.) `pin` and `update` do
 different things:
 
 ```console
@@ -408,28 +415,28 @@ git diff chartbook.lock
 finm-32800/yield_spread_monitor: 1 already pinned
 chartbook.lock is unchanged.
 
-finm-32800/yield_spread_monitor: fetched ... at 5cb9263 (monitor-history)
--            "commit": "0b7bda88508803cfbe434bff0c45094230ce1faa"
-+            "commit": "5cb9263b136ecc7ddec21ed8ccac915677b709b0"
-             "pinned_hash": "sha256:2dec4d060b3b..."      (unchanged)
+finm-32800/yield_spread_monitor: fetched ... at f2180f9 (monitor-history)
+-            "commit": "aff8f6d5e6f2afa885ea6b431442702d2337fab9"
++            "commit": "f2180f93cfa533511c420786e1060e1b3c3a5bc5"
+             "pinned_hash": "sha256:4385c35b8571..."      (unchanged)
 ```
 
 `pin` moved nothing. `update` fetched again, followed the branch to its new
 commit, and the diff shows exactly that: the commit line moved and no hash
 did, because the data did not change. `data.path` still points at the same
-stored file, so `doit` rebuilds nothing. After a day with a new row, the
-same two commands give a diff with a moved hash:
+stored file, so `doit` rebuilds no exhibit. After a day with a new row, the
+same two commands give a diff with a moved hash, of this shape:
 
 ```text
 finm-32800/yield_spread_monitor: 1 moved
   finm-32800/yield_spread_monitor:spread_history
-    sha256:c1c698b40345… -> sha256:b3f5123ca830…
--            "commit": "45cdd221ceafc350b042b5683c017eaeee8b354f"
-+            "commit": "0b7bda88508803cfbe434bff0c45094230ce1faa"
--          "pinned_hash": "sha256:8a6781a8c78c..."
-+          "pinned_hash": "sha256:2dec4d060b3b..."
--      "size_bytes": 202461
-+      "size_bytes": 202477
+    sha256:40a4699920c6… -> sha256:<the new file's>…
+-            "commit": "f2180f93cfa533511c420786e1060e1b3c3a5bc5"
++            "commit": "<the day's commit>"
+-          "pinned_hash": "sha256:4385c35b8571..."
++          "pinned_hash": "sha256:<new>..."
+-      "size_bytes": 202541
++      "size_bytes": 202557
 ```
 
 Sixteen more bytes: one row. The point: a pin never moves by itself. When it
@@ -441,24 +448,30 @@ and what your reviewers read.
 What you are about to see: the same code, run at a later point in time,
 gives a different hash, and the hash tells you so. Step B read a snapshot
 from a store. Now build the upstream yourself, at the commit the lockfile
-names. In a second terminal, so that the report's environment stays active
+names. The output in this step is from November 2, when the report pinned
+commit `3904ad6` and a snapshot that ended October 2; your commit is the
+one your lockfile names (`5bb7217` since November 3), and your dates are
+later. In a second terminal, so that the report's environment stays active
 in the first:
 
 ```console
 git clone https://github.com/ftsfr/fed_yield_curve
 cd fed_yield_curve
-git switch --detach 3904ad6
-python3.12 -m venv .venv && source .venv/bin/activate
+git switch --detach 5bb7217
+python3.12 -m venv ../.venv && source ../.venv/bin/activate
 pip install -r requirements.txt
 chartbook trust
 chartbook run --snapshot
 ```
 
-(`3904ad6` is the `commit` from step B; read it from the lockfile with
+(`5bb7217` is the `commit` from step B; read it from the lockfile with
 `jq -r '.records[0].dependencies[] | select(.id=="ftsfr/fed_yield_curve") | .location.commit' chartbook.lock`
 in the report. Python 3.12, because the pipeline pins `numpy==1.26.4`;
 its `requirements.txt` pins `pyarrow==20.0.0`, which is what wrote the
-pinned file, and that matters at the end of this step.) `chartbook trust` says this folder's
+pinned file, and that matters at the end of this step. The environment
+goes beside the clone, not inside it: the pipeline's `.gitignore` does not
+list `.venv`, and `chartbook run --snapshot` refuses a folder with
+uncommitted files.) `chartbook trust` says this folder's
 build script may run on your machine. `chartbook run --snapshot` checks that
 everything is committed, builds (about a minute: it pulls the Fed's yield
 curve file, formats it, runs the tests and two notebooks, and draws the
@@ -469,7 +482,7 @@ ftsfr/fed_yield_curve: build
 ...
 ftsfr/fed_yield_curve at 3904ad6: 4 asset(s) in the store
 Snapshot made. A pipeline that depends on this one gets it with `chartbook update`.
-Stores: mine
+Stores: default
 ```
 
 Compare what you built with what the report pinned:
@@ -499,6 +512,12 @@ ftsfr/fed_yield_curve: 4 changed upstream since it was pinned
 4 pinned asset(s) have changed upstream. `chartbook update` moves the pins.
 ```
 
+What you see depends on the day. If the Fed has published nothing since
+the pin, as on November 10, the rebuilt parquet is byte for byte the pinned
+one: `chartbook pin` then says `1 already pinned, 3 changed upstream` (the
+chart and the two notebooks, which every build renders anew), and no
+exhibit rebuilds after an update.
+
 To see what moving the pin does, move it, build, and undo:
 
 ```console
@@ -511,7 +530,7 @@ git restore chartbook.lock && doit
 ftsfr/fed_yield_curve: 4 moved
   ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon
     sha256:b63da0404cf9… -> sha256:bc106bbafd76…
-  From its snapshot at 3904ad6, made 2026-11-02 22:51 UTC, in store mine.
+  From its snapshot at 3904ad6, made 2026-11-02 22:51 UTC, in store default.
 -          "snapshot": "2026-11-02T05:22:19.659609Z",
 +          "snapshot": "2026-11-02T22:51:43.146901Z",
 -          "pinned_hash": "sha256:aff4ea7deb55..."
@@ -519,7 +538,6 @@ ftsfr/fed_yield_curve: 4 moved
 -- exhibit:factor_returns  -- exhibit:gdp_growth  -- exhibit:size_value_returns
 .  exhibit:yield_curve
 .  compile_report  .  compile_style_guides  .  build_chartbook_site  .  run_pytest
-yield_curve: Latest (Oct 23, 2026): 2y 4.64%, 10y 4.99%, 30y 5.36%
 ```
 
 The commit line did not move; the snapshot's time and every hash did.
@@ -532,7 +550,7 @@ fail at `chartbook pin --frozen`. The HW 4 rule is that the pins in
 lockfile diff shows what moved.
 
 Finally, does the rebuild reproduce the pin if you cut it at the pinned
-date? Save this as `trim_and_hash.py` and run it in the clone, with the
+date (the last date the pin holds, which step B printed)? Save this as `trim_and_hash.py` and run it in the clone, with the
 clone's environment:
 
 ```python
@@ -563,7 +581,7 @@ python trim_and_hash.py _data/ftsfr_treas_yield_curve_zero_coupon.parquet 2026-1
 
 ```text
 rows 382,232, through 2026-10-02, pyarrow 20.0.0, pandas 2.2.3
-sha256:b63da0404cf9cad95233228f31aa6d0fc19bf8583838cd1ed04032901e5bce2b
+sha256:4c04214626a01006a131ff11fa391453a52c6f1dc15d5daede2d7704642a2506
 ```
 
 Byte for byte the pin. The same rows written by pyarrow 26.0.0 hash to

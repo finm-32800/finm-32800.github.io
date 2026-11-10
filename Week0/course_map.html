@@ -259,30 +259,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Orchestration Across Projects with Apache Airflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, and Basic MLOps — Experiment Tracking and Monitoring Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
 <ul class="nav bd-sidenav">
@@ -703,9 +703,9 @@ change.</p>
 <td><p>The FTSFR pipelines and your own homework, as upstreams of the class report</p></td>
 </tr>
 <tr class="row-odd"><td><p>7</p></td>
-<td><p>Orchestration across projects: Apache Airflow</p></td>
-<td><p>Goyal, Welch, and Zafirov (2024), the equity premium predictors</p></td>
-<td><p>FRED and other public data; the FTSFR pipelines</p></td>
+<td><p>Data too big for a laptop: Polars and Parquet, SSH, and the SLURM scheduler</p></td>
+<td><p>Dickerson, Robotti, and Rossetti (2026), the corporate bond factor replication crisis, read for how much the cleaning of TRACE moves the results</p></td>
+<td><p>FINRA TRACE (WRDS), on Midway3</p></td>
 </tr>
 <tr class="row-even"><td><p>8</p></td>
 <td><p>Packaging, CI, and code quality</p></td>
@@ -713,19 +713,19 @@ change.</p>
 <td><p>CME fed funds futures</p></td>
 </tr>
 <tr class="row-odd"><td><p>9</p></td>
-<td><p>Basic MLOps: experiment tracking and monitoring models</p></td>
-<td><p>Bejarano et al. (2026), an open benchmark for forecasting across financial markets</p></td>
-<td><p>The FTSFR datasets</p></td>
+<td><p>The exam; orchestration across projects with Apache Airflow; a short look at experiment tracking</p></td>
+<td><p>Goyal, Welch, and Zafirov (2024), the equity premium predictors, and Bejarano et al. (2026), an open benchmark for forecasting across financial markets</p></td>
+<td><p>The FTSFR pipelines behind the class report</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>The arc on the finance side runs from equities (weeks 0 to 2), to interest
 rates and options (weeks 3 to 5), to many datasets at once in the class report
-(week 6), and ends with return prediction (weeks 7 to 9), which draws on
-everything before it. Corporate bonds, the cleaning of FINRA TRACE, the order
-book, and intraday trades and quotes come later in the quarter, with the
-material on data at scale.</p>
+(week 6), to corporate bonds and the cleaning of FINRA TRACE (week 7), and
+ends with return prediction (week 9), which draws on everything before it.
+The order book and intraday trades and quotes come later in the quarter, with
+the rest of the material on data at scale.</p>
 </section>
 <section id="the-final-project">
 <h2>The final project<a class="headerlink" href="#the-final-project" title="Link to this heading">#</a></h2>
@@ -773,7 +773,7 @@ archived posting.</p>
 <li><p>“Perform data reconciliations, validations, and quality checks” (<a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html"><span class="std std-doc">Hudson River Trading</span></a>)</p></li>
 <li><p>“Build automated data validation test suites that ensure that data is processed and published in accordance with well-defined Service Level Agreements (SLA’s) pertaining to data quality, data availability and data correctness” (<a class="reference internal" href="../Appendix/job_posting_akuna_capital.html"><span class="std std-doc">Akuna Capital</span></a>)</p></li>
 </ul>
-<p><strong>Later in the quarter: SQL at scale, remote machines, and job schedulers</strong></p>
+<p><strong>Week 7: Data at scale, remote machines, and job schedulers</strong></p>
 <ul class="simple">
 <li><p>“Proficient with SQL or DataFrame libraries like pandas or Polars” (<a class="reference internal" href="../Appendix/job_posting_jane_street.html"><span class="std std-doc">Jane Street</span></a>)</p></li>
 <li><p>“Experienced in at least one SQL dialect (PostgreSQL, MSSQL, MYSQL) and able to use others as needed” (<a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html"><span class="std std-doc">Hudson River Trading</span></a>)</p></li>
@@ -781,19 +781,16 @@ archived posting.</p>
 <li><p>“Unix scripting experience (bash, python, etc.)” (<a class="reference internal" href="../Appendix/job_posting_imc.html"><span class="std std-doc">IMC Trading</span></a>)</p></li>
 <li><p>“Data Build Tool (DBT)” (<a class="reference internal" href="../Appendix/job_posting_citadel_securities.html"><span class="std std-doc">Citadel Securities</span></a>)</p></li>
 </ul>
-<p><strong>Week 7: Orchestration across projects (Apache Airflow)</strong></p>
-<ul class="simple">
-<li><p>“Strong coding skills: proficiency in Python, SQL DBs, Cloud, schedulers, containers, CI/CD, software packaging” (<a class="reference internal" href="../Appendix/job_posting_citadel_securities.html"><span class="std std-doc">Citadel Securities</span></a>)</p></li>
-<li><p>“Translate high-level market research concepts into scalable processes that further transform the data” (<a class="reference internal" href="../Appendix/job_posting_citadel_securities.html"><span class="std std-doc">Citadel Securities</span></a>)</p></li>
-</ul>
 <p><strong>Week 8: CI/CD with GitHub Actions</strong></p>
 <ul class="simple">
 <li><p>“Demonstrated experience working on an Agile team employing software engineering best practices, such as GitOps and CI/CD, to deliver complex software projects” (<a class="reference internal" href="../Appendix/job_posting_akuna_capital.html"><span class="std std-doc">Akuna Capital</span></a>)</p></li>
 <li><p>“Ability to work with a team in a fast-paced environment, deploying new software daily” (<a class="reference internal" href="../Appendix/job_posting_jump_trading.html"><span class="std std-doc">Jump Trading</span></a>)</p></li>
 <li><p>“Build, deploy, and monitor our data processing pipelines (Java, Python, Spark, Flink)” (<a class="reference internal" href="../Appendix/job_posting_imc.html"><span class="std std-doc">IMC Trading</span></a>)</p></li>
 </ul>
-<p><strong>Week 9: Basic MLOps: experiment tracking and monitoring models</strong></p>
+<p><strong>Week 9: Orchestration across projects (Apache Airflow) and basic MLOps</strong></p>
 <ul class="simple">
+<li><p>“Strong coding skills: proficiency in Python, SQL DBs, Cloud, schedulers, containers, CI/CD, software packaging” (<a class="reference internal" href="../Appendix/job_posting_citadel_securities.html"><span class="std std-doc">Citadel Securities</span></a>)</p></li>
+<li><p>“Translate high-level market research concepts into scalable processes that further transform the data” (<a class="reference internal" href="../Appendix/job_posting_citadel_securities.html"><span class="std std-doc">Citadel Securities</span></a>)</p></li>
 <li><p>“they engineer data, build and deploy models, and monitor them in production” (<a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html"><span class="std std-doc">JPMorganChase</span></a>)</p></li>
 <li><p>“Experience with monitoring, observability, and alerting systems for data pipelines” (<a class="reference internal" href="../Appendix/job_posting_drw.html"><span class="std std-doc">DRW</span></a>)</p></li>
 </ul>
@@ -893,12 +890,12 @@ the full text.</p>
 <li><p><strong>Week 2.</strong> Fama, Eugene F., and Kenneth R. French. <a class="reference external" href="https://doi.org/10.1016/0304-405X(93)90023-5">“Common Risk Factors in the Returns on Stocks and Bonds.”</a> <em>Journal of Financial Economics</em> 33, no. 1 (1993): 3-56.</p></li>
 <li><p><strong>Week 3.</strong> Gürkaynak, Refet S., Brian Sack, and Jonathan H. Wright. <a class="reference external" href="https://doi.org/10.1016/j.jmoneco.2007.06.029">“The U.S. Treasury Yield Curve: 1961 to the Present.”</a> <em>Journal of Monetary Economics</em> 54, no. 8 (2007): 2291-2304. First circulated in 2006 as Finance and Economics Discussion Series paper 2006-28, which is <a class="reference external" href="https://www.federalreserve.gov/pubs/feds/2006/200628/200628abs.html">free from the Federal Reserve Board</a>. The same week reads the expected path of the policy rate from 30-Day Fed Funds futures, following the <a class="reference external" href="https://www.cmegroup.com/education/demos-and-tutorials/fed-funds-futures-probability-tree-calculator.html">CME FedWatch methodology</a>.</p></li>
 <li><p><strong>Week 4.</strong> Martin, Ian W. R., and Ran Shi. <a class="reference external" href="https://personal.lse.ac.uk/martiniw/oib_martin_shi_latest.pdf">“Forecasting Crashes with a Smile.”</a> Working paper, 2025. Also circulated as <a class="reference external" href="https://cepr.org/publications/dp18524">CEPR Discussion Paper 18524</a> and Financial Markets Group Discussion Paper 936.</p></li>
-<li><p><strong>Later in the quarter.</strong> Easley, David, Marcos M. López de Prado, and Maureen O’Hara. <a class="reference external" href="https://doi.org/10.1093/rfs/hhs053">“Flow Toxicity and Liquidity in a High-Frequency World.”</a> <em>The Review of Financial Studies</em> 25, no. 5 (2012): 1457-1493. A <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1695596">free version</a> is on SSRN.</p></li>
-<li><p><strong>Later in the quarter.</strong> Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. <a class="reference external" href="https://arxiv.org/abs/2604.07880">“The Corporate Bond Factor Replication Crisis.”</a> Working paper, 2026. Also on <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966">SSRN</a>. An earlier version circulated as “Common Pitfalls in the Evaluation of Corporate Bond Strategies.” The data and code are at <a class="reference external" href="https://openbondassetpricing.com/">Open Source Bond Asset Pricing</a>.</p></li>
-<li><p><strong>Later in the quarter.</strong> Holden, Craig W., and Stacey Jacobsen. <a class="reference external" href="https://doi.org/10.1111/jofi.12127">“Liquidity Measurement Problems in Fast, Competitive Markets: Expensive and Cheap Solutions.”</a> <em>The Journal of Finance</em> 69, no. 4 (2014): 1747-1785. A <a class="reference external" href="https://host.kelley.iu.edu/cholden/Holden%20and%20Jacobsen%20(2014).pdf">free copy</a> is on Craig Holden’s website.</p></li>
-<li><p><strong>Week 7.</strong> Goyal, Amit, Ivo Welch, and Athanasse Zafirov. <a class="reference external" href="https://academic.oup.com/rfs/article/37/11/3490/7749383">“A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction.”</a> <em>The Review of Financial Studies</em> 37, no. 11 (2024): 3490-3557. A <a class="reference external" href="https://dx.doi.org/10.2139/ssrn.3929119">free version</a> is on SSRN. It updates Welch and Goyal, <a class="reference external" href="https://doi.org/10.1093/rfs/hhm014">“A Comprehensive Look at the Empirical Performance of Equity Premium Prediction,”</a> <em>The Review of Financial Studies</em> 21, no. 4 (2008): 1455-1508.</p></li>
+<li><p><strong>Week 7.</strong> Dickerson, Alexander, Cesare Robotti, and Giulio Rossetti. <a class="reference external" href="https://arxiv.org/abs/2604.07880">“The Corporate Bond Factor Replication Crisis.”</a> Working paper, 2026. Also on <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6088966">SSRN</a>. An earlier version circulated as “Common Pitfalls in the Evaluation of Corporate Bond Strategies.” The data and code are at <a class="reference external" href="https://openbondassetpricing.com/">Open Source Bond Asset Pricing</a>.</p></li>
 <li><p><strong>Week 8.</strong> Bernanke, Ben S., and Kenneth N. Kuttner. <a class="reference external" href="https://doi.org/10.1111/j.1540-6261.2005.00760.x">“What Explains the Stock Market’s Reaction to Federal Reserve Policy?”</a> <em>The Journal of Finance</em> 60, no. 3 (2005): 1221-1257. A free version is <a class="reference external" href="https://www.nber.org/papers/w10402">NBER Working Paper 10402</a>.</p></li>
+<li><p><strong>Week 9.</strong> Goyal, Amit, Ivo Welch, and Athanasse Zafirov. <a class="reference external" href="https://academic.oup.com/rfs/article/37/11/3490/7749383">“A Comprehensive 2022 Look at the Empirical Performance of Equity Premium Prediction.”</a> <em>The Review of Financial Studies</em> 37, no. 11 (2024): 3490-3557. A <a class="reference external" href="https://dx.doi.org/10.2139/ssrn.3929119">free version</a> is on SSRN. It updates Welch and Goyal, <a class="reference external" href="https://doi.org/10.1093/rfs/hhm014">“A Comprehensive Look at the Empirical Performance of Equity Premium Prediction,”</a> <em>The Review of Financial Studies</em> 21, no. 4 (2008): 1455-1508.</p></li>
 <li><p><strong>Weeks 6 and 9.</strong> Bejarano, Jeremy, Viren Desai, Kausthub Keshava, Arsh Kumar, Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu. <a class="reference external" href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">“An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial Markets.”</a> Office of Financial Research Working Paper 26-05, August 2026. The data and code are the <a class="reference external" href="https://github.com/jmbejara/ftsfr">Financial Time Series Forecasting Repository</a>.</p></li>
+<li><p><strong>Later in the quarter.</strong> Easley, David, Marcos M. López de Prado, and Maureen O’Hara. <a class="reference external" href="https://doi.org/10.1093/rfs/hhs053">“Flow Toxicity and Liquidity in a High-Frequency World.”</a> <em>The Review of Financial Studies</em> 25, no. 5 (2012): 1457-1493. A <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1695596">free version</a> is on SSRN.</p></li>
+<li><p><strong>Later in the quarter.</strong> Holden, Craig W., and Stacey Jacobsen. <a class="reference external" href="https://doi.org/10.1111/jofi.12127">“Liquidity Measurement Problems in Fast, Competitive Markets: Expensive and Cheap Solutions.”</a> <em>The Journal of Finance</em> 69, no. 4 (2014): 1747-1785. A <a class="reference external" href="https://host.kelley.iu.edu/cholden/Holden%20and%20Jacobsen%20(2014).pdf">free copy</a> is on Craig Holden’s website.</p></li>
 </ul>
 </section>
 </section>
