@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a344f13" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -259,7 +259,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -535,7 +535,7 @@ document.write(`
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -572,10 +572,15 @@ request by Thursday, November 12, so your reviewers have time.</p></li>
 collaborator invite to the private report repository. Check your email or
 <a class="reference external" href="https://github.com/notifications">github.com/notifications</a> and confirm in
 class that you can open it.</p></li>
-<li><p><strong>Upgrade to ChartBook 0.5 or newer before you start HW 4.</strong> All homework
-moves to 0.5. See <em>Upgrade to ChartBook 0.5</em> in
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a>;
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> should print <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code> or newer.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">chartbook</span></code> before you start HW 4.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code>
+should print <code class="docutils literal notranslate"><span class="pre">0.5.1</span></code> or newer. All homework moves to 0.5; for HW 1 and
+HW 2, see the <a class="reference internal" href="Week6/chartbook_catalog.html#upgrade-homework"><span class="std std-ref">appendix</span></a> of
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a>.</p></li>
+<li><p><strong>The report’s pins moved on November 3.</strong> The six FTSFR upstreams now
+install with a plain <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code> on Python 3.12,
+and the report’s <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins their new commits. If you built an
+upstream before then, pull the report’s <code class="docutils literal notranslate"><span class="pre">main</span></code>, check out the commit its
+lockfile names now, and rebuild.</p></li>
 <li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a>:</strong> dates to be announced on Canvas.</p></li>
 <li><p><strong>The exam is Tuesday, December 1,</strong> in week 9, covering weeks 0 through 8.
 See <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
@@ -607,11 +612,12 @@ testing a pull without pulling; stop, or flag and publish.</p></li>
 <a class="reference download internal" download="" href="_downloads/bbaeea018874821e4aa4dba6b526afbf/slides_ftsfr.pdf"><span class="xref download myst">slides</span></a>): the benchmarking gap; one
 pipeline per dataset, validated; code, not data; results; Section 6,
 where cleaning reshuffles the leaderboard.</p></li>
-<li><p><strong>Vocabulary</strong> (<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook</span></a>): three
-questions, three tools; content hash, Merkle tree, <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code>;
-snapshot, store, pin, lockfile; lineage vs provenance; rebuild or read
-the snapshot, and the committed cutoff date; DVC, Delta Lake; why Parquet
-is fast; Polars.</p></li>
+<li><p><strong>ChartBook quick start</strong> (<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook</span></a>):
+build a pipeline and snapshot it; a catalog over three; depend on one
+from a pipeline of your own, read by name, commit the lockfile. Then the
+six words; three questions, three tools; content hash, Merkle tree,
+<code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code>; rebuild or read the snapshot; DVC, Delta Lake; why Parquet
+is fast.</p></li>
 <li><p><strong>Demo</strong> (<a class="reference internal" href="Week6/pins_walkthrough.html"><span class="std std-doc">walkthrough</span></a>): the <code class="docutils literal notranslate"><span class="pre">summer</span></code>
 branch; <code class="docutils literal notranslate"><span class="pre">main</span></code> and its lockfile; hashes by hand; a live git dependency,
 <code class="docutils literal notranslate"><span class="pre">pin</span></code> vs <code class="docutils literal notranslate"><span class="pre">update</span></code>; rebuild an upstream, same code, later day, different

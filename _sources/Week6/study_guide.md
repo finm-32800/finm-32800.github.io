@@ -51,7 +51,7 @@ and [Bejarano et al. (2026)](https://www.financialresearch.gov/working-papers/20
 
 ## Hashes, Snapshots, and Pins
 
-*Read: [ChartBook: Pipelines, Stores, and Lineage](./chartbook_catalog.md) and Agenda Items 4
+*Read: [ChartBook: Know Where Every Number Came From](./chartbook_catalog.md) and Agenda Items 4
 and 5 of the [week 6 chapter](../overview_w6.md).*
 
 7. What is a content hash of a file, and what happens to it when one byte of
@@ -89,7 +89,7 @@ and 5 of the [week 6 chapter](../overview_w6.md).*
 
 ## Lineage and Provenance
 
-*Read: [ChartBook: Pipelines, Stores, and Lineage](./chartbook_catalog.md).*
+*Read: [ChartBook: Know Where Every Number Came From](./chartbook_catalog.md).*
 
 14. What is the difference between the lineage of a chart and its
    provenance?

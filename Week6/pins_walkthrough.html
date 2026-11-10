@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Collaborative Report and Style Guides" href="../Week1/collaborative_report_and_style_guides.html" />
-    <link rel="prev" title="ChartBook: Pipelines, Stores, and Lineage" href="chartbook_catalog.html" /> 
+    <link rel="prev" title="ChartBook: Know Where Every Number Came From" href="chartbook_catalog.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
   </head>
@@ -257,7 +257,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -537,10 +537,12 @@ document.write(`
 class. It uses the class report, the repository you work in for
 <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a>, and one of its upstreams, <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code>. Every
 command runs from a clone of the report, and every block of output is cut
-down from a real run on November 2. Your hashes and commits will differ
-where the report or the upstream has moved since.</p>
+down from a real run on November 2. The report’s pins moved on November 3
+(the upstreams’ requirements were fixed and the report re-pinned), so the
+commits and hashes below are from before the move; the commands are
+unchanged, and step B shows how to read the current ones from the lockfile.</p>
 <p>The words are the ones
-<a class="reference internal" href="chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a> defines:
+<a class="reference internal" href="chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a> defines:
 pipeline, store, snapshot, lockfile, pin, reference, lineage. Read that page
 first; this one shows each word on the screen.</p>
 <p><strong>What you need.</strong> About an hour, and:</p>
@@ -548,7 +550,7 @@ first; this one shows each word on the screen.</p>
 <li><p>A clone of the report with its environment installed (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code> in the
 clone). Activate it once, <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">.venv/bin/activate</span></code>, so that the
 commands below are typed as written; or put <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span></code> in front of each.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> printing <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code> or newer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> printing <code class="docutils literal notranslate"><span class="pre">0.5.1</span></code> or newer.</p></li>
 <li><p>The snapshots <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins, in your store, each built by you
 (step E shows how, for one of them). <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code> passes when
 this is set up.</p></li>
@@ -717,7 +719,7 @@ when, the pin moves. Data validation would catch bad data; the pin catches
 <em>different</em> data.</p>
 </section>
 <section id="c-the-hashes-by-hand">
-<h2>C. The hashes, by hand<a class="headerlink" href="#c-the-hashes-by-hand" title="Link to this heading">#</a></h2>
+<span id="walkthrough-hashes-by-hand"></span><h2>C. The hashes, by hand<a class="headerlink" href="#c-the-hashes-by-hand" title="Link to this heading">#</a></h2>
 <p>What you are about to see: every hash in the lockfile can be recomputed
 with <code class="docutils literal notranslate"><span class="pre">shasum</span></code> and <code class="docutils literal notranslate"><span class="pre">jq</span></code>. First the file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">shasum -a 256 &quot;$(python -c &#39;from chartbook import data; print(data.path(&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;))&#39;)&quot;</span>
@@ -784,11 +786,8 @@ hash sits in the tree, the tree’s in the commit, the commit’s in its child.<
 full Merkle tree. ChartBook stops a level short: a <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> covers one
 dependency’s files, and a snapshot is named by its time and commit, not by a
 root hash. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> checks the graph edge by edge instead.
-(<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code> also reads every byte again; in ChartBook
-0.5.0 it reports every object as a gap when more than one store is
-registered, so until a release fixes that, run it with one store named:
-<code class="docutils literal notranslate"><span class="pre">CHARTBOOK_STORE=&quot;&lt;the</span> <span class="pre">store's</span> <span class="pre">path&gt;&quot;</span> <span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code>.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">verify</span></code> rehashes a store and is not affected.)</p>
+(<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code> also reads every byte again, and
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">verify</span></code> rehashes a whole store.)</p>
 </section>
 <section id="d-a-live-git-dependency">
 <h2>D. A live git dependency<a class="headerlink" href="#d-a-live-git-dependency" title="Link to this heading">#</a></h2>
@@ -919,11 +918,6 @@ same two commands give a diff with a moved hash:</p>
 <p>Sixteen more bytes: one row. The point: a pin never moves by itself. When it
 moves, the lockfile diff says what moved, and that diff is what you commit
 and what your reviewers read.</p>
-<p>One thing to know about ChartBook 0.5.0: a classmate who clones your branch
-and runs <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> sees <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">put</span> <span class="pre">back</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">store</span></code>, after which <code class="docutils literal notranslate"><span class="pre">pin</span> <span class="pre">--frozen</span></code> and <code class="docutils literal notranslate"><span class="pre">data.load</span></code> say the store does not have the pinned bytes;
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">yield_spread_monitor</span></code> puts them right, and if the branch
-has moved since you pinned, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">chartbook.lock</span></code> shows it and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">chartbook.lock</span></code> undoes it. A later release restores a git
-dependency’s files correctly, and this step goes away.</p>
 </section>
 <section id="e-rebuild-versus-read">
 <h2>E. Rebuild versus read<a class="headerlink" href="#e-rebuild-versus-read" title="Link to this heading">#</a></h2>
@@ -935,18 +929,17 @@ in the first:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
 <span class="go">cd fed_yield_curve</span>
 <span class="go">git switch --detach 3904ad6</span>
-<span class="go">python -m venv .venv &amp;&amp; source .venv/bin/activate</span>
-<span class="go">pip install -r requirements.txt &quot;pyarrow==20.0.0&quot; jupytext</span>
+<span class="go">python3.12 -m venv .venv &amp;&amp; source .venv/bin/activate</span>
+<span class="go">pip install -r requirements.txt</span>
 <span class="go">chartbook trust</span>
 <span class="go">chartbook run --snapshot</span>
 </pre></div>
 </div>
 <p>(<code class="docutils literal notranslate"><span class="pre">3904ad6</span></code> is the <code class="docutils literal notranslate"><span class="pre">commit</span></code> from step B; read it from the lockfile with
 <code class="docutils literal notranslate"><span class="pre">jq</span> <span class="pre">-r</span> <span class="pre">'.records[0].dependencies[]</span> <span class="pre">|</span> <span class="pre">select(.id==&quot;ftsfr/fed_yield_curve&quot;)</span> <span class="pre">|</span> <span class="pre">.location.commit'</span> <span class="pre">chartbook.lock</span></code>
-in the report. The two extra packages: the pipeline’s <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>
-pins <code class="docutils literal notranslate"><span class="pre">numpy==1.26.4</span></code>, which the newest pyarrow refuses, and its notebooks
-need <code class="docutils literal notranslate"><span class="pre">jupytext</span></code>; <code class="docutils literal notranslate"><span class="pre">pyarrow==20.0.0</span></code> is also what wrote the pinned file,
-which matters at the end of this step.) <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> says this folder’s
+in the report. Python 3.12, because the pipeline pins <code class="docutils literal notranslate"><span class="pre">numpy==1.26.4</span></code>;
+its <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> pins <code class="docutils literal notranslate"><span class="pre">pyarrow==20.0.0</span></code>, which is what wrote the
+pinned file, and that matters at the end of this step.) <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> says this folder’s
 build script may run on your machine. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> checks that
 everything is committed, builds (about a minute: it pulls the Fed’s yield
 curve file, formats it, runs the tests and two notebooks, and draws the
@@ -1102,7 +1095,7 @@ diff, commit <code class="docutils literal notranslate"><span class="pre">chartb
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ChartBook: Pipelines, Stores, and Lineage</p>
+        <p class="prev-next-title">ChartBook: Know Where Every Number Came From</p>
       </div>
     </a>
     <a class="right-next"

@@ -297,7 +297,7 @@ disk, you check the input to the failing step, then the input to that one,
 until you reach the first step whose output is wrong. The error is in that
 step or in the data it read. A pipeline that does everything in one
 notebook gives you nowhere to look. ChartBook's lineage
-([ChartBook: Pipelines, Stores, and Lineage](../Week6/chartbook_catalog.md)) records
+([ChartBook: Know Where Every Number Came From](../Week6/chartbook_catalog.md)) records
 which upstream each dataframe came from, so the trail crosses repositories
 too.
 

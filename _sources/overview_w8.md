@@ -22,8 +22,8 @@ the orchestrator of last week.
 
 ## Announcements
 
-- **[HW 4](./HW4.md), the class report, is due today at 9:30 am,** the
-  start of class. Only pull requests merged by then count.
+- **[HW 4](./HW4.md), the class report, is due this Friday,** November 20,
+  at 11:59 pm. Only pull requests merged by then count.
 - **[HW 5](./HW5.md):** dates to be announced on Canvas.
 - **No class next week.** November 24 falls in Thanksgiving break. Week 9 meets
   on December 1.

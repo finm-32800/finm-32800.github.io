@@ -32,7 +32,7 @@ the report's `chartbook.toml` and pinned by content hash in
 `chartbook.lock`. A change upstream reaches the report only when someone
 moves the pin, and the move shows up as a diff of the lockfile in a pull
 request. Week 6 covers the machinery:
-[ChartBook: Pipelines, Stores, and Lineage](./Week6/chartbook_catalog.md).
+[ChartBook: Know Where Every Number Came From](./Week6/chartbook_catalog.md).
 The Summer 2026
 edition of the report used ChartBook 0.1, which had no snapshots or pins.
 This edition is built on them.
@@ -71,11 +71,17 @@ so the reviews can happen before the deadline.
 - **Accept your invite** to
   [finm-32800/finm_midterm_report](https://github.com/finm-32800/finm_midterm_report)
   and clone it.
-- **Upgrade to ChartBook 0.5 or newer.** All homework moves to 0.5 this week,
-  including any repository of yours that you turn into an upstream. Follow
-  *Upgrade to ChartBook 0.5* in
-  [ChartBook: Pipelines, Stores, and Lineage](./Week6/chartbook_catalog.md).
-  `chartbook --version` should print `0.5.0` or newer.
+- **`pip install -U chartbook`.** `chartbook --version` should print `0.5.1`
+  or newer. All homework moves to 0.5 this week, including any repository of
+  yours that you turn into an upstream; for HW 1 and HW 2, follow the
+  {ref}`appendix <upgrade-homework>` of
+  [ChartBook: Know Where Every Number Came From](./Week6/chartbook_catalog.md).
+- **The pins moved on November 3.** The six FTSFR upstreams now install
+  with a plain `pip install -r requirements.txt` on Python 3.12, and the
+  report's `chartbook.lock` pins their new commits. If you built an
+  upstream before then, pull `main`, check out the commit the lockfile
+  names now, and rebuild; a pull request opened before then rebases onto
+  the new lockfile.
 - **ChartBook's skill for Claude Code** (optional). If you use Claude Code,
   `chartbook install claude-skill` installs ChartBook's skill for every
   session on your machine, and `chartbook install claude-skill --project`
@@ -142,7 +148,7 @@ the same kind.
 
 This is the bonus route. The recipe below makes your HW 3 monitor an
 upstream of the report. *Depending on a public repository* in
-[ChartBook: Pipelines, Stores, and Lineage](./Week6/chartbook_catalog.md)
+[ChartBook: Know Where Every Number Came From](./Week6/chartbook_catalog.md)
 explains what `chartbook pin` does with a `git` dependency.
 
 1. **The monitor repository is public,** in your own account, and has
@@ -209,7 +215,7 @@ reports that the pinned asset changed upstream. The pins committed in
 pull request unless your exhibit needs the newer data; if it does, run
 `chartbook update <name>` and say so in the pull request, where the
 lockfile diff shows exactly what moved. *Your rebuild and the pin* in
-[ChartBook: Pipelines, Stores, and Lineage](./Week6/chartbook_catalog.md)
+[ChartBook: Know Where Every Number Came From](./Week6/chartbook_catalog.md)
 has the details, and
 [Walkthrough: From a Working Folder to a Pin](./Week6/pins_walkthrough.md)
 rebuilds `ftsfr/fed_yield_curve` and checks it against the pin, command by

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ChartBook: Pipelines, Stores, and Lineage &#8212; Data Pipelines for Quantitative Research</title>
+    <title>ChartBook: Know Where Every Number Came From &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2af69973" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -257,7 +257,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -505,7 +505,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ChartBook: Pipelines, Stores, and Lineage</h1>
+    <h1>ChartBook: Know Where Every Number Came From</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -515,37 +515,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrade-to-chartbook-0-5">Upgrade to ChartBook 0.5</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-your-homework-repositories">Upgrading your homework repositories</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#help-from-claude-code">Help from Claude Code</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-three-pipelines-and-a-catalog">Try it: three pipelines and a catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-data-that-other-repositories-made">The problem: data that other repositories made</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vocabulary">Vocabulary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-pipeline-snapshot-it-open-a-catalog">1. Build a pipeline, snapshot it, open a catalog</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-more-and-the-catalog-grows">2. Two more, and the catalog grows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depend-on-it-from-a-pipeline-of-your-own">3. Depend on it from a pipeline of your own</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-words-now-that-you-have-seen-them">The words, now that you have seen them</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-questions-three-tools">Three questions, three tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashes-and-merkle-trees">Hashes and Merkle trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recompute-a-pin-by-hand">Recompute a pin by hand</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-far-the-merkle-analogy-goes">How far the Merkle analogy goes</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots-and-stores">Snapshots and stores</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-snapshot-checks-and-records">What a snapshot checks and records</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-small-and-cleaned-on-request">Immutable, small, and cleaned on request</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relatives">Relatives</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-data-inside-is-parquet">Why the data inside is Parquet</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hw-4-workflow">The HW 4 workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-upstream-and-snapshot-it">1. Build an upstream and snapshot it</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declare-a-dependency-and-pin-it">2. Declare a dependency and pin it</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-by-name">3. Read by name</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-and-move-forward-on-purpose">4. Check, and move forward on purpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hw-4-the-reports-upstreams">HW 4: the report’s upstreams</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-rebuild-and-the-pin">Your rebuild and the pin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#depending-on-a-public-repository">Depending on a public repository</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftsfr-many-pipelines-one-store">FTSFR: many pipelines, one store</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-deeper">Going deeper</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-snapshot-checks-and-records">What a snapshot checks and records</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-small-and-cleaned-on-request">Immutable, small, and cleaned on request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashes-and-merkle-trees">Hashes and Merkle trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recompute-a-pin-by-hand">Recompute a pin by hand</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relatives">Relatives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-data-inside-is-parquet">Why the data inside is Parquet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-upgrade-your-homework-repositories-to-chartbook-0-5">Appendix: Upgrade your homework repositories to ChartBook 0.5</a></li>
 </ul>
             </nav>
         </div>
@@ -556,212 +547,330 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="chartbook-pipelines-stores-and-lineage">
-<h1>ChartBook: Pipelines, Stores, and Lineage<a class="headerlink" href="#chartbook-pipelines-stores-and-lineage" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="chartbook-know-where-every-number-came-from">
+<h1>ChartBook: Know Where Every Number Came From<a class="headerlink" href="#chartbook-know-where-every-number-came-from" title="Link to this heading">#</a></h1>
 <p>Official documentation:
 <a class="reference external" href="https://backofficedev.github.io/chartbook/">backofficedev.github.io/chartbook</a>.</p>
+<p>Every pipeline you have built so far pulls its own data. This week one
+pipeline reads what another one made, and can prove which bytes it read.
+Git does this for code: a commit hash names every version of every file.
+ChartBook does it for data: a pipeline declares a build ready with a
+<strong>snapshot</strong>, and a pipeline that reads it <strong>pins</strong> that snapshot in a
+lockfile committed next to its code.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -U chartbook</span>
+<span class="go">chartbook --version        # chartbook, version 0.5.1 (or newer)</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Depend</div>
+<p class="sd-card-text">Build on another pipeline’s exact output, the way you depend on a package.
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">ftsfr/fed_yield_curve</span></code> pins its newest snapshot in
+<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>, and what you read changes only when you run
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code>.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://backofficedev.github.io/chartbook/guide/depending-on-pipelines.html"><span>https://backofficedev.github.io/chartbook/guide/depending-on-pipelines.html</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Trace</div>
+<p class="sd-card-text">Every dataframe, chart, and model records what it was made from, by content
+hash. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> walks the chain back to the first source and checks
+every hash on the way.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://backofficedev.github.io/chartbook/guide/depending-on-pipelines.html#chartbook-lineage"><span>https://backofficedev.github.io/chartbook/guide/depending-on-pipelines.html#chartbook-lineage</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Rebuild</div>
+<p class="sd-card-text">A snapshot keeps the exact bytes a pipeline made, labelled with the commit
+that made them. Rebuild from the same inputs and compare; put back an output
+that took a day to compute with <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">restore</span></code>.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://backofficedev.github.io/chartbook/guide/keeping-costly-outputs.html"><span>https://backofficedev.github.io/chartbook/guide/keeping-costly-outputs.html</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Discover</div>
+<p class="sd-card-text">Many pipelines become one catalog: a website your team browses, and a
+command line (<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span></code>) that scripts and agents
+ask the same questions.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://backofficedev.github.io/chartbook/guide/catalogs-and-data.html"><span>https://backofficedev.github.io/chartbook/guide/catalogs-and-data.html</span></a></div>
+</div>
+</div>
+</div>
 <p><strong>Objectives of This Chapter</strong></p>
 <ol class="arabic simple">
-<li><p>Upgrade to ChartBook 0.5 or newer, in your environment and in your homework
-repositories, and install its Claude Code skill.</p></li>
-<li><p>Discuss terminology: pipeline, catalog, store, snapshot, lockfile, pin,
-reference, lineage, and provenance.</p></li>
+<li><p>Build an upstream pipeline and snapshot it into your store; open a
+catalog over it.</p></li>
+<li><p>Depend on it from a pipeline of your own, read its data by name, and
+commit the lockfile.</p></li>
 <li><p>Say which question each tool answers: <code class="docutils literal notranslate"><span class="pre">doit</span></code> (what is stale), an
-orchestrator (when it runs), and ChartBook (what this data is and where it
-came from).</p></li>
-<li><p>Explain what ChartBook hashes and how, recompute a pin’s hash by hand, and
-say how far the Merkle-tree analogy goes.</p></li>
-<li><p>Explain what a snapshot records, how a store stays small and immutable, and
-how ChartBook compares with Delta Lake, Iceberg, git, and DVC.</p></li>
-<li><p>Do the <a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> workflow: build an FTSFR pipeline and snapshot
-it into your store, depend on it, pin it, read it by name, and commit the
-lockfile.</p></li>
+orchestrator (when it runs), and ChartBook (what this data is and where
+it came from).</p></li>
 </ol>
-<section id="upgrade-to-chartbook-0-5">
-<h2>Upgrade to ChartBook 0.5<a class="headerlink" href="#upgrade-to-chartbook-0-5" title="Link to this heading">#</a></h2>
-<p>All homework moves to ChartBook 0.5: version 0.5.0 or any later release
-(0.5.1 fixes three bugs noted on this page and ships a better project
-template; either works for the homework). Upgrade before class. Check what you
-have:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook --version</span>
-</pre></div>
-</div>
-<p>In a pip or conda environment:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install --upgrade &quot;chartbook&gt;=0.5.0&quot;</span>
-</pre></div>
-</div>
-<p>In a uv project, change the dependency and the lockfile together:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uv add &quot;chartbook&gt;=0.5.0&quot; &quot;polars&gt;=1.33&quot;</span>
-<span class="go">uv run chartbook --version</span>
-</pre></div>
-</div>
-<p>ChartBook 0.5 requires polars 1.33 or later. Our homework repositories pin
-<code class="docutils literal notranslate"><span class="pre">polars==1.9.0</span></code>, and with that pin in place <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span> <span class="pre">&quot;chartbook&gt;=0.5.0&quot;</span></code> alone
-fails to resolve: naming both packages in one <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span></code> replaces both pins in
-<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and updates <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>. With pip, the upgrade pulls in a newer
-polars by itself, but the next <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code> would put the
-old pins back, so edit <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> too (next section). Either way polars
-moves forward a long way (the 2.x series, as of this writing), so run your tests
-after upgrading.</p>
-<section id="upgrading-your-homework-repositories">
-<h3>Upgrading your homework repositories<a class="headerlink" href="#upgrading-your-homework-repositories" title="Link to this heading">#</a></h3>
-<p>Each homework repository was written for ChartBook 0.1.1. The general steps:</p>
-<ol class="arabic simple">
-<li><p><strong>Requirements.</strong> In <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, replace <code class="docutils literal notranslate"><span class="pre">chartbook==0.1.1</span></code> with
-<code class="docutils literal notranslate"><span class="pre">chartbook&gt;=0.5.0</span></code> and <code class="docutils literal notranslate"><span class="pre">polars==1.9.0</span></code> with <code class="docutils literal notranslate"><span class="pre">polars&gt;=1.33</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>. In a uv project, run the <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span></code> line
-above and commit <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span> <span class="pre">-f</span></code> is gone in 0.5. Replace it with
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">build</span> <span class="pre">-f</span></code>. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">browse</span></code> is now <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">open</span></code>.
-An old spelling stops with a message that names the new one.</p></li>
-<li><p><strong>Trust.</strong> ChartBook runs a folder’s build script only in a folder you have
-said is yours. Run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> once in each homework folder; until you
-do, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">build</span></code> renders the site as it would one from a store (no
-query run, no file read from outside the folder), and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> asks
-first.</p></li>
-<li><p><strong>An old catalog.</strong> If you made <code class="docutils literal notranslate"><span class="pre">~/.chartbook/chartbook.toml</span></code> with
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">add</span></code> under 0.1, run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">migrate</span></code> once.
-Catalogs no longer list working folders; they read stores.</p></li>
-<li><p><strong>Check and rebuild.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">check</span></code> reads the manifest, and <code class="docutils literal notranslate"><span class="pre">doit</span></code>
-rebuilds. Commit what changed.</p></li>
-</ol>
-</section>
-<section id="help-from-claude-code">
-<h3>Help from Claude Code<a class="headerlink" href="#help-from-claude-code" title="Link to this heading">#</a></h3>
-<p>ChartBook ships a skill for Claude Code that describes its commands, its
-manifest, and its data API:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook install claude-skill              # user-level: ~/.claude/skills/chartbook/</span>
-<span class="go">chartbook install claude-skill --project    # this repository: ./.claude/skills/chartbook/</span>
-</pre></div>
-</div>
-<p>The user-level copy is available in every Claude Code session on your machine.
-The <code class="docutils literal notranslate"><span class="pre">--project</span></code> copy is meant to be committed with a repository. The skill
-names the ChartBook version it was written for, and after an upgrade any
-<code class="docutils literal notranslate"><span class="pre">chartbook</span></code> command you run at a terminal tells you when your copy is older
-than your ChartBook, so rerun the install after each upgrade.</p>
-</section>
-</section>
-<section id="try-it-three-pipelines-and-a-catalog">
-<span id="try-it-three-pipelines"></span><h2>Try it: three pipelines and a catalog<a class="headerlink" href="#try-it-three-pipelines-and-a-catalog" title="Link to this heading">#</a></h2>
-<p>Three FTSFR pipelines build from public data and need no credentials: the
-Fed’s fitted Treasury yield curve, the Ken French Data Library, and the He,
-Kelly, and Manela intermediary factors. These commands clone the three, build
-each one, snapshot it into your store, and render a catalog site that lists
-all three. They take a few minutes, most of it downloading packages.</p>
+<p>Parts 1 to 3 take about half an hour at a keyboard. Everything in them uses
+pip, a plain virtual environment, ChartBook’s defaults, and public data.
+<a class="reference internal" href="../HW4.html"><span class="std std-doc">HW 4</span></a> is Part 1 done six times, with one extra line.</p>
+<section id="build-a-pipeline-snapshot-it-open-a-catalog">
+<span id="try-it-three-pipelines"></span><h2>1. Build a pipeline, snapshot it, open a catalog<a class="headerlink" href="#build-a-pipeline-snapshot-it-open-a-catalog" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../Week3/ftsfr.html"><span class="std std-doc">FTSFR</span></a> pipelines are public repositories, one per
+dataset, and the Fed’s fitted Treasury yield curve needs no credentials.
+Clone it into a folder that will hold a few of them.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="shell" data-sync-id="bash" for="sd-tab-item-0">
+macOS / Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir ftsfr &amp;&amp; cd ftsfr</span>
 <span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
-<span class="go">git clone https://github.com/ftsfr/ken_french_data_library</span>
-<span class="go">git clone https://github.com/ftsfr/he_kelly_manela</span>
 
-<span class="go">uv venv --python 3.12</span>
-<span class="go">source .venv/bin/activate           # Windows: .venv\Scripts\activate</span>
-<span class="go">uv pip install -r fed_yield_curve/requirements.txt &quot;pyarrow&lt;26&quot;</span>
+<span class="go">python3.12 -m venv .venv</span>
+<span class="go">source .venv/bin/activate</span>
+<span class="go">pip install -r fed_yield_curve/requirements.txt</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="shell" data-sync-id="powershell" for="sd-tab-item-1">
+Windows PowerShell</label><div class="sd-tab-content docutils">
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">ftsfr</span><span class="p">;</span> <span class="nb">cd </span><span class="n">ftsfr</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">ftsfr</span><span class="p">/</span><span class="n">fed_yield_curve</span>
 
-<span class="go">chartbook trust                     # trusts every pipeline in this folder</span>
-
+<span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">fed_yield_curve</span><span class="p">/</span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python 3.12 is the pipeline’s requirement (its <code class="docutils literal notranslate"><span class="pre">.python-version</span></code> says so),
+the same Python HW 3 uses. The install takes a few minutes. Then:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook trust                      # once: every pipeline in this folder may run its build here</span>
 <span class="go">cd fed_yield_curve</span>
-<span class="go">chartbook run --snapshot            # builds it (doit), then snapshots it into your store</span>
+<span class="go">chartbook run --snapshot             # builds it (doit), then snapshots what it built</span>
 <span class="go">cd ..</span>
-
-<span class="go">cd ken_french_data_library</span>
-<span class="go">chartbook run --snapshot</span>
-<span class="go">cd ..</span>
-
-<span class="go">cd he_kelly_manela</span>
-<span class="go">chartbook run --snapshot</span>
-<span class="go">cd ..</span>
-
-<span class="go">chartbook catalog init                  # asks for a title; Enter takes the default</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> says that build scripts in this folder are yours to run.
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> checks that everything is committed, runs the
+pipeline’s build (about a minute: it pulls the Fed’s file, formats it, runs
+the tests and two notebooks, draws the chart), and copies what it built into
+your <strong>store</strong>, with the commit that built it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve: build
+...
+ftsfr/fed_yield_curve at 5bb7217: 4 asset(s) in the store
+Snapshot made. A pipeline that depends on this one gets it with `chartbook update`.
+</pre></div>
+</div>
+<p>There was nothing to set up: the store is <code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, made when
+this first snapshot was.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ chartbook store info
+Store: ~/.chartbook/store
+  a folder, the default: neither CHARTBOOK_STORE nor a [store] url in a settings file says otherwise
+</pre></div>
+</div>
+<p>Now open a site over it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook catalog init               # asks for a title; Enter takes the default</span>
 <span class="go">chartbook catalog build</span>
 <span class="go">chartbook catalog open</span>
 </pre></div>
 </div>
-<p>No store is set up by hand: the first <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> creates
-<code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code> shows it.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">init</span></code> writes <code class="docutils literal notranslate"><span class="pre">~/.chartbook/catalog.toml</span></code>, which names that
-store and titles the site; the catalog commands read it.</p>
-<p>One environment serves all three, because <code class="docutils literal notranslate"><span class="pre">fed_yield_curve</span></code>’s requirements
-include everything the other two need. Python 3.12, because the pipelines pin
-NumPy 1.26.4, which has no wheels for later Pythons. <code class="docutils literal notranslate"><span class="pre">&quot;pyarrow&lt;26&quot;</span></code>, because
-the requirements leave pyarrow unpinned and pyarrow 26 needs NumPy 2: without
-the cap, each build stops at its first Parquet write.</p>
-<p>Then read the data by name, from any folder:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Catalog title [My Catalog]:
+Created global catalog: ~/.chartbook/catalog.toml
+...
+Catalog site generated: ~/.chartbook/docs/index.html
+</pre></div>
+</div>
+<p>Click <strong>Pipelines</strong>, then <strong>Fed Yield Curve</strong>, then its dataframe. The page
+has the columns, the date range, a glimpse of the rows, and under
+<em>Provenance</em> the hash of the file’s bytes and the commit that made them.
+That page is what this chapter is about.</p>
+</section>
+<section id="two-more-and-the-catalog-grows">
+<h2>2. Two more, and the catalog grows<a class="headerlink" href="#two-more-and-the-catalog-grows" title="Link to this heading">#</a></h2>
+<p>The same environment serves the other two credential-free pipelines, the
+Ken French Data Library and the He, Kelly, and Manela intermediary factors,
+because their requirements are the same.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/ftsfr/ken_french_data_library</span>
+<span class="go">git clone https://github.com/ftsfr/he_kelly_manela</span>
+<span class="gp gp-VirtualEnv">(cd ken_french_data_library &amp;&amp; chartbook run --snapshot)</span>
+<span class="gp gp-VirtualEnv">(cd he_kelly_manela &amp;&amp; chartbook run --snapshot)</span>
+<span class="go">chartbook catalog build &amp;&amp; chartbook catalog open</span>
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> a second time in any of the three. Nothing
+new is written, because nothing changed, and the hash is how it knows
+(<a class="reference internal" href="#same-bytes-no-new-snapshot">below</a>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve at 5bb7217: 4 asset(s) in the store
+Nothing has changed since the snapshot of 2026-11-04 05:41 UTC. No new one was made.
+</pre></div>
+</div>
+<p>What a person browses on the site, a script asks for at the terminal:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook ls dataframes</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ftsfr/fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon: ftsfr_treas_yield_curve_zero_coupon
+ftsfr/he_kelly_manela:ftsfr_he_kelly_manela_all: ftsfr_he_kelly_manela_all
+ftsfr/he_kelly_manela:ftsfr_he_kelly_manela_factors_daily: ftsfr_he_kelly_manela_factors_daily
+ftsfr/he_kelly_manela:ftsfr_he_kelly_manela_factors_monthly: ftsfr_he_kelly_manela_factors_monthly
+ftsfr/ken_french_data_library:ftsfr_french_portfolios_25_daily_size_and_bm: ftsfr_french_portfolios_25_daily_size_and_bm
+ftsfr/ken_french_data_library:ftsfr_french_portfolios_25_daily_size_and_inv: ftsfr_french_portfolios_25_daily_size_and_inv
+ftsfr/ken_french_data_library:ftsfr_french_portfolios_25_daily_size_and_op: ftsfr_french_portfolios_25_daily_size_and_op
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span> <span class="pre">fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon</span></code>
+prints the dataframe’s write-up, the same text as its page. And from any
+folder, the data itself, by name:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">)</span>   <span class="c1"># a polars LazyFrame</span>
+<span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span> <span class="pre">dataframes</span></code> lists the seven dataframes the three pipelines
-declare. The snapshots are step 1 of <a class="reference internal" href="#the-hw-4-workflow">the HW 4 workflow</a>;
-the rest of this page explains what each command did.</p>
-</section>
-<section id="the-problem-data-that-other-repositories-made">
-<h2>The problem: data that other repositories made<a class="headerlink" href="#the-problem-data-that-other-repositories-made" title="Link to this heading">#</a></h2>
-<p>By now you have built several pipelines, each a repository where <code class="docutils literal notranslate"><span class="pre">doit</span></code> pulls
-data, transforms it, and leaves dataframes, charts, and notebooks. Real work is
-rarely one repository deep. Your HW 4 contribution might need the Fed’s fitted
-yield curve, the Fama-French 25 portfolios, or option portfolio returns, and
-another repository has already built each of them carefully. You can copy the
-pull code (it drifts), copy the output file by hand (nobody knows how it was
-made), or declare a dependency on the other repository’s output and read it by
-name. ChartBook does the third.</p>
-</section>
-<section id="vocabulary">
-<h2>Vocabulary<a class="headerlink" href="#vocabulary" title="Link to this heading">#</a></h2>
-<p>ChartBook uses a few words in exact senses
-(<a class="reference external" href="https://backofficedev.github.io/chartbook/guide/vocabulary.html">its vocabulary page</a>).
-Each one below has its ChartBook example.</p>
+<p>Every FTSFR dataframe is in long format with three columns: <code class="docutils literal notranslate"><span class="pre">unique_id</span></code>
+(which series), <code class="docutils literal notranslate"><span class="pre">ds</span></code> (the date), and <code class="docutils literal notranslate"><span class="pre">y</span></code> (the value). For the yield curve,
+<code class="docutils literal notranslate"><span class="pre">unique_id</span></code> runs <code class="docutils literal notranslate"><span class="pre">SVENY01</span></code> to <code class="docutils literal notranslate"><span class="pre">SVENY30</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> is in percent.</p>
+<p>The same three commands, on the package’s own small example catalog:</p>
+<video class="cb-terminal" autoplay loop muted playsinline aria-label="A terminal: chartbook ls dataframes, chartbook get-docs printing a dataframe's write-up, chartbook path, and data.load in Python">
+<source src="../_static/tapes/catalog.mp4" type="video/mp4">
+</video></section>
+<section id="depend-on-it-from-a-pipeline-of-your-own">
+<h2>3. Depend on it from a pipeline of your own<a class="headerlink" href="#depend-on-it-from-a-pipeline-of-your-own" title="Link to this heading">#</a></h2>
+<p>Reading by name from any folder is fine for a look. A pipeline that
+<em>depends</em> on the data pins it, so that the bytes it read are on record. Make
+the smallest pipeline there is, a folder with a two-line manifest, and add
+the dependency:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir my_report &amp;&amp; cd my_report</span>
+<span class="go">git init</span>
+<span class="go">printf &#39;[project]\nname = &quot;My Report&quot;\n&#39; &gt; chartbook.toml</span>
+<span class="go">chartbook add ftsfr/fed_yield_curve</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Added to [dependencies] in my_report/chartbook.toml: &quot;ftsfr/fed_yield_curve&quot; = {}
+ftsfr/fed_yield_curve: 4 pinned
+  From its snapshot at 5bb7217, made 2026-11-04 05:41 UTC, which says it was made in https://github.com/ftsfr/fed_yield_curve, in store default.
+Wrote chartbook.lock.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span></code> wrote one line under <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> in <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>
+and a <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> that names the snapshot and the hash of each of its
+four assets. Your code reads the data by name, and the lockfile says which
+bytes that name means:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook lineage</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>my_report (this folder)
+└── ftsfr/fed_yield_curve: ftsfr/fed_yield_curve 5bb7217, made 2026-11-04 05:41:34 UTC, pins checked
+1 snapshot(s) upstream; no gaps.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> walks up from the lockfile: the snapshot is in the
+store, it holds what was pinned from it at those hashes, and its own pins
+cover its own dependencies. Commit the two files. They are how anyone who
+clones your repository knows which data you used:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git add chartbook.toml chartbook.lock</span>
+<span class="go">git commit -m &quot;Depend on ftsfr/fed_yield_curve&quot;</span>
+</pre></div>
+</div>
+<p><strong>A pin never moves by itself.</strong> When a newer snapshot appears in your store
+(you rebuilt the upstream, say, after the Fed published more days),
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> tell you a pinned asset changed upstream
+and leave your pins alone. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code> moves them, and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">chartbook.lock</span></code> shows each asset’s old and new hash. Commit that diff as its
+own commit; it is what a reviewer reads.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Word</p></th>
-<th class="head"><p>What it is</p></th>
-<th class="head"><p>In ChartBook</p></th>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Pins</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>pipeline</strong></p></td>
-<td><p>One project that produces data</p></td>
-<td><p>A folder with a <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and its code in git. Its ID is <code class="docutils literal notranslate"><span class="pre">scope/name</span></code>, from the git remote: <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">&lt;ID&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code></p></td>
+<td><p>Create a pin for a dependency that has none. Never move one; say <code class="docutils literal notranslate"><span class="pre">changed</span> <span class="pre">upstream</span></code> when a newer snapshot exists</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>catalog</strong></p></td>
-<td><p>A list of where to find pipelines, and a site over them</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">~/.chartbook/catalog.toml</span></code>. Its <code class="docutils literal notranslate"><span class="pre">[stores]</span></code> table lists stores, in order. A catalog declares no data of its own and reads no working folder</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code></p></td>
+<td><p>Never move one. The build reads the pinned snapshot. <code class="docutils literal notranslate"><span class="pre">run</span></code> also pins what has no pin yet</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>store</strong></p></td>
-<td><p>A folder that keeps snapshots</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, or a folder a team shares (Google Drive, a shared disk, an S3 bucket). Each file is kept once</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">[&lt;name&gt;]</span></code></p></td>
+<td><p>Move: to the newest snapshot. The lockfile diff is the record; commit it on its own</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>snapshot</strong></p></td>
-<td><p>What one pipeline built at one commit, declared ready by its owner</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;store&gt;/pipelines/ftsfr+fed_yield_curve/2026-11-02T221410Z_31f453e04986/</span></code>, with its record in <code class="docutils literal notranslate"><span class="pre">_chartbook/snapshot.json</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>lockfile</strong></p></td>
-<td><p>The exact versions a project was built against</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>, committed beside <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>. No timestamp on purpose: a diff of it means a pin moved</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>pin</strong></p></td>
-<td><p>Freezing which snapshot of a dependency you read; also the record of it in the lockfile</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> makes pins and never moves one. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code> moves them</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>reference</strong></p></td>
-<td><p>The address of an asset</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pipeline:dataframe</span></code>, as in <code class="docutils literal notranslate"><span class="pre">fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon</span></code>. Charts and other kinds add the kind: <code class="docutils literal notranslate"><span class="pre">fed_yield_curve:chart/...</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>lineage</strong></p></td>
-<td><p>The graph of where data came from: which inputs fed which outputs, at which versions</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> walks it: your lockfile’s pins, the pins each of those snapshots recorded, and so on up</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>provenance</strong></p></td>
-<td><p>The full record of one artifact’s origin: what made it, from what, when</p></td>
-<td><p>The provenance panel on every asset page: its hash and location, the pipeline and commit that built it, its inputs at their hashes</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span> <span class="pre">--frozen</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--frozen</span></code></p></td>
+<td><p>Write nothing. Refuse if any pin is missing or not in a store. What a build server runs</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>If you use Claude Code, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">install</span> <span class="pre">claude-skill</span></code> teaches it these
+commands, and it answers questions like “what data do we have on Treasury
+yields, and what is built on it?” from <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span> <span class="pre">--json</span></code> and
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span></code>, the same facts as the site:</p>
+<video class="cb-terminal" autoplay loop muted playsinline aria-label="A terminal: chartbook ls --json listing every asset, chartbook get-docs printing a model's write-up, chartbook add pinning a dependency, and chartbook lineage checking it">
+<source src="../_static/tapes/agent.mp4" type="video/mp4">
+</video></section>
+<section id="the-words-now-that-you-have-seen-them">
+<h2>The words, now that you have seen them<a class="headerlink" href="#the-words-now-that-you-have-seen-them" title="Link to this heading">#</a></h2>
+<p>ChartBook uses a few words in exact senses
+(<a class="reference external" href="https://backofficedev.github.io/chartbook/guide/vocabulary.html">its vocabulary page</a>).
+You have now used each one.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Word</p></th>
+<th class="head"><p>What it is</p></th>
+<th class="head"><p>Where you saw it</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pipeline</strong></p></td>
+<td><p>One project that produces data: a folder with a <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and its code in git. Its ID is <code class="docutils literal notranslate"><span class="pre">scope/name</span></code>, from the git remote</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code>; your <code class="docutils literal notranslate"><span class="pre">my_report</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>snapshot</strong></p></td>
+<td><p>What one pipeline built at one commit, declared ready by its owner, with the hash of every file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code>: <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span> <span class="pre">at</span> <span class="pre">5bb7217:</span> <span class="pre">4</span> <span class="pre">asset(s)</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">store</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>store</strong></p></td>
+<td><p>The folder that keeps snapshots. Each file is kept once. Yours is <code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>; a team can share one on a shared drive or in S3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pin</strong></p></td>
+<td><p>Freezing which snapshot of a dependency you read, and the record of it in the lockfile</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span></code> pinned four assets; <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code> would move them</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>lockfile</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>: the exact snapshots and hashes a project was built against. Committed beside <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>; no timestamp on purpose, so a diff of it means a pin moved</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">chartbook.lock</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lineage</strong></p></td>
+<td><p>The graph of where data came from, which inputs fed which outputs at which versions, with a hash on every edge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code>: <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">snapshot(s)</span> <span class="pre">upstream;</span> <span class="pre">no</span> <span class="pre">gaps</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>catalog</strong> is the website over one or more stores, and the index behind
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span></code>. By default your store and your catalog are one unit; the
+difference matters when a team has several stores. A <strong>reference</strong> is the
+address of an asset, <code class="docutils literal notranslate"><span class="pre">pipeline:dataframe</span></code>; charts and notebooks add the kind,
+<code class="docutils literal notranslate"><span class="pre">fed_yield_curve:chart/yield_curve_replication</span></code>.</p>
 <p>ChartBook puts the relationship among its documents in one sentence: a
 manifest asks, a lockfile records what was got, a snapshot records what was
 made, and an index records what a site shows. The split between
-<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> is the same split as between a
+<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> is the split between a
 <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and its <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>, applied to data.</p>
 </section>
 <section id="three-questions-three-tools">
@@ -790,10 +899,11 @@ made, and an index records what a site shows. The split between
 </table>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">doit</span></code> keeps its state on one machine on purpose. Deleting <code class="docutils literal notranslate"><span class="pre">.doit.db</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">forget</span></code>, costs only a rerun, so nothing about the science may live there.
-ChartBook’s record is the opposite: it is committed and shared, because it is
-the answer to “which data was this built from?” A month from now that question
-has to have the same answer on your laptop, a teammate’s, and the grader’s.</p>
+<code class="docutils literal notranslate"><span class="pre">doit</span> <span class="pre">forget</span></code>, costs only a rerun, so nothing about the science may live
+there. ChartBook’s record is the opposite: it is committed and shared,
+because it is the answer to “which data was this built from?” A month from
+now that question has to have the same answer on your laptop, a teammate’s,
+and the grader’s.</p>
 <p>The tools compose. ChartBook resolves a reference to a file in the store, and
 <code class="docutils literal notranslate"><span class="pre">doit</span></code> watches that file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># dodo.py</span>
@@ -812,112 +922,126 @@ has to have the same answer on your laptop, a teammate’s, and the grader’s.<
 </div>
 <p>Until you run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code>, the path and its bytes stay the same, and
 <code class="docutils literal notranslate"><span class="pre">doit</span></code> skips the task. When <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code> moves the pin to a newer
-snapshot, the path now names other bytes, and the next <code class="docutils literal notranslate"><span class="pre">doit</span></code> reruns the task.
-Nothing else upstream reaches your build. (<code class="docutils literal notranslate"><span class="pre">data.path</span></code> names one file. For
-another pipeline’s dataset of several files, a Hive folder, use
+snapshot, the path now names other bytes, and the next <code class="docutils literal notranslate"><span class="pre">doit</span></code> reruns the
+task. Nothing else upstream reaches your build. (<code class="docutils literal notranslate"><span class="pre">data.path</span></code> names one file.
+For another pipeline’s dataset of several files, a Hive folder, use
 <code class="docutils literal notranslate"><span class="pre">data.files(&quot;pipeline:name&quot;)</span></code>, which lists every file.)</p>
 </section>
-<section id="hashes-and-merkle-trees">
-<h2>Hashes and Merkle trees<a class="headerlink" href="#hashes-and-merkle-trees" title="Link to this heading">#</a></h2>
-<p>A <strong>cryptographic hash</strong> such as SHA-256 maps any sequence of bytes to 256 bits.
-Change one byte and the hash changes completely, and no one knows how to find
-two inputs with the same hash. So a hash works as a name for content: two
-files with the same SHA-256 are, for every practical purpose, the same bytes.</p>
-<p>ChartBook names every asset by a hash, written <code class="docutils literal notranslate"><span class="pre">sha256:&lt;hex&gt;</span></code>, and computes it
-one way (<code class="docutils literal notranslate"><span class="pre">chartbook/hashing.py</span></code>):</p>
-<ul>
-<li><p><strong>A file</strong> is the SHA-256 of its bytes. <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span> <span class="pre">file.parquet</span></code> gives
-the same hex.</p></li>
-<li><p><strong>A folder or a glob</strong> is the SHA-256 of a listing with one line per file,
-<code class="docutils literal notranslate"><span class="pre">&lt;hex</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">file's</span> <span class="pre">SHA-256&gt;</span>&#160; <span class="pre">&lt;path</span> <span class="pre">inside</span> <span class="pre">the</span> <span class="pre">asset&gt;</span></code>, sorted by path. That
-listing is exactly what <code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> prints, so the hash can be reproduced in
-the shell:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd _data/rates &amp;&amp; find . -type f | sed &#39;s|^\./||&#39; \</span>
-<span class="go">    | grep -viE &#39;(^|/)(\.DS_Store|Thumbs\.db|desktop\.ini|\._[^/]*)$&#39; \</span>
-<span class="go">    | LC_ALL=C sort | xargs sha256sum | sha256sum</span>
+<section id="hw-4-the-reports-upstreams">
+<span id="the-hw-4-workflow"></span><h2>HW 4: the report’s upstreams<a class="headerlink" href="#hw-4-the-reports-upstreams" title="Link to this heading">#</a></h2>
+<p>The class report is many pipelines and one report. Every pipeline it reads
+is a public FTSFR repository, and you have built three of the six. The
+report’s <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins each one at a commit, so the one extra line
+is to check out that commit before you build, so that your snapshot is the
+one the pin names:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd fed_yield_curve</span>
+<span class="go">git switch --detach 5bb7217          # the commit the report&#39;s lockfile names</span>
+<span class="go">chartbook run --snapshot</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">grep</span></code> drops the files that operating systems create by themselves.
-(On macOS, <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span></code> in both places gives the same answer.)</p>
-</li>
-<li><p><strong>A dependency’s <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code></strong>, one per dependency in your lockfile, is the
-SHA-256 of a listing with one line per pinned asset,
-<code class="docutils literal notranslate"><span class="pre">&lt;hex</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">asset's</span> <span class="pre">hash&gt;</span>&#160; <span class="pre">&lt;asset</span> <span class="pre">ID&gt;</span></code>, sorted by ID. It is a hash of
-hashes: if any pinned asset of that dependency changes, it changes.</p></li>
-</ul>
-<section id="recompute-a-pin-by-hand">
-<h3>Recompute a pin by hand<a class="headerlink" href="#recompute-a-pin-by-hand" title="Link to this heading">#</a></h3>
-<p>You can check a lockfile with nothing but <code class="docutils literal notranslate"><span class="pre">jq</span></code> and <code class="docutils literal notranslate"><span class="pre">shasum</span></code>. Take the records
-of one dependency, write the listing, and hash it:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ jq -r &#39;.records[]
-    | select(.pipeline == &quot;ftsfr/fed_yield_curve&quot; and .content_hash)
-    | &quot;\(.content_hash | ltrimstr(&quot;sha256:&quot;))  \(.id)&quot;&#39; chartbook.lock \
-    | LC_ALL=C sort -k2 | shasum -a 256
-a5f96f21021fee0331f5c1785651cb482a0e9e7280a70337540c818723213dd5  -
-
-$ jq -r &#39;.records[0].dependencies[]
-    | select(.id == &quot;ftsfr/fed_yield_curve&quot;) | .pinned_hash&#39; chartbook.lock
-sha256:a5f96f21021fee0331f5c1785651cb482a0e9e7280a70337540c818723213dd5
+<p>Read the commit from the lockfile in your clone of the report:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jq -r &#39;.records[0].dependencies[] | select(.id==&quot;ftsfr/fed_yield_curve&quot;) | .location.commit&#39; chartbook.lock</span>
 </pre></div>
 </div>
-<p>The two agree. (These hashes come from a small test pipeline; yours will
-differ.) Then <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span></code> on the parquet file in the store gives the
-<code class="docutils literal notranslate"><span class="pre">content_hash</span></code> the lockfile records for it.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dependency</p></th>
+<th class="head"><p>Dataframes</p></th>
+<th class="head"><p>Credentials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_treas_yield_curve_zero_coupon</span></code></p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/ken_french_data_library</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_bm</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_inv</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_op</span></code></p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/he_kelly_manela</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_factors_monthly</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_factors_daily</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_all</span></code></p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/corp_bond_returns</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_corp_bond_portfolio_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_corp_bond_returns</span></code></p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/nyu_call_report</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_nyu_call_report_leverage</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_nyu_call_report_cash_liquidity</span></code>, and four more bank-level and quartile series</p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/options</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_cjs_option_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_hkm_option_returns</span></code></p></td>
+<td><p>WRDS</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Pick the dataset closest to your report topic and, where you can, one that
+also serves your final project. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span> <span class="pre">&lt;reference&gt;</span></code> prints a
+dataframe’s write-up.</p>
+<section id="your-rebuild-and-the-pin">
+<h3>Your rebuild and the pin<a class="headerlink" href="#your-rebuild-and-the-pin" title="Link to this heading">#</a></h3>
+<p>The pin is the contract: the lockfile names the upstream’s commit and the
+hash of every file the report reads from it. Your rebuild is what meets it.
+Clone the upstream, build it at the pinned commit with your own credentials
+where it needs them, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> puts your build in your
+store, where the report reads it. A rebuild runs the upstream’s code with
+your environment, as <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> does with a package’s code, so rebuild
+only repositories you would run code from.</p>
+<p>When the upstream’s build is deterministic, your rebuild gives the pinned
+bytes, and the hash is how you find out. Often it is not quite: the Fed
+publishes more days of the yield curve, a source revises a past value, or a
+different version of the Parquet writer writes different bytes for the same
+table. The hash is what reveals the difference, and the snapshot’s record
+says which commit made it and when, which is where you start looking. <a class="reference internal" href="pins_walkthrough.html"><span class="std std-doc">Walkthrough: From a Working Folder to a
+Pin</span></a> does this for <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code>, command
+by command, with the output you should see.</p>
+<p>The pins in the report’s <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> are shared by every exhibit. Do
+not move them in your pull request unless your exhibit needs newer data; if
+it does, run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">&lt;name&gt;</span></code> and say so in the pull request, where
+the lockfile diff shows exactly what moved.</p>
 </section>
-<section id="how-far-the-merkle-analogy-goes">
-<h3>How far the Merkle analogy goes<a class="headerlink" href="#how-far-the-merkle-analogy-goes" title="Link to this heading">#</a></h3>
-<p>A <strong>Merkle tree</strong> is a tree in which each node’s name is the hash of its
-children’s names, so the root’s hash covers every byte below it. Git is the
-standard example, and a full <strong>Merkle DAG</strong>: a file is a <em>blob</em> named by its
-hash; a folder is a <em>tree</em>, whose hash covers its entries’ names and hashes;
-a <em>commit</em> hashes its tree and its parent commits. One commit ID therefore
-covers the whole repository and its entire history.</p>
-<p>ChartBook uses the same idea in places and stops short of it in others:</p>
-<ul class="simple">
-<li><p>A folder asset’s hash is a hash over its files’ hashes, like a git tree
-(the listing format differs from git’s).</p></li>
-<li><p>A <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> is a hash over a dependency’s asset hashes.</p></li>
-<li><p>A snapshot is <strong>not</strong> named by a root hash. Its name is the time it was made
-and its commit (<code class="docutils literal notranslate"><span class="pre">2026-11-02T221410Z_31f453e04986</span></code>). Its record lists the hash
-of every file it holds and, for each of its own dependencies, the commit and
-<code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> it was built against.</p></li>
-</ul>
-<p>So lineage in ChartBook is a graph whose every edge is a hash, and it is
-checked edge by edge rather than by comparing one root. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code>
-starts from your lockfile and walks up: each snapshot named is in the store,
-what was pinned from it is what it holds, each upstream <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code>
-recomputed from the snapshot it names matches what was recorded, and each
-snapshot’s pins cover every dependency its manifest declares.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code> also reads every byte again and checks each file
-against its hash:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>chartbook<span class="w"> </span>lineage<span class="w"> </span>--rehash
-<span class="go">student/my_figure (this folder)</span>
-<span class="go">└── fed_yield_curve: ftsfr/fed_yield_curve 31f453e, made 2026-11-02 22:14:10 UTC, pins checked</span>
-<span class="go">1 snapshot(s) upstream, 2 object(s) hashed again; no gaps.</span>
+<section id="depending-on-a-public-repository">
+<h3>Depending on a public repository<a class="headerlink" href="#depending-on-a-public-repository" title="Link to this heading">#</a></h3>
+<p>A dependency can also be a public git repository instead of a store. This is
+the route for your own HW 3 monitor, whose history grows by a row every day
+on its <code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[dependencies]</span>
+<span class="s2">&quot;&lt;you&gt;/&lt;repo&gt;&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/&lt;you&gt;/&lt;repo&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;monitor-history&quot;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>In ChartBook 0.5.0, <code class="docutils literal notranslate"><span class="pre">--rehash</span></code> reports every object as a gap when more than
-one store is registered. With the one store of the HW 4 setup below this does
-not arise; with several, name the store that holds the snapshots for that
-command: <code class="docutils literal notranslate"><span class="pre">CHARTBOOK_STORE=&quot;&lt;path</span> <span class="pre">to</span> <span class="pre">that</span> <span class="pre">store&gt;&quot;</span> <span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code>.</p>
-<p>A hash chain proves integrity, not correctness. It shows that these outputs
-came from those inputs by that commit’s code. Whether the code was right is
-still a question for tests and review.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rev</span></code> may be a branch, a tag, or a commit. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> clones the
+repository, reads the files its <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> declares and that are
+committed at that rev, and copies them into your own store, which is why
+the store must be writable. The repository’s owner makes no snapshot. The
+pin stays where it is as the branch moves, until <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code>. The
+dependency’s pipeline ID comes from its URL: the owner in lowercase, a slash,
+and the repository’s name in lowercase with <code class="docutils literal notranslate"><span class="pre">_</span></code> for <code class="docutils literal notranslate"><span class="pre">-</span></code> (the owner keeps its
+hyphens), so <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;you&gt;/svix-monitor</span></code> is <code class="docutils literal notranslate"><span class="pre">&lt;you&gt;/svix_monitor</span></code>,
+unless the repository sets <code class="docutils literal notranslate"><span class="pre">[project]</span> <span class="pre">id</span></code>. The key you write on the left of
+<code class="docutils literal notranslate"><span class="pre">=</span></code> in <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> is your own name for the dependency, and references
+such as <code class="docutils literal notranslate"><span class="pre">data.load(&quot;&lt;key&gt;:&lt;dataframe&gt;&quot;)</span></code> use it. A private repository fails
+at once, since ChartBook never asks for a password.</p>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> also builds what such a repository builds and does not
+commit, by running its build script in ChartBook’s own copy of that commit.
+A repository whose data branch is read on Windows should commit a
+<code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> file containing <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">-text</span></code>. Otherwise git’s line-ending
+conversion (<code class="docutils literal notranslate"><span class="pre">core.autocrlf</span></code>) changes the bytes of text files such as CSVs on
+checkout, and with them their hashes.</p>
 </section>
 </section>
-<section id="snapshots-and-stores">
-<h2>Snapshots and stores<a class="headerlink" href="#snapshots-and-stores" title="Link to this heading">#</a></h2>
+<section id="going-deeper">
+<h2>Going deeper<a class="headerlink" href="#going-deeper" title="Link to this heading">#</a></h2>
 <section id="what-a-snapshot-checks-and-records">
 <h3>What a snapshot checks and records<a class="headerlink" href="#what-a-snapshot-checks-and-records" title="Link to this heading">#</a></h3>
-<p>The owner of a pipeline declares a build ready with one command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook run --snapshot</span>
-</pre></div>
-</div>
-<p>It checks that everything in the pipeline’s folder is committed <strong>before</strong> it
-builds (so you are not refused after an hour), runs the build script, and
-checks again that the build changed no committed file and made no commit. It
-checks that the pipeline’s pins account for every dependency it declares. Then
-it copies every declared asset into the store and writes the record:</p>
+<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> checks that everything in the pipeline’s folder
+is committed <strong>before</strong> it builds (so you are not refused after an hour),
+runs the build script, and checks again that the build changed no committed
+file and made no commit. It checks that the pipeline’s pins account for every
+dependency it declares. Then it copies every declared asset into the store
+and writes the record:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>The record says</p></th>
@@ -943,245 +1067,223 @@ it copies every declared asset into the store and writes the record:</p>
 </tbody>
 </table>
 </div>
-<p>The snapshot also keeps the README, <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>, and the
-write-ups, taking only files git tracks, so a <code class="docutils literal notranslate"><span class="pre">.env</span></code> never reaches the store.
-If nothing was rebuilt and the pins have not moved, no new snapshot is made.
-New data with the same code makes a new snapshot at the same commit, which is
-why a snapshot is named by its time as well as its commit.</p>
+<p>The snapshot also keeps the README, <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code>, <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>, and
+the write-ups, taking only files git tracks, so a <code class="docutils literal notranslate"><span class="pre">.env</span></code> never reaches the
+store.</p>
 </section>
 <section id="immutable-small-and-cleaned-on-request">
 <h3>Immutable, small, and cleaned on request<a class="headerlink" href="#immutable-small-and-cleaned-on-request" title="Link to this heading">#</a></h3>
-<p>Nothing in a store is moved or rewritten once written; only <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">gc</span></code>
-removes anything. A snapshot’s file is the store’s own bytes, a copy-on-write
-clone where the disk supports it and a copy otherwise, never a link to the
-owner’s working file, so the owner’s next build cannot change what you pinned.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">verify</span></code> rehashes every object and reports any that no longer
-match. A store keeps each file once, so a snapshot whose data grew by a year
-holds only the new files and points to the rest; <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">ls</span></code> calls such
-a snapshot <em>shared</em>. Never delete a snapshot’s folder by hand, because another
-snapshot may keep files in it.</p>
+<p>Nothing in a store is moved or rewritten once written; only
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">gc</span></code> removes anything. A snapshot’s file is the store’s own
+bytes, a copy-on-write clone where the disk supports it and a copy
+otherwise, never a link to the owner’s working file, so the owner’s next
+build cannot change what you pinned. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">verify</span></code> rehashes every
+object and reports any that no longer match. A store keeps each file once,
+so a snapshot whose data grew by a year holds only the new files and points
+to the rest; <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">ls</span></code> calls such a snapshot <em>shared</em>. Never
+delete a snapshot’s folder by hand, because another snapshot may keep files
+in it.</p>
 <p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">gc</span></code> lists what it would remove and asks first. It keeps the
-newest snapshot of each pipeline, everything a lockfile pins, anything a git tag
-or a model label names, and anything made in the last 7 days. The rest can go.</p>
+newest snapshot of each pipeline, everything a lockfile pins, anything a git
+tag or a model label names, and anything made in the last 7 days. The rest
+can go.</p>
 <p><strong>Time travel</strong> is pinning. Check out an old commit of your project, and its
-<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> names the exact snapshots it was built against; <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">ID</span> <span class="pre">--commit</span> <span class="pre">&lt;sha&gt;</span></code> pins the newest snapshot made at a given commit of the
-other pipeline. Either works for as long as the store still holds that snapshot,
-which is what <code class="docutils literal notranslate"><span class="pre">gc</span></code>’s rules decide.</p>
+<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> names the exact snapshots it was built against;
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span> <span class="pre">ID</span> <span class="pre">--commit</span> <span class="pre">&lt;sha&gt;</span></code> pins the newest snapshot made at a given
+commit of the other pipeline. Either works for as long as the store still
+holds that snapshot, which is what <code class="docutils literal notranslate"><span class="pre">gc</span></code>’s rules decide.</p>
+</section>
+<section id="hashes-and-merkle-trees">
+<h3>Hashes and Merkle trees<a class="headerlink" href="#hashes-and-merkle-trees" title="Link to this heading">#</a></h3>
+<p>A <strong>cryptographic hash</strong> such as SHA-256 maps any sequence of bytes to 256
+bits. Change one byte and the hash changes completely, and no one knows how
+to find two inputs with the same hash. So a hash works as a name for
+content: two files with the same SHA-256 are, for every practical purpose,
+the same bytes.</p>
+<p>A <strong>Merkle tree</strong> (a hash tree) names a collection by hashing hashes: each
+leaf is the hash of a file, each node above is the hash of its children’s
+hashes, and the root covers every byte below it.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/hash_tree.svg"><img alt="A hash tree. Four files at the bottom, each hashed; pairs of hashes hashed together; one root hash at the top." src="../_images/hash_tree.svg" width="620px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">A hash tree over four files. Change any byte of any file and every hash on
+the path above it changes, up to the root. Redrawn from
+<a class="reference external" href="https://en.wikipedia.org/wiki/Merkle_tree#/media/File:Hash_Tree.svg">Wikipedia’s figure</a>
+(CC0).</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Git is the standard example, and a full Merkle DAG: a file is a <em>blob</em>
+named by its hash; a folder is a <em>tree</em>, whose hash covers its entries’
+names and hashes; a <em>commit</em> hashes its tree and its parent commits. One
+commit ID therefore covers the whole repository and its entire history.</p>
+<p>ChartBook builds the same kind of structure across pipelines, and computes
+every hash one way (<code class="docutils literal notranslate"><span class="pre">chartbook/hashing.py</span></code>):</p>
+<ul>
+<li><p><strong>A file</strong> is the SHA-256 of its bytes. <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span> <span class="pre">file.parquet</span></code> gives
+the same hex.</p></li>
+<li><p><strong>A folder or a glob</strong> is the SHA-256 of a listing with one line per file,
+<code class="docutils literal notranslate"><span class="pre">&lt;hex</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">file's</span> <span class="pre">SHA-256&gt;</span>&#160; <span class="pre">&lt;path</span> <span class="pre">inside</span> <span class="pre">the</span> <span class="pre">asset&gt;</span></code>, sorted by path.
+That listing is exactly what <code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> prints, so the hash can be
+reproduced in the shell:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd _data/rates &amp;&amp; find . -type f | sed &#39;s|^\./||&#39; \</span>
+<span class="go">    | grep -viE &#39;(^|/)(\.DS_Store|Thumbs\.db|desktop\.ini|\._[^/]*)$&#39; \</span>
+<span class="go">    | LC_ALL=C sort | xargs sha256sum | sha256sum</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">grep</span></code> drops the files that operating systems create by themselves.
+(On macOS, <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span></code> in both places gives the same answer.)</p>
+</li>
+<li><p><strong>A dependency’s <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code></strong>, one per dependency in your lockfile, is
+the SHA-256 of a listing with one line per pinned asset,
+<code class="docutils literal notranslate"><span class="pre">&lt;hex</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">asset's</span> <span class="pre">hash&gt;</span>&#160; <span class="pre">&lt;asset</span> <span class="pre">ID&gt;</span></code>, sorted by ID. It is a hash of
+hashes: if any pinned asset of that dependency changes, it changes.</p></li>
+</ul>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/chartbook_lineage.svg"><img alt="ChartBook lineage. An upstream snapshot named by commit and time holds four assets, each with a content hash; a downstream lockfile lists those hashes and hashes the listing into one pinned_hash; the downstream snapshot records that pinned_hash, and a third pipeline pins it in turn." src="../_images/chartbook_lineage.svg" width="860px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">How ChartBook uses the idea. Every arrow is a hash that <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code>
+recomputes and checks. The snapshot’s name is the one thing that is not a
+hash: it is the commit and the time.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p id="same-bytes-no-new-snapshot"><strong>The same comparison is how <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">snapshot</span></code> knows when it has nothing
+to do.</strong> It hashes what the build made and compares the hashes, and the
+pins, with the snapshots already in the store at this commit. The same
+bytes and the same pins mean no new snapshot. New data at the same commit
+(the Fed published more days) makes one, named by its time, and because the
+store keeps each file once, the new snapshot holds only the files that
+changed. The hash is what makes “nothing changed” a fact rather than a
+guess.</p>
+<p><strong>How far the analogy goes.</strong> A folder asset’s hash is a hash over its
+files’ hashes, like a git tree (the listing format differs from git’s), and
+a <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> is a hash over a dependency’s asset hashes. But a snapshot
+is <strong>not</strong> named by a root hash. Its name is the time it was made and its
+commit (<code class="docutils literal notranslate"><span class="pre">2026-11-04T054134Z_5bb7217c30f4</span></code>), because the same code can make
+new bytes on a later day, and the record has to say which. So lineage in
+ChartBook is a graph whose every edge is a hash, checked edge by edge rather
+than by comparing one root. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span></code> starts from your lockfile
+and walks up: each snapshot named is in the store, what was pinned from it
+is what it holds, each upstream <code class="docutils literal notranslate"><span class="pre">pinned_hash</span></code> recomputed from the snapshot
+it names matches what was recorded, and each snapshot’s pins cover every
+dependency its manifest declares. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">lineage</span> <span class="pre">--rehash</span></code> also reads
+every byte again and checks each file against its hash.</p>
+<p>What this buys the class: a reviewer of your pull request reads a diff of
+<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> and knows exactly which bytes moved, by name and by hash,
+without rebuilding anything. And a store that lost a file, or a synced
+folder that altered one, is caught by <code class="docutils literal notranslate"><span class="pre">lineage</span> <span class="pre">--rehash</span></code> or
+<code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">verify</span></code> before the number it fed reaches a report.</p>
+<p>A hash chain proves integrity, not correctness. It shows that these outputs
+came from those inputs by that commit’s code. Whether the code was right is
+still a question for tests and review.</p>
+<section id="recompute-a-pin-by-hand">
+<h4>Recompute a pin by hand<a class="headerlink" href="#recompute-a-pin-by-hand" title="Link to this heading">#</a></h4>
+<p>You can check a lockfile with nothing but <code class="docutils literal notranslate"><span class="pre">jq</span></code> and <code class="docutils literal notranslate"><span class="pre">shasum</span></code>. Take the records
+of one dependency, write the listing, and hash it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ jq -r &#39;.records[]
+    | select(.pipeline == &quot;ftsfr/fed_yield_curve&quot; and .content_hash)
+    | &quot;\(.content_hash | ltrimstr(&quot;sha256:&quot;))  \(.id)&quot;&#39; chartbook.lock \
+    | LC_ALL=C sort -k2 | shasum -a 256
+a5f96f21021fee0331f5c1785651cb482a0e9e7280a70337540c818723213dd5  -
+
+$ jq -r &#39;.records[0].dependencies[]
+    | select(.id == &quot;ftsfr/fed_yield_curve&quot;) | .pinned_hash&#39; chartbook.lock
+sha256:a5f96f21021fee0331f5c1785651cb482a0e9e7280a70337540c818723213dd5
+</pre></div>
+</div>
+<p>The two agree. (These hashes come from a small test pipeline; yours will
+differ.) Then <code class="docutils literal notranslate"><span class="pre">shasum</span> <span class="pre">-a</span> <span class="pre">256</span></code> on the parquet file in the store gives the
+<code class="docutils literal notranslate"><span class="pre">content_hash</span></code> the lockfile records for it. The walkthrough’s
+<a class="reference internal" href="pins_walkthrough.html#walkthrough-hashes-by-hand"><span class="std std-ref">step C</span></a> does this on the class report.</p>
+</section>
 </section>
 <section id="relatives">
 <h3>Relatives<a class="headerlink" href="#relatives" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Delta Lake and Apache Iceberg</strong> are <em>table formats</em>: a table stored as
-Parquet files plus metadata that says which files make up each version. Delta
-keeps an ordered transaction log (<code class="docutils literal notranslate"><span class="pre">_delta_log/</span></code>); Iceberg keeps a tree of
-metadata files and manifests. Both give ACID writes from many writers, time
-travel to an earlier version or timestamp, and cleanup of files no retained
-version needs (Delta’s <code class="docutils literal notranslate"><span class="pre">VACUUM</span></code>, with a default retention of 7 days; Iceberg’s
-snapshot expiration). ChartBook shares the ideas of files kept once across
-versions, time travel, and garbage collection with a retention window. It is
-not a table format: its unit is a whole pipeline’s outputs at one commit,
-declared ready by a person, with the code commit, the documentation, and the
-lineage attached.</p></li>
-<li><p><strong>Git</strong> is content-addressed and a full Merkle DAG, and it is where your code
-and your <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> live. Every clone carries every version, which is
-why large data does not go in git.</p></li>
+Parquet files plus metadata that says which files make up each version.
+Delta keeps an ordered transaction log (<code class="docutils literal notranslate"><span class="pre">_delta_log/</span></code>); Iceberg keeps a
+tree of metadata files and manifests. Both give ACID writes from many
+writers, time travel to an earlier version or timestamp, and cleanup of
+files no retained version needs (Delta’s <code class="docutils literal notranslate"><span class="pre">VACUUM</span></code>, with a default
+retention of 7 days; Iceberg’s snapshot expiration). ChartBook shares the
+ideas of files kept once across versions, time travel, and garbage
+collection with a retention window. It is not a table format: its unit is
+a whole pipeline’s outputs at one commit, declared ready by a person, with
+the code commit, the documentation, and the lineage attached.</p></li>
+<li><p><strong>Git</strong> is content-addressed and a full Merkle DAG, and it is where your
+code and your <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> live. Every clone carries every version,
+which is why large data does not go in git.</p></li>
 <li><p><strong>DVC</strong> (Data Version Control) is the closest cousin. It keeps data in a
 content-addressed cache and a remote, commits small files that record each
 output’s hash (MD5) to git, hashes a folder as a listing of its files’
-hashes, cleans with <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">gc</span></code>, and can import data from another DVC repository
-at a recorded revision. DVC also runs pipeline stages (<code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">repro</span></code>), the job
-<code class="docutils literal notranslate"><span class="pre">doit</span></code> does here. ChartBook leaves the steps inside a repository to <code class="docutils literal notranslate"><span class="pre">doit</span></code> and
-concentrates on dependencies between repositories, their documentation, and a
-catalog over all of them.</p></li>
+hashes, cleans with <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">gc</span></code>, and can import data from another DVC
+repository at a recorded revision. DVC also runs pipeline stages
+(<code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">repro</span></code>), the job <code class="docutils literal notranslate"><span class="pre">doit</span></code> does here. ChartBook leaves the steps inside
+a repository to <code class="docutils literal notranslate"><span class="pre">doit</span></code> and concentrates on dependencies between
+repositories, their documentation, and a catalog over all of them.</p></li>
 </ul>
 </section>
 <section id="why-the-data-inside-is-parquet">
 <h3>Why the data inside is Parquet<a class="headerlink" href="#why-the-data-inside-is-parquet" title="Link to this heading">#</a></h3>
-<p>Parquet is a <strong>columnar</strong> format. A file is divided into <strong>row groups</strong>; within
-each, the values of one column are stored together, encoded and compressed
-column by column, and the file’s footer records each column chunk’s statistics
-(minimum, maximum, null count). A reader can therefore skip row groups whose
-statistics rule out a filter (<strong>predicate pushdown</strong>) and read only the columns
-a query uses (<strong>projection pushdown</strong>). A Hive-partitioned folder
-(<code class="docutils literal notranslate"><span class="pre">year=2024/part-0.parquet</span></code>) lets a reader skip whole files by their folder
-keys. Polars exploits all three: a lazy <code class="docutils literal notranslate"><span class="pre">scan_parquet</span></code> followed by <code class="docutils literal notranslate"><span class="pre">.filter()</span></code>
-and <code class="docutils literal notranslate"><span class="pre">.select()</span></code> pushes both into the scan, and <code class="docutils literal notranslate"><span class="pre">data.load</span></code> returns exactly such
-a LazyFrame. <a class="reference internal" href="../Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a>
-and the <a class="reference internal" href="../Week8/polars_exercises.html"><span class="std std-doc">Polars exercises</span></a> go further.</p>
+<p>Parquet is a <strong>columnar</strong> format. A file is divided into <strong>row groups</strong>;
+within each, the values of one column are stored together, encoded and
+compressed column by column, and the file’s footer records each column
+chunk’s statistics (minimum, maximum, null count). A reader can therefore
+skip row groups whose statistics rule out a filter (<strong>predicate pushdown</strong>)
+and read only the columns a query uses (<strong>projection pushdown</strong>). A
+Hive-partitioned folder (<code class="docutils literal notranslate"><span class="pre">year=2024/part-0.parquet</span></code>) lets a reader skip whole
+files by their folder keys. Polars exploits all three: a lazy <code class="docutils literal notranslate"><span class="pre">scan_parquet</span></code>
+followed by <code class="docutils literal notranslate"><span class="pre">.filter()</span></code> and <code class="docutils literal notranslate"><span class="pre">.select()</span></code> pushes both into the scan, and
+<code class="docutils literal notranslate"><span class="pre">data.load</span></code> returns exactly such a LazyFrame.
+<a class="reference internal" href="../Week8/medium_sized_data_strategies.html"><span class="std std-doc">Medium-Sized Data Strategies</span></a> and
+the <a class="reference internal" href="../Week8/polars_exercises.html"><span class="std std-doc">Polars exercises</span></a> go further.</p>
 </section>
 </section>
-<section id="the-hw-4-workflow">
-<span id="id1"></span><h2>The HW 4 workflow<a class="headerlink" href="#the-hw-4-workflow" title="Link to this heading">#</a></h2>
-<p>The class report is many pipelines and one report. Each pipeline the report
-reads is a public repository you can clone and run: the FTSFR pipelines.
-You build each, snapshot it
-into your store, and the report pins that snapshot. The store is yours and
-stays on your machine. Its job is to hold what you built, as you
-built it, so that the report reads those bytes while the upstream’s working
-folder goes on changing under your edits and rebuilds.</p>
-<section id="build-an-upstream-and-snapshot-it">
-<h3>1. Build an upstream and snapshot it<a class="headerlink" href="#build-an-upstream-and-snapshot-it" title="Link to this heading">#</a></h3>
-<p>Nothing to set up first: snapshots go to <code class="docutils literal notranslate"><span class="pre">~/.chartbook/store</span></code>, the default,
-which ChartBook creates when the first one is made. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">store</span> <span class="pre">info</span></code>
-shows it.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/ftsfr/fed_yield_curve</span>
-<span class="go">cd fed_yield_curve</span>
-<span class="go">git switch --detach 3904ad6          # the commit the report&#39;s lockfile names</span>
-<span class="go">uv venv --python 3.12 &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install -r requirements.txt &quot;pyarrow&lt;26&quot;</span>
-<span class="go">chartbook trust                      # once per folder: this build script may run</span>
-<span class="go">chartbook run --snapshot             # builds (doit), then snapshots into your store</span>
+<section id="appendix-upgrade-your-homework-repositories-to-chartbook-0-5">
+<span id="upgrade-homework"></span><h2>Appendix: Upgrade your homework repositories to ChartBook 0.5<a class="headerlink" href="#appendix-upgrade-your-homework-repositories-to-chartbook-0-5" title="Link to this heading">#</a></h2>
+<p>All homework moves to ChartBook 0.5.1 or newer, including any repository of
+yours that becomes an upstream of the report. HW 3 is already there. HW 1
+and HW 2 were written for ChartBook 0.1.1, and the quickest route is to let
+Claude Code do it with ChartBook’s own skill:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -U chartbook                    # 0.5.1 or newer</span>
+<span class="go">chartbook install claude-skill              # user-level: ~/.claude/skills/chartbook/</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> refuses if the working tree has uncommitted
-changes, because the snapshot’s record names the commit. The pipeline’s
-README says what credentials it needs; <code class="docutils literal notranslate"><span class="pre">fed_yield_curve</span></code> needs none. The
-Python version and the pyarrow cap are explained <a class="reference internal" href="#try-it-three-pipelines">above</a>.</p>
-</section>
-<section id="declare-a-dependency-and-pin-it">
-<h3>2. Declare a dependency and pin it<a class="headerlink" href="#declare-a-dependency-and-pin-it" title="Link to this heading">#</a></h3>
-<p>In your pipeline’s folder:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook add ftsfr/fed_yield_curve</span>
-<span class="go">git add chartbook.toml chartbook.lock</span>
-<span class="go">git commit -m &quot;Depend on ftsfr/fed_yield_curve&quot;</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">add</span></code> writes <code class="docutils literal notranslate"><span class="pre">&quot;ftsfr/fed_yield_curve&quot;</span> <span class="pre">=</span> <span class="pre">{}</span></code> under <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> in
-<code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> and pins the newest snapshot in your stores. You can also write
-the <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> lines yourself and run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code>. Commit
-<code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>: it is how anyone who clones your repository knows which data
-you used.</p>
-</section>
-<section id="read-by-name">
-<h3>3. Read by name<a class="headerlink" href="#read-by-name" title="Link to this heading">#</a></h3>
-<p>The name before the colon is the part of the ID after the slash:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
-
-<span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">)</span>   <span class="c1"># a polars LazyFrame</span>
-<span class="n">ff25</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">&quot;ken_french_data_library:ftsfr_french_portfolios_25_daily_size_and_bm&quot;</span><span class="p">,</span>
-    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Every FTSFR dataframe is in long format with three columns: <code class="docutils literal notranslate"><span class="pre">unique_id</span></code> (which
-series), <code class="docutils literal notranslate"><span class="pre">ds</span></code> (the date), and <code class="docutils literal notranslate"><span class="pre">y</span></code> (the value). For the yield curve, <code class="docutils literal notranslate"><span class="pre">unique_id</span></code>
-runs <code class="docutils literal notranslate"><span class="pre">SVENY01</span></code> to <code class="docutils literal notranslate"><span class="pre">SVENY30</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> is in percent. Your code names the data, not
-a path on your disk, so it runs unchanged on any machine that has the store.</p>
-</section>
-<section id="check-and-move-forward-on-purpose">
-<h3>4. Check, and move forward on purpose<a class="headerlink" href="#check-and-move-forward-on-purpose" title="Link to this heading">#</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">chartbook lineage          # every snapshot upstream, each edge checked</span>
-<span class="go">chartbook update           # move pins to the newest snapshots; the lockfile diff shows what moved</span>
-</pre></div>
-</div>
-<p>When a newer snapshot appears in a store (you rebuilt the upstream, say, and
-the Fed has published more days), <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> tell you
-a pinned asset changed upstream and leave your pins alone.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code> moves them, and the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">chartbook.lock</span></code> shows each
-asset’s old and new hash. Commit that diff as its own commit.</p>
-<p>On a machine that can reach the stores your lockfile names,
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--frozen</span></code> builds only if every pin is complete and in the store,
-writes no lockfile, and lists what is missing otherwise. That is the command a
-build server runs.</p>
-</section>
-<section id="your-rebuild-and-the-pin">
-<h3>Your rebuild and the pin<a class="headerlink" href="#your-rebuild-and-the-pin" title="Link to this heading">#</a></h3>
-<p>The pin is the contract. Your lockfile says which snapshot of
-<code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code> you used, and that snapshot is tied by its record to the
-commit that built it and the moment it was made. Your rebuild is what meets
-it: clone the upstream, supply your own credentials where it needs them (WRDS,
-for example), build it at the pinned commit, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span> <span class="pre">--snapshot</span></code> in
-your clone puts its snapshot in your store, where the report reads it. A
-rebuild runs the upstream’s code with your environment, as <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> does
-with a package’s code, so rebuild only repositories you would run code from.</p>
-<p>Your rebuild gives the pinned bytes when the upstream build is deterministic:
-the same commit and the same inputs give the same bytes. Often they do not
-quite. FRED revises past values, a build may write today’s timestamp into a
-file, and a different version of the Parquet writer can write different bytes
-for the same table. The hash is what reveals the difference: it tells you
-whether your rebuild matches the pinned snapshot. That is what hashing is for.
-When the hashes differ, the record of each snapshot says which commit made it
-and when, which is where you start looking.</p>
-</section>
-<section id="depending-on-a-public-repository">
-<h3>Depending on a public repository<a class="headerlink" href="#depending-on-a-public-repository" title="Link to this heading">#</a></h3>
-<p>A dependency can also be a public git repository instead of a store:</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[dependencies]</span>
-<span class="s2">&quot;&lt;you&gt;/&lt;repo&gt;&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/&lt;you&gt;/&lt;repo&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;monitor-history&quot;</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">rev</span></code> may be a branch, a tag, or a commit. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> clones the
-repository, reads the files its <code class="docutils literal notranslate"><span class="pre">chartbook.toml</span></code> declares and that are
-committed at that rev (such as the history a monitor commits to its
-<code class="docutils literal notranslate"><span class="pre">monitor-history</span></code> branch), and copies them into your own store, the first one in
-your catalog, so that store must be writable. The repository’s owner makes no
-snapshot. The pin stays where it is as the branch moves, until
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span></code>. The dependency’s pipeline ID comes from its URL: the owner in
-lowercase, a slash, and the repository’s name in lowercase with <code class="docutils literal notranslate"><span class="pre">_</span></code> for <code class="docutils literal notranslate"><span class="pre">-</span></code>
-(the owner keeps its hyphens), so <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;you&gt;/svix-monitor</span></code> is
-<code class="docutils literal notranslate"><span class="pre">&lt;you&gt;/svix_monitor</span></code>, unless the repository sets <code class="docutils literal notranslate"><span class="pre">[project]</span> <span class="pre">id</span></code>. The key you write on the left of <code class="docutils literal notranslate"><span class="pre">=</span></code> in
-<code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> is your own name for the dependency, and references such as
-<code class="docutils literal notranslate"><span class="pre">data.load(&quot;&lt;key&gt;:&lt;dataframe&gt;&quot;)</span></code> use it. A private
-repository fails at once, since ChartBook never asks for a password.</p>
-<p>This is the route for data that lives in a public repository rather than in a
-store. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> also builds what such a repository builds and does not
-commit, by running its build script in ChartBook’s own copy of that commit
-(the rebuild route in the previous section).</p>
-<p>A repository whose data branch is read on Windows should commit a
-<code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> file containing <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">-text</span></code>. Otherwise git’s line-ending
-conversion (<code class="docutils literal notranslate"><span class="pre">core.autocrlf</span></code>) changes the bytes of text files such as CSVs on
-checkout, and with them their hashes.</p>
-</section>
-</section>
-<section id="ftsfr-many-pipelines-one-store">
-<h2>FTSFR: many pipelines, one store<a class="headerlink" href="#ftsfr-many-pipelines-one-store" title="Link to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://github.com/ftsfr">FTSFR organization</a> is this arrangement at
-production scale: one ChartBook pipeline per dataset, each its own repository,
-each buildable and snapshottable on its own, and a catalog site that lists
-every pipeline with a snapshot in a store. The research behind it is in
-<a class="reference internal" href="../Week3/ftsfr.html"><span class="std std-doc">FTSFR</span></a>.</p>
-<p>The report pins these; each is a repository you clone, build, and snapshot
-into your store:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Dependency</p></th>
-<th class="head"><p>Dataframes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_treas_yield_curve_zero_coupon</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/ken_french_data_library</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_bm</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_inv</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_french_portfolios_25_daily_size_and_op</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/he_kelly_manela</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_factors_monthly</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_factors_daily</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_he_kelly_manela_all</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/corp_bond_returns</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_corp_bond_portfolio_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_corp_bond_returns</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/options</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_cjs_option_returns</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_hkm_option_returns</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftsfr/nyu_call_report</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ftsfr_nyu_call_report_leverage</span></code>, <code class="docutils literal notranslate"><span class="pre">ftsfr_nyu_call_report_cash_liquidity</span></code>, and four more bank-level and quartile series</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">ls</span> <span class="pre">dataframes</span></code> lists them on your machine, and
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span> <span class="pre">fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon</span></code> prints
-a dataframe’s write-up. Pick the dataset closest to your report topic and, where
-you can, one that also serves your final project.</p>
-<p><strong>Further reading:</strong> ChartBook’s guides to
+<p>Then, in the homework folder, ask Claude Code: <em>“Upgrade this repository to
+ChartBook 0.5.1.”</em> The skill describes the commands, the manifest, and the
+data API, and it names the ChartBook version it was written for; rerun the
+install after each upgrade. (<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">install</span> <span class="pre">claude-skill</span> <span class="pre">--project</span></code> puts
+the skill in the current repository instead, to commit with it.)</p>
+<p>What it does, and the checklist if you do it by hand:</p>
+<ol class="arabic simple">
+<li><p><strong>Requirements.</strong> In <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, replace <code class="docutils literal notranslate"><span class="pre">chartbook==0.1.1</span></code> with
+<code class="docutils literal notranslate"><span class="pre">chartbook&gt;=0.5.1</span></code> and <code class="docutils literal notranslate"><span class="pre">polars==1.9.0</span></code> with <code class="docutils literal notranslate"><span class="pre">polars&gt;=1.33</span></code> (ChartBook 0.5
+needs polars 1.33 or later), then <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>. In a
+uv project, <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span> <span class="pre">&quot;chartbook&gt;=0.5.1&quot;</span> <span class="pre">&quot;polars&gt;=1.33&quot;</span></code> changes both pins
+and <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> together; commit <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>. Polars
+moves forward a long way, so run your tests after upgrading.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">build</span> <span class="pre">-f</span></code> is gone in 0.5. Replace it with
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">build</span> <span class="pre">-f</span></code>. <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">browse</span></code> is now <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">open</span></code>. An old spelling stops with a message that names the new one.</p></li>
+<li><p><strong>Trust.</strong> ChartBook runs a folder’s build script only in a folder you
+have said is yours. Run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">trust</span></code> once in each homework folder;
+until you do, <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">docs</span> <span class="pre">build</span></code> renders the site as it would one
+from a store, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">run</span></code> asks first.</p></li>
+<li><p><strong>An old catalog.</strong> If you made <code class="docutils literal notranslate"><span class="pre">~/.chartbook/chartbook.toml</span></code> with
+<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">add</span></code> under 0.1, run <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">catalog</span> <span class="pre">migrate</span></code> once.
+Catalogs no longer list working folders; they read stores.</p></li>
+<li><p><strong>Check and rebuild.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">check</span></code> reads the manifest, and <code class="docutils literal notranslate"><span class="pre">doit</span></code>
+rebuilds. Commit what changed.</p></li>
+</ol>
+<p><strong>Further reading:</strong> ChartBook’s
+<a class="reference external" href="https://backofficedev.github.io/chartbook/getting-started.html">Quickstart</a>
+(a pipeline from nothing in five minutes), its guides to
 <a class="reference external" href="https://backofficedev.github.io/chartbook/guide/depending-on-pipelines.html">depending on another pipeline</a>
 and <a class="reference external" href="https://backofficedev.github.io/chartbook/guide/catalogs-and-data.html">catalogs and stores</a>,
 the <a class="reference external" href="https://backofficedev.github.io/chartbook/reference/cli.html">CLI reference</a>,
 and the design note on the
 <a class="reference external" href="https://backofficedev.github.io/chartbook/design/asset-graph.html">asset graph</a>,
-which explains the choices above and the prior art (Nix, Cargo, DVC, Snakemake)
-they borrow from.</p>
+which explains the choices above and the prior art (Nix, Cargo, DVC,
+Snakemake) they borrow from.</p>
 </section>
 </section>
 
@@ -1233,37 +1335,28 @@ they borrow from.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrade-to-chartbook-0-5">Upgrade to ChartBook 0.5</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-your-homework-repositories">Upgrading your homework repositories</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#help-from-claude-code">Help from Claude Code</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-three-pipelines-and-a-catalog">Try it: three pipelines and a catalog</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-data-that-other-repositories-made">The problem: data that other repositories made</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vocabulary">Vocabulary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-pipeline-snapshot-it-open-a-catalog">1. Build a pipeline, snapshot it, open a catalog</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-more-and-the-catalog-grows">2. Two more, and the catalog grows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depend-on-it-from-a-pipeline-of-your-own">3. Depend on it from a pipeline of your own</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-words-now-that-you-have-seen-them">The words, now that you have seen them</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-questions-three-tools">Three questions, three tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashes-and-merkle-trees">Hashes and Merkle trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recompute-a-pin-by-hand">Recompute a pin by hand</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-far-the-merkle-analogy-goes">How far the Merkle analogy goes</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots-and-stores">Snapshots and stores</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-snapshot-checks-and-records">What a snapshot checks and records</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-small-and-cleaned-on-request">Immutable, small, and cleaned on request</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relatives">Relatives</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-data-inside-is-parquet">Why the data inside is Parquet</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hw-4-workflow">The HW 4 workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-an-upstream-and-snapshot-it">1. Build an upstream and snapshot it</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declare-a-dependency-and-pin-it">2. Declare a dependency and pin it</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-by-name">3. Read by name</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-and-move-forward-on-purpose">4. Check, and move forward on purpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hw-4-the-reports-upstreams">HW 4: the report’s upstreams</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-rebuild-and-the-pin">Your rebuild and the pin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#depending-on-a-public-repository">Depending on a public repository</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftsfr-many-pipelines-one-store">FTSFR: many pipelines, one store</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-deeper">Going deeper</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-snapshot-checks-and-records">What a snapshot checks and records</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutable-small-and-cleaned-on-request">Immutable, small, and cleaned on request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashes-and-merkle-trees">Hashes and Merkle trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recompute-a-pin-by-hand">Recompute a pin by hand</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relatives">Relatives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-data-inside-is-parquet">Why the data inside is Parquet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-upgrade-your-homework-repositories-to-chartbook-0-5">Appendix: Upgrade your homework repositories to ChartBook 0.5</a></li>
 </ul>
   </nav></div>
 

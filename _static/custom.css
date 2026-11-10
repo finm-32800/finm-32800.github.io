@@ -36,3 +36,14 @@ h2 img.inline-logo,
 h3 img.inline-logo {
     margin-right: 0.6rem;
 }
+
+/* Terminal recordings from the ChartBook docs (Week 6), framed as a window.
+   Copied from the package's docs_src/_static/custom.css. */
+video.cb-terminal {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 1.5rem auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25), 0 2px 6px rgba(15, 23, 42, 0.12);
+}

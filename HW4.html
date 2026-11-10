@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2af69973" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a344f13" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -257,7 +257,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Pipelines, Stores, and Lineage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
@@ -567,7 +567,7 @@ the report’s <code class="docutils literal notranslate"><span class="pre">char
 <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code>. A change upstream reaches the report only when someone
 moves the pin, and the move shows up as a diff of the lockfile in a pull
 request. Week 6 covers the machinery:
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a>.
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a>.
 The Summer 2026
 edition of the report used ChartBook 0.1, which had no snapshots or pins.
 This edition is built on them.</p>
@@ -606,11 +606,17 @@ style guide.</p></li>
 <li><p><strong>Accept your invite</strong> to
 <a class="reference external" href="https://github.com/finm-32800/finm_midterm_report">finm-32800/finm_midterm_report</a>
 and clone it.</p></li>
-<li><p><strong>Upgrade to ChartBook 0.5 or newer.</strong> All homework moves to 0.5 this week,
-including any repository of yours that you turn into an upstream. Follow
-<em>Upgrade to ChartBook 0.5</em> in
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a>.
-<code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> should print <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code> or newer.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">chartbook</span></code>.</strong> <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">--version</span></code> should print <code class="docutils literal notranslate"><span class="pre">0.5.1</span></code>
+or newer. All homework moves to 0.5 this week, including any repository of
+yours that you turn into an upstream; for HW 1 and HW 2, follow the
+<a class="reference internal" href="Week6/chartbook_catalog.html#upgrade-homework"><span class="std std-ref">appendix</span></a> of
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a>.</p></li>
+<li><p><strong>The pins moved on November 3.</strong> The six FTSFR upstreams now install
+with a plain <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code> on Python 3.12, and the
+report’s <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> pins their new commits. If you built an
+upstream before then, pull <code class="docutils literal notranslate"><span class="pre">main</span></code>, check out the commit the lockfile
+names now, and rebuild; a pull request opened before then rebases onto
+the new lockfile.</p></li>
 <li><p><strong>ChartBook’s skill for Claude Code</strong> (optional). If you use Claude Code,
 <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">install</span> <span class="pre">claude-skill</span></code> installs ChartBook’s skill for every
 session on your machine, and <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">install</span> <span class="pre">claude-skill</span> <span class="pre">--project</span></code>
@@ -676,7 +682,7 @@ the same kind.</p>
 <h2>Make Your Homework an Upstream<a class="headerlink" href="#make-your-homework-an-upstream" title="Link to this heading">#</a></h2>
 <p>This is the bonus route. The recipe below makes your HW 3 monitor an
 upstream of the report. <em>Depending on a public repository</em> in
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a>
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a>
 explains what <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">pin</span></code> does with a <code class="docutils literal notranslate"><span class="pre">git</span></code> dependency.</p>
 <ol class="arabic">
 <li><p><strong>The monitor repository is public,</strong> in your own account, and has
@@ -742,7 +748,7 @@ reports that the pinned asset changed upstream. The pins committed in
 pull request unless your exhibit needs the newer data; if it does, run
 <code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">update</span> <span class="pre">&lt;name&gt;</span></code> and say so in the pull request, where the
 lockfile diff shows exactly what moved. <em>Your rebuild and the pin</em> in
-<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Pipelines, Stores, and Lineage</span></a>
+<a class="reference internal" href="Week6/chartbook_catalog.html"><span class="std std-doc">ChartBook: Know Where Every Number Came From</span></a>
 has the details, and
 <a class="reference internal" href="Week6/pins_walkthrough.html"><span class="std std-doc">Walkthrough: From a Working Folder to a Pin</span></a>
 rebuilds <code class="docutils literal notranslate"><span class="pre">ftsfr/fed_yield_curve</span></code> and checks it against the pin, command by

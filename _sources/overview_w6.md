@@ -43,10 +43,15 @@ and the best upstreams are your own homework.
   collaborator invite to the private report repository. Check your email or
   [github.com/notifications](https://github.com/notifications) and confirm in
   class that you can open it.
-- **Upgrade to ChartBook 0.5 or newer before you start HW 4.** All homework
-  moves to 0.5. See *Upgrade to ChartBook 0.5* in
-  [ChartBook: Pipelines, Stores, and Lineage](./Week6/chartbook_catalog.md);
-  `chartbook --version` should print `0.5.0` or newer.
+- **`pip install -U chartbook` before you start HW 4.** `chartbook --version`
+  should print `0.5.1` or newer. All homework moves to 0.5; for HW 1 and
+  HW 2, see the {ref}`appendix <upgrade-homework>` of
+  [ChartBook: Know Where Every Number Came From](./Week6/chartbook_catalog.md).
+- **The report's pins moved on November 3.** The six FTSFR upstreams now
+  install with a plain `pip install -r requirements.txt` on Python 3.12,
+  and the report's `chartbook.lock` pins their new commits. If you built an
+  upstream before then, pull the report's `main`, check out the commit its
+  lockfile names now, and rebuild.
 - **[HW 5](./HW5.md):** dates to be announced on Canvas.
 - **The exam is Tuesday, December 1,** in week 9, covering weeks 0 through 8.
   See [Exam Preparation](./exam_prep.md).
@@ -74,11 +79,12 @@ and the best upstreams are your own homework.
    [slides](./Week6/assets/slides_ftsfr.pdf)): the benchmarking gap; one
    pipeline per dataset, validated; code, not data; results; Section 6,
    where cleaning reshuffles the leaderboard.
-4. **Vocabulary** ([ChartBook](./Week6/chartbook_catalog.md)): three
-   questions, three tools; content hash, Merkle tree, `pinned_hash`;
-   snapshot, store, pin, lockfile; lineage vs provenance; rebuild or read
-   the snapshot, and the committed cutoff date; DVC, Delta Lake; why Parquet
-   is fast; Polars.
+4. **ChartBook quick start** ([ChartBook](./Week6/chartbook_catalog.md)):
+   build a pipeline and snapshot it; a catalog over three; depend on one
+   from a pipeline of your own, read by name, commit the lockfile. Then the
+   six words; three questions, three tools; content hash, Merkle tree,
+   `pinned_hash`; rebuild or read the snapshot; DVC, Delta Lake; why Parquet
+   is fast.
 5. **Demo** ([walkthrough](./Week6/pins_walkthrough.md)): the `summer`
    branch; `main` and its lockfile; hashes by hand; a live git dependency,
    `pin` vs `update`; rebuild an upstream, same code, later day, different

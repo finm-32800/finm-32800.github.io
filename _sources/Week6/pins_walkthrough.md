@@ -4,11 +4,13 @@ This page is the week 6 demo, written down so that you can redo it after
 class. It uses the class report, the repository you work in for
 [HW 4](../HW4.md), and one of its upstreams, `ftsfr/fed_yield_curve`. Every
 command runs from a clone of the report, and every block of output is cut
-down from a real run on November 2. Your hashes and commits will differ
-where the report or the upstream has moved since.
+down from a real run on November 2. The report's pins moved on November 3
+(the upstreams' requirements were fixed and the report re-pinned), so the
+commits and hashes below are from before the move; the commands are
+unchanged, and step B shows how to read the current ones from the lockfile.
 
 The words are the ones
-[ChartBook: Pipelines, Stores, and Lineage](./chartbook_catalog.md) defines:
+[ChartBook: Know Where Every Number Came From](./chartbook_catalog.md) defines:
 pipeline, store, snapshot, lockfile, pin, reference, lineage. Read that page
 first; this one shows each word on the screen.
 
@@ -17,7 +19,7 @@ first; this one shows each word on the screen.
 - A clone of the report with its environment installed (`uv sync` in the
   clone). Activate it once, `source .venv/bin/activate`, so that the
   commands below are typed as written; or put `uv run` in front of each.
-- `chartbook --version` printing `0.5.0` or newer.
+- `chartbook --version` printing `0.5.1` or newer.
 - The snapshots `chartbook.lock` pins, in your store, each built by you
   (step E shows how, for one of them). `chartbook pin --frozen` passes when
   this is set up.
@@ -199,6 +201,7 @@ pin, `doit` watches the pinned file, and the exhibit reruns when, and only
 when, the pin moves. Data validation would catch bad data; the pin catches
 *different* data.
 
+(walkthrough-hashes-by-hand)=
 ## C. The hashes, by hand
 
 What you are about to see: every hash in the lockfile can be recomputed
@@ -281,11 +284,8 @@ The point: git's one commit hash covers every file and all of history, a
 full Merkle tree. ChartBook stops a level short: a `pinned_hash` covers one
 dependency's files, and a snapshot is named by its time and commit, not by a
 root hash. `chartbook lineage` checks the graph edge by edge instead.
-(`chartbook lineage --rehash` also reads every byte again; in ChartBook
-0.5.0 it reports every object as a gap when more than one store is
-registered, so until a release fixes that, run it with one store named:
-`CHARTBOOK_STORE="<the store's path>" chartbook lineage --rehash`.
-`chartbook store verify` rehashes a store and is not affected.)
+(`chartbook lineage --rehash` also reads every byte again, and
+`chartbook store verify` rehashes a whole store.)
 
 ## D. A live git dependency
 
@@ -436,14 +436,6 @@ Sixteen more bytes: one row. The point: a pin never moves by itself. When it
 moves, the lockfile diff says what moved, and that diff is what you commit
 and what your reviewers read.
 
-One thing to know about ChartBook 0.5.0: a classmate who clones your branch
-and runs `chartbook pin` sees `1 put back in the store`, after which `pin
---frozen` and `data.load` say the store does not have the pinned bytes;
-`chartbook update yield_spread_monitor` puts them right, and if the branch
-has moved since you pinned, `git diff chartbook.lock` shows it and `git
-restore chartbook.lock` undoes it. A later release restores a git
-dependency's files correctly, and this step goes away.
-
 ## E. Rebuild versus read
 
 What you are about to see: the same code, run at a later point in time,
@@ -456,18 +448,17 @@ in the first:
 git clone https://github.com/ftsfr/fed_yield_curve
 cd fed_yield_curve
 git switch --detach 3904ad6
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt "pyarrow==20.0.0" jupytext
+python3.12 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 chartbook trust
 chartbook run --snapshot
 ```
 
 (`3904ad6` is the `commit` from step B; read it from the lockfile with
 `jq -r '.records[0].dependencies[] | select(.id=="ftsfr/fed_yield_curve") | .location.commit' chartbook.lock`
-in the report. The two extra packages: the pipeline's `requirements.txt`
-pins `numpy==1.26.4`, which the newest pyarrow refuses, and its notebooks
-need `jupytext`; `pyarrow==20.0.0` is also what wrote the pinned file,
-which matters at the end of this step.) `chartbook trust` says this folder's
+in the report. Python 3.12, because the pipeline pins `numpy==1.26.4`;
+its `requirements.txt` pins `pyarrow==20.0.0`, which is what wrote the
+pinned file, and that matters at the end of this step.) `chartbook trust` says this folder's
 build script may run on your machine. `chartbook run --snapshot` checks that
 everything is committed, builds (about a minute: it pulls the Fed's yield
 curve file, formats it, runs the tests and two notebooks, and draws the
