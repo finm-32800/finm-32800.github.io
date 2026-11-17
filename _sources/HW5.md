@@ -10,7 +10,10 @@ You do two things on Midway3 and take a screenshot of each:
 
 - **Part A (2 points).** Submit a batch job with `sbatch`: a job array that
   cleans three months of corporate bond trades, February through April 2020,
-  as six tasks at the same time.
+  as six tasks at the same time, and a second job that waits for it and then
+  builds the figure and the notebook from
+  [Corporate Bonds in March 2020](./notebooks/_03_corporate_bonds_march_2020_ipynb.ipynb).
+  You end up with your own copy of that page, built on the cluster.
 - **Part B (2 points).** Open VS Code on a compute node with `scode`, in the
   browser on your laptop.
 

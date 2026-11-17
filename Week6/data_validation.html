@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -747,17 +747,17 @@ comparison’s go in <code class="docutils literal notranslate"><span class="pre
 <span class="sd">tolerance.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">settings</span>
+<span class="kn">import</span> <span class="nn">settings</span>
 
 <span class="n">TOLERANCE</span> <span class="o">=</span> <span class="mf">0.005</span>  <span class="c1"># percentage points; both are quoted to 0.01, so any real gap is larger</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">benchmark</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">benchmark</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;One row per date in both, with the gap between our spread and FRED&#39;s.&quot;&quot;&quot;</span>
     <span class="n">both</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">benchmark</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
     <span class="n">both</span><span class="p">[</span><span class="s2">&quot;gap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">both</span><span class="p">[</span><span class="s2">&quot;spread&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">both</span><span class="p">[</span><span class="s2">&quot;t10y2y&quot;</span><span class="p">]</span>
@@ -782,7 +782,7 @@ comparison’s go in <code class="docutils literal notranslate"><span class="pre
 <p>In <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>, the page lists the comparison file as a dependency. The file
 is written only when the check passes, and doit does not run a task whose
 dependency failed, so a failed check leaves yesterday’s page up:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">task_validate</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">task_validate</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check the spread history against FRED&#39;s T10Y2Y before anything publishes&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;python src/validate_spread.py&quot;</span><span class="p">],</span>
@@ -791,7 +791,7 @@ dependency failed, so a failed check leaves yesterday’s page up:</p>
     <span class="p">}</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">task_page</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">task_page</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Build docs/index.html from the history, once it has been validated&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;python src/build_page.py&quot;</span><span class="p">],</span>

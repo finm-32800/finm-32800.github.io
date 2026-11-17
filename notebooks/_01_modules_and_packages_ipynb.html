@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -554,22 +554,22 @@ at the bottom of nearly every module in this course.</p>
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code>. Here the notebook runs them and prints what they print.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>  <span class="c1"># the python_imports/ folder, where this notebook runs</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print one of the example files, with its path as a header.&quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">(</span><span class="n">HERE</span> <span class="o">/</span> <span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">HERE</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run `python &lt;script&gt;` inside `folder` and print its output.</span>
 
 <span class="sd">    Paths in the output are shortened: `~` is your home folder and `&lt;env&gt;` is</span>
@@ -852,12 +852,12 @@ from a vendor and saves it, and that is how <code class="docutils literal notran
 it offers a <code class="docutils literal notranslate"><span class="pre">load_</span></code> function that reads what the pull saved, and that is how
 a notebook uses it. Here is the shape of the FedWatch case study’s
 <code class="docutils literal notranslate"><span class="pre">pull_fed_funds_futures.py</span></code>, shortened:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pull_fed_funds_futures</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">START_DATE</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">END_DATE</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pull_fed_funds_futures</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">START_DATE</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">END_DATE</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull daily ZQ bars from Databento.&quot;&quot;&quot;</span>      <span class="c1"># goes out to the network</span>
     <span class="o">...</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">load_fed_funds_futures</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load_fed_funds_futures</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the cached ZQ daily bars pulled by this module.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">PARQUET_NAME</span><span class="p">)</span>
 
