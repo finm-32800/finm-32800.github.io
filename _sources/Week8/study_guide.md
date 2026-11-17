@@ -6,35 +6,89 @@ question can be answered in a few sentences from the pages listed under its
 heading. The exam's format is described in
 [Exam Preparation](../exam_prep.md).
 
-## Python Packages and CI
+## Pins That a Rebuild Can Meet
 
-*Read: [Writing and Publishing Your Own Python Packages](../Week6/python_packaging_with_hatch.md),
-the installable example in
-[Modules, Packages, and `if __name__ == "__main__"`](../notebooks/_01_modules_and_packages_ipynb.ipynb),
-and [Semantic Versioning](https://semver.org/).*
+*Read: [Pins That a Rebuild Can Meet](./pins_that_a_rebuild_can_meet.md).*
 
-1. What does each of the two tables in this `pyproject.toml` declare?
+1. In HW 4 the report's lockfile recorded a hash of the bytes of each
+    upstream file. A classmate checked out the same upstream commit a week
+    later, rebuilt it, and got a table whose hash did not match. No code had
+    changed. What had?
+2. Why can no rebuild reproduce the bytes of a Plotly HTML chart or of an
+    executed notebook, even from the same code and the same data?
+3. A pin by bytes works when a team shares one store, and fails when each
+    person rebuilds the upstream. Why?
+4. Suppose a table is pinned by a hash of its rows up to the pin's last date,
+    and not by the bytes of its file. For each change below, say whether the
+    pin is still met, and why.
 
-    ```toml
-    [build-system]
-    requires = ["hatchling"]
-    build-backend = "hatchling.build"
+    - The source has published two new days of data.
+    - The same rows were written in another order, by another version of the
+      Parquet writer.
+    - The source revised a value from last year.
 
-    [project]
-    name = "myproj"
-    version = "0.1.0"
-    dependencies = ["pandas"]
+## Corporate Bonds in March 2020
+
+*Read: [Corporate Bonds in March 2020](../notebooks/_03_corporate_bonds_march_2020_ipynb.ipynb).*
+
+5. What is a credit spread? When a bond's credit spread widens and Treasury
+    yields do not move, what has happened to the bond's price?
+6. What happened to investment-grade and high-yield credit spreads between
+    late February and March 20, 2020?
+7. What did the Federal Reserve announce on March 23, 2020? Its first
+    purchases came weeks later. What does the timing of the fall in spreads
+    say about how the announcement worked?
+8. The figure of daily spreads and trade counts is drawn from cleaned TRACE.
+    Name one way the same figure drawn from the raw feed would be wrong.
+
+## Port Forwarding and VS Code
+
+*Read: [Remote Machines and High-Performance Computing](./remote_machines_and_hpc.md).*
+
+9. VS Code is running on a compute node of Midway3 and listening on a port.
+    Why can the browser on your laptop not open it directly?
+10. In the command below, what does each of `8000`, `midway3-0123`, and
+    `41234` name? Which machine looks up the name `midway3-0123`?
+
+    ```bash
+    ssh -L 8000:midway3-0123:41234 cnetid@midway3.rcc.uchicago.edu
     ```
 
-2. Under semantic versioning, what does a change in each of the three parts
-    of a version number such as `2.4.1` tell the package's users?
-3. What is TestPyPI, and why rehearse a release there before publishing to
-    PyPI?
-4. A package's test workflow contains the lines below. What does GitHub
-    Actions do with them, and what kind of bug do they catch?
+11. With that command running, you open `http://localhost:8000` in a browser.
+    Trace the request from the browser to VS Code, machine by machine.
+12. `scode` starts VS Code inside a SLURM job. What happens to your editor
+    when the job's time limit runs out, and what happens to the files you
+    saved?
 
-    ```yaml
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+## Parallel Jobs: GNU Parallel and Job Arrays
+
+*Read: [Parallel Jobs on a Cluster](./parallel_jobs_on_a_cluster.md).*
+
+13. What makes a set of tasks independent enough to run in parallel? Stage 0
+    of the TRACE pipeline can be split by month. Why?
+14. What does the command below run, and how many of them at a time?
+
+    ```bash
+    parallel -j 2 python clean_month.py {} ::: 2020-02 2020-03 2020-04
     ```
+
+15. What does GNU Parallel write to the file named by `--joblog`, and what
+    does `--resume` do with it on the next run?
+16. How many jobs does the script below create, and what does each one run?
+
+    ```bash
+    #SBATCH --array=0-2
+    MONTHS=(2020-02 2020-03 2020-04)
+    python clean_month.py ${MONTHS[$SLURM_ARRAY_TASK_ID]}
+    ```
+
+17. After submitting that script as job 12345, `sacct -j 12345` shows
+    `12345_1` as `FAILED` and the other two as `COMPLETED`. What command
+    reruns only the task that failed?
+18. A task that exits at once when its output file already exists is called
+    idempotent. How does that make rerunning a whole array cheap?
+19. What does the `%10` do in `#SBATCH --array=0-99%10`?
+20. The scheduler sees a job array as many jobs and a GNU Parallel run as one
+    job. What does that difference mean for when the work starts and for how
+    you find out which task failed?
+21. When is one job that runs GNU Parallel a better choice than a job array?

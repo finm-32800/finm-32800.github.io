@@ -317,6 +317,10 @@ The tasks must not depend on one another. If year 2020 needs the output of
 year 2019, it is not an array; it is a pipeline, and `doit` or an
 orchestrator orders it.
 
+[Parallel Jobs on a Cluster](./parallel_jobs_on_a_cluster.md) builds this up
+in small steps, compares a job array with GNU Parallel, and shows what to do
+when one task fails.
+
 After a job finishes, `sacct -j <jobid>` reports how long it ran and how much
 memory it used. Read it before the next submission: asking for far more
 memory or time than you use makes you wait longer in the queue.
@@ -458,67 +462,141 @@ automatically. See the
 for details.
 
 
-## SSH Port Forwarding
+## VS Code on a Compute Node
 
-### The Problem
+You can edit files on the cluster with `nano` or `vim`, and for a one-line
+change that is fine. For real work you want your editor: the file tree, the
+Python extension, a notebook, a terminal beside the code. And you want it
+running where the data and the cores are, on a compute node, not on a login
+node that hundreds of people share.
 
-You've started a Jupyter notebook server on a Midway compute node. But that
-compute node is deep inside the cluster network---your laptop can't reach it
-directly. How do you open the notebook in your browser?
+RCC's `scode` command does this. It submits a SLURM job that starts VS Code
+on a **compute node**, as a small web server. You then use it from the
+browser on your laptop.
 
-### The Solution: SSH Tunneling
+That last step has a problem in it.
 
-**SSH port forwarding** (also called SSH tunneling) creates a secure tunnel
-from a port on your laptop to a port on the remote compute node, routed
-through the Midway login node.
+### The Problem: Your Laptop Cannot Reach a Compute Node
+
+VS Code is now a web server listening on a port of a compute node, say port
+`41234` on `midway3-0123`. If that machine were on the internet, you would
+type `http://midway3-0123:41234` into your browser and be done.
+
+It is not on the internet. Compute nodes sit on the cluster's private
+network. From outside, the only machines you can reach are the login nodes,
+and the only door into those is SSH, on port 22.
+
+So there are two facts to put together:
+
+- Your laptop can reach the login node, over SSH.
+- The login node can reach the compute node, because both are inside.
+
+### The Solution: SSH Port Forwarding
+
+**SSH port forwarding**, also called an SSH tunnel, uses the SSH connection
+you already have as a pipe for other traffic. You ask the `ssh` program on
+your laptop to do two things: listen on a port of your own machine, and send
+whatever arrives there through the SSH connection to the login node, which
+passes it on to the address you name.
+
+```{figure} ./assets/midway_port_forwarding.svg
+:name: midway-port-forwarding
+:width: 100%
+
+Port forwarding to VS Code on a compute node. (1) The browser connects to
+port 8000 on your own laptop, where the `ssh` client is listening. (2) The
+client sends the traffic through its encrypted connection to the login node.
+(3) The login node opens a connection to port 41234 on the compute node and
+passes the traffic along. Replies come back the same way.
+```
+
+The command is:
+
+```bash
+ssh -L 8000:midway3-0123:41234 <cnetid>@midway3.rcc.uchicago.edu
+```
+
+Read `-L 8000:midway3-0123:41234` as *local port, then where to send it*:
+
+| Part | What it names |
+|------|---------------|
+| `8000` | The port to open on **your laptop**. You choose it |
+| `midway3-0123` | The machine the traffic should end up at: the compute node |
+| `41234` | The port on that machine: the one VS Code is listening on |
+| `<cnetid>@midway3...` | The machine you log in to, which does the forwarding |
+
+With that command running, `http://localhost:8000` in your browser is VS Code
+on the compute node. `localhost` always means "this machine", so the browser
+believes it is talking to a program on your laptop. It is: the `ssh` client.
+
+One detail explains most of the errors you will see. The name `midway3-0123`
+is looked up by the **login node**, not by your laptop. Your laptop has never
+heard of `midway3-0123` and does not need to. It only has to reach the login
+node.
+
+Two flags are often added:
+
+| Flag | Meaning |
+|------|---------|
+| `-N` | Do not open a shell on the login node; only forward the port |
+| `-f` | Go to the background once the connection is made |
+
+The same idea in its general form, with two machines instead of three:
 
 ```{figure} ./assets/ssh_local_port_forwarding.png
 :name: ssh-port-forwarding
-:width: 80%
+:width: 70%
 
-Local port forwarding: your laptop connects to localhost:PORT, and SSH
-forwards the traffic through the login node to the compute node where Jupyter
-is running.
+Local port forwarding in general. The "remote" address is resolved by the SSH
+server, so `localhost:80` there means port 80 on the server itself.
 ```
 
 *Image: [iximiuz.com](https://iximiuz.com/en/posts/ssh-tunnels/)*
 
-The command looks like this:
+Port forwarding is not special to VS Code. A Jupyter server, a database, a
+dashboard: anything that listens on a port of a machine you can only reach
+over SSH can be used this way. The
+[Jupyter exercise](./exercise_jupyter_on_midway.md) does every step by hand.
+
+### Using `scode`
+
+Follow
+[RCC's instructions](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/),
+which are the source of truth, and use `--account finm32800` where their page
+shows an account. In outline:
+
+1. **On Midway3,** run `scode` as RCC's page describes. It submits a SLURM
+   job, waits for it to start, and prints two things: an `ssh -L ...` command
+   and an `http://localhost:...` address.
+2. **On your laptop, in a new terminal,** run the `ssh -L ...` command and
+   leave it running. It asks for your password and Duo, because it is a
+   second SSH connection.
+3. **In your browser,** open the `http://localhost:...` address.
+
+If the browser cannot connect and the terminal with the tunnel prints
+`channel 2: open failed: connect failed: Connection refused`, `scode` has
+printed an address for the compute node that the login node cannot use.
+Replace the address in the middle of the `-L` argument with the compute
+node's name, which `squeue --me` shows in its last column:
 
 ```bash
-ssh -N -f -L <local_port>:<compute_node_ip>:<remote_port> \
-    <cnetid>@midway3.rcc.uchicago.edu
+ssh -L 8000:<node-name>:<port> <cnetid>@midway3.rcc.uchicago.edu
 ```
 
-| Flag | Meaning |
-|------|---------|
-| `-N` | Don't execute a remote command (just forward ports) |
-| `-f` | Run in the background |
-| `-L` | Local port forwarding: `local_port:remote_host:remote_port` |
+Why this works, and what to do about a port that is already in use, is in
+the [`scode` section of the Jupyter exercise](#option-2-scode).
 
-After running this, opening `http://127.0.0.1:<local_port>` in your browser
-will connect to the Jupyter server on the compute node, tunneled securely
-through Midway's login node.
+The session is an ordinary SLURM job. It gets the cores and memory you asked
+for, and it is charged to the class's allocation for as long as it runs. When
+its time limit is reached, SLURM ends it: the editor in your browser
+disconnects, and any terminal or notebook running in it stops. Files you
+saved are on the cluster's file system and are untouched. When you are done
+early, end the job yourself with `scancel <job id>`.
 
-```{note}
-We walk through this entire process step-by-step in the
-[in-class exercise](./exercise_jupyter_on_midway.md).
-```
+### Other Ways to Get VS Code on a Remote Machine
 
+Where the server runs is what separates them.
 
-## VS Code on a Remote Machine
-
-You can edit files on the cluster with `nano` or `vim`, but most people want
-their editor. There are three ways to get VS Code onto a remote machine,
-and where the server runs is what separates them.
-
-- **`scode` on Midway3.** RCC's `scode` submits a SLURM job that starts VS
-  Code on a **compute node** and prints the `ssh -L` command that tunnels it
-  to your browser. This is the supported way on Midway3. Follow
-  [RCC's instructions](https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/),
-  which are the source of truth, with `--account finm32800`. The session is
-  an ordinary SLURM job: it gets the CPUs and memory you ask for, and it ends
-  when its time runs out or when you `scancel` it.
 - **Remote-SSH.** The VS Code extension of that name opens a folder over
   SSH, and it starts its server on whatever machine you SSH into. On a
   machine of your own that is the right tool. On Midway3 you land on a

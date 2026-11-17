@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a344f13" />
@@ -189,6 +189,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -276,9 +278,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -538,7 +541,7 @@ document.write(`
 <p>The Airflow chapter for this week is posted before class. Until then, this page
 is the agenda.</p>
 </div>
-<p>The <strong>exam</strong> takes the first 75 minutes. After it, two short topics close the
+<p>The <strong>exam</strong> takes the first 60 minutes. After it, two short topics close the
 quarter.</p>
 <p>The first is orchestration. <code class="docutils literal notranslate"><span class="pre">doit</span></code> orders the steps inside one project. An
 orchestrator such as <strong>Apache Airflow</strong> orders many projects: it runs each
@@ -552,7 +555,7 @@ months later.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>The exam is today, 9:30 to 10:45 am,</strong> the first 75 minutes of class. In person,
+<li><p><strong>The exam is today, 9:30 to 10:30 am,</strong> the first 60 minutes of class: 30 questions. In person,
 closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
 through 8. Each question has four options, <strong>one or more may be correct</strong>, and a
 question earns its point only if every bubble is right. There is no partial
@@ -582,7 +585,7 @@ only meaningful when the data is held fixed.</p></li>
 </section>
 <section id="agenda-item-1-the-exam">
 <h2>Agenda Item 1: The Exam<a class="headerlink" href="#agenda-item-1-the-exam" title="Link to this heading">#</a></h2>
-<p>First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
+<p>First 60 minutes, 30 questions. Bubble sheets and booklets are provided; bring a pencil. Room
 and start time are on Canvas.</p>
 </section>
 <section id="agenda-item-2-apache-airflow">

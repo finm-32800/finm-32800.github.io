@@ -31,6 +31,19 @@ This material is **not covered in any class session this quarter**. It is kept h
 Week8/web_authentication.md
 ```
 
+## Python Packaging and Sphinx
+
+```{note}
+This material is **not covered in a class session this quarter** and is not
+on the exam. It is kept here as a reference.
+```
+
+```{toctree}
+:maxdepth: 1
+Week6/python_packaging_with_hatch.md
+Week5/sphinx.md
+```
+
 ## Job Postings: Sample, Methods and Limitations
 
 The reference document behind

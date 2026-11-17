@@ -27,19 +27,28 @@ Questions test three things in roughly equal measure:
 
 ## The Exam
 
-The exam is held in class in **week 9**, on Tuesday, December 1, in the first
-75 minutes, and covers the material through week 8: all lecture notes,
-in-class discussions, the notebooks linked from the weekly chapters, and
-Homework 1 through 5. That includes remote machines and SLURM (week 7) and
-packaging and CI (week 8). The Airflow session in week 9 comes after the exam
-and is not on it. The room is posted on Canvas. There is no separate final
-exam.
+The exam is held in class in **week 9**, on Tuesday, December 1, at the start
+of class. It has **30 questions** and you have **60 minutes**. It covers the
+material through week 8: all lecture notes, in-class discussions, the
+notebooks linked from the weekly chapters, and Homework 1 through 5. That
+includes remote machines and SLURM (week 7) and port forwarding, GNU
+Parallel, and job arrays (week 8). The room is posted on Canvas. There is no
+separate final exam.
+
+Every question on the exam is a question from one of the weekly study guides,
+turned into multiple choice. The study guide is the last page of each week's
+chapter. If you can answer every study-guide question, you can answer every
+exam question.
+
+Not on the exam: Apache Airflow, MLflow, building and publishing a Python
+package, Sphinx, and Ruff and pre-commit.
 
 ## Practice Questions
 
-A set of practice questions in the same format, with the answer key, is handed
-out ahead of the exam. It is not graded. Work it under exam conditions and
-grade yourself; the answer key explains why each option is right or wrong.
+A practice exam of 20 questions in the same format, with the answer key, is
+handed out in week 8. It is not graded. Work it under exam conditions, at two
+minutes a question, and grade yourself; the answer key explains why each
+option is right or wrong.
 
 ## Online Notes
 
@@ -87,14 +96,9 @@ exam. More are added here as the quarter progresses.
   69(4), 1747--1785. Computing the NBBO and standard liquidity measures from
   TAQ, and why the choice between Daily and Monthly TAQ changes the answer.
 
-- Goyal, A., Welch, I., & Zafirov, A. (2024). A comprehensive 2022 look at the
-  empirical performance of equity premium prediction. *Review of Financial
-  Studies*, 37(11), 3490--3557. The equity premium predictors, the
-  historical-mean benchmark, and why a forecast at date *t* may use only what
-  was known at *t*.
-- Bernanke, B. S., & Kuttner, K. N. (2005). What explains the stock market's
-  reaction to Federal Reserve policy? *Journal of Finance*, 60(3),
-  1221--1257. Measuring the policy surprise from the fed funds futures price
-  change on the announcement day.
+- Haddad, V., Moreira, A., & Muir, T. (2021). When selling becomes viral:
+  Disruptions in debt markets in the COVID-19 crisis and the Fed's response.
+  *Review of Financial Studies*, 34(11), 5309--5351. Corporate bond credit
+  spreads in March 2020 and the announcement of March 23.
 
 *Additional papers are posted here as the course progresses.*

@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a344f13" />
@@ -189,6 +189,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -276,9 +278,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -492,7 +495,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -508,6 +513,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read">What to Read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-should-be-able-to-do-afterward">What You Should Be Able To Do Afterward</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -518,7 +532,47 @@ document.write(`
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="homework-5">
 <h1>Homework 5<a class="headerlink" href="#homework-5" title="Link to this heading">#</a></h1>
-<p>TBD.</p>
+<p><strong>Due: Friday, December 11, at 11:59 pm.</strong> 4 points.</p>
+<p>This assignment is short on purpose. The exam is on December 1 and your final
+project is due the week after, and that is where your time should go. You can
+finish it in class in week 8.</p>
+<p>You do two things on Midway3 and take a screenshot of each:</p>
+<ul class="simple">
+<li><p><strong>Part A (2 points).</strong> Submit a batch job with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code>: a job array that
+cleans three months of corporate bond trades, February through April 2020,
+as six tasks at the same time.</p></li>
+<li><p><strong>Part B (2 points).</strong> Open VS Code on a compute node with <code class="docutils literal notranslate"><span class="pre">scode</span></code>, in the
+browser on your laptop.</p></li>
+</ul>
+<p>You get the points for doing each one and showing it. The job does not have
+to finish without an error.</p>
+<p>The steps are in the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> of your copy of the repository,
+<code class="docutils literal notranslate"><span class="pre">hw-finm-32800/hw5-&lt;your</span> <span class="pre">GitHub</span> <span class="pre">username&gt;</span></code>. To submit, commit the two
+screenshots to the repository’s <code class="docutils literal notranslate"><span class="pre">screenshots</span></code> folder and set two flags and
+two file paths in <code class="docutils literal notranslate"><span class="pre">src/hw5_submission.py</span></code>. The autograder checks that the
+flags are set and that the image files are there. I look at each screenshot
+by hand.</p>
+<section id="what-to-read">
+<h2>What to Read<a class="headerlink" href="#what-to-read" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html"><span class="std std-doc">Parallel Jobs on a Cluster</span></a>: what a
+job array is, and how the script you submit hands each task its month.</p></li>
+<li><p><a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a>: logging in,
+the scheduler, and <em>VS Code on a Compute Node</em>, which explains the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span></code>
+command that <code class="docutils literal notranslate"><span class="pre">scode</span></code> asks you to run.</p></li>
+<li><p><a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html"><span class="std std-doc">Corporate Bonds in March 2020</span></a>:
+what the data you are cleaning is used for.</p></li>
+</ul>
+</section>
+<section id="what-you-should-be-able-to-do-afterward">
+<h2>What You Should Be Able To Do Afterward<a class="headerlink" href="#what-you-should-be-able-to-do-afterward" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Log in to a cluster, submit a batch job, and find out what happened to it
+with <code class="docutils literal notranslate"><span class="pre">squeue</span></code> and <code class="docutils literal notranslate"><span class="pre">sacct</span></code>.</p></li>
+<li><p>Read a job array script and say what each task runs.</p></li>
+<li><p>Open an editor on a compute node through an SSH tunnel.</p></li>
+</ul>
+</section>
 </section>
 
 <div class="section ablog__blog_comments">
@@ -559,6 +613,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read">What to Read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-should-be-able-to-do-afterward">What You Should Be Able To Do Afterward</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

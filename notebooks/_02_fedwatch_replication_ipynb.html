@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -191,6 +191,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -278,9 +280,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -518,7 +521,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-two-numbers-to-a-probability">From two numbers to a probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-worked-example-against-the-real-tool">The worked example — against the real tool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-print">Fine print</a></li>
 </ul>
 </li>
@@ -561,7 +563,7 @@ with <span class="math notranslate nohighlight">\(N\)</span> calendar days settl
 month’s calendar-day average of the effective federal funds rate (EFFR).
 Before the month is over, the contract trades at the market’s forecast of
 <span class="math notranslate nohighlight">\(\bar{r}\)</span>, so a price <span class="math notranslate nohighlight">\(P\)</span> observed today reveals an <strong>expected average
-rate</strong>, <span class="math notranslate nohighlight">\(R = 100 - P = \mathbb{E}[\bar{r}]\)</span>. (Strictly a futures price
+rate</strong>, <span class="math notranslate nohighlight">\(r_{\text{avg}} = 100 - P = \mathbb{E}[\bar{r}]\)</span>. (Strictly a futures price
 can also embed a risk premium; over the couple of months ahead of a
 meeting it is small, FedWatch ignores it, and so do we.)</p>
 <p><strong>Step 1 — the current rate is published every morning.</strong> The pre-meeting
@@ -579,12 +581,12 @@ at the known <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span
 the post-meeting rate <span class="math notranslate nohighlight">\(\tilde{r}_{\text{post}}\)</span> — a <em>random variable</em>
 today, because the meeting hasn’t happened yet. Taking expectations of
 the average, the contract’s implied rate is a <strong>day-weighted blend</strong> with
-exactly one unknown, <span class="math notranslate nohighlight">\(r_{\text{post}} \equiv \mathbb{E}[\tilde{r}_{\text{post}}]\)</span>:</p>
+exactly one unknown, <span class="math notranslate nohighlight">\(\mathbb{E}[\tilde{r}_{\text{post}}]\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ r_{\text{avg}} = \frac{d}{N}\, r_{\text{pre}} + \frac{N-d}{N}\, r_{\text{post}}
+\[ r_{\text{avg}} = \frac{d}{N}\, r_{\text{pre}} + \frac{N-d}{N}\, \mathbb{E}[\tilde{r}_{\text{post}}]
    \quad\Longrightarrow\quad
-   r_{\text{post}} = \frac{r_{\text{avg}}\, N - r_{\text{pre}}\, d}{N - d}. \]</div>
-<p>Read <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> carefully: it is an expectation, not a possible
+   \mathbb{E}[\tilde{r}_{\text{post}}] = \frac{r_{\text{avg}}\, N - r_{\text{pre}}\, d}{N - d}. \]</div>
+<p>Read <span class="math notranslate nohighlight">\(\mathbb{E}[\tilde{r}_{\text{post}}]\)</span> carefully: it is an expectation, not a possible
 outcome. The Fed moves in 25 bp steps, so the realized post-meeting
 rate will sit on that grid — but its <em>expectation</em> can land anywhere in
 between, and exactly where it lands is what encodes the probabilities.</p>
@@ -600,43 +602,34 @@ the direction the data suggest:</p>
 <p>with <span class="math notranslate nohighlight">\(\Delta = -0.25\)</span> for a cut or <span class="math notranslate nohighlight">\(+0.25\)</span> for a hike. Take the
 expectation of this two-point distribution:</p>
 <div class="math notranslate nohighlight">
-\[ r_{\text{post}} = (1-p)\, r_{\text{pre}} + p\,(r_{\text{pre}} + \Delta)
+\[ \mathbb{E}[\tilde{r}_{\text{post}}] = (1-p)\, r_{\text{pre}} + p\,(r_{\text{pre}} + \Delta)
    = r_{\text{pre}} + p\, \Delta. \]</div>
-<p>The expected change is the probability times the step size — so the
-probability is the expected change <em>measured in units of one step</em>:</p>
+<p>The expected change is the probability times the step size. Now
+substitute this expression for <span class="math notranslate nohighlight">\(\mathbb{E}[\tilde{r}_{\text{post}}]\)</span> into
+the day-weighted blend from Step 2:</p>
 <div class="math notranslate nohighlight">
-\[ p = \frac{\lvert r_{\text{post}} - r_{\text{pre}} \rvert}{0.25},
+\[\begin{split} \begin{aligned}
+   r_{\text{avg}}
+     &amp;= \frac{d}{N}\, r_{\text{pre}} + \frac{N-d}{N}\,\bigl(r_{\text{pre}} + p\,\Delta\bigr) \\
+     &amp;= r_{\text{pre}} + \frac{N-d}{N}\, p\,\Delta .
+   \end{aligned} \end{split}\]</div>
+<p>The <span class="math notranslate nohighlight">\(r_{\text{pre}}\)</span> terms collect because the day weights sum to one.
+Only <span class="math notranslate nohighlight">\(p\)</span> is unknown, so solve for it:</p>
+<div class="math notranslate nohighlight">
+\[ p = \frac{N}{N-d} \cdot \frac{r_{\text{avg}} - r_{\text{pre}}}{\Delta}
+     = \frac{\lvert \mathbb{E}[\tilde{r}_{\text{post}}] - r_{\text{pre}} \rvert}{0.25},
    \qquad p_{\text{no change}} = 1 - p. \]</div>
+<p>The second form says the probability is the expected change <em>measured in
+units of one step</em>. The first form shows why the day-weighting matters.
+A move on day <span class="math notranslate nohighlight">\(d\)</span> affects only the last <span class="math notranslate nohighlight">\(N - d\)</span> days of the month, so the
+monthly average <em>dilutes</em> the move by <span class="math notranslate nohighlight">\(\tfrac{N-d}{N}\)</span>, and the factor
+<span class="math notranslate nohighlight">\(\tfrac{N}{N-d}\)</span> undoes that dilution. Reading the raw gap
+<span class="math notranslate nohighlight">\(r_{\text{avg}} - r_{\text{pre}}\)</span> as if it were the expected move would
+understate <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p>The two sanity checks are the intuition: a zero gap means <span class="math notranslate nohighlight">\(p = 0\)</span>, a full
 25 bp gap means <span class="math notranslate nohighlight">\(p = 1\)</span>, and in between <span class="math notranslate nohighlight">\(p\)</span> is how far the expected rate
 has traveled from “no change” toward “one full move.” (Market noise can
 push the gap slightly outside <span class="math notranslate nohighlight">\([0, 0.25]\)</span>; the code clips <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span>.)</p>
-<section id="the-worked-example-against-the-real-tool">
-<h3>The worked example — against the real tool<a class="headerlink" href="#the-worked-example-against-the-real-tool" title="Link to this heading">#</a></h3>
-<p>The September 2026 meeting ends September 16, and September has 30 days:
-<span class="math notranslate nohighlight">\(d = 16\)</span>, <span class="math notranslate nohighlight">\(N = 30\)</span>. On August 5, 2026, the EFFR print was
-<span class="math notranslate nohighlight">\(r_{\text{pre}} = 3.63\%\)</span> and the September contract <code class="docutils literal notranslate"><span class="pre">ZQU6</span></code> closed at
-96.30, implying <span class="math notranslate nohighlight">\(r_{\text{avg}} = 3.70\%\)</span>. Step 2:</p>
-<div class="math notranslate nohighlight">
-\[ r_{\text{post}} = \frac{3.70 \times 30 - 3.63 \times 16}{30 - 16}
-   = \frac{111.00 - 58.08}{14} = 3.78\%. \]</div>
-<p>The expected change is <span class="math notranslate nohighlight">\(+15\)</span> bps, so Step 3 gives
-<span class="math notranslate nohighlight">\(p_{\text{hike}} = 15/25 = 60\%\)</span> and 40% no change.</p>
-<p>Notice what the day-weighting accomplished. The naive reading —
-“September prices 3.70% against 3.63% today, 7 bps is a <span class="math notranslate nohighlight">\(7/25 = 28\%\)</span>
-hike chance” — is wrong, because a September 16 hike affects only the
-last 14 of September’s 30 days. The monthly average <em>dilutes</em> the move by
-<span class="math notranslate nohighlight">\(\tfrac{N-d}{N} = \tfrac{14}{30}\)</span>, and Step 2 exists to undo that
-dilution: <span class="math notranslate nohighlight">\(7 \times \tfrac{30}{14} = 15\)</span> bps — hence 60%, not 28%.</p>
-<p>The FedWatch screenshot at the top, captured the next morning, showed
-<strong>54.5% hike / 45.5% no change</strong> — the same call as our 60/40, about six
-probability points apart. That gap is smaller than it looks: the solve
-for <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> amplifies pricing differences by
-<span class="math notranslate nohighlight">\(N/(N-d) \approx 2.1\)</span>, so one basis point in the implied rate moves the
-probability by roughly nine points. Six points is under a basis point of
-price — about what official settlements versus daily closes, and an
-intraday screenshot versus a previous-day close, account for.</p>
-</section>
 <section id="fine-print">
 <h3>Fine print<a class="headerlink" href="#fine-print" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -661,13 +654,13 @@ is the atom it is built from.</p></li>
 calendar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">fedwatch</span>
-<span class="kn">import</span> <span class="nn">fedwatch_monitor</span>
-<span class="kn">import</span> <span class="nn">pull_effr</span>
-<span class="kn">import</span> <span class="nn">pull_fed_funds_futures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fedwatch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fedwatch_monitor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_effr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_fed_funds_futures</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pull_fed_funds_futures</span><span class="o">.</span><span class="n">load_fed_funds_futures</span><span class="p">()</span>
 <span class="n">effr</span> <span class="o">=</span> <span class="n">pull_effr</span><span class="o">.</span><span class="n">load_effr</span><span class="p">()</span>
@@ -835,7 +828,7 @@ contract actually prices: the day-weighted average of the expected path.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
     <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">r_post</span> <span class="o">-</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">pad</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">&quot;expected: $r_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="se">{{</span><span class="s2">post</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">r_post</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">mathbb</span><span class="se">{{</span><span class="s2">E</span><span class="se">}}</span><span class="s2">[</span><span class="se">\\</span><span class="s2">tilde</span><span class="se">{{</span><span class="s2">r</span><span class="se">}}</span><span class="s2">_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="se">{{</span><span class="s2">post</span><span class="se">}}</span><span class="s2">]$ = </span><span class="si">{</span><span class="n">r_post</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span>
     <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
     <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span> <span class="k">if</span> <span class="n">sgn</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
 <span class="p">)</span>
@@ -856,7 +849,7 @@ contract actually prices: the day-weighted average of the expected path.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19806641631c9846f97638497d57b0fb7cf6ec8423136153d1c37a1ef8207e8a.png" src="../_images/19806641631c9846f97638497d57b0fb7cf6ec8423136153d1c37a1ef8207e8a.png" />
+<img alt="../_images/22cb82dad8d257ce6f080a209fea3c417a22eb919181c0245d87bd729e3f071b.png" src="../_images/22cb82dad8d257ce6f080a209fea3c417a22eb919181c0245d87bd729e3f071b.png" />
 </div>
 </div>
 </section>
@@ -922,7 +915,7 @@ and remember that if you have refreshed the data since this case study
 was written, the numbers will have moved with the market.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fedwatch_chart</span> <span class="kn">import</span> <span class="n">plot_probabilities_matplotlib</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fedwatch_chart</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_probabilities_matplotlib</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_probabilities_matplotlib</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -944,7 +937,7 @@ which are stored next to CME’s numbers in
 <code class="docutils literal notranslate"><span class="pre">data_manual/cme_fedwatch_snapshots.csv</span></code>, and <code class="docutils literal notranslate"><span class="pre">doit</span></code> saves the result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calc_fedwatch_vs_cme</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">calc_fedwatch_vs_cme</span>
 
 <span class="n">comparison</span> <span class="o">=</span> <span class="n">calc_fedwatch_vs_cme</span><span class="o">.</span><span class="n">load_fedwatch_vs_cme</span><span class="p">()</span>
 <span class="n">comparison</span><span class="p">[</span>
@@ -1062,7 +1055,7 @@ path-over-time view is exactly what <code class="docutils literal notranslate"><
 <code class="docutils literal notranslate"><span class="pre">_data/fedwatch_history.parquet</span></code> going forward.)</p></li>
 <li><p>EFFR can only anchor the <em>next</em> meeting: for the meeting after that,
 the pre-meeting rate is unknown today because it depends on the first
-decision. Argue that the first meeting’s <span class="math notranslate nohighlight">\(r_{\text{post}}\)</span> is the
+decision. Argue that the first meeting’s <span class="math notranslate nohighlight">\(\mathbb{E}[\tilde{r}_{\text{post}}]\)</span> is the
 natural anchor for the second, and use it to extend the forecast one
 meeting further out. (You have just built the first branch of
 FedWatch’s probability tree.)</p></li>
@@ -1119,7 +1112,6 @@ FedWatch’s probability tree.)</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-two-numbers-to-a-probability">From two numbers to a probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-worked-example-against-the-real-tool">The worked example — against the real tool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-print">Fine print</a></li>
 </ul>
 </li>

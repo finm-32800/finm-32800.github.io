@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Port forwarding from a laptop to VS Code on a Midway3 compute node</title>
+  <desc id="d">The browser on the laptop connects to localhost port 8000, where the SSH client listens. The SSH client carries the traffic through an encrypted connection to the login node, which opens a connection to port 41234 on the compute node, where VS Code is running. The laptop cannot reach the compute node directly.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/>
+    </marker>
+    <marker id="arrowred" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b5462f"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#ffffff"/>
+
+  <!-- the cluster's private network -->
+  <rect x="384" y="70" width="564" height="290" rx="10" fill="#f3f6fa" stroke="#1f4e79" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="666" y="98" text-anchor="middle" font-size="18" fill="#1f4e79">Midway3's private network</text>
+
+  <!-- laptop -->
+  <rect x="12" y="112" width="278" height="232" rx="8" fill="#eef5e6" stroke="#4b7a1f" stroke-width="2"/>
+  <text x="151" y="142" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Your laptop</text>
+  <rect x="28" y="158" width="246" height="62" rx="5" fill="#fff" stroke="#222"/>
+  <text x="151" y="183" text-anchor="middle" font-size="17" fill="#222">Browser</text>
+  <text x="151" y="207" text-anchor="middle" font-size="16" font-family="Menlo, Consolas, monospace" fill="#4b7a1f">http://localhost:8000</text>
+  <rect x="28" y="262" width="246" height="64" rx="5" fill="#fff" stroke="#222"/>
+  <text x="151" y="288" text-anchor="middle" font-size="17" fill="#222">ssh client</text>
+  <text x="151" y="312" text-anchor="middle" font-size="16" fill="#222">listens on port <tspan font-family="Menlo, Consolas, monospace" fill="#4b7a1f">8000</tspan></text>
+  <line x1="151" y1="220" x2="151" y2="260" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="163" y="247" font-size="17" font-weight="bold" fill="#222">1</text>
+
+  <!-- login node -->
+  <rect x="400" y="190" width="250" height="154" rx="8" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
+  <text x="525" y="219" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Login node</text>
+  <text x="525" y="243" text-anchor="middle" font-size="14.5" font-family="Menlo, Consolas, monospace" fill="#1f4e79">midway3.rcc.uchicago.edu</text>
+  <rect x="416" y="262" width="218" height="64" rx="5" fill="#fff" stroke="#222"/>
+  <text x="525" y="288" text-anchor="middle" font-size="17" fill="#222">ssh server</text>
+  <text x="525" y="312" text-anchor="middle" font-size="16" fill="#222">open to the internet</text>
+
+  <!-- compute node -->
+  <rect x="712" y="190" width="224" height="154" rx="8" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
+  <text x="824" y="219" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Compute node</text>
+  <text x="824" y="243" text-anchor="middle" font-size="16" font-family="Menlo, Consolas, monospace" fill="#7a3fa0">midway3-0123</text>
+  <rect x="726" y="262" width="196" height="64" rx="5" fill="#fbe9e6" stroke="#b5462f" stroke-width="1.5"/>
+  <text x="824" y="288" text-anchor="middle" font-size="17" fill="#222">VS Code</text>
+  <text x="824" y="312" text-anchor="middle" font-size="16" fill="#222">listens on port <tspan font-family="Menlo, Consolas, monospace" fill="#7a3fa0">41234</tspan></text>
+
+  <!-- the tunnel -->
+  <rect x="276" y="284" width="138" height="20" rx="10" fill="#d9dde3" stroke="#555"/>
+  <line x1="280" y1="294" x2="412" y2="294" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="345" y="272" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">2</text>
+
+  <!-- login to compute -->
+  <line x1="636" y1="294" x2="723" y2="294" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="680" y="282" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">3</text>
+
+  <!-- the direct route that does not exist -->
+  <path d="M 276 176 C 440 120, 660 120, 790 186" fill="none" stroke="#b5462f" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrowred)"/>
+  <text x="151" y="52" text-anchor="middle" font-size="17" fill="#b5462f">No direct route: a compute node</text>
+  <text x="151" y="75" text-anchor="middle" font-size="17" fill="#b5462f">cannot be reached from outside</text>
+  <g stroke="#b5462f" stroke-width="3">
+    <line x1="332" y1="146" x2="350" y2="164"/>
+    <line x1="350" y1="146" x2="332" y2="164"/>
+  </g>
+
+  <!-- the command -->
+  <text x="480" y="412" text-anchor="middle" font-size="21" font-family="Menlo, Consolas, monospace" fill="#222">ssh -L <tspan fill="#4b7a1f" font-weight="bold">8000</tspan>:<tspan fill="#7a3fa0" font-weight="bold">midway3-0123</tspan>:<tspan fill="#7a3fa0" font-weight="bold">41234</tspan> cnetid@<tspan fill="#1f4e79" font-weight="bold">midway3.rcc.uchicago.edu</tspan></text>
+  <text x="140" y="446" text-anchor="middle" font-size="16" fill="#4b7a1f">port to open</text>
+  <text x="140" y="467" text-anchor="middle" font-size="16" fill="#4b7a1f">on your laptop</text>
+  <text x="352" y="446" text-anchor="middle" font-size="16" fill="#7a3fa0">where the login node</text>
+  <text x="352" y="467" text-anchor="middle" font-size="16" fill="#7a3fa0">sends the traffic</text>
+  <text x="716" y="446" text-anchor="middle" font-size="16" fill="#1f4e79">the machine you log in to,</text>
+  <text x="716" y="467" text-anchor="middle" font-size="16" fill="#1f4e79">which does the forwarding</text>
+  <text x="480" y="516" text-anchor="middle" font-size="16" fill="#222">The login node looks up the name midway3-0123. Your laptop never needs to know it.</text>
+</svg>

@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -189,6 +189,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -276,9 +278,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -548,12 +551,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#globus-large-scale-transfers">Globus: Large-Scale Transfers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-port-forwarding">SSH Port Forwarding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-tunneling">The Solution: SSH Tunneling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-compute-node">VS Code on a Compute Node</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-your-laptop-cannot-reach-a-compute-node">The Problem: Your Laptop Cannot Reach a Compute Node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-port-forwarding">The Solution: SSH Port Forwarding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scode">Using <code class="docutils literal notranslate"><span class="pre">scode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ways-to-get-vs-code-on-a-remote-machine">Other Ways to Get VS Code on a Remote Machine</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-remote-machine">VS Code on a Remote Machine</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wrds-cloud-same-idea-different-scheduler">The WRDS Cloud: Same Idea, Different Scheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
 </ul>
@@ -952,6 +956,9 @@ python<span class="w"> </span>src/process_year.py<span class="w"> </span>--year<
 <p>The tasks must not depend on one another. If year 2020 needs the output of
 year 2019, it is not an array; it is a pipeline, and <code class="docutils literal notranslate"><span class="pre">doit</span></code> or an
 orchestrator orders it.</p>
+<p><a class="reference internal" href="parallel_jobs_on_a_cluster.html"><span class="std std-doc">Parallel Jobs on a Cluster</span></a> builds this up
+in small steps, compares a job array with GNU Parallel, and shows what to do
+when one task fails.</p>
 <p>After a job finishes, <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-j</span> <span class="pre">&lt;jobid&gt;</span></code> reports how long it ran and how much
 memory it used. Read it before the next submission: asking for far more
 memory or time than you use makes you wait longer in the queue.</p>
@@ -1098,33 +1105,83 @@ automatically. See the
 for details.</p>
 </section>
 </section>
-<section id="ssh-port-forwarding">
-<h2>SSH Port Forwarding<a class="headerlink" href="#ssh-port-forwarding" title="Link to this heading">#</a></h2>
-<section id="the-problem">
-<h3>The Problem<a class="headerlink" href="#the-problem" title="Link to this heading">#</a></h3>
-<p>You’ve started a Jupyter notebook server on a Midway compute node. But that
-compute node is deep inside the cluster network—your laptop can’t reach it
-directly. How do you open the notebook in your browser?</p>
+<section id="vs-code-on-a-compute-node">
+<h2>VS Code on a Compute Node<a class="headerlink" href="#vs-code-on-a-compute-node" title="Link to this heading">#</a></h2>
+<p>You can edit files on the cluster with <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, and for a one-line
+change that is fine. For real work you want your editor: the file tree, the
+Python extension, a notebook, a terminal beside the code. And you want it
+running where the data and the cores are, on a compute node, not on a login
+node that hundreds of people share.</p>
+<p>RCC’s <code class="docutils literal notranslate"><span class="pre">scode</span></code> command does this. It submits a SLURM job that starts VS Code
+on a <strong>compute node</strong>, as a small web server. You then use it from the
+browser on your laptop.</p>
+<p>That last step has a problem in it.</p>
+<section id="the-problem-your-laptop-cannot-reach-a-compute-node">
+<h3>The Problem: Your Laptop Cannot Reach a Compute Node<a class="headerlink" href="#the-problem-your-laptop-cannot-reach-a-compute-node" title="Link to this heading">#</a></h3>
+<p>VS Code is now a web server listening on a port of a compute node, say port
+<code class="docutils literal notranslate"><span class="pre">41234</span></code> on <code class="docutils literal notranslate"><span class="pre">midway3-0123</span></code>. If that machine were on the internet, you would
+type <code class="docutils literal notranslate"><span class="pre">http://midway3-0123:41234</span></code> into your browser and be done.</p>
+<p>It is not on the internet. Compute nodes sit on the cluster’s private
+network. From outside, the only machines you can reach are the login nodes,
+and the only door into those is SSH, on port 22.</p>
+<p>So there are two facts to put together:</p>
+<ul class="simple">
+<li><p>Your laptop can reach the login node, over SSH.</p></li>
+<li><p>The login node can reach the compute node, because both are inside.</p></li>
+</ul>
 </section>
-<section id="the-solution-ssh-tunneling">
-<h3>The Solution: SSH Tunneling<a class="headerlink" href="#the-solution-ssh-tunneling" title="Link to this heading">#</a></h3>
-<p><strong>SSH port forwarding</strong> (also called SSH tunneling) creates a secure tunnel
-from a port on your laptop to a port on the remote compute node, routed
-through the Midway login node.</p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/ssh_local_port_forwarding.png"><img alt="../_images/ssh_local_port_forwarding.png" src="../_images/ssh_local_port_forwarding.png" style="width: 80%;" /></a>
+<section id="the-solution-ssh-port-forwarding">
+<h3>The Solution: SSH Port Forwarding<a class="headerlink" href="#the-solution-ssh-port-forwarding" title="Link to this heading">#</a></h3>
+<p><strong>SSH port forwarding</strong>, also called an SSH tunnel, uses the SSH connection
+you already have as a pipe for other traffic. You ask the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> program on
+your laptop to do two things: listen on a port of your own machine, and send
+whatever arrives there through the SSH connection to the login node, which
+passes it on to the address you name.</p>
+<figure class="align-default" id="midway-port-forwarding">
+<a class="reference internal image-reference" href="../_images/midway_port_forwarding.svg"><img alt="../_images/midway_port_forwarding.svg" src="../_images/midway_port_forwarding.svg" width="100%" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Local port forwarding: your laptop connects to localhost:PORT, and SSH
-forwards the traffic through the login node to the compute node where Jupyter
-is running.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Port forwarding to VS Code on a compute node. (1) The browser connects to
+port 8000 on your own laptop, where the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> client is listening. (2) The
+client sends the traffic through its encrypted connection to the login node.
+(3) The login node opens a connection to port 41234 on the compute node and
+passes the traffic along. Replies come back the same way.</span><a class="headerlink" href="#midway-port-forwarding" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p><em>Image: <a class="reference external" href="https://iximiuz.com/en/posts/ssh-tunnels/">iximiuz.com</a></em></p>
-<p>The command looks like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-N<span class="w"> </span>-f<span class="w"> </span>-L<span class="w"> </span>&lt;local_port&gt;:&lt;compute_node_ip&gt;:&lt;remote_port&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu
+<p>The command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:midway3-0123:41234<span class="w"> </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu
 </pre></div>
 </div>
+<p>Read <code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">8000:midway3-0123:41234</span></code> as <em>local port, then where to send it</em>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Part</p></th>
+<th class="head"><p>What it names</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">8000</span></code></p></td>
+<td><p>The port to open on <strong>your laptop</strong>. You choose it</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">midway3-0123</span></code></p></td>
+<td><p>The machine the traffic should end up at: the compute node</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">41234</span></code></p></td>
+<td><p>The port on that machine: the one VS Code is listening on</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;cnetid&gt;&#64;midway3...</span></code></p></td>
+<td><p>The machine you log in to, which does the forwarding</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With that command running, <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> in your browser is VS Code
+on the compute node. <code class="docutils literal notranslate"><span class="pre">localhost</span></code> always means “this machine”, so the browser
+believes it is talking to a program on your laptop. It is: the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> client.</p>
+<p>One detail explains most of the errors you will see. The name <code class="docutils literal notranslate"><span class="pre">midway3-0123</span></code>
+is looked up by the <strong>login node</strong>, not by your laptop. Your laptop has never
+heard of <code class="docutils literal notranslate"><span class="pre">midway3-0123</span></code> and does not need to. It only has to reach the login
+node.</p>
+<p>Two flags are often added:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Flag</p></th>
@@ -1133,40 +1190,64 @@ is running.</span><a class="headerlink" href="#id1" title="Link to this image">#
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-N</span></code></p></td>
-<td><p>Don’t execute a remote command (just forward ports)</p></td>
+<td><p>Do not open a shell on the login node; only forward the port</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-f</span></code></p></td>
-<td><p>Run in the background</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-L</span></code></p></td>
-<td><p>Local port forwarding: <code class="docutils literal notranslate"><span class="pre">local_port:remote_host:remote_port</span></code></p></td>
+<td><p>Go to the background once the connection is made</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>After running this, opening <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:&lt;local_port&gt;</span></code> in your browser
-will connect to the Jupyter server on the compute node, tunneled securely
-through Midway’s login node.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We walk through this entire process step-by-step in the
-<a class="reference internal" href="exercise_jupyter_on_midway.html"><span class="std std-doc">in-class exercise</span></a>.</p>
-</div>
+<p>The same idea in its general form, with two machines instead of three:</p>
+<figure class="align-default" id="ssh-port-forwarding">
+<a class="reference internal image-reference" href="../_images/ssh_local_port_forwarding.png"><img alt="../_images/ssh_local_port_forwarding.png" src="../_images/ssh_local_port_forwarding.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Local port forwarding in general. The “remote” address is resolved by the SSH
+server, so <code class="docutils literal notranslate"><span class="pre">localhost:80</span></code> there means port 80 on the server itself.</span><a class="headerlink" href="#ssh-port-forwarding" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><em>Image: <a class="reference external" href="https://iximiuz.com/en/posts/ssh-tunnels/">iximiuz.com</a></em></p>
+<p>Port forwarding is not special to VS Code. A Jupyter server, a database, a
+dashboard: anything that listens on a port of a machine you can only reach
+over SSH can be used this way. The
+<a class="reference internal" href="exercise_jupyter_on_midway.html"><span class="std std-doc">Jupyter exercise</span></a> does every step by hand.</p>
 </section>
-</section>
-<section id="vs-code-on-a-remote-machine">
-<h2>VS Code on a Remote Machine<a class="headerlink" href="#vs-code-on-a-remote-machine" title="Link to this heading">#</a></h2>
-<p>You can edit files on the cluster with <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code>, but most people want
-their editor. There are three ways to get VS Code onto a remote machine,
-and where the server runs is what separates them.</p>
-<ul>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">scode</span></code> on Midway3.</strong> RCC’s <code class="docutils literal notranslate"><span class="pre">scode</span></code> submits a SLURM job that starts VS
-Code on a <strong>compute node</strong> and prints the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span></code> command that tunnels it
-to your browser. This is the supported way on Midway3. Follow
+<section id="using-scode">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">scode</span></code><a class="headerlink" href="#using-scode" title="Link to this heading">#</a></h3>
+<p>Follow
 <a class="reference external" href="https://docs.rcc.uchicago.edu/software/apps-and-envs/scode/main/">RCC’s instructions</a>,
-which are the source of truth, with <code class="docutils literal notranslate"><span class="pre">--account</span> <span class="pre">finm32800</span></code>. The session is
-an ordinary SLURM job: it gets the CPUs and memory you ask for, and it ends
-when its time runs out or when you <code class="docutils literal notranslate"><span class="pre">scancel</span></code> it.</p></li>
+which are the source of truth, and use <code class="docutils literal notranslate"><span class="pre">--account</span> <span class="pre">finm32800</span></code> where their page
+shows an account. In outline:</p>
+<ol class="arabic simple">
+<li><p><strong>On Midway3,</strong> run <code class="docutils literal notranslate"><span class="pre">scode</span></code> as RCC’s page describes. It submits a SLURM
+job, waits for it to start, and prints two things: an <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">...</span></code> command
+and an <code class="docutils literal notranslate"><span class="pre">http://localhost:...</span></code> address.</p></li>
+<li><p><strong>On your laptop, in a new terminal,</strong> run the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">...</span></code> command and
+leave it running. It asks for your password and Duo, because it is a
+second SSH connection.</p></li>
+<li><p><strong>In your browser,</strong> open the <code class="docutils literal notranslate"><span class="pre">http://localhost:...</span></code> address.</p></li>
+</ol>
+<p>If the browser cannot connect and the terminal with the tunnel prints
+<code class="docutils literal notranslate"><span class="pre">channel</span> <span class="pre">2:</span> <span class="pre">open</span> <span class="pre">failed:</span> <span class="pre">connect</span> <span class="pre">failed:</span> <span class="pre">Connection</span> <span class="pre">refused</span></code>, <code class="docutils literal notranslate"><span class="pre">scode</span></code> has
+printed an address for the compute node that the login node cannot use.
+Replace the address in the middle of the <code class="docutils literal notranslate"><span class="pre">-L</span></code> argument with the compute
+node’s name, which <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">--me</span></code> shows in its last column:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:&lt;node-name&gt;:&lt;port&gt;<span class="w"> </span>&lt;cnetid&gt;@midway3.rcc.uchicago.edu
+</pre></div>
+</div>
+<p>Why this works, and what to do about a port that is already in use, is in
+the <a class="reference internal" href="exercise_jupyter_on_midway.html#option-2-scode"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">scode</span></code> section of the Jupyter exercise</span></a>.</p>
+<p>The session is an ordinary SLURM job. It gets the cores and memory you asked
+for, and it is charged to the class’s allocation for as long as it runs. When
+its time limit is reached, SLURM ends it: the editor in your browser
+disconnects, and any terminal or notebook running in it stops. Files you
+saved are on the cluster’s file system and are untouched. When you are done
+early, end the job yourself with <code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;job</span> <span class="pre">id&gt;</span></code>.</p>
+</section>
+<section id="other-ways-to-get-vs-code-on-a-remote-machine">
+<h3>Other Ways to Get VS Code on a Remote Machine<a class="headerlink" href="#other-ways-to-get-vs-code-on-a-remote-machine" title="Link to this heading">#</a></h3>
+<p>Where the server runs is what separates them.</p>
+<ul>
 <li><p><strong>Remote-SSH.</strong> The VS Code extension of that name opens a folder over
 SSH, and it starts its server on whatever machine you SSH into. On a
 machine of your own that is the right tool. On Midway3 you land on a
@@ -1184,6 +1265,7 @@ a workstation at the office, a cloud VM, or a Mac mini in a closet.</p>
 </div>
 </li>
 </ul>
+</section>
 </section>
 <section id="the-wrds-cloud-same-idea-different-scheduler">
 <h2>The WRDS Cloud: Same Idea, Different Scheduler<a class="headerlink" href="#the-wrds-cloud-same-idea-different-scheduler" title="Link to this heading">#</a></h2>
@@ -1337,12 +1419,13 @@ at your employer, takes an afternoon to learn.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#globus-large-scale-transfers">Globus: Large-Scale Transfers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-port-forwarding">SSH Port Forwarding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-tunneling">The Solution: SSH Tunneling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-compute-node">VS Code on a Compute Node</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-your-laptop-cannot-reach-a-compute-node">The Problem: Your Laptop Cannot Reach a Compute Node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solution-ssh-port-forwarding">The Solution: SSH Port Forwarding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scode">Using <code class="docutils literal notranslate"><span class="pre">scode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ways-to-get-vs-code-on-a-remote-machine">Other Ways to Get VS Code on a Remote Machine</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code-on-a-remote-machine">VS Code on a Remote Machine</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-wrds-cloud-same-idea-different-scheduler">The WRDS Cloud: Same Idea, Different Scheduler</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
 </ul>

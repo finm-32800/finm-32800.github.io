@@ -5,7 +5,7 @@ The Airflow chapter for this week is posted before class. Until then, this page
 is the agenda.
 ```
 
-The **exam** takes the first 75 minutes. After it, two short topics close the
+The **exam** takes the first 60 minutes. After it, two short topics close the
 quarter.
 
 The first is orchestration. `doit` orders the steps inside one project. An
@@ -21,7 +21,7 @@ months later.
 
 ## Announcements
 
-- **The exam is today, 9:30 to 10:45 am,** the first 75 minutes of class. In person,
+- **The exam is today, 9:30 to 10:30 am,** the first 60 minutes of class: 30 questions. In person,
   closed-book, closed-notes, multiple choice, on a bubble sheet. It covers weeks 0
   through 8. Each question has four options, **one or more may be correct**, and a
   question earns its point only if every bubble is right. There is no partial
@@ -48,7 +48,7 @@ months later.
 
 ## Agenda Item 1: The Exam
 
-First 75 minutes. Bubble sheets and booklets are provided; bring a pencil. Room
+First 60 minutes, 30 questions. Bubble sheets and booklets are provided; bring a pencil. Room
 and start time are on Canvas.
 
 ## Agenda Item 2: Apache Airflow

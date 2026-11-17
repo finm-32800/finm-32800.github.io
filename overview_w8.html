@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Week 8: Packaging, CI, and Code Quality &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Week 8: VS Code on a Cluster and Parallel Jobs &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a344f13" />
@@ -47,11 +47,13 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview_w8';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Writing and Publishing Your Own Python Packages" href="Week6/python_packaging_with_hatch.html" />
+    <link rel="next" title="Pins That a Rebuild Can Meet" href="Week8/pins_that_a_rebuild_can_meet.html" />
     <link rel="prev" title="WARNING: Notes subject to change after this week" href="subject_to_change_after_this_week.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>   
@@ -189,6 +191,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -276,9 +280,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: Packaging, CI, and Code Quality</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Week 8: VS Code on a Cluster and Parallel Jobs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -505,7 +510,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Week 8: Packaging, CI, and Code Quality</h1>
+    <h1>Week 8: VS Code on a Cluster and Parallel Jobs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -517,11 +522,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-where-ci-cd-lives-python-packages">Agenda Item 1: Where CI/CD Lives — Python Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-documentation-with-sphinx">Agenda Item 2: Documentation with Sphinx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-checks-before-the-push-ruff-and-pre-commit">Agenda Item 3: Checks Before the Push — Ruff and pre-commit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-matrices-caching-and-the-boundary">Agenda Item 4: Matrices, Caching, and the Boundary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-the-paper-bernanke-and-kuttner-2005">Agenda Item 5: The Paper — Bernanke and Kuttner (2005)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-9">Looking ahead to Week 9</a></li>
 </ul>
             </nav>
@@ -533,33 +534,42 @@ document.write(`
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-packaging-ci-and-code-quality">
-<h1>Week 8: Packaging, CI, and Code Quality<a class="headerlink" href="#week-8-packaging-ci-and-code-quality" title="Link to this heading">#</a></h1>
+                   <section class="tex2jax_ignore mathjax_ignore" id="week-8-vs-code-on-a-cluster-and-parallel-jobs">
+<h1>Week 8: VS Code on a Cluster and Parallel Jobs<a class="headerlink" href="#week-8-vs-code-on-a-cluster-and-parallel-jobs" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </div>
-<p>Week 4 read a workflow and week 5 deployed one. This week turns to where most
-workflows in the wild live: Python packages. Every package you have installed
-this quarter was built, tested on several versions of Python, documented, and
-released by one. We look at how, then at the checks that run before a push,
-Ruff and pre-commit, and close by drawing the line between a CI service and
-an orchestrator such as Airflow, which comes after the exam in week 9.</p>
+<p>Last week we logged in to Midway3 and met the scheduler. This week we put the
+cluster to work on a question. In March 2020 the corporate bond market came
+close to breaking, and on March 23 the Federal Reserve said it would buy
+corporate bonds. To see what happened day by day we need three months of
+TRACE, cleaned. That gives us two things to learn: how to work on a compute
+node with a real editor, which turns out to be a question about how a browser
+on your laptop reaches a machine that is not on the internet; and how to
+clean many months at the same time, with GNU Parallel and with a SLURM job
+array.</p>
+<p>We start with HW 4, and with what its lockfile taught us about ChartBook.</p>
 <section id="announcements">
 <h2>Announcements<a class="headerlink" href="#announcements" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong><a class="reference internal" href="HW4.html"><span class="std std-doc">HW 4</span></a>, the class report, is due next Tuesday,</strong> November 24,
 at 9:30 am. Only pull requests merged by then count. Your pull request
 should be open today, so that your two reviewers have the week.</p></li>
-<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a>:</strong> TBD.</p></li>
+<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a> is out today and is short on purpose:</strong> submit one batch
+job on Midway3, open VS Code on a compute node, and take a screenshot of
+each. It is due <strong>Friday, December 11, at 11:59 pm,</strong> the end of exam
+week, but you can finish it in class today.</p></li>
 <li><p><strong>No class next week.</strong> November 24 falls in Thanksgiving break. Week 9 meets
 on December 1.</p></li>
-<li><p><strong>The exam is December 1,</strong> in the first 75 minutes of class, covering weeks 0
-through 8, today included. Practice questions and their answer key are
-handed out today; see <a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
+<li><p><strong>The exam is December 1,</strong> at the start of class: 30 multiple-choice
+questions in 60 minutes, covering weeks 0 through 8, today included. A
+practice exam of 20 questions and its answer key are handed out today; see
+<a class="reference internal" href="exam_prep.html"><span class="std std-doc">Exam Preparation</span></a>.</p></li>
 <li><p><strong>Final project work should be underway.</strong> Your project is due 24 hours
 before your final project presentation in week 10. I run and grade the code
 before we meet, so it must run from a clean clone by following your README
@@ -572,119 +582,53 @@ is Friday, December 11.</p></li>
 <section id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Explain the anatomy of a published Python package: <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, a
-build backend, versioning, a test matrix in CI, and a release:
-<a class="reference internal" href="Week6/python_packaging_with_hatch.html"><span class="std std-doc">Writing and Publishing Your Own Python Packages</span></a>.</p></li>
-<li><p>Say what Sphinx builds, and why documentation generated from the code
-stays current: <a class="reference internal" href="Week5/sphinx.html"><span class="std std-doc">Sphinx</span></a>.</p></li>
-<li><p>Lint and format code with <a class="reference external" href="https://docs.astral.sh/ruff/">Ruff</a>, run it on
-every commit with <a class="reference external" href="https://pre-commit.com/">pre-commit</a>, and enforce the
-same checks in CI.</p></li>
-<li><p>Use a matrix and a cache in a workflow.</p></li>
-<li><p>Say clearly where GitHub Actions stops and an orchestrator starts, and
-defend the choice either way.</p></li>
-<li><p>Explain what a monetary policy surprise is, how it is extracted from fed
-funds futures, and what Bernanke and Kuttner (2005) find about the stock
-market’s reaction to it.</p></li>
+<li><p>Say why a rebuild of an upstream pipeline can fail to match a pin made
+from a hash of a file’s bytes, and how a pin by rows up to a date differs.</p></li>
+<li><p>Describe what happened to corporate bond credit spreads and trading in
+March 2020, and what the Federal Reserve’s announcement of March 23 did.</p></li>
+<li><p>Explain SSH port forwarding: why a browser on your laptop cannot reach a
+compute node, and what each part of <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">8000:node:port</span> <span class="pre">login</span></code> names.</p></li>
+<li><p>Run VS Code on a Midway3 compute node with <code class="docutils literal notranslate"><span class="pre">scode</span></code>.</p></li>
+<li><p>Run independent tasks at the same time with GNU Parallel and with a SLURM
+job array, read <code class="docutils literal notranslate"><span class="pre">sacct</span></code> and a GNU Parallel job log, and rerun only the task
+that failed.</p></li>
+<li><p>Choose between a job array and GNU Parallel for a given set of tasks.</p></li>
 </ul>
 </section>
-<section id="agenda-item-1-where-ci-cd-lives-python-packages">
-<h2>Agenda Item 1: Where CI/CD Lives — Python Packages<a class="headerlink" href="#agenda-item-1-where-ci-cd-lives-python-packages" title="Link to this heading">#</a></h2>
-<p>Every package you have installed this quarter was built, tested, and
-released by a workflow.
-<a class="reference internal" href="Week6/python_packaging_with_hatch.html"><span class="std std-doc">Writing and Publishing Your Own Python Packages</span></a>:
-<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> as the single source of truth, a build backend, dynamic
-versioning, semantic versioning as a contract.</p>
-<p>The demo is <a class="reference external" href="https://pypi.org/project/chartbook/"><code class="docutils literal notranslate"><span class="pre">chartbook</span></code></a>, the package
-you have been running all quarter: its <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">build</span></code>
-producing the wheel, <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">test</span></code> running the suite across a matrix of
-Python versions in GitHub Actions, and a release cut from the
-<a class="reference external" href="https://backofficedev.github.io/chartbook/changelog.html">changelog</a>.
-You will not build a package in this course. You will see how one is built,
-because this is what “software packaging” means in the postings, and
-because HW 3 itself grew out of a package two of last summer’s students
-wrote for their final project, <code class="docutils literal notranslate"><span class="pre">crashbounds</span></code>, which is credited in the
-assignment.</p>
-</section>
-<section id="agenda-item-2-documentation-with-sphinx">
-<h2>Agenda Item 2: Documentation with Sphinx<a class="headerlink" href="#agenda-item-2-documentation-with-sphinx" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="Week5/sphinx.html"><span class="std std-doc">Sphinx</span></a> builds the documentation for pandas and for this
-book: pages written in reStructuredText or Markdown, reference pages
-generated from the code’s own docstrings, and a static site published the same way you published
-yours in week 4.</p>
-</section>
-<section id="agenda-item-3-checks-before-the-push-ruff-and-pre-commit">
-<h2>Agenda Item 3: Checks Before the Push — Ruff and pre-commit<a class="headerlink" href="#agenda-item-3-checks-before-the-push-ruff-and-pre-commit" title="Link to this heading">#</a></h2>
-<p>CI catches a problem after you push. The cheapest checks run before that.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.astral.sh/ruff/">Ruff</a> is a Python linter and formatter.
-<code class="docutils literal notranslate"><span class="pre">ruff</span> <span class="pre">check</span></code> flags unused imports, undefined names, and other mistakes;
-<code class="docutils literal notranslate"><span class="pre">ruff</span> <span class="pre">format</span></code> settles style once, so a code review never argues about it.
-Both are configured in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.</p></li>
-<li><p><a class="reference external" href="https://pre-commit.com/">pre-commit</a> runs those checks as a git hook on every
-commit, from a <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> checked into the repository, so every
-contributor runs the same checks.</p></li>
-<li><p>Then run the same hooks in a workflow, so the check that guards <code class="docutils literal notranslate"><span class="pre">main</span></code> is the
-one you already ran on your laptop. Add both to your final project.</p></li>
-</ul>
-</section>
-<section id="agenda-item-4-matrices-caching-and-the-boundary">
-<h2>Agenda Item 4: Matrices, Caching, and the Boundary<a class="headerlink" href="#agenda-item-4-matrices-caching-and-the-boundary" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Matrices and caching.</strong> A <code class="docutils literal notranslate"><span class="pre">strategy:</span> <span class="pre">matrix:</span></code> runs the same job on
-several versions of Python, which catches the bug that only one version
-has; a cache keeps a slow workflow from reinstalling everything on every
-run.</p></li>
-<li><p><strong>The boundary.</strong> You have now used three kinds of automation:</p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>Triggered by</p></th>
-<th class="head"><p>Knows about</p></th>
-<th class="head"><p>Reach for it when</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">doit</span></code></p></td>
-<td><p>you, at a prompt</p></td>
-<td><p>one project’s file graph</p></td>
-<td><p>building or rebuilding a project</p></td>
-</tr>
-<tr class="row-odd"><td><p>Actions / cron</p></td>
-<td><p>a push, or a clock</p></td>
-<td><p>one repository</p></td>
-<td><p>tests on every change; one job on a schedule</p></td>
-</tr>
-<tr class="row-even"><td><p>Airflow</p></td>
-<td><p>a clock, or data landing</p></td>
-<td><p>many projects, with history</p></td>
-<td><p>pipelines depend on each other, and you need to know what ran</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="agenda-item-5-the-paper-bernanke-and-kuttner-2005">
-<h2>Agenda Item 5: The Paper — Bernanke and Kuttner (2005)<a class="headerlink" href="#agenda-item-5-the-paper-bernanke-and-kuttner-2005" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://doi.org/10.1111/j.1540-6261.2005.00760.x">Bernanke and Kuttner (2005)</a>,
-<em>What Explains the Stock Market’s Reaction to Federal Reserve Policy?</em>, splits a
-rate change into the part the market expected and the part it did not, using the
-futures price change on the announcement day, and shows that equities respond to
-the surprise and essentially not at all to the expected part. It is the natural
-paper for this week because its entire empirical content depends on a
-point-in-time measurement: what was priced <em>before</em> the announcement. The
-<a class="reference external" href="https://github.com/finm-32800/case_study_fedwatch">FedWatch case study</a>
-computes these surprises from the same futures as HW 2, and a monitor like the
-one you deployed in week 5 is the machine that records them every day, without
-being asked.</p>
+<section id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Announcements, HW 5, and the exam.</strong> What the exam looks like: the
+practice exam, the bubble sheet, and how a question is scored.</p></li>
+<li><p><strong>What broke in HW 4, and the fix</strong>
+(<a class="reference internal" href="Week8/pins_that_a_rebuild_can_meet.html"><span class="std std-doc">Pins That a Rebuild Can Meet</span></a>).
+A pin is a hash of bytes. A rebuild a week later has newer data, and a
+chart never has the same bytes twice. ChartBook is being changed so that
+a lockfile holds only what code reads, and a table is pinned by its rows
+up to a date.</p></li>
+<li><p><strong>Corporate bonds in March 2020</strong>
+(<a class="reference internal" href="notebooks/_03_corporate_bonds_march_2020_ipynb.html"><span class="std std-doc">Corporate Bonds in March 2020</span></a>).
+Credit spreads, the dash for cash, and the announcement of March 23. The
+figure we want needs three months of TRACE, cleaned, on Midway3.</p></li>
+<li><p><strong>VS Code on a compute node</strong>
+(<a class="reference internal" href="Week8/remote_machines_and_hpc.html"><span class="std std-doc">Remote Machines and HPC</span></a>). To work
+on the cluster you want your editor, running where the data is. The
+browser on your laptop cannot reach a compute node, and SSH port
+forwarding is how it gets there. Then <code class="docutils literal notranslate"><span class="pre">scode</span></code>, live.</p></li>
+<li><p><strong>Parallel jobs</strong>
+(<a class="reference internal" href="Week8/parallel_jobs_on_a_cluster.html"><span class="std std-doc">Parallel Jobs on a Cluster</span></a>).
+Six small steps: one after another, GNU Parallel, a job array, GNU
+Parallel across machines, and what to do when one task fails. Then the
+TRACE job both ways, and the figure it makes.</p></li>
+<li><p><strong><a class="reference internal" href="HW5.html"><span class="std std-doc">HW 5</span></a>, in the room.</strong> Submit the array, open VS Code, take
+the two screenshots.</p></li>
+</ol>
 </section>
 <section id="looking-ahead-to-week-9">
 <h2>Looking ahead to Week 9<a class="headerlink" href="#looking-ahead-to-week-9" title="Link to this heading">#</a></h2>
-<p>The <strong>exam</strong> is in the first 75 minutes. After it, <strong>Apache Airflow</strong>: an
-orchestrator that runs many pipelines on a schedule or when their inputs land,
-pointed at the class report. Then a short look at experiment tracking with
-MLflow. It meets on December 1, after the break.</p>
+<p>The <strong>exam</strong> is at the start of class on December 1. After it, a
+demonstration to close the course; the topic will be announced. There is no
+class on November 24.</p>
 </section>
 </section>
 
@@ -712,11 +656,11 @@ MLflow. It meets on December 1, after the break.</p>
       </div>
     </a>
     <a class="right-next"
-       href="Week6/python_packaging_with_hatch.html"
+       href="Week8/pins_that_a_rebuild_can_meet.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Writing and Publishing Your Own Python Packages</p>
+        <p class="prev-next-title">Pins That a Rebuild Can Meet</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -738,11 +682,7 @@ MLflow. It meets on December 1, after the break.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#announcements">Announcements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-1-where-ci-cd-lives-python-packages">Agenda Item 1: Where CI/CD Lives — Python Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-2-documentation-with-sphinx">Agenda Item 2: Documentation with Sphinx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-3-checks-before-the-push-ruff-and-pre-commit">Agenda Item 3: Checks Before the Push — Ruff and pre-commit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-4-matrices-caching-and-the-boundary">Agenda Item 4: Matrices, Caching, and the Boundary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda-item-5-the-paper-bernanke-and-kuttner-2005">Agenda Item 5: The Paper — Bernanke and Kuttner (2005)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-ahead-to-week-9">Looking ahead to Week 9</a></li>
 </ul>
   </nav></div>

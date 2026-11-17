@@ -1,0 +1,1146 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Corporate Bonds in March 2020 &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/_03_corporate_bonds_march_2020_ipynb';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parallel Jobs on a Cluster" href="../Week8/parallel_jobs_on_a_cluster.html" />
+    <link rel="prev" title="Pins That a Rebuild Can Meet" href="../Week8/pins_that_a_rebuild_can_meet.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Data APIs, Static Sites, and GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Live Monitors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/live_monitor.html">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/data_validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/study_guide.html">Study Guide: Week 5</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2Fnotebooks/_03_corporate_bonds_march_2020_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/_03_corporate_bonds_march_2020_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Corporate Bonds in March 2020</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-spreads">1. Credit spreads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">2. The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">3. What happened</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-bonds-were-hit-hardest">4. Which bonds were hit hardest?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-credit-curve-turned-upside-down">5. The credit curve turned upside down</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-cost-to-trade">6. What it cost to trade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-fed-did-and-when">7. What the Fed did, and when</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-needed-clean-data-and-a-cluster">8. Why this needed clean data, and a cluster</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways">Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="corporate-bonds-in-march-2020">
+<h1>Corporate Bonds in March 2020<a class="headerlink" href="#corporate-bonds-in-march-2020" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">In this guide</p>
+<p><strong>The corporate bond market came close to breaking in March 2020.</strong> In four
+weeks the credit spread of the median investment-grade bond went from 85
+basis points to 380.</p>
+<p><strong>It was not only about default.</strong> The safest bonds were hit hardest in
+proportion, short-maturity bonds traded at wider spreads than long ones,
+and investment-grade bonds became more expensive to trade than junk. Those
+are the marks of investors selling what they could to raise cash.</p>
+<p><strong>On March 23 the Federal Reserve said it would buy corporate bonds, and
+the market turned that day.</strong> The Fed’s first purchase came seven weeks
+later.</p>
+<p><strong>Every number here comes from three months of TRACE,</strong> cleaned month by
+month, in parallel, on the university’s cluster.</p>
+</div>
+<p>Last week’s argument for the cluster was about size: the TRACE record of
+corporate bond trades is too big to clean comfortably on a laptop. This
+guide is the reason to bother. It uses the cleaned data to look at one
+episode, day by day, and asks three questions. What happened to corporate
+bonds in March 2020? Was it fear of default, or something else? And what
+did the Federal Reserve’s announcement do?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Make src/ importable whether this runs from the project root or from _output/.</span>
+<span class="n">_cwd</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_cwd</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="n">_cwd</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="n">_cwd</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_p</span> <span class="o">/</span> <span class="s2">&quot;settings.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">_p</span><span class="p">))</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">_p</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">break</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">plot_credit_spreads_march_2020</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">figures</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">130</span><span class="p">,</span> <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.float_format&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+<span class="c1"># The tables were computed by src/calc_march_2020.py from the cleaned panel.</span>
+<span class="n">daily</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;daily_by_class&quot;</span><span class="p">)</span>
+<span class="n">by_rating</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;spreads_by_rating&quot;</span><span class="p">)</span>
+<span class="n">by_maturity</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;daily_by_maturity&quot;</span><span class="p">)</span>
+<span class="n">trading_cost</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;daily_trading_cost&quot;</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;monthly_counts&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="credit-spreads">
+<h2>1. Credit spreads<a class="headerlink" href="#credit-spreads" title="Link to this heading">#</a></h2>
+<p>A corporate bond pays a higher yield than a Treasury bond of the same
+maturity. The difference is the bond’s <strong>credit spread</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{credit spread} = y_{\text{corporate bond}} - y_{\text{Treasury of the same maturity}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y\)</span> is a yield.</p>
+<p>It is what investors are paid for two things a Treasury does not have: the
+chance that the company defaults, and the difficulty of selling the bond
+quickly at a fair price. Spreads are quoted in <strong>basis points</strong>, hundredths
+of a percent, so a spread of 150 basis points is 1.5%.</p>
+<p>A bond’s price and its yield move in opposite directions. If a bond’s credit
+spread widens while Treasury yields stay where they are, the bond’s yield has
+gone up and its <strong>price has fallen</strong>. A chart of spreads rising is a chart of
+bond prices falling.</p>
+<p>Bonds are grouped by credit rating. <strong>Investment grade</strong> is BBB- and above.
+<strong>High yield</strong>, also called junk, is everything below. High-yield issuers are
+more likely to default, so their spreads are wider.</p>
+</section>
+<section id="the-data">
+<h2>2. The data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
+<p>TRACE records every trade in a U.S. corporate bond. We use February, March,
+and April of 2020. The raw feed has about two million trade reports a month.
+The cleaned panel keeps far fewer, for three reasons that week 7 covered:</p>
+<ul class="simple">
+<li><p>Reports that were later cancelled or corrected are removed, along with
+the second copy of trades that a dealer arranged as an agent and reported
+twice.</p></li>
+<li><p>Bonds outside the standard research universe are dropped: convertibles,
+floating-rate notes, asset-backed bonds, and others.</p></li>
+<li><p>Very small trades, under $10,000, are dropped. Their prices are not
+representative of what an institution pays.</p></li>
+</ul>
+<p>The result is a daily panel: one row per bond per day it traded, with its
+average price, its yield and credit spread, its rating, and the average
+prices at which customers bought and sold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counts_table</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">counts_table</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts_table</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%B %Y&quot;</span><span class="p">)</span>
+<span class="n">counts_table</span> <span class="o">=</span> <span class="n">counts_table</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;month&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;raw_reports&quot;</span><span class="p">:</span> <span class="s2">&quot;Trade reports in the raw feed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;raw_bonds&quot;</span><span class="p">:</span> <span class="s2">&quot;Bonds in the raw feed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;clean_trades&quot;</span><span class="p">:</span> <span class="s2">&quot;Trades in the cleaned panel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;clean_bonds&quot;</span><span class="p">:</span> <span class="s2">&quot;Rated bonds in the cleaned panel&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">counts_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">counts_table</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_6f0eb">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_6f0eb_level0_col0" class="col_heading level0 col0" >Trade reports in the raw feed</th>
+      <th id="T_6f0eb_level0_col1" class="col_heading level0 col1" >Bonds in the raw feed</th>
+      <th id="T_6f0eb_level0_col2" class="col_heading level0 col2" >Trades in the cleaned panel</th>
+      <th id="T_6f0eb_level0_col3" class="col_heading level0 col3" >Rated bonds in the cleaned panel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_6f0eb_level0_row0" class="row_heading level0 row0" >February 2020</th>
+      <td id="T_6f0eb_row0_col0" class="data row0 col0" >1,912,064</td>
+      <td id="T_6f0eb_row0_col1" class="data row0 col1" >24,157</td>
+      <td id="T_6f0eb_row0_col2" class="data row0 col2" >601,816</td>
+      <td id="T_6f0eb_row0_col3" class="data row0 col3" >8,969</td>
+    </tr>
+    <tr>
+      <th id="T_6f0eb_level0_row1" class="row_heading level0 row1" >March 2020</th>
+      <td id="T_6f0eb_row1_col0" class="data row1 col0" >2,453,396</td>
+      <td id="T_6f0eb_row1_col1" class="data row1 col1" >25,479</td>
+      <td id="T_6f0eb_row1_col2" class="data row1 col2" >732,133</td>
+      <td id="T_6f0eb_row1_col3" class="data row1 col3" >9,058</td>
+    </tr>
+    <tr>
+      <th id="T_6f0eb_level0_row2" class="row_heading level0 row2" >April 2020</th>
+      <td id="T_6f0eb_row2_col0" class="data row2 col0" >2,319,809</td>
+      <td id="T_6f0eb_row2_col1" class="data row2 col1" >22,487</td>
+      <td id="T_6f0eb_row2_col2" class="data row2 col2" >713,142</td>
+      <td id="T_6f0eb_row2_col3" class="data row2 col3" >9,068</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>About nine thousand bonds and six to seven hundred thousand trades a month.
+March has the most trades. Hold on to that: whatever went wrong in March,
+the market did not close.</p>
+</section>
+<section id="what-happened">
+<h2>3. What happened<a class="headerlink" href="#what-happened" title="Link to this heading">#</a></h2>
+<p>The figure shows, for each day, the credit spread of the median
+investment-grade bond and of the median high-yield bond, and below it the
+number of trades.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">plot_spreads_and_trades</span><span class="p">(</span><span class="n">daily</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5c9253fca705804dd703c6a70c66999a225cbae29d456b1cc73e6f262f17f586.png" src="../_images/5c9253fca705804dd703c6a70c66999a225cbae29d456b1cc73e6f262f17f586.png" />
+</div>
+</div>
+<p>Read it from left to right.</p>
+<p><strong>Mid-February: calm.</strong> The median investment-grade bond trades at a spread
+of about 85 basis points, and the median high-yield bond at about 330.</p>
+<p><strong>Late February to March 20: spreads widen every week, then every day.</strong> As
+the pandemic reaches the United States, bond prices fall. On March 20 the
+median investment-grade spread is about 380 basis points, more than four
+times its February level. The median high-yield spread peaks on March 23 at
+about 950. These were the widest spreads since the financial crisis of 2008
+and 2009.</p>
+<p><strong>March 23: the turn.</strong> Before the market opens, the Federal Reserve
+announces that it will buy investment-grade corporate bonds. The
+investment-grade spread falls that day and keeps falling, to about 245 at
+the end of March.</p>
+<p><strong>April 9: a second step down.</strong> The Fed widens the program to reach some
+high-yield bonds. The median high-yield spread falls by more than 130 basis
+points in that one day.</p>
+<p>The lower panel is the surprise. Trading did not dry up in the worst weeks.
+The week of March 16 had about as many trades as a typical week in
+February, and the week of March 23 had the most of the whole period. Bonds
+were changing hands, at much worse prices.</p>
+<div class="note admonition">
+<p class="admonition-title">Stop and discuss</p>
+<p>Spreads quadrupled in a month. Give two different stories for why a
+corporate bond’s price would fall that far that fast. For each story, which
+bonds should fall the most?</p>
+</div>
+</section>
+<section id="which-bonds-were-hit-hardest">
+<h2>4. Which bonds were hit hardest?<a class="headerlink" href="#which-bonds-were-hit-hardest" title="Link to this heading">#</a></h2>
+<p>One story is <strong>default</strong>. A pandemic closes businesses, some companies will
+not repay, and investors demand more to hold their bonds. If that is the
+whole story, the weakest companies should be hit hardest, and the bonds of
+the strongest should hardly move. Nobody thought in March 2020 that
+Microsoft or Johnson &amp; Johnson was about to default.</p>
+<p>The table shows the median spread by rating, on a calm day in February, at
+the peak, and after each announcement. The last column is the spread at the
+peak divided by the spread in February.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_table</span> <span class="o">=</span> <span class="n">by_rating</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;rating_bucket&quot;</span><span class="p">)</span>
+<span class="n">rating_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">rating_table</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%b </span><span class="si">%-d</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rating_table</span><span class="o">.</span><span class="n">columns</span>
+<span class="p">]</span>
+<span class="n">rating_table</span><span class="p">[</span><span class="s2">&quot;Mar 20 as a multiple of Feb 14&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">rating_table</span><span class="p">[</span><span class="s2">&quot;Mar 20&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">rating_table</span><span class="p">[</span><span class="s2">&quot;Feb 14&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">rating_table</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="si">{:.1f}</span><span class="s2">x&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Mar 20 as a multiple of Feb 14&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_1c15f">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_1c15f_level0_col0" class="col_heading level0 col0" >Feb 14</th>
+      <th id="T_1c15f_level0_col1" class="col_heading level0 col1" >Mar 20</th>
+      <th id="T_1c15f_level0_col2" class="col_heading level0 col2" >Mar 23</th>
+      <th id="T_1c15f_level0_col3" class="col_heading level0 col3" >Mar 31</th>
+      <th id="T_1c15f_level0_col4" class="col_heading level0 col4" >Apr 8</th>
+      <th id="T_1c15f_level0_col5" class="col_heading level0 col5" >Apr 9</th>
+      <th id="T_1c15f_level0_col6" class="col_heading level0 col6" >Apr 30</th>
+      <th id="T_1c15f_level0_col7" class="col_heading level0 col7" >Mar 20 as a multiple of Feb 14</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_1c15f_level0_row0" class="row_heading level0 row0" >AAA and AA</th>
+      <td id="T_1c15f_row0_col0" class="data row0 col0" >36</td>
+      <td id="T_1c15f_row0_col1" class="data row0 col1" >258</td>
+      <td id="T_1c15f_row0_col2" class="data row0 col2" >229</td>
+      <td id="T_1c15f_row0_col3" class="data row0 col3" >140</td>
+      <td id="T_1c15f_row0_col4" class="data row0 col4" >126</td>
+      <td id="T_1c15f_row0_col5" class="data row0 col5" >108</td>
+      <td id="T_1c15f_row0_col6" class="data row0 col6" >97</td>
+      <td id="T_1c15f_row0_col7" class="data row0 col7" >7.1x</td>
+    </tr>
+    <tr>
+      <th id="T_1c15f_level0_row1" class="row_heading level0 row1" >A</th>
+      <td id="T_1c15f_row1_col0" class="data row1 col0" >63</td>
+      <td id="T_1c15f_row1_col1" class="data row1 col1" >328</td>
+      <td id="T_1c15f_row1_col2" class="data row1 col2" >304</td>
+      <td id="T_1c15f_row1_col3" class="data row1 col3" >198</td>
+      <td id="T_1c15f_row1_col4" class="data row1 col4" >180</td>
+      <td id="T_1c15f_row1_col5" class="data row1 col5" >157</td>
+      <td id="T_1c15f_row1_col6" class="data row1 col6" >141</td>
+      <td id="T_1c15f_row1_col7" class="data row1 col7" >5.2x</td>
+    </tr>
+    <tr>
+      <th id="T_1c15f_level0_row2" class="row_heading level0 row2" >BBB</th>
+      <td id="T_1c15f_row2_col0" class="data row2 col0" >110</td>
+      <td id="T_1c15f_row2_col1" class="data row2 col1" >473</td>
+      <td id="T_1c15f_row2_col2" class="data row2 col2" >446</td>
+      <td id="T_1c15f_row2_col3" class="data row2 col3" >318</td>
+      <td id="T_1c15f_row2_col4" class="data row2 col4" >307</td>
+      <td id="T_1c15f_row2_col5" class="data row2 col5" >281</td>
+      <td id="T_1c15f_row2_col6" class="data row2 col6" >253</td>
+      <td id="T_1c15f_row2_col7" class="data row2 col7" >4.3x</td>
+    </tr>
+    <tr>
+      <th id="T_1c15f_level0_row3" class="row_heading level0 row3" >BB</th>
+      <td id="T_1c15f_row3_col0" class="data row3 col0" >276</td>
+      <td id="T_1c15f_row3_col1" class="data row3 col1" >780</td>
+      <td id="T_1c15f_row3_col2" class="data row3 col2" >842</td>
+      <td id="T_1c15f_row3_col3" class="data row3 col3" >647</td>
+      <td id="T_1c15f_row3_col4" class="data row3 col4" >666</td>
+      <td id="T_1c15f_row3_col5" class="data row3 col5" >537</td>
+      <td id="T_1c15f_row3_col6" class="data row3 col6" >580</td>
+      <td id="T_1c15f_row3_col7" class="data row3 col7" >2.8x</td>
+    </tr>
+    <tr>
+      <th id="T_1c15f_level0_row4" class="row_heading level0 row4" >B</th>
+      <td id="T_1c15f_row4_col0" class="data row4 col0" >442</td>
+      <td id="T_1c15f_row4_col1" class="data row4 col1" >1,061</td>
+      <td id="T_1c15f_row4_col2" class="data row4 col2" >1,185</td>
+      <td id="T_1c15f_row4_col3" class="data row4 col3" >936</td>
+      <td id="T_1c15f_row4_col4" class="data row4 col4" >986</td>
+      <td id="T_1c15f_row4_col5" class="data row4 col5" >837</td>
+      <td id="T_1c15f_row4_col6" class="data row4 col6" >871</td>
+      <td id="T_1c15f_row4_col7" class="data row4 col7" >2.4x</td>
+    </tr>
+    <tr>
+      <th id="T_1c15f_level0_row5" class="row_heading level0 row5" >CCC and below</th>
+      <td id="T_1c15f_row5_col0" class="data row5 col0" >1,003</td>
+      <td id="T_1c15f_row5_col1" class="data row5 col1" >2,667</td>
+      <td id="T_1c15f_row5_col2" class="data row5 col2" >3,055</td>
+      <td id="T_1c15f_row5_col3" class="data row5 col3" >3,007</td>
+      <td id="T_1c15f_row5_col4" class="data row5 col4" >2,838</td>
+      <td id="T_1c15f_row5_col5" class="data row5 col5" >2,841</td>
+      <td id="T_1c15f_row5_col6" class="data row5 col6" >4,292</td>
+      <td id="T_1c15f_row5_col7" class="data row5 col7" >2.7x</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>In basis points, the riskiest bonds moved the most, as they always do. In
+proportion, it is the other way around. The spread on bonds rated AAA and AA
+rose about <strong>sevenfold</strong>. The spread on bonds rated B rose less than
+threefold.</p>
+<p>A sevenfold rise in the spread of the safest companies in the country is
+hard to explain by default alone. The default story predicts the ranking in
+the last column upside down.</p>
+<p>The table also shows who the announcements reached. From March 20 to March
+31, every investment-grade row falls by about a third or more. The BB and B rows
+are still rising on March 23, and their large one-day fall is from April 8
+to April 9, when the program was widened to them. The lowest row, CCC and
+below, which no program covered, does not recover at all.</p>
+</section>
+<section id="the-credit-curve-turned-upside-down">
+<h2>5. The credit curve turned upside down<a class="headerlink" href="#the-credit-curve-turned-upside-down" title="Link to this heading">#</a></h2>
+<p>Normally a company pays a wider spread to borrow for thirty years than for
+two. More can go wrong over thirty years. So the spread rises with maturity,
+and in February it does: about 40 basis points for investment-grade bonds
+with under three years to run, and about 135 for those with more than ten.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">plot_spreads_by_maturity</span><span class="p">(</span><span class="n">by_maturity</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1980229ce5a0d23204463ba866faeefb47593dab995af259e08d14d2b4369e0e.png" src="../_images/1980229ce5a0d23204463ba866faeefb47593dab995af259e08d14d2b4369e0e.png" />
+</div>
+</div>
+<p>In March the lines cross. On March 20 the shortest bonds have the <em>widest</em>
+spread, about 400 basis points, ten times their February level. The longest
+bonds, which have the most exposure to a company’s long-run fate, moved the
+least.</p>
+<p>This is a second fact the default story cannot produce. A two-year bond of a
+company with a strong balance sheet is close to cash. That is the reason it
+was sold. An investor who needs money today sells the holding that is
+easiest to sell and loses the least when sold, and in March 2020 everyone
+needed money on the same day. Bond mutual funds, facing withdrawals, were
+the largest sellers.</p>
+<div class="note admonition">
+<p class="admonition-title">Stop and discuss</p>
+<p>If short-maturity, high-grade bonds are the easiest to sell, why did their
+prices fall the most? Who is supposed to be on the other side of those
+sales, and what would stop them from buying?</p>
+</div>
+</section>
+<section id="what-it-cost-to-trade">
+<h2>6. What it cost to trade<a class="headerlink" href="#what-it-cost-to-trade" title="Link to this heading">#</a></h2>
+<p>Corporate bonds do not trade on an exchange. An investor who wants to sell
+calls a <strong>dealer</strong>, usually a bank, which buys the bond for its own account
+and holds it until it finds a buyer. The dealer is paid by the gap between
+the price at which it buys and the price at which it sells.</p>
+<p>TRACE says, for each trade, whether the customer was buying or selling. So
+for every bond that customers both bought and sold on the same day, we can
+measure that gap: the average price customers paid, minus the average price
+customers received, as a share of the price. It is what a customer would
+lose by buying a bond from a dealer and selling it straight back. The figure
+shows the median across bonds, each day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">figures</span><span class="o">.</span><span class="n">plot_trading_cost</span><span class="p">(</span><span class="n">trading_cost</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3f82ba7fd0d43b429044d2e8a7b63c81a9d0b870b07a7fcfeef58307a8306e99.png" src="../_images/3f82ba7fd0d43b429044d2e8a7b63c81a9d0b870b07a7fcfeef58307a8306e99.png" />
+</div>
+</div>
+<p>In February a round trip in an investment-grade bond costs under 20 basis
+points, about half of what it costs in a high-yield bond. That is the
+normal order: safer bonds are cheaper to trade.</p>
+<p>In the third week of March the investment-grade cost reaches about <strong>200
+basis points, more than ten times its February level,</strong> and more than twice
+the cost of trading junk. Dealers were being asked to buy far more
+investment-grade bonds than they had room to hold, and they charged for it.</p>
+<p>On March 23 the investment-grade cost drops by about a third in one day,
+and it keeps falling: under 90 basis points within a week, about 40 by
+mid-April. The high-yield cost does not
+spike as far and does not come down as fast. Again the order of events
+follows the order of the announcements.</p>
+<p>This is the measure O’Hara and Zhou (2021) build, with more care than we
+take here: they separate trades by size and by which dealer was involved,
+and show that the cost fell first for the bonds the Fed’s program covered.</p>
+</section>
+<section id="what-the-fed-did-and-when">
+<h2>7. What the Fed did, and when<a class="headerlink" href="#what-the-fed-did-and-when" title="Link to this heading">#</a></h2>
+<p><strong>March 23.</strong> The Federal Reserve announced the Primary and the Secondary
+Market Corporate Credit Facility, under which it would lend to
+investment-grade companies and buy their bonds, and buy exchange-traded
+funds that hold such bonds. The Fed had never bought corporate bonds before.</p>
+<p><strong>April 9.</strong> It enlarged the facilities and extended them to companies that
+had been investment grade on March 22 and were downgraded afterward, and to
+funds that hold high-yield bonds.</p>
+<p><strong>May 12.</strong> The Fed made its first purchase, of bond funds. Its first
+purchases of individual bonds were in mid-June.</p>
+<p>So for seven weeks the Fed bought nothing, and prices recovered anyway. What
+changed on March 23 was what investors expected. A buyer with no limit on
+its balance sheet had said it would be there. That made it safe for dealers
+to hold bonds again and pointless for investors to sell first, and the
+selling stopped.</p>
+<div class="note admonition">
+<p class="admonition-title">Stop and discuss</p>
+<p>The Fed moved prices for seven weeks by promising to buy. What had to be
+true about the Fed for that promise to work? Could a large pension fund have
+done the same thing with the same announcement?</p>
+</div>
+</section>
+<section id="why-this-needed-clean-data-and-a-cluster">
+<h2>8. Why this needed clean data, and a cluster<a class="headerlink" href="#why-this-needed-clean-data-and-a-cluster" title="Link to this heading">#</a></h2>
+<p>Every exhibit above is a median or a count across thousands of bonds, taken
+day by day. Drawn from the raw feed, each would be wrong in a way that
+matters most in exactly these weeks:</p>
+<ul class="simple">
+<li><p><strong>Counts.</strong> The raw feed keeps a trade that was cancelled or corrected
+beside its replacement, and reports agency trades twice. The trade counts
+would be too high, by a different amount each day.</p></li>
+<li><p><strong>Prices.</strong> A price entered with the decimal point in the wrong place
+becomes a yield, then a spread, then a trading cost. When real prices move
+several percent in a day, an error and a real trade look alike, and the
+filters that separate them are judgment calls. The defense is a cleaning
+procedure that is written down, tested, and can be run again.</p></li>
+</ul>
+<p>The cleaning is independent by month: March’s trades do not depend on
+February’s. So the three months, for two TRACE feeds, were cleaned as six
+tasks at the same time on Midway3, in about two minutes. A second job then
+followed each bond through time to add its yield, spread, and rating, and
+built the tables this guide reads. How to run work that way is the rest of
+this week.</p>
+</section>
+<section id="takeaways">
+<h2>Takeaways<a class="headerlink" href="#takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A credit spread is a corporate bond’s yield over a matching Treasury. A
+wider spread is a lower price.</p></li>
+<li><p>In March 2020 spreads reached their widest since 2008 and 2009, while
+trading continued.</p></li>
+<li><p>Three facts point to forced selling and strained dealers, not only to
+default: the safest bonds were hit hardest in proportion, short bonds
+traded wider than long ones, and investment-grade bonds became costlier to
+trade than high-yield bonds.</p></li>
+<li><p>Spreads and trading costs turned on March 23, the day of the Fed’s
+announcement, and high-yield spreads on April 9, when the program was
+widened. The purchases themselves began in May.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Haddad, V., Moreira, A., &amp; Muir, T. (2021).
+<a class="reference external" href="https://ideas.repec.org/a/oup/rfinst/v34y2021i11p5309-5351..html">When selling becomes viral: Disruptions in debt markets in the COVID-19 crisis and the Fed’s response</a>.
+<em>Review of Financial Studies</em>, 34(11), 5309–5351.</p></li>
+<li><p>O’Hara, M., &amp; Zhou, X. A. (2021).
+<a class="reference external" href="https://doi.org/10.1016/j.jfineco.2021.05.052">Anatomy of a liquidity crisis: Corporate bonds in the COVID-19 crisis</a>.
+<em>Journal of Financial Economics</em>, 142(1), 46–68.</p></li>
+<li><p>Dick-Nielsen, J. (2014). How to clean Enhanced TRACE data. Working paper.
+The cancellation, correction, and agency-trade filters.</p></li>
+</ul>
+<div class="admonition-notes-on-the-discussion-questions admonition">
+<p class="admonition-title">Notes on the discussion questions</p>
+<p><strong>Two stories.</strong> One is default: the pandemic makes it more likely that
+companies cannot repay. That story says the weakest companies’ bonds fall
+the most and the strongest hardly move. The other is selling pressure:
+investors need cash, sell what they can, and dealers cannot absorb it. That
+story says the bonds that are easiest to sell fall the most, whatever the
+company’s health. Sections 4 to 6 are three tests between them.</p>
+<p><strong>Why the easiest bonds to sell fell the most.</strong> Because they were the ones
+sold. The other side of the trade is a dealer, and a dealer’s room to hold
+bonds is limited by its capital and its own risk limits. When every customer
+sells at once, dealers fill up, and the price has to fall far enough to
+bring in a buyer from outside the usual market.</p>
+<p><strong>Why the promise worked.</strong> The Fed can create the money it buys with, so
+no amount of selling can exhaust it, and everyone knows that. A pension
+fund’s promise is only as large as its assets. Sellers who believe the buyer
+cannot run out have no reason to sell first, and dealers who believe it can
+always sell to that buyer are willing to hold bonds again.</p>
+</div>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week8/pins_that_a_rebuild_can_meet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pins That a Rebuild Can Meet</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week8/parallel_jobs_on_a_cluster.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parallel Jobs on a Cluster</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-spreads">1. Credit spreads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">2. The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happened">3. What happened</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-bonds-were-hit-hardest">4. Which bonds were hit hardest?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-credit-curve-turned-upside-down">5. The credit curve turned upside down</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-cost-to-trade">6. What it cost to trade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-fed-did-and-when">7. What the Fed did, and when</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-needed-clean-data-and-a-cluster">8. Why this needed clean data, and a cluster</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways">Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

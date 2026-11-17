@@ -1,0 +1,1101 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parallel Jobs on a Cluster &#8212; Data Pipelines for Quantitative Research</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=8dbc1659"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week8/parallel_jobs_on_a_cluster';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Study Guide: Week 8" href="study_guide.html" />
+    <link rel="prev" title="Corporate Bonds in March 2020" href="../notebooks/_03_corporate_bonds_march_2020_ipynb.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>   
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_data_pipelines.png" class="logo__image only-light" alt="Data Pipelines for Quantitative Research - Home"/>
+    <script>document.write(`<img src="../_static/logo_data_pipelines.png" class="logo__image only-dark" alt="Data Pipelines for Quantitative Research - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Data Pipelines for Quantitative Research
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Course Syllabus: FINM 32800, Autumn 2026</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Appendix/job_postings.html">Archived Job Postings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jane_street.html">Jane Street — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_citadel_securities.html">Citadel Securities — Senior Research Engineer (Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_imc.html">IMC Trading — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_drw.html">DRW — Data Engineer, Cumberland/FICCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_point72.html">Point72 (Cubist Systematic Strategies) — Data Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jump_trading.html">Jump Trading — Campus Data Engineer (Intern)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_hudson_river_trading.html">Hudson River Trading — Data Production Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_akuna_capital.html">Akuna Capital — Software Engineer, Data Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_aqr.html">AQR Capital Management — Portfolio Analytics Engineer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Appendix/job_posting_jpmorganchase.html">JPMorganChase — Data &amp; AI Internship Program</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures 📖</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w0.html">Lecture 0: Portfolio Selection and a First Look at the Course</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/course_map.html">Course Map: Is This the Right Course for You?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_job_postings_findings_ipynb.html">What Firms Ask For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/tour_of_the_course.html">A Tour of the Course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/getting_set_up.html">Getting Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/clone_and_run.html">Clone and Run: What <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> Is For</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_markowitz.html">Portfolio Selection: Markowitz (1952)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_markowitz_derivation.html">Appendix: Deriving the Mean-Variance Frontier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/data_tour.html">A Tour of the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week0/study_guide.html">Study Guide: Lecture 0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w1.html">Week 1: Git, GitHub, and Virtual Environments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/what_is_this_course_about.html">What Is This Course About? Why Data Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/reproducible_analytical_pipelines.html">What are Reproducible Analytical Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/case_study_reproducibility_in_finance.html">Case Study: Is There A Reproducibility Crisis In Finance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/virtual_environments.html">Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/WRDS_intro_and_web_queries.html">Introduction to WRDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_wrds_python_package_ipynb.html">Example: Connecting to the WRDS Platform With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/env_files.html">Env Files, Secrets, and the Separations of Settings from Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_07_mean_variance_to_CAPM_ipynb.html">From Mean-Variance to the CAPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/study_guide.html">Study Guide: Week 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w2.html">Week 2: Task Runners and SQL, featuring Fama-French 1993</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_08_CAPM_to_multifactor_models_ipynb.html">From the CAPM to Multifactor Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_basics_of_SQL_ipynb.html">Basics of SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/what_is_a_task_runner.html">What is a build system or task runner?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/doit_examples.html">PyDoit Examples Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week2/study_guide.html">Study Guide: Week 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w3.html">Week 3: Reports — Notebooks, ChartBook, and LaTeX</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/reports_with_jupyter_notebooks.html">Reports with Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/intro_to_LaTeX.html">Introduction to LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/latex_essentials.html">LaTeX Essentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/project_structure.html">Project Structure: “Chartbook” Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/study_guide.html">Study Guide: Week 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w4.html">Week 4: Data APIs, Static Sites, and GitHub Actions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/databento.html">Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_databento_ipynb.html">Example: Pulling Market Data From Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/LSEG_datastream.html">LSEG Datastream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/github_pages_preview.html">GitHub Pages and Tearsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week9/cron_jobs.html">Scheduling Recurring Tasks with Cron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week4/study_guide.html">Study Guide: Week 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w5.html">Week 5: Live Monitors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_modules_and_packages_ipynb.html">Modules, Packages, and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">"__main__"</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/uv_and_pixi.html">Modern Environment Tools: uv and pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/live_monitor.html">Building a Live Monitor with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/unit_tests.html">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/data_validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/study_guide.html">Study Guide: Week 5</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w6.html">Week 6: Data Across Repositories: Snapshots, Lineage, and the Class Report</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week3/ftsfr.html">Financial Time Series Forecasting Repository (FTSFR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/chartbook_catalog.html">ChartBook: Know Where Every Number Came From</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/pins_walkthrough.html">Walkthrough: From a Working Folder to a Pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/study_guide.html">Study Guide: Week 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w7.html">Week 7: Medium-sized Data and Working with Remotes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week1/collaborative_report_and_style_guides.html">The Collaborative Report and Style Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/GitHub_pull_requests.html">GitHub Issues and Pull Requests: Enhancing Collaborative Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_data_sources_overview_ipynb.html">Data Sources Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_trace_cleaning_walkthrough_ipynb.html">Cleaning TRACE Corporate Bond Data: A Walkthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="medium_sized_data_strategies.html">Strategies for Medium-Sized Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polars_exercises.html">Polars Exercises: Code Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote_machines_and_hpc.html">Remote Machines and High-Performance Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercise_jupyter_on_midway.html">Exercise: Jupyter Notebook on Midway via SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optional_lab_clean_trace_on_midway.html">Optional Lab: Clean TRACE on Midway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week7/study_guide.html">Study Guide: Week 7</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Parallel Jobs on a Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study_guide.html">Study Guide: Week 8</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW0.html">Homework 0</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW1.html">Homework 1: CRSP, the CAPM, and Fama-French</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW1_guide_A_github_skills.html">HW 1 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_CRSP_market_index_ipynb.html">HW 1 Guide B: The CRSP Market Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_SP500_constituents_and_index_ipynb.html">HW 1 Guide C: Reconstructing the S&amp;P 500</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_05_Fama_French_1993_ipynb.html">HW 1 Guide D: Constructing the Fama-French Factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_06_CAPM_and_Fama_French_ipynb.html">HW 1 Guide E: Testing the CAPM and the Three-Factor Model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW2.html">Homework 2: The Yield Curve and the Policy Path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../HW2_guide_A_github_skills.html">HW 2 Guide A: GitHub Skills</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_CRSP_treasury_overview_ipynb.html">CRSP Treasury Data Oveview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_es_options_data_ipynb.html">01. E-mini S&amp;P 500 Options Data from Databento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_svix_and_crash_probability_ipynb.html">02. Replicating SVIX and the Probability of a Crash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_daily_monitor_ipynb.html">03. The Daily Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_04_single_name_crash_bounds_ipynb.html">04. Crash Bounds for Single Names (Martin and Shi 2025)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW4.html">Homework 4: The Class Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW5.html">Homework 5</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/past_final_projects.html">Past Final Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FinalProject/potential_final_projects.html">List of Potential Final Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../exam_prep.html">Exam Preparation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/blank_project/issues/new?title=Issue%20on%20page%20%2FWeek8/parallel_jobs_on_a_cluster.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week8/parallel_jobs_on_a_cluster.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parallel Jobs on a Cluster</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-can-work-run-in-parallel">When Can Work Run in Parallel?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-work-a-task-that-takes-five-seconds">The Work: a Task That Takes Five Seconds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-one-after-another">Step 1: One After Another</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-gnu-parallel">Step 2: GNU Parallel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-job-array">Step 3: a Job Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-gnu-parallel-across-machines">Step 4: GNU Parallel Across Machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steps-5-and-6-when-one-task-fails">Steps 5 and 6: When One Task Fails</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idempotent-tasks">Idempotent Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-side-by-side">The Two Side by Side</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trace-job-both-ways">The TRACE Job, Both Ways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="parallel-jobs-on-a-cluster">
+<h1>Parallel Jobs on a Cluster<a class="headerlink" href="#parallel-jobs-on-a-cluster" title="Link to this heading">#</a></h1>
+<p>Cleaning one month of TRACE takes about two minutes. The full history is more
+than 270 months. Run one after another, that is nine hours; run at the same
+time on 270 cores, it is still two minutes. A cluster has the cores. This
+page is about how you ask for them.</p>
+<p>There are two common ways, and you should be able to read both:</p>
+<ul class="simple">
+<li><p><strong>GNU Parallel</strong> runs many commands at once <em>inside one job</em>.</p></li>
+<li><p><strong>A SLURM job array</strong> submits <em>many jobs</em> at once, one per task.</p></li>
+</ul>
+<p>We build up to the TRACE job in six small steps. The scripts are in the
+<a class="reference external" href="https://github.com/finm-32800/inclass_examples/tree/main/slurm"><code class="docutils literal notranslate"><span class="pre">slurm</span></code> folder of the in-class examples</a>.
+Each one runs in under a minute and costs almost nothing, so submit them
+yourself.</p>
+<section id="when-can-work-run-in-parallel">
+<h2>When Can Work Run in Parallel?<a class="headerlink" href="#when-can-work-run-in-parallel" title="Link to this heading">#</a></h2>
+<p>Tasks can run at the same time when they are <strong>independent</strong>: no task needs
+another task’s output, and no two tasks write to the same file.</p>
+<p>Stage 0 of the TRACE pipeline is independent by month. February’s raw trades
+are in one file, and cleaning them produces one file. March has its own raw
+file and its own output. Nothing in March’s cleaning reads February. Work like this is called
+<em>embarrassingly parallel</em>, because there is nothing clever to do: split it up
+and run the pieces.</p>
+<p>Stage 1 is different. It follows each bond through time to compute returns
+and to track its rating, so it needs every month together. It runs as one
+task, after stage 0 has finished.</p>
+</section>
+<section id="the-work-a-task-that-takes-five-seconds">
+<h2>The Work: a Task That Takes Five Seconds<a class="headerlink" href="#the-work-a-task-that-takes-five-seconds" title="Link to this heading">#</a></h2>
+<p>To see the scheduling without waiting on real data, the examples use a task
+that sleeps for five seconds, squares a number, and says which machine it ran
+on:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># slow_square.sh</span>
+<span class="nv">N</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+sleep<span class="w"> </span><span class="m">5</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span>+%T<span class="k">)</span><span class="s2">  </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">  </span><span class="si">${</span><span class="nv">N</span><span class="si">}</span><span class="s2"> squared is </span><span class="k">$((</span><span class="nv">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">N</span><span class="k">))</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>We want to run it for the numbers 1 through 6.</p>
+</section>
+<section id="step-1-one-after-another">
+<h2>Step 1: One After Another<a class="headerlink" href="#step-1-one-after-another" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=01-serial</span>
+<span class="c1">#SBATCH --account=finm32800</span>
+<span class="c1">#SBATCH --partition=caslake</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --output=%x_%j.out</span>
+
+<span class="k">for</span><span class="w"> </span>N<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>bash<span class="w"> </span>slow_square.sh<span class="w"> </span><span class="si">${</span><span class="nv">N</span><span class="si">}</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Submit it with <code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">01_serial.sbatch</span></code> and read the output file when it is
+done:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>02:00:50  midway3-0156.rcc.local  1 squared is 1
+02:00:55  midway3-0156.rcc.local  2 squared is 4
+02:01:00  midway3-0156.rcc.local  3 squared is 9
+02:01:05  midway3-0156.rcc.local  4 squared is 16
+02:01:10  midway3-0156.rcc.local  5 squared is 25
+02:01:15  midway3-0156.rcc.local  6 squared is 36
+</pre></div>
+</div>
+<p>One machine, one core, six tasks five seconds apart: 30 seconds.</p>
+</section>
+<section id="step-2-gnu-parallel">
+<h2>Step 2: GNU Parallel<a class="headerlink" href="#step-2-gnu-parallel" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.gnu.org/software/parallel/">GNU Parallel</a> is a command-line
+program that takes a command and a list of inputs, and runs the command once
+per input, several at a time. It is not part of SLURM. It runs on a laptop
+the same way it runs on a cluster.</p>
+<p>The smallest example, which you can type at any prompt where it is installed
+(on Midway3, after <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">parallel</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>parallel<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello, {}&quot;</span><span class="w"> </span>:::<span class="w"> </span>Alice<span class="w"> </span>Bob<span class="w"> </span>Carol
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hello, Alice
+Hello, Bob
+Hello, Carol
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:::</span></code> starts the list of inputs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{}</span></code> is where each input goes in the command.</p></li>
+<li><p>The three <code class="docutils literal notranslate"><span class="pre">echo</span></code> commands run at the same time, so the lines can come out
+in any order.</p></li>
+</ul>
+<p>The options you will meet most often:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">4</span></code></p></td>
+<td><p>Run at most four commands at a time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dry-run</span></code></p></td>
+<td><p>Print the commands that would run, and run nothing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">::::</span> <span class="pre">tasks.txt</span></code></p></td>
+<td><p>Read the inputs from a file, one per line</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colsep</span> <span class="pre">'</span> <span class="pre">'</span></code></p></td>
+<td><p>Split each input line into <code class="docutils literal notranslate"><span class="pre">{1}</span></code>, <code class="docutils literal notranslate"><span class="pre">{2}</span></code>, <code class="docutils literal notranslate"><span class="pre">{3}</span></code>, …</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--joblog</span> <span class="pre">log.txt</span></code></p></td>
+<td><p>Write one line per finished command: start, run time, exit code</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--resume</span></code></p></td>
+<td><p>Skip the commands that the job log says already ran</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--resume-failed</span></code></p></td>
+<td><p>Skip those that succeeded, and rerun those that failed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> is the one to learn first. Use it every time before the real run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>parallel<span class="w"> </span>--dry-run<span class="w"> </span>-j<span class="w"> </span><span class="m">2</span><span class="w"> </span>python<span class="w"> </span>clean_month.py<span class="w"> </span><span class="o">{}</span><span class="w"> </span>:::<span class="w"> </span><span class="m">2020</span>-02<span class="w"> </span><span class="m">2020</span>-03<span class="w"> </span><span class="m">2020</span>-04
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python clean_month.py 2020-02
+python clean_month.py 2020-03
+python clean_month.py 2020-04
+</pre></div>
+</div>
+<p>Without <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>, this runs those three commands, two at a time. The third
+starts when either of the first two finishes.</p>
+<p>Now the six squares, as a batch job. The job asks for six cores on one
+machine, and GNU Parallel uses them:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=02-gnu-parallel</span>
+<span class="c1">#SBATCH --account=finm32800</span>
+<span class="c1">#SBATCH --partition=caslake</span>
+<span class="c1">#SBATCH --cpus-per-task=6</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --output=%x_%j.out</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8<span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+module<span class="w"> </span>load<span class="w"> </span>parallel
+
+parallel<span class="w"> </span>-j<span class="w"> </span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w"> </span>bash<span class="w"> </span>slow_square.sh<span class="w"> </span><span class="o">{}</span><span class="w"> </span>:::<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>02:00:50  midway3-0099.rcc.local  6 squared is 36
+02:00:50  midway3-0099.rcc.local  4 squared is 16
+02:00:50  midway3-0099.rcc.local  2 squared is 4
+02:00:50  midway3-0099.rcc.local  3 squared is 9
+02:00:50  midway3-0099.rcc.local  1 squared is 1
+02:00:50  midway3-0099.rcc.local  5 squared is 25
+</pre></div>
+</div>
+<p>One machine, the same second on every line, and no particular order: 5
+seconds.</p>
+<p>Two things in the script are worth a note. <code class="docutils literal notranslate"><span class="pre">SLURM_CPUS_PER_TASK</span></code> is set by
+SLURM to the number you asked for, so the <code class="docutils literal notranslate"><span class="pre">-j</span></code> can never disagree with the
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line. And the <code class="docutils literal notranslate"><span class="pre">export</span></code> line is there because a Mac sends its own
+language setting over SSH, the compute nodes do not have it, and GNU Parallel
+(a Perl program) prints a long warning for every task without it.</p>
+</section>
+<section id="step-3-a-job-array">
+<h2>Step 3: a Job Array<a class="headerlink" href="#step-3-a-job-array" title="Link to this heading">#</a></h2>
+<p>A job array asks SLURM to do the splitting. One line does it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=03-array</span>
+<span class="c1">#SBATCH --account=finm32800</span>
+<span class="c1">#SBATCH --partition=caslake</span>
+<span class="c1">#SBATCH --array=1-6</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --output=%x_%A_%a.out</span>
+
+bash<span class="w"> </span>slow_square.sh<span class="w"> </span><span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--array=1-6</span></code> tells SLURM to run this script six times, as six separate jobs.
+Each copy is identical except for one environment variable,
+<code class="docutils literal notranslate"><span class="pre">SLURM_ARRAY_TASK_ID</span></code>, which is 1 in the first copy, 2 in the second, and so
+on. The script uses that number to decide what its own piece of the work is.</p>
+<p>Every other <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line describes <strong>one task</strong>, not the whole array: each
+of the six gets one core, 1 GB, and two minutes.</p>
+<p>In the output file name, <code class="docutils literal notranslate"><span class="pre">%A</span></code> is the array’s job ID and <code class="docutils literal notranslate"><span class="pre">%a</span></code> is the task’s
+number, so each task writes its own file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>== 03-array_63296473_1.out
+02:00:50  midway3-0156.rcc.local  1 squared is 1
+== 03-array_63296473_2.out
+02:00:50  midway3-0214.rcc.local  2 squared is 4
+== 03-array_63296473_3.out
+02:00:50  midway3-0136.rcc.local  3 squared is 9
+== 03-array_63296473_4.out
+02:00:50  midway3-0097.rcc.local  4 squared is 16
+== 03-array_63296473_5.out
+02:00:57  midway3-0203.rcc.local  5 squared is 25
+== 03-array_63296473_6.out
+02:01:10  midway3-0203.rcc.local  6 squared is 36
+</pre></div>
+</div>
+<p>Look at the machines and the times. The six tasks ran on five different
+machines, and tasks 5 and 6 started a few seconds after the others. Each task
+is its own job in the queue, and each started when the scheduler found it a
+free core.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sacct</span></code> shows one row per task:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sacct -X -j 63296473 --format=JobID%16,JobName,State,Elapsed,NodeList
+           JobID    JobName      State    Elapsed        NodeList
+---------------- ---------- ---------- ---------- ---------------
+      63296473_1   03-array  COMPLETED   00:00:06    midway3-0156
+      63296473_2   03-array  COMPLETED   00:00:06    midway3-0214
+      63296473_3   03-array  COMPLETED   00:00:06    midway3-0136
+      63296473_4   03-array  COMPLETED   00:00:06    midway3-0097
+      63296473_5   03-array  COMPLETED   00:00:16    midway3-0203
+      63296473_6   03-array  COMPLETED   00:00:29    midway3-0203
+</pre></div>
+</div>
+<p>A few more forms of <code class="docutils literal notranslate"><span class="pre">--array</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Line</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--array=1-6</span></code></p></td>
+<td><p>Tasks 1 through 6</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--array=2015-2024</span></code></p></td>
+<td><p>Ten tasks; the task ID is the year</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--array=3,5</span></code></p></td>
+<td><p>Only tasks 3 and 5</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--array=0-99%10</span></code></p></td>
+<td><p>A hundred tasks, at most ten running at a time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%10</span></code> matters on a shared allocation. Without it, a large array takes
+every core the scheduler will give it.</p>
+</section>
+<section id="step-4-gnu-parallel-across-machines">
+<h2>Step 4: GNU Parallel Across Machines<a class="headerlink" href="#step-4-gnu-parallel-across-machines" title="Link to this heading">#</a></h2>
+<p>Step 2 kept all six tasks on one machine. A job can also ask for six <em>slots</em>
+and let SLURM put them wherever there is room:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --ntasks=6</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+
+parallel<span class="w"> </span>-j<span class="w"> </span><span class="si">${</span><span class="nv">SLURM_NTASKS</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>srun<span class="w"> </span>--exclusive<span class="w"> </span>-N1<span class="w"> </span>-n1<span class="w"> </span>bash<span class="w"> </span>slow_square.sh<span class="w"> </span><span class="o">{}</span><span class="w"> </span>:::<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+<p>GNU Parallel still decides which task runs next. <code class="docutils literal notranslate"><span class="pre">srun</span></code> is SLURM’s command
+for starting a program on the resources a job already holds; here each <code class="docutils literal notranslate"><span class="pre">srun</span></code>
+takes one free slot of the job’s allocation and runs one task there. In our
+run, five tasks landed on <code class="docutils literal notranslate"><span class="pre">midway3-0012</span></code> and one on <code class="docutils literal notranslate"><span class="pre">midway3-0029</span></code>.</p>
+<p>This is still <strong>one job</strong>: one line in <code class="docutils literal notranslate"><span class="pre">squeue</span></code>, one job ID, one output file.</p>
+</section>
+<section id="steps-5-and-6-when-one-task-fails">
+<h2>Steps 5 and 6: When One Task Fails<a class="headerlink" href="#steps-5-and-6-when-one-task-fails" title="Link to this heading">#</a></h2>
+<p>In real work one month has a bad row and its task crashes. The examples use
+<code class="docutils literal notranslate"><span class="pre">flaky_square.sh</span></code>, which fails for the number 3 until a file named <code class="docutils literal notranslate"><span class="pre">fixed</span></code>
+exists.</p>
+<p><strong>With a job array,</strong> <code class="docutils literal notranslate"><span class="pre">sacct</span></code> tells you which task failed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>           JobID      State ExitCode
+---------------- ---------- --------
+      63296475_1  COMPLETED      0:0
+      63296475_2  COMPLETED      0:0
+      63296475_3     FAILED      1:0
+      63296475_4  COMPLETED      0:0
+      63296475_5  COMPLETED      0:0
+      63296475_6  COMPLETED      0:0
+</pre></div>
+</div>
+<p>SLURM does not rerun task 3, and it keeps no list of what is left to do. You
+fix the problem and submit the same script again, for that task only:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>fixed<span class="w">                                       </span><span class="c1"># &quot;fix the bug&quot;</span>
+sbatch<span class="w"> </span>--array<span class="o">=</span><span class="m">3</span><span class="w"> </span>05_array_with_a_failure.sbatch
+</pre></div>
+</div>
+<p>An option given on the command line overrides the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line of the same
+name. So this submission is an array with one task, number 3, and the script
+does what it always does for task 3.</p>
+<p><strong>With GNU Parallel,</strong> the scheduler knows only that the one job failed. The
+detail is in the job log, which has one line per command. Four of its nine
+columns are shown here; <code class="docutils literal notranslate"><span class="pre">Exitval</span></code> is the command’s exit code, and anything
+but 0 is a failure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Seq  JobRuntime  Exitval  Command
+1    5.000       0        bash flaky_square.sh 1
+2    5.000       0        bash flaky_square.sh 2
+4    5.000       0        bash flaky_square.sh 4
+5    5.000       0        bash flaky_square.sh 5
+6    5.000       0        bash flaky_square.sh 6
+3    5.000       1        bash flaky_square.sh 3
+</pre></div>
+</div>
+<p>Because the script passes <code class="docutils literal notranslate"><span class="pre">--joblog</span> <span class="pre">joblog.txt</span> <span class="pre">--resume-failed</span></code>, you fix the
+problem and submit the <em>same script, unchanged</em>. GNU Parallel reads the log,
+skips the five that succeeded, and reruns the one that failed.</p>
+<section id="idempotent-tasks">
+<h3>Idempotent Tasks<a class="headerlink" href="#idempotent-tasks" title="Link to this heading">#</a></h3>
+<p>There is a third way, and it works with either tool. Write each task so that
+it checks for its own output first and exits at once when the output is
+already there. A task like that is called <strong>idempotent</strong>: running it twice
+leaves the same result as running it once.</p>
+<p>Then you never work out which tasks failed. You submit everything again. The
+finished tasks each take a second, and only the missing ones do any work.
+The TRACE tasks below are written this way.</p>
+</section>
+</section>
+<section id="the-two-side-by-side">
+<h2>The Two Side by Side<a class="headerlink" href="#the-two-side-by-side" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Job array</p></th>
+<th class="head"><p>GNU Parallel in one job</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>What the scheduler sees</p></td>
+<td><p>N jobs, each queued and billed on its own</p></td>
+<td><p>One job; you divide its allocation yourself</p></td>
+</tr>
+<tr class="row-odd"><td><p>When the work starts</p></td>
+<td><p>Each task as soon as a slot is free for it</p></td>
+<td><p>When the whole allocation is free</p></td>
+</tr>
+<tr class="row-even"><td><p>Where a failure shows up</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sacct</span></code>, one row per task</p></td>
+<td><p>The job log</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rerunning a failure</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">--array=3</span> <span class="pre">script.sbatch</span></code></p></td>
+<td><p>Submit again with <code class="docutils literal notranslate"><span class="pre">--resume-failed</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Output</p></td>
+<td><p>One file per task</p></td>
+<td><p>One file for the job</p></td>
+</tr>
+<tr class="row-odd"><td><p>Works without a scheduler</p></td>
+<td><p>No</p></td>
+<td><p>Yes, on any Linux or Mac</p></td>
+</tr>
+<tr class="row-even"><td><p>Good for</p></td>
+<td><p>Tens to hundreds of tasks, minutes to hours each</p></td>
+<td><p>Hundreds or thousands of short tasks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The last row is the one that decides most cases. Every job costs the
+scheduler some work to queue, start, and record. For a thousand tasks of
+three seconds each, that overhead is larger than the work, and cluster
+administrators ask you not to submit them as an array. One job that runs GNU
+Parallel is the right tool there. For six tasks of two minutes, or two
+hundred tasks of an hour, the array is simpler and tells you more.</p>
+<p>Neither is a pipeline. If task 4 needs the output of task 3, the tasks are
+not independent, and the tool is <code class="docutils literal notranslate"><span class="pre">doit</span></code>, or a second job submitted with
+<code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">--dependency=afterok:&lt;job</span> <span class="pre">id&gt;</span></code>, which starts only after the first has
+finished without an error.</p>
+</section>
+<section id="the-trace-job-both-ways">
+<h2>The TRACE Job, Both Ways<a class="headerlink" href="#the-trace-job-both-ways" title="Link to this heading">#</a></h2>
+<p>The real job cleans February, March, and April of 2020 for two TRACE feeds,
+Enhanced and Rule 144A: six tasks. The scripts are in the
+<a class="reference external" href="https://github.com/finm-32800/case_study_clean_trace/tree/main/slurm"><code class="docutils literal notranslate"><span class="pre">slurm</span></code> folder of the TRACE case study</a>.</p>
+<p>Both versions read the same list, <code class="docutils literal notranslate"><span class="pre">slurm/tasks.txt</span></code>, one task per line:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>enhanced 2020 2
+enhanced 2020 3
+enhanced 2020 4
+144a 2020 2
+144a 2020 3
+144a 2020 4
+</pre></div>
+</div>
+<p>and both call the same script, <code class="docutils literal notranslate"><span class="pre">slurm/clean-one-month.sh</span> <span class="pre">&lt;feed&gt;</span> <span class="pre">&lt;year&gt;</span> <span class="pre">&lt;month&gt;</span></code>,
+which cleans one month and skips it if the output already exists.</p>
+<p><strong>As a job array</strong> (<code class="docutils literal notranslate"><span class="pre">slurm/clean-trace-array.sbatch</span></code>), task N takes line N of
+the list:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --array=1-6</span>
+<span class="c1">#SBATCH --cpus-per-task=2</span>
+<span class="c1">#SBATCH --mem=8G</span>
+<span class="c1">#SBATCH --time=00:30:00</span>
+<span class="c1">#SBATCH --output=%x_%A_%a.out</span>
+
+<span class="nv">TASK</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span><span class="s2">p&quot;</span><span class="w"> </span>slurm/tasks.txt<span class="k">)</span>
+bash<span class="w"> </span>slurm/clean-one-month.sh<span class="w"> </span><span class="si">${</span><span class="nv">TASK</span><span class="si">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-n</span> <span class="pre">&quot;3p&quot;</span> <span class="pre">file</span></code> prints line 3 of a file. This is the usual way to hand an
+array anything more complicated than a number: put the inputs in a file, one
+per line, and let the task ID pick the line.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sacct -X -j 63296433 --format=User,JobID%16,JobName,State,Elapsed,NodeList
+     User            JobID    JobName      State    Elapsed        NodeList
+--------- ---------------- ---------- ---------- ---------- ---------------
+jbejarano       63296433_1 trace-arr+  COMPLETED   00:01:41    midway3-0090
+jbejarano       63296433_2 trace-arr+  COMPLETED   00:01:57    midway3-0105
+jbejarano       63296433_3 trace-arr+  COMPLETED   00:01:55    midway3-0012
+jbejarano       63296433_4 trace-arr+  COMPLETED   00:00:35    midway3-0099
+jbejarano       63296433_5 trace-arr+  COMPLETED   00:00:36    midway3-0185
+jbejarano       63296433_6 trace-arr+  COMPLETED   00:00:35    midway3-0185
+</pre></div>
+</div>
+<p>Six tasks on five machines, done in under two minutes. One after another,
+the same work takes more than seven.</p>
+<p><strong>With GNU Parallel</strong> (<code class="docutils literal notranslate"><span class="pre">slurm/clean-trace-parallel.sbatch</span></code>), one job asks for
+six slots and hands the six lines out:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --ntasks=6</span>
+<span class="c1">#SBATCH --cpus-per-task=2</span>
+<span class="c1">#SBATCH --mem-per-cpu=4G</span>
+
+module<span class="w"> </span>load<span class="w"> </span>parallel
+
+parallel<span class="w"> </span>-j<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_NTASKS</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--colsep<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--joblog<span class="w"> </span>trace-parallel_joblog.txt<span class="w"> </span>--resume<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>srun<span class="w"> </span>--exclusive<span class="w"> </span>-N1<span class="w"> </span>-n1<span class="w"> </span>bash<span class="w"> </span>slurm/clean-one-month.sh<span class="w"> </span><span class="o">{</span><span class="m">1</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="m">3</span><span class="o">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>::::<span class="w"> </span>slurm/tasks.txt
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--colsep</span> <span class="pre">'</span> <span class="pre">'</span></code> splits each line of the list at the spaces, so <code class="docutils literal notranslate"><span class="pre">{1}</span></code> is the
+feed, <code class="docutils literal notranslate"><span class="pre">{2}</span></code> the year, and <code class="docutils literal notranslate"><span class="pre">{3}</span></code> the month.</p>
+<p>To clean ten years, neither script changes. The list gets longer, and for
+the array <code class="docutils literal notranslate"><span class="pre">--array=1-6</span></code> becomes <code class="docutils literal notranslate"><span class="pre">--array=1-240%20</span></code>.</p>
+<p><a class="reference internal" href="../HW5.html"><span class="std std-doc">HW 5</span></a> asks you to submit the array version yourself.</p>
+</section>
+<section id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.gnu.org/software/parallel/parallel_tutorial.html">GNU Parallel tutorial</a></p></li>
+<li><p><a class="reference external" href="https://slurm.schedmd.com/job_array.html">SLURM job array documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.rcc.uchicago.edu/slurm/main/">RCC user guide: running jobs on Midway3</a></p></li>
+</ul>
+</section>
+</section>
+
+<div class="section ablog__blog_comments">
+   
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notebooks/_03_corporate_bonds_march_2020_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Corporate Bonds in March 2020</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="study_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Study Guide: Week 8</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-can-work-run-in-parallel">When Can Work Run in Parallel?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-work-a-task-that-takes-five-seconds">The Work: a Task That Takes Five Seconds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-one-after-another">Step 1: One After Another</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-gnu-parallel">Step 2: GNU Parallel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-job-array">Step 3: a Job Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-gnu-parallel-across-machines">Step 4: GNU Parallel Across Machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steps-5-and-6-when-one-task-fails">Steps 5 and 6: When One Task Fails</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idempotent-tasks">Idempotent Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-side-by-side">The Two Side by Side</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trace-job-both-ways">The TRACE Job, Both Ways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

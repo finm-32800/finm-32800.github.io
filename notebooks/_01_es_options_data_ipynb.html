@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -191,6 +191,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Week7/bloomberg_terminal.html">The Bloomberg Terminal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/web_authentication.html">Web Authentication and Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_job_postings_methods_ipynb.html">Job Postings: Sample, Methods and Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_02_spx_hedging_ipynb.html">Case Study: Hedging A Long-Only SPX Portfolio With Costless Collars</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week9/github_actions_interactive_dashboard.html">Creating a Live Dashboard Example with GitHub Actions</a></li>
@@ -278,9 +280,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: Packaging, CI, and Code Quality</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Week6/python_packaging_with_hatch.html">Writing and Publishing Your Own Python Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Week5/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Week8/parallel_jobs_on_a_cluster.html">Parallel Jobs on a Cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
@@ -576,17 +579,17 @@ pull has every one of them, in <code class="docutils literal notranslate"><span 
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">figures</span>
-<span class="kn">import</span> <span class="nn">monitor</span>
-<span class="kn">import</span> <span class="nn">pull_es_options</span>
-<span class="kn">import</span> <span class="nn">pull_fred</span>
-<span class="kn">import</span> <span class="nn">smile</span>
-<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">monitor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_es_options</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pull_fred</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">smile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
 
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">))</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.width&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
@@ -801,7 +804,7 @@ not say:</p>
 <span class="n">forward</span> <span class="o">=</span> <span class="n">surface</span><span class="p">[</span><span class="s2">&quot;forward&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">expiration</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">moneyness</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nearest</span><span class="p">(</span><span class="n">expiration</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">moneyness</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The listed contract closest to a given strike, as a fraction of the forward.&quot;&quot;&quot;</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="n">session</span><span class="p">[(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expiration</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;cp_flag&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">flag</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">rows</span><span class="o">.</span><span class="n">iloc</span><span class="p">[(</span><span class="n">rows</span><span class="p">[</span><span class="s2">&quot;strike&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">moneyness</span> <span class="o">*</span> <span class="n">forward</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span>
