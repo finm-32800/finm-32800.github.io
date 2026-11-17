@@ -33,7 +33,7 @@ We start with HW 4, and with what its lockfile taught us about ChartBook.
   on December 1.
 - **The exam is December 1,** at the start of class: 30 multiple-choice
   questions in 60 minutes, covering weeks 0 through 8, today included. A
-  practice exam of 20 questions and its answer key are handed out today; see
+  practice exam of 20 questions is handed out today; see
   [Exam Preparation](./exam_prep.md).
 - **Final project work should be underway.** Your project is due 24 hours
   before your final project presentation in week 10. I run and grade the code

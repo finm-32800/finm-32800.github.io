@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notebook assets &#8212; Data Pipelines for Quantitative Research</title>
+    <title>Notebook Assets &#8212; Data Pipelines for Quantitative Research</title>
   
   
   
@@ -277,7 +277,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Week7/study_guide.html">Study Guide: Week 7</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../overview_w8.html">Week 8: VS Code on a Cluster and Parallel Jobs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../Week8/pins_that_a_rebuild_can_meet.html">Pins That a Rebuild Can Meet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_03_corporate_bonds_march_2020_ipynb.html">Corporate Bonds in March 2020</a></li>
@@ -285,6 +284,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Week8/study_guide.html">Study Guide: Week 8</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subject_to_change_after_this_week.html">WARNING: Notes subject to change after this week</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview_w9.html">Week 9: Exam, Orchestration with Apache Airflow, and Experiment Tracking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework 📝</span></p>
@@ -314,7 +314,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../HW4.html">Homework 4: The Class Report</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HW5.html">Homework 5: A Batch Job on the Cluster</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../final_project.html">Final Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../FinalProject/final_project_rubric.html">Final Project Instructions and Rubric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../FinalProject/project_previews.html">Project Previews: What a Finished Project Looks Like</a></li>
@@ -506,7 +506,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notebook assets</h1>
+    <h1>Notebook Assets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -520,10 +520,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                    <section class="tex2jax_ignore mathjax_ignore" id="notebook-assets">
-<h1>Notebook assets<a class="headerlink" href="#notebook-assets" title="Link to this heading">#</a></h1>
-<p>Images the guide notebooks embed that are not generated from code. The
-textbook build copies this folder next to the executed notebooks. Empty for
-now: every figure in these guides is drawn from the data.</p>
+<h1>Notebook Assets<a class="headerlink" href="#notebook-assets" title="Link to this heading">#</a></h1>
+<p>Drop screenshots for the notebooks in this folder (e.g. from the CME FedWatch
+tool at <a class="reference external" href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html">https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html</a>).</p>
+<p>Notebooks reference these files with relative paths like <code class="docutils literal notranslate"><span class="pre">assets/&lt;name&gt;.png</span></code>
+(notebooks execute with <code class="docutils literal notranslate"><span class="pre">src/</span></code> as the working directory). The course textbook
+build copies this entire folder alongside the published notebooks, so the same
+relative paths work there too.</p>
+<p>Current files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cme_zq_product_page.png</span></code> — CME’s 30-Day Fed Funds futures (ZQ) product page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fedwatch_target_probabilities.png</span></code> — FedWatch’s probability bars for the
+next FOMC meeting, captured the same day the data was pulled</p></li>
+</ul>
 </section>
 
 <div class="section ablog__blog_comments">

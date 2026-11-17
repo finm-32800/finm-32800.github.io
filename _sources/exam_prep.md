@@ -45,10 +45,9 @@ package, Sphinx, and Ruff and pre-commit.
 
 ## Practice Questions
 
-A practice exam of 20 questions in the same format, with the answer key, is
+A practice exam of 20 questions in the same format is
 handed out in week 8. It is not graded. Work it under exam conditions, at two
-minutes a question, and grade yourself; the answer key explains why each
-option is right or wrong.
+minutes a question.
 
 ## Online Notes
 
