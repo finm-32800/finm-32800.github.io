@@ -8,8 +8,17 @@ The final project is more than a replication—it is a **product**. You replicat
 ## How the Project Runs
 
 1. **Consultation (weeks 4 through 7).** A 1-on-1 meeting with the instructor, booked through [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile). The consultation is ungraded. It is a low-stakes chance to get feedback on your plan, and you leave it with an agreed extension (see *The Extension Agreement* below).
-2. **Submission (24 hours before your final project presentation).** Before we meet, I will clone your repository, run it on my own machine, and read your report and your project site. **I grade the commit on your `main` branch as it stood 24 hours before your meeting.** Anything pushed after that is not graded. Your project must run from a clean clone by following your README alone. Reproducing your results without your help is the whole point of the course.
-3. **Final project presentation (week 10, no later than Friday, December 11).** A 30-minute meeting with your whole group, booked at the same link. You do not present slides or give a demo: I will already have run your code. The whole meeting is spent questioning each member individually, with questions written from your repository and report (see *The Final Project Presentation* below).
+2. **Submission (24 hours before your final project presentation).** At least 24 hours before your meeting, email me the link to your GitHub repository. Before we meet, I will clone it, follow your README, and run the pipeline end to end on my own machine, then read your report and your project site. **I grade the commit on your `main` branch as it stood 24 hours before your meeting.** Anything pushed after that is not graded. Your project must run from a clean clone by following your README alone, without a problem. Reproducing your results without your help is the whole point of the course.
+3. **Final project presentation (no later than Friday, December 11).** A 30-minute meeting with your whole group, booked through the same Microsoft Bookings link you used for the consultation (see *Booking Your Final Project Presentation* below). You do not present slides or give a demo: I will already have run your code. The whole meeting is spent questioning each member individually, with questions I prepare from your repository and report (see *The Final Project Presentation* below).
+
+## Booking Your Final Project Presentation
+
+- **Book through the same link as the consultation:** [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).
+- **One person books for the whole group.** I meet with all four of you at once, so the group needs one booking, not four.
+- **Share the booking with your team.** Whoever books it sends the meeting invitation to everyone else in the group.
+- **Slots are first come, first served.** You can book now.
+- **The last day to present is Friday, December 11,** the end of finals week.
+- **Email me your repository link at least 24 hours before the meeting.**
 
 ## Receiving Your Assigned Project
 
@@ -59,7 +68,7 @@ Each member of the group is questioned individually, for about seven minutes eac
 - **The extension**: why someone would use it, where it stops being reliable, and what you would build next.
 - **Working with the code**: for example, "If I changed `END_DATE`, what reruns, and how does `doit` know?"
 
-Treat it like a job interview where this project is on your resume. An interviewer won't ask you to recite the paper. They will ask what you built, why you built it that way, and whether you can tell them something useful they didn't already know. Answer like that. [Project Previews](project_previews.md) has example questions for three past projects.
+Treat it like a mock job interview where this project is on your resume. An interviewer won't ask you to recite the paper. They will ask what you built, why you built it that way, and whether you can tell them something useful they didn't already know. Answer like that. [Project Previews](project_previews.md) has example questions for three past projects.
 
 ## Final Project Grading Rubric
 

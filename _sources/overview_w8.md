@@ -39,9 +39,14 @@ We start with HW 4, and with what its lockfile taught us about ChartBook.
   before your final project presentation in week 10. I run and grade the code
   before we meet, so it must run from a clean clone by following your README
   alone.
-- **Final project presentation sign-ups.** Book your group's 30-minute slot for
-  week 10 at [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile). The last day
-  is Friday, December 11.
+- **Book your final project presentation now.** Use the same
+  [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile)
+  link you used for the consultation. One person books a 30-minute slot for
+  the whole group and shares the invitation with everyone else; I meet with
+  all of you at once. Slots are first come, first served, and the last day is
+  Friday, December 11, the end of finals week. Email me the link to your
+  repository at least 24 hours before the meeting. See
+  [Booking Your Final Project Presentation](./FinalProject/final_project_rubric.md#booking-your-final-project-presentation).
 
 ## Objectives
 
