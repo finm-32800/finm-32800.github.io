@@ -11,6 +11,7 @@ The final project is more than a replication—it is a **product**. You replicat
 2. **Submission (24 hours before your final project presentation).** At least 24 hours before your meeting, email me the link to your GitHub repository. Before we meet, I will clone it, follow your README, and run the pipeline end to end on my own machine, then read your report and your project site. **I grade the commit on your `main` branch as it stood 24 hours before your meeting.** Anything pushed after that is not graded. Your project must run from a clean clone by following your README alone, without a problem. Reproducing your results without your help is the whole point of the course.
 3. **Final project presentation (no later than Friday, December 11).** A 30-minute meeting with your whole group, booked through the same Microsoft Bookings link you used for the consultation (see *Booking Your Final Project Presentation* below). You do not present slides or give a demo: I will already have run your code. The whole meeting is spent questioning each member individually, with questions I prepare from your repository and report (see *The Final Project Presentation* below).
 
+(booking-final-project-presentation)=
 ## Booking Your Final Project Presentation
 
 - **Book through the same link as the consultation:** [Microsoft Bookings](https://bookings.cloud.microsoft/bookwithme/user/256043fbc7aa4a39905fa3b2920bd8c5@UCHICAGO.EDU/meetingtype/OF6E4r_zPkmqIADL4BDtUA2?bookingcode=19494481-e86a-4fec-8be6-5ae4223d55ce&anonymous&ismsaljsauthenabled&ep=mLinkFromTile).

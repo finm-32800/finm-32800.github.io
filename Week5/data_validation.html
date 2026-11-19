@@ -304,6 +304,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_replicate_GSW2005_ipynb.html">Replicating the Gürkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_01_fed_funds_futures_data_ipynb.html">01. 30-Day Fed Funds Futures (ZQ) Data from Databento</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/_02_fedwatch_replication_ipynb.html">02. Replicating the CME FedWatch Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/_03_kuttner_surprises_ipynb.html">03. Expected and Unexpected Rate Changes (Kuttner 2001)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../HW3.html">Homework 3: SVIX and the Probability of a Crash</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -675,7 +676,7 @@ anything in the series’ history. These catch breakage: a source that is
 down, a parse that went wrong, a change in how a series is built. They
 cannot catch a wrong number that looks like a right one.</p>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/dv_plausibility_30y1.png"><img alt="The 30-year minus 20-year Treasury yield from 1998 to 2009. The spread jumps up on February 19, 2002, sits higher until February 9, 2006, and falls back that day." src="../_images/dv_plausibility_30y1.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/dv_plausibility_30y.png"><img alt="The 30-year minus 20-year Treasury yield from 1998 to 2009. The spread jumps up on February 19, 2002, sits higher until February 9, 2006, and falls back that day." src="../_images/dv_plausibility_30y.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>A jump the market did not make.</strong> The H.15 notes say the 30-year series
 was discontinued from February 18, 2002, to February 9, 2006, yet FRED’s file
@@ -702,7 +703,7 @@ fitted Treasury yields against the Fed’s published curve. For the monitor,
 FRED’s own spread series, T10Y2Y, which a test can compare against without
 storing or publishing it.</p>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/dv_reconciliation_typo1.png"><img alt="Two panels. Top, the 10-year minus 2-year spread and the 10-year minus 1-year spread since 1976, which move together. Bottom, the gap between them, mostly between minus 1 and plus 1 percentage point and rarely zero." src="../_images/dv_reconciliation_typo1.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/dv_reconciliation_typo.png"><img alt="Two panels. Top, the 10-year minus 2-year spread and the 10-year minus 1-year spread since 1976, which move together. Bottom, the gap between them, mostly between minus 1 and plus 1 percentage point and rarely zero." src="../_images/dv_reconciliation_typo.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>The <code class="docutils literal notranslate"><span class="pre">DGS1</span></code> typo, caught.</strong> The spread the monitor should publish and the
 one the typo publishes move together, so a chart of either looks right. The
@@ -715,7 +716,7 @@ number of securities, firms, or observations by month. And the series doing
 what it is known to have done: the 10-year minus 2-year spread was negative
 for long stretches of 2000 and 2006-07, and from mid-2022 into 2024.</p>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/dv_coverage_20y1.png"><img alt="Business days with a value per year for the 20-year Treasury yield, about 250 every year except 1987 to 1992, which have none, and 1993, which has 62." src="../_images/dv_coverage_20y1.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/dv_coverage_20y.png"><img alt="Business days with a value per year for the 20-year Treasury yield, about 250 every year except 1987 to 1992, which have none, and 1993, which has 62." src="../_images/dv_coverage_20y.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>A hole in the history.</strong> The 20-year series has no values from January
 1987 through September 1993. A check on the newest reading never sees a gap

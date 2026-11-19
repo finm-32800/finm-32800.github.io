@@ -94,6 +94,8 @@ pins down the probability of the move.
 
 - [30-Day Fed Funds Futures Data from Databento](notebooks/_01_fed_funds_futures_data_ipynb.ipynb)
 - [Replicating the CME FedWatch Tool](notebooks/_02_fedwatch_replication_ipynb.ipynb)
+- [Expected and Unexpected Rate Changes (Kuttner 2001)](notebooks/_03_kuttner_surprises_ipynb.ipynb)
+  (optional)
 
 ## Agenda Item 3: Static Sites and GitHub Pages
 

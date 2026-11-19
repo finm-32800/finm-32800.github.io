@@ -46,7 +46,7 @@ We start with HW 4, and with what its lockfile taught us about ChartBook.
   all of you at once. Slots are first come, first served, and the last day is
   Friday, December 11, the end of finals week. Email me the link to your
   repository at least 24 hours before the meeting. See
-  [Booking Your Final Project Presentation](./FinalProject/final_project_rubric.md#booking-your-final-project-presentation).
+  {ref}`Booking Your Final Project Presentation <booking-final-project-presentation>`.
 
 ## Objectives
 
