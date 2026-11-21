@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -605,21 +605,21 @@ you run a multi-step project by hand.</p></li>
 </ol>
 <p>Questions 11 to 15 use this <code class="docutils literal notranslate"><span class="pre">dodo.py</span></code>. It defines three tasks, each of which
 runs one Python script.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">task_create_data</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">task_create_data</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;python create_data.py&#39;</span><span class="p">],</span>
         <span class="s1">&#39;file_dep&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;create_data.py&#39;</span><span class="p">],</span>
         <span class="s1">&#39;targets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;_output/data.txt&#39;</span><span class="p">],</span>
     <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">task_process_data</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task_process_data</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;python process_data.py&#39;</span><span class="p">],</span>
         <span class="s1">&#39;file_dep&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;process_data.py&#39;</span><span class="p">,</span> <span class="s1">&#39;_output/data.txt&#39;</span><span class="p">],</span>
         <span class="s1">&#39;targets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;_output/processed.txt&#39;</span><span class="p">],</span>
     <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">task_create_report</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task_create_report</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;python create_report.py&#39;</span><span class="p">],</span>
         <span class="s1">&#39;file_dep&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;create_report.py&#39;</span><span class="p">,</span> <span class="s1">&#39;_output/processed.txt&#39;</span><span class="p">],</span>

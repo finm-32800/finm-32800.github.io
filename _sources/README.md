@@ -64,19 +64,20 @@ From week 4 on, the due dates are spaced so that no two fall in the same week.
 | 5 | Tuesday, October 27 | [HW 2](HW2.md): the yield curve and the policy path |
 | 7 | Tuesday, November 10 | [HW 3](HW3.md): option-implied crash probabilities |
 | | Tuesday, November 24 | [HW 4](HW4.md): the class report (no class: Thanksgiving break) |
-| | TBD | [HW 5](HW5.md) |
 | 9 | Tuesday, December 1 | Exam, in class |
 | 10 | Week of December 8 | Final project presentation |
+| 10 | Friday, December 11, 11:59 pm | [HW 5](HW5.md): a batch job on the cluster |
 
-The homework comes early on purpose. HW 5 is TBD.
+The homework comes early on purpose.
 
 ### Homework
 
 - There are five homework assignments, one of which builds the class report.
   [HW 0](HW0.md) is ungraded setup; please complete it as soon as possible.
 - Homework is distributed and collected through GitHub, and it is due at the
-  start of class. The assignments launch in class, each in the week
-  its material is taught, and the lectures keep teaching the
+  start of class (9:30 am), except HW 5, due Friday, December 11, at
+  11:59 pm. The assignments launch in class, each in the week its material
+  is taught, and the lectures keep teaching the
   pieces of an open assignment after it launches.
 - Assignments are automatically graded by an autograder that runs on GitHub
   Actions, and solutions will be released shortly after. This means that the due date is
@@ -180,10 +181,10 @@ the agenda is listed in the first sub-section of the chapter.
 | 5 | Oct 27 | [Live monitors, uv, and the math of HW 3](overview_w5.md) | [HW 3](HW3.md) | HW 2 |
 | 6 | Nov 3 | [Data across repositories: snapshots, lineage, and the class report](overview_w6.md) | [HW 4](HW4.md) | |
 | 7 | Nov 10 | [Orchestration with Apache Airflow; containers](overview_w7.md) | | HW 3 |
-| 8 | Nov 17 | [Packaging, CI, and code quality](overview_w8.md) | | HW 4 |
-| | Nov 24 | No class: Thanksgiving break | | |
+| 8 | Nov 17 | [Packaging, CI, and code quality](overview_w8.md) | [HW 5](HW5.md) | |
+| | Nov 24 | No class: Thanksgiving break | | HW 4 (9:30 am) |
 | 9 | Dec 1 | [Exam, then MLOps](overview_w9.md) | | |
-| 10 | Dec 8–11 | Final project presentations | | |
+| 10 | Dec 8–11 | Final project presentations | | HW 5 (Fri, Dec 11, 11:59 pm) |
 
 The due dates are in the table under Coursework at a Glance, above, and on
 Canvas. Each assignment's page gives its launch date and its due date.

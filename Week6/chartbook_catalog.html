@@ -28,9 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a344f13" />
@@ -736,7 +736,7 @@ ftsfr/ken_french_data_library:ftsfr_french_portfolios_25_daily_size_and_op: ftsf
 <p><code class="docutils literal notranslate"><span class="pre">chartbook</span> <span class="pre">get-docs</span> <span class="pre">fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon</span></code>
 prints the dataframe’s write-up, the same text as its page. And from any
 folder, the data itself, by name:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">chartbook</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">)</span>   <span class="c1"># a polars LazyFrame</span>
 <span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
@@ -773,7 +773,7 @@ says where the pipeline’s code lives; <code class="docutils literal notranslat
 pins the same snapshot and writes <code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">{}</span></code>) and a <code class="docutils literal notranslate"><span class="pre">chartbook.lock</span></code> that names the snapshot and the hash of each of its
 four assets. Your code reads the data by name, and the lockfile says which
 bytes that name means:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">chartbook</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">curve</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
 </pre></div>
@@ -913,9 +913,9 @@ and the grader’s.</p>
 <p>The tools compose. ChartBook resolves a reference to a file in the store, and
 <code class="docutils literal notranslate"><span class="pre">doit</span></code> watches that file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># dodo.py</span>
-<span class="kn">from</span> <span class="nn">chartbook</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chartbook</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
-<span class="k">def</span> <span class="nf">task_summarize</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task_summarize</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;file_dep&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="n">data</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;fed_yield_curve:ftsfr_treas_yield_curve_zero_coupon&quot;</span><span class="p">),</span>
